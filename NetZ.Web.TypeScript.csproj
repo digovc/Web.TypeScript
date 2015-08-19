@@ -23,10 +23,20 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="AppWeb.ts" />
+    <TypeScriptCompile Include="design\PaletaCor.ts" />
+    <TypeScriptCompile Include="erro\Erro.ts" />
+    <TypeScriptCompile Include="html\componente\Componente.ts" />
+    <TypeScriptCompile Include="html\componente\Mensagem.ts" />
+    <TypeScriptCompile Include="html\Tag.ts" />
+    <TypeScriptCompile Include="lib\jquery.d.ts" />
+    <TypeScriptCompile Include="Objeto.ts" />
+    <TypeScriptCompile Include="Utils.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppWebJs.js" />
+    <Content Include="lib\jquery-2.1.3.min.js" />
+    <Content Include="zzz.js" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
