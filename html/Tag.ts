@@ -41,9 +41,9 @@ module NetZ.Web.TypeScript.html
             {
                 this._booVisivel = this.jq.is(":visible");
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -71,9 +71,9 @@ module NetZ.Web.TypeScript.html
 
                 this.jq.fadeOut();
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -97,9 +97,9 @@ module NetZ.Web.TypeScript.html
                 this._fncKeyDown = fncKeyDown;
                 this.jq.keydown(this._fncKeyDown);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -123,9 +123,9 @@ module NetZ.Web.TypeScript.html
                 this._fncKeyPress = fncKeyPress;
                 this.jq.keypress(this._fncKeyPress);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -149,9 +149,9 @@ module NetZ.Web.TypeScript.html
                 this._fncKeyUp = fncKeyUp;
                 this.jq.keyup(this._fncKeyUp);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -175,9 +175,9 @@ module NetZ.Web.TypeScript.html
                 this._fncOnChange = fncOnChange;
                 this.jq.change(this._fncOnChange);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -201,9 +201,9 @@ module NetZ.Web.TypeScript.html
                 this._fncOnClick = fncOnClick;
                 this.jq.click(this._fncOnClick);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -221,9 +221,9 @@ module NetZ.Web.TypeScript.html
             {
                 this._jq = $("#" + this.strId);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -263,9 +263,9 @@ module NetZ.Web.TypeScript.html
             {
                 this._strPlaceholder = this.jq.attr("placeholder");
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -286,9 +286,9 @@ module NetZ.Web.TypeScript.html
                 this._strPlaceholder = strPlaceholder;
                 this.jq.attr("placeholder", this._strPlaceholder);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -306,9 +306,9 @@ module NetZ.Web.TypeScript.html
             {
                 this._strTitle = this.jq.attr("title");
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -329,9 +329,9 @@ module NetZ.Web.TypeScript.html
                 this._strTitle = strTitle;
                 this.jq.attr("title", this._strTitle);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -355,9 +355,9 @@ module NetZ.Web.TypeScript.html
             {
                 this.strId = strId;
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -379,9 +379,9 @@ module NetZ.Web.TypeScript.html
             {
                 this.jq.append(strConteudo);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -400,9 +400,9 @@ module NetZ.Web.TypeScript.html
                 this.jq.stop();
                 this.booVisivel = false;
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -425,9 +425,9 @@ module NetZ.Web.TypeScript.html
                 this.jq.stop();
                 this.booVisivel = true;
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -447,9 +447,9 @@ module NetZ.Web.TypeScript.html
             {
                 this.montarLayout();
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {

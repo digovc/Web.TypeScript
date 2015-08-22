@@ -49,9 +49,9 @@ module NetZ.Web.TypeScript
                 img.src = strSrc;
                 img.onload = evtOnLoad;
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -82,9 +82,9 @@ module NetZ.Web.TypeScript
                     return true;
                 }
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -121,9 +121,9 @@ module NetZ.Web.TypeScript
                     return true;
                 }
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -173,9 +173,9 @@ module NetZ.Web.TypeScript
                     }
                 }
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -203,9 +203,9 @@ module NetZ.Web.TypeScript
                     str = str.replace(strAntigo, strNovo);
                 }
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {

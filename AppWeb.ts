@@ -42,9 +42,9 @@ module NetZ.Web.TypeScript
 
                 this._arrObjPaletaCor = [];
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -99,9 +99,9 @@ module NetZ.Web.TypeScript
 
                 AppWeb._i = new AppWeb();
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -136,9 +136,9 @@ module NetZ.Web.TypeScript
                 objWindow.print();
                 objWindow.close();
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -157,9 +157,9 @@ module NetZ.Web.TypeScript
                 this.montarLayout();
                 this.setEventos();
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -185,9 +185,9 @@ module NetZ.Web.TypeScript
                 window.onfocus = this.evtFocus;
                 window.onblur = this.evtBlur;
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -209,9 +209,9 @@ module NetZ.Web.TypeScript
             {
                 this.booEmFoco = false;
             }
-            catch (e)
+            catch (ex)
             {
-                new Erro("Erro desconhecido.", e);
+                new Erro("Erro desconhecido.", ex);
             }
             finally
             {
@@ -229,9 +229,9 @@ module NetZ.Web.TypeScript
             {
                 this.booEmFoco = true;
             }
-            catch (e)
+            catch (ex)
             {
-                new Erro("Erro desconhecido.", e);
+                new Erro("Erro desconhecido.", ex);
             }
             finally
             {

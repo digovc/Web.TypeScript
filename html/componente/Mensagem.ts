@@ -66,9 +66,9 @@ module NetZ.Web.TypeScript.html.componente
                 this._enmTipo = enmTipo;
                 this.booBloquearTela = !(this._enmTipo == EnmTipo.POSITIVA);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -108,9 +108,9 @@ module NetZ.Web.TypeScript.html.componente
                         break;
                 }
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -217,9 +217,9 @@ module NetZ.Web.TypeScript.html.componente
                 this.strTitulo = strTitulo;
                 this.strMsg = strMsg;
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -247,9 +247,9 @@ module NetZ.Web.TypeScript.html.componente
                     Mensagem.booMensagemVisivel = false;
                 }, 400);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -292,9 +292,9 @@ module NetZ.Web.TypeScript.html.componente
 
                 this.montarLayoutBloquearTela(tag)
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -344,9 +344,9 @@ module NetZ.Web.TypeScript.html.componente
                     this.esconder();
                 }, intTempo);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -376,9 +376,9 @@ module NetZ.Web.TypeScript.html.componente
 
                 this.strEstrutura = tagJq[0];
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -426,9 +426,9 @@ module NetZ.Web.TypeScript.html.componente
 
                 Mensagem.strMensagemUltima = (this.strTitulo + this.strMsg);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {

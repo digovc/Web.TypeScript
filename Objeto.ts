@@ -47,9 +47,9 @@ module NetZ.Web.TypeScript
 
                 Objeto.intObjetoIdStatic++;
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -88,9 +88,9 @@ module NetZ.Web.TypeScript
 
                 this._strNomeExibicao = this.strNome;
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {

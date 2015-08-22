@@ -50,9 +50,9 @@ module NetZ.Web.TypeScript.erro
                 this._strMensagemFormatada += "\n\n"
                 this._strMensagemFormatada += this.strMensagemTecnica;
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -95,9 +95,9 @@ module NetZ.Web.TypeScript.erro
 
                 this.mostrarMensagem();
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -120,9 +120,9 @@ module NetZ.Web.TypeScript.erro
                 // TODO: Usar a classe Mensagem para mostrar as mensagens de erro para o usuário.
                 window.alert(this.strMensagemFormatada);
             }
-            catch (e)
+            catch (ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
