@@ -1,14 +1,15 @@
 ﻿// #region Módulos externos
+
+/// <reference path="../Objeto.ts"/>
+
 // #endregion Módulos externos
-
-// #region Importações
-
-import Objeto = NetZ.Web.TypeScript.Objeto;
-
-// #endregion Importações
 
 module NetZ.Web.TypeScript.html
 {
+    // #region Importações
+
+    // #endregion Importações
+
     // #region Enumerados
     // #endregion Enumerados
 
@@ -20,11 +21,11 @@ module NetZ.Web.TypeScript.html
         // #region Atributos
 
         private _booVisivel: boolean;
-        private _fncKeyDown: any;
-        private _fncKeyPress: any;
-        private _fncKeyUp: any;
-        private _fncOnChange: any;
-        private _fncOnClick: any;
+        private _fncKeyDown: Function;
+        private _fncKeyPress: Function;
+        private _fncKeyUp: Function;
+        private _fncOnChange: Function;
+        private _fncOnClick: Function;
         private _jq: any;
         private _strEstrutura: string;
         private _strId: string;

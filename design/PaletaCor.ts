@@ -1,11 +1,14 @@
 ﻿// #region Módulos externos
-// #endregion Módulos externos
 
-// #region Importações
-// #endregion Importações
+/// <reference path="../Objeto.ts"/>
+
+// #endregion Módulos externos
 
 module NetZ.Web.TypeScript.design
 {
+    // #region Importações
+    // #endregion Importações
+
     // #region Enumerados
     // #endregion Enumerados
 

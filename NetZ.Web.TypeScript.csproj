@@ -10,7 +10,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -25,8 +25,9 @@
     <TypeScriptCompile Include="AppWeb.ts" />
     <TypeScriptCompile Include="design\PaletaCor.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
-    <TypeScriptCompile Include="html\componente\Componente.ts" />
+    <TypeScriptCompile Include="html\componente\ComponenteHtml.ts" />
     <TypeScriptCompile Include="html\componente\Mensagem.ts" />
+    <TypeScriptCompile Include="html\Div.ts" />
     <TypeScriptCompile Include="html\Tag.ts" />
     <TypeScriptCompile Include="lib\jquery.d.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
@@ -64,18 +65,21 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptTarget>ES6</TypeScriptTarget>
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
     <TypeScriptOutFile />
-    <TypeScriptOutDir>D:\Projetos\Web.TypeScript\bin\js</TypeScriptOutDir>
+    <TypeScriptOutDir>../Principal/bin/Debug/res/js</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
+    <TypeScriptMapRoot>
+    </TypeScriptMapRoot>
+    <TypeScriptSourceRoot>
+    </TypeScriptSourceRoot>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>

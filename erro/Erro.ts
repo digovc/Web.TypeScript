@@ -1,11 +1,15 @@
 ﻿// #region Módulos externos
-// #endregion Módulos externos
 
-// #region Importações
-// #endregion Importações
+/// <reference path="../Objeto.ts"/>
+
+// #endregion Módulos externos
 
 module NetZ.Web.TypeScript.erro
 {
+    // #region Importações
+
+    // #endregion Importações
+
     // #region Enumerados
     // #endregion Enumerados
 
@@ -17,7 +21,7 @@ module NetZ.Web.TypeScript.erro
         // #region Atributos
 
         private _strMensagem: string = "Erro inesperado.";
-        private _strMensagemFormatada;
+        private _strMensagemFormatada: string;
         private _strMensagemTecnica: string = "<Sem detalhes>";
 
         public get strMensagem(): string
@@ -76,7 +80,7 @@ module NetZ.Web.TypeScript.erro
 
         // #region Construtores
 
-        constructor(strMensagem: string, e)
+        constructor(strMensagem: string, e: Error)
         {
             super();
 

@@ -1,11 +1,11 @@
 ﻿// #region Módulos externos
 // #endregion Módulos externos
 
-// #region Importações
-// #endregion Importações
-
 module NetZ.Web.TypeScript
 {
+    // #region Importações
+    // #endregion Importações
+
     // #region Enumerados
     // #endregion Enumerados
 
@@ -34,7 +34,7 @@ module NetZ.Web.TypeScript
          * @param evtOnLoad Evento que será disparado assim que a imagem
          * terminar de ser carregada.
          */
-        public static carregarImagem(strSrc: string, evtOnLoad = null): HTMLImageElement
+        public static carregarImagem(strSrc: string, evtOnLoad: any = null): HTMLImageElement
         {
             // #region Variáveis
 
@@ -65,7 +65,7 @@ module NetZ.Web.TypeScript
          * Valida se um texto é igual a null ou vazio (""). Caso ele seja
          * retorna true.
          */
-        public static getBooStrVazia(str): boolean
+        public static getBooStrVazia(str: string): boolean
         {
             // #region Variáveis
             // #endregion Variáveis

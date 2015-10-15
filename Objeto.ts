@@ -1,11 +1,14 @@
 ﻿// #region Módulos externos
-// #endregion Módulos externos
 
-// #region Importações
-// #endregion Importações
+/// <reference path="Utils.ts"/>
+
+// #endregion Módulos externos
 
 module NetZ.Web.TypeScript
 {
+    // #region Importações
+    // #endregion Importações
+
     // #region Enumerados
     // #endregion Enumerados
 
@@ -16,19 +19,10 @@ module NetZ.Web.TypeScript
 
         // #region Atributos
 
-        private static _intObjetoIdStatic: number;
-
-        private static get intObjetoIdStatic(): number
-        {
-            return Objeto._intObjetoIdStatic;
-        }
-
-        private static set intObjetoIdStatic(intObjetoIdStatic: number)
-        {
-            Objeto._intObjetoIdStatic = intObjetoIdStatic;
-        }
-
         private _intObjetoId: number;
+        private _strNome: string;
+        private _strNomeExibicao: string;
+        private static _intObjetoIdStatic: number;
 
         public get intObjetoId(): number
         {
@@ -59,8 +53,6 @@ module NetZ.Web.TypeScript
             return this._intObjetoId;
         }
 
-        private _strNome: string;
-
         public get strNome(): string
         {
             return this._strNome;
@@ -70,8 +62,6 @@ module NetZ.Web.TypeScript
         {
             this._strNome = strNome;
         }
-
-        private _strNomeExibicao: string;
 
         public get strNomeExibicao(): string
         {
@@ -103,6 +93,16 @@ module NetZ.Web.TypeScript
         public set strNomeExibicao(strNomeExibicao: string)
         {
             this._strNomeExibicao = strNomeExibicao;
+        }
+
+        private static get intObjetoIdStatic(): number
+        {
+            return Objeto._intObjetoIdStatic;
+        }
+
+        private static set intObjetoIdStatic(intObjetoIdStatic: number)
+        {
+            Objeto._intObjetoIdStatic = intObjetoIdStatic;
         }
 
         // #endregion Atributos

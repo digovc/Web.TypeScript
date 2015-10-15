@@ -1,14 +1,16 @@
 ﻿// #region Módulos externos
 
-declare var Notification: any;
+/// <reference path="ComponenteHtml.ts"/>
 
 // #endregion Módulos externos
 
-// #region Importações
-// #endregion Importações
+declare var Notification: any;
 
 module NetZ.Web.TypeScript.html.componente
 {
+    // #region Importações
+    // #endregion Importações
+
     // #region Enumerados
 
     export enum EnmTipo
@@ -21,7 +23,7 @@ module NetZ.Web.TypeScript.html.componente
 
     // #endregion Enumerados
 
-    export class Mensagem extends Componente
+    export class Mensagem extends ComponenteHtml
     {
         // #region Constantes
         // #endregion Constantes
@@ -32,7 +34,7 @@ module NetZ.Web.TypeScript.html.componente
         private _enmTipo: EnmTipo = EnmTipo.POSITIVA;
         private _srcIcon: string;
         private _strMsg: string;
-        private _strTitulo;
+        private _strTitulo: string;
         private static _booMensagemVisivel: boolean;
         private static _strEstruturaAlerta: string;
         private static _strEstruturaLoad: string;
@@ -310,7 +312,7 @@ module NetZ.Web.TypeScript.html.componente
             // #region Ações
             try
             {
-                var intTempo;
+                var intTempo: number;
 
                 if (!AppWeb.i.booEmFoco)
                 {
@@ -358,7 +360,7 @@ module NetZ.Web.TypeScript.html.componente
         {
             // #region Variáveis
 
-            var tagJq;
+            var tagJq: any;
 
             // #endregion Variáveis
 
@@ -390,7 +392,7 @@ module NetZ.Web.TypeScript.html.componente
         {
             // #region Variáveis
 
-            var objNotificacaoOption;
+            var objNotificacaoOption: any;
 
             // #endregion Variáveis
 
@@ -415,7 +417,7 @@ module NetZ.Web.TypeScript.html.componente
                     new Notification(this.strTitulo, objNotificacaoOption);
                 } else if (Notification.permission !== 'denied')
                 {
-                    Notification.requestPermission(function (permission)
+                    Notification.requestPermission(function (permission: any)
                     {
                         if (permission === "granted")
                         {

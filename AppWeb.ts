@@ -1,16 +1,23 @@
 ﻿// #region Módulos externos
+
+/// <reference path="design/PaletaCor.ts"/>
+/// <reference path="erro/Erro.ts"/>
+/// <reference path="html/componente/Mensagem.ts"/>
+/// <reference path="lib/jquery.d.ts"/>
+/// <reference path="Objeto.ts"/>
+
 // #endregion Módulos externos
-
-// #region Importações
-
-import Erro = NetZ.Web.TypeScript.erro.Erro;
-import Mensagem = NetZ.Web.TypeScript.html.componente.Mensagem;
-import PaletaCor = NetZ.Web.TypeScript.design.PaletaCor;
-
-// #endregion Importações
 
 module NetZ.Web.TypeScript
 {
+    // #region Importações
+
+    import Erro = NetZ.Web.TypeScript.erro.Erro;
+    import Mensagem = NetZ.Web.TypeScript.html.componente.Mensagem;
+    import PaletaCor = NetZ.Web.TypeScript.design.PaletaCor;
+
+    // #endregion Importações
+
     // #region Enumerados
     // #endregion Enumerados
 
@@ -25,7 +32,7 @@ module NetZ.Web.TypeScript
         private _booEmFoco: boolean = true;
         private _intPaletaCorSelecionada: number;
         private _strSessionId: string;
-        private static _i: AppWeb;
+        protected static _i: AppWeb;
 
         private get arrObjPaletaCor(): PaletaCor[]
         {
@@ -199,7 +206,7 @@ module NetZ.Web.TypeScript
 
         // #region Eventos
 
-        private evtBlur(evt): void
+        private evtBlur(evt: Event): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -219,7 +226,7 @@ module NetZ.Web.TypeScript
             // #endregion Ações
         }
 
-        private evtFocus(evt): void
+        private evtFocus(evt: Event): void
         {
             // #region Variáveis
             // #endregion Variáveis
