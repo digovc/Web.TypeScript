@@ -1,12 +1,8 @@
-﻿// #region Módulos externos
-
-/// <reference path="design/PaletaCor.ts"/>
-/// <reference path="erro/Erro.ts"/>
+﻿/// <reference path="erro/Erro.ts"/>
 /// <reference path="html/componente/Mensagem.ts"/>
+/// <reference path="html/PaginaHtml.ts"/>
 /// <reference path="lib/jquery.d.ts"/>
 /// <reference path="Objeto.ts"/>
-
-// #endregion Módulos externos
 
 module NetZ.Web.TypeScript
 {
@@ -14,52 +10,24 @@ module NetZ.Web.TypeScript
 
     import Erro = NetZ.Web.TypeScript.erro.Erro;
     import Mensagem = NetZ.Web.TypeScript.html.componente.Mensagem;
-    import PaletaCor = NetZ.Web.TypeScript.design.PaletaCor;
+    import PaginaHtml = NetZ.Web.TypeScript.html.PaginaHtml;
 
     // #endregion Importações
 
     // #region Enumerados
     // #endregion Enumerados
 
-    export class AppWeb extends Objeto
+    export abstract class AppWeb extends Objeto
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _arrObjPaletaCor: PaletaCor[];
         private _booEmFoco: boolean = true;
-        private _intPaletaCorSelecionada: number;
+        private _pag: PaginaHtml;
         private _strSessionId: string;
         protected static _i: AppWeb;
-
-        private get arrObjPaletaCor(): PaletaCor[]
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this._arrObjPaletaCor != null)
-                {
-                    return this._arrObjPaletaCor;
-                }
-
-                this._arrObjPaletaCor = [];
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._arrObjPaletaCor;
-        }
 
         public get booEmFoco(): boolean
         {
@@ -71,14 +39,41 @@ module NetZ.Web.TypeScript
             this._booEmFoco = booEmFoco;
         }
 
-        public get intPaletaCorSelecionada(): number
+        public get pag(): PaginaHtml
         {
-            return this._intPaletaCorSelecionada;
+            return this._pag;
         }
 
-        public set intPaletaCorSelecionada(intPaletaCorSelecionada: number)
+        public set pag(pag: PaginaHtml)
         {
-            this._intPaletaCorSelecionada = intPaletaCorSelecionada;
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (pag == null)
+                {
+                    return;
+                }
+
+                if (this._pag != null)
+                {
+                    return;
+                }
+
+                this._pag = pag;
+
+                this.inicializar();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
         }
 
         public get strSessionId(): string
@@ -93,18 +88,23 @@ module NetZ.Web.TypeScript
 
         public static get i(): AppWeb
         {
+            return AppWeb._i;
+        }
+
+        public static set i(appWeb: AppWeb)
+        {
             // #region Variáveis
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                if (AppWeb._i != null)
+                if (AppWeb.i != null)
                 {
-                    return AppWeb._i;
+                    return;
                 }
 
-                AppWeb._i = new AppWeb();
+                AppWeb._i = appWeb;
             }
             catch (ex)
             {
@@ -114,13 +114,33 @@ module NetZ.Web.TypeScript
             {
             }
             // #endregion Ações
-
-            return AppWeb._i;
         }
 
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor()
+        {
+            super();
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                AppWeb.i = this;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         // #endregion Construtores
 
@@ -161,8 +181,9 @@ module NetZ.Web.TypeScript
             // #region Ações
             try
             {
-                this.montarLayout();
                 this.setEventos();
+
+                this.inicializarPag();
             }
             catch (ex)
             {
@@ -174,8 +195,9 @@ module NetZ.Web.TypeScript
             // #endregion Ações
         }
 
-        protected montarLayout(): void
+        private inicializarPag(): void
         {
+            (this.pag != null) && this.pag.inicializar();
         }
 
         protected setEventos(): void
@@ -186,11 +208,8 @@ module NetZ.Web.TypeScript
             // #region Ações
             try
             {
-                $(window).focus(this.evtFocus);
-                $(window).blur(this.evtBlur);
-
-                window.onfocus = this.evtFocus;
-                window.onblur = this.evtBlur;
+                window.onfocus = this.AppWeb_onFocus;
+                window.onblur = this.AppWeb_onBlur;
             }
             catch (ex)
             {
@@ -206,7 +225,7 @@ module NetZ.Web.TypeScript
 
         // #region Eventos
 
-        private evtBlur(evt: Event): void
+        private AppWeb_onBlur(evt: Event): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -226,7 +245,7 @@ module NetZ.Web.TypeScript
             // #endregion Ações
         }
 
-        private evtFocus(evt: Event): void
+        private AppWeb_onFocus(evt: Event): void
         {
             // #region Variáveis
             // #endregion Variáveis

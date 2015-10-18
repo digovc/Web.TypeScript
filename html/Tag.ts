@@ -1,8 +1,5 @@
-﻿// #region Módulos externos
-
+﻿/// <reference path="../lib/jquery.d.ts"/>
 /// <reference path="../Objeto.ts"/>
-
-// #endregion Módulos externos
 
 module NetZ.Web.TypeScript.html
 {
@@ -11,6 +8,16 @@ module NetZ.Web.TypeScript.html
     // #endregion Importações
 
     // #region Enumerados
+
+    export enum EnmAnimacaoTipo
+    {
+        ABAIXO,
+        ACIMA,
+        DIREITA,
+        ESQUERDA,
+        FADE,
+    }
+
     // #endregion Enumerados
 
     export class Tag extends Objeto
@@ -21,12 +28,12 @@ module NetZ.Web.TypeScript.html
         // #region Atributos
 
         private _booVisivel: boolean;
-        private _fncKeyDown: Function;
-        private _fncKeyPress: Function;
-        private _fncKeyUp: Function;
-        private _fncOnChange: Function;
-        private _fncOnClick: Function;
         private _jq: any;
+        private _onChange: Function;
+        private _onClick: Function;
+        private _onKeyDown: Function;
+        private _onKeyPress: Function;
+        private _onKeyUp: Function;
         private _strEstrutura: string;
         private _strId: string;
         private _strPlaceholder: string;
@@ -64,162 +71,31 @@ module NetZ.Web.TypeScript.html
             {
                 this._booVisivel = booVisivel;
 
-                if (this._booVisivel)
+                this._booVisivel ? this.mostrar() : this.esconder();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public get jq(): JQuery
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._jq != null)
                 {
-                    this.jq.fadeIn();
-                    return;
+                    return this._jq;
                 }
 
-                this.jq.fadeOut();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get fncKeyDown(): any
-        {
-            return this._fncKeyDown;
-        }
-
-        public set fncKeyDown(fncKeyDown: any)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._fncKeyDown = fncKeyDown;
-                this.jq.keydown(this._fncKeyDown);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get fncKeyPress(): any
-        {
-            return this._fncKeyPress;
-        }
-
-        public set fncKeyPress(fncKeyPress: any)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._fncKeyPress = fncKeyPress;
-                this.jq.keypress(this._fncKeyPress);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get fncKeyUp(): any
-        {
-            return this._fncKeyUp;
-        }
-
-        public set fncKeyUp(fncKeyUp: any)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._fncKeyUp = fncKeyUp;
-                this.jq.keyup(this._fncKeyUp);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get fncOnChange(): any
-        {
-            return this._fncOnChange;
-        }
-
-        public set fncOnChange(fncOnChange: any)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._fncOnChange = fncOnChange;
-                this.jq.change(this._fncOnChange);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get fncOnClick(): any
-        {
-            return this._fncOnClick;
-        }
-
-        public set fncOnClick(fncOnClick: any)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._fncOnClick = fncOnClick;
-                this.jq.click(this._fncOnClick);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get jq(): any
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
                 this._jq = $("#" + this.strId);
             }
             catch (ex)
@@ -232,6 +108,141 @@ module NetZ.Web.TypeScript.html
             // #endregion Ações
 
             return this._jq;
+        }
+
+        public get onChange(): Function
+        {
+            return this._onChange;
+        }
+
+        public set onChange(fncOnChange: Function)
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._onChange = fncOnChange;
+
+                this.jq.change(this._onChange);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public get onClick(): Function
+        {
+            return this._onClick;
+        }
+
+        public set onClick(fncOnClick: Function)
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._onClick = fncOnClick;
+
+                this.jq.click(this._onClick);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public get onKeyDown(): Function
+        {
+            return this._onKeyDown;
+        }
+
+        public set onKeyDown(fncKeyDown: Function)
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._onKeyDown = fncKeyDown;
+
+                this.jq.keydown(this._onKeyDown);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public get onKeyPress(): Function
+        {
+            return this._onKeyPress;
+        }
+
+        public set onKeyPress(fncKeyPress: Function)
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._onKeyPress = fncKeyPress;
+
+                this.jq.keypress(this._onKeyPress);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public get onKeyUp(): Function
+        {
+            return this._onKeyUp;
+        }
+
+        public set onKeyUp(fncKeyUp: Function)
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._onKeyUp = fncKeyUp;
+
+                this.jq.keyup(this._onKeyUp);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
         }
 
         public get strEstrutura(): string
@@ -285,6 +296,7 @@ module NetZ.Web.TypeScript.html
             try
             {
                 this._strPlaceholder = strPlaceholder;
+
                 this.jq.attr("placeholder", this._strPlaceholder);
             }
             catch (ex)
@@ -328,6 +340,7 @@ module NetZ.Web.TypeScript.html
             try
             {
                 this._strTitle = strTitle;
+
                 this.jq.attr("title", this._strTitle);
             }
             catch (ex)
@@ -390,7 +403,51 @@ module NetZ.Web.TypeScript.html
             // #endregion Ações
         }
 
-        public esconder(): void
+        public esconder(enmAnimacaoTipo: EnmAnimacaoTipo = EnmAnimacaoTipo.FADE): void
+        {
+            // #region Variáveis
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.jq.stop();
+
+                switch (enmAnimacaoTipo)
+                {
+                    case EnmAnimacaoTipo.ABAIXO:
+                        this.jq.slideDown();
+                        return;
+
+                    case EnmAnimacaoTipo.ACIMA:
+                        this.jq.slideUp();
+                        return;
+
+                    case EnmAnimacaoTipo.DIREITA:
+                        this.jq.hide(); // TODO: Implementar.
+                        return;
+
+                    case EnmAnimacaoTipo.ESQUERDA:
+                        this.jq.hide(); // TODO: Implementar.
+                        return;
+
+                    default:
+                        this.jq.fadeOut();
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public inicializar(): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -398,8 +455,8 @@ module NetZ.Web.TypeScript.html
             // #region Ações
             try
             {
-                this.jq.stop();
-                this.booVisivel = false;
+                this.montarLayout();
+                this.setEventos();
             }
             catch (ex)
             {
@@ -415,7 +472,7 @@ module NetZ.Web.TypeScript.html
         {
         }
 
-        public mostrar()
+        public mostrar(enmAnimacaoTipo: EnmAnimacaoTipo = EnmAnimacaoTipo.FADE)
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -424,7 +481,29 @@ module NetZ.Web.TypeScript.html
             try
             {
                 this.jq.stop();
-                this.booVisivel = true;
+
+                switch (enmAnimacaoTipo)
+                {
+                    case EnmAnimacaoTipo.ABAIXO:
+                        this.jq.slideDown();
+                        return;
+
+                    case EnmAnimacaoTipo.ACIMA:
+                        this.jq.slideUp();
+                        return;
+
+                    case EnmAnimacaoTipo.DIREITA:
+                        this.jq.show(); // TODO: Implementar.
+                        return;
+
+                    case EnmAnimacaoTipo.ESQUERDA:
+                        this.jq.show(); // TODO: Implementar.
+                        return;
+
+                    default:
+                        this.jq.fadeIn();
+                        return;
+                }
             }
             catch (ex)
             {
@@ -434,6 +513,15 @@ module NetZ.Web.TypeScript.html
             {
             }
             // #endregion Ações
+        }
+
+        public mostrarEsconder(enmAnimacaoTipo: EnmAnimacaoTipo = EnmAnimacaoTipo.FADE): void
+        {
+            (this.booVisivel) ? this.esconder(enmAnimacaoTipo) : this.mostrar(enmAnimacaoTipo);
+        }
+
+        protected setEventos(): void
+        {
         }
 
         public toHtml(): string

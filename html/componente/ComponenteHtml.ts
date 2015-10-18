@@ -1,8 +1,4 @@
-﻿// #region Módulos externos
-
-/// <reference path="../Div.ts"/>
-
-// #endregion Módulos externos
+﻿/// <reference path="../Div.ts"/>
 
 module NetZ.Web.TypeScript.html.componente
 {

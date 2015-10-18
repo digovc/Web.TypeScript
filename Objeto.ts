@@ -1,8 +1,4 @@
-﻿// #region Módulos externos
-
-/// <reference path="Utils.ts"/>
-
-// #endregion Módulos externos
+﻿/// <reference path="Utils.ts"/>
 
 module NetZ.Web.TypeScript
 {

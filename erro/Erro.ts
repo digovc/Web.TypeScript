@@ -1,8 +1,4 @@
-﻿// #region Módulos externos
-
-/// <reference path="../Objeto.ts"/>
-
-// #endregion Módulos externos
+﻿/// <reference path="../Objeto.ts"/>
 
 module NetZ.Web.TypeScript.erro
 {

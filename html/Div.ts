@@ -1,8 +1,4 @@
-﻿// #region Módulos externos
-
-/// <reference path="Tag.ts"/>
-
-// #endregion Módulos externos
+﻿/// <reference path="Tag.ts"/>
 
 module NetZ.Web.TypeScript.html
 {

@@ -1,8 +1,4 @@
-﻿// #region Módulos externos
-
-/// <reference path="ComponenteHtml.ts"/>
-
-// #endregion Módulos externos
+﻿/// <reference path="ComponenteHtml.ts"/>
 
 declare var Notification: any;
 
@@ -259,8 +255,10 @@ module NetZ.Web.TypeScript.html.componente
             // #endregion Ações
         }
 
-        public montarLayout(): void
+        protected montarLayout(): void
         {
+            super.montarLayout();
+
             // #region Variáveis
 
             var tag: string;

@@ -23,11 +23,15 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="AppWeb.ts" />
-    <TypeScriptCompile Include="design\PaletaCor.ts" />
+    <TypeScriptCompile Include="Boot.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="html\componente\ComponenteHtml.ts" />
     <TypeScriptCompile Include="html\componente\Mensagem.ts" />
+    <TypeScriptCompile Include="html\componente\menu\MainMenu.ts" />
+    <TypeScriptCompile Include="html\componente\menu\MainMenuItem.ts" />
     <TypeScriptCompile Include="html\Div.ts" />
+    <TypeScriptCompile Include="html\Imagem.ts" />
+    <TypeScriptCompile Include="html\PaginaHtml.ts" />
     <TypeScriptCompile Include="html\Tag.ts" />
     <TypeScriptCompile Include="lib\jquery.d.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
@@ -37,7 +41,9 @@
     <Content Include="lib\jquery-2.1.3.min.js" />
     <Content Include="zzz.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="design\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
@@ -67,12 +73,14 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
-    <TypeScriptTarget>ES6</TypeScriptTarget>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
-    <TypeScriptOutFile />
-    <TypeScriptOutDir>../Principal/bin/Debug/res/js</TypeScriptOutDir>
+    <TypeScriptOutFile>
+    </TypeScriptOutFile>
+    <TypeScriptOutDir>
+    </TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot>

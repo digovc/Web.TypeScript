@@ -1,7 +1,4 @@
-﻿// #region Módulos externos
-// #endregion Módulos externos
-
-module NetZ.Web.TypeScript
+﻿module NetZ.Web.TypeScript
 {
     // #region Importações
     // #endregion Importações
