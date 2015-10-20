@@ -11,11 +11,9 @@ module NetZ.Web.TypeScript.html
 
     export enum EnmAnimacaoTipo
     {
-        ABAIXO,
-        ACIMA,
-        DIREITA,
-        ESQUERDA,
         FADE,
+        SLIDE_HORIZONTAL,
+        SLIDE_VERTICAL,
     }
 
     // #endregion Enumerados
@@ -416,19 +414,11 @@ module NetZ.Web.TypeScript.html
 
                 switch (enmAnimacaoTipo)
                 {
-                    case EnmAnimacaoTipo.ABAIXO:
-                        this.jq.slideDown();
-                        return;
-
-                    case EnmAnimacaoTipo.ACIMA:
+                    case EnmAnimacaoTipo.SLIDE_VERTICAL:
                         this.jq.slideUp();
                         return;
 
-                    case EnmAnimacaoTipo.DIREITA:
-                        this.jq.hide(); // TODO: Implementar.
-                        return;
-
-                    case EnmAnimacaoTipo.ESQUERDA:
+                    case EnmAnimacaoTipo.SLIDE_HORIZONTAL:
                         this.jq.hide(); // TODO: Implementar.
                         return;
 
@@ -484,19 +474,11 @@ module NetZ.Web.TypeScript.html
 
                 switch (enmAnimacaoTipo)
                 {
-                    case EnmAnimacaoTipo.ABAIXO:
+                    case EnmAnimacaoTipo.SLIDE_VERTICAL:
                         this.jq.slideDown();
                         return;
 
-                    case EnmAnimacaoTipo.ACIMA:
-                        this.jq.slideUp();
-                        return;
-
-                    case EnmAnimacaoTipo.DIREITA:
-                        this.jq.show(); // TODO: Implementar.
-                        return;
-
-                    case EnmAnimacaoTipo.ESQUERDA:
+                    case EnmAnimacaoTipo.SLIDE_HORIZONTAL:
                         this.jq.show(); // TODO: Implementar.
                         return;
 

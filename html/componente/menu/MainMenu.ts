@@ -16,9 +16,9 @@ module NetZ.Web.TypeScript.html.componente.menu
 
         // #region Atributos
 
-        private _lstDivMainMenuItem: Array<MainMenuItem>;
+        private _lstDivMmiFilho: Array<MainMenuItem>;
 
-        protected get lstDivMainMenuItem(): Array<MainMenuItem>
+        protected get lstDivMmiFilho(): Array<MainMenuItem>
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -26,12 +26,12 @@ module NetZ.Web.TypeScript.html.componente.menu
             // #region Ações
             try
             {
-                if (this._lstDivMainMenuItem != null)
+                if (this._lstDivMmiFilho != null)
                 {
-                    return this._lstDivMainMenuItem;
+                    return this._lstDivMmiFilho;
                 }
 
-                this._lstDivMainMenuItem = new Array<MainMenuItem>();
+                this._lstDivMmiFilho = new Array<MainMenuItem>();
             }
             catch (ex)
             {
@@ -42,7 +42,7 @@ module NetZ.Web.TypeScript.html.componente.menu
             }
             // #endregion Ações
 
-            return this._lstDivMainMenuItem;
+            return this._lstDivMmiFilho;
         }
 
         // #endregion Atributos
@@ -52,7 +52,7 @@ module NetZ.Web.TypeScript.html.componente.menu
 
         // #region Métodos
 
-        public addItem(divMmi: MainMenuItem): void
+        public addDivMmiFilho(divMmiFilho: MainMenuItem): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -60,19 +60,20 @@ module NetZ.Web.TypeScript.html.componente.menu
             // #region Ações
             try
             {
-                if (divMmi == null)
+                if (divMmiFilho == null)
                 {
                     return;
                 }
 
-                if (this.lstDivMainMenuItem.indexOf(divMmi) > -1)
+                if (this.lstDivMmiFilho.indexOf(divMmiFilho) > -1)
                 {
                     return;
                 }
 
-                this.lstDivMainMenuItem.push(divMmi);
+                this.lstDivMmiFilho.push(divMmiFilho);
 
-                divMmi.inicializar();
+                divMmiFilho.divMmnPai = this;
+                divMmiFilho.inicializar();
             }
             catch (ex)
             {
