@@ -1,12 +1,9 @@
 ﻿/// <reference path="../../../erro/Erro.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 
-module NetZ.Web.TypeScript.html.componente.menu
+module NetZ_Web_TypeScript
 {
     // #region Importações
-
-    import Erro = NetZ.Web.TypeScript.erro.Erro;
-
     // #endregion Importações
 
     // #region Enumerados

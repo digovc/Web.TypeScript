@@ -1,7 +1,7 @@
 ﻿/// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="MainMenuItem.ts"/>
 
-module NetZ.Web.TypeScript.html.componente.menu
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações

@@ -2,7 +2,7 @@
 
 declare var Notification: any;
 
-module NetZ.Web.TypeScript.html.componente
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações

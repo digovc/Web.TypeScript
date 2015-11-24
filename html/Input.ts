@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JanelaHtml extends ComponenteHtml
+    export class Input extends Tag
     {
         // #region Constantes
         // #endregion Constantes

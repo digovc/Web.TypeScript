@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JanelaHtml extends ComponenteHtml
+    export class Filtro extends Objeto
     {
         // #region Constantes
         // #endregion Constantes

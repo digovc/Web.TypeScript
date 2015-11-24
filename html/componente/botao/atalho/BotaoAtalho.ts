@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JanelaHtml extends ComponenteHtml
+    export class BotaoAtalho extends BotaoHtml
     {
         // #region Constantes
         // #endregion Constantes

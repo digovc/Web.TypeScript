@@ -26,15 +26,30 @@
     <TypeScriptCompile Include="AppWeb.ts" />
     <TypeScriptCompile Include="Boot.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
-    <TypeScriptCompile Include="html\componente\botao\BotaoAcao.ts" />
-    <TypeScriptCompile Include="html\componente\botao\BotaoAtalho.ts" />
+    <TypeScriptCompile Include="html\ComboBox.ts" />
+    <TypeScriptCompile Include="html\componente\botao\acao\BotaoAcao.ts" />
+    <TypeScriptCompile Include="html\componente\botao\atalho\BotaoAtalho.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoHtml.ts" />
-    <TypeScriptCompile Include="html\componente\botao\BotaoMini.ts" />
-    <TypeScriptCompile Include="html\componente\botao\BotaoMiniFechar.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMini.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniAdicionar.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniAlterar.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniApagar.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniFechar.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniPesquisar.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoAlfanumerico.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoAnexo.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoCheckBox.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoComboBox.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoConsulta.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoDataHora.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoHtml.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoImagem.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoRadioButton.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoSenha.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoTexto.ts" />
     <TypeScriptCompile Include="html\componente\ComponenteHtml.ts" />
     <TypeScriptCompile Include="html\componente\form\FormHtml.ts" />
+    <TypeScriptCompile Include="html\componente\grid\GridHtml.ts" />
     <TypeScriptCompile Include="html\componente\janela\JanelaHtml.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlConsulta.ts" />
@@ -49,18 +64,23 @@
     <TypeScriptCompile Include="html\design\Tema.ts" />
     <TypeScriptCompile Include="html\Div.ts" />
     <TypeScriptCompile Include="html\Imagem.ts" />
+    <TypeScriptCompile Include="html\Input.ts" />
     <TypeScriptCompile Include="html\PaginaHtml.ts" />
     <TypeScriptCompile Include="html\Tag.ts" />
     <TypeScriptCompile Include="lib\jquery.d.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
+    <TypeScriptCompile Include="persistencia\Coluna.ts" />
+    <TypeScriptCompile Include="persistencia\DataBase.ts" />
+    <TypeScriptCompile Include="persistencia\Filtro.ts" />
+    <TypeScriptCompile Include="persistencia\Tabela.ts" />
+    <TypeScriptCompile Include="persistencia\View.ts" />
+    <TypeScriptCompile Include="server\Servidor.ts" />
     <TypeScriptCompile Include="Utils.ts" />
+    <TypeScriptCompile Include="websocket\ServerWs.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\jquery-2.1.3.min.js" />
     <Content Include="zzz.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="design\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Data.DataSetExtensions" />

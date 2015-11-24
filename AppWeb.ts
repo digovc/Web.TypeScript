@@ -4,13 +4,9 @@
 /// <reference path="lib/jquery.d.ts"/>
 /// <reference path="Objeto.ts"/>
 
-module NetZ.Web.TypeScript
+module NetZ_Web_TypeScript
 {
     // #region Importações
-
-    import Erro = NetZ.Web.TypeScript.erro.Erro;
-    import Mensagem = NetZ.Web.TypeScript.html.componente.Mensagem;
-    import PaginaHtml = NetZ.Web.TypeScript.html.PaginaHtml;
 
     // #endregion Importações
 

@@ -6,12 +6,13 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JanelaHtml extends ComponenteHtml
+    export class ServerWs extends Objeto
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
+
         // #endregion Atributos
 
         // #region Construtores

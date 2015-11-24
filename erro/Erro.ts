@@ -1,9 +1,8 @@
 ﻿/// <reference path="../Objeto.ts"/>
 
-module NetZ.Web.TypeScript.erro
+module NetZ_Web_TypeScript
 {
     // #region Importações
-
     // #endregion Importações
 
     // #region Enumerados

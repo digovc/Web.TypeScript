@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JanelaHtml extends ComponenteHtml
+    export class CampoSenha extends CampoAlfanumerico
     {
         // #region Constantes
         // #endregion Constantes

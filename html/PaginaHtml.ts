@@ -1,6 +1,6 @@
 ﻿/// <reference path="../Objeto.ts"/>
 
-module NetZ.Web.TypeScript.html
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
