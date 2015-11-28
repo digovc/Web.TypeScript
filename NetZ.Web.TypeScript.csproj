@@ -26,6 +26,9 @@
     <TypeScriptCompile Include="AppWeb.ts" />
     <TypeScriptCompile Include="Boot.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
+    <TypeScriptCompile Include="event\EventArg.ts" />
+    <TypeScriptCompile Include="event\OnValorAlteradoArg.ts" />
+    <TypeScriptCompile Include="event\OnValorAlteradoListener.ts" />
     <TypeScriptCompile Include="html\ComboBox.ts" />
     <TypeScriptCompile Include="html\componente\botao\acao\BotaoAcao.ts" />
     <TypeScriptCompile Include="html\componente\botao\atalho\BotaoAtalho.ts" />
@@ -68,6 +71,7 @@
     <TypeScriptCompile Include="html\PaginaHtml.ts" />
     <TypeScriptCompile Include="html\Tag.ts" />
     <TypeScriptCompile Include="lib\jquery.d.ts" />
+    <TypeScriptCompile Include="List.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
     <TypeScriptCompile Include="persistencia\Coluna.ts" />
     <TypeScriptCompile Include="persistencia\DataBase.ts" />
@@ -125,8 +129,7 @@
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
-    <TypeScriptOutDir>
-    </TypeScriptOutDir>
+    <TypeScriptOutDir>../Principal/bin/Debug/res/js/Web.TypeScript</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot>

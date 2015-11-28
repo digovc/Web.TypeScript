@@ -6,19 +6,32 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlLogin extends JnlMensagem
+    export class List<T>
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _btnEntrar: BotaoAcao;
-        private _cmpLogin: CampoAlfanumerico;
-        private _cmpSenha: CampoSenha;
-        private _frmLogin: FormHtml;
+        private _booPermitirValorDuplicado: boolean;
+        private _booVazia: boolean;
+        private _intItemQuantidade: number;
+        private _lstItem: Array<T>;
 
-        private get btnEnter(): BotaoAcao
+        /**
+         * Indica se esta lista poderá conter valores duplicados. Caso esta
+         * lista contenha objetos complexos, a validação será feita através
+         * das instâncias destes objetos e não de seus valores.
+         */
+        public get booPermitirValorDuplicado(): boolean
+        {
+            return this._booPermitirValorDuplicado;
+        }
+
+        /**
+         * Indica se esta lista está vazia (se contém elementos).
+         */
+        public get booVazia(): boolean
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -26,12 +39,7 @@
             // #region Ações
             try
             {
-                if (this._btnEntrar != null)
-                {
-                    return this._btnEntrar;
-                }
-
-                this._btnEntrar = new BotaoAcao("btnEntrar");
+                this._booVazia = (this.intItemQuantidade < 1);
             }
             catch (ex)
             {
@@ -42,10 +50,18 @@
             }
             // #endregion Ações
 
-            return this._btnEntrar;
+            return this._booVazia;
         }
 
-        private get cmpLogin(): CampoAlfanumerico
+        public set booPermitirValorDuplicado(booPermitirValorDuplicado: boolean)
+        {
+            this._booPermitirValorDuplicado = booPermitirValorDuplicado;
+        }
+
+        /**
+         * Indica a quantidade de itens que estão presentes nesta lista.
+         */
+        public get intItemQuantidade(): number
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -53,12 +69,7 @@
             // #region Ações
             try
             {
-                if (this._cmpLogin != null)
-                {
-                    return this._cmpLogin;
-                }
-
-                this._cmpLogin = new CampoAlfanumerico("cmpLogin");
+                this._intItemQuantidade = this.lstItem.length;
             }
             catch (ex)
             {
@@ -69,10 +80,10 @@
             }
             // #endregion Ações
 
-            return this._cmpLogin;
+            return this._intItemQuantidade;
         }
 
-        private get cmpSenha(): CampoSenha
+        private get lstItem(): Array<T>
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -80,12 +91,12 @@
             // #region Ações
             try
             {
-                if (this._cmpSenha != null)
+                if (this._lstItem != null)
                 {
-                    return this._cmpSenha;
+                    return this._lstItem;
                 }
 
-                this._cmpSenha = new CampoSenha("cmpSenha");
+                this._lstItem = new Array<T>();
             }
             catch (ex)
             {
@@ -96,36 +107,10 @@
             }
             // #endregion Ações
 
-            return this._cmpSenha;
+            return this._lstItem;
         }
 
-        private get frmLogin(): FormHtml
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                super.inicializar
-                if (this._frmLogin != null)
-                {
-                    return this._frmLogin;
-                }
-
-                this._frmLogin = new FormHtml("frmLogin");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._frmLogin;
-        }
+        [intIndex: number]: T;
 
         // #endregion Atributos
 
@@ -134,7 +119,10 @@
 
         // #region Métodos
 
-        private entrar(): void
+        /**
+         * Adiciona um item para esta lista.
+         */
+        public adicionar(itm: T): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -142,54 +130,52 @@
             // #region Ações
             try
             {
-                if (!this.validarDados())
+                if (itm == null)
                 {
                     return;
                 }
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
-        protected setEventos(): void
-        {
-            super.setEventos();
-
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.btnEnter.onClick = (e: any) => this.btnEnter_onClick(e);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        private validarDados(): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (Utils.getBooStrVazia(this.cmpLogin.strValor))
+                if ((!this.booPermitirValorDuplicado) && (this.lstItem.indexOf(itm) > -1))
                 {
+                    return;
+                }
 
+                this.lstItem.push(itm);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        /**
+         * Adiciona um item para esta lista.
+         */
+        public forEach(fnc: Function): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (fnc == null)
+                {
+                    return;
+                }
+
+                if (this.booVazia)
+                {
+                    return;
+                }
+
+                for (var itm in this.lstItem)
+                {
+                    fnc(itm);
                 }
             }
             catch (ex)
@@ -201,11 +187,8 @@
             }
             // #endregion Ações
         }
-        // #endregion Métodos
 
-        // #region Eventos
-
-        private btnEnter_onClick(e: any): void
+        public remover(itm: T): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -213,17 +196,31 @@
             // #region Ações
             try
             {
-                this.entrar();
+                if (itm == null)
+                {
+                    return;
+                }
+
+                if (this.lstItem.indexOf(itm) < 0)
+                {
+                    return;
+                }
+
+                this.lstItem.splice(this.lstItem.indexOf(itm), 1);
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                throw ex;
             }
             finally
             {
             }
             // #endregion Ações
         }
+
+        // #endregion Métodos
+
+        // #region Eventos
         // #endregion Eventos
     }
 }

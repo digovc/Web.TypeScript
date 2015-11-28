@@ -197,6 +197,7 @@ module NetZ_Web_TypeScript
         {
             Mensagem._strMensagemUltima = strMensagemUltima;
         }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -330,7 +331,7 @@ module NetZ_Web_TypeScript
 
                 intTempo = this.strMsg.length * 75;
 
-                $("body").append(this.toHtml());
+                //$("body").append(this.toHtml());
 
                 Mensagem.booMensagemVisivel = true;
 
@@ -367,14 +368,14 @@ module NetZ_Web_TypeScript
             {
                 if (!this.booBloquearTela)
                 {
-                    this.strEstrutura = tag;
+                    //this.strEstrutura = tag;
                     return;
                 }
 
                 tagJq = $(tag).css("background", "rgba(0, 0, 0, 0.15)");
                 tagJq = $(tag).css("bottom", "0px");
 
-                this.strEstrutura = tagJq[0];
+                //this.strEstrutura = tagJq[0];
             }
             catch (ex)
             {

@@ -32,7 +32,6 @@ module NetZ_Web_TypeScript
         private _onKeyDown: Function;
         private _onKeyPress: Function;
         private _onKeyUp: Function;
-        private _strEstrutura: string;
         private _strId: string;
         private _strPlaceholder: string;
         private _strTitle: string;
@@ -243,16 +242,6 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public get strEstrutura(): string
-        {
-            return this._strEstrutura;
-        }
-
-        public set strEstrutura(strEstrutura: string)
-        {
-            this._strEstrutura = strEstrutura;
-        }
-
         public get strId(): string
         {
             return this._strId;
@@ -366,6 +355,10 @@ module NetZ_Web_TypeScript
             try
             {
                 this.strId = strId;
+                this.inicializar();
+                this.montarLayout();
+                this.setEventos();
+                this.finalizar();
             }
             catch (ex)
             {
@@ -437,25 +430,12 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
+        private finalizar(): void
+        {
+        }
+
         public inicializar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.montarLayout();
-                this.setEventos();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         protected montarLayout(): void
@@ -504,30 +484,6 @@ module NetZ_Web_TypeScript
 
         protected setEventos(): void
         {
-        }
-
-        public toHtml(): string
-        {
-            var strHtmlResultado: string;
-
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.montarLayout();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this.strEstrutura;
         }
 
         // #endregion Métodos

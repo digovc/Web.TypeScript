@@ -212,6 +212,48 @@
             return str;
         }
 
+        /**
+         * Converte o valor de strValor para seu correspondente booleano (true ou false).
+         * A string será transformada para minúsculo, logo "S" é o mesmo que "s".
+         * @param strValor Texto que se deseja verificar o valor booleano.
+         * @return True caso strValor contenha: 1, sim, s, true, t. E false em qualquer outra possibilidade.
+         */
+        public static strToBoo(strValor: string): boolean
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (Utils.getBooStrVazia(strValor))
+                {
+                    return false;
+                }
+
+                switch (strValor.toLowerCase())
+                {
+                    case "1":
+                    case "s":
+                    case "sim":
+                    case "t":
+                    case "true":
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         // #endregion Métodos
 
         // #region Eventos
