@@ -342,7 +342,7 @@
                     return;
                 }
 
-                this.lstEvtOnValorAlteradoListener.forEach((i) => this.dispararOnValorAlteradoItem(i));
+                //this.lstEvtOnValorAlteradoListener.forEach((i) => this.dispararOnValorAlteradoItem(i));
             }
             catch (ex)
             {

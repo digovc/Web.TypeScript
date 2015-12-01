@@ -189,7 +189,6 @@
             {
                 if (Utils.getBooStrVazia(this.cmpLogin.strValor))
                 {
-
                 }
             }
             catch (ex)
@@ -201,6 +200,7 @@
             }
             // #endregion Ações
         }
+
         // #endregion Métodos
 
         // #region Eventos
@@ -224,6 +224,7 @@
             }
             // #endregion Ações
         }
+
         // #endregion Eventos
     }
 }
