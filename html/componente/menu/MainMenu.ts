@@ -109,28 +109,6 @@ module NetZ_Web_TypeScript
 
         protected abstract inicializarItem(): void;
 
-        protected montarLayout(): void
-        {
-            super.montarLayout();
-
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.esconder();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
         // #endregion Métodos
 
         // #region Eventos
