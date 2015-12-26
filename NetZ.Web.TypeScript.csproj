@@ -10,7 +10,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -59,6 +59,7 @@
     <TypeScriptCompile Include="html\componente\janela\JnlLogin.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlMensagem.ts" />
     <TypeScriptCompile Include="html\componente\Mensagem.ts" />
+    <TypeScriptCompile Include="html\componente\menu\chat\DivChatUsuario.ts" />
     <TypeScriptCompile Include="html\componente\menu\MainMenu.ts" />
     <TypeScriptCompile Include="html\componente\menu\MainMenuItem.ts" />
     <TypeScriptCompile Include="html\componente\painel\PainelAtalho.ts" />
