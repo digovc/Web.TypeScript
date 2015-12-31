@@ -1,4 +1,6 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="CampoAlfanumerico.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
@@ -6,7 +8,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class BotaoMiniPesquisar extends BotaoMini
+    export class CampoNumerico extends CampoAlfanumerico
     {
         // #region Constantes
         // #endregion Constantes

@@ -158,51 +158,9 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        protected setEventos(): void
-        {
-            super.setEventos();
-
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.onClick = (arg: any) => this.MainMenuItem_onClick(arg);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
         // #endregion Métodos
 
         // #region Eventos
-
-        private MainMenuItem_onClick(arg: any): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.mostrarEsconderItem();
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
         // #endregion Eventos
     }

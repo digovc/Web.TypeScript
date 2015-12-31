@@ -1,6 +1,11 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="../ComponenteHtml.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
+
+    import ComponenteHtml = NetZ_Web_TypeScript.ComponenteHtml;
+
     // #endregion Importações
 
     // #region Enumerados

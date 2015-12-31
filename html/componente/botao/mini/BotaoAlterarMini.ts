@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export interface OnValorAlteradoListener
+    export class BotaoAlterarMini extends BotaoMini
     {
         // #region Constantes
         // #endregion Constantes
@@ -14,10 +14,10 @@
         // #region Atributos
         // #endregion Atributos
 
+        // #region Construtores
+        // #endregion Construtores
+
         // #region Métodos
-
-        onValorAlterado(e: OnValorAlteradoArg): void;
-
         // #endregion Métodos
 
         // #region Eventos

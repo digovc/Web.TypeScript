@@ -107,6 +107,7 @@ module NetZ_Web_TypeScript
         // #endregion Construtores
 
         // #region Métodos
+
         // #endregion Métodos
 
         // #region Eventos

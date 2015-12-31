@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class BotaoMiniAdicionar extends BotaoMini
+    export class BotaoFecharMini extends BotaoMini
     {
         // #region Constantes
         // #endregion Constantes

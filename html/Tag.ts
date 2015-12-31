@@ -27,11 +27,6 @@ module NetZ_Web_TypeScript
 
         private _booVisivel: boolean;
         private _jq: any;
-        private _onChange: Function;
-        private _onClick: Function;
-        private _onKeyDown: Function;
-        private _onKeyPress: Function;
-        private _onKeyUp: Function;
         private _strId: string;
         private _strPlaceholder: string;
         private _strTitle: string;
@@ -105,141 +100,6 @@ module NetZ_Web_TypeScript
             // #endregion Ações
 
             return this._jq;
-        }
-
-        public get onChange(): Function
-        {
-            return this._onChange;
-        }
-
-        public set onChange(fncOnChange: Function)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._onChange = fncOnChange;
-
-                this.jq.change(this._onChange);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get onClick(): Function
-        {
-            return this._onClick;
-        }
-
-        public set onClick(fncOnClick: Function)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._onClick = fncOnClick;
-
-                this.jq.click(this._onClick);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get onKeyDown(): Function
-        {
-            return this._onKeyDown;
-        }
-
-        public set onKeyDown(fncKeyDown: Function)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._onKeyDown = fncKeyDown;
-
-                this.jq.keydown(this._onKeyDown);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get onKeyPress(): Function
-        {
-            return this._onKeyPress;
-        }
-
-        public set onKeyPress(fncKeyPress: Function)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._onKeyPress = fncKeyPress;
-
-                this.jq.keypress(this._onKeyPress);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get onKeyUp(): Function
-        {
-            return this._onKeyUp;
-        }
-
-        public set onKeyUp(fncKeyUp: Function)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._onKeyUp = fncKeyUp;
-
-                this.jq.keyup(this._onKeyUp);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public get strId(): string
@@ -355,10 +215,6 @@ module NetZ_Web_TypeScript
             try
             {
                 this.strId = strId;
-                this.inicializar();
-                this.montarLayout();
-                this.setEventos();
-                this.finalizar();
             }
             catch (ex)
             {
@@ -430,12 +286,30 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private finalizar(): void
+        protected inicializar(): void
         {
         }
 
-        public inicializar(): void
+        public iniciar(): void
         {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.inicializar();
+                this.montarLayout();
+                this.setEventos();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
         }
 
         protected montarLayout(): void
@@ -489,6 +363,130 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
+
+        // #region Evento OnClickListener
+
+        private _arrEvtOnClickListener: Array<OnClickListener>;
+
+        private get arrEvtOnClickListener(): Array<OnClickListener>
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._arrEvtOnClickListener != null)
+                {
+                    return this._arrEvtOnClickListener;
+                }
+
+                this._arrEvtOnClickListener = new Array<OnClickListener>();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._arrEvtOnClickListener;
+        }
+
+        public addEvtOnClickListener(evtOnClickListener: OnClickListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnClickListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) > 0)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnClickListener.length == 0)
+                {
+                    this.jq.click((e) => this.dispararEvtOnClickListener(e));
+                }
+
+                this.arrEvtOnClickListener.push(evtOnClickListener);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public removeEvtOnClickListener(evtOnClickListener: OnClickListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnClickListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evtOnClickListener));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private dispararEvtOnClickListener(e: any): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrEvtOnClickListener.length == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnClickListener.forEach((value) => { value.onClick(this, e); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        // #endregion Evento OnClickListener
+
         // #endregion Eventos
     }
 }

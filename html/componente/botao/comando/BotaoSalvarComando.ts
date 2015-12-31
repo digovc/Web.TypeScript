@@ -1,12 +1,15 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="../BotaoHtml.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
+
     // #endregion Importações
 
     // #region Enumerados
     // #endregion Enumerados
 
-    export class BotaoMiniFechar extends BotaoMini
+    export class BotaoSalvarComando extends BotaoHtml
     {
         // #region Constantes
         // #endregion Constantes

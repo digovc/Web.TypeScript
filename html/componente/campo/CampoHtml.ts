@@ -1,4 +1,7 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
@@ -14,6 +17,7 @@
         // #region Atributos
 
         private _booValor: boolean;
+        private _cln: Coluna;
         private _decValor: number;
         private _dttValor: Date;
         private _intValor: number;
@@ -62,6 +66,33 @@
             {
             }
             // #endregion Ações
+        }
+
+        public get cln(): Coluna
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._cln != null)
+                {
+                    return this._cln;
+                }
+
+                this._cln = this.getCln();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._cln;
         }
 
         public get dttValor(): Date
@@ -235,35 +266,6 @@
             this._strValorAnterior = strValorAnterior;
         }
 
-        private _lstEvtOnValorAlteradoListener: List<OnValorAlteradoListener>;
-
-        public get lstEvtOnValorAlteradoListener(): List<OnValorAlteradoListener>
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this._lstEvtOnValorAlteradoListener != null)
-                {
-                    return this._lstEvtOnValorAlteradoListener;
-                }
-
-                this._lstEvtOnValorAlteradoListener = new List<OnValorAlteradoListener>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._lstEvtOnValorAlteradoListener;
-        }
-
         // #endregion Atributos
 
         // #region Construtores
@@ -273,13 +275,24 @@
 
         private atualizarStrValor(): void
         {
+        }
+
+        private getCln(): Coluna
+        {
             // #region Variáveis
+
+            var clnResultado: Coluna;
+
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.dispararOnValorAlterado();
+                clnResultado = new Coluna(this.jq.attr("cln"));
+
+                 // TODO: Manter os valores atualizados dos dois lados.
+
+                return clnResultado;
             }
             catch (ex)
             {
@@ -289,9 +302,12 @@
             {
             }
             // #endregion Ações
+
+            return clnResultado;
+            
         }
 
-        private dispararOnValorAlterado(): void
+        public validarDados(): boolean
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -299,20 +315,6 @@
             // #region Ações
             try
             {
-                if (this.lstEvtOnValorAlteradoListener.booVazia)
-                {
-                    return;
-                }
-
-                if (this.strValor == this.strValorAnterior)
-                {
-                    return;
-                }
-
-                for (var onValorAlteradoListener in this.lstEvtOnValorAlteradoListener)
-                {
-                    this.dispararOnValorAlteradoItem((onValorAlteradoListener as OnValorAlteradoListener));
-                }
             }
             catch (ex)
             {
@@ -322,36 +324,8 @@
             {
             }
             // #endregion Ações
-        }
 
-        private dispararOnValorAlteradoItem(evt: OnValorAlteradoListener): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this.lstEvtOnValorAlteradoListener.booVazia)
-                {
-                    return;
-                }
-
-                if (this.strValor == this.strValorAnterior)
-                {
-                    return;
-                }
-
-                //this.lstEvtOnValorAlteradoListener.forEach((i) => this.dispararOnValorAlteradoItem(i));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            return true;
         }
 
         // #endregion Métodos

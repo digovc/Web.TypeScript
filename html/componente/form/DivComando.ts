@@ -1,24 +1,30 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../botao/comando/BotaoSalvarComando.ts"/>
+/// <reference path="../painel/PainelNivel.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
+
+    import BotaoSalvarComando = NetZ_Web_TypeScript.BotaoSalvarComando;
+    import PainelNivel = NetZ_Web_TypeScript.PainelNivel;
+
     // #endregion Importações
 
     // #region Enumerados
     // #endregion Enumerados
 
-    export class Servidor extends Objeto
+    export class DivComando extends PainelNivel implements OnClickListener
     {
         // #region Constantes
-
-        private static get URL_AJAX(): string { return "/ajax-server" };
-
         // #endregion Constantes
 
         // #region Atributos
 
-        protected static _i: Servidor;
+        private _btnSalvar: BotaoSalvarComando;
+        private _jnlCadastro: JnlCadastro;
 
-        public static get i(): Servidor
+        private get btnSalvar(): BotaoSalvarComando
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -26,12 +32,12 @@
             // #region Ações
             try
             {
-                if (Servidor._i != null)
+                if (this._btnSalvar != null)
                 {
-                    return Servidor._i;
+                    return this._btnSalvar;
                 }
 
-                Servidor._i = new Servidor();
+                this._btnSalvar = new BotaoSalvarComando("btnSalvar");
             }
             catch (ex)
             {
@@ -42,16 +48,26 @@
             }
             // #endregion Ações
 
-            return Servidor._i;
+            return this._btnSalvar;
+        }
+
+        private get jnlCadastro(): JnlCadastro
+        {
+            return this._jnlCadastro;
+        }
+
+        private set jnlCadastro(jnlCadastro: JnlCadastro)
+        {
+            this._jnlCadastro = jnlCadastro;
         }
 
         // #endregion Atributos
 
         // #region Construtores
 
-        constructor()
+        constructor(strId: string, jnlCadastro: JnlCadastro)
         {
-            super();
+            super(strId);
 
             // #region Variáveis
             // #endregion Variáveis
@@ -59,7 +75,7 @@
             // #region Ações
             try
             {
-                this.inicializar();
+                this.jnlCadastro = jnlCadastro;
             }
             catch (ex)
             {
@@ -75,7 +91,7 @@
 
         // #region Métodos
 
-        public enviar(objSolicitacao: SolicitacaoAjax): void
+        private salvar(): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -83,23 +99,12 @@
             // #region Ações
             try
             {
-                if (objSolicitacao == null)
+                if (this.jnlCadastro == null)
                 {
                     return;
                 }
 
-                if (!objSolicitacao.validarDadosEnvio())
-                {
-                    return;
-                }
-
-                $.ajaxSettings.data = JSON.stringify(objSolicitacao);
-                $.ajaxSettings.dataType = "JSON";
-                $.ajaxSettings.error = (objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objSolicitacao.ajaxErro(strTextStatus, strErrorThrown) };
-                $.ajaxSettings.success = (anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objSolicitacao.ajaxSucesso(anyData) };
-                $.ajaxSettings.beforeSend = (objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacao.ajaxAntesEnviar() };
-
-                $.ajax($.ajaxSettings);
+                this.jnlCadastro.salvar();
             }
             catch (ex)
             {
@@ -111,35 +116,17 @@
             // #endregion Ações
         }
 
-        private inicializar(): void
+        protected setEventos(): void
         {
+            super.setEventos();
+
             // #region Variáveis
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.inicializarAjaxConfig();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        private inicializarAjaxConfig(): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                $.ajaxSettings.url = Servidor.URL_AJAX;
+                this.btnSalvar.addEvtOnClickListener(this);
             }
             catch (ex)
             {
@@ -154,6 +141,31 @@
         // #endregion Métodos
 
         // #region Eventos
+
+        public onClick(objSender: Object, e: any): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this.btnSalvar:
+                        return this.salvar();
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações        
+        }
+
         // #endregion Eventos
     }
 }

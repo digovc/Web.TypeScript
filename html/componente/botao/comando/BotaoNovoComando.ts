@@ -1,12 +1,13 @@
 ﻿module NetZ_Web_TypeScript
 {
     // #region Importações
+
     // #endregion Importações
 
     // #region Enumerados
     // #endregion Enumerados
 
-    export class FormHtml extends ComponenteHtml
+    export class BotaoNovoComando extends BotaoHtml
     {
         // #region Constantes
         // #endregion Constantes
@@ -18,7 +19,6 @@
         // #endregion Construtores
 
         // #region Métodos
-
         // #endregion Métodos
 
         // #region Eventos

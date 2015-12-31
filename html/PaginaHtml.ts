@@ -18,10 +18,16 @@ module NetZ_Web_TypeScript
 
         // #region Construtores
 
-        constructor()
-        {
-            super();
+        // #endregion Construtores
 
+        // #region Métodos
+
+        public inicializar(): void
+        {
+        }
+
+        public iniciar(): void
+        {
             // #region Variáveis
             // #endregion Variáveis
 
@@ -31,7 +37,6 @@ module NetZ_Web_TypeScript
                 this.inicializar();
                 this.montarLayout();
                 this.setEventos();
-                this.finalizar();
             }
             catch (ex)
             {
@@ -41,18 +46,6 @@ module NetZ_Web_TypeScript
             {
             }
             // #endregion Ações
-        }
-
-        // #endregion Construtores
-
-        // #region Métodos
-
-        public finalizar(): void
-        {
-        }
-
-        public inicializar(): void
-        {
         }
 
         protected montarLayout(): void

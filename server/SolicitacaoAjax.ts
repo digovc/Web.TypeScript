@@ -4,46 +4,42 @@
     // #endregion Importações
 
     // #region Enumerados
+
+    export enum Solicitacao_EnmMetodo
+    {
+        NONE,
+        SALVAR_REGISTRO,
+    }
+
     // #endregion Enumerados
 
-    export class Tabela extends Objeto
+    export class SolicitacaoAjax extends Objeto
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _arrCln: Array<Coluna>;
-        private _clnChavePrimaria: Coluna;
+        private _enmMetodo: Solicitacao_EnmMetodo = Solicitacao_EnmMetodo.NONE;
+        private _objJsonEnvio: Object;
+        private _strJsonEnvio: string;
 
-        private get arrCln(): Array<Coluna>
+        public get enmMetodo(): Solicitacao_EnmMetodo
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this._arrCln != null)
-                {
-                    return this._arrCln;
-                }
-
-                this._arrCln = new Array<Coluna>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._arrCln;
+            return this._enmMetodo;
         }
 
-        private get clnChavePrimaria(): Coluna
+        public set enmMetodo(enmMetodo: Solicitacao_EnmMetodo)
+        {
+            this._enmMetodo = enmMetodo;
+        }
+
+        public get objJsonEnvio(): Object
+        {
+            return this._objJsonEnvio;
+        }
+
+        public set objJsonEnvio(objJsonEnvio: Object)
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -51,12 +47,9 @@
             // #region Ações
             try
             {
-                if (this._clnChavePrimaria != null)
-                {
-                    return this._clnChavePrimaria;
-                }
+                this._objJsonEnvio = objJsonEnvio;
 
-                this._clnChavePrimaria = this.getClnChavePrimaria();
+                this.atualizarObjJsonEnvio();
             }
             catch (ex)
             {
@@ -66,41 +59,26 @@
             {
             }
             // #endregion Ações
+        }
 
-            return this._clnChavePrimaria;
+        private get strJsonEnvio(): string
+        {
+            return this._strJsonEnvio;
+        }
+
+        private set strJsonEnvio(strJsonEnvio: string)
+        {
+            this._strJsonEnvio = strJsonEnvio;
         }
 
         // #endregion Atributos
 
         // #region Construtores
-
-        constructor(strNome: string)
-        {
-            super();
-
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.strNome = strNome;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
         // #endregion Construtores
 
         // #region Métodos
 
-        public addCln(cln: Coluna): void
+        private atualizarObjJsonEnvio(): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -108,17 +86,13 @@
             // #region Ações
             try
             {
-                if (cln == null)
+                if (this.objJsonEnvio == null)
                 {
+                    this.strJsonEnvio = null;
                     return;
                 }
 
-                if (this.arrCln.indexOf(cln) > 0)
-                {
-                    return;
-                }
-
-                this.arrCln.push(cln);
+                this.strJsonEnvio = JSON.stringify(this.objJsonEnvio);
             }
             catch (ex)
             {
@@ -130,7 +104,7 @@
             // #endregion Ações
         }
 
-        public salvar(): void
+        public ajaxAntesEnviar(): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -138,7 +112,6 @@
             // #region Ações
             try
             {
-                this.clnChavePrimaria.numValor = DataBase.i.salvar(this);
             }
             catch (ex)
             {
@@ -150,7 +123,7 @@
             // #endregion Ações
         }
 
-        private getClnChavePrimaria(): Coluna
+        public ajaxErro(strTextStatus: string, strErrorThrown: string): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -158,17 +131,52 @@
             // #region Ações
             try
             {
-                if (this.arrCln == null)
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public ajaxSucesso(anyData: any): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public validarDadosEnvio(): boolean
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (Solicitacao_EnmMetodo.NONE == this.enmMetodo)
                 {
-                    return;
+                    return false;
                 }
 
-                for (var i = 0; i < this.arrCln.length; i++)
+                if (Utils.getBooStrVazia(this.strJsonEnvio))
                 {
-                    if ("int_id" == this.arrCln[i].strNome)
-                    {
-                        return this.arrCln[i];
-                    }
+                    return false;
                 }
             }
             catch (ex)
@@ -180,7 +188,7 @@
             }
             // #endregion Ações
 
-            return null;
+            return true;
         }
 
         // #endregion Métodos

@@ -134,51 +134,6 @@
 
         // #region Métodos
 
-        private entrar(): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (!this.validarDados())
-                {
-                    return;
-                }
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        protected setEventos(): void
-        {
-            super.setEventos();
-
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.btnEnter.onClick = (e: any) => this.btnEnter_onClick(e);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
         private validarDados(): void
         {
             // #region Variáveis
@@ -204,26 +159,6 @@
         // #endregion Métodos
 
         // #region Eventos
-
-        private btnEnter_onClick(e: any): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.entrar();
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
         // #endregion Eventos
     }

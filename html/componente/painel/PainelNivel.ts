@@ -1,6 +1,11 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="PainelHtml.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
+
+    import PainelHtml = NetZ_Web_TypeScript.PainelHtml;
+
     // #endregion Importações
 
     // #region Enumerados

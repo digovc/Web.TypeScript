@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class EventArg
+    export class BotaoApagarMini extends BotaoMini
     {
         // #region Constantes
         // #endregion Constantes

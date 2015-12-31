@@ -26,19 +26,22 @@
     <TypeScriptCompile Include="AppWeb.ts" />
     <TypeScriptCompile Include="Boot.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
-    <TypeScriptCompile Include="event\EventArg.ts" />
-    <TypeScriptCompile Include="event\OnValorAlteradoArg.ts" />
-    <TypeScriptCompile Include="event\OnValorAlteradoListener.ts" />
+    <TypeScriptCompile Include="OnValorAlteradoArg.ts" />
+    <TypeScriptCompile Include="OnValorAlteradoListener.ts" />
     <TypeScriptCompile Include="html\ComboBox.ts" />
     <TypeScriptCompile Include="html\componente\botao\acao\BotaoAcao.ts" />
     <TypeScriptCompile Include="html\componente\botao\atalho\BotaoAtalho.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoHtml.ts" />
+    <TypeScriptCompile Include="html\componente\botao\comando\BotaoComando.ts" />
+    <TypeScriptCompile Include="html\componente\botao\comando\BotaoNovoComando.ts" />
+    <TypeScriptCompile Include="html\componente\botao\comando\BotaoSalvarComando.ts" />
     <TypeScriptCompile Include="html\componente\botao\mini\BotaoMini.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniAdicionar.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniAlterar.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniApagar.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniFechar.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMiniPesquisar.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoAdicionarMini.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoAlterarMini.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoApagarMini.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoFecharMini.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoPesquisarMini.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoNumerico.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoAlfanumerico.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoAnexo.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoCheckBox.ts" />
@@ -51,6 +54,7 @@
     <TypeScriptCompile Include="html\componente\campo\CampoSenha.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoTexto.ts" />
     <TypeScriptCompile Include="html\componente\ComponenteHtml.ts" />
+    <TypeScriptCompile Include="html\componente\form\DivComando.ts" />
     <TypeScriptCompile Include="html\componente\form\FormHtml.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridHtml.ts" />
     <TypeScriptCompile Include="html\componente\janela\JanelaHtml.ts" />
@@ -72,14 +76,16 @@
     <TypeScriptCompile Include="html\PaginaHtml.ts" />
     <TypeScriptCompile Include="html\Tag.ts" />
     <TypeScriptCompile Include="lib\jquery.d.ts" />
-    <TypeScriptCompile Include="List.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
+    <TypeScriptCompile Include="OnClickListener.ts" />
+    <TypeScriptCompile Include="OnStartListener.ts" />
     <TypeScriptCompile Include="persistencia\Coluna.ts" />
     <TypeScriptCompile Include="persistencia\DataBase.ts" />
     <TypeScriptCompile Include="persistencia\Filtro.ts" />
     <TypeScriptCompile Include="persistencia\Tabela.ts" />
     <TypeScriptCompile Include="persistencia\View.ts" />
     <TypeScriptCompile Include="server\Servidor.ts" />
+    <TypeScriptCompile Include="server\SolicitacaoAjax.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="websocket\ServerWs.ts" />
   </ItemGroup>
@@ -95,6 +101,7 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
