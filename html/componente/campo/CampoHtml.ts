@@ -1,5 +1,4 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../../../persistencia/ColunaWeb.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -17,7 +16,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _booValor: boolean;
-        private _cln: Coluna;
+        private _cln: ColunaWeb;
         private _decValor: number;
         private _dttValor: Date;
         private _intValor: number;
@@ -68,7 +67,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public get cln(): Coluna
+        public get cln(): ColunaWeb
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -277,18 +276,18 @@ module NetZ_Web_TypeScript
         {
         }
 
-        private getCln(): Coluna
+        private getCln(): ColunaWeb
         {
             // #region Variáveis
 
-            var clnResultado: Coluna;
+            var clnResultado: ColunaWeb;
 
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                clnResultado = new Coluna(this.jq.attr("cln"));
+                clnResultado = new ColunaWeb(this.jq.attr("cln"));
 
                  // TODO: Manter os valores atualizados dos dois lados.
 

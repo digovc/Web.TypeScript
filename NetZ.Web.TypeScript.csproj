@@ -79,13 +79,17 @@
     <TypeScriptCompile Include="Objeto.ts" />
     <TypeScriptCompile Include="OnClickListener.ts" />
     <TypeScriptCompile Include="OnStartListener.ts" />
-    <TypeScriptCompile Include="persistencia\Coluna.ts" />
-    <TypeScriptCompile Include="persistencia\DataBase.ts" />
-    <TypeScriptCompile Include="persistencia\Filtro.ts" />
-    <TypeScriptCompile Include="persistencia\Tabela.ts" />
-    <TypeScriptCompile Include="persistencia\View.ts" />
-    <TypeScriptCompile Include="server\Servidor.ts" />
+    <TypeScriptCompile Include="persistencia\ColunaWeb.ts" />
+    <TypeScriptCompile Include="persistencia\FiltroWeb.ts" />
+    <TypeScriptCompile Include="persistencia\TabelaWeb.ts" />
+    <TypeScriptCompile Include="server\OnAjaxErroArg.ts" />
+    <TypeScriptCompile Include="server\OnAjaxListener.ts" />
+    <TypeScriptCompile Include="server\OnAjaxSucessoArg.ts" />
+    <TypeScriptCompile Include="server\ServerAjax.ts" />
+    <TypeScriptCompile Include="server\ServerAjaxDb.ts" />
+    <TypeScriptCompile Include="server\ServerBase.ts" />
     <TypeScriptCompile Include="server\SolicitacaoAjax.ts" />
+    <TypeScriptCompile Include="server\SolicitacaoAjaxDb.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="websocket\ServerWs.ts" />
   </ItemGroup>

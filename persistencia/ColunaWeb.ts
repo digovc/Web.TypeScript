@@ -1,4 +1,7 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="../OnValorAlteradoArg.ts"/>
+/// <reference path="../OnValorAlteradoListener.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
@@ -6,7 +9,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class Coluna extends Objeto
+    export class ColunaWeb extends Objeto
     {
         // #region Constantes
         // #endregion Constantes

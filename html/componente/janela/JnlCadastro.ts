@@ -1,20 +1,25 @@
-﻿/// <reference path="../campo/CampoAlfanumerico.ts"/>
+﻿/// <reference path="../../../persistencia/TabelaWeb.ts"/>
+/// <reference path="../../../server/OnAjaxErroArg.ts"/>
+/// <reference path="../../../server/OnAjaxListener.ts"/>
+/// <reference path="../../../server/OnAjaxSucessoArg.ts"/>
+/// <reference path="../../../server/ServerAjaxDb.ts"/>
+/// <reference path="../../../server/SolicitacaoAjaxDb.ts"/>
+/// <reference path="../campo/CampoAlfanumerico.ts"/>
 /// <reference path="../campo/CampoHtml.ts"/>
 /// <reference path="../campo/CampoNumerico.ts"/>
 /// <reference path="../form/DivComando.ts"/>
+/// <reference path="JanelaHtml.ts"/>
 
 module NetZ_Web_TypeScript
 {
     // #region Importações
-
-    import DivComando = NetZ_Web_TypeScript.DivComando;
 
     // #endregion Importações
 
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlCadastro extends JanelaHtml
+    export class JnlCadastro extends JanelaHtml implements OnAjaxListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -23,7 +28,7 @@ module NetZ_Web_TypeScript
 
         private _arrCmp: Array<CampoHtml>;
         private _divComando: DivComando;
-        private _tbl: Tabela;
+        private _tbl: TabelaWeb;
 
         private get arrCmp(): Array<CampoHtml>
         {
@@ -79,7 +84,7 @@ module NetZ_Web_TypeScript
             return this._divComando;
         }
 
-        private get tbl(): Tabela
+        private get tbl(): TabelaWeb
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -141,7 +146,7 @@ module NetZ_Web_TypeScript
 
                 for (var i = 0; i < arrCmpJq.length; i++)
                 {
-                    this.getArrCmpItem(arrCmpResultado, arrCmpJq[1]);
+                    this.getArrCmpItem(arrCmpResultado, arrCmpJq[i]);
                 }
 
                 return arrCmpResultado;
@@ -196,18 +201,18 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private getTbl(): Tabela
+        private getTbl(): TabelaWeb
         {
             // #region Variáveis
 
-            var tblResultado: Tabela;
+            var tblResultado: TabelaWeb;
 
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                tblResultado = new Tabela(this.jq.attr("tbl"));
+                tblResultado = new TabelaWeb(this.jq.attr("tbl"));
 
                 this.getTblItem(tblResultado);
 
@@ -223,7 +228,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private getTblItem(tbl: Tabela): void
+        private getTblItem(tbl: TabelaWeb): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -322,6 +327,9 @@ module NetZ_Web_TypeScript
         public salvar(): void
         {
             // #region Variáveis
+
+            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb;
+
             // #endregion Variáveis
 
             // #region Ações
@@ -332,7 +340,14 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.tbl.salvar();
+                objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+
+                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.SALVAR_REGISTRO;
+                objSolicitacaoAjaxDb.objJsonEnvio = this.getTbl();
+
+                objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+
+                ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
             }
             catch (ex)
             {
@@ -352,6 +367,11 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
+                if (this.getTbl() == null)
+                {
+                    return false;
+                }
+
                 if (this.arrCmp == null)
                 {
                     return false;
@@ -380,6 +400,30 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
+
+        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, e: OnAjaxSucessoArg): void
+        {
+            if (e == null)
+            {
+                return;
+            }
+
+            if (e.anyData == null)
+            {
+                return;
+            }
+
+            window.alert(e.anyData);
+        }
+
+        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, e: OnAjaxErroArg): void
+        {
+        }
+
+        public onAjaxAntesEnviar(objSolicitacaoAjaxSender: SolicitacaoAjax): void
+        {
+        }
+
         // #endregion Eventos
     }
 }

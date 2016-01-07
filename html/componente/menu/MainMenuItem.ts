@@ -1,7 +1,4 @@
-﻿/// <reference path="../../../erro/Erro.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
-
-module NetZ_Web_TypeScript
+﻿module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações

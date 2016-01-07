@@ -1,14 +1,14 @@
-﻿/// <reference path="../BotaoHtml.ts"/>
+﻿/// <reference path="ServerBase.ts"/>
+
 module NetZ_Web_TypeScript
 {
     // #region Importações
-
     // #endregion Importações
 
     // #region Enumerados
     // #endregion Enumerados
 
-    export class BotaoSalvarComando extends BotaoHtml
+    export abstract class ServerAjax extends ServerBase
     {
         // #region Constantes
         // #endregion Constantes
@@ -20,6 +20,7 @@ module NetZ_Web_TypeScript
         // #endregion Construtores
 
         // #region Métodos
+
         // #endregion Métodos
 
         // #region Eventos

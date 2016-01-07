@@ -1,5 +1,4 @@
 ﻿/// <reference path="Tag.ts"/>
-
 module NetZ_Web_TypeScript
 {
     // #region Importações

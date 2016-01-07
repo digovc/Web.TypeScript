@@ -1,6 +1,4 @@
-﻿/// <reference path="ComponenteHtml.ts"/>
-
-declare var Notification: any;
+﻿declare var Notification: any;
 
 module NetZ_Web_TypeScript
 {

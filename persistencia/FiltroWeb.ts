@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class View extends Tabela
+    export class FiltroWeb extends Objeto
     {
         // #region Constantes
         // #endregion Constantes

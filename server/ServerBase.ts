@@ -6,16 +6,28 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class MainMenu extends ComponenteHtml
+    export abstract class ServerBase extends Objeto
     {
         // #region Constantes
+
         // #endregion Constantes
 
         // #region Atributos
 
-        private _lstDivMmiFilho: Array<MainMenuItem>;
+        private _intPort: number = 8080;
+        private _url: string;
 
-        protected get lstDivMmiFilho(): Array<MainMenuItem>
+        public get intPort(): number
+        {
+            return this._intPort;
+        }
+
+        public set intPort(intPort: number)
+        {
+            this._intPort = intPort;
+        }
+
+        protected get url(): string
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -23,12 +35,12 @@
             // #region Ações
             try
             {
-                if (this._lstDivMmiFilho != null)
+                if (this._url != null)
                 {
-                    return this._lstDivMmiFilho;
+                    return this._url;
                 }
 
-                this._lstDivMmiFilho = new Array<MainMenuItem>();
+                this._url = this.getUrl();
             }
             catch (ex)
             {
@@ -39,38 +51,56 @@
             }
             // #endregion Ações
 
-            return this._lstDivMmiFilho;
+            return this._url;
         }
 
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor()
+        {
+            super();
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.iniciar();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         // #endregion Construtores
 
         // #region Métodos
 
-        public addDivMmiFilho(divMmiFilho: MainMenuItem): void
+        private getUrl(): string
         {
             // #region Variáveis
+
+            var urlResultado: string;
+
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                if (divMmiFilho == null)
-                {
-                    return;
-                }
+                urlResultado = "http://_server_host:_server_port";
 
-                if (this.lstDivMmiFilho.indexOf(divMmiFilho) > -1)
-                {
-                    return;
-                }
+                urlResultado = urlResultado.replace("_server_host", window.location.host);
+                urlResultado = urlResultado.replace("_server_port", String(this.intPort));
 
-                this.lstDivMmiFilho.push(divMmiFilho);
-
-                divMmiFilho.divMmnPai = this;
-                divMmiFilho.inicializar();
+                return urlResultado;
             }
             catch (ex)
             {
@@ -82,17 +112,20 @@
             // #endregion Ações
         }
 
-        public inicializar(): void
+        protected inicializar(): void
         {
-            super.inicializar();
+        }
 
+        private iniciar(): void
+        {
             // #region Variáveis
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.inicializarItem()
+                this.inicializar();
+                this.setEventos();
             }
             catch (ex)
             {
@@ -104,7 +137,9 @@
             // #endregion Ações
         }
 
-        protected abstract inicializarItem(): void;
+        protected setEventos(): void
+        {
+        }
 
         // #endregion Métodos
 

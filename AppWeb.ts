@@ -1,7 +1,5 @@
 ﻿/// <reference path="erro/Erro.ts"/>
-/// <reference path="html/componente/Mensagem.ts"/>
 /// <reference path="html/PaginaHtml.ts"/>
-/// <reference path="lib/jquery.d.ts"/>
 /// <reference path="Objeto.ts"/>
 /// <reference path="OnStartListener.ts"/>
 
@@ -18,7 +16,7 @@ module NetZ_Web_TypeScript
     {
         // #region Constantes
 
-        private _this: AppWeb = this;
+        private static get STR_COOKIE_SESSAO_ID_NOME(): string { return "sessao_id" };
 
         // #endregion Constantes
 
@@ -109,12 +107,29 @@ module NetZ_Web_TypeScript
 
         public get strSessionId(): string
         {
-            return this._strSessionId;
-        }
+            // #region Variáveis
+            // #endregion Variáveis
 
-        public set strSessionId(strSessionId: string)
-        {
-            this._strSessionId = strSessionId;
+            // #region Ações
+            try
+            {
+                if (this._strSessionId != null)
+                {
+                    return this._strSessionId;
+                }
+
+                this._strSessionId = this.getStrSessionId();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._strSessionId;
         }
 
         // #endregion Atributos
@@ -146,6 +161,55 @@ module NetZ_Web_TypeScript
         // #endregion Construtores
 
         // #region Métodos
+
+        private getStrCookieValue(strCookieNome: string): string
+        {
+            // #region Variáveis
+
+            var objRegExp: RegExp;
+            var objRegExpExecArray: RegExpExecArray;
+            var strResultado: string;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (Utils.getBooStrVazia(strCookieNome))
+                {
+                    return null;
+                }
+
+                objRegExp = new RegExp(name + "=([^;]+)");
+
+                objRegExpExecArray = objRegExp.exec(document.cookie);
+
+                if (objRegExpExecArray == null)
+                {
+                    return null;
+                }
+
+                if (objRegExpExecArray.length < 1)
+                {
+                    return null;
+                }
+
+                return objRegExpExecArray[1];
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private getStrSessionId(): string
+        {
+            return this.getStrCookieValue(AppWeb.STR_COOKIE_SESSAO_ID_NOME);
+        }
 
         public imprimir(pag: string): void
         {

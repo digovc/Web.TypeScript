@@ -6,17 +6,17 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class Tabela extends Objeto
+    export class TabelaWeb extends Objeto
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _arrCln: Array<Coluna>;
-        private _clnChavePrimaria: Coluna;
+        private _arrCln: Array<ColunaWeb>;
+        private _clnChavePrimaria: ColunaWeb;
 
-        private get arrCln(): Array<Coluna>
+        private get arrCln(): Array<ColunaWeb>
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -29,7 +29,7 @@
                     return this._arrCln;
                 }
 
-                this._arrCln = new Array<Coluna>();
+                this._arrCln = new Array<ColunaWeb>();
             }
             catch (ex)
             {
@@ -43,7 +43,7 @@
             return this._arrCln;
         }
 
-        private get clnChavePrimaria(): Coluna
+        private get clnChavePrimaria(): ColunaWeb
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -100,7 +100,7 @@
 
         // #region Métodos
 
-        public addCln(cln: Coluna): void
+        public addCln(cln: ColunaWeb): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -130,27 +130,7 @@
             // #endregion Ações
         }
 
-        public salvar(): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.clnChavePrimaria.numValor = DataBase.i.salvar(this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        private getClnChavePrimaria(): Coluna
+        private getClnChavePrimaria(): ColunaWeb
         {
             // #region Variáveis
             // #endregion Variáveis

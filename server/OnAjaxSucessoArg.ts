@@ -6,12 +6,25 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class Filtro extends Objeto
+    export class OnAjaxSucessoArg
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
+
+        private _anyData: any;
+
+        public get anyData(): any
+        {
+            return this._anyData;
+        }
+
+        public set anyData(anyData: any)
+        {
+            this._anyData = anyData;
+        }
+
         // #endregion Atributos
 
         // #region Construtores

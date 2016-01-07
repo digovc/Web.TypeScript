@@ -1,38 +1,21 @@
 ﻿module NetZ_Web_TypeScript
 {
     // #region Importações
+
     // #endregion Importações
 
     // #region Enumerados
 
-    export enum Solicitacao_EnmMetodo
-    {
-        NONE,
-        SALVAR_REGISTRO,
-    }
-
     // #endregion Enumerados
 
-    export class SolicitacaoAjax extends Objeto
+    export class SolicitacaoAjax
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _enmMetodo: Solicitacao_EnmMetodo = Solicitacao_EnmMetodo.NONE;
         private _objJsonEnvio: Object;
-        private _strJsonEnvio: string;
-
-        public get enmMetodo(): Solicitacao_EnmMetodo
-        {
-            return this._enmMetodo;
-        }
-
-        public set enmMetodo(enmMetodo: Solicitacao_EnmMetodo)
-        {
-            this._enmMetodo = enmMetodo;
-        }
 
         public get objJsonEnvio(): Object
         {
@@ -41,34 +24,7 @@
 
         public set objJsonEnvio(objJsonEnvio: Object)
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._objJsonEnvio = objJsonEnvio;
-
-                this.atualizarObjJsonEnvio();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        private get strJsonEnvio(): string
-        {
-            return this._strJsonEnvio;
-        }
-
-        private set strJsonEnvio(strJsonEnvio: string)
-        {
-            this._strJsonEnvio = strJsonEnvio;
+            this._objJsonEnvio = objJsonEnvio;
         }
 
         // #endregion Atributos
@@ -78,32 +34,6 @@
 
         // #region Métodos
 
-        private atualizarObjJsonEnvio(): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this.objJsonEnvio == null)
-                {
-                    this.strJsonEnvio = null;
-                    return;
-                }
-
-                this.strJsonEnvio = JSON.stringify(this.objJsonEnvio);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
         public ajaxAntesEnviar(): void
         {
             // #region Variáveis
@@ -112,6 +42,7 @@
             // #region Ações
             try
             {
+                this.dispararEvtOnAjaxListenerOnAjaxAntesEnviar();
             }
             catch (ex)
             {
@@ -131,6 +62,7 @@
             // #region Ações
             try
             {
+                this.dispararEvtOnAjaxListenerOnAjaxErroListener(strErrorThrown, strTextStatus);
             }
             catch (ex)
             {
@@ -150,6 +82,7 @@
             // #region Ações
             try
             {
+                this.dispararEvtOnAjaxListenerOnAjaxSucesso(anyData);
             }
             catch (ex)
             {
@@ -163,20 +96,20 @@
 
         public validarDadosEnvio(): boolean
         {
+            return true;
+        }
+
+        protected validarJson(strKey: string, anyValue: any): any
+        {
             // #region Variáveis
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                if (Solicitacao_EnmMetodo.NONE == this.enmMetodo)
+                if (strKey == "_arrEvtOnAjaxListener")
                 {
-                    return false;
-                }
-
-                if (Utils.getBooStrVazia(this.strJsonEnvio))
-                {
-                    return false;
+                    return null;
                 }
             }
             catch (ex)
@@ -188,12 +121,217 @@
             }
             // #endregion Ações
 
-            return true;
+            return anyValue;
+        }
+
+        public toJson(): string
+        {
+            // #region Variáveis
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                return JSON.stringify(this, (strKey, anyValue) => this.validarJson(strKey, anyValue));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
         }
 
         // #endregion Métodos
 
         // #region Eventos
+
+        // #region Evento OnAjaxListener
+
+        private _arrEvtOnAjaxListener: Array<OnAjaxListener>;
+
+        private get arrEvtOnAjaxListener(): Array<OnAjaxListener>
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._arrEvtOnAjaxListener != null)
+                {
+                    return this._arrEvtOnAjaxListener;
+                }
+
+                this._arrEvtOnAjaxListener = new Array<OnAjaxListener>();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._arrEvtOnAjaxListener;
+        }
+
+        public addEvtOnAjaxListener(evtOnAjaxListener: OnAjaxListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnAjaxListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener) > 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnAjaxListener.push(evtOnAjaxListener);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public removeEvtOnAjaxListener(evtOnAjaxListener: OnAjaxListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnAjaxListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener) == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnAjaxListener.splice(this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private dispararEvtOnAjaxListenerOnAjaxAntesEnviar(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrEvtOnAjaxListener.length == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxAntesEnviar(this); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private dispararEvtOnAjaxListenerOnAjaxErroListener(strErrorThrown: string, strTextStatus: string): void
+        {
+            // #region Variáveis
+
+            var e: OnAjaxErroArg;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrEvtOnAjaxListener.length == 0)
+                {
+                    return;
+                }
+
+                e = new OnAjaxErroArg();
+
+                e.strErrorThrown = strErrorThrown;
+                e.strTextStatus = strTextStatus;
+
+                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxErroListener(this, e); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private dispararEvtOnAjaxListenerOnAjaxSucesso(anyData: any): void
+        {
+            // #region Variáveis
+
+            var e: OnAjaxSucessoArg;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrEvtOnAjaxListener.length == 0)
+                {
+                    return;
+                }
+
+                e = new OnAjaxSucessoArg();
+
+                e.anyData = anyData;
+
+                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxSucesso(this, e); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        // #endregion Evento OnAjaxListener
+
         // #endregion Eventos
     }
 }

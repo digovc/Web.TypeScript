@@ -1,13 +1,9 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../botao/comando/BotaoSalvarComando.ts"/>
+﻿/// <reference path="../botao/comando/BotaoSalvarComando.ts"/>
 /// <reference path="../painel/PainelNivel.ts"/>
-
+/// <reference path="../../../OnClickListener.ts"/>
 module NetZ_Web_TypeScript
 {
     // #region Importações
-
-    import BotaoSalvarComando = NetZ_Web_TypeScript.BotaoSalvarComando;
-    import PainelNivel = NetZ_Web_TypeScript.PainelNivel;
 
     // #endregion Importações
 
