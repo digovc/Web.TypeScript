@@ -142,7 +142,7 @@
             // #region Ações
             try
             {
-                if (Utils.getBooStrVazia(this.cmpLogin.strValor))
+                if (Utils.getBooStrVazia(this.cmpLogin.tagInput.strValor))
                 {
                 }
             }

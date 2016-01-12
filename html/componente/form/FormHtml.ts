@@ -19,6 +19,34 @@
 
         // #region Métodos
 
+        /**
+         * Envia os dados para o servidor.
+         */
+        public enviar(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.jq == null)
+                {
+                    return;
+                }
+
+                this.jq.submit();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         // #endregion Métodos
 
         // #region Eventos

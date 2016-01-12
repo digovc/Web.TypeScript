@@ -15,16 +15,16 @@
 
         // #region Atributos
 
-        private _objJsonEnvio: Object;
+        private _jsn: string;
 
-        public get objJsonEnvio(): Object
+        public get jsn(): string
         {
-            return this._objJsonEnvio;
+            return this._jsn;
         }
 
-        public set objJsonEnvio(objJsonEnvio: Object)
+        public set jsn(jsn: string)
         {
-            this._objJsonEnvio = objJsonEnvio;
+            this._jsn = jsn;
         }
 
         // #endregion Atributos
@@ -34,6 +34,10 @@
 
         // #region Métodos
 
+        /**
+         * Método disparado antes que esta solicitação AJAX seja
+         * enviada para o servidor.
+         */
         public ajaxAntesEnviar(): void
         {
             // #region Variáveis
@@ -54,6 +58,14 @@
             // #endregion Ações
         }
 
+        /**
+         * Método disparado quando o servidor devolve algum tipo de
+         * exceção durante o processamento desta solicitação.
+         * Isso não significa que o processo em si deu errado, mas que
+         * o algo na conexão deu.
+         * @param strTextStatus Texto contendo o status do erro.
+         * @param strErrorThrown Texto contendo detalhes do erro.
+         */
         public ajaxErro(strTextStatus: string, strErrorThrown: string): void
         {
             // #region Variáveis
@@ -74,6 +86,13 @@
             // #endregion Ações
         }
 
+        /**
+         * Método disparado quando a resposta desta solicitação retorna,
+         * contendo o resultado do processamento no servidor.
+         * @param anyData Objeto JSON que foi enviado pelo servidor
+         * contendo informações sobre o resultado do processo que foi
+         * executado no servido.
+         */
         public ajaxSucesso(anyData: any): void
         {
             // #region Variáveis
@@ -94,7 +113,39 @@
             // #endregion Ações
         }
 
-        public validarDadosEnvio(): boolean
+        /**
+         * Carrega os valores de um objeto com o mesmo prototipo desta classe
+         * para esta instância.
+         * @param obj Objeto com o mesmo prototipo deste.
+         */
+        public carregarDados(obj: any): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                for (var objPropriedade in obj)
+                {
+                    (<any>this)[objPropriedade] = obj[objPropriedade];
+                }
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        /**
+         * Verifica se esta solicitação possui dados válidos
+         * para ser enviada para o servidor.
+         */
+        public validarDados(): boolean
         {
             return true;
         }
@@ -108,6 +159,11 @@
             try
             {
                 if (strKey == "_arrEvtOnAjaxListener")
+                {
+                    return null;
+                }
+
+                if (strKey == "_objJson")
                 {
                     return null;
                 }

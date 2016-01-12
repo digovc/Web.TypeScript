@@ -20,7 +20,7 @@
 
         // #region Métodos
 
-        public inicializar(): void
+        protected inicializar(): void
         {
         }
 

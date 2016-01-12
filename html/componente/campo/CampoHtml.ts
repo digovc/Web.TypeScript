@@ -1,4 +1,6 @@
-﻿/// <reference path="../../../persistencia/ColunaWeb.ts"/>
+﻿/// <reference path="../../../OnValorAlteradoListener.ts"/>
+/// <reference path="../../Input.ts"/>
+/// <reference path="../../../persistencia/ColunaWeb.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -8,64 +10,16 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class CampoHtml extends ComponenteHtml
+    export class CampoHtml extends ComponenteHtml implements OnValorAlteradoListener
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _booValor: boolean;
         private _cln: ColunaWeb;
-        private _decValor: number;
-        private _dttValor: Date;
-        private _intValor: number;
-        private _strValor: string;
-        private _strValorAnterior: string;
-
-        public get booValor(): boolean
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._booValor = Utils.strToBoo(this.strValor);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._booValor;
-        }
-
-        public set booValor(booValor: boolean)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._booValor = booValor;
-
-                this.strValor = this._booValor ? "true" : "false";
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
+        private _strCritica: string;
+        private _tagInput: Input;
 
         public get cln(): ColunaWeb
         {
@@ -94,29 +48,12 @@ module NetZ_Web_TypeScript
             return this._cln;
         }
 
-        public get dttValor(): Date
+        public get strCritica(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                // TODO: Converter strValor para dttValor.
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._dttValor;
+            return this._strCritica;
         }
 
-        public set dttValor(dttValor: Date)
+        public set strCritica(strCritica: string)
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -124,9 +61,9 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this._dttValor = dttValor;
+                this._strCritica = strCritica;
 
-                // TODO: Converter dttValor para strValor.
+                this.atualizarStrCritica();
             }
             catch (ex)
             {
@@ -138,7 +75,8 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public get decValor(): number
+
+        public get tagInput(): Input
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -146,31 +84,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this._decValor = parseFloat(this.strValor);
-            }
-            catch (ex)
-            {
-                return 0;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+                if (this._tagInput != null)
+                {
+                    return this._tagInput;
+                }
 
-            return this._decValor;
-        }
-
-        public set decValor(decValor: number)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._decValor = decValor;
-
-                this.strValor = this._decValor.toString();
+                this._tagInput = this.getTagInput();
             }
             catch (ex)
             {
@@ -180,89 +99,8 @@ module NetZ_Web_TypeScript
             {
             }
             // #endregion Ações
-        }
 
-        public get intValor(): number
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._intValor = parseInt(this.strValor);
-            }
-            catch (ex)
-            {
-                return 0;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._intValor;
-        }
-
-        public set intValor(intValor: number)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._intValor = intValor;
-
-                this.strValor = this._intValor.toString();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get strValor(): string
-        {
-            return this._strValor;
-        }
-
-        public set strValor(strValor: string)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.strValorAnterior = this._strValor;
-
-                this._strValor = strValor;
-
-                this.atualizarStrValor();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public get strValorAnterior(): string
-        {
-            return this._strValorAnterior;
-        }
-
-        public set strValorAnterior(strValorAnterior: string)
-        {
-            this._strValorAnterior = strValorAnterior;
+            return this._tagInput;
         }
 
         // #endregion Atributos
@@ -272,8 +110,25 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        private atualizarStrValor(): void
+        private atualizarStrCritica(): void
         {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                // TODO: Criar uma forma melhor para mostrar ao usuário que este campo está com crítica.
+                this.strTitle = this.strCritica;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
         }
 
         private getCln(): ColunaWeb
@@ -287,9 +142,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                clnResultado = new ColunaWeb(this.jq.attr("cln"));
+                if (this.jq == null)
+                {
+                    return null;
+                }
 
-                 // TODO: Manter os valores atualizados dos dois lados.
+                clnResultado = new ColunaWeb(this.jq.attr("cln"));
 
                 return clnResultado;
             }
@@ -303,7 +161,85 @@ module NetZ_Web_TypeScript
             // #endregion Ações
 
             return clnResultado;
-            
+        }
+
+        private getTagInput(): Input
+        {
+            // #region Variáveis
+
+            var strInputId: string;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.jq == null)
+                {
+                    return null;
+                }
+
+                strInputId = this.jq.find("input")[0].id;
+
+                if (Utils.getBooStrVazia(strInputId))
+                {
+                    return null;
+                }
+
+                return new Input(strInputId);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.tagInput.iniciar();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.tagInput.addEvtOnValorAlteradoListener(this);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
         }
 
         public validarDados(): boolean
@@ -330,6 +266,31 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
+
+        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.cln == null)
+                {
+                    return;
+                }
+
+                this.cln.strValor = arg.strValor;
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         // #endregion Eventos
     }

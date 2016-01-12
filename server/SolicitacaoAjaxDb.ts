@@ -9,8 +9,11 @@ module NetZ_Web_TypeScript
 
     export enum SolicitacaoAjaxDb_EnmMetodo
     {
+        APAGAR,
         NONE,
-        SALVAR_REGISTRO,
+        PESQUISAR,
+        RECUPERAR,
+        SALVAR,
     }
 
     // #endregion Enumerados
@@ -41,7 +44,7 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public validarDadosEnvio(): boolean
+        public validarDados(): boolean
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -49,7 +52,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (!super.validarDadosEnvio())
+                if (!super.validarDados())
                 {
                     return false;
                 }
@@ -59,7 +62,7 @@ module NetZ_Web_TypeScript
                     return false;
                 }
 
-                if (this.objJsonEnvio == null)
+                if (Utils.getBooStrVazia(this.jsn))
                 {
                     return false;
                 }

@@ -28,7 +28,7 @@ module NetZ_Web_TypeScript
 
         private _arrCmp: Array<CampoHtml>;
         private _divComando: DivComando;
-        private _tbl: TabelaWeb;
+        private _tblWeb: TabelaWeb;
 
         private get arrCmp(): Array<CampoHtml>
         {
@@ -84,7 +84,7 @@ module NetZ_Web_TypeScript
             return this._divComando;
         }
 
-        private get tbl(): TabelaWeb
+        private get tblWeb(): TabelaWeb
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -92,12 +92,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this._tbl != null)
+                if (this._tblWeb != null)
                 {
-                    return this._tbl;
+                    return this._tblWeb;
                 }
 
-                this._tbl = this.getTbl();
+                this._tblWeb = this.getTblWeb();
             }
             catch (ex)
             {
@@ -108,7 +108,7 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
 
-            return this._tbl;
+            return this._tblWeb;
         }
 
         // #endregion Atributos
@@ -201,22 +201,32 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private getTbl(): TabelaWeb
+        private getTblWeb(): TabelaWeb
         {
             // #region Variáveis
 
-            var tblResultado: TabelaWeb;
+            var tblWebResultado: TabelaWeb;
 
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                tblResultado = new TabelaWeb(this.jq.attr("tbl"));
+                if (this.jq == null)
+                {
+                    return null;
+                }
 
-                this.getTblItem(tblResultado);
+                if (Utils.getBooStrVazia(this.jq.attr("tbl")))
+                {
+                    return null;
+                }
 
-                return tblResultado;
+                tblWebResultado = new TabelaWeb(this.jq.attr("tbl"));
+
+                this.getTblWebClnWeb(tblWebResultado);
+
+                return tblWebResultado;
             }
             catch (ex)
             {
@@ -228,7 +238,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private getTblItem(tbl: TabelaWeb): void
+        private getTblWebClnWeb(tbl: TabelaWeb): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -241,7 +251,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrCmp.forEach((value) => { tbl.addCln(value.cln) });
+                this.arrCmp.forEach((value) => { tbl.addClnWeb(value.cln) });
             }
             catch (ex)
             {
@@ -287,7 +297,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrCmp.forEach((value) => this.inicializarCamposItem(value));
+                this.arrCmp.forEach((value) => this.inicializarCampos2(value));
             }
             catch (ex)
             {
@@ -299,7 +309,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private inicializarCamposItem(cmp: CampoHtml): void
+        private inicializarCampos2(cmp: CampoHtml): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -342,12 +352,203 @@ module NetZ_Web_TypeScript
 
                 objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.SALVAR_REGISTRO;
-                objSolicitacaoAjaxDb.objJsonEnvio = this.getTbl();
+                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.SALVAR;
+                objSolicitacaoAjaxDb.jsn = JSON.stringify(this.tblWeb);
 
                 objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
 
                 ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private salvarResposta(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        {
+            // #region Variáveis
+
+            var tblWeb: TabelaWeb;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (objSolicitacaoAjaxDb == null)
+                {
+                    return;
+                }
+
+                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.jsn))
+                {
+                    return;
+                }
+
+                tblWeb = new TabelaWeb(this.tblWeb.strNome);
+
+                tblWeb.carregarDados(JSON.parse(objSolicitacaoAjaxDb.jsn));
+
+                this.salvarResposta2(tblWeb);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private salvarResposta2(tblWeb: TabelaWeb): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (tblWeb == null)
+                {
+                    return;
+                }
+
+                if (tblWeb.getBooCritica())
+                {
+                    this.salvarRespostaErro(tblWeb);
+                    return;
+                }
+
+                if (this.tblWeb == null)
+                {
+                    return;
+                }
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private salvarRespostaErro(tblWeb: TabelaWeb): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (tblWeb == null)
+                {
+                    return;
+                }
+
+                if (!Utils.getBooStrVazia(tblWeb.strCritica))
+                {
+                    // TOD: Criar mecanismo de mensagens para o usuário e substituir esta função de "alert".
+                    window.alert(tblWeb.strCritica);
+                }
+
+                if (tblWeb.arrClnWeb == null)
+                {
+                    return;
+                }
+
+                for (var i = 0; i < tblWeb.arrClnWeb.length; i++)
+                {
+                    this.salvarRespostaErroClnWeb(tblWeb.arrClnWeb[i]);
+                }
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private salvarRespostaErroClnWeb(clnWeb: ColunaWeb): void
+        {
+            // #region Variáveis
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (clnWeb == null)
+                {
+                    return;
+                }
+
+                if (Utils.getBooStrVazia(clnWeb.strNome))
+                {
+                    return;
+                }
+
+                if (Utils.getBooStrVazia(clnWeb.strCritica))
+                {
+                    return;
+                }
+
+                if (this.arrCmp == null)
+                {
+                    return;
+                }
+
+                this.arrCmp.forEach((cmp) => this.salvarRespostaErroClnWeb2(clnWeb, cmp));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private salvarRespostaErroClnWeb2(clnWeb: ColunaWeb, cmp: CampoHtml): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (cmp == null)
+                {
+                    return;
+                }
+
+                if (cmp.cln == null)
+                {
+                    return;
+                }
+
+                if (Utils.getBooStrVazia(cmp.cln.strNome))
+                {
+                    return;
+                }
+
+                if (clnWeb.strNome.toLowerCase() != cmp.cln.strNome.toLowerCase())
+                {
+                    return;
+                }
+
+                cmp.strCritica = clnWeb.strCritica;
             }
             catch (ex)
             {
@@ -367,7 +568,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this.getTbl() == null)
+                if (this.tblWeb == null)
                 {
                     return false;
                 }
@@ -401,22 +602,44 @@ module NetZ_Web_TypeScript
 
         // #region Eventos
 
-        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, e: OnAjaxSucessoArg): void
+        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxSucessoArg): void
         {
-            if (e == null)
-            {
-                return;
-            }
+            // #region Variáveis
 
-            if (e.anyData == null)
-            {
-                return;
-            }
+            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb;
 
-            window.alert(e.anyData);
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (arg == null)
+                {
+                    return;
+                }
+
+                if (arg.anyData == null)
+                {
+                    return;
+                }
+
+                objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+
+                objSolicitacaoAjaxDb.carregarDados(arg.anyData);
+
+                this.salvarResposta(objSolicitacaoAjaxDb);
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
         }
 
-        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, e: OnAjaxErroArg): void
+        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxErroArg): void
         {
         }
 

@@ -2,9 +2,9 @@
 {
     export interface OnAjaxListener
     {
-        onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, e: OnAjaxSucessoArg): void;
+        onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxSucessoArg): void;
 
-        onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, e: OnAjaxErroArg): void;
+        onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxErroArg): void;
 
         onAjaxAntesEnviar(objSolicitacaoAjaxSender: SolicitacaoAjax): void;
     }

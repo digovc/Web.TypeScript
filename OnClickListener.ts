@@ -2,6 +2,6 @@
 {
     export interface OnClickListener
     {
-        onClick(objSender: Object, e: any): void;
+        onClick(objSender: Object, arg: any): void;
     }
 }

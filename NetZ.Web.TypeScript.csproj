@@ -26,6 +26,8 @@
     <TypeScriptCompile Include="AppWeb.ts" />
     <TypeScriptCompile Include="Boot.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
+    <TypeScriptCompile Include="OnLeaveListener.ts" />
+    <TypeScriptCompile Include="OnEnterListener.ts" />
     <TypeScriptCompile Include="OnValorAlteradoArg.ts" />
     <TypeScriptCompile Include="OnValorAlteradoListener.ts" />
     <TypeScriptCompile Include="html\ComboBox.ts" />

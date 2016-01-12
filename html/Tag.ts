@@ -8,7 +8,7 @@ module NetZ_Web_TypeScript
 
     // #region Enumerados
 
-    export enum EnmAnimacaoTipo
+    export enum Tag_EnmAnimacaoTipo
     {
         FADE,
         SLIDE_HORIZONTAL,
@@ -26,6 +26,7 @@ module NetZ_Web_TypeScript
 
         private _booVisivel: boolean;
         private _jq: any;
+        private _strConteudo: string;
         private _strId: string;
         private _strPlaceholder: string;
         private _strTitle: string;
@@ -63,6 +64,50 @@ module NetZ_Web_TypeScript
                 this._booVisivel = booVisivel;
 
                 this._booVisivel ? this.mostrar() : this.esconder();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public get strConteudo(): string
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._strConteudo = this.jq.html();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._strConteudo;
+        }
+
+        public set strConteudo(strConteudo: string)
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._strConteudo = strConteudo;
+
+                this.jq.html(this._strConteudo);
             }
             catch (ex)
             {
@@ -187,7 +232,7 @@ module NetZ_Web_TypeScript
             {
                 this._strTitle = strTitle;
 
-                this.jq.attr("title", this._strTitle);
+                this.atualizarStrTitle();
             }
             catch (ex)
             {
@@ -249,7 +294,32 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public esconder(enmAnimacaoTipo: EnmAnimacaoTipo = EnmAnimacaoTipo.FADE): void
+        private atualizarStrTitle(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.jq == null)
+                {
+                    return;
+                }
+
+                this.jq.attr("title", this.strTitle);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public esconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
         {
             // #region Variáveis
 
@@ -262,11 +332,11 @@ module NetZ_Web_TypeScript
 
                 switch (enmAnimacaoTipo)
                 {
-                    case EnmAnimacaoTipo.SLIDE_VERTICAL:
+                    case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
                         this.jq.slideUp();
                         return;
 
-                    case EnmAnimacaoTipo.SLIDE_HORIZONTAL:
+                    case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
                         this.jq.hide(); // TODO: Implementar.
                         return;
 
@@ -315,7 +385,7 @@ module NetZ_Web_TypeScript
         {
         }
 
-        public mostrar(enmAnimacaoTipo: EnmAnimacaoTipo = EnmAnimacaoTipo.FADE)
+        public mostrar(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE)
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -327,11 +397,11 @@ module NetZ_Web_TypeScript
 
                 switch (enmAnimacaoTipo)
                 {
-                    case EnmAnimacaoTipo.SLIDE_VERTICAL:
+                    case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
                         this.jq.slideDown();
                         return;
 
-                    case EnmAnimacaoTipo.SLIDE_HORIZONTAL:
+                    case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
                         this.jq.show(); // TODO: Implementar.
                         return;
 
@@ -350,7 +420,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public mostrarEsconder(enmAnimacaoTipo: EnmAnimacaoTipo = EnmAnimacaoTipo.FADE): void
+        public mostrarEsconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
         {
             (this.booVisivel) ? this.esconder(enmAnimacaoTipo) : this.mostrar(enmAnimacaoTipo);
         }
@@ -414,7 +484,7 @@ module NetZ_Web_TypeScript
 
                 if (this.arrEvtOnClickListener.length == 0)
                 {
-                    this.jq.click((e) => this.dispararEvtOnClickListener(e));
+                    this.jq.click((arg) => this.dispararEvtOnClickListener(arg));
                 }
 
                 this.arrEvtOnClickListener.push(evtOnClickListener);

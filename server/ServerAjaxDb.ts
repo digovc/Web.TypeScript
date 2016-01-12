@@ -54,7 +54,7 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public enviar(objSolicitacao: SolicitacaoAjax): void
+        public enviar(objSolicitacaoAjax: SolicitacaoAjax): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -62,26 +62,26 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (objSolicitacao == null)
+                if (objSolicitacaoAjax == null)
                 {
                     return;
                 }
 
-                if (!objSolicitacao.validarDadosEnvio())
+                if (!objSolicitacaoAjax.validarDados())
                 {
                     return;
                 }
 
                 $.ajaxSettings.crossDomain = true;
-                $.ajaxSettings.data = objSolicitacao.toJson();
-                $.ajaxSettings.dataType = "JSON";
+                $.ajaxSettings.data = objSolicitacaoAjax.toJson();
+                $.ajaxSettings.dataType = "json";
                 $.ajaxSettings.method = "POST";
                 $.ajaxSettings.url = this.url;
                 $.ajaxSettings.xhrFields = { "withCredentials": true };
 
-                $.ajaxSettings.beforeSend = (objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacao.ajaxAntesEnviar() };
-                $.ajaxSettings.error = (objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objSolicitacao.ajaxErro(strTextStatus, strErrorThrown) };
-                $.ajaxSettings.success = (anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objSolicitacao.ajaxSucesso(anyData) };
+                $.ajaxSettings.beforeSend = (objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacaoAjax.ajaxAntesEnviar() };
+                $.ajaxSettings.error = (objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objSolicitacaoAjax.ajaxErro(strTextStatus, strErrorThrown) };
+                $.ajaxSettings.success = (anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objSolicitacaoAjax.ajaxSucesso(anyData) };
 
                 $.ajax($.ajaxSettings);
             }

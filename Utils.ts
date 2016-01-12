@@ -74,7 +74,13 @@
                 {
                     return true;
                 }
+
                 if (str == "")
+                {
+                    return true;
+                }
+
+                if (str == undefined)
                 {
                     return true;
                 }
