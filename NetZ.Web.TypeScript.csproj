@@ -92,6 +92,7 @@
     <TypeScriptCompile Include="server\ServerBase.ts" />
     <TypeScriptCompile Include="server\SolicitacaoAjax.ts" />
     <TypeScriptCompile Include="server\SolicitacaoAjaxDb.ts" />
+    <TypeScriptCompile Include="TestSnippet.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="websocket\ServerWs.ts" />
   </ItemGroup>

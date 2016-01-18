@@ -26,7 +26,7 @@ module NetZ_Web_TypeScript
 
         public static get i(): AppWeb
         {
-            return AppWeb._i;            
+            return AppWeb._i;
         }
 
         public static set i(appWeb: AppWeb)
