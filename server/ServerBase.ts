@@ -97,7 +97,7 @@
             {
                 urlResultado = "http://_server_host:_server_port";
 
-                urlResultado = urlResultado.replace("_server_host", window.location.host);
+                urlResultado = urlResultado.replace("_server_host", window.location.hostname);
                 urlResultado = urlResultado.replace("_server_port", String(this.intPort));
 
                 return urlResultado;
