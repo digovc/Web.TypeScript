@@ -1,5 +1,6 @@
-﻿/// <reference path="../painel/PainelHtml.ts"/>
-/// <reference path="../../../OnClickListener.ts"/>
+﻿/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../../../persistencia/TabelaWeb.ts"/>
+/// <reference path="../painel/PainelHtml.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -22,6 +23,7 @@ module NetZ_Web_TypeScript
         private _divTitulo: Div;
         private _mmiPai: MainMenuItem;
         private _mmnPai: MainMenu;
+        private _tblWeb: TabelaWeb;
 
         private get arrMmiFilho(): Array<MainMenuItem>
         {
@@ -151,12 +153,64 @@ module NetZ_Web_TypeScript
             return this._mmnPai;
         }
 
+        private get tblWeb(): TabelaWeb
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._tblWeb != null)
+                {
+                    return this._tblWeb;
+                }
+
+                this._tblWeb = this.getTblWeb();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._tblWeb;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
         // #endregion Construtores
 
         // #region Métodos
+
+        private abrirConsulta(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.tblWeb == null)
+                {
+                    return;
+                }
+
+                DivConsulta.i.abrirConsulta(this.tblWeb);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         public addMmiFilho(mmiFilho: MainMenuItem): void
         {
@@ -180,6 +234,63 @@ module NetZ_Web_TypeScript
 
                 mmiFilho.mmiPai = this;
                 mmiFilho.iniciar();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private divTitulo_onClick(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrMmiFilho != null && (this.arrMmiFilho.length > 0))
+                {
+                    this.mostrarEsconderDivItemConteudo();
+                    return;
+                }
+
+                this.abrirConsulta();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private getTblWeb(): TabelaWeb
+        {
+            // #region Variáveis
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.jq == null)
+                {
+                    return null;
+                }
+
+                if (Utils.getBooStrVazia(this.jq.attr("tblWebNome")))
+                {
+                    return null;
+                }
+
+                return new TabelaWeb(this.jq.attr("tblWebNome"));
             }
             catch (ex)
             {
@@ -403,7 +514,7 @@ module NetZ_Web_TypeScript
                 switch (objSender)
                 {
                     case this.divTitulo:
-                        this.mostrarEsconderDivItemConteudo();
+                        this.divTitulo_onClick();
                         return;
                 }
             }

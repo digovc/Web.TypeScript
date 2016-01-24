@@ -80,20 +80,32 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public abrirConsulta(strTblNome: string): void
+        public abrirConsulta(tblWeb: TabelaWeb): void
         {
             // #region Variáveis
+
+            var url: string;
+
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                if (Utils.getBooStrVazia(strTblNome))
+                if (tblWeb == null)
                 {
                     return;
                 }
 
-                this.tagObject.jq.attr("data", "http://localhost/consulta-" + strTblNome);
+                if (Utils.getBooStrVazia(tblWeb.strNome))
+                {
+                    return;
+                }
+
+                url = "/consulta?tbl=_tbl_web_nome";
+
+                url = url.replace("_tbl_web_nome", tblWeb.strNome);
+
+                this.tagObject.jq.attr("data", url);
 
                 //window.history.pushState("object or string", strTblNome, ("/consulta-" + strTblNome));
             }

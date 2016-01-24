@@ -1,4 +1,5 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
+﻿/// <reference path="../../componente/grid/GridHtml.ts"/>
+/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../PaginaHtml.ts"/>
 
 module NetZ_Web_TypeScript
@@ -47,6 +48,7 @@ module NetZ_Web_TypeScript
 
         private _btnAcao: BotaoAcao;
         private _divGrid: Div;
+        private _tagGridHtml: GridHtml;
         private _tblWeb: TabelaWeb;
 
         private get btnAcao(): BotaoAcao
@@ -103,6 +105,16 @@ module NetZ_Web_TypeScript
             return this._divGrid;
         }
 
+        private get tagGridHtml(): GridHtml
+        {
+            return this._tagGridHtml;
+        }
+
+        private set tagGridHtml(tagGridHtml: GridHtml)
+        {
+            this._tagGridHtml = tagGridHtml;
+        }
+
         private get tblWeb(): TabelaWeb
         {
             // #region Variáveis
@@ -141,8 +153,6 @@ module NetZ_Web_TypeScript
         {
             // #region Variáveis
 
-            var tblWebResultado: TabelaWeb;
-
             // #endregion Variáveis
 
             // #region Ações
@@ -158,16 +168,36 @@ module NetZ_Web_TypeScript
                     return null;
                 }
 
-                if (Utils.getBooStrVazia(this.tagBody.jq.attr("tblWeb")))
+                if (Utils.getBooStrVazia(this.tagBody.jq.attr("tblWebNome")))
                 {
                     return null;
                 }
 
-                tblWebResultado = new TabelaWeb(this.tagBody.jq.attr("tblWeb"));
-
                 // TODO: Carregar os filtros para a pesquisa.
 
-                return tblWebResultado;
+                return new TabelaWeb(this.tagBody.jq.attr("tblWebNome"));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private inicializarGridHtml(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.tagGridHtml = new GridHtml("tagGridHtml_consulta");
+
+                this.tagGridHtml.iniciar();
             }
             catch (ex)
             {
@@ -265,6 +295,8 @@ module NetZ_Web_TypeScript
                 }
 
                 this.divGrid.jq.html(tblWeb.tagGrid);
+
+                this.inicializarGridHtml();
             }
             catch (ex)
             {
