@@ -26,6 +26,8 @@
     <TypeScriptCompile Include="AppWeb.ts" />
     <TypeScriptCompile Include="Boot.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
+    <TypeScriptCompile Include="html\componente\DivConsulta.ts" />
+    <TypeScriptCompile Include="html\pagina\consulta\PagConsulta.ts" />
     <TypeScriptCompile Include="OnLeaveListener.ts" />
     <TypeScriptCompile Include="OnEnterListener.ts" />
     <TypeScriptCompile Include="OnValorAlteradoArg.ts" />
@@ -98,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\jquery-2.1.3.min.js" />
+    <Content Include="lib\jquery.floatThead.min.js" />
     <Content Include="zzz.js" />
   </ItemGroup>
   <ItemGroup>

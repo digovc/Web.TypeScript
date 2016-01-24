@@ -16,6 +16,7 @@
         private _arrClnWeb: Array<ColunaWeb>;
         private _clnChavePrimaria: ColunaWeb;
         private _strCritica: string;
+        private _tagGrid: string;
 
         public get arrClnWeb(): Array<ColunaWeb>
         {
@@ -81,6 +82,16 @@
             this._strCritica = strCritica;
         }
 
+        public get tagGrid(): string
+        {
+            return this._tagGrid;
+        }
+
+        public set tagGrid(tagGrid: string)
+        {
+            this._tagGrid = tagGrid;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -141,7 +152,6 @@
             // #endregion Ações
         }
 
-
         /**
          * Carrega os valores de um objeto com o mesmo prototipo desta classe
          * para esta instância.
@@ -157,7 +167,6 @@
             {
                 for (var objPropriedade in obj)
                 {
-
                     (<any>this)[objPropriedade] = obj[objPropriedade];
                 }
             }

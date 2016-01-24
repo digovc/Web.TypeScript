@@ -1,4 +1,6 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="../Div.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
@@ -6,16 +8,16 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class PaginaHtml extends Objeto
+    export class DivConsulta extends Div
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _tagBody: Tag;
+        protected static _i: DivConsulta;
 
-        protected get tagBody(): Tag
+        public static get i(): DivConsulta
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -23,12 +25,12 @@
             // #region Ações
             try
             {
-                if (this._tagBody != null)
+                if (DivConsulta._i != null)
                 {
-                    return this._tagBody;
+                    return DivConsulta._i;
                 }
 
-                this._tagBody = this.getTagBody();
+                DivConsulta._i = new DivConsulta("divConsulta");
             }
             catch (ex)
             {
@@ -39,33 +41,61 @@
             }
             // #endregion Ações
 
-            return this._tagBody;
+            return DivConsulta._i;
+        }
+
+        private _tagObject: Tag;
+
+        private get tagObject(): Tag
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._tagObject != null)
+                {
+                    return this._tagObject;
+                }
+
+                this._tagObject = new Tag("divConsulta_tagObject");
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._tagObject;
         }
 
         // #endregion Atributos
 
         // #region Construtores
-
         // #endregion Construtores
 
         // #region Métodos
 
-        private getTagBody(): Tag
+        public abrirConsulta(strTblNome: string): void
         {
             // #region Variáveis
-
-            var tagBodyResultado: Tag;
-
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                tagBodyResultado = new Tag(null);
+                if (Utils.getBooStrVazia(strTblNome))
+                {
+                    return;
+                }
 
-                tagBodyResultado.strJqSelector = "body";
+                this.tagObject.jq.attr("data", "http://localhost/consulta-" + strTblNome);
 
-                return tagBodyResultado;
+                //window.history.pushState("object or string", strTblNome, ("/consulta-" + strTblNome));
             }
             catch (ex)
             {
@@ -75,40 +105,6 @@
             {
             }
             // #endregion Ações
-        }
-
-        protected inicializar(): void
-        {
-        }
-
-        public iniciar(): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.inicializar();
-                this.montarLayout();
-                this.setEventos();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        protected montarLayout(): void
-        {
-        }
-
-        protected setEventos(): void
-        {
         }
 
         // #endregion Métodos

@@ -28,6 +28,7 @@ module NetZ_Web_TypeScript
         private _jq: any;
         private _strConteudo: string;
         private _strId: string;
+        private _strJqSelector: string = null;
         private _strPlaceholder: string;
         private _strTitle: string;
 
@@ -132,7 +133,7 @@ module NetZ_Web_TypeScript
                     return this._jq;
                 }
 
-                this._jq = $("#" + this.strId);
+                this._jq = $(this.strJqSelector);
             }
             catch (ex)
             {
@@ -144,6 +145,38 @@ module NetZ_Web_TypeScript
             // #endregion Ações
 
             return this._jq;
+        }
+
+        public get strJqSelector(): string
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (!Utils.getBooStrVazia(this._strJqSelector))
+                {
+                    return this._strJqSelector;
+                }
+
+                this._strJqSelector = this.getStrJqSelector();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._strJqSelector;
+        }
+
+        public set strJqSelector(strJqSelector: string)
+        {
+            this._strJqSelector = strJqSelector;
         }
 
         public get strId(): string
@@ -344,6 +377,33 @@ module NetZ_Web_TypeScript
                         this.jq.fadeOut();
                         return;
                 }
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private getStrJqSelector(): string
+        {
+            // #region Variáveis
+
+            var strJqSelector: string;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                strJqSelector = "#_tag_id";
+
+                strJqSelector = strJqSelector.replace("_tag_id", this.strId);
+
+                return strJqSelector;
             }
             catch (ex)
             {

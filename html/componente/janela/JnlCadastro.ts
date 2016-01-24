@@ -217,12 +217,12 @@ module NetZ_Web_TypeScript
                     return null;
                 }
 
-                if (Utils.getBooStrVazia(this.jq.attr("tbl")))
+                if (Utils.getBooStrVazia(this.jq.attr("tblWeb")))
                 {
                     return null;
                 }
 
-                tblWebResultado = new TabelaWeb(this.jq.attr("tbl"));
+                tblWebResultado = new TabelaWeb(this.jq.attr("tblWeb"));
 
                 this.getTblWebClnWeb(tblWebResultado);
 
@@ -606,28 +606,12 @@ module NetZ_Web_TypeScript
         {
             // #region Variáveis
 
-            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb;
-
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                if (arg == null)
-                {
-                    return;
-                }
-
-                if (arg.anyData == null)
-                {
-                    return;
-                }
-
-                objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
-
-                objSolicitacaoAjaxDb.carregarDados(arg.anyData);
-
-                this.salvarResposta(objSolicitacaoAjaxDb);
+                this.salvarResposta(arg.objSolicitacaoAjaxDb);
             }
             catch (ex)
             {

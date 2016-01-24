@@ -21,7 +21,7 @@ module NetZ_Web_TypeScript
         // #endregion Constantes
 
         // #region Atributos
-        
+
         protected static _i: AppWeb;
 
         public static get i(): AppWeb

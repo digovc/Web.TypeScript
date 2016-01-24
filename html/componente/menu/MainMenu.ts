@@ -143,7 +143,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public inicializar(): void
+        protected inicializar(): void
         {
             super.inicializar();
 
@@ -210,7 +210,7 @@ module NetZ_Web_TypeScript
             try
             {
                 this.txtPesquisa.addEvtOnEnterListener(this);
-                //this.txtPesquisa.addEvtOnLeaveListener(this);
+                this.txtPesquisa.addEvtOnLeaveListener(this); // TODO: Analisar uma melhor forma para fechar a gaveta do menu.
                 this.txtPesquisa.addEvtOnValorAlteradoListener(this);
             }
             catch (ex)
