@@ -94,12 +94,12 @@ module NetZ_Web_TypeScript
                     return null;
                 }
 
-                if (Utils.getBooStrVazia(this.jq.attr("tblWebNome")))
+                if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
                 {
                     return null;
                 }
 
-                return new TabelaWeb(this.jq.attr("tblWebNome"));
+                return new TabelaWeb(this.jq.attr("tbl_web_nome"));
             }
             catch (ex)
             {

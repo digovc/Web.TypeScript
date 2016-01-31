@@ -1,7 +1,8 @@
-﻿/// <reference path="../../../OnValorAlteradoListener.ts"/>
+﻿/// <reference path="../../../OnEnterListener.ts"/>
 /// <reference path="../../../OnLeaveListener.ts"/>
+/// <reference path="../../../OnValorAlteradoListener.ts"/>
+/// <reference path="../../PaginaHtml.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
-/// <reference path="../../../OnEnterListener.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -20,6 +21,7 @@ module NetZ_Web_TypeScript
 
         private _arrMmiFilho: Array<MainMenuItem>;
         private _divGaveta: Div;
+        private _pag: PaginaHtml;
         private _txtPesquisa: Input;
 
         protected get arrMmiFilho(): Array<MainMenuItem>
@@ -76,6 +78,16 @@ module NetZ_Web_TypeScript
             return this._divGaveta;
         }
 
+        public get pag(): PaginaHtml
+        {
+            return this._pag;
+        }
+
+        public set pag(pag: PaginaHtml)
+        {
+            this._pag = pag;
+        }
+
         private get txtPesquisa(): Input
         {
             // #region Variáveis
@@ -106,9 +118,40 @@ module NetZ_Web_TypeScript
         // #endregion Atributos
 
         // #region Construtores
+
         // #endregion Construtores
 
         // #region Métodos
+
+        public abrirConsulta(tblWeb: TabelaWeb): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (tblWeb == null)
+                {
+                    return;
+                }
+
+                if (this.pag == null)
+                {
+                    return;
+                }
+
+                this.pag.abrirConsulta(tblWeb);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         public addMmiFilho(mmiFilho: MainMenuItem): void
         {
@@ -182,7 +225,6 @@ module NetZ_Web_TypeScript
 
                 if (Utils.getBooStrVazia(strPesquisa))
                 {
-
                     this.arrMmiFilho.forEach((mni) => { mni.limparPesquisa() });
                     return;
                 }

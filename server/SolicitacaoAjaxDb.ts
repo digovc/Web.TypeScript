@@ -9,6 +9,7 @@ module NetZ_Web_TypeScript
 
     export enum SolicitacaoAjaxDb_EnmMetodo
     {
+        ADICIONAR,
         APAGAR,
         NONE,
         PESQUISAR,

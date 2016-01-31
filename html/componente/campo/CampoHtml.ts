@@ -147,7 +147,7 @@ module NetZ_Web_TypeScript
                     return null;
                 }
 
-                clnResultado = new ColunaWeb(this.jq.attr("cln"));
+                clnResultado = new ColunaWeb(this.jq.attr("cln_nome"));
 
                 return clnResultado;
             }

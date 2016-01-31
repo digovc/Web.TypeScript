@@ -1,4 +1,4 @@
-﻿/// <reference path="../BotaoHtml.ts"/>
+﻿/// <reference path="BotaoHtml.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -8,7 +8,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class BotaoAcao extends BotaoHtml
+    export class BotaoCircular extends BotaoHtml
     {
         // #region Constantes
         // #endregion Constantes

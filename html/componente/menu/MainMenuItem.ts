@@ -187,7 +187,7 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        private abrirConsulta(): void
+        private abrirConsulta(tblWeb: TabelaWeb): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -195,12 +195,22 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this.tblWeb == null)
+                if (tblWeb == null)
                 {
                     return;
                 }
 
-                DivConsulta.i.abrirConsulta(this.tblWeb);
+                if (this.mmiPai != null)
+                {
+                    this.mmiPai.abrirConsulta(tblWeb);
+                    return;
+                }
+
+                if (this.mmnPai != null)
+                {
+                    this.mmnPai.abrirConsulta(tblWeb);
+                    return;
+                }
             }
             catch (ex)
             {
@@ -259,7 +269,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.abrirConsulta();
+                this.abrirConsulta(this.tblWeb);
             }
             catch (ex)
             {
@@ -285,12 +295,12 @@ module NetZ_Web_TypeScript
                     return null;
                 }
 
-                if (Utils.getBooStrVazia(this.jq.attr("tblWebNome")))
+                if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
                 {
                     return null;
                 }
 
-                return new TabelaWeb(this.jq.attr("tblWebNome"));
+                return new TabelaWeb(this.jq.attr("tbl_web_nome"));
             }
             catch (ex)
             {

@@ -1,5 +1,7 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../botao/mini/BotaoFecharMini.ts"/>
+/// <reference path="../../componente/botao/mini/BotaoAdicionarMini.ts"/>
+/// <reference path="../../componente/botao/mini/BotaoAlterarMini.ts"/>
+/// <reference path="../../componente/painel/PainelAcao.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -9,16 +11,17 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JanelaHtml extends ComponenteHtml implements OnClickListener
+    export class PainelAcaoConsulta extends PainelAcao implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _btnFechar: BotaoFecharMini;
+        private _btnAdicionar: BotaoAdicionarMini;
+        private _btnAlterar: BotaoAlterarMini;
 
-        private get btnFechar(): BotaoFecharMini
+        private get btnAdicionar(): BotaoAdicionarMini
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -26,12 +29,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this._btnFechar != null)
+                if (this._btnAdicionar != null)
                 {
-                    return this._btnFechar;
+                    return this._btnAdicionar;
                 }
 
-                this._btnFechar = new BotaoFecharMini("btnFechar");
+                this._btnAdicionar = new BotaoAdicionarMini("btnAdicionar");
             }
             catch (ex)
             {
@@ -42,7 +45,34 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
 
-            return this._btnFechar;
+            return this._btnAdicionar;
+        }
+
+        private get btnAlterar(): BotaoAlterarMini
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._btnAlterar != null)
+                {
+                    return this._btnAlterar;
+                }
+
+                this._btnAlterar = new BotaoAlterarMini("btnAlterar");
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._btnAlterar;
         }
 
         // #endregion Atributos
@@ -52,19 +82,19 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        protected fechar(): void
-        {
-        }
-
         protected setEventos(): void
         {
+            super.setEventos();
+
             // #region Variáveis
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.btnFechar.addEvtOnClickListener(this);
+                this.btnAcaoPrincipal.addEvtOnClickListener(this);
+                this.btnAdicionar.addEvtOnClickListener(this);
+                this.btnAlterar.addEvtOnClickListener(this);
             }
             catch (ex)
             {
@@ -90,8 +120,12 @@ module NetZ_Web_TypeScript
             {
                 switch (objSender)
                 {
-                    case this.btnFechar:
-                        this.fechar();
+                    case this.btnAcaoPrincipal:
+                        PagConsulta.i.pesquisar();
+                        return;
+
+                    case this.btnAdicionar:
+                        PagConsulta.i.adicionar();
                         return;
                 }
             }

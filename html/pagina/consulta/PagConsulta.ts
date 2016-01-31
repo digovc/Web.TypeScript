@@ -1,6 +1,8 @@
-﻿/// <reference path="../../componente/grid/GridHtml.ts"/>
-/// <reference path="../../../OnClickListener.ts"/>
+﻿/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../../../OnPaginaImportadaListener.ts"/>
+/// <reference path="../../componente/grid/GridHtml.ts"/>
 /// <reference path="../../PaginaHtml.ts"/>
+/// <reference path="PainelAcaoConsulta.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -10,7 +12,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class PagConsulta extends PaginaHtml implements OnClickListener, OnAjaxListener
+    export class PagConsulta extends PaginaHtml implements OnAjaxListener, OnPaginaImportadaListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -46,37 +48,10 @@ module NetZ_Web_TypeScript
             return PagConsulta._i;
         }
 
-        private _btnAcao: BotaoAcao;
         private _divGrid: Div;
+        private _pnlAcaoConsulta: PainelAcaoConsulta;
         private _tagGridHtml: GridHtml;
         private _tblWeb: TabelaWeb;
-
-        private get btnAcao(): BotaoAcao
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this._btnAcao != null)
-                {
-                    return this._btnAcao;
-                }
-
-                this._btnAcao = new BotaoAcao("btnAcao");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._btnAcao;
-        }
 
         private get divGrid(): Div
         {
@@ -103,6 +78,33 @@ module NetZ_Web_TypeScript
             // #endregion Ações
 
             return this._divGrid;
+        }
+
+        private get pnlAcaoConsulta(): PainelAcaoConsulta
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._pnlAcaoConsulta != null)
+                {
+                    return this._pnlAcaoConsulta;
+                }
+
+                this._pnlAcaoConsulta = new PainelAcaoConsulta("pnlAcaoConsulta");
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._pnlAcaoConsulta;
         }
 
         private get tagGridHtml(): GridHtml
@@ -149,6 +151,56 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
+        public adicionar(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.tblWeb == null)
+                {
+                    return;
+                }
+
+                //DivCadastro.i.abrirCadastro(this.tblWeb); // TODO: Abrir tela de cadastros.
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        protected getTagBody(): Tag
+        {
+            // #region Variáveis
+
+            var tagBodyResultado: Tag;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                tagBodyResultado = new Tag("body_consulta");
+
+                return tagBodyResultado;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         private getTblWeb(): TabelaWeb
         {
             // #region Variáveis
@@ -168,14 +220,34 @@ module NetZ_Web_TypeScript
                     return null;
                 }
 
-                if (Utils.getBooStrVazia(this.tagBody.jq.attr("tblWebNome")))
+                if (Utils.getBooStrVazia(this.tagBody.jq.attr("tbl_web_nome")))
                 {
                     return null;
                 }
 
                 // TODO: Carregar os filtros para a pesquisa.
 
-                return new TabelaWeb(this.tagBody.jq.attr("tblWebNome"));
+                return new TabelaWeb(this.tagBody.jq.attr("tbl_web_nome"));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        protected inicializar(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.pnlAcaoConsulta.iniciar();
             }
             catch (ex)
             {
@@ -209,7 +281,27 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private pesquisar(): void
+        public iniciarImport(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                AppWeb.i.addEvtOnPaginaImportadaListener(this);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public pesquisar(): void
         {
             // #region Variáveis
 
@@ -308,28 +400,6 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        protected setEventos(): void
-        {
-            super.setEventos();
-
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.btnAcao.addEvtOnClickListener(this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
         // #endregion Métodos
 
         // #region Eventos
@@ -381,7 +451,22 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.pesquisarResposta(arg.objSolicitacaoAjaxDb);
+                if (arg == null)
+                {
+                    return;
+                }
+
+                if (arg.objSolicitacaoAjaxDb == null)
+                {
+                    return;
+                }
+
+                switch (arg.objSolicitacaoAjaxDb.enmMetodo)
+                {
+                    case SolicitacaoAjaxDb_EnmMetodo.PESQUISAR:
+                        this.pesquisarResposta(arg.objSolicitacaoAjaxDb);
+                        return;
+                }
             }
             catch (ex)
             {
@@ -393,7 +478,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public onClick(objSender: Object, arg: any): void
+        public onPaginaImportada(urlImport: string): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -401,12 +486,17 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                switch (objSender)
+                if (Utils.getBooStrVazia(urlImport))
                 {
-                    case this.btnAcao:
-                        this.pesquisar();
-                        return;
+                    return;
                 }
+
+                if (urlImport.indexOf("consulta") < 0)
+                {
+                    return;
+                }
+
+                this.iniciar();
             }
             catch (ex)
             {
@@ -423,7 +513,7 @@ module NetZ_Web_TypeScript
 
     // #region Inicialização
 
-    $(document).ready(() => { PagConsulta.i.iniciar(); });
+    //$(document).ready(() => { PagConsulta.i.iniciarImport(); });
 
     // #endregion Inicialização
 }

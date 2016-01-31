@@ -13,12 +13,12 @@
 
         // #region Atributos
 
-        private _btnEntrar: BotaoAcao;
+        private _btnEntrar: PainelAcao;
         private _cmpLogin: CampoAlfanumerico;
         private _cmpSenha: CampoSenha;
         private _frmLogin: FormHtml;
 
-        private get btnEnter(): BotaoAcao
+        private get btnEnter(): PainelAcao
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -31,7 +31,7 @@
                     return this._btnEntrar;
                 }
 
-                this._btnEntrar = new BotaoAcao("btnEntrar");
+                this._btnEntrar = new PainelAcao("btnEntrar");
             }
             catch (ex)
             {

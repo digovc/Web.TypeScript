@@ -118,6 +118,28 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
+        protected fechar(): void
+        {
+            super.fechar();
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                // TODO: Fechar o cadastro.
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         private getArrCmp(): Array<CampoHtml>
         {
             // #region Variáveis
@@ -217,12 +239,12 @@ module NetZ_Web_TypeScript
                     return null;
                 }
 
-                if (Utils.getBooStrVazia(this.jq.attr("tblWeb")))
+                if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
                 {
                     return null;
                 }
 
-                tblWebResultado = new TabelaWeb(this.jq.attr("tblWeb"));
+                tblWebResultado = new TabelaWeb(this.jq.attr("tbl_web_nome"));
 
                 this.getTblWebClnWeb(tblWebResultado);
 

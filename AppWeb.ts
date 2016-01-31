@@ -1,6 +1,7 @@
 ﻿/// <reference path="erro/Erro.ts"/>
 /// <reference path="html/PaginaHtml.ts"/>
 /// <reference path="Objeto.ts"/>
+/// <reference path="OnPaginaImportadaListener.ts"/>
 /// <reference path="OnStartListener.ts"/>
 
 module NetZ_Web_TypeScript
@@ -348,6 +349,129 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
         }
+
+        // #region Evento OnPaginaImportadaListener
+
+        private _arrEvtOnPaginaImportadaListener: Array<OnPaginaImportadaListener>;
+
+        private get arrEvtOnPaginaImportadaListener(): Array<OnPaginaImportadaListener>
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._arrEvtOnPaginaImportadaListener != null)
+                {
+                    return this._arrEvtOnPaginaImportadaListener;
+                }
+
+                this._arrEvtOnPaginaImportadaListener = new Array<OnPaginaImportadaListener>();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._arrEvtOnPaginaImportadaListener;
+        }
+
+        public addEvtOnPaginaImportadaListener(evtOnPaginaImportadaListener: OnPaginaImportadaListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnPaginaImportadaListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnPaginaImportadaListener.indexOf(evtOnPaginaImportadaListener) > 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnPaginaImportadaListener.push(evtOnPaginaImportadaListener);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public dispararEvtOnPaginaImportadaListener(urlImport: string): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (Utils.getBooStrVazia(urlImport))
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnPaginaImportadaListener.length == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnPaginaImportadaListener.forEach((value) => { value.onPaginaImportada(urlImport); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public removerEvtOnPaginaImportadaListener(evtOnPaginaImportadaListener: OnPaginaImportadaListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnPaginaImportadaListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnPaginaImportadaListener.indexOf(evtOnPaginaImportadaListener) == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnPaginaImportadaListener.splice(this.arrEvtOnPaginaImportadaListener.indexOf(evtOnPaginaImportadaListener));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        // #endregion Evento OnPaginaImportadaListener
 
         // #region Evento OnStartListener
 

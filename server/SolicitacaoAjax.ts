@@ -325,7 +325,7 @@
         {
             // #region Variáveis
 
-            var e: OnAjaxErroArg;
+            var arg: OnAjaxErroArg;
 
             // #endregion Variáveis
 
@@ -337,12 +337,12 @@
                     return;
                 }
 
-                e = new OnAjaxErroArg();
+                arg = new OnAjaxErroArg();
 
-                e.strErrorThrown = strErrorThrown;
-                e.strTextStatus = strTextStatus;
+                arg.strErrorThrown = strErrorThrown;
+                arg.strTextStatus = strTextStatus;
 
-                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxErroListener(this, e); });
+                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxErroListener(this, arg); });
             }
             catch (ex)
             {
@@ -358,7 +358,7 @@
         {
             // #region Variáveis
 
-            var e: OnAjaxSucessoArg;
+            var arg: OnAjaxSucessoArg;
 
             // #endregion Variáveis
 
@@ -370,11 +370,11 @@
                     return;
                 }
 
-                e = new OnAjaxSucessoArg();
+                arg = new OnAjaxSucessoArg();
 
-                e.anyData = anyData;
+                arg.anyData = anyData;
 
-                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxSucesso(this, e); });
+                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxSucesso(this, arg); });
             }
             catch (ex)
             {
