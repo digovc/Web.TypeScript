@@ -14,17 +14,34 @@
 
         // #region Atributos
 
-        private _intPort: number = 8080;
+        private _intPort: number;
         private _url: string;
 
         public get intPort(): number
         {
-            return this._intPort;
-        }
+            // #region Variáveis
+            // #endregion Variáveis
 
-        public set intPort(intPort: number)
-        {
-            this._intPort = intPort;
+            // #region Ações
+            try
+            {
+                if (this._intPort != null)
+                {
+                    return this._intPort;
+                }
+
+                this._intPort = this.getIntPort();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._intPort;
         }
 
         protected get url(): string
@@ -83,6 +100,11 @@
         // #endregion Construtores
 
         // #region Métodos
+
+        protected getIntPort(): number
+        {
+            return 8080;
+        }
 
         private getUrl(): string
         {

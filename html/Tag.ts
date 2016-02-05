@@ -147,6 +147,11 @@ module NetZ_Web_TypeScript
             return this._jq;
         }
 
+        public set jq(jq: JQuery)
+        {
+            this._jq = jq;
+        }
+
         public get strJqSelector(): string
         {
             // #region Variáveis
@@ -176,7 +181,24 @@ module NetZ_Web_TypeScript
 
         public set strJqSelector(strJqSelector: string)
         {
-            this._strJqSelector = strJqSelector;
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._strJqSelector = strJqSelector;
+
+                this.atualizarStrJqSelector();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
         }
 
         public get strId(): string
@@ -316,6 +338,26 @@ module NetZ_Web_TypeScript
             try
             {
                 this.jq.append(strConteudo);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private atualizarStrJqSelector(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.jq = null;
             }
             catch (ex)
             {

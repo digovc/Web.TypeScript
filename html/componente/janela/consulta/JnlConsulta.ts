@@ -1,7 +1,7 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../../../OnPaginaImportadaListener.ts"/>
-/// <reference path="../../componente/grid/GridHtml.ts"/>
-/// <reference path="../../PaginaHtml.ts"/>
+﻿/// <reference path="../../grid/GridHtml.ts"/>
+/// <reference path="../../../Div.ts"/>
+/// <reference path="../../../../server/OnAjaxListener.ts"/>
+/// <reference path="../JanelaHtml.ts"/>
 /// <reference path="PainelAcaoConsulta.ts"/>
 
 module NetZ_Web_TypeScript
@@ -12,16 +12,21 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class PagConsulta extends PaginaHtml implements OnAjaxListener, OnPaginaImportadaListener
+    export class JnlConsulta extends JanelaHtml implements OnAjaxListener
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        protected static _i: PagConsulta;
+        private _divCadastro: Div;
+        private _divGrid: Div;
+        private _jnlCadastro: JnlCadastro;
+        private _pnlAcaoConsulta: PainelAcaoConsulta;
+        private _tagGridHtml: GridHtml;
+        private _tblWeb: TabelaWeb;
 
-        public static get i(): PagConsulta
+        private get divCadastro(): Div
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -29,12 +34,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (PagConsulta._i != null)
+                if (this._divCadastro != null)
                 {
-                    return PagConsulta._i;
+                    return this._divCadastro;
                 }
 
-                PagConsulta._i = new PagConsulta();
+                this._divCadastro = new Div("divCadastro");
             }
             catch (ex)
             {
@@ -45,13 +50,8 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
 
-            return PagConsulta._i;
+            return this._divCadastro;
         }
-
-        private _divGrid: Div;
-        private _pnlAcaoConsulta: PainelAcaoConsulta;
-        private _tagGridHtml: GridHtml;
-        private _tblWeb: TabelaWeb;
 
         private get divGrid(): Div
         {
@@ -80,6 +80,16 @@ module NetZ_Web_TypeScript
             return this._divGrid;
         }
 
+        private get jnlCadastro(): JnlCadastro
+        {
+            return this._jnlCadastro;
+        }
+
+        private set jnlCadastro(jnlCadastro: JnlCadastro)
+        {
+            this._jnlCadastro = jnlCadastro;
+        }
+
         private get pnlAcaoConsulta(): PainelAcaoConsulta
         {
             // #region Variáveis
@@ -93,7 +103,7 @@ module NetZ_Web_TypeScript
                     return this._pnlAcaoConsulta;
                 }
 
-                this._pnlAcaoConsulta = new PainelAcaoConsulta("pnlAcaoConsulta");
+                this._pnlAcaoConsulta = new PainelAcaoConsulta(this);
             }
             catch (ex)
             {
@@ -147,11 +157,56 @@ module NetZ_Web_TypeScript
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor()
+        {
+            super("jnlConsulta");
+        }
+
         // #endregion Construtores
 
         // #region Métodos
 
-        public adicionar(): void
+        public abrirCadastro(): void
+        {
+            // #region Variáveis
+
+            var urlConsulta: string;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.divCadastro.esconder();
+
+                if (this.tblWeb == null)
+                {
+                    return;
+                }
+
+                if (Utils.getBooStrVazia(this.tblWeb.strNome))
+                {
+                    return;
+                }
+
+                urlConsulta = "/cadastro?tblWeb=_tbl_web_nome";
+
+                urlConsulta = urlConsulta.replace("_tbl_web_nome", this.tblWeb.strNome);
+
+                ServerHttp.i.importarHtml(urlConsulta, this.divCadastro, () => { this.inicializarCadastro() });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private adicionarResposta(): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -159,12 +214,6 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this.tblWeb == null)
-                {
-                    return;
-                }
-
-                //DivCadastro.i.abrirCadastro(this.tblWeb); // TODO: Abrir tela de cadastros.
             }
             catch (ex)
             {
@@ -210,24 +259,14 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this.tagBody == null)
-                {
-                    return null;
-                }
-
-                if (this.tagBody.jq == null)
-                {
-                    return null;
-                }
-
-                if (Utils.getBooStrVazia(this.tagBody.jq.attr("tbl_web_nome")))
+                if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
                 {
                     return null;
                 }
 
                 // TODO: Carregar os filtros para a pesquisa.
 
-                return new TabelaWeb(this.tagBody.jq.attr("tbl_web_nome"));
+                return new TabelaWeb(this.jq.attr("tbl_web_nome"));
             }
             catch (ex)
             {
@@ -259,17 +298,18 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private inicializarGridHtml(): void
+        private inicializarCadastro(): void
         {
             // #region Variáveis
+
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.tagGridHtml = new GridHtml("tagGridHtml_consulta");
+                this.divCadastro.mostrar();
 
-                this.tagGridHtml.iniciar();
+                // TODO: Parei aqui.
             }
             catch (ex)
             {
@@ -281,7 +321,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public iniciarImport(): void
+        private inicializarGridHtml(): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -289,7 +329,9 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                AppWeb.i.addEvtOnPaginaImportadaListener(this);
+                this.tagGridHtml = new GridHtml("tagGridHtml_consulta");
+
+                this.tagGridHtml.iniciar();
             }
             catch (ex)
             {
@@ -478,42 +520,10 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public onPaginaImportada(urlImport: string): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (Utils.getBooStrVazia(urlImport))
-                {
-                    return;
-                }
-
-                if (urlImport.indexOf("consulta") < 0)
-                {
-                    return;
-                }
-
-                this.iniciar();
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
         // #endregion Eventos
     }
 
     // #region Inicialização
-
-    //$(document).ready(() => { PagConsulta.i.iniciarImport(); });
 
     // #endregion Inicialização
 }

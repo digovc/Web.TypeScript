@@ -27,12 +27,12 @@
     <TypeScriptCompile Include="Boot.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
-    <TypeScriptCompile Include="html\pagina\cadastro\PagCadastro.ts" />
-    <TypeScriptCompile Include="html\pagina\consulta\PagConsulta.ts" />
-    <TypeScriptCompile Include="html\pagina\consulta\PainelAcaoConsulta.ts" />
+    <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
+    <TypeScriptCompile Include="html\componente\janela\consulta\PainelAcaoConsulta.ts" />
+    <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
+    <TypeScriptCompile Include="OnCloseListener.ts" />
     <TypeScriptCompile Include="OnLeaveListener.ts" />
     <TypeScriptCompile Include="OnEnterListener.ts" />
-    <TypeScriptCompile Include="OnPaginaImportadaListener.ts" />
     <TypeScriptCompile Include="OnValorAlteradoArg.ts" />
     <TypeScriptCompile Include="OnValorAlteradoListener.ts" />
     <TypeScriptCompile Include="html\ComboBox.ts" />
@@ -65,8 +65,7 @@
     <TypeScriptCompile Include="html\componente\form\FormHtml.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridHtml.ts" />
     <TypeScriptCompile Include="html\componente\janela\JanelaHtml.ts" />
-    <TypeScriptCompile Include="html\componente\janela\JnlCadastro.ts" />
-    <TypeScriptCompile Include="html\componente\janela\JnlConsulta.ts" />
+    <TypeScriptCompile Include="html\componente\janela\cadastro\JnlCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlLogin.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlMensagem.ts" />
     <TypeScriptCompile Include="html\componente\Mensagem.ts" />
@@ -80,12 +79,11 @@
     <TypeScriptCompile Include="html\Div.ts" />
     <TypeScriptCompile Include="html\Imagem.ts" />
     <TypeScriptCompile Include="html\Input.ts" />
-    <TypeScriptCompile Include="html\PaginaHtml.ts" />
+    <TypeScriptCompile Include="html\pagina\PaginaHtml.ts" />
     <TypeScriptCompile Include="html\Tag.ts" />
     <TypeScriptCompile Include="lib\jquery.d.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
     <TypeScriptCompile Include="OnClickListener.ts" />
-    <TypeScriptCompile Include="OnStartListener.ts" />
     <TypeScriptCompile Include="persistencia\ColunaWeb.ts" />
     <TypeScriptCompile Include="persistencia\FiltroWeb.ts" />
     <TypeScriptCompile Include="persistencia\TabelaWeb.ts" />
@@ -95,6 +93,7 @@
     <TypeScriptCompile Include="server\ServerAjax.ts" />
     <TypeScriptCompile Include="server\ServerAjaxDb.ts" />
     <TypeScriptCompile Include="server\ServerBase.ts" />
+    <TypeScriptCompile Include="server\ServerHttp.ts" />
     <TypeScriptCompile Include="server\SolicitacaoAjax.ts" />
     <TypeScriptCompile Include="server\SolicitacaoAjaxDb.ts" />
     <TypeScriptCompile Include="TestSnippet.ts" />
@@ -143,7 +142,7 @@
   </ProjectExtensions>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>

@@ -95,11 +95,9 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        protected inicializar(): void
+        protected getIntPort(): number
         {
-            super.inicializar();
-
-            this.intPort = 8081;
+            return 8081;
         }
 
         // #endregion Métodos

@@ -1,14 +1,13 @@
-﻿/// <reference path="../../../persistencia/TabelaWeb.ts"/>
-/// <reference path="../../../server/OnAjaxErroArg.ts"/>
-/// <reference path="../../../server/OnAjaxListener.ts"/>
-/// <reference path="../../../server/OnAjaxSucessoArg.ts"/>
-/// <reference path="../../../server/ServerAjaxDb.ts"/>
-/// <reference path="../../../server/SolicitacaoAjaxDb.ts"/>
-/// <reference path="../campo/CampoAlfanumerico.ts"/>
-/// <reference path="../campo/CampoHtml.ts"/>
-/// <reference path="../campo/CampoNumerico.ts"/>
-/// <reference path="../form/DivComando.ts"/>
-/// <reference path="JanelaHtml.ts"/>
+﻿/// <reference path="../../../../server/OnAjaxErroArg.ts"/>
+/// <reference path="../../../../server/OnAjaxListener.ts"/>
+/// <reference path="../../../../server/OnAjaxSucessoArg.ts"/>
+/// <reference path="../../../../server/ServerAjaxDb.ts"/>
+/// <reference path="../../../../server/SolicitacaoAjaxDb.ts"/>
+/// <reference path="../../campo/CampoAlfanumerico.ts"/>
+/// <reference path="../../campo/CampoHtml.ts"/>
+/// <reference path="../../campo/CampoNumerico.ts"/>
+/// <reference path="../../form/DivComando.ts"/>
+/// <reference path="../JanelaHtml.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -117,28 +116,6 @@ module NetZ_Web_TypeScript
         // #endregion Construtores
 
         // #region Métodos
-
-        protected fechar(): void
-        {
-            super.fechar();
-
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                // TODO: Fechar o cadastro.
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
         private getArrCmp(): Array<CampoHtml>
         {

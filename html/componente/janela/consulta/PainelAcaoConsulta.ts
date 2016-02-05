@@ -1,7 +1,8 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../../componente/botao/mini/BotaoAdicionarMini.ts"/>
-/// <reference path="../../componente/botao/mini/BotaoAlterarMini.ts"/>
-/// <reference path="../../componente/painel/PainelAcao.ts"/>
+﻿/// <reference path="../../botao/mini/BotaoAdicionarMini.ts"/>
+/// <reference path="../../botao/mini/BotaoAlterarMini.ts"/>
+/// <reference path="../../botao/mini/BotaoAdicionarMini.ts"/>
+/// <reference path="../../../../OnClickListener.ts"/>
+/// <reference path="../../painel/PainelAcao.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -20,6 +21,7 @@ module NetZ_Web_TypeScript
 
         private _btnAdicionar: BotaoAdicionarMini;
         private _btnAlterar: BotaoAlterarMini;
+        private _jnlConsulta: JnlConsulta;
 
         private get btnAdicionar(): BotaoAdicionarMini
         {
@@ -75,9 +77,42 @@ module NetZ_Web_TypeScript
             return this._btnAlterar;
         }
 
+        private get jnlConsulta(): JnlConsulta
+        {
+            return this._jnlConsulta;
+        }
+
+        private set jnlConsulta(jnlConsulta: JnlConsulta)
+        {
+            this._jnlConsulta = jnlConsulta;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor(jnlConsulta: JnlConsulta)
+        {
+            super("pnlAcaoConsulta");
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.jnlConsulta = jnlConsulta;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         // #endregion Construtores
 
         // #region Métodos
@@ -121,11 +156,11 @@ module NetZ_Web_TypeScript
                 switch (objSender)
                 {
                     case this.btnAcaoPrincipal:
-                        PagConsulta.i.pesquisar();
+                        this.jnlConsulta.pesquisar();
                         return;
 
                     case this.btnAdicionar:
-                        PagConsulta.i.adicionar();
+                        this.jnlConsulta.abrirCadastro();
                         return;
                 }
             }

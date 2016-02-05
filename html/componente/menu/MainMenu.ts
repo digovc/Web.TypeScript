@@ -1,7 +1,9 @@
-﻿/// <reference path="../../../OnEnterListener.ts"/>
+﻿/// <reference path="../../pagina/PagPrincipal.ts"/>
+/// <reference path="../../pagina/PagPrincipal.ts"/>
+/// <reference path="../../../OnEnterListener.ts"/>
 /// <reference path="../../../OnLeaveListener.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
-/// <reference path="../../PaginaHtml.ts"/>
+/// <reference path="../../pagina/PaginaHtml.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 
 module NetZ_Web_TypeScript
@@ -21,7 +23,7 @@ module NetZ_Web_TypeScript
 
         private _arrMmiFilho: Array<MainMenuItem>;
         private _divGaveta: Div;
-        private _pag: PaginaHtml;
+        private _pag: PagPrincipal;
         private _txtPesquisa: Input;
 
         protected get arrMmiFilho(): Array<MainMenuItem>
@@ -78,12 +80,12 @@ module NetZ_Web_TypeScript
             return this._divGaveta;
         }
 
-        public get pag(): PaginaHtml
+        public get pag(): PagPrincipal
         {
             return this._pag;
         }
 
-        public set pag(pag: PaginaHtml)
+        public set pag(pag: PagPrincipal)
         {
             this._pag = pag;
         }
