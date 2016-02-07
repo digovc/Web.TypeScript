@@ -64,7 +64,44 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public importarHtml(urlImport: string, tabContainer: Tag, fncCompute: any): void
+        public atualizarCssMain(): void
+        {
+            // #region Variáveis
+
+            var tagLink: HTMLLinkElement;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                tagLink = <HTMLLinkElement>document.getElementById("cssMain");
+
+                if (tagLink == null)
+                {
+                    return;
+                }
+
+                if (tagLink.href.indexOf("?x") == -1)
+                {
+                    tagLink.href = tagLink.href + "?x";
+                }
+                else
+                {
+                    tagLink.href = tagLink.href + "x";
+                }
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public importarHtml(urlImport: string, tabContainer: Tag, fncComplete: any): void
         {
             // #region Variáveis
 
@@ -90,7 +127,32 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                tabContainer.jq.load(urlImport, null, fncCompute);
+                tabContainer.jq.load(urlImport, null, () => this.importarHtmlComplete(fncComplete));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private importarHtmlComplete(fncComplete: Function): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.atualizarCssMain();
+
+                if (fncComplete != null)
+                {
+                    fncComplete();
+                }
             }
             catch (ex)
             {

@@ -52,6 +52,26 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
+        protected atualizarCssMain(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                ServerHttp.i.atualizarCssMain();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         protected getTagBody(): Tag
         {
             // #region Variáveis

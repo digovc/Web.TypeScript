@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../../pagina/PaginaHtml.ts"/>
 /// <reference path="../botao/mini/BotaoFecharMini.ts"/>
 
 module NetZ_Web_TypeScript
@@ -17,6 +18,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _btnFechar: BotaoFecharMini;
+        private _pag: PaginaHtml;
 
         private get btnFechar(): BotaoFecharMini
         {
@@ -45,9 +47,41 @@ module NetZ_Web_TypeScript
             return this._btnFechar;
         }
 
+        protected get pag(): PaginaHtml
+        {
+            return this._pag;
+        }
+
+        protected set pag(pag: PaginaHtml)
+        {
+            this._pag = pag;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor(strId: string, pag: PaginaHtml)
+        {
+            super(strId);
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.pag = pag;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         // #endregion Construtores
 

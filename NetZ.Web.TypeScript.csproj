@@ -29,6 +29,7 @@
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelAcaoConsulta.ts" />
+    <TypeScriptCompile Include="html\DivArea.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
     <TypeScriptCompile Include="OnCloseListener.ts" />
     <TypeScriptCompile Include="OnLeaveListener.ts" />

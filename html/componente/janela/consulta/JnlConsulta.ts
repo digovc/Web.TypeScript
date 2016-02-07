@@ -1,6 +1,7 @@
-﻿/// <reference path="../../grid/GridHtml.ts"/>
+﻿/// <reference path="../../../../server/OnAjaxListener.ts"/>
 /// <reference path="../../../Div.ts"/>
-/// <reference path="../../../../server/OnAjaxListener.ts"/>
+/// <reference path="../../../pagina/PagPrincipal.ts"/>
+/// <reference path="../../grid/GridHtml.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
 /// <reference path="PainelAcaoConsulta.ts"/>
 
@@ -19,39 +20,12 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _divCadastro: Div;
         private _divGrid: Div;
         private _jnlCadastro: JnlCadastro;
+        private _pagPrincipal: PagPrincipal;
         private _pnlAcaoConsulta: PainelAcaoConsulta;
         private _tagGridHtml: GridHtml;
         private _tblWeb: TabelaWeb;
-
-        private get divCadastro(): Div
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this._divCadastro != null)
-                {
-                    return this._divCadastro;
-                }
-
-                this._divCadastro = new Div("divCadastro");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._divCadastro;
-        }
 
         private get divGrid(): Div
         {
@@ -83,6 +57,16 @@ module NetZ_Web_TypeScript
         private get jnlCadastro(): JnlCadastro
         {
             return this._jnlCadastro;
+        }
+
+        private get pagPrincipal(): PagPrincipal
+        {
+            return this._pagPrincipal;
+        }
+
+        private set pagPrincipal(pagPrincipal: PagPrincipal)
+        {
+            this._pagPrincipal = pagPrincipal;
         }
 
         private set jnlCadastro(jnlCadastro: JnlCadastro)
@@ -158,9 +142,26 @@ module NetZ_Web_TypeScript
 
         // #region Construtores
 
-        constructor()
+        constructor(pagPrincipal: PagPrincipal)
         {
-            super("jnlConsulta");
+            super("jnlConsulta", pagPrincipal);
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.pagPrincipal = pagPrincipal;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
         }
 
         // #endregion Construtores
@@ -171,30 +172,12 @@ module NetZ_Web_TypeScript
         {
             // #region Variáveis
 
-            var urlConsulta: string;
-
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.divCadastro.esconder();
-
-                if (this.tblWeb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(this.tblWeb.strNome))
-                {
-                    return;
-                }
-
-                urlConsulta = "/cadastro?tblWeb=_tbl_web_nome";
-
-                urlConsulta = urlConsulta.replace("_tbl_web_nome", this.tblWeb.strNome);
-
-                ServerHttp.i.importarHtml(urlConsulta, this.divCadastro, () => { this.inicializarCadastro() });
+                this.pagPrincipal.abrirCadastro(this.tblWeb);
             }
             catch (ex)
             {
@@ -287,29 +270,6 @@ module NetZ_Web_TypeScript
             try
             {
                 this.pnlAcaoConsulta.iniciar();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        private inicializarCadastro(): void
-        {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.divCadastro.mostrar();
-
-                // TODO: Parei aqui.
             }
             catch (ex)
             {
@@ -427,6 +387,8 @@ module NetZ_Web_TypeScript
                 {
                     return;
                 }
+
+                ServerHttp.i.atualizarCssMain();
 
                 this.divGrid.jq.html(tblWeb.tagGrid);
 

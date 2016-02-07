@@ -18,6 +18,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _cln: ColunaWeb;
+        private _divTitulo: Div;
         private _strCritica: string;
         private _tagInput: Input;
 
@@ -48,6 +49,33 @@ module NetZ_Web_TypeScript
             return this._cln;
         }
 
+        private get divTitulo(): Div
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._divTitulo != null)
+                {
+                    return this._divTitulo;
+                }
+
+                this._divTitulo = new Div(this.strId + "_divTitulo");
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._divTitulo;
+        }
+
         public get strCritica(): string
         {
             return this._strCritica;
@@ -74,7 +102,6 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
         }
-
 
         public get tagInput(): Input
         {
@@ -120,6 +147,78 @@ module NetZ_Web_TypeScript
             {
                 // TODO: Criar uma forma melhor para mostrar ao usuário que este campo está com crítica.
                 this.strTitle = this.strCritica;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private atualizarStrValor(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.atualizarStrValorCln();
+                this.atualizarStrValorDivTitulo();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private atualizarStrValorCln(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.cln == null)
+                {
+                    return;
+                }
+
+                this.cln.strValor = this.tagInput.strValor;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private atualizarStrValorDivTitulo(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (Utils.getBooStrVazia(this.tagInput.strValor))
+                {
+                    this.divTitulo.esconder();
+                    return;
+                }
+
+                this.divTitulo.mostrar();
             }
             catch (ex)
             {
@@ -275,12 +374,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this.cln == null)
-                {
-                    return;
-                }
-
-                this.cln.strValor = arg.strValor;
+                this.atualizarStrValor();
             }
             catch (ex)
             {

@@ -1,4 +1,4 @@
-﻿/// <reference path="Tag.ts"/>
+﻿/// <reference path="Div.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -8,7 +8,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class Div extends Tag
+    export class DivArea extends Div
     {
         // #region Constantes
         // #endregion Constantes
@@ -17,7 +17,6 @@ module NetZ_Web_TypeScript
         // #endregion Atributos
 
         // #region Construtores
-
         // #endregion Construtores
 
         // #region Métodos
