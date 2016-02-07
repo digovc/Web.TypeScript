@@ -101,7 +101,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public importarHtml(urlImport: string, tabContainer: Tag, fncComplete: any): void
+        public carregarHtml(urlImport: string, tabContainer: Tag, fncComplete: any): void
         {
             // #region Variáveis
 
@@ -127,7 +127,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                tabContainer.jq.load(urlImport, null, () => this.importarHtmlComplete(fncComplete));
+                tabContainer.jq.load(urlImport, null, () => this.carregarHtmlComplete(fncComplete));
             }
             catch (ex)
             {
@@ -139,7 +139,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private importarHtmlComplete(fncComplete: Function): void
+        private carregarHtmlComplete(fncComplete: Function): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -153,6 +153,38 @@ module NetZ_Web_TypeScript
                 {
                     fncComplete();
                 }
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public carregarJq(strJqClass: string): void
+        {
+            // #region Variáveis
+
+            var urlJq: string;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (Utils.getBooStrVazia(strJqClass))
+                {
+                    return;
+                }
+
+                urlJq = "/res?method=getScript&class=_js_class";
+
+                urlJq = urlJq.replace("_js_class", strJqClass);
+
+                $.getScript(urlJq);
             }
             catch (ex)
             {

@@ -144,7 +144,7 @@ module NetZ_Web_TypeScript
 
         constructor(pagPrincipal: PagPrincipal)
         {
-            super("jnlConsulta", pagPrincipal);
+            super("JnlConsulta", pagPrincipal);
 
             // #region Variáveis
             // #endregion Variáveis

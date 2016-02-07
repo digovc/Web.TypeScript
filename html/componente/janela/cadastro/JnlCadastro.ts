@@ -27,6 +27,7 @@ module NetZ_Web_TypeScript
 
         private _arrCmp: Array<CampoHtml>;
         private _divComando: DivComando;
+        private _pagPrincipal: PagPrincipal;
         private _tblWeb: TabelaWeb;
 
         private get arrCmp(): Array<CampoHtml>
@@ -83,6 +84,33 @@ module NetZ_Web_TypeScript
             return this._divComando;
         }
 
+        private get pagPrincipal(): PagPrincipal
+        {
+            return this._pagPrincipal;
+        }
+
+        private set pagPrincipal(pagPrincipal: PagPrincipal)
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._pagPrincipal = pagPrincipal;
+
+                this.atualizarPagPrincipal();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         private get tblWeb(): TabelaWeb
         {
             // #region Variáveis
@@ -113,9 +141,57 @@ module NetZ_Web_TypeScript
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor(strId: string, pagPrincipal: PagPrincipal)
+        {
+            super(strId, pagPrincipal);
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.pagPrincipal = pagPrincipal;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         // #endregion Construtores
 
         // #region Métodos
+
+        private atualizarPagPrincipal(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.pagPrincipal == null)
+                {
+                    return;
+                }
+
+                this.pagPrincipal.jnlCadastro = this;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         private getArrCmp(): Array<CampoHtml>
         {
@@ -548,6 +624,29 @@ module NetZ_Web_TypeScript
                 }
 
                 cmp.strCritica = clnWeb.strCritica;
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                window.alert("JS cadastro inicializado.");
+                this.addEvtOnCloseListener(this.pagPrincipal);
             }
             catch (ex)
             {

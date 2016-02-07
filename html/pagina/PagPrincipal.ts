@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../OnCloseListener.ts"/>
 /// <reference path="../../persistencia/TabelaWeb.ts"/>
 /// <reference path="../../server/ServerHttp.ts"/>
+/// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
 /// <reference path="../DivArea.ts"/>
 /// <reference path="PaginaHtml.ts"/>
@@ -22,6 +23,7 @@ module NetZ_Web_TypeScript
 
         private _divCadastro: DivArea;
         private _divConsulta: DivArea;
+        private _jnlCadastro: JnlCadastro;
         private _jnlConsulta: JnlConsulta;
 
         private get divCadastro(): DivArea
@@ -78,6 +80,16 @@ module NetZ_Web_TypeScript
             return this._divConsulta;
         }
 
+        public get jnlCadastro(): JnlCadastro
+        {
+            return this._jnlCadastro;
+        }
+
+        public set jnlCadastro(jnlCadastro: JnlCadastro)
+        {
+            this._jnlCadastro = jnlCadastro;
+        }
+
         private get jnlConsulta(): JnlConsulta
         {
             return this._jnlConsulta;
@@ -122,7 +134,7 @@ module NetZ_Web_TypeScript
 
                 urlConsulta = urlConsulta.replace("_tbl_web_nome", tblWeb.strNome);
 
-                ServerHttp.i.importarHtml(urlConsulta, this.divCadastro, () => { this.inicializarCadastro() });
+                ServerHttp.i.carregarHtml(urlConsulta, this.divCadastro, () => { this.inicializarCadastro() });
             }
             catch (ex)
             {
@@ -161,7 +173,63 @@ module NetZ_Web_TypeScript
 
                 urlConsulta = urlConsulta.replace("_tbl_web_nome", tblWeb.strNome);
 
-                ServerHttp.i.importarHtml(urlConsulta, this.divConsulta, () => { this.inicializarConsulta() });
+                ServerHttp.i.carregarHtml(urlConsulta, this.divConsulta, () => { this.inicializarConsulta() });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private carregarJsCadastro(): void
+        {
+            // #region Variáveis
+
+            var srcJqCadastro: string;
+            var tagScriptCadastro: HTMLScriptElement;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                srcJqCadastro = this.divCadastro.jq.children().attr("js_src");
+
+                if (Utils.getBooStrVazia(srcJqCadastro))
+                {
+                    return;
+                }
+
+                tagScriptCadastro = document.createElement("script");
+
+                tagScriptCadastro.src = srcJqCadastro;
+                tagScriptCadastro.type = "text/javascript";
+
+                document.head.appendChild(tagScriptCadastro);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private fecharCadastro(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.divCadastro.esconder();
             }
             catch (ex)
             {
@@ -203,6 +271,7 @@ module NetZ_Web_TypeScript
             try
             {
                 this.divCadastro.mostrar();
+                this.carregarJsCadastro();
             }
             catch (ex)
             {
@@ -254,6 +323,10 @@ module NetZ_Web_TypeScript
             {
                 switch (objSender)
                 {
+                    case this.jnlCadastro:
+                        this.fecharCadastro();
+                        return
+
                     case this.jnlConsulta:
                         this.fecharConsulta();
                         return

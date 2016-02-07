@@ -33,7 +33,7 @@ module NetZ_Web_TypeScript
                     return this._btnFechar;
                 }
 
-                this._btnFechar = new BotaoFecharMini("btnFechar");
+                this._btnFechar = new BotaoFecharMini(this.strId + "_btnFechar");
             }
             catch (ex)
             {
