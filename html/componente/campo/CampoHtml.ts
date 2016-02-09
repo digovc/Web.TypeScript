@@ -214,11 +214,11 @@ module NetZ_Web_TypeScript
             {
                 if (Utils.getBooStrVazia(this.tagInput.strValor))
                 {
-                    this.divTitulo.esconder();
+                    this.divTitulo.jq.animate({ opacity: 0 }, 200);
                     return;
                 }
 
-                this.divTitulo.mostrar();
+                this.divTitulo.jq.animate({ opacity: 1 }, 200);
             }
             catch (ex)
             {
