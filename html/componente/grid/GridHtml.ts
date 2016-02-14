@@ -120,7 +120,6 @@ module NetZ_Web_TypeScript
             try
             {
                 this.inicializarCabecalhoFixo();
-                window.alert("Grid inicializado.");
             }
             catch (ex)
             {

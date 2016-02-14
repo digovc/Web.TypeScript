@@ -645,7 +645,6 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                window.alert("JS cadastro inicializado.");
                 this.addEvtOnCloseListener(this.pagPrincipal);
             }
             catch (ex)
