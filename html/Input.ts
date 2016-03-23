@@ -569,7 +569,7 @@ module NetZ_Web_TypeScript
 
                 if (this.arrEvtOnLeaveListener.length == 0)
                 {
-                    this.jq.focusout(() => this.dispararEvtOnLeaveListener());
+                    this.jq.focusout((arg) => this.dispararEvtOnLeaveListener(arg));
                 }
 
                 this.arrEvtOnLeaveListener.push(evtOnLeaveListener);
@@ -614,7 +614,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private dispararEvtOnLeaveListener(): void
+        private dispararEvtOnLeaveListener(arg: JQueryEventObject): void
         {
             // #region Variáveis
             // #endregion Variáveis

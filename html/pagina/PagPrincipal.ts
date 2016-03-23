@@ -107,7 +107,7 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public abrirCadastro(tblWeb: TabelaWeb): void
+        public abrirCadastro(tblWeb: TabelaWeb, intId: number): void
         {
             // #region Variáveis
 
@@ -130,9 +130,10 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                urlConsulta = "/cadastro?tblWeb=_tbl_web_nome";
+                urlConsulta = "/cadastro?tbl_web=_tbl_web_nome&int_id=_registro_id";
 
                 urlConsulta = urlConsulta.replace("_tbl_web_nome", tblWeb.strNome);
+                urlConsulta = urlConsulta.replace("_registro_id", intId.toString());
 
                 ServerHttp.i.carregarHtml(urlConsulta, this.divCadastro, () => { this.inicializarCadastro() });
             }

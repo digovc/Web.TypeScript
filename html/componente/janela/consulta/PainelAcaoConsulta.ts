@@ -160,7 +160,7 @@ module NetZ_Web_TypeScript
                         return;
 
                     case this.btnAdicionar:
-                        this.jnlConsulta.abrirCadastro();
+                        this.jnlConsulta.abrirCadastro(0);
                         return;
                 }
             }

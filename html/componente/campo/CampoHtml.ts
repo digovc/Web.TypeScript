@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../OnValorAlteradoListener.ts"/>
-/// <reference path="../../Input.ts"/>
 /// <reference path="../../../persistencia/ColunaWeb.ts"/>
+/// <reference path="../../Input.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -308,6 +308,8 @@ module NetZ_Web_TypeScript
             try
             {
                 this.tagInput.iniciar();
+
+                this.atualizarStrValor();
             }
             catch (ex)
             {

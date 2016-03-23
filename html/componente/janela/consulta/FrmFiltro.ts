@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../botao/mini/BotaoAdicionarMini.ts"/>
+/// <reference path="../../campo/CampoComboBox.ts"/>
 /// <reference path="../../form/FormHtml.ts"/>
 /// <reference path="PainelFiltro.ts"/>
 

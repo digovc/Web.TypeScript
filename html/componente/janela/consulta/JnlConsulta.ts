@@ -2,6 +2,7 @@
 /// <reference path="../../../Div.ts"/>
 /// <reference path="../../../pagina/PagPrincipal.ts"/>
 /// <reference path="../../grid/GridHtml.ts"/>
+/// <reference path="../../grid/OnRowDoubleClickListener.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
 /// <reference path="PainelAcaoConsulta.ts"/>
 /// <reference path="PainelFiltro.ts"/>
@@ -14,7 +15,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlConsulta extends JanelaHtml implements OnAjaxListener
+    export class JnlConsulta extends JanelaHtml implements OnAjaxListener, OnRowDoubleClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -197,7 +198,7 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public abrirCadastro(): void
+        public abrirCadastro(intId: number): void
         {
             // #region Variáveis
 
@@ -206,7 +207,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.pagPrincipal.abrirCadastro(this.tblWeb);
+                this.pagPrincipal.abrirCadastro(this.tblWeb, intId);
             }
             catch (ex)
             {
@@ -247,6 +248,36 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private alterar(tagGridRow: GridRow): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (tagGridRow == null)
+                {
+                    return;
+                }
+
+                if (tagGridRow.intId < 1)
+                {
+                    return;
+                }
+
+                this.abrirCadastro(tagGridRow.intId);
             }
             catch (ex)
             {
@@ -343,6 +374,8 @@ module NetZ_Web_TypeScript
                 this.tagGridHtml = new GridHtml("tagGridHtml_consulta");
 
                 this.tagGridHtml.iniciar();
+
+                this.tagGridHtml.addEvtOnRowDoubleClickListener(this);
             }
             catch (ex)
             {
@@ -522,6 +555,26 @@ module NetZ_Web_TypeScript
                         this.pesquisarResposta(arg.objSolicitacaoAjaxDb);
                         return;
                 }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onRowDoubleClick(objSender: Object, tagGridRow: GridRow): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.alterar(tagGridRow);
             }
             catch (ex)
             {

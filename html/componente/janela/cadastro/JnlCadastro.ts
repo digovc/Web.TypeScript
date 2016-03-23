@@ -347,6 +347,7 @@ module NetZ_Web_TypeScript
             try
             {
                 this.inicializarCampos();
+
                 this.divComando.iniciar();
             }
             catch (ex)
@@ -462,7 +463,7 @@ module NetZ_Web_TypeScript
 
                 if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.jsn))
                 {
-                    return;
+                    return; // TODO: Verificar a necessidade de validar o porque do JSON voltar vazio.
                 }
 
                 tblWeb = new TabelaWeb(this.tblWeb.strNome);
@@ -500,10 +501,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.tblWeb == null)
-                {
-                    return;
-                }
+                window.alert("Registro salvo com sucesso."); // TODO: Substituir por uma notificação.
             }
             catch (ex)
             {

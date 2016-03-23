@@ -1,4 +1,7 @@
-﻿/// <reference path="../lib/jquery.d.ts"/>
+﻿/// <reference path="../OnDoubleClickListener.ts"/>
+/// <reference path="../OnMouseOverListener.ts"/>
+/// <reference path="../OnMouseLeaveListener.ts"/>
+/// <reference path="../lib/jquery.d.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -657,6 +660,375 @@ module NetZ_Web_TypeScript
         }
 
         // #endregion Evento OnClickListener
+
+        // #region Evento OnDoubleClickListener
+
+        private _arrEvtOnDoubleClickListener: Array<OnDoubleClickListener>;
+
+        private get arrEvtOnDoubleClickListener(): Array<OnDoubleClickListener>
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._arrEvtOnDoubleClickListener != null)
+                {
+                    return this._arrEvtOnDoubleClickListener;
+                }
+
+                this._arrEvtOnDoubleClickListener = new Array<OnDoubleClickListener>();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._arrEvtOnDoubleClickListener;
+        }
+
+        public addEvtOnDoubleClickListener(evtOnDoubleClickListener: OnDoubleClickListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnDoubleClickListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener) > 0)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnClickListener.length == 0)
+                {
+                    this.jq.dblclick((arg) => this.dispararEvtOnDoubleClickListener(arg));
+                }
+
+                this.arrEvtOnDoubleClickListener.push(evtOnDoubleClickListener);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private dispararEvtOnDoubleClickListener(arg: JQueryEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrEvtOnDoubleClickListener.length == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnDoubleClickListener.forEach((value) => { value.onDoubleClick(this, arg); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public removerEvtOnDoubleClickListener(evtOnDoubleClickListener: OnDoubleClickListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnDoubleClickListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener) == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnDoubleClickListener.splice(this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        // #endregion Evento OnDoubleClickListener
+
+        // #region Evento OnMouseLeaveListener
+
+        private _arrEvtOnMouseLeaveListener: Array<OnMouseLeaveListener>;
+
+        private get arrEvtOnMouseLeaveListener(): Array<OnMouseLeaveListener>
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._arrEvtOnMouseLeaveListener != null)
+                {
+                    return this._arrEvtOnMouseLeaveListener;
+                }
+
+                this._arrEvtOnMouseLeaveListener = new Array<OnMouseLeaveListener>();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._arrEvtOnMouseLeaveListener;
+        }
+
+        public addEvtOnMouseLeaveListener(evtOnMouseLeaveListener: OnMouseLeaveListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnMouseLeaveListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener) > 0)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnMouseLeaveListener.length == 0)
+                {
+                    this.jq.mouseleave((arg) => this.dispararEvtOnMouseLeaveListener(arg));
+                }
+
+                this.arrEvtOnMouseLeaveListener.push(evtOnMouseLeaveListener);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private dispararEvtOnMouseLeaveListener(arg: JQueryMouseEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrEvtOnMouseLeaveListener.length == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnMouseLeaveListener.forEach((value) => { value.onMouseLeave(this, arg); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public removerEvtOnMouseLeaveListener(evtOnMouseLeaveListener: OnMouseLeaveListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnMouseLeaveListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener) == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnMouseLeaveListener.splice(this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        // #endregion Evento OnMouseLeaveListener
+
+        // #region Evento OnMouseOverListener
+
+        private _arrEvtOnMouseOverListener: Array<OnMouseOverListener>;
+
+        private get arrEvtOnMouseOverListener(): Array<OnMouseOverListener>
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._arrEvtOnMouseOverListener != null)
+                {
+                    return this._arrEvtOnMouseOverListener;
+                }
+
+                this._arrEvtOnMouseOverListener = new Array<OnMouseOverListener>();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._arrEvtOnMouseOverListener;
+        }
+
+        public addEvtOnMouseOverListener(evtOnMouseOverListener: OnMouseOverListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnMouseOverListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener) > 0)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnMouseOverListener.length == 0)
+                {
+                    this.jq.mouseover((arg) => this.dispararEvtOnMouseOverListener(arg));
+                }
+
+                this.arrEvtOnMouseOverListener.push(evtOnMouseOverListener);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private dispararEvtOnMouseOverListener(arg: JQueryMouseEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrEvtOnMouseOverListener.length == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnMouseOverListener.forEach((value) => { value.onMouseOver(this, arg); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public removerEvtOnMouseOverListener(evtOnMouseOverListener: OnMouseOverListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnMouseOverListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener) == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnMouseOverListener.splice(this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        // #endregion Evento OnMouseOverListener
 
         // #endregion Eventos
     }
