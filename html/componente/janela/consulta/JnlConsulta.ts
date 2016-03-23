@@ -4,6 +4,7 @@
 /// <reference path="../../grid/GridHtml.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
 /// <reference path="PainelAcaoConsulta.ts"/>
+/// <reference path="PainelFiltro.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -24,6 +25,7 @@ module NetZ_Web_TypeScript
         private _jnlCadastro: JnlCadastro;
         private _pagPrincipal: PagPrincipal;
         private _pnlAcaoConsulta: PainelAcaoConsulta;
+        private _pnlFiltro: PainelFiltro;
         private _tagGridHtml: GridHtml;
         private _tblWeb: TabelaWeb;
 
@@ -99,6 +101,33 @@ module NetZ_Web_TypeScript
             // #endregion Ações
 
             return this._pnlAcaoConsulta;
+        }
+
+        private get pnlFiltro(): PainelFiltro
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._pnlFiltro != null)
+                {
+                    return this._pnlFiltro;
+                }
+
+                this._pnlFiltro = new PainelFiltro(this);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._pnlFiltro;
         }
 
         private get tagGridHtml(): GridHtml
@@ -178,6 +207,27 @@ module NetZ_Web_TypeScript
             try
             {
                 this.pagPrincipal.abrirCadastro(this.tblWeb);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public abrirFiltroCadastro(): void
+        {
+            // #region Variáveis
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.pagPrincipal.abrirFiltroCadastro(this.tblWeb);
             }
             catch (ex)
             {
@@ -270,6 +320,7 @@ module NetZ_Web_TypeScript
             try
             {
                 this.pnlAcaoConsulta.iniciar();
+                this.pnlFiltro.iniciar();
             }
             catch (ex)
             {

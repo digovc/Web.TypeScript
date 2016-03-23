@@ -3,7 +3,7 @@
 /// <reference path="../../server/ServerHttp.ts"/>
 /// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
-/// <reference path="../DivArea.ts"/>
+/// <reference path="../Div.ts"/>
 /// <reference path="PaginaHtml.ts"/>
 
 module NetZ_Web_TypeScript
@@ -21,12 +21,12 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _divCadastro: DivArea;
-        private _divConsulta: DivArea;
+        private _divCadastro: Div;
+        private _divConsulta: Div;
         private _jnlCadastro: JnlCadastro;
         private _jnlConsulta: JnlConsulta;
 
-        private get divCadastro(): DivArea
+        private get divCadastro(): Div
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -39,7 +39,7 @@ module NetZ_Web_TypeScript
                     return this._divCadastro;
                 }
 
-                this._divCadastro = new DivArea("divCadastro");
+                this._divCadastro = new Div("divCadastro");
             }
             catch (ex)
             {
@@ -53,7 +53,7 @@ module NetZ_Web_TypeScript
             return this._divCadastro;
         }
 
-        private get divConsulta(): DivArea
+        private get divConsulta(): Div
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -66,7 +66,7 @@ module NetZ_Web_TypeScript
                     return this._divConsulta;
                 }
 
-                this._divConsulta = new DivArea("divConsulta");
+                this._divConsulta = new Div("divConsulta");
             }
             catch (ex)
             {
@@ -135,6 +135,43 @@ module NetZ_Web_TypeScript
                 urlConsulta = urlConsulta.replace("_tbl_web_nome", tblWeb.strNome);
 
                 ServerHttp.i.carregarHtml(urlConsulta, this.divCadastro, () => { this.inicializarCadastro() });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public abrirFiltroCadastro(tblWeb: TabelaWeb): void
+        {
+            // #region Variáveis
+
+            var urlConsulta: string;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.divCadastro.esconder();
+
+                if (tblWeb == null)
+                {
+                    return;
+                }
+
+                if (Utils.getBooStrVazia(tblWeb.strNome))
+                {
+                    return;
+                }
+
+                urlConsulta = "/cadastro?tblWeb=tbl_filtro";
+
+                ServerHttp.i.carregarHtml(urlConsulta, this.divCadastro, () => { this.inicializarFiltroCadastro(tblWeb) });
             }
             catch (ex)
             {
@@ -298,6 +335,28 @@ module NetZ_Web_TypeScript
                 this.jnlConsulta.addEvtOnCloseListener(this);
 
                 this.jnlConsulta.iniciar();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private inicializarFiltroCadastro(tblWeb: TabelaWeb): void
+        {
+            // #region Variáveis
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.divCadastro.mostrar();
+                this.carregarJsCadastro();
             }
             catch (ex)
             {

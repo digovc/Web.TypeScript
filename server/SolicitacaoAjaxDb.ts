@@ -8,9 +8,10 @@ module NetZ_Web_TypeScript
     // #region Enumerados
 
     export enum SolicitacaoAjaxDb_EnmMetodo
-    {
+    {        
         ADICIONAR,
         APAGAR,
+        FILTRO,
         NONE,
         PESQUISAR,
         RECUPERAR,
