@@ -23,7 +23,7 @@ module NetZ_Web_TypeScript
 
         private _arrMmiFilho: Array<MainMenuItem>;
         private _divGaveta: Div;
-        private _pag: PagPrincipal;
+        private _pagPrincipal: PagPrincipal;
         private _txtPesquisa: Input;
 
         protected get arrMmiFilho(): Array<MainMenuItem>
@@ -80,14 +80,14 @@ module NetZ_Web_TypeScript
             return this._divGaveta;
         }
 
-        public get pag(): PagPrincipal
+        public get pagPrincipal(): PagPrincipal
         {
-            return this._pag;
+            return this._pagPrincipal;
         }
 
-        public set pag(pag: PagPrincipal)
+        public set pagPrincipal(pagPrincipal: PagPrincipal)
         {
-            this._pag = pag;
+            this._pagPrincipal = pagPrincipal;
         }
 
         private get txtPesquisa(): Input
@@ -138,12 +138,12 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.pag == null)
+                if (this.pagPrincipal == null)
                 {
                     return;
                 }
 
-                this.pag.abrirConsulta(tblWeb);
+                this.pagPrincipal.abrirConsulta(tblWeb);
             }
             catch (ex)
             {

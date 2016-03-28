@@ -14,7 +14,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class PagPrincipal extends PaginaHtml implements OnCloseListener
+    export abstract class PagPrincipal extends PaginaHtml implements OnAjaxListener, OnCloseListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -107,18 +107,17 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public abrirCadastro(tblWeb: TabelaWeb, intId: number): void
+        public abrirCadastro(tblWeb: TabelaWeb): void
         {
             // #region Variáveis
 
-            var urlConsulta: string;
+            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb;
 
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.divCadastro.esconder();
 
                 if (tblWeb == null)
                 {
@@ -130,12 +129,16 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                urlConsulta = "/cadastro?tbl_web=_tbl_web_nome&int_id=_registro_id";
+                this.divCadastro.esconder();
 
-                urlConsulta = urlConsulta.replace("_tbl_web_nome", tblWeb.strNome);
-                urlConsulta = urlConsulta.replace("_registro_id", intId.toString());
+                objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-                ServerHttp.i.carregarHtml(urlConsulta, this.divCadastro, () => { this.inicializarCadastro() });
+                objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+
+                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO;
+                objSolicitacaoAjaxDb.jsn = JSON.stringify(tblWeb);
+
+                ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
             }
             catch (ex)
             {
@@ -147,32 +150,66 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public abrirFiltroCadastro(tblWeb: TabelaWeb): void
+        private abrirCadastroResposta(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
         {
             // #region Variáveis
 
-            var urlConsulta: string;
+            var tblWeb: TabelaWeb;
 
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.divCadastro.esconder();
+                if (objSolicitacaoAjaxDb == null)
+                {
+                    return;
+                }
 
+                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.jsn))
+                {
+                    return;
+                }
+
+                tblWeb = new TabelaWeb(null);
+
+                tblWeb.carregarDados(JSON.parse(objSolicitacaoAjaxDb.jsn));
+
+                this.abrirCadastroResposta2(tblWeb);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private abrirCadastroResposta2(tblWeb: TabelaWeb): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
                 if (tblWeb == null)
                 {
                     return;
                 }
 
-                if (Utils.getBooStrVazia(tblWeb.strNome))
+                if (Utils.getBooStrVazia(tblWeb.tag))
                 {
                     return;
                 }
 
-                urlConsulta = "/cadastro?tblWeb=tbl_filtro";
+                ServerHttp.i.atualizarCssMain();
 
-                ServerHttp.i.carregarHtml(urlConsulta, this.divCadastro, () => { this.inicializarFiltroCadastro(tblWeb) });
+                this.divCadastro.jq.html(tblWeb.tag);
+
+                this.inicializarCadastro();
             }
             catch (ex)
             {
@@ -188,15 +225,13 @@ module NetZ_Web_TypeScript
         {
             // #region Variáveis
 
-            var urlConsulta: string;
+            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb;
 
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.divConsulta.esconder();
-
                 if (tblWeb == null)
                 {
                     return;
@@ -207,11 +242,114 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                urlConsulta = "/consulta?tblWeb=_tbl_web_nome";
+                this.divConsulta.esconder();
 
-                urlConsulta = urlConsulta.replace("_tbl_web_nome", tblWeb.strNome);
+                objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-                ServerHttp.i.carregarHtml(urlConsulta, this.divConsulta, () => { this.inicializarConsulta() });
+                objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+
+                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CONSULTA;
+                objSolicitacaoAjaxDb.jsn = JSON.stringify(tblWeb);
+
+                ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private abrirConsultaResposta(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        {
+            // #region Variáveis
+
+            var tblWeb: TabelaWeb;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (objSolicitacaoAjaxDb == null)
+                {
+                    return;
+                }
+
+                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.jsn))
+                {
+                    return;
+                }
+
+                tblWeb = new TabelaWeb(null);
+
+                tblWeb.carregarDados(JSON.parse(objSolicitacaoAjaxDb.jsn));
+
+                this.abrirConsultaResposta2(tblWeb);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private abrirConsultaResposta2(tblWeb: TabelaWeb): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (tblWeb == null)
+                {
+                    return;
+                }
+
+                if (Utils.getBooStrVazia(tblWeb.tag))
+                {
+                    return;
+                }
+
+                ServerHttp.i.atualizarCssMain();
+
+                this.divConsulta.jq.html(tblWeb.tag);
+
+                this.inicializarConsulta();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public abrirFiltroCadastro(intFiltroId: number): void
+        {
+            // #region Variáveis
+
+            var tblWebFiltro: TabelaWeb;
+
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                tblWebFiltro = new TabelaWeb("tbl_filtro");
+
+                tblWebFiltro.intRegistroId = intFiltroId;
+
+                this.abrirCadastro(tblWebFiltro);
             }
             catch (ex)
             {
@@ -309,6 +447,7 @@ module NetZ_Web_TypeScript
             try
             {
                 this.divCadastro.mostrar();
+
                 this.carregarJsCadastro();
             }
             catch (ex)
@@ -372,6 +511,43 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
+
+        public onAjaxAntesEnviar(objSolicitacaoAjaxSender: SolicitacaoAjax): void
+        {
+        }
+
+        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxErroArg): void
+        {
+        }
+
+        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxSucessoArg): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch ((<SolicitacaoAjaxDb>objSolicitacaoAjaxSender).enmMetodo)
+                {
+                    case SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO:
+                        this.abrirCadastroResposta(arg.objSolicitacaoAjaxDb);
+                        return;
+
+                    case SolicitacaoAjaxDb_EnmMetodo.ABRIR_CONSULTA:
+                        this.abrirConsultaResposta(arg.objSolicitacaoAjaxDb);
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         public onClose(objSender: Object): void
         {

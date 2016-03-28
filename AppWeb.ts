@@ -55,6 +55,7 @@ module NetZ_Web_TypeScript
 
         private _booEmFoco: boolean = true;
         private _pag: PaginaHtml;
+        private _pagPrincipal: PagPrincipal;
         private _strSessionId: string;
 
         public get booEmFoco(): boolean
@@ -65,6 +66,16 @@ module NetZ_Web_TypeScript
         public set booEmFoco(booEmFoco: boolean)
         {
             this._booEmFoco = booEmFoco;
+        }
+
+        public get pagPrincipal(): PagPrincipal
+        {
+            return this._pagPrincipal;
+        }
+
+        public set pagPrincipal(pagPrincipal: PagPrincipal)
+        {
+            this._pagPrincipal = pagPrincipal;
         }
 
         public get pag(): PaginaHtml

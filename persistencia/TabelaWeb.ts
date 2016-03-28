@@ -15,8 +15,9 @@
 
         private _arrClnWeb: Array<ColunaWeb>;
         private _clnChavePrimaria: ColunaWeb;
+        private _intRegistroId: number;
         private _strCritica: string;
-        private _tagGrid: string;
+        private _tag: string;
 
         public get arrClnWeb(): Array<ColunaWeb>
         {
@@ -72,6 +73,16 @@
             return this._clnChavePrimaria;
         }
 
+        public get intRegistroId(): number
+        {
+            return this._intRegistroId;
+        }
+
+        public set intRegistroId(intRegistroId: number)
+        {
+            this._intRegistroId = intRegistroId;
+        }
+
         public get strCritica(): string
         {
             return this._strCritica;
@@ -82,14 +93,14 @@
             this._strCritica = strCritica;
         }
 
-        public get tagGrid(): string
+        public get tag(): string
         {
-            return this._tagGrid;
+            return this._tag;
         }
 
-        public set tagGrid(tagGrid: string)
+        public set tag(tag: string)
         {
-            this._tagGrid = tagGrid;
+            this._tag = tag;
         }
 
         // #endregion Atributos

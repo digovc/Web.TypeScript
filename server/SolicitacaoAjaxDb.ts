@@ -9,6 +9,8 @@ module NetZ_Web_TypeScript
 
     export enum SolicitacaoAjaxDb_EnmMetodo
     {        
+        ABRIR_CADASTRO,
+        ABRIR_CONSULTA,
         ADICIONAR,
         APAGAR,
         FILTRO,

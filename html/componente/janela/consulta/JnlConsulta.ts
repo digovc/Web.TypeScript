@@ -198,7 +198,7 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public abrirCadastro(intId: number): void
+        public abrirCadastro(intRegistroId: number): void
         {
             // #region Variáveis
 
@@ -207,7 +207,14 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.pagPrincipal.abrirCadastro(this.tblWeb, intId);
+                if (this.tblWeb == null)
+                {
+                    return;
+                }
+
+                this.tblWeb.intRegistroId = intRegistroId;
+
+                this.pagPrincipal.abrirCadastro(this.tblWeb);
             }
             catch (ex)
             {
@@ -228,7 +235,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.pagPrincipal.abrirFiltroCadastro(this.tblWeb);
+                this.pagPrincipal.abrirFiltroCadastro(0);
             }
             catch (ex)
             {
@@ -467,14 +474,14 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (Utils.getBooStrVazia(tblWeb.tagGrid))
+                if (Utils.getBooStrVazia(tblWeb.tag))
                 {
                     return;
                 }
 
                 ServerHttp.i.atualizarCssMain();
 
-                this.divGrid.jq.html(tblWeb.tagGrid);
+                this.divGrid.jq.html(tblWeb.tag);
 
                 this.inicializarGridHtml();
             }

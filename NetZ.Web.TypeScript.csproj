@@ -29,6 +29,7 @@
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridRow.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowDoubleClickListener.ts" />
+    <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltro.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelAcaoConsulta.ts" />

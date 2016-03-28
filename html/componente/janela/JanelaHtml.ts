@@ -17,10 +17,10 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _btnFechar: BotaoFecharMini;
+        private _divBtnFechar: Div;
         private _pag: PaginaHtml;
 
-        private get btnFechar(): BotaoFecharMini
+        private get divBtnFechar(): Div
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -28,12 +28,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this._btnFechar != null)
+                if (this._divBtnFechar != null)
                 {
-                    return this._btnFechar;
+                    return this._divBtnFechar;
                 }
 
-                this._btnFechar = new BotaoFecharMini(this.strId + "_btnFechar");
+                this._divBtnFechar = new BotaoFecharMini(this.strId + "_divBtnFechar");
             }
             catch (ex)
             {
@@ -44,7 +44,7 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
 
-            return this._btnFechar;
+            return this._divBtnFechar;
         }
 
         protected get pag(): PaginaHtml
@@ -115,7 +115,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.btnFechar.addEvtOnClickListener(this);
+                this.divBtnFechar.addEvtOnClickListener(this);
             }
             catch (ex)
             {
@@ -141,7 +141,7 @@ module NetZ_Web_TypeScript
             {
                 switch (objSender)
                 {
-                    case this.btnFechar:
+                    case this.divBtnFechar:
                         this.fechar();
                         return;
                 }
