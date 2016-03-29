@@ -1,4 +1,6 @@
-module Net_Z
+﻿/// <reference path="../BotaoHtml.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
@@ -6,15 +8,12 @@ module Net_Z
     // #region Enumerados
     // #endregion Enumerados
 
-    export class ClassNome
+    export class BotaoActionBar extends BotaoHtml
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
-
-
-
         // #endregion Atributos
 
         // #region Construtores

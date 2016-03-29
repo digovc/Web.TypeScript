@@ -1,5 +1,6 @@
 ﻿/// <reference path="erro/Erro.ts"/>
 /// <reference path="html/pagina/PaginaHtml.ts"/>
+/// <reference path="html/pagina/PagPrincipal.ts"/>
 /// <reference path="Objeto.ts"/>
 
 module NetZ_Web_TypeScript
@@ -55,7 +56,6 @@ module NetZ_Web_TypeScript
 
         private _booEmFoco: boolean = true;
         private _pag: PaginaHtml;
-        private _pagPrincipal: PagPrincipal;
         private _strSessionId: string;
 
         public get booEmFoco(): boolean
@@ -68,16 +68,6 @@ module NetZ_Web_TypeScript
             this._booEmFoco = booEmFoco;
         }
 
-        public get pagPrincipal(): PagPrincipal
-        {
-            return this._pagPrincipal;
-        }
-
-        public set pagPrincipal(pagPrincipal: PagPrincipal)
-        {
-            this._pagPrincipal = pagPrincipal;
-        }
-
         public get pag(): PaginaHtml
         {
             return this._pag;
@@ -85,34 +75,7 @@ module NetZ_Web_TypeScript
 
         public set pag(pag: PaginaHtml)
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (pag == null)
-                {
-                    return;
-                }
-
-                if (this._pag != null)
-                {
-                    return;
-                }
-
-                this._pag = pag;
-
-                this.iniciar();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._pag = pag;
         }
 
         public get strSessionId(): string

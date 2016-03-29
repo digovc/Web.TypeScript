@@ -14,19 +14,19 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class MainMenu extends ComponenteHtml implements OnEnterListener, OnLeaveListener, OnValorAlteradoListener
+    export abstract class Menu extends ComponenteHtml implements OnEnterListener, OnLeaveListener, OnValorAlteradoListener
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _arrMmiFilho: Array<MainMenuItem>;
+        private _arrMniFilho: Array<MenuItem>;
         private _divGaveta: Div;
         private _pagPrincipal: PagPrincipal;
         private _txtPesquisa: Input;
 
-        protected get arrMmiFilho(): Array<MainMenuItem>
+        protected get arrMniFilho(): Array<MenuItem>
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -34,12 +34,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this._arrMmiFilho != null)
+                if (this._arrMniFilho != null)
                 {
-                    return this._arrMmiFilho;
+                    return this._arrMniFilho;
                 }
 
-                this._arrMmiFilho = new Array<MainMenuItem>();
+                this._arrMniFilho = new Array<MenuItem>();
             }
             catch (ex)
             {
@@ -50,7 +50,7 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
 
-            return this._arrMmiFilho;
+            return this._arrMniFilho;
         }
 
         private get divGaveta(): Div
@@ -155,7 +155,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public addMmiFilho(mmiFilho: MainMenuItem): void
+        public addMniFilho(mniFilho: MenuItem): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -163,20 +163,21 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (mmiFilho == null)
+                if (mniFilho == null)
                 {
                     return;
                 }
 
-                if (this.arrMmiFilho.indexOf(mmiFilho) > -1)
+                if (this.arrMniFilho.indexOf(mniFilho) > -1)
                 {
                     return;
                 }
 
-                this.arrMmiFilho.push(mmiFilho);
+                this.arrMniFilho.push(mniFilho);
 
-                mmiFilho.mmnPai = this;
-                mmiFilho.iniciar();
+                mniFilho.mnuPai = this;
+
+                mniFilho.iniciar();
             }
             catch (ex)
             {
@@ -220,18 +221,18 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this.arrMmiFilho == null)
+                if (this.arrMniFilho == null)
                 {
                     return;
                 }
 
                 if (Utils.getBooStrVazia(strPesquisa))
                 {
-                    this.arrMmiFilho.forEach((mni) => { mni.limparPesquisa() });
+                    this.arrMniFilho.forEach((mni) => { mni.limparPesquisa() });
                     return;
                 }
 
-                this.arrMmiFilho.forEach((mni) => { mni.pesquisar(strPesquisa) });
+                this.arrMniFilho.forEach((mni) => { mni.pesquisar(strPesquisa) });
             }
             catch (ex)
             {

@@ -1,6 +1,10 @@
-﻿/// <reference path="../../../OnValorAlteradoListener.ts"/>
+﻿/// <reference path="../../../erro/Erro.ts"/>
+/// <reference path="../../../OnValorAlteradoListener.ts"/>
 /// <reference path="../../../persistencia/ColunaWeb.ts"/>
+/// <reference path="../../../Utils.ts"/>
+/// <reference path="../../Div.ts"/>
 /// <reference path="../../Input.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -247,8 +251,6 @@ module NetZ_Web_TypeScript
                 }
 
                 clnResultado = new ColunaWeb(this.jq.attr("cln_nome"));
-
-                return clnResultado;
             }
             catch (ex)
             {

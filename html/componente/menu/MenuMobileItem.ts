@@ -1,4 +1,6 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="../ComponenteHtml.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
 
@@ -7,12 +9,24 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlFiltroCadastro extends JnlCadastro
+    export class MenuMobileItem extends ComponenteHtml
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
+
+        private _mnm: MenuMobile;
+
+        public get mnm(): MenuMobile
+        {
+            return this._mnm;
+        }
+
+        public set mnm(mnm: MenuMobile)
+        {
+            this._mnm = mnm;
+        }
 
         // #endregion Atributos
 
@@ -20,16 +34,9 @@
         // #endregion Construtores
 
         // #region Métodos
-
         // #endregion Métodos
 
         // #region Eventos
         // #endregion Eventos
     }
-
-    // #region Inicialização
-
-    $(document).ready(() => { new JnlFiltroCadastro("JnlFiltroCadastro", (<PagPrincipal>AppWeb.i.pag)).iniciar(); });
-
-    // #endregion Inicialização
 }
