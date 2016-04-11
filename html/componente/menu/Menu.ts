@@ -1,10 +1,11 @@
-﻿/// <reference path="../../pagina/PagPrincipal.ts"/>
-/// <reference path="../../pagina/PagPrincipal.ts"/>
-/// <reference path="../../../OnEnterListener.ts"/>
+﻿/// <reference path="../../../OnEnterListener.ts"/>
 /// <reference path="../../../OnLeaveListener.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
 /// <reference path="../../pagina/PaginaHtml.ts"/>
+/// <reference path="../../pagina/PagPrincipal.ts"/>
+/// <reference path="../../pagina/PagPrincipal.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="MenuItem.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -21,12 +22,12 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _arrMniFilho: Array<MenuItem>;
+        private _arrMni: Array<MenuItem>;
         private _divGaveta: Div;
         private _pagPrincipal: PagPrincipal;
         private _txtPesquisa: Input;
 
-        protected get arrMniFilho(): Array<MenuItem>
+        protected get arrMni(): Array<MenuItem>
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -34,12 +35,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this._arrMniFilho != null)
+                if (this._arrMni != null)
                 {
-                    return this._arrMniFilho;
+                    return this._arrMni;
                 }
 
-                this._arrMniFilho = new Array<MenuItem>();
+                this._arrMni = new Array<MenuItem>();
             }
             catch (ex)
             {
@@ -50,7 +51,7 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
 
-            return this._arrMniFilho;
+            return this._arrMni;
         }
 
         private get divGaveta(): Div
@@ -155,7 +156,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public addMniFilho(mniFilho: MenuItem): void
+        public addMniFilho(mni: MenuItem): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -163,21 +164,21 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (mniFilho == null)
+                if (mni == null)
                 {
                     return;
                 }
 
-                if (this.arrMniFilho.indexOf(mniFilho) > -1)
+                if (this.arrMni.indexOf(mni) > -1)
                 {
                     return;
                 }
 
-                this.arrMniFilho.push(mniFilho);
+                this.arrMni.push(mni);
 
-                mniFilho.mnuPai = this;
+                mni.mnuPai = this;
 
-                mniFilho.iniciar();
+                mni.iniciar();
             }
             catch (ex)
             {
@@ -221,18 +222,18 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this.arrMniFilho == null)
+                if (this.arrMni == null)
                 {
                     return;
                 }
 
                 if (Utils.getBooStrVazia(strPesquisa))
                 {
-                    this.arrMniFilho.forEach((mni) => { mni.limparPesquisa() });
+                    this.arrMni.forEach((mni) => { mni.limparPesquisa() });
                     return;
                 }
 
-                this.arrMniFilho.forEach((mni) => { mni.pesquisar(strPesquisa) });
+                this.arrMni.forEach((mni) => { mni.pesquisar(strPesquisa) });
             }
             catch (ex)
             {

@@ -95,10 +95,10 @@ module NetZ_Web_TypeScript
         {
             super.inicializar();
 
-            this.inicializarArrMmi();
+            this.inicializarItem();
         }
 
-        protected abstract inicializarArrMmi(): void;
+        protected abstract inicializarItem(): void;
 
         // #endregion Métodos
 
