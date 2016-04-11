@@ -54,7 +54,7 @@ module NetZ_Web_TypeScript
 
         public abrir(): void
         {
-            this.jq.show();
+            this.mostrar(Tag_EnmAnimacaoTipo.FADE);
         }
 
         public addMniFilho(mmiFilho: MenuMobileItem): void
