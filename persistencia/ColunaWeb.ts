@@ -39,7 +39,6 @@ module NetZ_Web_TypeScript
             this._strValor = strValor;
         }
 
-
         // #endregion Atributos
 
         // #region Construtores

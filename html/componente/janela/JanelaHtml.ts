@@ -17,8 +17,27 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
+        private _booAtivo: boolean = true;
         private _divBtnFechar: Div;
+        private _divInativa: Div;
         private _pag: PaginaHtml;
+
+        public get booAtivo(): boolean
+        {
+            return this._booAtivo;
+        }
+
+        public set booAtivo(booAtivo: boolean)
+        {
+            if (this._booAtivo == booAtivo)
+            {
+                return;
+            }
+
+            this._booAtivo = booAtivo;
+
+            this.atualizarBooAtivo();
+        }
 
         private get divBtnFechar(): Div
         {
@@ -57,6 +76,18 @@ module NetZ_Web_TypeScript
             this._pag = pag;
         }
 
+        private get divInativa(): Div
+        {
+            if (this._divInativa != null)
+            {
+                return this._divInativa;
+            }
+
+            this._divInativa = new Div(this.strId + "_divInativa");
+
+            return this._divInativa;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -86,6 +117,11 @@ module NetZ_Web_TypeScript
         // #endregion Construtores
 
         // #region Métodos
+
+        private atualizarBooAtivo(): void
+        {
+            this.divInativa.jq.css("display", !this.booAtivo ? "block" : null);
+        }
 
         private fechar(): void
         {

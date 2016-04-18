@@ -165,7 +165,6 @@
                     if (booDireita)
                     {
                         str = str + strComplemento.substring(1, 0);
-
                     } else
                     {
                         str = strComplemento.substring(1, 0) + str;

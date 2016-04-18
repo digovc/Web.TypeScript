@@ -4,10 +4,12 @@
 /// <reference path="../../../../server/ServerAjaxDb.ts"/>
 /// <reference path="../../../../server/SolicitacaoAjaxDb.ts"/>
 /// <reference path="../../campo/CampoAlfanumerico.ts"/>
+/// <reference path="../../campo/CampoCheckBox.ts"/>
 /// <reference path="../../campo/CampoHtml.ts"/>
 /// <reference path="../../campo/CampoNumerico.ts"/>
-/// <reference path="../../form/DivComando.ts"/>
+/// <reference path="../../tab/TabHtml.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
+/// <reference path="DivComando.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -26,62 +28,54 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _arrCmp: Array<CampoHtml>;
+        private _cmpIntId: CampoNumerico;
         private _divComando: DivComando;
+        private _intRegistroId: number;
         private _pagPrincipal: PagPrincipal;
+        private _tabHtml: TabHtml;
         private _tblWeb: TabelaWeb;
 
         private get arrCmp(): Array<CampoHtml>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrCmp != null)
+            {
+                return this._arrCmp;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrCmp != null)
-                {
-                    return this._arrCmp;
-                }
-
-                this._arrCmp = this.getArrCmp();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrCmp = this.getArrCmp();
 
             return this._arrCmp;
         }
 
+        private get cmpIntId(): CampoNumerico
+        {
+            if (this._cmpIntId != null)
+            {
+                return this._cmpIntId;
+            }
+
+            this._cmpIntId = this.getCmp("int_id");
+
+            return this._cmpIntId;
+        }
+
         private get divComando(): DivComando
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._divComando != null)
+            {
+                return this._divComando;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._divComando != null)
-                {
-                    return this._divComando;
-                }
-
-                this._divComando = new DivComando("DivComando", this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._divComando = new DivComando((this.strId + "_divComando"), this);
 
             return this._divComando;
+        }
+
+        public get intRegistroId(): number
+        {
+            this._intRegistroId = this.getIntRegistroId();
+
+            return this._intRegistroId;
         }
 
         private get pagPrincipal(): PagPrincipal
@@ -91,49 +85,31 @@ module NetZ_Web_TypeScript
 
         private set pagPrincipal(pagPrincipal: PagPrincipal)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._pagPrincipal = pagPrincipal;
 
-            // #region Ações
-            try
-            {
-                this._pagPrincipal = pagPrincipal;
-
-                this.atualizarPagPrincipal();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.atualizarPagPrincipal();
         }
 
-        private get tblWeb(): TabelaWeb
+        private get tabHtml(): TabHtml
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._tabHtml != null)
+            {
+                return this._tabHtml;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._tblWeb != null)
-                {
-                    return this._tblWeb;
-                }
+            this._tabHtml = this.getTabHtml();
 
-                this._tblWeb = this.getTblWeb();
-            }
-            catch (ex)
+            return this._tabHtml;
+        }
+
+        public get tblWeb(): TabelaWeb
+        {
+            if (this._tblWeb != null)
             {
-                throw ex;
+                return this._tblWeb;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this._tblWeb = this.getTblWeb();
 
             return this._tblWeb;
         }
@@ -146,51 +122,38 @@ module NetZ_Web_TypeScript
         {
             super(strId, pagPrincipal);
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.pagPrincipal = pagPrincipal;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.pagPrincipal = pagPrincipal;
         }
 
         // #endregion Construtores
 
         // #region Métodos
 
+        public abrirCadastroFilho(tblWebFilho: TabelaWeb): void
+        {
+            if (tblWebFilho == null)
+            {
+                return;
+            }
+
+            if (this.pagPrincipal == null)
+            {
+                return;
+            }
+
+            this.pagPrincipal.abrirCadastro(tblWebFilho);
+
+            this.booAtivo = false;
+        }
+
         private atualizarPagPrincipal(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.pagPrincipal == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.pagPrincipal == null)
-                {
-                    return;
-                }
-
-                this.pagPrincipal.jnlCadastro = this;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.pagPrincipal.jnlCadastro = this;
         }
 
         private getArrCmp(): Array<CampoHtml>
@@ -221,7 +184,7 @@ module NetZ_Web_TypeScript
 
                 for (var i = 0; i < arrCmpJq.length; i++)
                 {
-                    this.getArrCmpItem(arrCmpResultado, arrCmpJq[i]);
+                    this.getArrCmp2(arrCmpResultado, arrCmpJq[i]);
                 }
 
                 return arrCmpResultado;
@@ -236,44 +199,121 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private getArrCmpItem(arrCmpResultado: Array<CampoHtml>, cmpJq: HTMLElement): void
+        private getArrCmp2(arrCmpResultado: Array<CampoHtml>, cmpJq: HTMLElement): void
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (cmpJq == null)
             {
-                if (cmpJq == null)
-                {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(cmpJq.id))
+            {
+                return;
+            }
+
+            switch ($(cmpJq).attr("clazz"))
+            {
+                case "CampoAlfanumerico":
+                    arrCmpResultado.push(new CampoAlfanumerico(cmpJq.id));
                     return;
-                }
 
-                if (Utils.getBooStrVazia(cmpJq.id))
-                {
+                case "CampoCheckBox":
+                    arrCmpResultado.push(new CampoCheckBox(cmpJq.id));
                     return;
-                }
 
-                switch ($(cmpJq).attr("clazz"))
-                {
-                    case "CampoAlfanumerico":
-                        arrCmpResultado.push(new CampoAlfanumerico(cmpJq.id));
-                        return;
+                case "CampoComboBox":
+                    arrCmpResultado.push(new CampoComboBox(cmpJq.id));
+                    return;
 
-                    case "CampoNumerico":
-                        arrCmpResultado.push(new CampoNumerico(cmpJq.id));
-                        return;
-                }
+                case "CampoNumerico":
+                    arrCmpResultado.push(new CampoNumerico(cmpJq.id));
+                    return;
             }
-            catch (ex)
+        }
+
+        /**
+         * Busca na lista de campos desta janela de cadastro o
+         * campo que represente a coluna com o nome passado por parãmetro.
+         * @param strClnNome Nome da coluna que o campo representa.
+         */
+        public getCmp(strClnNome: string): CampoHtml
+        {
+            if (Utils.getBooStrVazia(strClnNome))
             {
-                throw ex;
+                return null;
             }
-            finally
+
+            if (this.arrCmp == null)
             {
+                return null;
             }
-            // #endregion Ações
+
+            var cmpResultado: CampoHtml;
+
+            this.arrCmp.some((cmp) =>
+            {
+                cmpResultado = this.getCmp2(strClnNome, cmp);
+
+                return cmpResultado != null;
+            });
+
+            return cmpResultado;
+        }
+
+        private getCmp2(strClnNome: string, cmp: CampoHtml): CampoHtml
+        {
+            if (cmp == null)
+            {
+                return null;
+            }
+
+            if (cmp.cln == null)
+            {
+                return null;
+            }
+
+            if (Utils.getBooStrVazia(cmp.cln.strNome))
+            {
+                return null;
+            }
+
+            if (strClnNome.toLowerCase() != cmp.cln.strNome.toLowerCase())
+            {
+                return null;
+            }
+
+            return cmp;
+        }
+
+        private getIntRegistroId(): number
+        {
+            if (this.cmpIntId == null)
+            {
+                return 0;
+            }
+
+            if (this.cmpIntId.tagInput == null)
+            {
+                return 0;
+            }
+
+            return this.cmpIntId.tagInput.intValor;
+        }
+
+        private getTabHtml(): TabHtml
+        {
+            var strTabHtmlId: string = (this.strId + "_tabHtml");
+
+            if (document.getElementById(strTabHtmlId) == null)
+            {
+                return null;
+            }
+
+            var tabHtmlResultado: TabHtml = new TabHtml(strTabHtmlId);
+
+            tabHtmlResultado.jnlCadastro = this;
+
+            return tabHtmlResultado;
         }
 
         private getTblWeb(): TabelaWeb
@@ -313,101 +353,61 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private getTblWebClnWeb(tbl: TabelaWeb): void
+        private getTblWebClnWeb(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.arrCmp == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.arrCmp == null)
-                {
-                    return;
-                }
+            this.arrCmp.forEach((cmp) => { this.getTblWebClnWeb2(tblWeb, cmp); });
+        }
 
-                this.arrCmp.forEach((value) => { tbl.addClnWeb(value.cln) });
-            }
-            catch (ex)
+        private getTblWebClnWeb2(tblWeb: TabelaWeb, cmp: CampoHtml): void
+        {
+            if (cmp == null)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            if (cmp.tagInput == null)
             {
+                return;
             }
-            // #endregion Ações
+
+            if (cmp.tagInput.booVazio)
+            {
+                return;
+            }
+
+            tblWeb.addClnWeb(cmp.cln);
         }
 
         protected inicializar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this.inicializarCampos();
 
-            // #region Ações
-            try
-            {
-                this.inicializarCampos();
-
-                this.divComando.iniciar();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.divComando.iniciar();
         }
 
         private inicializarCampos(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.arrCmp == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.arrCmp == null)
-                {
-                    return;
-                }
-
-                this.arrCmp.forEach((value) => this.inicializarCampos2(value));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrCmp.forEach((value) => this.inicializarCampos2(value));
         }
 
         private inicializarCampos2(cmp: CampoHtml): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (cmp == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (cmp == null)
-                {
-                    return;
-                }
-
-                cmp.iniciar();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            cmp.iniciar();
         }
 
         public salvar(): void
@@ -484,211 +484,134 @@ module NetZ_Web_TypeScript
 
         private salvarResposta2(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (tblWeb == null)
             {
-                if (tblWeb == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (tblWeb.getBooCritica())
-                {
-                    this.salvarRespostaErro(tblWeb);
-                    return;
-                }
+            if (tblWeb.getBooCritica())
+            {
+                this.salvarResposta2Erro(tblWeb);
+                return;
+            }
 
-                window.alert("Registro salvo com sucesso."); // TODO: Substituir por uma notificação.
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.salvarResposta2Sucesso(tblWeb);
         }
 
-        private salvarRespostaErro(tblWeb: TabelaWeb): void
+        private salvarResposta2Erro(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (tblWeb == null)
             {
-                if (tblWeb == null)
-                {
-                    return;
-                }
-
-                if (!Utils.getBooStrVazia(tblWeb.strCritica))
-                {
-                    // TOD: Criar mecanismo de mensagens para o usuário e substituir esta função de "alert".
-                    window.alert(tblWeb.strCritica);
-                }
-
-                if (tblWeb.arrClnWeb == null)
-                {
-                    return;
-                }
-
-                for (var i = 0; i < tblWeb.arrClnWeb.length; i++)
-                {
-                    this.salvarRespostaErroClnWeb(tblWeb.arrClnWeb[i]);
-                }
+                return;
             }
-            catch (ex)
+
+            if (!Utils.getBooStrVazia(tblWeb.strCritica))
             {
-                throw ex;
+                // TOD: Criar mecanismo de mensagens para o usuário e substituir esta função de "alert".
+                window.alert(tblWeb.strCritica);
             }
-            finally
+
+            if (tblWeb.arrClnWeb == null)
             {
+                return;
             }
-            // #endregion Ações
+
+            tblWeb.arrClnWeb.forEach((clnWeb) => { this.salvarResposta2ErroClnWeb(clnWeb); });
         }
 
-        private salvarRespostaErroClnWeb(clnWeb: ColunaWeb): void
+        private salvarResposta2ErroClnWeb(clnWeb: ColunaWeb): void
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (clnWeb == null)
             {
-                if (clnWeb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(clnWeb.strNome))
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(clnWeb.strCritica))
-                {
-                    return;
-                }
-
-                if (this.arrCmp == null)
-                {
-                    return;
-                }
-
-                this.arrCmp.forEach((cmp) => this.salvarRespostaErroClnWeb2(clnWeb, cmp));
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(clnWeb.strNome))
             {
-                throw ex;
+                return;
             }
-            finally
+
+            if (Utils.getBooStrVazia(clnWeb.strCritica))
             {
+                return;
             }
-            // #endregion Ações
+
+            var cmp: CampoHtml = this.getCmp(clnWeb.strNome);
+
+            if (cmp == null)
+            {
+                return;
+            }
+
+            cmp.strCritica = clnWeb.strCritica;
         }
 
-        private salvarRespostaErroClnWeb2(clnWeb: ColunaWeb, cmp: CampoHtml): void
+        private salvarResposta2Sucesso(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this.salvarResposta2SucessoCmpIntId(tblWeb);
+            this.salvarResposta2SucessoTabHtml();
 
-            // #region Ações
-            try
+            window.alert("Registro salvo com sucesso."); // TODO: Substituir por uma notificação.
+        }
+
+        private salvarResposta2SucessoCmpIntId(tblWeb: TabelaWeb): void
+        {
+            if (tblWeb == null)
             {
-                if (cmp == null)
-                {
-                    return;
-                }
-
-                if (cmp.cln == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(cmp.cln.strNome))
-                {
-                    return;
-                }
-
-                if (clnWeb.strNome.toLowerCase() != cmp.cln.strNome.toLowerCase())
-                {
-                    return;
-                }
-
-                cmp.strCritica = clnWeb.strCritica;
+                return;
             }
-            catch (ex)
+
+            if (this.cmpIntId == null)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            this.cmpIntId.tagInput.intValor = tblWeb.intRegistroId;
+        }
+
+        private salvarResposta2SucessoTabHtml(): void
+        {
+            if (this.jq == null)
             {
+                return;
             }
-            // #endregion Ações
+
+            if (this.tabHtml == null)
+            {
+                return;
+            }
+
+            this.jq.height((this.jq.height() + 250));
+
+            this.tabHtml.iniciar();
         }
 
         protected setEventos(): void
         {
             super.setEventos();
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.addEvtOnCloseListener(this.pagPrincipal);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.addEvtOnCloseListener(this.pagPrincipal);
         }
 
         private validarDados(): boolean
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.tblWeb == null)
             {
-                if (this.tblWeb == null)
+                return false;
+            }
+
+            if (this.arrCmp == null)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < this.arrCmp.length; i++)
+            {
+                if (!this.arrCmp[i].validarDados())
                 {
                     return false;
                 }
-
-                if (this.arrCmp == null)
-                {
-                    return false;
-                }
-
-                for (var i = 0; i < this.arrCmp.length; i++)
-                {
-                    if (!this.arrCmp[i].validarDados())
-                    {
-                        return false;
-                    }
-                }
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
 
             return true;
         }

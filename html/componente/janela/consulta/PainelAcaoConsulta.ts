@@ -93,7 +93,7 @@ module NetZ_Web_TypeScript
 
         constructor(jnlConsulta: JnlConsulta)
         {
-            super("pnlAcaoConsulta");
+            super("jnlConsulta_pnlAcaoConsulta");
 
             // #region Variáveis
             // #endregion Variáveis

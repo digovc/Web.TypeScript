@@ -31,6 +31,7 @@
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridRow.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowDoubleClickListener.ts" />
+    <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroItemCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltro.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
@@ -38,6 +39,9 @@
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelFiltro.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuMobile.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuMobileItem.ts" />
+    <TypeScriptCompile Include="html\componente\tab\TabHtml.ts" />
+    <TypeScriptCompile Include="html\componente\tab\TabItem.ts" />
+    <TypeScriptCompile Include="html\componente\tab\TabItemHead.ts" />
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
     <TypeScriptCompile Include="OnCloseListener.ts" />
@@ -74,7 +78,7 @@
     <TypeScriptCompile Include="html\componente\campo\CampoSenha.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoTexto.ts" />
     <TypeScriptCompile Include="html\componente\ComponenteHtml.ts" />
-    <TypeScriptCompile Include="html\componente\form\DivComando.ts" />
+    <TypeScriptCompile Include="html\componente\janela\cadastro\DivComando.ts" />
     <TypeScriptCompile Include="html\componente\form\FormHtml.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridHtml.ts" />
     <TypeScriptCompile Include="html\componente\janela\JanelaHtml.ts" />

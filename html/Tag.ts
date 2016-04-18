@@ -266,6 +266,11 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
+                if (!Utils.getBooStrVazia(this._strTitle))
+                {
+                    return this._strTitle;
+                }
+
                 this._strTitle = this.jq.attr("title");
             }
             catch (ex)

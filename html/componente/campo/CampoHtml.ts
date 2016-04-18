@@ -28,54 +28,24 @@ module NetZ_Web_TypeScript
 
         public get cln(): ColunaWeb
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._cln != null)
+            {
+                return this._cln;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._cln != null)
-                {
-                    return this._cln;
-                }
-
-                this._cln = this.getCln();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._cln = this.getCln();
 
             return this._cln;
         }
 
         private get divTitulo(): Div
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._divTitulo != null)
+            {
+                return this._divTitulo;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._divTitulo != null)
-                {
-                    return this._divTitulo;
-                }
-
-                this._divTitulo = new Div(this.strId + "_divTitulo");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._divTitulo = new Div(this.strId + "_divTitulo");
 
             return this._divTitulo;
         }
@@ -87,49 +57,19 @@ module NetZ_Web_TypeScript
 
         public set strCritica(strCritica: string)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._strCritica = strCritica;
 
-            // #region Ações
-            try
-            {
-                this._strCritica = strCritica;
-
-                this.atualizarStrCritica();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.atualizarStrCritica();
         }
 
         public get tagInput(): Input
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._tagInput != null)
+            {
+                return this._tagInput;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._tagInput != null)
-                {
-                    return this._tagInput;
-                }
-
-                this._tagInput = this.getTagInput();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._tagInput = this.getTagInput();
 
             return this._tagInput;
         }
@@ -143,95 +83,29 @@ module NetZ_Web_TypeScript
 
         private atualizarStrCritica(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                // TODO: Criar uma forma melhor para mostrar ao usuário que este campo está com crítica.
-                this.strTitle = this.strCritica;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            // TODO: Criar uma forma melhor para mostrar ao usuário que este campo está com crítica.
+            this.strTitle = this.strCritica;
         }
 
         private atualizarStrValor(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.atualizarStrValorCln();
-                this.atualizarStrValorDivTitulo();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.atualizarStrValorCln();
+            this.atualizarStrValorDivTitulo();
         }
 
         private atualizarStrValorCln(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.cln == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.cln == null)
-                {
-                    return;
-                }
-
-                this.cln.strValor = this.tagInput.strValor;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.cln.strValor = this.tagInput.strValor;
         }
 
         private atualizarStrValorDivTitulo(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (Utils.getBooStrVazia(this.tagInput.strValor))
-                {
-                    this.divTitulo.jq.animate({ opacity: 0 }, 200);
-                    return;
-                }
-
-                this.divTitulo.jq.animate({ opacity: 1 }, 200);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.mostrarDivTitulo(!this.tagInput.booVazio);
         }
 
         private getCln(): ColunaWeb
@@ -264,105 +138,40 @@ module NetZ_Web_TypeScript
             return clnResultado;
         }
 
-        private getTagInput(): Input
+        protected getTagInput(): Input
         {
-            // #region Variáveis
-
-            var strInputId: string;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this.jq == null)
-                {
-                    return null;
-                }
-
-                strInputId = this.jq.find("input")[0].id;
-
-                if (Utils.getBooStrVazia(strInputId))
-                {
-                    return null;
-                }
-
-                return new Input(strInputId);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            return new Input(this.strId + "_tagInput");
         }
 
         protected inicializar(): void
         {
             super.inicializar();
 
-            // #region Variáveis
-            // #endregion Variáveis
+            this.tagInput.iniciar();
 
-            // #region Ações
-            try
-            {
-                this.tagInput.iniciar();
+            this.atualizarStrValor();
+        }
 
-                this.atualizarStrValor();
-            }
-            catch (ex)
+        protected mostrarDivTitulo(booMostrar: boolean): void
+        {
+            if (booMostrar)
             {
-                throw ex;
+                this.divTitulo.jq.animate({ opacity: 1 }, 200);
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.divTitulo.jq.animate({ opacity: 0 }, 200);
         }
 
         protected setEventos(): void
         {
             super.setEventos();
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.tagInput.addEvtOnValorAlteradoListener(this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.tagInput.addEvtOnValorAlteradoListener(this);
         }
 
         public validarDados(): boolean
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
             return true;
         }
 

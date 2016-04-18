@@ -133,6 +133,11 @@ module NetZ_Web_TypeScript
         {
         }
 
+        protected validarJsCarregado(srcJq: string): boolean
+        {
+            return ($("script[src='" + srcJq + "']").length > 0);
+        }
+
         // #endregion Métodos
 
         // #region Eventos

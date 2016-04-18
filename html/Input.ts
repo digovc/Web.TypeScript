@@ -18,6 +18,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _booValor: boolean;
+        private _booVazio: boolean;
         private _decValor: number;
         private _dttValor: Date;
         private _intValor: number;
@@ -67,6 +68,13 @@ module NetZ_Web_TypeScript
             {
             }
             // #endregion Ações
+        }
+
+        public get booVazio(): boolean
+        {
+            this._booVazio = this.getBooVazio();
+
+            return this._booVazio;
         }
 
         public get dttValor(): Date
@@ -203,22 +211,12 @@ module NetZ_Web_TypeScript
 
         public get strValor(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (!Utils.getBooStrVazia(this._strValor))
+            {
+                return this._strValor;
+            }
 
-            // #region Ações
-            try
-            {
-                this._strValor = this.getStrValor();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._strValor = this.getStrValor();
 
             return this._strValor;
         }
@@ -231,6 +229,11 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
+                if (strValor == this._strValor)
+                {
+                    return;
+                }
+
                 this.strValorAnterior = this._strValor;
 
                 this._strValor = strValor;
@@ -282,16 +285,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (this.strValor != this.jq.val())
-                {
-                    this.jq.val(this.strValor);
-                }
-
-                if (this.strValor == this.strValorAnterior)
-                {
-                    return;
-                }
-
+                this.jq.val(this.strValor);
                 this.dispararEvtOnValorAlteradoListener();
             }
             catch (ex)
@@ -304,29 +298,19 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
+        private getBooVazio(): boolean
+        {
+            return Utils.getBooStrVazia(this.strValor);
+        }
+
         private getStrValor(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.jq == null)
+            {
+                return null;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.jq == null)
-                {
-                    return null;
-                }
-
-                return this.jq.val();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            return this.jq.val();
         }
 
         protected inicializar(): void

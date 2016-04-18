@@ -16,7 +16,9 @@
         private _arrClnWeb: Array<ColunaWeb>;
         private _clnChavePrimaria: ColunaWeb;
         private _intRegistroId: number;
+        private _intRegistroPaiId: number;
         private _strCritica: string;
+        private _strTblPaiNome: string;
         private _tag: string;
 
         public get arrClnWeb(): Array<ColunaWeb>
@@ -44,6 +46,11 @@
             // #endregion Ações
 
             return this._arrClnWeb;
+        }
+
+        public set arrClnWeb(arrClnWeb: Array<ColunaWeb>)
+        {
+            this._arrClnWeb = arrClnWeb;
         }
 
         private get clnWebChavePrimaria(): ColunaWeb
@@ -83,6 +90,16 @@
             this._intRegistroId = intRegistroId;
         }
 
+        public get intRegistroPaiId(): number
+        {
+            return this._intRegistroPaiId;
+        }
+
+        public set intRegistroPaiId(intRegistroPaiId: number)
+        {
+            this._intRegistroPaiId = intRegistroPaiId;
+        }
+
         public get strCritica(): string
         {
             return this._strCritica;
@@ -91,6 +108,16 @@
         public set strCritica(strCritica: string)
         {
             this._strCritica = strCritica;
+        }
+
+        public get strTblPaiNome(): string
+        {
+            return this._strTblPaiNome;
+        }
+
+        public set strTblPaiNome(strTblPaiNome: string)
+        {
+            this._strTblPaiNome = strTblPaiNome;
         }
 
         public get tag(): string
@@ -163,32 +190,42 @@
             // #endregion Ações
         }
 
-        /**
-         * Carrega os valores de um objeto com o mesmo prototipo desta classe
-         * para esta instância.
-         * @param obj Objeto com o mesmo prototipo deste.
-         */
         public carregarDados(obj: any): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            super.carregarDados(obj);
 
-            // #region Ações
-            try
+            this.carregarDadosArrClnWeb();
+        }
+
+        private carregarDadosArrClnWeb(): void
+        {
+            if (this.arrClnWeb == null)
             {
-                for (var objPropriedade in obj)
-                {
-                    (<any>this)[objPropriedade] = obj[objPropriedade];
-                }
+                return;
             }
-            catch (ex)
+
+            var arrObjTemp = this.arrClnWeb;
+
+            this.arrClnWeb = null;
+
+            arrObjTemp.forEach((obj) =>
             {
-                throw ex;
-            }
-            finally
+                this.carregarDadosArrClnWeb2(obj)
+            });
+        }
+
+        private carregarDadosArrClnWeb2(obj: any): void
+        {
+            if (obj == null)
             {
+                return;
             }
-            // #endregion Ações
+
+            var clnWeb: ColunaWeb = new ColunaWeb(null);
+
+            clnWeb.carregarDados(obj);
+
+            this.arrClnWeb.push(clnWeb);
         }
 
         /**
@@ -197,45 +234,41 @@
          */
         public getBooCritica(): boolean
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.getBooCriticaCln())
             {
-                if (!Utils.getBooStrVazia(this.strCritica))
-                {
-                    return true;
-                }
+                return true;
+            }
 
-                if (this.arrClnWeb == null)
-                {
-                    return true;
-                }
+            return !Utils.getBooStrVazia(this.strCritica)
+        }
 
-                for (var i = 0; i < this.arrClnWeb.length; i++)
-                {
-                    if (this.arrClnWeb[i] == null)
-                    {
-                        continue;
-                    }
-
-                    if (!Utils.getBooStrVazia(this.arrClnWeb[i].strCritica))
-                    {
-                        return true;
-                    }
-                }
-
+        private getBooCriticaCln(): boolean
+        {
+            if (this.arrClnWeb == null)
+            {
                 return false;
             }
-            catch (ex)
+
+            var booResultado: boolean;
+
+            this.arrClnWeb.some((clnWeb) =>
             {
-                throw ex;
-            }
-            finally
+                booResultado = this.getBooCriticaCln2(clnWeb);
+
+                return booResultado;
+            });
+
+            return booResultado;
+        }
+
+        private getBooCriticaCln2(clnWeb: ColunaWeb): boolean
+        {
+            if (clnWeb == null)
             {
+                return false;
             }
-            // #endregion Ações
+
+            return !Utils.getBooStrVazia(clnWeb.strCritica);
         }
 
         /**

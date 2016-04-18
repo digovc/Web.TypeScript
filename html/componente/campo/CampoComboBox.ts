@@ -1,4 +1,8 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="../../ComboBox.ts"/>
+/// <reference path="../../Input.ts"/>
+/// <reference path="CampoHtml.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
@@ -18,6 +22,19 @@
         // #endregion Construtores
 
         // #region Métodos
+
+        protected getTagInput(): Input
+        {
+            return new ComboBox(this.strId + "_tagInput");
+        }
+
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.mostrarDivTitulo(true);
+        }
+
         // #endregion Métodos
 
         // #region Eventos

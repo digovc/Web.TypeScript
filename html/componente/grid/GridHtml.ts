@@ -18,6 +18,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _arrTagGridRow: Array<GridRow>;
+        private _btnAdicionar: BotaoAdicionarMini;
         private _tagTable: Tag;
         private _tagTbody: Tag;
         private _tblWeb: TabelaWeb;
@@ -47,6 +48,18 @@ module NetZ_Web_TypeScript
             // #endregion Ações
 
             return this._arrTagGridRow;
+        }
+
+        public get btnAdicionar(): BotaoAdicionarMini
+        {
+            if (this._btnAdicionar != null)
+            {
+                return this._btnAdicionar;
+            }
+
+            this._btnAdicionar = new BotaoAdicionarMini(this.strId + "_btnAdicionar");
+
+            return this._btnAdicionar;
         }
 
         private get tagTable(): Tag

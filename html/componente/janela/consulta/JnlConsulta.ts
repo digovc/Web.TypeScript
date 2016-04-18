@@ -43,7 +43,7 @@ module NetZ_Web_TypeScript
                     return this._divGrid;
                 }
 
-                this._divGrid = new Div("divGrid");
+                this._divGrid = new Div(this.strId + "_divGrid");
             }
             catch (ex)
             {
@@ -141,7 +141,7 @@ module NetZ_Web_TypeScript
             this._tagGridHtml = tagGridHtml;
         }
 
-        private get tblWeb(): TabelaWeb
+        public get tblWeb(): TabelaWeb
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -174,7 +174,7 @@ module NetZ_Web_TypeScript
 
         constructor(pagPrincipal: PagPrincipal)
         {
-            super("JnlConsulta", pagPrincipal);
+            super("jnlConsulta", pagPrincipal);
 
             // #region Variáveis
             // #endregion Variáveis
@@ -235,6 +235,16 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
+                if (this.tblWeb == null)
+                {
+                    return;
+                }
+
+                if (Utils.getBooStrVazia(this.tblWeb.strNome))
+                {
+                    return;
+                }
+
                 this.pagPrincipal.abrirFiltroCadastro(0);
             }
             catch (ex)
@@ -323,30 +333,19 @@ module NetZ_Web_TypeScript
 
         private getTblWeb(): TabelaWeb
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.jq == null)
             {
-                if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
-                {
-                    return null;
-                }
+                return null;
+            }
 
-                // TODO: Carregar os filtros para a pesquisa.
+            if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
+            {
+                return null;
+            }
 
-                return new TabelaWeb(this.jq.attr("tbl_web_nome"));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            // TODO: Carregar os filtros para a pesquisa.
+
+            return new TabelaWeb(this.jq.attr("tbl_web_nome"));
         }
 
         protected inicializar(): void

@@ -108,6 +108,19 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
+        /**
+         * Carrega os valores de um objeto com o mesmo prototipo desta classe
+         * para esta instância.
+         * @param obj Objeto com o mesmo prototipo deste.
+         */
+        public carregarDados(obj: any): void
+        {
+            for (var objPropriedade in obj)
+            {
+                (<any>this)[objPropriedade] = obj[objPropriedade];
+            }
+        }
+
         // #endregion Métodos
 
         // #region Eventos

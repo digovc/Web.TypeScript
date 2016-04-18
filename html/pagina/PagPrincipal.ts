@@ -28,54 +28,24 @@ module NetZ_Web_TypeScript
 
         private get divCadastro(): Div
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._divCadastro != null)
+            {
+                return this._divCadastro;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._divCadastro != null)
-                {
-                    return this._divCadastro;
-                }
-
-                this._divCadastro = new Div("divCadastro");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._divCadastro = new Div("divCadastro");
 
             return this._divCadastro;
         }
 
         private get divConsulta(): Div
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._divConsulta != null)
+            {
+                return this._divConsulta;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._divConsulta != null)
-                {
-                    return this._divConsulta;
-                }
-
-                this._divConsulta = new Div("divConsulta");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._divConsulta = new Div("divConsulta");
 
             return this._divConsulta;
         }
@@ -90,12 +60,12 @@ module NetZ_Web_TypeScript
             this._jnlCadastro = jnlCadastro;
         }
 
-        private get jnlConsulta(): JnlConsulta
+        public get jnlConsulta(): JnlConsulta
         {
             return this._jnlConsulta;
         }
 
-        private set jnlConsulta(jnlConsulta: JnlConsulta)
+        public set jnlConsulta(jnlConsulta: JnlConsulta)
         {
             this._jnlConsulta = jnlConsulta;
         }
@@ -118,7 +88,6 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-
                 if (tblWeb == null)
                 {
                     return;
@@ -129,7 +98,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.divCadastro.esconder();
+                //this.divCadastro.esconder();
 
                 objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
@@ -189,36 +158,21 @@ module NetZ_Web_TypeScript
 
         private abrirCadastroResposta2(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (tblWeb == null)
             {
-                if (tblWeb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(tblWeb.tag))
-                {
-                    return;
-                }
-
-                ServerHttp.i.atualizarCssMain();
-
-                this.divCadastro.jq.html(tblWeb.tag);
-
-                this.inicializarCadastro();
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(tblWeb.tag))
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            ServerHttp.i.atualizarCssMain();
+
+            this.divCadastro.jq.append(tblWeb.tag);
+
+            this.inicializarCadastro();
         }
 
         public abrirConsulta(tblWeb: TabelaWeb): void
@@ -302,36 +256,21 @@ module NetZ_Web_TypeScript
 
         private abrirConsultaResposta2(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (tblWeb == null)
             {
-                if (tblWeb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(tblWeb.tag))
-                {
-                    return;
-                }
-
-                ServerHttp.i.atualizarCssMain();
-
-                this.divConsulta.jq.html(tblWeb.tag);
-
-                this.inicializarConsulta();
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(tblWeb.tag))
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            ServerHttp.i.atualizarCssMain();
+
+            this.divConsulta.jq.html(tblWeb.tag);
+
+            this.inicializarConsulta();
         }
 
         public abrirFiltroCadastro(intFiltroId: number): void
@@ -363,149 +302,78 @@ module NetZ_Web_TypeScript
 
         private carregarJsCadastro(): void
         {
-            // #region Variáveis
+            var arrJnlCadastroJq = this.divCadastro.jq.children();
 
-            var srcJqCadastro: string;
-            var tagScriptCadastro: HTMLScriptElement;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (arrJnlCadastroJq == null)
             {
-                srcJqCadastro = this.divCadastro.jq.children().attr("js_src");
-
-                if (Utils.getBooStrVazia(srcJqCadastro))
-                {
-                    return;
-                }
-
-                tagScriptCadastro = document.createElement("script");
-
-                tagScriptCadastro.src = srcJqCadastro;
-                tagScriptCadastro.type = "text/javascript";
-
-                document.head.appendChild(tagScriptCadastro);
+                return;
             }
-            catch (ex)
+
+            for (var i = 0; i < arrJnlCadastroJq.length; i++)
             {
-                throw ex;
+                this.carregarJsCadastro2(arrJnlCadastroJq[i]);
             }
-            finally
+        }
+
+        private carregarJsCadastro2(jnlCadastroJq: HTMLElement): void
+        {
+            if (jnlCadastroJq == null)
             {
+                return;
             }
-            // #endregion Ações
+
+            var srcJqCadastro = $(jnlCadastroJq).attr("js_src");
+
+            if (Utils.getBooStrVazia(srcJqCadastro))
+            {
+                return;
+            }
+
+            if (this.validarJsCarregado(srcJqCadastro))
+            {
+                return;
+            }
+
+            var tagScriptCadastro = document.createElement("script");
+
+            tagScriptCadastro.src = srcJqCadastro;
+            tagScriptCadastro.type = "text/javascript";
+
+            document.head.appendChild(tagScriptCadastro);
         }
 
         private fecharCadastro(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.divCadastro.esconder();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.divCadastro.esconder();
         }
 
         private fecharConsulta(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.divConsulta.esconder();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.divConsulta.esconder();
         }
 
         private inicializarCadastro(): void
         {
-            // #region Variáveis
+            this.divCadastro.mostrar();
 
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.divCadastro.mostrar();
-
-                this.carregarJsCadastro();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.carregarJsCadastro();
         }
 
         private inicializarConsulta(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this.divConsulta.mostrar();
 
-            // #region Ações
-            try
-            {
-                this.divConsulta.mostrar();
+            this.jnlConsulta = new JnlConsulta(this);
 
-                this.jnlConsulta = new JnlConsulta(this);
+            this.jnlConsulta.addEvtOnCloseListener(this);
 
-                this.jnlConsulta.addEvtOnCloseListener(this);
-
-                this.jnlConsulta.iniciar();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.jnlConsulta.iniciar();
         }
 
         private inicializarFiltroCadastro(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.divCadastro.mostrar();
-                this.carregarJsCadastro();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.divCadastro.mostrar();
+            this.carregarJsCadastro();
         }
 
         // #endregion Métodos
