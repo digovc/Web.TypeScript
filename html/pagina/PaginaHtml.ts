@@ -52,7 +52,7 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        protected atualizarCssMain(): void
+        public atualizarCssMain(): void
         {
             // #region Variáveis
             // #endregion Variáveis

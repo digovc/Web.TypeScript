@@ -1,4 +1,7 @@
-﻿/// <reference path="../../../../OnClickListener.ts"/>
+﻿/// <reference path="../../../../database/DataTable.ts"/>
+/// <reference path="../../../../database/ParValorNome.ts"/>
+/// <reference path="../../../../database/TblFiltro.ts"/>
+/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../botao/mini/BotaoAdicionarMini.ts"/>
 /// <reference path="../../campo/CampoComboBox.ts"/>
 /// <reference path="../../form/FormHtml.ts"/>
@@ -12,7 +15,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class FrmFiltro extends FormHtml implements OnClickListener
+    export class FrmFiltro extends FormHtml implements OnAjaxListener, OnClickListener, OnValorAlteradoListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -20,61 +23,32 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _btnAdicionar: BotaoAdicionarMini;
-        private _cmpFiltro: CampoComboBox;
+        private _cmpIntFiltroId: CampoComboBox;
         private _pnlFiltro: PainelFiltro;
+        private _tblWebConsulta: TabelaWeb;
 
         private get btnAdicionar(): BotaoAdicionarMini
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._btnAdicionar != null)
+            {
+                return this._btnAdicionar;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._btnAdicionar != null)
-                {
-                    return this._btnAdicionar;
-                }
-
-                this._btnAdicionar = new BotaoAdicionarMini(this.strId + "_btnAdicionar");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._btnAdicionar = new BotaoAdicionarMini(this.strId + "_btnAdicionar");
 
             return this._btnAdicionar;
         }
 
-        private get cmpFiltro(): CampoComboBox
+        private get cmpIntFiltroId(): CampoComboBox
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this._cmpIntFiltroId != null)
             {
-                if (this._cmpFiltro != null)
-                {
-                    return this._cmpFiltro;
-                }
+                return this._cmpIntFiltroId;
+            }
 
-                this._cmpFiltro = new CampoComboBox(this.strId + "_cmpFiltro");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._cmpIntFiltroId = new CampoComboBox(this.strId + "_cmpIntFiltroId");
 
-            return this._cmpFiltro;
+            return this._cmpIntFiltroId;
         }
 
         private get pnlFiltro(): PainelFiltro
@@ -87,6 +61,18 @@ module NetZ_Web_TypeScript
             this._pnlFiltro = pnlFiltro;
         }
 
+        private get tblWebConsulta(): TabelaWeb
+        {
+            if (this._tblWebConsulta != null)
+            {
+                return this._tblWebConsulta;
+            }
+
+            this._tblWebConsulta = this.getTblWebConsulta();
+
+            return this._tblWebConsulta;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -95,74 +81,194 @@ module NetZ_Web_TypeScript
         {
             super("frmFiltro");
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.pnlFiltro = pnlFiltro;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.pnlFiltro = pnlFiltro;
         }
 
         // #endregion Construtores
 
         // #region Métodos
 
+        private abrirFiltroConteudo(): void
+        {
+            if (this.pnlFiltro == null)
+            {
+                return;
+            }
+
+            if (this.cmpIntFiltroId.tagInput.intValor < 1)
+            {
+                return;
+            }
+
+            TblFiltro.i.limparFiltro();
+
+            TblFiltro.i.addFiltro2(TblFiltro.i.clnIntId, this.cmpIntFiltroId.tagInput.intValor);
+
+            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO_FILTRO_CONTEUDO;
+
+            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirFiltroConteudoSucesso(objSolicitacaoAjaxDb); });
+            objSolicitacaoAjaxDb.addJsn(TblFiltro.i);
+
+            objSolicitacaoAjaxDb.enviar();
+        }
+
         private abrirFiltroCadastro(): void
         {
-            // #region Variáveis
+            if (this.pnlFiltro == null)
+            {
+                return;
+            }
 
-            // #endregion Variáveis
+            if (this.pnlFiltro.jnlConsulta == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
+            this.pnlFiltro.jnlConsulta.abrirFiltroCadastro();
+        }
+
+        private abrirFiltroConteudoSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        {
+            if (objSolicitacaoAjaxDb == null)
             {
-                this.pnlFiltro.jnlConsulta.abrirFiltroCadastro();
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
             {
-                throw ex;
+                return;
             }
-            finally
+
+            this.pnlFiltro.atualizarFrmFiltroConteudo(objSolicitacaoAjaxDb.strData);
+        }
+
+        protected carregarDados(): void
+        {
+            super.carregarDados();
+
+            this.carregarDadosCmpFiltro();
+        }
+
+        private carregarDadosCmpFiltro(): void
+        {
+            if (this.tblWebConsulta == null)
             {
+                return;
             }
-            // #endregion Ações
+
+            if (Utils.getBooStrVazia(this.tblWebConsulta.strNome))
+            {
+                return;
+            }
+
+            TblFiltro.i.limparFiltro();
+
+            TblFiltro.i.addFiltro2(TblFiltro.i.clnStrTabelaNome, this.tblWebConsulta.strNome);
+
+            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_COMBO_BOX;
+
+            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.carregarDadosCmpFiltroSucesso(objSolicitacaoAjaxDb); });
+            objSolicitacaoAjaxDb.addJsn(TblFiltro.i);
+
+            objSolicitacaoAjaxDb.enviar();
+        }
+
+        private carregarDadosCmpFiltroSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        {
+            if (objSolicitacaoAjaxDb == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
+            {
+                return;
+            }
+
+            var arrData: Array<any> = JSON.parse(objSolicitacaoAjaxDb.strData);
+
+            arrData.forEach((par) => { this.carregarDadosCmpFiltroSucesso2(par); });
+        }
+
+        private carregarDadosCmpFiltroSucesso2(par: ParValorNome): void
+        {
+            if (par == null)
+            {
+                return;
+            }
+
+            this.cmpIntFiltroId.addOpcao(par);
+        }
+
+        private getTblWebConsulta(): TabelaWeb
+        {
+            if (this.pnlFiltro == null)
+            {
+                return null;
+            }
+
+            if (this.pnlFiltro.jnlConsulta == null)
+            {
+                return null;
+            }
+
+            if (this.pnlFiltro.jnlConsulta.tblWeb == null)
+            {
+                return null;
+            }
+
+            return this.pnlFiltro.jnlConsulta.tblWeb;
         }
 
         protected setEventos(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this.btnAdicionar.addEvtOnClickListener(this);
 
-            // #region Ações
-            try
-            {
-                this.btnAdicionar.addEvtOnClickListener(this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.cmpIntFiltroId.tagInput.addEvtOnValorAlteradoListener(this);
         }
 
         // #endregion Métodos
 
         // #region Eventos
 
+        public onAjaxAntesEnviar(objSolicitacaoAjaxSender: SolicitacaoAjax): void { }
+
+        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxErroArg): void { }
+
+        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxSucessoArg): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         public onClick(objSender: Object, arg: any): void
+        {
+            switch (objSender)
+            {
+                case this.btnAdicionar:
+                    this.abrirFiltroCadastro();
+                    return;
+            }
+        }
+
+        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -172,8 +278,8 @@ module NetZ_Web_TypeScript
             {
                 switch (objSender)
                 {
-                    case this.btnAdicionar:
-                        this.abrirFiltroCadastro();
+                    case this.cmpIntFiltroId.tagInput:
+                        this.abrirFiltroConteudo();
                         return;
                 }
             }

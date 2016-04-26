@@ -1,4 +1,7 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="DataTable.ts"/>
+/// <reference path="FiltroWeb.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
@@ -14,12 +17,12 @@
         // #region Atributos
 
         private _arrClnWeb: Array<ColunaWeb>;
-        private _clnChavePrimaria: ColunaWeb;
+        private _arrFil: Array<FiltroWeb>;
+        private _clnIntId: ColunaWeb;
         private _intRegistroId: number;
         private _intRegistroPaiId: number;
         private _strCritica: string;
         private _strTblPaiNome: string;
-        private _tag: string;
 
         public get arrClnWeb(): Array<ColunaWeb>
         {
@@ -53,31 +56,16 @@
             this._arrClnWeb = arrClnWeb;
         }
 
-        private get clnWebChavePrimaria(): ColunaWeb
+        private get arrFil(): Array<FiltroWeb>
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this._arrFil != null)
             {
-                if (this._clnChavePrimaria != null)
-                {
-                    return this._clnChavePrimaria;
-                }
+                return this._arrFil;
+            }
 
-                this._clnChavePrimaria = this.getClnWebChavePrimaria();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrFil = new Array<FiltroWeb>();
 
-            return this._clnChavePrimaria;
+            return this._arrFil;
         }
 
         public get intRegistroId(): number
@@ -120,16 +108,17 @@
             this._strTblPaiNome = strTblPaiNome;
         }
 
-        public get tag(): string
+        public get clnIntId(): ColunaWeb
         {
-            return this._tag;
-        }
+            if (this._clnIntId != null)
+            {
+                return this._clnIntId;
+            }
 
-        public set tag(tag: string)
-        {
-            this._tag = tag;
-        }
+            this._clnIntId = new ColunaWeb("int_id");
 
+            return this._clnIntId;
+        }
         // #endregion Atributos
 
         // #region Construtores
@@ -173,7 +162,7 @@
                     return;
                 }
 
-                if (this.arrClnWeb.indexOf(clnWeb) > 0)
+                if (this.arrClnWeb.indexOf(clnWeb) > -1)
                 {
                     return;
                 }
@@ -190,9 +179,34 @@
             // #endregion Ações
         }
 
-        public carregarDados(obj: any): void
+        public addFiltro(filWeb: FiltroWeb): void
         {
-            super.carregarDados(obj);
+            if (filWeb == null)
+            {
+                return;
+            }
+
+            this.arrFil.push(filWeb);
+        }
+
+        public addFiltro2(clnWeb: ColunaWeb, objValor: Object): void
+        {
+            if (clnWeb == null)
+            {
+                return;
+            }
+
+            var filWeb = new FiltroWeb();
+
+            filWeb.objValor = objValor;
+            filWeb.clnWeb = clnWeb;
+
+            this.arrFil.push(filWeb);
+        }
+
+        public copiarDados(obj: any): void
+        {
+            super.copiarDados(obj);
 
             this.carregarDadosArrClnWeb();
         }
@@ -208,10 +222,7 @@
 
             this.arrClnWeb = null;
 
-            arrObjTemp.forEach((obj) =>
-            {
-                this.carregarDadosArrClnWeb2(obj)
-            });
+            arrObjTemp.forEach((obj) => { this.carregarDadosArrClnWeb2(obj) });
         }
 
         private carregarDadosArrClnWeb2(obj: any): void
@@ -223,7 +234,7 @@
 
             var clnWeb: ColunaWeb = new ColunaWeb(null);
 
-            clnWeb.carregarDados(obj);
+            clnWeb.copiarDados(obj);
 
             this.arrClnWeb.push(clnWeb);
         }
@@ -275,7 +286,7 @@
          * Retorna a coluna que contém o nome passado por parâmetro ou null
          * caso nenhuma seja encontrada.
          */
-        public getClnWeb(strNome: string): ColunaWeb
+        public getClnWeb(strClnWebNome: string): ColunaWeb
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -283,7 +294,7 @@
             // #region Ações
             try
             {
-                if (Utils.getBooStrVazia(strNome))
+                if (Utils.getBooStrVazia(strClnWebNome))
                 {
                     return null;
                 }
@@ -305,7 +316,7 @@
                         continue;
                     }
 
-                    if (strNome.toLowerCase() != this.arrClnWeb[i].strNome.toLowerCase())
+                    if (strClnWebNome.toLowerCase() != this.arrClnWeb[i].strNome.toLowerCase())
                     {
                         continue;
                     }
@@ -313,7 +324,11 @@
                     return this.arrClnWeb[i];
                 }
 
-                return null;
+                var clnWeb = new ColunaWeb(strClnWebNome);
+
+                this.addClnWeb(clnWeb);
+
+                return clnWeb;
             }
             catch (ex)
             {
@@ -325,37 +340,9 @@
             // #endregion Ações
         }
 
-        private getClnWebChavePrimaria(): ColunaWeb
+        public limparFiltro(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this.arrClnWeb == null)
-                {
-                    return;
-                }
-
-                for (var i = 0; i < this.arrClnWeb.length; i++)
-                {
-                    if ("int_id" == this.arrClnWeb[i].strNome)
-                    {
-                        return this.arrClnWeb[i];
-                    }
-                }
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return null;
+            this.arrFil.splice(0, this.arrFil.length);
         }
 
         // #endregion Métodos

@@ -80,7 +80,7 @@ module NetZ_Web_TypeScript
 
                 objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-                objSolicitacaoAjaxDb.carregarDados(this.anyData);
+                objSolicitacaoAjaxDb.copiarDados(this.anyData);
 
                 return objSolicitacaoAjaxDb;
             }

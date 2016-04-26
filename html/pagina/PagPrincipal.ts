@@ -1,5 +1,5 @@
-﻿/// <reference path="../../OnCloseListener.ts"/>
-/// <reference path="../../persistencia/TabelaWeb.ts"/>
+﻿/// <reference path="../../OnDisposedListener.ts"/>
+/// <reference path="../../database/TabelaWeb.ts"/>
 /// <reference path="../../server/ServerHttp.ts"/>
 /// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
@@ -14,7 +14,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class PagPrincipal extends PaginaHtml implements OnAjaxListener, OnCloseListener
+    export abstract class PagPrincipal extends PaginaHtml implements OnAjaxListener, OnDisposedListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -105,7 +105,7 @@ module NetZ_Web_TypeScript
                 objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
 
                 objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO;
-                objSolicitacaoAjaxDb.jsn = JSON.stringify(tblWeb);
+                objSolicitacaoAjaxDb.strData = JSON.stringify(tblWeb);
 
                 ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
             }
@@ -119,11 +119,9 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private abrirCadastroResposta(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        private abrirCadastroSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
         {
             // #region Variáveis
-
-            var tblWeb: TabelaWeb;
 
             // #endregion Variáveis
 
@@ -135,16 +133,14 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.jsn))
+                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
                 {
                     return;
                 }
 
-                tblWeb = new TabelaWeb(null);
+                this.divCadastro.jq.append(objSolicitacaoAjaxDb.strData);
 
-                tblWeb.carregarDados(JSON.parse(objSolicitacaoAjaxDb.jsn));
-
-                this.abrirCadastroResposta2(tblWeb);
+                this.inicializarJnlCadastro();
             }
             catch (ex)
             {
@@ -154,25 +150,6 @@ module NetZ_Web_TypeScript
             {
             }
             // #endregion Ações
-        }
-
-        private abrirCadastroResposta2(tblWeb: TabelaWeb): void
-        {
-            if (tblWeb == null)
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia(tblWeb.tag))
-            {
-                return;
-            }
-
-            ServerHttp.i.atualizarCssMain();
-
-            this.divCadastro.jq.append(tblWeb.tag);
-
-            this.inicializarCadastro();
         }
 
         public abrirConsulta(tblWeb: TabelaWeb): void
@@ -203,7 +180,7 @@ module NetZ_Web_TypeScript
                 objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
 
                 objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CONSULTA;
-                objSolicitacaoAjaxDb.jsn = JSON.stringify(tblWeb);
+                objSolicitacaoAjaxDb.strData = JSON.stringify(tblWeb);
 
                 ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
             }
@@ -217,11 +194,9 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private abrirConsultaResposta(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        private abrirConsultaSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
         {
             // #region Variáveis
-
-            var tblWeb: TabelaWeb;
 
             // #endregion Variáveis
 
@@ -233,16 +208,14 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.jsn))
+                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
                 {
                     return;
                 }
 
-                tblWeb = new TabelaWeb(null);
+                this.divConsulta.jq.html(objSolicitacaoAjaxDb.strData);
 
-                tblWeb.carregarDados(JSON.parse(objSolicitacaoAjaxDb.jsn));
-
-                this.abrirConsultaResposta2(tblWeb);
+                this.inicializarJnlConsulta();
             }
             catch (ex)
             {
@@ -252,25 +225,6 @@ module NetZ_Web_TypeScript
             {
             }
             // #endregion Ações
-        }
-
-        private abrirConsultaResposta2(tblWeb: TabelaWeb): void
-        {
-            if (tblWeb == null)
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia(tblWeb.tag))
-            {
-                return;
-            }
-
-            ServerHttp.i.atualizarCssMain();
-
-            this.divConsulta.jq.html(tblWeb.tag);
-
-            this.inicializarConsulta();
         }
 
         public abrirFiltroCadastro(intFiltroId: number): void
@@ -322,7 +276,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            var srcJqCadastro = $(jnlCadastroJq).attr("js_src");
+            var srcJqCadastro = $(jnlCadastroJq).attr("src_js"); // TODO: Permitir que sejam carregados N arquivos.
 
             if (Utils.getBooStrVazia(srcJqCadastro))
             {
@@ -342,9 +296,22 @@ module NetZ_Web_TypeScript
             document.head.appendChild(tagScriptCadastro);
         }
 
-        private fecharCadastro(): void
+        public fecharCadastro(jnlCadastro: JnlCadastro): void
         {
+            if (this.jnlCadastro == null)
+            {
+                this.divCadastro.esconder();
+                return;
+            }
+
+            if (this.jnlCadastro != jnlCadastro)
+            {
+                return;
+            }
+
             this.divCadastro.esconder();
+
+            this.jnlCadastro = null;
         }
 
         private fecharConsulta(): void
@@ -352,28 +319,36 @@ module NetZ_Web_TypeScript
             this.divConsulta.esconder();
         }
 
-        private inicializarCadastro(): void
+        private inicializarJnlCadastro(): void
         {
             this.divCadastro.mostrar();
 
             this.carregarJsCadastro();
         }
 
-        private inicializarConsulta(): void
+        private inicializarJnlConsulta(): void
         {
             this.divConsulta.mostrar();
 
             this.jnlConsulta = new JnlConsulta(this);
 
-            this.jnlConsulta.addEvtOnCloseListener(this);
+            this.jnlConsulta.addEvtOnDisposedListener(this);
 
             this.jnlConsulta.iniciar();
         }
 
-        private inicializarFiltroCadastro(tblWeb: TabelaWeb): void
+        public removerJs(srcJs: string): void
         {
-            this.divCadastro.mostrar();
-            this.carregarJsCadastro();
+            if (Utils.getBooStrVazia(srcJs))
+            {
+                return;
+            }
+
+            var strSelect: string = "script[src='_src_js']";
+
+            strSelect = strSelect.replace("_src_js", srcJs);
+
+            $(strSelect).remove();
         }
 
         // #endregion Métodos
@@ -399,11 +374,11 @@ module NetZ_Web_TypeScript
                 switch ((<SolicitacaoAjaxDb>objSolicitacaoAjaxSender).enmMetodo)
                 {
                     case SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO:
-                        this.abrirCadastroResposta(arg.objSolicitacaoAjaxDb);
+                        this.abrirCadastroSucesso(arg.objSolicitacaoAjaxDb);
                         return;
 
                     case SolicitacaoAjaxDb_EnmMetodo.ABRIR_CONSULTA:
-                        this.abrirConsultaResposta(arg.objSolicitacaoAjaxDb);
+                        this.abrirConsultaSucesso(arg.objSolicitacaoAjaxDb);
                         return;
                 }
             }
@@ -417,7 +392,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public onClose(objSender: Object): void
+        public onDisposed(objSender: Object): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -425,15 +400,10 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                switch (objSender)
+                if (objSender instanceof JnlConsulta)
                 {
-                    case this.jnlCadastro:
-                        this.fecharCadastro();
-                        return
-
-                    case this.jnlConsulta:
-                        this.fecharConsulta();
-                        return
+                    this.fecharConsulta();
+                    return;
                 }
             }
             catch (ex)

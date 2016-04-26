@@ -10,12 +10,14 @@ module NetZ_Web_TypeScript
     export enum SolicitacaoAjaxDb_EnmMetodo
     {
         ABRIR_CADASTRO,
+        ABRIR_CADASTRO_FILTRO_CONTEUDO,
         ABRIR_CONSULTA,
         ADICIONAR,
         APAGAR,
         FILTRO,
         NONE,
-        PESQUISAR,
+        PESQUISAR_COMBO_BOX,
+        PESQUISAR_GRID,
         RECUPERAR,
         SALVAR,
     }
@@ -48,6 +50,13 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
+        public enviar(): void
+        {
+            super.enviar();
+
+            ServerAjaxDb.i.enviar(this);
+        }
+
         public validarDados(): boolean
         {
             // #region Variáveis
@@ -66,7 +75,7 @@ module NetZ_Web_TypeScript
                     return false;
                 }
 
-                if (Utils.getBooStrVazia(this.jsn))
+                if (Utils.getBooStrVazia(this.strData))
                 {
                     return false;
                 }

@@ -8,23 +8,36 @@
 
     // #endregion Enumerados
 
-    export class SolicitacaoAjax
+    export class SolicitacaoAjax extends Objeto
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _jsn: string;
+        private _arrFncSucesso: Array<Function>;
+        private _strData: string;
 
-        public get jsn(): string
+        private get arrFncSucesso(): Array<Function>
         {
-            return this._jsn;
+            if (this._arrFncSucesso != null)
+            {
+                return this._arrFncSucesso;
+            }
+
+            this._arrFncSucesso = new Array<Function>();
+
+            return this._arrFncSucesso;
         }
 
-        public set jsn(jsn: string)
+        public get strData(): string
         {
-            this._jsn = jsn;
+            return this._strData;
+        }
+
+        public set strData(jsn: string)
+        {
+            this._strData = jsn;
         }
 
         // #endregion Atributos
@@ -35,27 +48,43 @@
         // #region Métodos
 
         /**
+         * Adiciona uma função que será executada caso a solicitação seja bem sucedida.
+         * Esta função receberá um objeto do tipo @link SolicitacaoAjax contendo
+         * os dados de resposta do servidor.
+         * @param fncSucesso Função que será executada caso a solicitação seja bem sucedida.
+         */
+        public addFncSucesso(fncSucesso: Function): void
+        {
+            if (fncSucesso == null)
+            {
+                return;
+            }
+
+            if (this.arrFncSucesso.indexOf(fncSucesso) > -1)
+            {
+                return;
+            }
+
+            this.arrFncSucesso.push(fncSucesso);
+        }
+
+        public addJsn(obj: any): void
+        {
+            if (obj == null)
+            {
+                return;
+            }
+
+            this.strData = JSON.stringify(obj);
+        }
+
+        /**
          * Método disparado antes que esta solicitação AJAX seja
          * enviada para o servidor.
          */
         public ajaxAntesEnviar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.dispararEvtOnAjaxListenerOnAjaxAntesEnviar();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.dispararEvtOnAjaxListenerOnAjaxAntesEnviar();
         }
 
         /**
@@ -68,22 +97,7 @@
          */
         public ajaxErro(strTextStatus: string, strErrorThrown: string): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.dispararEvtOnAjaxListenerOnAjaxErroListener(strErrorThrown, strTextStatus);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.dispararEvtOnAjaxListenerOnAjaxErroListener(strErrorThrown, strTextStatus);
         }
 
         /**
@@ -95,50 +109,28 @@
          */
         public ajaxSucesso(anyData: any): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this.dispararArrFncSucesso(anyData);
 
-            // #region Ações
-            try
-            {
-                this.dispararEvtOnAjaxListenerOnAjaxSucesso(anyData);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.dispararEvtOnAjaxListenerOnAjaxSucesso(anyData);
         }
 
-        /**
-         * Carrega os valores de um objeto com o mesmo prototipo desta classe
-         * para esta instância.
-         * @param obj Objeto com o mesmo prototipo deste.
-         */
-        public carregarDados(obj: any): void
+        private dispararArrFncSucesso(anyData: any): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (anyData == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                for (var objPropriedade in obj)
-                {
-                    (<any>this)[objPropriedade] = obj[objPropriedade];
-                }
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            var objSolicitacaoAjax = new SolicitacaoAjax();
+
+            objSolicitacaoAjax.copiarDados(anyData);
+
+            this.arrFncSucesso.forEach((fnc) => { fnc(objSolicitacaoAjax); });
+        }
+
+        public enviar(): void
+        {
+            return;
         }
 
         /**
@@ -152,53 +144,22 @@
 
         protected validarJson(strKey: string, anyValue: any): any
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (strKey == "_arrEvtOnAjaxListener")
+            {
+                return null;
+            }
 
-            // #region Ações
-            try
+            if (strKey == "_objJson")
             {
-                if (strKey == "_arrEvtOnAjaxListener")
-                {
-                    return null;
-                }
-
-                if (strKey == "_objJson")
-                {
-                    return null;
-                }
+                return null;
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
 
             return anyValue;
         }
 
         public toJson(): string
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                return JSON.stringify(this, (strKey, anyValue) => this.validarJson(strKey, anyValue));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            return JSON.stringify(this, (strKey, anyValue) => this.validarJson(strKey, anyValue));
         }
 
         // #endregion Métodos
@@ -211,179 +172,83 @@
 
         private get arrEvtOnAjaxListener(): Array<OnAjaxListener>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrEvtOnAjaxListener != null)
+            {
+                return this._arrEvtOnAjaxListener;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrEvtOnAjaxListener != null)
-                {
-                    return this._arrEvtOnAjaxListener;
-                }
-
-                this._arrEvtOnAjaxListener = new Array<OnAjaxListener>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrEvtOnAjaxListener = new Array<OnAjaxListener>();
 
             return this._arrEvtOnAjaxListener;
         }
 
         public addEvtOnAjaxListener(evtOnAjaxListener: OnAjaxListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnAjaxListener == null)
             {
-                if (evtOnAjaxListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener) > 0)
-                {
-                    return;
-                }
+            if (this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener) > -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnAjaxListener.push(evtOnAjaxListener);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnAjaxListener.push(evtOnAjaxListener);
         }
 
         public removeEvtOnAjaxListener(evtOnAjaxListener: OnAjaxListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnAjaxListener == null)
             {
-                if (evtOnAjaxListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener) == 0)
-                {
-                    return;
-                }
+            if (this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener) == -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnAjaxListener.splice(this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnAjaxListener.splice(this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener));
         }
 
         private dispararEvtOnAjaxListenerOnAjaxAntesEnviar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.arrEvtOnAjaxListener.length == 0)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.arrEvtOnAjaxListener.length == 0)
-                {
-                    return;
-                }
-
-                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxAntesEnviar(this); });
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnAjaxListener.forEach((evt) => { evt.onAjaxAntesEnviar(this); });
         }
 
         private dispararEvtOnAjaxListenerOnAjaxErroListener(strErrorThrown: string, strTextStatus: string): void
         {
-            // #region Variáveis
-
-            var arg: OnAjaxErroArg;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.arrEvtOnAjaxListener.length == 0)
             {
-                if (this.arrEvtOnAjaxListener.length == 0)
-                {
-                    return;
-                }
-
-                arg = new OnAjaxErroArg();
-
-                arg.strErrorThrown = strErrorThrown;
-                arg.strTextStatus = strTextStatus;
-
-                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxErroListener(this, arg); });
+                return;
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            var arg = new OnAjaxErroArg();
+
+            arg.strErrorThrown = strErrorThrown;
+            arg.strTextStatus = strTextStatus;
+
+            this.arrEvtOnAjaxListener.forEach((evt) => { evt.onAjaxErroListener(this, arg); });
         }
 
         private dispararEvtOnAjaxListenerOnAjaxSucesso(anyData: any): void
         {
-            // #region Variáveis
-
-            var arg: OnAjaxSucessoArg;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.arrEvtOnAjaxListener.length == 0)
             {
-                if (this.arrEvtOnAjaxListener.length == 0)
-                {
-                    return;
-                }
-
-                arg = new OnAjaxSucessoArg();
-
-                arg.anyData = anyData;
-
-                this.arrEvtOnAjaxListener.forEach((value) => { value.onAjaxSucesso(this, arg); });
+                return;
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            var arg = new OnAjaxSucessoArg();
+
+            arg.anyData = anyData;
+
+            this.arrEvtOnAjaxListener.forEach((evt) => { evt.onAjaxSucesso(this, arg); });
         }
 
         // #endregion Evento OnAjaxListener

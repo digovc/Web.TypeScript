@@ -211,11 +211,6 @@ module NetZ_Web_TypeScript
 
         public get strValor(): string
         {
-            if (!Utils.getBooStrVazia(this._strValor))
-            {
-                return this._strValor;
-            }
-
             this._strValor = this.getStrValor();
 
             return this._strValor;
@@ -335,7 +330,11 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private onKeyUp(arg: JQueryKeyEventObject): void
+        // #endregion Métodos
+
+        // #region Eventos
+
+        private onChange(): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -343,11 +342,11 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.strValor = this.jq.val();
+                this.dispararEvtOnValorAlteradoListener();
             }
             catch (ex)
             {
-                throw ex;
+                new Erro("Erro desconhecido.", ex);
             }
             finally
             {
@@ -355,11 +354,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        // #endregion Métodos
-
-        // #region Eventos
-
-        private Input_keyUp(arg: JQueryKeyEventObject)
+        private onKeyUp(arg: JQueryKeyEventObject)
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -367,7 +362,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.onKeyUp(arg);
+                this.dispararEvtOnValorAlteradoListener();
             }
             catch (ex)
             {
@@ -423,7 +418,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnEnterListener.indexOf(evtOnEnterListener) > 0)
+                if (this.arrEvtOnEnterListener.indexOf(evtOnEnterListener) > -1)
                 {
                     return;
                 }
@@ -458,7 +453,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnEnterListener.indexOf(evtOnEnterListener) == 0)
+                if (this.arrEvtOnEnterListener.indexOf(evtOnEnterListener) == -1)
                 {
                     return;
                 }
@@ -488,7 +483,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnEnterListener.forEach((value) => { value.onEnter(this); });
+                this.arrEvtOnEnterListener.forEach((evt) => { evt.onEnter(this); });
             }
             catch (ex)
             {
@@ -546,7 +541,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener) > 0)
+                if (this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener) > -1)
                 {
                     return;
                 }
@@ -581,7 +576,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener) == 0)
+                if (this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener) == -1)
                 {
                     return;
                 }
@@ -611,7 +606,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnLeaveListener.forEach((value) => { value.onLeave(this); });
+                this.arrEvtOnLeaveListener.forEach((evt) => { evt.onLeave(this); });
             }
             catch (ex)
             {
@@ -669,14 +664,15 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener) > 0)
+                if (this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener) > -1)
                 {
                     return;
                 }
 
                 if (this.arrEvtOnValorAlteradoListener.length == 0)
                 {
-                    this.jq.keyup((arg) => this.Input_keyUp(arg));
+                    this.jq.keyup((arg) => this.onKeyUp(arg));
+                    this.jq.change(() => { this.onChange(); });
                 }
 
                 this.arrEvtOnValorAlteradoListener.push(evtOnValorAlteradoListener);
@@ -704,7 +700,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener) == 0)
+                if (this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener) == -1)
                 {
                     return;
                 }
@@ -742,7 +738,7 @@ module NetZ_Web_TypeScript
                 arg.strValor = this.strValor;
                 arg.strValorAnterior = this.strValorAnterior;
 
-                this.arrEvtOnValorAlteradoListener.forEach((value) => { value.onValorAlterado(this, arg); });
+                this.arrEvtOnValorAlteradoListener.forEach((evt) => { evt.onValorAlterado(this, arg); });
             }
             catch (ex)
             {

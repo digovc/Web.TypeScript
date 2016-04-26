@@ -21,6 +21,23 @@
 
         // #region Métodos
 
+        protected carregarDados(): void
+        {
+            super.carregarDados();
+
+            this.carregarDadosIntFiltroId();
+        }
+
+        private carregarDadosIntFiltroId(): void
+        {
+            if (this.jnlCadastroPai == null)
+            {
+                return;
+            }
+
+            this.tblWeb.getClnWeb("int_filtro_id").intValor = this.jnlCadastroPai.intRegistroId;
+        }
+
         // #endregion Métodos
 
         // #region Eventos

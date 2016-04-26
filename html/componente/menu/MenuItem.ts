@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../../../persistencia/TabelaWeb.ts"/>
+/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../painel/PainelHtml.ts"/>
 
 module NetZ_Web_TypeScript

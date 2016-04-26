@@ -16,8 +16,53 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
+        private _intValor: number;
         private _strCritica: string;
         private _strValor: string;
+
+        public get intValor(): number
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._intValor = parseInt(this.strValor);
+            }
+            catch (ex)
+            {
+                return 0;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._intValor;
+        }
+
+        public set intValor(intValor: number)
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this._intValor = intValor;
+
+                this.strValor = this._intValor.toString();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         public get strCritica(): string
         {

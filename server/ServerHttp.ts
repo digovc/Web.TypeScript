@@ -82,7 +82,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (tagLink.href.indexOf("?x") == -1)
+                if (tagLink.href.indexOf("?x") == -1) // TODO: Em vez de usar o processo de agregar o "x", usar a data e hora.
                 {
                     tagLink.href = tagLink.href + "?x";
                 }

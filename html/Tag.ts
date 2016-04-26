@@ -491,6 +491,18 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
+        protected limparMemoria(): void
+        {
+            super.limparMemoria();
+
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            this.jq.remove();
+        }
+
         protected montarLayout(): void
         {
         }
@@ -587,7 +599,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) > 0)
+                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) > -1)
                 {
                     return;
                 }
@@ -622,7 +634,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) == 0)
+                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) == -1)
                 {
                     return;
                 }
@@ -652,7 +664,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnClickListener.forEach((value) => { value.onClick(this, e); });
+                this.arrEvtOnClickListener.forEach((evt) => { evt.onClick(this, e); });
             }
             catch (ex)
             {
@@ -710,7 +722,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener) > 0)
+                if (this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener) > -1)
                 {
                     return;
                 }
@@ -745,7 +757,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnDoubleClickListener.forEach((value) => { value.onDoubleClick(this, arg); });
+                this.arrEvtOnDoubleClickListener.forEach((evt) => { evt.onDoubleClick(this, arg); });
             }
             catch (ex)
             {
@@ -770,7 +782,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener) == 0)
+                if (this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener) == -1)
                 {
                     return;
                 }
@@ -833,7 +845,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener) > 0)
+                if (this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener) > -1)
                 {
                     return;
                 }
@@ -868,7 +880,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnMouseLeaveListener.forEach((value) => { value.onMouseLeave(this, arg); });
+                this.arrEvtOnMouseLeaveListener.forEach((evt) => { evt.onMouseLeave(this, arg); });
             }
             catch (ex)
             {
@@ -893,7 +905,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener) == 0)
+                if (this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener) == -1)
                 {
                     return;
                 }
@@ -956,7 +968,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener) > 0)
+                if (this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener) > -1)
                 {
                     return;
                 }
@@ -991,7 +1003,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnMouseOverListener.forEach((value) => { value.onMouseOver(this, arg); });
+                this.arrEvtOnMouseOverListener.forEach((evt) => { evt.onMouseOver(this, arg); });
             }
             catch (ex)
             {
@@ -1016,7 +1028,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener) == 0)
+                if (this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener) == -1)
                 {
                     return;
                 }

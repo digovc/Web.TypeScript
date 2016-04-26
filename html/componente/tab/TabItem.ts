@@ -1,4 +1,4 @@
-﻿/// <reference path="../../../persistencia/TabelaWeb.ts"/>
+﻿/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="TabItemHead.ts"/>
 
 module NetZ_Web_TypeScript
@@ -139,48 +139,29 @@ module NetZ_Web_TypeScript
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR;
-            objSolicitacaoAjaxDb.jsn = JSON.stringify(this.tblWeb);
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID;
+            objSolicitacaoAjaxDb.strData = JSON.stringify(this.tblWeb);
 
             objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
 
             ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
 
-        private pesquisarResultado(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        private pesquisarSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
         {
             if (objSolicitacaoAjaxDb == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.jsn))
-            {
-                return;
-            }
-
-            var tblWeb = new TabelaWeb(this.tblWeb.strNome);
-
-            tblWeb.carregarDados(JSON.parse(objSolicitacaoAjaxDb.jsn));
-
-            this.pesquisarResposta2(tblWeb);
-        }
-
-        private pesquisarResposta2(tblWeb: TabelaWeb): void
-        {
-            if (tblWeb == null)
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia(tblWeb.tag))
+            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
             {
                 return;
             }
 
             ServerHttp.i.atualizarCssMain();
 
-            this.jq.html(tblWeb.tag);
+            this.jq.html(objSolicitacaoAjaxDb.strData);
 
             this.inicializarGridHtml();
         }
@@ -268,7 +249,12 @@ module NetZ_Web_TypeScript
 
         private inicializarGridHtml(): void
         {
-            this.tagGridHtml = new GridHtml("tagGridHtml_consulta");
+            if (this.tblWeb == null)
+            {
+                return;
+            }
+
+            this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
 
             this.tagGridHtml.iniciar();
 
@@ -307,8 +293,8 @@ module NetZ_Web_TypeScript
 
                 switch (arg.objSolicitacaoAjaxDb.enmMetodo)
                 {
-                    case SolicitacaoAjaxDb_EnmMetodo.PESQUISAR:
-                        this.pesquisarResultado(arg.objSolicitacaoAjaxDb);
+                    case SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID:
+                        this.pesquisarSucesso(arg.objSolicitacaoAjaxDb);
                         return;
                 }
             }
@@ -341,6 +327,7 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
         }
+
         // #endregion Eventos
     }
 }

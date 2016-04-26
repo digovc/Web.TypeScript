@@ -16,12 +16,32 @@ module NetZ_Web_TypeScript
         // #endregion Constantes
 
         // #region Atributos
+
+        private _cmb: ComboBox;
+
+        private get cmb(): ComboBox
+        {
+            if (this._cmb != null)
+            {
+                return this._cmb;
+            }
+
+            this._cmb = new ComboBox(this.tagInput.strId);
+
+            return this._cmb;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
         // #endregion Construtores
 
         // #region Métodos
+
+        public addOpcao(par: ParValorNome): void
+        {
+            this.cmb.addOpcao(par);
+        }
 
         protected getTagInput(): Input
         {

@@ -1,6 +1,6 @@
-﻿/// <reference path="../../../erro/Erro.ts"/>
+﻿/// <reference path="../../../database/ColunaWeb.ts"/>
+/// <reference path="../../../erro/Erro.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
-/// <reference path="../../../persistencia/ColunaWeb.ts"/>
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../../Div.ts"/>
 /// <reference path="../../Input.ts"/>

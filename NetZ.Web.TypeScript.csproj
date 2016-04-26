@@ -25,6 +25,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="AppWeb.ts" />
     <TypeScriptCompile Include="Boot.ts" />
+    <TypeScriptCompile Include="database\DataCell.ts" />
+    <TypeScriptCompile Include="database\DataRow.ts" />
+    <TypeScriptCompile Include="database\DataTable.ts" />
+    <TypeScriptCompile Include="database\ParValorNome.ts" />
+    <TypeScriptCompile Include="database\TblFiltro.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="html\componente\ActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
@@ -34,6 +39,7 @@
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroItemCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltro.ts" />
+    <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltroConteudo.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelAcaoConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelFiltro.ts" />
@@ -44,7 +50,7 @@
     <TypeScriptCompile Include="html\componente\tab\TabItemHead.ts" />
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
-    <TypeScriptCompile Include="OnCloseListener.ts" />
+    <TypeScriptCompile Include="OnDisposedListener.ts" />
     <TypeScriptCompile Include="OnDoubleClickListener.ts" />
     <TypeScriptCompile Include="OnLeaveListener.ts" />
     <TypeScriptCompile Include="OnEnterListener.ts" />
@@ -101,9 +107,9 @@
     <TypeScriptCompile Include="lib\jquery.d.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
     <TypeScriptCompile Include="OnClickListener.ts" />
-    <TypeScriptCompile Include="persistencia\ColunaWeb.ts" />
-    <TypeScriptCompile Include="persistencia\FiltroWeb.ts" />
-    <TypeScriptCompile Include="persistencia\TabelaWeb.ts" />
+    <TypeScriptCompile Include="database\ColunaWeb.ts" />
+    <TypeScriptCompile Include="database\FiltroWeb.ts" />
+    <TypeScriptCompile Include="database\TabelaWeb.ts" />
     <TypeScriptCompile Include="server\OnAjaxErroArg.ts" />
     <TypeScriptCompile Include="server\OnAjaxListener.ts" />
     <TypeScriptCompile Include="server\OnAjaxSucessoArg.ts" />

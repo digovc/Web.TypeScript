@@ -1,5 +1,5 @@
 ﻿/// <reference path="GridRow.ts"/>
-/// <reference path="../../../persistencia/TabelaWeb.ts"/>
+/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Utils.ts"/>
 
 module NetZ_Web_TypeScript
@@ -398,7 +398,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) > 0)
+                if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) > -1)
                 {
                     return;
                 }
@@ -433,7 +433,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnRowDoubleClickListener.forEach((value) => { value.onRowDoubleClick(this, tagGridRow); });
+                this.arrEvtOnRowDoubleClickListener.forEach((evt) => { evt.onRowDoubleClick(this, tagGridRow); });
             }
             catch (ex)
             {
@@ -458,7 +458,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) == 0)
+                if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) == -1)
                 {
                     return;
                 }

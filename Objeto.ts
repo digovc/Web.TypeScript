@@ -1,4 +1,5 @@
-﻿/// <reference path="Utils.ts"/>
+﻿/// <reference path="OnDisposedListener.ts"/>
+/// <reference path="Utils.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -113,7 +114,7 @@ module NetZ_Web_TypeScript
          * para esta instância.
          * @param obj Objeto com o mesmo prototipo deste.
          */
-        public carregarDados(obj: any): void
+        public copiarDados(obj: any): void
         {
             for (var objPropriedade in obj)
             {
@@ -121,9 +122,139 @@ module NetZ_Web_TypeScript
             }
         }
 
+        public dispose(): void
+        {
+            this.limparMemoria();
+
+            this.dispararEvtOnDisposedListener();
+        }
+
+        protected limparMemoria(): void
+        {
+        }
+
         // #endregion Métodos
 
         // #region Eventos
+
+        // #region Evento OnDisposedListener
+
+        private _arrEvtOnDisposedListener: Array<OnDisposedListener>;
+
+        private get arrEvtOnDisposedListener(): Array<OnDisposedListener>
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._arrEvtOnDisposedListener != null)
+                {
+                    return this._arrEvtOnDisposedListener;
+                }
+
+                this._arrEvtOnDisposedListener = new Array<OnDisposedListener>();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._arrEvtOnDisposedListener;
+        }
+
+        public addEvtOnDisposedListener(evtOnDisposedListener: OnDisposedListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnDisposedListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener) > -1)
+                {
+                    return;
+                }
+
+                this.arrEvtOnDisposedListener.push(evtOnDisposedListener);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private dispararEvtOnDisposedListener(): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrEvtOnDisposedListener.length == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnDisposedListener.forEach((evt) => { evt.onDisposed(this); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public removerEvtOnDisposedListener(evtOnDisposedListener: OnDisposedListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnDisposedListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener) == -1)
+                {
+                    return;
+                }
+
+                this.arrEvtOnDisposedListener.splice(this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        // #endregion Evento OnDisposedListener
+
         // #endregion Eventos
     }
 }

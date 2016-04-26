@@ -356,6 +356,8 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
+                ServerHttp.i.atualizarCssMain();
+
                 this.pnlAcaoConsulta.iniciar();
                 this.pnlFiltro.iniciar();
             }
@@ -377,7 +379,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.tagGridHtml = new GridHtml("tagGridHtml_consulta");
+                if (this.tblWeb == null)
+                {
+                    return;
+                }
+
+                this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
 
                 this.tagGridHtml.iniciar();
 
@@ -404,10 +411,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
+                this.pnlFiltro.atualizarLstFiltro(this.tblWeb);
+
                 objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR;
-                objSolicitacaoAjaxDb.jsn = JSON.stringify(this.tblWeb);
+                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID;
+                objSolicitacaoAjaxDb.strData = JSON.stringify(this.tblWeb);
 
                 objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
 
@@ -423,7 +432,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private pesquisarResposta(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        private pesquisarSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
         {
             // #region Variáveis
 
@@ -439,48 +448,14 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.jsn))
-                {
-                    return;
-                }
-
-                tblWeb = new TabelaWeb(this.tblWeb.strNome);
-
-                tblWeb.carregarDados(JSON.parse(objSolicitacaoAjaxDb.jsn));
-
-                this.pesquisarResposta2(tblWeb);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        private pesquisarResposta2(tblWeb: TabelaWeb): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (tblWeb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(tblWeb.tag))
+                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
                 {
                     return;
                 }
 
                 ServerHttp.i.atualizarCssMain();
 
-                this.divGrid.jq.html(tblWeb.tag);
+                this.divGrid.jq.html(objSolicitacaoAjaxDb.strData);
 
                 this.inicializarGridHtml();
             }
@@ -557,8 +532,8 @@ module NetZ_Web_TypeScript
 
                 switch (arg.objSolicitacaoAjaxDb.enmMetodo)
                 {
-                    case SolicitacaoAjaxDb_EnmMetodo.PESQUISAR:
-                        this.pesquisarResposta(arg.objSolicitacaoAjaxDb);
+                    case SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID:
+                        this.pesquisarSucesso(arg.objSolicitacaoAjaxDb);
                         return;
                 }
             }

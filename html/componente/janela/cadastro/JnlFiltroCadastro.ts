@@ -14,18 +14,6 @@
 
         // #region Atributos
 
-        private _booClnStrTabelaNomeAdicionada: boolean;
-
-        private get booClnStrTabelaNomeAdicionada(): boolean
-        {
-            return this._booClnStrTabelaNomeAdicionada;
-        }
-
-        private set booClnStrTabelaNomeAdicionada(booClnStrTabelaNomeAdicionada: boolean)
-        {
-            this._booClnStrTabelaNomeAdicionada = booClnStrTabelaNomeAdicionada;
-        }
-
         // #endregion Atributos
 
         // #region Construtores
@@ -33,52 +21,31 @@
 
         // #region Métodos
 
-        public salvar(): void
+        protected carregarDados(): void
         {
-            if (this.pag == null)
-            {
-                return;
-            }
+            super.carregarDados();
 
-            if ((<PagPrincipal>this.pag).jnlConsulta == null)
-            {
-                return;
-            }
-
-            if ((<PagPrincipal>this.pag).jnlConsulta.tblWeb == null)
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia((<PagPrincipal>this.pag).jnlConsulta.tblWeb.strNome))
-            {
-                return;
-            }
-
-            this.salvarAddClnStrTabelaNome((<PagPrincipal>this.pag).jnlConsulta.tblWeb.strNome);
-
-            super.salvar();
+            this.carregarDadosStrTabelaNome();
         }
 
-        private salvarAddClnStrTabelaNome(strTabelaNome: string): void
+        private carregarDadosStrTabelaNome(): void
         {
-            if (this.booClnStrTabelaNomeAdicionada)
+            if (this.pagPrincipal == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(strTabelaNome))
+            if (this.pagPrincipal.jnlConsulta == null)
             {
                 return;
             }
 
-            var clnStrTabelaNome: ColunaWeb = new ColunaWeb("str_tabela_nome");
+            if (this.pagPrincipal.jnlConsulta.tblWeb == null)
+            {
+                return;
+            }
 
-            clnStrTabelaNome.strValor = strTabelaNome;
-
-            this.tblWeb.addClnWeb(clnStrTabelaNome);
-
-            this.booClnStrTabelaNomeAdicionada = true;
+            this.tblWeb.getClnWeb("str_tabela_nome").strValor = (<PagPrincipal>this.pag).jnlConsulta.tblWeb.strNome;
         }
 
         // #endregion Métodos
