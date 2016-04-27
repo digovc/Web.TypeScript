@@ -27,81 +27,36 @@ module NetZ_Web_TypeScript
 
         private get arrMniFilho(): Array<MenuItem>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrMniFilho != null)
+            {
+                return this._arrMniFilho;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrMniFilho != null)
-                {
-                    return this._arrMniFilho;
-                }
-
-                this._arrMniFilho = new Array<MenuItem>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrMniFilho = new Array<MenuItem>();
 
             return this._arrMniFilho;
         }
 
         private get arrStrTag(): Array<string>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrStrTag != null)
+            {
+                return this._arrStrTag;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrStrTag != null)
-                {
-                    return this._arrStrTag;
-                }
-
-                this._arrStrTag = new Array<string>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrStrTag = new Array<string>();
 
             return this._arrStrTag;
         }
 
         private get divItemConteudo(): PainelHtml
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._divItemConteudo != null)
+            {
+                return this._divItemConteudo;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._divItemConteudo != null)
-                {
-                    return this._divItemConteudo;
-                }
-
-                this._divItemConteudo = new Div(this.strId + "_itemConteudo");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._divItemConteudo = new Div(this.strId + "_itemConteudo");
 
             return this._divItemConteudo;
         }
@@ -118,27 +73,12 @@ module NetZ_Web_TypeScript
 
         private get divTitulo(): Div
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._divTitulo != null)
+            {
+                return this._divTitulo;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._divTitulo != null)
-                {
-                    return this._divTitulo;
-                }
-
-                this._divTitulo = new Div(this.strId + "_titulo");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._divTitulo = new Div(this.strId + "_titulo");
 
             return this._divTitulo;
         }
@@ -155,27 +95,12 @@ module NetZ_Web_TypeScript
 
         private get tblWeb(): TabelaWeb
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._tblWeb != null)
+            {
+                return this._tblWeb;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._tblWeb != null)
-                {
-                    return this._tblWeb;
-                }
-
-                this._tblWeb = this.getTblWeb();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._tblWeb = this.getTblWeb();
 
             return this._tblWeb;
         }
@@ -189,171 +114,115 @@ module NetZ_Web_TypeScript
 
         private abrirConsulta(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (tblWeb == null)
             {
-                if (tblWeb == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.mniPai != null)
-                {
-                    this.mniPai.abrirConsulta(tblWeb);
-                    return;
-                }
+            if (this.mniPai != null)
+            {
+                this.mniPai.abrirConsulta(tblWeb);
+                return;
+            }
 
-                if (this.mnuPai != null)
+            if (this.mnuPai != null)
+            {
+                this.mnuPai.abrirConsulta(tblWeb);
+                return;
+            }
+        }
+
+        public abrirConsultaPrimeira(): boolean
+        {
+            for (var i = 0; i < this.arrMniFilho.length; i++)
+            {
+                if (this.arrMniFilho[i].abrirConsultaPrimeira())
                 {
-                    this.mnuPai.abrirConsulta(tblWeb);
-                    return;
+                    return true;
                 }
             }
-            catch (ex)
+
+            if (this.arrMniFilho.length > 0)
             {
-                throw ex;
+                return false;
             }
-            finally
+
+            if (this.mniPai == null)
             {
+                return false;
             }
-            // #endregion Ações
+
+            if (!this.booVisivel)
+            {
+                return false;
+            }
+
+            if (!this.mniPai.divItemConteudo.booVisivel)
+            {
+                return false;
+            }
+
+            this.abrirConsulta(this.tblWeb);
+
+            return true;
         }
 
         public addMniFilho(mniFilho: MenuItem): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (mniFilho == null)
             {
-                if (mniFilho == null)
-                {
-                    return;
-                }
-
-                if (this.arrMniFilho.indexOf(mniFilho) > -1)
-                {
-                    return;
-                }
-
-                this.arrMniFilho.push(mniFilho);
-
-                mniFilho.mniPai = this;
-
-                mniFilho.iniciar();
+                return;
             }
-            catch (ex)
+
+            if (this.arrMniFilho.indexOf(mniFilho) > -1)
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.arrMniFilho.push(mniFilho);
+
+            mniFilho.mniPai = this;
+
+            mniFilho.iniciar();
         }
 
         private divTitulo_onClick(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.arrMniFilho.length > 0)
+            {
+                this.mostrarEsconderDivItemConteudo();
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.arrMniFilho != null && (this.arrMniFilho.length > 0))
-                {
-                    this.mostrarEsconderDivItemConteudo();
-                    return;
-                }
-
-                this.abrirConsulta(this.tblWeb);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.abrirConsulta(this.tblWeb);
         }
 
         private getTblWeb(): TabelaWeb
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.jq == null)
             {
-                if (this.jq == null)
-                {
-                    return null;
-                }
+                return null;
+            }
 
-                if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
-                {
-                    return null;
-                }
+            if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
+            {
+                return null;
+            }
 
-                return new TabelaWeb(this.jq.attr("tbl_web_nome"));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            return new TabelaWeb(this.jq.attr("tbl_web_nome"));
         }
 
         protected inicializar(): void
         {
             super.inicializar();
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.inicializarArrStrTag(this.arrStrTag);
-                this.inicializarItem();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.inicializarArrStrTag(this.arrStrTag);
+            this.inicializarItem();
         }
 
         protected inicializarArrStrTag(arrStrTag: Array<string>): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                arrStrTag.push(this.divTitulo.strConteudo);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            arrStrTag.push(this.divTitulo.strConteudo);
         }
 
         protected inicializarItem(): void
@@ -362,152 +231,75 @@ module NetZ_Web_TypeScript
 
         public limparPesquisa(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this.mostrar();
+            this.divItemConteudo.esconder();
 
-            // #region Ações
-            try
+            if (this.arrMniFilho == null)
             {
-                this.mostrar();
-                this.divItemConteudo.esconder();
+                return;
+            }
 
-                if (this.arrMniFilho == null)
-                {
-                    return;
-                }
-
-                this.arrMniFilho.forEach((mni) => { mni.limparPesquisa() });
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrMniFilho.forEach((mni) => { mni.limparPesquisa() });
         }
 
         public mostrarEsconderDivItemConteudo(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.arrMniFilho.length < 1)
             {
-                if (this.arrMniFilho.length < 1)
-                {
-                    return;
-                }
+                return;
+            }
 
-                this.divItemConteudo.mostrarEsconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
-
-                //this.lstMmiFilho.forEach((mmi) => (mmi != null) && mmi.mostrarEsconder(EnmAnimacaoTipo.SLIDE_VERTICAL));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.divItemConteudo.mostrarEsconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
         }
 
         public pesquisar(strPesquisa: string): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.arrMniFilho == null)
             {
-                if (this.arrMniFilho == null)
-                {
-                    return;
-                }
-
-                this.esconder();
-                this.divItemConteudo.esconder();
-
-                this.arrMniFilho.forEach((mni) => { mni.pesquisar(strPesquisa) });
-
-                if (this.arrStrTag == null)
-                {
-                    return;
-                }
-
-                this.arrStrTag.forEach((strTag) => this.pesquisarStrTag(strPesquisa, strTag));
+                return;
             }
-            catch (ex)
+
+            this.esconder();
+            this.divItemConteudo.esconder();
+
+            this.arrMniFilho.forEach((mni) => { mni.pesquisar(strPesquisa) });
+
+            if (this.arrStrTag == null)
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.arrStrTag.forEach((strTag) => this.pesquisarStrTag(strPesquisa, strTag));
         }
 
         private pesquisarStrTag(strPesquisa: string, strTag: string): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(strTag))
             {
-                if (Utils.getBooStrVazia(strTag))
-                {
-                    return;
-                }
-
-                if (strTag.toLowerCase().indexOf(strPesquisa.toLowerCase()) < 0)
-                {
-                    return;
-                }
-
-                this.mostrar();
-
-                if (this.mniPai == null)
-                {
-                    return;
-                }
-
-                this.mniPai.mostrar();
-                this.mniPai.divItemConteudo.mostrar();
+                return;
             }
-            catch (ex)
+
+            if (strTag.toLowerCase().indexOf(strPesquisa.toLowerCase()) < 0)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            this.mostrar();
+
+            if (this.mniPai == null)
             {
+                return;
             }
-            // #endregion Ações
+
+            this.mniPai.mostrar();
+            this.mniPai.divItemConteudo.mostrar();
         }
 
         protected setEventos(): void
         {
             super.setEventos();
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.divTitulo.addEvtOnClickListener(this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.divTitulo.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos

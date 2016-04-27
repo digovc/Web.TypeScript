@@ -163,45 +163,12 @@ module NetZ_Web_TypeScript
                 return;
             }
 
+
             TblFiltro.i.limparFiltro();
 
             TblFiltro.i.addFiltro2(TblFiltro.i.clnStrTabelaNome, this.tblWebConsulta.strNome);
 
-            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb = new SolicitacaoAjaxDb();
-
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_COMBO_BOX;
-
-            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.carregarDadosCmpFiltroSucesso(objSolicitacaoAjaxDb); });
-            objSolicitacaoAjaxDb.addJsn(TblFiltro.i);
-
-            objSolicitacaoAjaxDb.enviar();
-        }
-
-        private carregarDadosCmpFiltroSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
-        {
-            if (objSolicitacaoAjaxDb == null)
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
-            {
-                return;
-            }
-
-            var arrData: Array<any> = JSON.parse(objSolicitacaoAjaxDb.strData);
-
-            arrData.forEach((par) => { this.carregarDadosCmpFiltroSucesso2(par); });
-        }
-
-        private carregarDadosCmpFiltroSucesso2(par: ParValorNome): void
-        {
-            if (par == null)
-            {
-                return;
-            }
-
-            this.cmpIntFiltroId.addOpcao(par);
+            this.cmpIntFiltroId.carregarDados(TblFiltro.i);
         }
 
         private getTblWebConsulta(): TabelaWeb

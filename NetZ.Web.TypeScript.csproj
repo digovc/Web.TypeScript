@@ -50,8 +50,11 @@
     <TypeScriptCompile Include="html\componente\tab\TabItemHead.ts" />
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
+    <TypeScriptCompile Include="Keys.ts" />
     <TypeScriptCompile Include="OnDisposedListener.ts" />
     <TypeScriptCompile Include="OnDoubleClickListener.ts" />
+    <TypeScriptCompile Include="OnKeyDownListener.ts" />
+    <TypeScriptCompile Include="OnKeyPressListener.ts" />
     <TypeScriptCompile Include="OnLeaveListener.ts" />
     <TypeScriptCompile Include="OnEnterListener.ts" />
     <TypeScriptCompile Include="OnMouseLeaveListener.ts" />

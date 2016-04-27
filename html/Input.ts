@@ -10,7 +10,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class Input extends Tag
+    export class Input extends Tag implements OnValorAlteradoListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -211,8 +211,6 @@ module NetZ_Web_TypeScript
 
         public get strValor(): string
         {
-            this._strValor = this.getStrValor();
-
             return this._strValor;
         }
 
@@ -280,7 +278,11 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.jq.val(this.strValor);
+                if (this.jq.val() != this.strValor)
+                {
+                    this.jq.val(this.strValor);
+                }
+
                 this.dispararEvtOnValorAlteradoListener();
             }
             catch (ex)
@@ -298,43 +300,31 @@ module NetZ_Web_TypeScript
             return Utils.getBooStrVazia(this.strValor);
         }
 
-        private getStrValor(): string
-        {
-            if (this.jq == null)
-            {
-                return null;
-            }
-
-            return this.jq.val();
-        }
-
         protected inicializar(): void
         {
             super.inicializar();
 
-            // #region Variáveis
-            // #endregion Variáveis
+            this.inicializarStrValor();
+        }
 
-            // #region Ações
-            try
-            {
-                this.strValorInicial = this.strValor;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+        private inicializarStrValor(): void
+        {
+            this._strValor = this.jq.val();
+            this.strValorInicial = this.strValor;
+        }
+
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            this.addEvtOnValorAlteradoListener(this);
         }
 
         // #endregion Métodos
 
         // #region Eventos
 
-        private onChange(): void
+        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -342,27 +332,12 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.dispararEvtOnValorAlteradoListener();
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
+                if (this.strValor == this.jq.val())
+                {
+                    return;
+                }
 
-        private onKeyUp(arg: JQueryKeyEventObject)
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.dispararEvtOnValorAlteradoListener();
+                this.strValor = this.jq.val();
             }
             catch (ex)
             {
@@ -671,8 +646,8 @@ module NetZ_Web_TypeScript
 
                 if (this.arrEvtOnValorAlteradoListener.length == 0)
                 {
-                    this.jq.keyup((arg) => this.onKeyUp(arg));
-                    this.jq.change(() => { this.onChange(); });
+                    this.jq.change((arg) => { this.dispararEvtOnValorAlteradoListener(); });
+                    this.jq.keydown((arg) => { this.dispararEvtOnValorAlteradoListener(); });
                 }
 
                 this.arrEvtOnValorAlteradoListener.push(evtOnValorAlteradoListener);

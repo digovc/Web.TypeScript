@@ -19,7 +19,7 @@ module NetZ_Web_TypeScript
 
         private _cmb: ComboBox;
 
-        private get cmb(): ComboBox
+        protected get cmb(): ComboBox
         {
             if (this._cmb != null)
             {
@@ -43,9 +43,19 @@ module NetZ_Web_TypeScript
             this.cmb.addOpcao(par);
         }
 
+        public carregarDados(tblWeb: TabelaWeb): void
+        {
+            this.cmb.carregarDados(tblWeb);
+        }
+
         protected getTagInput(): Input
         {
             return new ComboBox(this.strId + "_tagInput");
+        }
+
+        public limparDados(): void
+        {
+            this.cmb.limparDados();
         }
 
         protected inicializar(): void

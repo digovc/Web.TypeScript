@@ -100,16 +100,18 @@ module NetZ_Web_TypeScript
             this.frmFiltroConteudo.atualizarLstFiltro(tblWeb);
         }
 
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.frmFiltro.iniciar();
+        }
+
         private inicializarFrmFiltroConteudo(): void
         {
             this.frmFiltroConteudo = new FrmFiltroConteudo();
 
             this.frmFiltroConteudo.iniciar();
-        }
-
-        public iniciar(): void
-        {
-            this.frmFiltro.iniciar();
         }
 
         // #endregion Métodos

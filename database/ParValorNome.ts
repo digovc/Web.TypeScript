@@ -39,6 +39,13 @@
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor(objValor: Object, strNome: string)
+        {
+            this.objValor = objValor;
+            this.strNome = strNome;
+        }
+
         // #endregion Construtores
 
         // #region Métodos

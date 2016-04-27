@@ -1,6 +1,7 @@
 ﻿/// <reference path="../campo/CampoAlfanumerico.ts"/>
 /// <reference path="../campo/CampoCheckBox.ts"/>
 /// <reference path="../campo/CampoComboBox.ts"/>
+/// <reference path="../campo/CampoConsulta.ts"/>
 /// <reference path="../campo/CampoNumerico.ts"/>
 
 module NetZ_Web_TypeScript
@@ -63,70 +64,58 @@ module NetZ_Web_TypeScript
          */
         public enviar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.jq == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.jq == null)
-                {
-                    return;
-                }
+            this.jq.submit();
+        }
 
-                this.jq.submit();
-            }
-            catch (ex)
+        protected finalizar(): void
+        {
+            super.finalizar();
+
+            this.finalizarSelecionarCampo();
+        }
+
+        private finalizarSelecionarCampo(): void
+        {
+            if (this.arrCmp == null)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            if (this.arrCmp.length < 2)
             {
+                return;
             }
-            // #endregion Ações
+
+            this.arrCmp[1].receberFoco();
         }
 
         private getArrCmp(): Array<CampoHtml>
         {
-            // #region Variáveis
-
-            var arrCmpJq: any;
-            var arrCmpResultado: Array<CampoHtml>;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.jq == null)
             {
-                if (this.jq == null)
-                {
-                    return;
-                }
-
-                arrCmpResultado = new Array<CampoHtml>();
-
-                arrCmpJq = this.jq.find("[clazz*=Campo]");
-
-                if (arrCmpJq == null)
-                {
-                    return;
-                }
-
-                for (var i = 0; i < arrCmpJq.length; i++)
-                {
-                    this.getArrCmp2(arrCmpResultado, arrCmpJq[i]);
-                }
-
-                return arrCmpResultado;
+                return;
             }
-            catch (ex)
+
+            var arrCmpJq = this.jq.find("[clazz*=Campo]");
+
+            if (arrCmpJq == null)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            var arrCmpResultado = new Array<CampoHtml>();
+
+            for (var i = 0; i < arrCmpJq.length; i++)
             {
+                this.getArrCmp2(arrCmpResultado, arrCmpJq[i]);
             }
-            // #endregion Ações
+
+            return arrCmpResultado;
         }
 
         private getArrCmp2(arrCmpResultado: Array<CampoHtml>, cmpJq: HTMLElement): void
@@ -153,6 +142,10 @@ module NetZ_Web_TypeScript
 
                 case "CampoComboBox":
                     arrCmpResultado.push(new CampoComboBox(cmpJq.id));
+                    return;
+
+                case "CampoConsulta":
+                    arrCmpResultado.push(new CampoConsulta(cmpJq.id));
                     return;
 
                 case "CampoNumerico":
@@ -231,17 +224,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => this.inicializarCampos2(cmp));
-        }
-
-        private inicializarCampos2(cmp: CampoHtml): void
-        {
-            if (cmp == null)
-            {
-                return;
-            }
-
-            cmp.iniciar();
+            this.arrCmp.forEach((cmp) => { cmp.iniciar(); });
         }
 
         public validarDados(): boolean

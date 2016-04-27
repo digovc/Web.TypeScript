@@ -163,6 +163,23 @@ module NetZ_Web_TypeScript
             this.divTitulo.jq.animate({ opacity: 0 }, 200);
         }
 
+        public receberFoco(): void
+        {
+            //super.receberFoco();
+
+            if (this.tagInput == null)
+            {
+                return;
+            }
+
+            if (this.tagInput.jq == null)
+            {
+                return;
+            }
+
+            this.tagInput.jq.focus();
+        }
+
         protected setEventos(): void
         {
             super.setEventos();

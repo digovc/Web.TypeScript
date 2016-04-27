@@ -14,6 +14,9 @@
     export class Utils
     {
         // #region Constantes
+
+        public static get STR_VAZIA(): string { return "" };
+
         // #endregion Constantes
 
         // #region Atributos
@@ -64,35 +67,20 @@
          */
         public static getBooStrVazia(str: string): boolean
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (str == null)
             {
-                if (str == null)
-                {
-                    return true;
-                }
+                return true;
+            }
 
-                if (str == "")
-                {
-                    return true;
-                }
+            if (str == undefined)
+            {
+                return true;
+            }
 
-                if (str == undefined)
-                {
-                    return true;
-                }
-            }
-            catch (ex)
+            if (str == Utils.STR_VAZIA)
             {
-                throw ex;
+                return true;
             }
-            finally
-            {
-            }
-            // #endregion Ações
 
             return false;
         }

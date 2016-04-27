@@ -1,7 +1,9 @@
-﻿/// <reference path="../OnDoubleClickListener.ts"/>
-/// <reference path="../OnMouseOverListener.ts"/>
+﻿/// <reference path="../lib/jquery.d.ts"/>
+/// <reference path="../OnDoubleClickListener.ts"/>
+/// <reference path="../OnKeyDownListener.ts"/>
+/// <reference path="../OnKeyPressListener.ts"/>
 /// <reference path="../OnMouseLeaveListener.ts"/>
-/// <reference path="../lib/jquery.d.ts"/>
+/// <reference path="../OnMouseOverListener.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -37,115 +39,40 @@ module NetZ_Web_TypeScript
 
         public get booVisivel(): boolean
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._booVisivel = this.jq.is(":visible");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._booVisivel = this.jq.is(":visible");
 
             return this._booVisivel;
         }
 
         public set booVisivel(booVisivel: boolean)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._booVisivel = booVisivel;
 
-            // #region Ações
-            try
-            {
-                this._booVisivel = booVisivel;
-
-                this._booVisivel ? this.mostrar() : this.esconder();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._booVisivel ? this.mostrar() : this.esconder();
         }
 
         public get strConteudo(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._strConteudo = this.jq.html();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._strConteudo = this.jq.html();
 
             return this._strConteudo;
         }
 
         public set strConteudo(strConteudo: string)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._strConteudo = strConteudo;
 
-            // #region Ações
-            try
-            {
-                this._strConteudo = strConteudo;
-
-                this.jq.html(this._strConteudo);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.jq.html(this._strConteudo);
         }
 
         public get jq(): JQuery
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._jq != null)
+            {
+                return this._jq;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._jq != null)
-                {
-                    return this._jq;
-                }
-
-                this._jq = $(this.strJqSelector);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._jq = $(this.strJqSelector);
 
             return this._jq;
         }
@@ -157,51 +84,21 @@ module NetZ_Web_TypeScript
 
         public get strJqSelector(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (!Utils.getBooStrVazia(this._strJqSelector))
+            {
+                return this._strJqSelector;
+            }
 
-            // #region Ações
-            try
-            {
-                if (!Utils.getBooStrVazia(this._strJqSelector))
-                {
-                    return this._strJqSelector;
-                }
-
-                this._strJqSelector = this.getStrJqSelector();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._strJqSelector = this.getStrJqSelector();
 
             return this._strJqSelector;
         }
 
         public set strJqSelector(strJqSelector: string)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._strJqSelector = strJqSelector;
 
-            // #region Ações
-            try
-            {
-                this._strJqSelector = strJqSelector;
-
-                this.atualizarStrJqSelector();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.atualizarStrJqSelector();
         }
 
         public get strId(): string
@@ -216,95 +113,35 @@ module NetZ_Web_TypeScript
 
         public get strPlaceholder(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._strPlaceholder = this.jq.attr("placeholder");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._strPlaceholder = this.jq.attr("placeholder");
 
             return this._strPlaceholder;
         }
 
         public set strPlaceholder(strPlaceholder: string)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._strPlaceholder = strPlaceholder;
 
-            // #region Ações
-            try
-            {
-                this._strPlaceholder = strPlaceholder;
-
-                this.jq.attr("placeholder", this._strPlaceholder);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.jq.attr("placeholder", this._strPlaceholder);
         }
 
         public get strTitle(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (!Utils.getBooStrVazia(this._strTitle))
+            {
+                return this._strTitle;
+            }
 
-            // #region Ações
-            try
-            {
-                if (!Utils.getBooStrVazia(this._strTitle))
-                {
-                    return this._strTitle;
-                }
-
-                this._strTitle = this.jq.attr("title");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._strTitle = this.jq.attr("title");
 
             return this._strTitle;
         }
 
         public set strTitle(strTitle: string)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._strTitle = strTitle;
 
-            // #region Ações
-            try
-            {
-                this._strTitle = strTitle;
-
-                this.atualizarStrTitle();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.atualizarStrTitle();
         }
 
         // #endregion Atributos
@@ -315,22 +152,7 @@ module NetZ_Web_TypeScript
         {
             super();
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.strId = strId;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.strId = strId;
         }
 
         // #endregion Construtores
@@ -339,130 +161,70 @@ module NetZ_Web_TypeScript
 
         public addStrConteudo(strConteudo: string): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.jq.append(strConteudo);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.jq.append(strConteudo);
         }
 
         private atualizarStrJqSelector(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.jq = null;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.jq = null;
         }
 
         private atualizarStrTitle(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.jq == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.jq == null)
-                {
-                    return;
-                }
-
-                this.jq.attr("title", this.strTitle);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.jq.attr("title", this.strTitle);
         }
 
         public esconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
         {
-            // #region Variáveis
+            this.jq.stop();
 
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            switch (enmAnimacaoTipo)
             {
-                this.jq.stop();
+                case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
+                    this.jq.slideUp();
+                    return;
 
-                switch (enmAnimacaoTipo)
-                {
-                    case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
-                        this.jq.slideUp();
-                        return;
+                case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
+                    this.jq.hide(); // TODO: Implementar.
+                    return;
 
-                    case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
-                        this.jq.hide(); // TODO: Implementar.
-                        return;
-
-                    default:
-                        this.jq.fadeOut();
-                        return;
-                }
+                default:
+                    this.jq.fadeOut();
+                    return;
             }
-            catch (ex)
+        }
+
+        protected finalizar(): void
+        {
+        }
+
+        protected getStrAttValor(strAttNome: string): string
+        {
+            if (Utils.getBooStrVazia(strAttNome))
             {
-                throw ex;
+                return null;
             }
-            finally
+
+            if (this.jq == null)
             {
+                return null;
             }
-            // #endregion Ações
+
+            return this.jq.attr(strAttNome);
         }
 
         private getStrJqSelector(): string
         {
-            // #region Variáveis
+            var strJqSelector = "#_tag_id";
 
-            var strJqSelector: string;
+            strJqSelector = strJqSelector.replace("_tag_id", this.strId);
 
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                strJqSelector = "#_tag_id";
-
-                strJqSelector = strJqSelector.replace("_tag_id", this.strId);
-
-                return strJqSelector;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            return strJqSelector;
         }
 
         protected inicializar(): void
@@ -471,24 +233,10 @@ module NetZ_Web_TypeScript
 
         public iniciar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.inicializar();
-                this.montarLayout();
-                this.setEventos();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
         }
 
         protected limparMemoria(): void
@@ -509,42 +257,37 @@ module NetZ_Web_TypeScript
 
         public mostrar(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this.jq.stop();
 
-            // #region Ações
-            try
+            switch (enmAnimacaoTipo)
             {
-                this.jq.stop();
+                case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
+                    this.jq.slideDown();
+                    return;
 
-                switch (enmAnimacaoTipo)
-                {
-                    case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
-                        this.jq.slideDown();
-                        return;
+                case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
+                    this.jq.show(); // TODO: Implementar.
+                    return;
 
-                    case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
-                        this.jq.show(); // TODO: Implementar.
-                        return;
-
-                    default:
-                        this.jq.fadeIn();
-                        return;
-                }
+                default:
+                    this.jq.fadeIn();
+                    return;
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public mostrarEsconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
         {
             (this.booVisivel) ? this.esconder(enmAnimacaoTipo) : this.mostrar(enmAnimacaoTipo);
+        }
+
+        public receberFoco(): void
+        {
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            this.jq.focus();
         }
 
         protected setEventos(): void
@@ -800,6 +543,148 @@ module NetZ_Web_TypeScript
         }
 
         // #endregion Evento OnDoubleClickListener
+
+        // #region Evento OnKeyDownListener
+
+        private _arrEvtOnKeyDownListener: Array<OnKeyDownListener>;
+
+        private get arrEvtOnKeyDownListener(): Array<OnKeyDownListener>
+        {
+            if (this._arrEvtOnKeyDownListener != null)
+            {
+                return this._arrEvtOnKeyDownListener;
+            }
+
+            this._arrEvtOnKeyDownListener = new Array<OnKeyDownListener>();
+
+            return this._arrEvtOnKeyDownListener;
+        }
+
+        public addEvtOnKeyDownListener(evtOnKeyDownListener: OnKeyDownListener): void
+        {
+            if (evtOnKeyDownListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener) > -1)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyDownListener.length == 0)
+            {
+                this.jq.keydown((arg) => this.dispararEvtOnKeyDownListener(arg));
+            }
+
+            this.arrEvtOnKeyDownListener.push(evtOnKeyDownListener);
+        }
+
+        private dispararEvtOnKeyDownListener(arg: JQueryKeyEventObject): void
+        {
+            if (this.arrEvtOnKeyDownListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyDownListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onKeyDown(this, arg);
+            });
+        }
+
+        public removerEvtOnKeyDownListener(evtOnKeyDownListener: OnKeyDownListener): void
+        {
+            if (evtOnKeyDownListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener));
+        }
+
+        // #endregion Evento OnKeyDownListener
+
+        // #region Evento OnKeyPressListener
+
+        private _arrEvtOnKeyPressListener: Array<OnKeyPressListener>;
+
+        private get arrEvtOnKeyPressListener(): Array<OnKeyPressListener>
+        {
+            if (this._arrEvtOnKeyPressListener != null)
+            {
+                return this._arrEvtOnKeyPressListener;
+            }
+
+            this._arrEvtOnKeyPressListener = new Array<OnKeyPressListener>();
+
+            return this._arrEvtOnKeyPressListener;
+        }
+
+        public addEvtOnKeyPressListener(evtOnKeyPressListener: OnKeyPressListener): void
+        {
+            if (evtOnKeyPressListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyPressListener.indexOf(evtOnKeyPressListener) > -1)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyPressListener.length == 0)
+            {
+                this.jq.keypress((arg) => this.dispararEvtOnKeyPressListener(arg));
+            }
+
+            this.arrEvtOnKeyPressListener.push(evtOnKeyPressListener);
+        }
+
+        private dispararEvtOnKeyPressListener(arg: JQueryKeyEventObject): void
+        {
+            if (this.arrEvtOnKeyPressListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyPressListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onKeyPress(this, arg);
+            });
+        }
+
+        public removerEvtOnKeyPressListener(evtOnKeyPressListener: OnKeyPressListener): void
+        {
+            if (evtOnKeyPressListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyPressListener.indexOf(evtOnKeyPressListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyPressListener.splice(this.arrEvtOnKeyPressListener.indexOf(evtOnKeyPressListener));
+        }
+
+        // #endregion Evento OnKeyPressListener
 
         // #region Evento OnMouseLeaveListener
 
