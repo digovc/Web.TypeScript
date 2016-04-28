@@ -36,27 +36,9 @@
          */
         public static carregarImagem(strSrc: string, evtOnLoad: any = null): HTMLImageElement
         {
-            // #region Variáveis
-
-            var img: HTMLImageElement;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                img = new Image();
-                img.src = strSrc;
-                img.onload = evtOnLoad;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            var img = new Image();
+            img.src = strSrc;
+            img.onload = evtOnLoad;
 
             return img;
         }
@@ -91,115 +73,64 @@
          */
         public static validarEmail(strEmail: string): boolean
         {
-            // #region Variáveis
-
-            var objRegExp: RegExp;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(strEmail))
             {
-                if (Utils.getBooStrVazia(strEmail))
-                {
-                    return false;
-                }
+                return false;
+            }
 
-                objRegExp = new RegExp("/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/");
+            var objRegExp = new RegExp("/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/");
 
-                if (objRegExp.test(strEmail))
-                {
-                    return true;
-                }
-            }
-            catch (ex)
+            if (objRegExp.test(strEmail))
             {
-                throw ex;
+                return true;
             }
-            finally
-            {
-            }
-            // #endregion Ações
 
             return false;
         }
 
         public static getStrTamanhoFixo(str: string, intTamanho: number, strComplemento: string = " ", booDireita: boolean = true): string
         {
-            // #region Variáveis
-
-            var i: number;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(str))
             {
-                if (Utils.getBooStrVazia(str))
+                return null;
+            }
+
+            if (str.length > intTamanho)
+            {
+                str = str.substring(intTamanho, 0);
+                return str;
+            }
+
+            var i = (intTamanho - str.length);
+
+            while (true)
+            {
+                if (booDireita)
                 {
-                    return null;
+                    str = str + strComplemento.substring(1, 0);
+                } else
+                {
+                    str = strComplemento.substring(1, 0) + str;
                 }
 
-                if (str.length > intTamanho)
+                if (str.length == intTamanho)
                 {
-                    str = str.substring(intTamanho, 0);
                     return str;
                 }
-
-                i = (intTamanho - str.length);
-
-                while (true)
-                {
-                    if (booDireita)
-                    {
-                        str = str + strComplemento.substring(1, 0);
-                    } else
-                    {
-                        str = strComplemento.substring(1, 0) + str;
-                    }
-
-                    if (str.length == intTamanho)
-                    {
-                        return str;
-                    }
-                }
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public static replaceAll(str: string, strAntigo: string, strNovo: string): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (Utils.getBooStrVazia(str))
+            {
+                return null;
+            }
 
-            // #region Ações
-            try
+            while (str.indexOf(strAntigo) != -1)
             {
-                if (Utils.getBooStrVazia(str))
-                {
-                    return null;
-                }
-
-                while (str.indexOf(strAntigo) != -1)
-                {
-                    str = str.replace(strAntigo, strNovo);
-                }
+                str = str.replace(strAntigo, strNovo);
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
 
             return str;
         }
@@ -212,38 +143,23 @@
          */
         public static strToBoo(strValor: string): boolean
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(strValor))
             {
-                if (Utils.getBooStrVazia(strValor))
-                {
+                return false;
+            }
+
+            switch (strValor.toLowerCase())
+            {
+                case "1":
+                case "s":
+                case "sim":
+                case "t":
+                case "true":
+                    return true;
+
+                default:
                     return false;
-                }
-
-                switch (strValor.toLowerCase())
-                {
-                    case "1":
-                    case "s":
-                    case "sim":
-                    case "t":
-                    case "true":
-                        return true;
-
-                    default:
-                        return false;
-                }
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Métodos

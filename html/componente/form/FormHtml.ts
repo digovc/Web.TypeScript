@@ -56,7 +56,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { tblWeb.addClnWeb(cmp.cln); });
+            this.arrCmp.forEach((cmp) => { tblWeb.addClnWeb(cmp.clnWeb); });
         }
 
         /**
@@ -76,22 +76,8 @@ module NetZ_Web_TypeScript
         {
             super.finalizar();
 
-            this.finalizarSelecionarCampo();
-        }
-
-        private finalizarSelecionarCampo(): void
-        {
-            if (this.arrCmp == null)
-            {
-                return;
-            }
-
-            if (this.arrCmp.length < 2)
-            {
-                return;
-            }
-
-            this.arrCmp[1].receberFoco();
+            this.carregarDados();
+            this.selecionarCampo();
         }
 
         private getArrCmp(): Array<CampoHtml>
@@ -154,12 +140,42 @@ module NetZ_Web_TypeScript
             }
         }
 
+        public getCmp(strCmpId: string): CampoHtml
+        {
+            if (Utils.getBooStrVazia(strCmpId))
+            {
+                return null;
+            }
+
+            if (this.arrCmp == null)
+            {
+                return null;
+            }
+
+            for (var i = 0; i < this.arrCmp.length; i++)
+            {
+                if (this.arrCmp[i] == null)
+                {
+                    continue;
+                }
+
+                if (this.arrCmp[i].strId != strCmpId)
+                {
+                    continue;
+                }
+
+                return this.arrCmp[i];
+            }
+
+            return null;
+        }
+
         /**
          * Busca na lista de campos desta janela de cadastro o
          * campo que represente a coluna com o nome passado por parãmetro.
          * @param strClnNome Nome da coluna que o campo representa.
          */
-        public getCmp(strClnNome: string): CampoHtml
+        public getCmpClnWebNome(strClnNome: string): CampoHtml
         {
             if (Utils.getBooStrVazia(strClnNome))
             {
@@ -173,34 +189,37 @@ module NetZ_Web_TypeScript
 
             var cmpResultado: CampoHtml;
 
-            this.arrCmp.some((cmp) =>
+            for (var i = 0; i < this.arrCmp.length; i++)
             {
-                cmpResultado = this.getCmp2(strClnNome, cmp);
+                cmpResultado = this.getCmpClnWebNome2(strClnNome, this.arrCmp[i]);
 
-                return cmpResultado != null;
-            });
+                if (cmpResultado == null)
+                {
+                    continue;
+                }
+            }
 
             return cmpResultado;
         }
 
-        private getCmp2(strClnNome: string, cmp: CampoHtml): CampoHtml
+        private getCmpClnWebNome2(strClnNome: string, cmp: CampoHtml): CampoHtml
         {
             if (cmp == null)
             {
                 return null;
             }
 
-            if (cmp.cln == null)
+            if (cmp.clnWeb == null)
             {
                 return null;
             }
 
-            if (Utils.getBooStrVazia(cmp.cln.strNome))
+            if (Utils.getBooStrVazia(cmp.clnWeb.strNome))
             {
                 return null;
             }
 
-            if (strClnNome.toLowerCase() != cmp.cln.strNome.toLowerCase())
+            if (strClnNome.toLowerCase() != cmp.clnWeb.strNome.toLowerCase())
             {
                 return null;
             }
@@ -213,8 +232,6 @@ module NetZ_Web_TypeScript
             super.inicializar();
 
             this.inicializarCampos();
-
-            this.carregarDados();
         }
 
         private inicializarCampos(): void
@@ -225,6 +242,31 @@ module NetZ_Web_TypeScript
             }
 
             this.arrCmp.forEach((cmp) => { cmp.iniciar(); });
+        }
+
+        private selecionarCampo(): void
+        {
+            if (this.arrCmp == null)
+            {
+                return;
+            }
+
+            for (var i = 0; i < this.arrCmp.length; i++)
+            {
+                var cmp = this.arrCmp[i];
+
+                if (cmp == null)
+                {
+                    continue;
+                }
+
+                if (!cmp.booAtivo)
+                {
+                    continue;
+                }
+
+                cmp.receberFoco();
+            }
         }
 
         public validarDados(): boolean

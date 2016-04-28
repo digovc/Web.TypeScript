@@ -28,46 +28,16 @@ module NetZ_Web_TypeScript
 
         public get booValor(): boolean
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._booValor = Utils.strToBoo(this.strValor);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._booValor = Utils.strToBoo(this.strValor);
 
             return this._booValor;
         }
 
         public set booValor(booValor: boolean)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._booValor = booValor;
 
-            // #region Ações
-            try
-            {
-                this._booValor = booValor;
-
-                this.strValor = this._booValor ? "true" : "false";
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.strValor = this._booValor ? "true" : "false";
         }
 
         public get booVazio(): boolean
@@ -79,134 +49,49 @@ module NetZ_Web_TypeScript
 
         public get dttValor(): Date
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                // TODO: Converter strValor para dttValor.
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            // TODO: Converter strValor para dttValor.
 
             return this._dttValor;
         }
 
         public set dttValor(dttValor: Date)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._dttValor = dttValor;
 
-            // #region Ações
-            try
-            {
-                this._dttValor = dttValor;
-
-                // TODO: Converter dttValor para strValor.
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            // TODO: Converter dttValor para strValor.
         }
 
         public get decValor(): number
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._decValor = parseFloat(this.strValor);
-            }
-            catch (ex)
+            if (Utils.getBooStrVazia(this.strValor))
             {
                 return 0;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this._decValor = parseFloat(this.strValor);
 
             return this._decValor;
         }
 
         public set decValor(decValor: number)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._decValor = decValor;
 
-            // #region Ações
-            try
-            {
-                this._decValor = decValor;
-
-                this.strValor = this._decValor.toString();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.strValor = this._decValor.toString();
         }
 
         public get intValor(): number
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._intValor = parseInt(this.strValor);
-            }
-            catch (ex)
-            {
-                return 0;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._intValor = Math.round(this.decValor);
 
             return this._intValor;
         }
 
         public set intValor(intValor: number)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._intValor = intValor;
 
-            // #region Ações
-            try
-            {
-                this._intValor = intValor;
-
-                this.strValor = this._intValor.toString();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.decValor = this._intValor;
         }
 
         public get strValor(): string
@@ -216,31 +101,16 @@ module NetZ_Web_TypeScript
 
         public set strValor(strValor: string)
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this._strValor == strValor)
             {
-                if (strValor == this._strValor)
-                {
-                    return;
-                }
-
-                this.strValorAnterior = this._strValor;
-
-                this._strValor = strValor;
-
-                this.atualizarStrValor();
+                return;
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.strValorAnterior = this._strValor;
+
+            this._strValor = strValor;
+
+            this.atualizarStrValor();
         }
 
         public get strValorAnterior(): string
@@ -272,27 +142,12 @@ module NetZ_Web_TypeScript
 
         private atualizarStrValor(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.jq.val() == this.strValor)
+            {
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.jq.val() != this.strValor)
-                {
-                    this.jq.val(this.strValor);
-                }
-
-                this.dispararEvtOnValorAlteradoListener();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.jq.val(this.strValor);
+            this.dispararEvtOnValorAlteradoListener();
         }
 
         private getBooVazio(): boolean
@@ -311,6 +166,16 @@ module NetZ_Web_TypeScript
         {
             this._strValor = this.jq.val();
             this.strValorInicial = this.strValor;
+        }
+
+        public selecionarTudo(): void
+        {
+            if (Utils.getBooStrVazia(this.strValor))
+            {
+                return;
+            }
+
+            this.jq.select();
         }
 
         protected setEventos(): void
@@ -646,8 +511,8 @@ module NetZ_Web_TypeScript
 
                 if (this.arrEvtOnValorAlteradoListener.length == 0)
                 {
-                    this.jq.change((arg) => { this.dispararEvtOnValorAlteradoListener(); });
-                    this.jq.keydown((arg) => { this.dispararEvtOnValorAlteradoListener(); });
+                    this.jq.change((arg) => { this.strValor = this.jq.val(); });
+                    this.jq.keydown((arg) => { this.strValor = this.jq.val(); });
                 }
 
                 this.arrEvtOnValorAlteradoListener.push(evtOnValorAlteradoListener);
@@ -704,6 +569,11 @@ module NetZ_Web_TypeScript
             try
             {
                 if (this.arrEvtOnValorAlteradoListener.length == 0)
+                {
+                    return;
+                }
+
+                if (this.strValor == this.strValorAnterior)
                 {
                     return;
                 }

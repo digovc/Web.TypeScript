@@ -292,7 +292,7 @@ module NetZ_Web_TypeScript
 
         private getCmpIntId(): CampoNumerico
         {
-            return this.frm.getCmp("int_id");
+            return this.frm.getCmpClnWebNome("int_id");
         }
 
         private getIntRegistroId(): number
@@ -536,7 +536,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            var cmp: CampoHtml = this.frm.getCmp(clnWeb.strNome);
+            var cmp: CampoHtml = this.frm.getCmpClnWebNome(clnWeb.strNome);
 
             if (cmp == null)
             {

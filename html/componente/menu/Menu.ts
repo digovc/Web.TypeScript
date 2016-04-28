@@ -1,4 +1,5 @@
-﻿/// <reference path="../../../OnEnterListener.ts"/>
+﻿/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../../../OnEnterListener.ts"/>
 /// <reference path="../../../OnKeyDownListener.ts"/>
 /// <reference path="../../../OnLeaveListener.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
@@ -16,7 +17,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class Menu extends ComponenteHtml implements OnEnterListener, OnLeaveListener, OnKeyDownListener, OnValorAlteradoListener
+    export abstract class Menu extends ComponenteHtml implements OnClickListener, OnEnterListener, OnKeyDownListener, OnValorAlteradoListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -95,6 +96,12 @@ module NetZ_Web_TypeScript
             }
 
             this.pagPrincipal.abrirConsulta(tblWeb);
+
+            this.divGaveta.esconder();
+
+            this.fecharGrupos();
+
+            this.txtPesquisa.strValor = null;
         }
 
         private abrirConsultaPrimeira(): void
@@ -127,6 +134,16 @@ module NetZ_Web_TypeScript
             mni.iniciar();
         }
 
+        private fecharGrupos(): void
+        {
+            if (this.arrMni == null)
+            {
+                return;
+            }
+
+            this.arrMni.forEach((mni) => { mni.esconderDivItemConteudo(); });
+        }
+
         protected finalizar(): void
         {
             super.finalizar();
@@ -144,6 +161,27 @@ module NetZ_Web_TypeScript
         }
 
         protected abstract inicializarItem(): void;
+
+        public pagPrincipalOnClick(arg: JQueryEventObject): void
+        {
+            this.divGaveta.esconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+        }
+
+        private pagPrincipalOnKeyDown(arg: JQueryKeyEventObject): void
+        {
+            if (arg.keyCode != Keys.M)
+            {
+                return;
+            }
+
+            if (!arg.ctrlKey)
+            {
+                return;
+            }
+
+            this.txtPesquisa.receberFoco();
+            this.txtPesquisa.selecionarTudo();
+        }
 
         private pesquisar(strPesquisa: string): void
         {
@@ -165,17 +203,42 @@ module NetZ_Web_TypeScript
         {
             super.setEventos();
 
+            this.divGaveta.addEvtOnClickListener(this);
+
+            this.txtPesquisa.addEvtOnClickListener(this);
             this.txtPesquisa.addEvtOnEnterListener(this);
             this.txtPesquisa.addEvtOnKeyDownListener(this);
-            this.txtPesquisa.addEvtOnLeaveListener(this);
             this.txtPesquisa.addEvtOnValorAlteradoListener(this);
+
+            this.setEventosGlobal();
+        }
+
+        private setEventosGlobal(): void
+        {
+            if (this.pagPrincipal == null)
+            {
+                return;
+            }
+
+            this.pagPrincipal.addEvtOnClickListener(this);
+            this.pagPrincipal.addEvtOnKeyDownListener(this);
+        }
+
+        private txtPesquisaOnKeyDown(arg: JQueryKeyEventObject): void
+        {
+            if (arg.keyCode != Keys.ENTER)
+            {
+                return;
+            }
+
+            this.abrirConsultaPrimeira();
         }
 
         // #endregion Métodos
 
         // #region Eventos
 
-        public onEnter(objSender: Object): void
+        public onClick(objSender: Object, arg: JQueryEventObject): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -183,7 +246,20 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.divGaveta.mostrar();
+                switch (objSender)
+                {
+                    case this.divGaveta:
+                        arg.stopPropagation();
+                        return;
+
+                    case this.pagPrincipal:
+                        this.pagPrincipalOnClick(arg);
+                        return;
+
+                    case this.txtPesquisa:
+                        arg.stopPropagation();
+                        return;
+                }
             }
             catch (ex)
             {
@@ -195,7 +271,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        public onLeave(objSender: Object): void
+        public onEnter(objSender: Object): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -203,7 +279,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.divGaveta.esconder();
+                this.divGaveta.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
             }
             catch (ex)
             {
@@ -223,15 +299,14 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                if (arg.keyCode != Keys.ENTER)
-                {
-                    return;
-                }
-
                 switch (objSender)
                 {
+                    case this.pagPrincipal:
+                        this.pagPrincipalOnKeyDown(arg);
+                        return;
+
                     case this.txtPesquisa:
-                        this.abrirConsultaPrimeira();
+                        this.txtPesquisaOnKeyDown(arg);
                         return;
                 }
             }

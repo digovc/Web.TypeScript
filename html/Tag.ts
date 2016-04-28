@@ -29,6 +29,7 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
+        private _booAtivo: boolean;
         private _booVisivel: boolean;
         private _jq: any;
         private _strConteudo: string;
@@ -36,6 +37,25 @@ module NetZ_Web_TypeScript
         private _strJqSelector: string = null;
         private _strPlaceholder: string;
         private _strTitle: string;
+
+        public get booAtivo(): boolean
+        {
+            this._booAtivo = this.getBooAtivo();
+
+            return this._booAtivo;
+        }
+
+        public set booAtivo(booAtivo: boolean)
+        {
+            if (this._booAtivo == booAtivo)
+            {
+                return;
+            }
+
+            this._booAtivo = booAtivo;
+
+            this.atualizarBooAtivo();
+        }
 
         public get booVisivel(): boolean
         {
@@ -164,6 +184,23 @@ module NetZ_Web_TypeScript
             this.jq.append(strConteudo);
         }
 
+        protected atualizarBooAtivo(): void
+        {
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            if (this.booAtivo)
+            {
+                this.jq.removeAttr("disabled");
+            }
+            else
+            {
+                this.jq.attr("disabled", "true");
+            }
+        }
+
         private atualizarStrJqSelector(): void
         {
             this.jq = null;
@@ -201,6 +238,16 @@ module NetZ_Web_TypeScript
 
         protected finalizar(): void
         {
+        }
+
+        private getBooAtivo(): any
+        {
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            return Utils.getBooStrVazia(this.jq.attr("disabled"));
         }
 
         protected getStrAttValor(strAttNome: string): string
@@ -394,7 +441,7 @@ module NetZ_Web_TypeScript
             // #endregion Ações
         }
 
-        private dispararEvtOnClickListener(e: any): void
+        private dispararEvtOnClickListener(arg: JQueryEventObject): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -407,7 +454,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnClickListener.forEach((evt) => { evt.onClick(this, e); });
+                this.arrEvtOnClickListener.forEach((evt) => { evt.onClick(this, arg); });
             }
             catch (ex)
             {

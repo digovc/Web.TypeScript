@@ -19,27 +19,12 @@ module NetZ_Web_TypeScript
 
         protected get tagBody(): Tag
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._tagBody != null)
+            {
+                return this._tagBody;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._tagBody != null)
-                {
-                    return this._tagBody;
-                }
-
-                this._tagBody = this.getTagBody();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._tagBody = this.getTagBody();
 
             return this._tagBody;
         }
@@ -54,49 +39,20 @@ module NetZ_Web_TypeScript
 
         public atualizarCssMain(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            ServerHttp.i.atualizarCssMain();
+        }
 
-            // #region Ações
-            try
-            {
-                ServerHttp.i.atualizarCssMain();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+        protected finalizar(): void
+        {
         }
 
         protected getTagBody(): Tag
         {
-            // #region Variáveis
+            var tagBodyResultado = new Tag(null);
 
-            var tagBodyResultado: Tag;
+            tagBodyResultado.strJqSelector = "body";
 
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                tagBodyResultado = new Tag(null);
-
-                tagBodyResultado.strJqSelector = "body";
-
-                return tagBodyResultado;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            return tagBodyResultado;
         }
 
         protected inicializar(): void
@@ -105,24 +61,10 @@ module NetZ_Web_TypeScript
 
         public iniciar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.inicializar();
-                this.montarLayout();
-                this.setEventos();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
         }
 
         protected montarLayout(): void
@@ -141,6 +83,200 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
+
+        // #region Evento OnClickListener
+
+        private _arrEvtOnClickListener: Array<OnClickListener>;
+
+        private get arrEvtOnClickListener(): Array<OnClickListener>
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this._arrEvtOnClickListener != null)
+                {
+                    return this._arrEvtOnClickListener;
+                }
+
+                this._arrEvtOnClickListener = new Array<OnClickListener>();
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+
+            return this._arrEvtOnClickListener;
+        }
+
+        public addEvtOnClickListener(evtOnClickListener: OnClickListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnClickListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) > -1)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnClickListener.length == 0)
+                {
+                    $(document).click((arg) => this.dispararEvtOnClickListener(arg));
+                }
+
+                this.arrEvtOnClickListener.push(evtOnClickListener);
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public removeEvtOnClickListener(evtOnClickListener: OnClickListener): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (evtOnClickListener == null)
+                {
+                    return;
+                }
+
+                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) == -1)
+                {
+                    return;
+                }
+
+                this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evtOnClickListener));
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        private dispararEvtOnClickListener(arg: JQueryEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.arrEvtOnClickListener.length == 0)
+                {
+                    return;
+                }
+
+                this.arrEvtOnClickListener.forEach((evt) => { evt.onClick(this, arg); });
+            }
+            catch (ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        // #endregion Evento OnClickListener
+
+        // #region Evento OnKeyDownListener
+
+        private _arrEvtOnKeyDownListener: Array<OnKeyDownListener>;
+
+        private get arrEvtOnKeyDownListener(): Array<OnKeyDownListener>
+        {
+            if (this._arrEvtOnKeyDownListener != null)
+            {
+                return this._arrEvtOnKeyDownListener;
+            }
+
+            this._arrEvtOnKeyDownListener = new Array<OnKeyDownListener>();
+
+            return this._arrEvtOnKeyDownListener;
+        }
+
+        public addEvtOnKeyDownListener(evtOnKeyDownListener: OnKeyDownListener): void
+        {
+            if (evtOnKeyDownListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener) > -1)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyDownListener.length == 0)
+            {
+                $(document).keydown((arg) => this.dispararEvtOnKeyDownListener(arg));
+            }
+
+            this.arrEvtOnKeyDownListener.push(evtOnKeyDownListener);
+        }
+
+        private dispararEvtOnKeyDownListener(arg: JQueryKeyEventObject): void
+        {
+            if (this.arrEvtOnKeyDownListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyDownListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onKeyDown(this, arg);
+            });
+        }
+
+        public removerEvtOnKeyDownListener(evtOnKeyDownListener: OnKeyDownListener): void
+        {
+            if (evtOnKeyDownListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener));
+        }
+
+        // #endregion Evento OnKeyDownListener
 
         // #endregion Eventos
     }

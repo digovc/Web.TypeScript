@@ -56,7 +56,7 @@ module NetZ_Web_TypeScript
                 return this._divItemConteudo;
             }
 
-            this._divItemConteudo = new Div(this.strId + "_itemConteudo");
+            this._divItemConteudo = new Div(this.strId + "_divItemConteudo");
 
             return this._divItemConteudo;
         }
@@ -78,7 +78,7 @@ module NetZ_Web_TypeScript
                 return this._divTitulo;
             }
 
-            this._divTitulo = new Div(this.strId + "_titulo");
+            this._divTitulo = new Div(this.strId + "_divTitulo");
 
             return this._divTitulo;
         }
@@ -186,7 +186,7 @@ module NetZ_Web_TypeScript
             mniFilho.iniciar();
         }
 
-        private divTitulo_onClick(): void
+        private divTituloOnClick(): void
         {
             if (this.arrMniFilho.length > 0)
             {
@@ -195,6 +195,16 @@ module NetZ_Web_TypeScript
             }
 
             this.abrirConsulta(this.tblWeb);
+        }
+
+        public esconderDivItemConteudo(): void
+        {
+            if (this.arrMniFilho.length < 1)
+            {
+                return;
+            }
+
+            this.divItemConteudo.esconder();
         }
 
         private getTblWeb(): TabelaWeb
@@ -232,12 +242,13 @@ module NetZ_Web_TypeScript
         public limparPesquisa(): void
         {
             this.mostrar();
-            this.divItemConteudo.esconder();
 
-            if (this.arrMniFilho == null)
+            if (this.arrMniFilho.length < 1)
             {
                 return;
             }
+
+            this.divItemConteudo.esconder();
 
             this.arrMniFilho.forEach((mni) => { mni.limparPesquisa() });
         }
@@ -249,7 +260,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.divItemConteudo.mostrarEsconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+            this.divItemConteudo.mostrarEsconder();
         }
 
         public pesquisar(strPesquisa: string): void
@@ -260,19 +271,18 @@ module NetZ_Web_TypeScript
             }
 
             this.esconder();
-            this.divItemConteudo.esconder();
 
-            this.arrMniFilho.forEach((mni) => { mni.pesquisar(strPesquisa) });
-
-            if (this.arrStrTag == null)
+            if (this.arrMniFilho.length > 0)
             {
-                return;
+                this.divItemConteudo.esconder();
             }
 
-            this.arrStrTag.forEach((strTag) => this.pesquisarStrTag(strPesquisa, strTag));
+            this.arrMniFilho.forEach((mni) => { mni.pesquisar(strPesquisa); });
+
+            this.arrStrTag.forEach((strTag) => { this.pesquisar2(strPesquisa, strTag); });
         }
 
-        private pesquisarStrTag(strPesquisa: string, strTag: string): void
+        private pesquisar2(strPesquisa: string, strTag: string): void
         {
             if (Utils.getBooStrVazia(strTag))
             {
@@ -317,7 +327,7 @@ module NetZ_Web_TypeScript
                 switch (objSender)
                 {
                     case this.divTitulo:
-                        this.divTitulo_onClick();
+                        this.divTituloOnClick();
                         return;
                 }
             }

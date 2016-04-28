@@ -46,7 +46,7 @@ module NetZ_Web_TypeScript
                 return this._cmpIntFiltroId;
             }
 
-            this._cmpIntFiltroId = new CampoComboBox(this.strId + "_cmpIntFiltroId");
+            this._cmpIntFiltroId = (<CampoComboBox>this.getCmp(this.strId + "_cmpIntFiltroId"));
 
             return this._cmpIntFiltroId;
         }
@@ -97,6 +97,7 @@ module NetZ_Web_TypeScript
 
             if (this.cmpIntFiltroId.tagInput.intValor < 1)
             {
+                this.pnlFiltro.atualizarFrmFiltroConteudo(Utils.STR_VAZIA);
                 return;
             }
 
@@ -163,7 +164,6 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-
             TblFiltro.i.limparFiltro();
 
             TblFiltro.i.addFiltro2(TblFiltro.i.clnStrTabelaNome, this.tblWebConsulta.strNome);
@@ -189,6 +189,13 @@ module NetZ_Web_TypeScript
             }
 
             return this.pnlFiltro.jnlConsulta.tblWeb;
+        }
+
+        public receberFoco(): void
+        {
+            super.receberFoco();
+
+            this.cmpIntFiltroId.jq.focus();
         }
 
         protected setEventos(): void

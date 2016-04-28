@@ -32,27 +32,12 @@ module NetZ_Web_TypeScript
 
         private get divGrid(): Div
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._divGrid != null)
+            {
+                return this._divGrid;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._divGrid != null)
-                {
-                    return this._divGrid;
-                }
-
-                this._divGrid = new Div(this.strId + "_divGrid");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._divGrid = new Div(this.strId + "_divGrid");
 
             return this._divGrid;
         }
@@ -79,54 +64,24 @@ module NetZ_Web_TypeScript
 
         private get pnlAcaoConsulta(): PainelAcaoConsulta
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._pnlAcaoConsulta != null)
+            {
+                return this._pnlAcaoConsulta;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._pnlAcaoConsulta != null)
-                {
-                    return this._pnlAcaoConsulta;
-                }
-
-                this._pnlAcaoConsulta = new PainelAcaoConsulta(this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._pnlAcaoConsulta = new PainelAcaoConsulta(this);
 
             return this._pnlAcaoConsulta;
         }
 
         private get pnlFiltro(): PainelFiltro
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._pnlFiltro != null)
+            {
+                return this._pnlFiltro;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._pnlFiltro != null)
-                {
-                    return this._pnlFiltro;
-                }
-
-                this._pnlFiltro = new PainelFiltro(this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._pnlFiltro = new PainelFiltro(this);
 
             return this._pnlFiltro;
         }
@@ -143,27 +98,12 @@ module NetZ_Web_TypeScript
 
         public get tblWeb(): TabelaWeb
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._tblWeb != null)
+            {
+                return this._tblWeb;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._tblWeb != null)
-                {
-                    return this._tblWeb;
-                }
-
-                this._tblWeb = this.getTblWeb();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._tblWeb = this.getTblWeb();
 
             return this._tblWeb;
         }
@@ -176,22 +116,7 @@ module NetZ_Web_TypeScript
         {
             super("jnlConsulta", pagPrincipal);
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.pagPrincipal = pagPrincipal;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.pagPrincipal = pagPrincipal;
         }
 
         // #endregion Construtores
@@ -200,135 +125,44 @@ module NetZ_Web_TypeScript
 
         public abrirCadastro(intRegistroId: number): void
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.tblWeb == null)
             {
-                if (this.tblWeb == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                this.tblWeb.intRegistroId = intRegistroId;
+            this.tblWeb.intRegistroId = intRegistroId;
 
-                this.pagPrincipal.abrirCadastro(this.tblWeb);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.pagPrincipal.abrirCadastro(this.tblWeb);
         }
 
         public abrirFiltroCadastro(): void
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.tblWeb == null)
             {
-                if (this.tblWeb == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (Utils.getBooStrVazia(this.tblWeb.strNome))
-                {
-                    return;
-                }
+            if (Utils.getBooStrVazia(this.tblWeb.strNome))
+            {
+                return;
+            }
 
-                this.pagPrincipal.abrirFiltroCadastro(0);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        private adicionarResposta(): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.pagPrincipal.abrirFiltroCadastro(0);
         }
 
         private alterar(tagGridRow: GridRow): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (tagGridRow == null)
             {
-                if (tagGridRow == null)
-                {
-                    return;
-                }
-
-                if (tagGridRow.intId < 1)
-                {
-                    return;
-                }
-
-                this.abrirCadastro(tagGridRow.intId);
+                return;
             }
-            catch (ex)
+
+            if (tagGridRow.intId < 1)
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
-        protected getTagBody(): Tag
-        {
-            // #region Variáveis
-
-            var tagBodyResultado: Tag;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                tagBodyResultado = new Tag("body_consulta");
-
-                return tagBodyResultado;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.abrirCadastro(tagGridRow.intId);
         }
 
         private getTblWeb(): TabelaWeb
@@ -343,130 +177,86 @@ module NetZ_Web_TypeScript
                 return null;
             }
 
-            // TODO: Carregar os filtros para a pesquisa.
-
             return new TabelaWeb(this.jq.attr("tbl_web_nome"));
         }
 
         protected inicializar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            ServerHttp.i.atualizarCssMain();
 
-            // #region Ações
-            try
-            {
-                ServerHttp.i.atualizarCssMain();
-
-                this.pnlAcaoConsulta.iniciar();
-                this.pnlFiltro.iniciar();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.pnlAcaoConsulta.iniciar();
+            this.pnlFiltro.iniciar();
         }
 
         private inicializarGridHtml(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.tblWeb == null)
             {
-                if (this.tblWeb == null)
-                {
-                    return;
-                }
-
-                this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
-
-                this.tagGridHtml.iniciar();
-
-                this.tagGridHtml.addEvtOnRowDoubleClickListener(this);
+                return;
             }
-            catch (ex)
+
+            this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
+
+            this.tagGridHtml.iniciar();
+
+            this.tagGridHtml.addEvtOnRowDoubleClickListener(this);
+        }
+
+        public maximinizarGrid(): void
+        {
+            if (this.divGrid.jq.css("top") == "60")
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.divGrid.jq.animate({ top: 60 });
+            this.pnlFiltro.esconderFiltro();
         }
 
         public pesquisar(): void
         {
-            // #region Variáveis
+            this.pnlFiltro.atualizarLstFiltro(this.tblWeb);
 
-            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb;
+            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            // #endregion Variáveis
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID;
+            objSolicitacaoAjaxDb.strData = JSON.stringify(this.tblWeb);
 
-            // #region Ações
-            try
-            {
-                this.pnlFiltro.atualizarLstFiltro(this.tblWeb);
+            objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
 
-                objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
-
-                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID;
-                objSolicitacaoAjaxDb.strData = JSON.stringify(this.tblWeb);
-
-                objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
-
-                ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
 
         private pesquisarSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
         {
-            // #region Variáveis
-
-            var tblWeb: TabelaWeb;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (objSolicitacaoAjaxDb == null)
             {
-                if (objSolicitacaoAjaxDb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
-                {
-                    return;
-                }
-
-                ServerHttp.i.atualizarCssMain();
-
-                this.divGrid.jq.html(objSolicitacaoAjaxDb.strData);
-
-                this.inicializarGridHtml();
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
             {
-                throw ex;
+                return;
             }
-            finally
+
+            ServerHttp.i.atualizarCssMain();
+
+            this.divGrid.jq.html(objSolicitacaoAjaxDb.strData);
+
+            this.inicializarGridHtml();
+
+            this.maximinizarGrid();
+        }
+
+        public restaurarGrid(): void
+        {
+            if (Utils.getBooStrVazia(this.divGrid.jq.css("top")))
             {
+                return;
             }
-            // #endregion Ações
+
+            this.divGrid.jq.animate({ top: 150 });
+            this.pnlFiltro.mostrarFiltro();
         }
 
         // #endregion Métodos

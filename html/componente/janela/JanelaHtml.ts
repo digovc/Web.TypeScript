@@ -17,51 +17,18 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _booAtivo: boolean = true;
         private _divBtnFechar: Div;
         private _divInativa: Div;
         private _pag: PaginaHtml;
 
-        public get booAtivo(): boolean
-        {
-            return this._booAtivo;
-        }
-
-        public set booAtivo(booAtivo: boolean)
-        {
-            if (this._booAtivo == booAtivo)
-            {
-                return;
-            }
-
-            this._booAtivo = booAtivo;
-
-            this.atualizarBooAtivo();
-        }
-
         private get divBtnFechar(): Div
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._divBtnFechar != null)
+            {
+                return this._divBtnFechar;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._divBtnFechar != null)
-                {
-                    return this._divBtnFechar;
-                }
-
-                this._divBtnFechar = new BotaoFecharMini(this.strId + "_divBtnFechar");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._divBtnFechar = new BotaoFecharMini(this.strId + "_divBtnFechar");
 
             return this._divBtnFechar;
         }
@@ -96,30 +63,17 @@ module NetZ_Web_TypeScript
         {
             super(strId);
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.pag = pag;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.pag = pag;
         }
 
         // #endregion Construtores
 
         // #region Métodos
 
-        private atualizarBooAtivo(): void
+        protected atualizarBooAtivo(): void
         {
+            super.atualizarBooAtivo();
+
             this.divInativa.jq.css("display", (!this.booAtivo) ? "block" : "none");
         }
 
@@ -130,22 +84,7 @@ module NetZ_Web_TypeScript
 
         protected setEventos(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.divBtnFechar.addEvtOnClickListener(this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.divBtnFechar.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos

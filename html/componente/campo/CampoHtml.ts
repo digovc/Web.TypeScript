@@ -21,21 +21,21 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _cln: ColunaWeb;
+        private _clnWeb: ColunaWeb;
         private _divTitulo: Div;
         private _strCritica: string;
         private _tagInput: Input;
 
-        public get cln(): ColunaWeb
+        public get clnWeb(): ColunaWeb
         {
-            if (this._cln != null)
+            if (this._clnWeb != null)
             {
-                return this._cln;
+                return this._clnWeb;
             }
 
-            this._cln = this.getCln();
+            this._clnWeb = this.getClnWeb();
 
-            return this._cln;
+            return this._clnWeb;
         }
 
         private get divTitulo(): Div
@@ -95,12 +95,17 @@ module NetZ_Web_TypeScript
 
         private atualizarStrValorCln(): void
         {
-            if (this.cln == null)
+            if (this.clnWeb == null)
             {
                 return;
             }
 
-            this.cln.strValor = this.tagInput.strValor;
+            if (this.clnWeb.strValor == this.tagInput.strValor)
+            {
+                return;
+            }
+
+            this.clnWeb.strValor = this.tagInput.strValor;
         }
 
         private atualizarStrValorDivTitulo(): void
@@ -108,34 +113,16 @@ module NetZ_Web_TypeScript
             this.mostrarDivTitulo(!this.tagInput.booVazio);
         }
 
-        private getCln(): ColunaWeb
+        private getClnWeb(): ColunaWeb
         {
-            // #region Variáveis
-
-            var clnResultado: ColunaWeb;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.jq == null)
             {
-                if (this.jq == null)
-                {
-                    return null;
-                }
+                return null;
+            }
 
-                clnResultado = new ColunaWeb(this.jq.attr("cln_nome"));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            var clnWebResultado = new ColunaWeb(this.jq.attr("cln_web_nome"));
 
-            return clnResultado;
+            return clnWebResultado;
         }
 
         protected getTagInput(): Input
