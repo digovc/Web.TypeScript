@@ -19,34 +19,18 @@ module NetZ_Web_TypeScript
         private _arrClnWeb: Array<ColunaWeb>;
         private _arrFil: Array<FiltroWeb>;
         private _clnIntId: ColunaWeb;
-        private _intRegistroId: number;
         private _intRegistroPaiId: number;
         private _strCritica: string;
         private _strTblPaiNome: string;
 
         public get arrClnWeb(): Array<ColunaWeb>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrClnWeb != null)
+            {
+                return this._arrClnWeb;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrClnWeb != null)
-                {
-                    return this._arrClnWeb;
-                }
-
-                this._arrClnWeb = new Array<ColunaWeb>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrClnWeb = new Array<ColunaWeb>();
 
             return this._arrClnWeb;
         }
@@ -68,14 +52,16 @@ module NetZ_Web_TypeScript
             return this._arrFil;
         }
 
-        public get intRegistroId(): number
+        public get clnIntId(): ColunaWeb
         {
-            return this._intRegistroId;
-        }
+            if (this._clnIntId != null)
+            {
+                return this._clnIntId;
+            }
 
-        public set intRegistroId(intRegistroId: number)
-        {
-            this._intRegistroId = intRegistroId;
+            this._clnIntId = this.getClnWeb("int_id");
+
+            return this._clnIntId;
         }
 
         public get intRegistroPaiId(): number
@@ -108,17 +94,6 @@ module NetZ_Web_TypeScript
             this._strTblPaiNome = strTblPaiNome;
         }
 
-        public get clnIntId(): ColunaWeb
-        {
-            if (this._clnIntId != null)
-            {
-                return this._clnIntId;
-            }
-
-            this._clnIntId = new ColunaWeb("int_id");
-
-            return this._clnIntId;
-        }
         // #endregion Atributos
 
         // #region Construtores
@@ -127,22 +102,7 @@ module NetZ_Web_TypeScript
         {
             super();
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.strNome = strNome;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.strNome = strNome;
         }
 
         // #endregion Construtores
@@ -151,35 +111,20 @@ module NetZ_Web_TypeScript
 
         public addClnWeb(clnWeb: ColunaWeb): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (clnWeb == null)
             {
-                if (clnWeb == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrClnWeb.indexOf(clnWeb) > -1)
-                {
-                    return;
-                }
+            if (this.arrClnWeb.indexOf(clnWeb) > -1)
+            {
+                return;
+            }
 
-                this.arrClnWeb.push(clnWeb);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrClnWeb.push(clnWeb);
         }
 
-        public addFiltro(filWeb: FiltroWeb): void
+        public addFil(filWeb: FiltroWeb): void
         {
             if (filWeb == null)
             {
@@ -189,7 +134,7 @@ module NetZ_Web_TypeScript
             this.arrFil.push(filWeb);
         }
 
-        public addFiltro2(clnWeb: ColunaWeb, objValor: Object): void
+        public addFil2(clnWeb: ColunaWeb, objValor: Object): void
         {
             if (clnWeb == null)
             {
@@ -208,10 +153,10 @@ module NetZ_Web_TypeScript
         {
             super.copiarDados(obj);
 
-            this.carregarDadosArrClnWeb();
+            this.copiarDadosArrClnWeb();
         }
 
-        private carregarDadosArrClnWeb(): void
+        private copiarDadosArrClnWeb(): void
         {
             if (this.arrClnWeb == null)
             {
@@ -222,21 +167,21 @@ module NetZ_Web_TypeScript
 
             this.arrClnWeb = null;
 
-            arrObjTemp.forEach((obj) => { this.carregarDadosArrClnWeb2(obj) });
+            arrObjTemp.forEach((obj) => { this.copiarDadosArrClnWeb2(obj); });
         }
 
-        private carregarDadosArrClnWeb2(obj: any): void
+        private copiarDadosArrClnWeb2(obj: any): void
         {
             if (obj == null)
             {
                 return;
             }
 
-            var clnWeb: ColunaWeb = new ColunaWeb(null);
+            var clnWeb = new ColunaWeb(null);
 
             clnWeb.copiarDados(obj);
 
-            this.arrClnWeb.push(clnWeb);
+            this.addClnWeb(clnWeb);
         }
 
         /**
@@ -288,56 +233,41 @@ module NetZ_Web_TypeScript
          */
         public getClnWeb(strClnWebNome: string): ColunaWeb
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(strClnWebNome))
             {
-                if (Utils.getBooStrVazia(strClnWebNome))
+                return null;
+            }
+
+            if (this.arrClnWeb == null)
+            {
+                return null;
+            }
+
+            for (var i = 0; i < this.arrClnWeb.length; i++)
+            {
+                if (this.arrClnWeb[i] == null)
                 {
-                    return null;
+                    continue;
                 }
 
-                if (this.arrClnWeb == null)
+                if (Utils.getBooStrVazia(this.arrClnWeb[i].strNome))
                 {
-                    return null;
+                    continue;
                 }
 
-                for (var i = 0; i < this.arrClnWeb.length; i++)
+                if (strClnWebNome.toLowerCase() != this.arrClnWeb[i].strNome.toLowerCase())
                 {
-                    if (this.arrClnWeb[i] == null)
-                    {
-                        continue;
-                    }
-
-                    if (Utils.getBooStrVazia(this.arrClnWeb[i].strNome))
-                    {
-                        continue;
-                    }
-
-                    if (strClnWebNome.toLowerCase() != this.arrClnWeb[i].strNome.toLowerCase())
-                    {
-                        continue;
-                    }
-
-                    return this.arrClnWeb[i];
+                    continue;
                 }
 
-                var clnWeb = new ColunaWeb(strClnWebNome);
+                return this.arrClnWeb[i];
+            }
 
-                this.addClnWeb(clnWeb);
+            var clnWebNew = new ColunaWeb(strClnWebNome);
 
-                return clnWeb;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.addClnWeb(clnWebNew);
+
+            return clnWebNew;
         }
 
         public limparFiltro(): void

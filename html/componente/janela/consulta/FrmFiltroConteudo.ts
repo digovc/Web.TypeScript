@@ -79,7 +79,7 @@ module NetZ_Web_TypeScript
             fil.enmOperador = this.getEnmOperador(cmpFiltro);
             fil.objValor = cmpFiltro.tagInput.strValor;
 
-            tblWeb.addFiltro(fil);
+            tblWeb.addFil(fil);
         }
 
         private cmpOnKeydown(arg: JQueryKeyEventObject): void

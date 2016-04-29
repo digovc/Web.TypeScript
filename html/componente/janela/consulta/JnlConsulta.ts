@@ -130,7 +130,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.tblWeb.intRegistroId = intRegistroId;
+            this.tblWeb.clnIntId.intValor = intRegistroId;
 
             this.pagPrincipal.abrirCadastro(this.tblWeb);
         }

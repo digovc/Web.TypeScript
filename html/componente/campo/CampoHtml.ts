@@ -23,6 +23,7 @@ module NetZ_Web_TypeScript
 
         private _clnWeb: ColunaWeb;
         private _divTitulo: Div;
+        private _frm: FormHtml;
         private _strCritica: string;
         private _tagInput: Input;
 
@@ -48,6 +49,16 @@ module NetZ_Web_TypeScript
             this._divTitulo = new Div(this.strId + "_divTitulo");
 
             return this._divTitulo;
+        }
+
+        public get frm(): FormHtml
+        {
+            return this._frm;
+        }
+
+        public set frm(frm: FormHtml)
+        {
+            this._frm = frm;
         }
 
         public get strCritica(): string
@@ -120,9 +131,17 @@ module NetZ_Web_TypeScript
                 return null;
             }
 
-            var clnWebResultado = new ColunaWeb(this.jq.attr("cln_web_nome"));
+            if (this.frm == null)
+            {
+                return new ColunaWeb(this.jq.attr("cln_web_nome"));
+            }
 
-            return clnWebResultado;
+            if (this.frm.tblWeb == null)
+            {
+                return new ColunaWeb(this.jq.attr("cln_web_nome"));
+            }
+
+            return this.frm.tblWeb.getClnWeb(this.jq.attr("cln_web_nome"));
         }
 
         protected getTagInput(): Input

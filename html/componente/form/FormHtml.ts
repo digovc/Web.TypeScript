@@ -20,6 +20,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _arrCmp: Array<CampoHtml>;
+        private _tblWeb: TabelaWeb;
 
         protected get arrCmp(): Array<CampoHtml>
         {
@@ -33,6 +34,23 @@ module NetZ_Web_TypeScript
             return this._arrCmp;
         }
 
+        public get tblWeb(): TabelaWeb
+        {
+            return this._tblWeb;
+        }
+
+        public set tblWeb(tblWeb: TabelaWeb)
+        {
+            if (this._tblWeb == tblWeb)
+            {
+                return;
+            }
+
+            this._tblWeb = tblWeb;
+
+            this.atualizarTblWeb();
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -40,13 +58,9 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        protected carregarDados(): void
+        private atualizarTblWeb(): void
         {
-        }
-
-        public carregarTblWeb(tblWeb: TabelaWeb): void
-        {
-            if (tblWeb == null)
+            if (this.tblWeb == null)
             {
                 return;
             }
@@ -56,7 +70,11 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { tblWeb.addClnWeb(cmp.clnWeb); });
+            this.arrCmp.forEach((cmp) => { this.tblWeb.addClnWeb(cmp.clnWeb); });
+        }
+
+        protected carregarDados(): void
+        {
         }
 
         /**
@@ -116,28 +134,34 @@ module NetZ_Web_TypeScript
                 return;
             }
 
+            var cmp: CampoHtml;
+
             switch ($(cmpJq).attr("clazz"))
             {
                 case "CampoAlfanumerico":
-                    arrCmpResultado.push(new CampoAlfanumerico(cmpJq.id));
-                    return;
+                    cmp = new CampoAlfanumerico(cmpJq.id);
+                    break;
 
                 case "CampoCheckBox":
-                    arrCmpResultado.push(new CampoCheckBox(cmpJq.id));
-                    return;
+                    cmp = new CampoCheckBox(cmpJq.id);
+                    break;
 
                 case "CampoComboBox":
-                    arrCmpResultado.push(new CampoComboBox(cmpJq.id));
-                    return;
+                    cmp = new CampoComboBox(cmpJq.id);
+                    break;
 
                 case "CampoConsulta":
-                    arrCmpResultado.push(new CampoConsulta(cmpJq.id));
-                    return;
+                    cmp = new CampoConsulta(cmpJq.id);
+                    break;
 
                 case "CampoNumerico":
-                    arrCmpResultado.push(new CampoNumerico(cmpJq.id));
-                    return;
+                    cmp = new CampoNumerico(cmpJq.id);
+                    break;
             }
+
+            cmp.frm = this;
+
+            arrCmpResultado.push(cmp);
         }
 
         public getCmp(strCmpId: string): CampoHtml
@@ -175,7 +199,7 @@ module NetZ_Web_TypeScript
          * campo que represente a coluna com o nome passado por parãmetro.
          * @param strClnNome Nome da coluna que o campo representa.
          */
-        public getCmpClnWebNome(strClnNome: string): CampoHtml
+        public getCmpClnWebStrNome(strClnNome: string): CampoHtml
         {
             if (Utils.getBooStrVazia(strClnNome))
             {
@@ -191,18 +215,18 @@ module NetZ_Web_TypeScript
 
             for (var i = 0; i < this.arrCmp.length; i++)
             {
-                cmpResultado = this.getCmpClnWebNome2(strClnNome, this.arrCmp[i]);
+                cmpResultado = this.getCmpClnWebStrNome2(strClnNome, this.arrCmp[i]);
 
-                if (cmpResultado == null)
+                if (cmpResultado != null)
                 {
-                    continue;
+                    return cmpResultado;
                 }
             }
 
-            return cmpResultado;
+            return null;
         }
 
-        private getCmpClnWebNome2(strClnNome: string, cmp: CampoHtml): CampoHtml
+        private getCmpClnWebStrNome2(strClnNome: string, cmp: CampoHtml): CampoHtml
         {
             if (cmp == null)
             {
@@ -231,10 +255,10 @@ module NetZ_Web_TypeScript
         {
             super.inicializar();
 
-            this.inicializarCampos();
+            this.inicializarArrCmp();
         }
 
-        private inicializarCampos(): void
+        private inicializarArrCmp(): void
         {
             if (this.arrCmp == null)
             {
@@ -260,12 +284,13 @@ module NetZ_Web_TypeScript
                     continue;
                 }
 
-                if (!cmp.booAtivo)
+                if (!cmp.tagInput.booDisabled)
                 {
                     continue;
                 }
 
                 cmp.receberFoco();
+                return;
             }
         }
 

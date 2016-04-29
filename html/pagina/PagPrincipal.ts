@@ -79,179 +79,91 @@ module NetZ_Web_TypeScript
 
         public abrirCadastro(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-
-            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (tblWeb == null)
             {
-                if (tblWeb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(tblWeb.strNome))
-                {
-                    return;
-                }
-
-                //this.divCadastro.esconder();
-
-                objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
-
-                objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
-
-                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO;
-                objSolicitacaoAjaxDb.strData = JSON.stringify(tblWeb);
-
-                ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(tblWeb.strNome))
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO;
+
+            objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+            objSolicitacaoAjaxDb.addJsn(tblWeb);
+
+            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
 
         private abrirCadastroSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (objSolicitacaoAjaxDb == null)
             {
-                if (objSolicitacaoAjaxDb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
-                {
-                    return;
-                }
-
-                this.divCadastro.jq.append(objSolicitacaoAjaxDb.strData);
-
-                this.inicializarJnlCadastro();
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.divCadastro.jq.append(objSolicitacaoAjaxDb.strData);
+
+            this.inicializarJnlCadastro();
         }
 
         public abrirConsulta(tblWeb: TabelaWeb): void
         {
-            // #region Variáveis
-
-            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (tblWeb == null)
             {
-                if (tblWeb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(tblWeb.strNome))
-                {
-                    return;
-                }
-
-                this.divConsulta.esconder();
-
-                objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
-
-                objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
-
-                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CONSULTA;
-                objSolicitacaoAjaxDb.strData = JSON.stringify(tblWeb);
-
-                ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(tblWeb.strNome))
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.divConsulta.esconder();
+
+            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+
+            objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CONSULTA;
+            objSolicitacaoAjaxDb.strData = JSON.stringify(tblWeb);
+
+            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
 
         private abrirConsultaSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
         {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (objSolicitacaoAjaxDb == null)
             {
-                if (objSolicitacaoAjaxDb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
-                {
-                    return;
-                }
-
-                this.divConsulta.jq.html(objSolicitacaoAjaxDb.strData);
-
-                this.inicializarJnlConsulta();
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.divConsulta.jq.html(objSolicitacaoAjaxDb.strData);
+
+            this.inicializarJnlConsulta();
         }
 
         public abrirFiltroCadastro(intFiltroId: number): void
         {
-            // #region Variáveis
+            TblFiltro.i.limparFiltro();
 
-            var tblWebFiltro: TabelaWeb;
+            TblFiltro.i.addFil2(TblFiltro.i.clnIntId, intFiltroId);
 
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                tblWebFiltro = new TabelaWeb("tbl_filtro");
-
-                tblWebFiltro.intRegistroId = intFiltroId;
-
-                this.abrirCadastro(tblWebFiltro);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.abrirCadastro(TblFiltro.i);
         }
 
         private carregarJsCadastro(): void

@@ -57,6 +57,9 @@
     <TypeScriptCompile Include="OnKeyPressListener.ts" />
     <TypeScriptCompile Include="OnLeaveListener.ts" />
     <TypeScriptCompile Include="OnEnterListener.ts" />
+    <TypeScriptCompile Include="OnMouseMoveListener.ts" />
+    <TypeScriptCompile Include="OnMouseUpListener.ts" />
+    <TypeScriptCompile Include="OnMouseDownListener.ts" />
     <TypeScriptCompile Include="OnMouseLeaveListener.ts" />
     <TypeScriptCompile Include="OnMouseOverListener.ts" />
     <TypeScriptCompile Include="OnValorAlteradoArg.ts" />

@@ -17,6 +17,7 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
+        private _booDisabled: boolean;
         private _booValor: boolean;
         private _booVazio: boolean;
         private _decValor: number;
@@ -25,6 +26,20 @@ module NetZ_Web_TypeScript
         private _strValor: string;
         private _strValorAnterior: string;
         private _strValorInicial: string;
+
+        public get booDisabled(): boolean
+        {
+            this._booDisabled = this.getBooDisabled();
+
+            return this._booDisabled;
+        }
+
+        public set booDisabled(booDisabled: boolean)
+        {
+            this._booDisabled = booDisabled;
+
+            this.atualizarBooDisabled();
+        }
 
         public get booValor(): boolean
         {
@@ -77,7 +92,14 @@ module NetZ_Web_TypeScript
         {
             this._decValor = decValor;
 
-            this.strValor = this._decValor.toString();
+            try
+            {
+                this.strValor = this._decValor.toString();
+            }
+            catch (ex)
+            {
+                this.strValor = null;
+            }
         }
 
         public get intValor(): number
@@ -140,14 +162,41 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        private atualizarStrValor(): void
+        private atualizarBooDisabled(): void
         {
-            if (this.jq.val() == this.strValor)
+            if (this.jq)
             {
+                return;
             }
 
-            this.jq.val(this.strValor);
+            if (this.booDisabled)
+            {
+                this.jq.attr("disabled", "true");
+            }
+            else
+            {
+                this.jq.removeAttr("disabled");
+            }
+        }
+
+        private atualizarStrValor(): void
+        {
+            if (this.jq.val() != this.strValor)
+            {
+                this.jq.val(this.strValor);
+            }
+
             this.dispararEvtOnValorAlteradoListener();
+        }
+
+        private getBooDisabled(): boolean
+        {
+            if (this.jq == null)
+            {
+                return false;
+            }
+
+            return (Utils.getBooStrVazia(this.jq.attr("disabled")));
         }
 
         private getBooVazio(): boolean
@@ -164,7 +213,7 @@ module NetZ_Web_TypeScript
 
         private inicializarStrValor(): void
         {
-            this._strValor = this.jq.val();
+            this.strValor = this.jq.val();
             this.strValorInicial = this.strValor;
         }
 

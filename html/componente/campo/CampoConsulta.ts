@@ -137,7 +137,7 @@ module NetZ_Web_TypeScript
 
             this.tblWebRef.limparFiltro();
 
-            this.tblWebRef.addFiltro2(this.clnWebRef, this.txtPesquisa.strValor);
+            this.tblWebRef.addFil2(this.clnWebRef, this.txtPesquisa.strValor);
 
             this.cmb.carregarDados(this.tblWebRef);
 

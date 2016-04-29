@@ -39,7 +39,7 @@ module NetZ_Web_TypeScript
                 return this._clnStrTabelaNome;
             }
 
-            this._clnStrTabelaNome = new ColunaWeb("str_tabela_nome");
+            this._clnStrTabelaNome = this.getClnWeb("str_tabela_nome");
 
             return this._clnStrTabelaNome;
         }
@@ -50,6 +50,7 @@ module NetZ_Web_TypeScript
         // #endregion Construtores
 
         // #region Métodos
+
         // #endregion Métodos
 
         // #region Eventos

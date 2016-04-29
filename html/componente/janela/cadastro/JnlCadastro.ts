@@ -82,7 +82,7 @@ module NetZ_Web_TypeScript
                 return this._frm;
             }
 
-            this._frm = new FormHtml(this.strId + "_frm");
+            this._frm = this.getFrm();
 
             return this._frm;
         }
@@ -292,7 +292,16 @@ module NetZ_Web_TypeScript
 
         private getCmpIntId(): CampoNumerico
         {
-            return this.frm.getCmpClnWebNome("int_id");
+            return this.frm.getCmpClnWebStrNome("int_id");
+        }
+
+        private getFrm(): FormHtml
+        {
+            var frmResultado = new FormHtml(this.strId + "_frm");
+
+            frmResultado.tblWeb = this.tblWeb;
+
+            return frmResultado;
         }
 
         private getIntRegistroId(): number
@@ -360,13 +369,13 @@ module NetZ_Web_TypeScript
 
             var tblWebResultado = new TabelaWeb(this.strTblNome);
 
-            this.frm.carregarTblWeb(tblWebResultado);
-
             return tblWebResultado;
         }
 
         protected inicializar(): void
         {
+            super.inicializar();
+
             ServerHttp.i.atualizarCssMain();
 
             this.frm.iniciar();
@@ -410,76 +419,40 @@ module NetZ_Web_TypeScript
 
         public salvar(): void
         {
-            // #region Variáveis
+            this.carregarDados();
 
-            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (!this.validarDados())
             {
-                this.carregarDados();
-
-                if (!this.validarDados())
-                {
-                    return;
-                }
-
-                objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
-
-                objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.SALVAR;
-                objSolicitacaoAjaxDb.strData = JSON.stringify(this.tblWeb);
-
-                objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
-
-                ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+                return;
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.SALVAR;
+
+            objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+            objSolicitacaoAjaxDb.addJsn(this.tblWeb);
+
+            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
 
         private salvarSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
         {
-            // #region Variáveis
-
-            var tblWeb: TabelaWeb;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (objSolicitacaoAjaxDb == null)
             {
-                if (objSolicitacaoAjaxDb == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
-                {
-                    return; // TODO: Verificar a necessidade de validar o porque do JSON voltar vazio.
-                }
-
-                tblWeb = new TabelaWeb(this.tblWeb.strNome);
-
-                tblWeb.copiarDados(JSON.parse(objSolicitacaoAjaxDb.strData));
-
-                this.salvarSucesso2(tblWeb);
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
             {
-                throw ex;
+                return; // TODO: Verificar a necessidade de validar o porque do JSON voltar vazio.
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            var tblWeb = new TabelaWeb(this.tblWeb.strNome);
+
+            tblWeb.copiarDados(JSON.parse(objSolicitacaoAjaxDb.strData));
+
+            this.salvarSucesso2(tblWeb);
         }
 
         private salvarSucesso2(tblWeb: TabelaWeb): void
@@ -536,7 +509,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            var cmp: CampoHtml = this.frm.getCmpClnWebNome(clnWeb.strNome);
+            var cmp: CampoHtml = this.frm.getCmpClnWebStrNome(clnWeb.strNome);
 
             if (cmp == null)
             {
@@ -566,7 +539,12 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.cmpIntId.tagInput.intValor = tblWeb.intRegistroId;
+            if (this.cmpIntId.clnWeb == null)
+            {
+                return;
+            }
+
+            this.cmpIntId.tagInput.intValor = tblWeb.getClnWeb(this.cmpIntId.clnWeb.strNome).intValor;
         }
 
         private salvarSucesso2SucessoTabHtml(): void

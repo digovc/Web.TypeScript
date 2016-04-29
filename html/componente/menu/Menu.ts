@@ -99,9 +99,8 @@ module NetZ_Web_TypeScript
 
             this.divGaveta.esconder();
 
-            this.fecharGrupos();
-
-            this.txtPesquisa.strValor = null;
+            window.setTimeout(() => { this.fecharGrupos(); }, 200);
+            window.setTimeout(() => { this.txtPesquisa.strValor = null; }, 200);
         }
 
         private abrirConsultaPrimeira(): void

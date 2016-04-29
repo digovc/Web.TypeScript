@@ -103,7 +103,7 @@ module NetZ_Web_TypeScript
 
             TblFiltro.i.limparFiltro();
 
-            TblFiltro.i.addFiltro2(TblFiltro.i.clnIntId, this.cmpIntFiltroId.tagInput.intValor);
+            TblFiltro.i.addFil2(TblFiltro.i.clnIntId, this.cmpIntFiltroId.tagInput.intValor);
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
@@ -166,7 +166,7 @@ module NetZ_Web_TypeScript
 
             TblFiltro.i.limparFiltro();
 
-            TblFiltro.i.addFiltro2(TblFiltro.i.clnStrTabelaNome, this.tblWebConsulta.strNome);
+            TblFiltro.i.addFil2(TblFiltro.i.clnStrTabelaNome, this.tblWebConsulta.strNome);
 
             this.cmpIntFiltroId.carregarDados(TblFiltro.i);
         }
