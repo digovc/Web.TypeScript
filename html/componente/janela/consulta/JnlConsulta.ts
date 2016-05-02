@@ -182,6 +182,8 @@ module NetZ_Web_TypeScript
 
         protected inicializar(): void
         {
+            this.booPermitirMover = false;
+
             ServerHttp.i.atualizarCssMain();
 
             this.pnlAcaoConsulta.iniciar();

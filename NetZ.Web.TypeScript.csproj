@@ -43,6 +43,8 @@
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelAcaoConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelFiltro.ts" />
+    <TypeScriptCompile Include="html\componente\menu\contexto\MenuContexto.ts" />
+    <TypeScriptCompile Include="html\componente\menu\contexto\MenuContextoItem.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuMobile.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuMobileItem.ts" />
     <TypeScriptCompile Include="html\componente\tab\TabHtml.ts" />
@@ -51,6 +53,8 @@
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
     <TypeScriptCompile Include="Keys.ts" />
+    <TypeScriptCompile Include="LayoutFixo.ts" />
+    <TypeScriptCompile Include="LayoutFixoManager.ts" />
     <TypeScriptCompile Include="OnDisposedListener.ts" />
     <TypeScriptCompile Include="OnDoubleClickListener.ts" />
     <TypeScriptCompile Include="OnKeyDownListener.ts" />

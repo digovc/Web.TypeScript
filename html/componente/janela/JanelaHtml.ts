@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnMouseDownListener.ts"/>
+/// <reference path="../../../OnMouseLeaveListener.ts"/>
 /// <reference path="../../../OnMouseMoveListener.ts"/>
 /// <reference path="../../../OnMouseUpListener.ts"/>
 /// <reference path="../../pagina/PaginaHtml.ts"/>
@@ -13,7 +14,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JanelaHtml extends ComponenteHtml implements OnClickListener, OnMouseDownListener, OnMouseMoveListener, OnMouseUpListener
+    export class JanelaHtml extends ComponenteHtml implements OnClickListener, OnMouseDownListener, OnMouseLeaveListener, OnMouseMoveListener, OnMouseUpListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -21,10 +22,13 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _booAtivo: boolean;
-        private _booCabecalhoArrastar: boolean;
+        private _booDragging: boolean;
+        private _booPermitirMover: boolean = true;
         private _divBtnFechar: Div;
         private _divCabecalho: Div;
         private _divInativa: Div;
+        private _intCabecalhoLeft: number;
+        private _intCabecalhoTop: number;
         private _intCabecalhoX: number;
         private _intCabecalhoY: number;
         private _pag: PaginaHtml;
@@ -43,14 +47,24 @@ module NetZ_Web_TypeScript
             this.atualizarBooAtivo();
         }
 
-        private get booCabecalhoArrastar(): boolean
+        private get booDragging(): boolean
         {
-            return this._booCabecalhoArrastar;
+            return this._booDragging;
         }
 
-        private set booCabecalhoArrastar(booCabecalhoArrastar: boolean)
+        private set booDragging(booCabecalhoArrastar: boolean)
         {
-            this._booCabecalhoArrastar = booCabecalhoArrastar;
+            this._booDragging = booCabecalhoArrastar;
+        }
+
+        protected get booPermitirMover(): boolean
+        {
+            return this._booPermitirMover;
+        }
+
+        protected set booPermitirMover(booPermitirMover: boolean)
+        {
+            this._booPermitirMover = booPermitirMover;
         }
 
         private get divBtnFechar(): Div
@@ -87,6 +101,26 @@ module NetZ_Web_TypeScript
             this._divInativa = new Div(this.strId + "_divInativa");
 
             return this._divInativa;
+        }
+
+        private get intCabecalhoLeft(): number
+        {
+            return this._intCabecalhoLeft;
+        }
+
+        private set intCabecalhoLeft(intCabecalhoLeft: number)
+        {
+            this._intCabecalhoLeft = intCabecalhoLeft;
+        }
+
+        private get intCabecalhoTop(): number
+        {
+            return this._intCabecalhoTop;
+        }
+
+        private set intCabecalhoTop(intCabecalhoTop: number)
+        {
+            this._intCabecalhoTop = intCabecalhoTop;
         }
 
         private get intCabecalhoX(): number
@@ -153,29 +187,43 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.booCabecalhoArrastar = true;
+            if (!this.booPermitirMover)
+            {
+                return;
+            }
 
-            this.intCabecalhoX = arg.screenX;
-            this.intCabecalhoY = arg.screenY;
+            this.booDragging = true;
+
+            this.intCabecalhoLeft = parseInt(this.jq.css("left"));
+            this.intCabecalhoTop = parseInt(this.jq.css("top"));
+
+            this.intCabecalhoLeft = (Math.abs(this.intCabecalhoLeft) > 0) ? this.intCabecalhoLeft : 0;
+            this.intCabecalhoTop = (Math.abs(this.intCabecalhoTop) > 0) ? this.intCabecalhoTop : 0;
+
+            this.intCabecalhoX = arg.clientX;
+            this.intCabecalhoY = arg.clientY;
         }
 
         private divCabecalhoOnMouseMove(arg: JQueryMouseEventObject): void
         {
-            if (!this.booCabecalhoArrastar)
+            if (!this.booDragging)
             {
+                return;
+            }
+
+            if (arg.button != 0)
+            {
+                this.booDragging;
                 return;
             }
 
             console.log(arg);
 
-            var intCabecalhoLeft = parseInt(this.jq.css("left"));
-            var intCabecalhoTop = parseInt(this.jq.css("top"));
+            var x = (this.intCabecalhoLeft + arg.clientX - this.intCabecalhoX);
+            var y = (this.intCabecalhoTop + (arg.clientY - this.intCabecalhoY));
 
-            intCabecalhoLeft = (Math.abs(intCabecalhoLeft) > 0) ? intCabecalhoLeft : 0;
-            intCabecalhoTop = (Math.abs(intCabecalhoTop) > 0) ? intCabecalhoTop : 0;
-
-            this.jq.css("left", (intCabecalhoLeft - (this.intCabecalhoX - arg.screenX)));
-            this.jq.css("top", (intCabecalhoTop - (this.intCabecalhoY - arg.screenY)));
+            this.jq.css("left", x);
+            this.jq.css("top", y);
         }
 
         private divCabecalhoOnMouseUp(arg: JQueryMouseEventObject): void
@@ -185,7 +233,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.booCabecalhoArrastar = false;
+            this.booDragging = false;
         }
 
         protected fechar(): void
@@ -193,10 +241,44 @@ module NetZ_Web_TypeScript
             this.dispose();
         }
 
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.inicializarPosicao();
+        }
+
+        private inicializarPosicao(): void
+        {
+            var intParentHeight = this.jq.parent().height();
+            var intParentWidth = this.jq.parent().width();
+
+            var intHeight = this.jq.height();
+            var intWidth = this.jq.width();
+
+            var x = ((intParentWidth / 2) - (intWidth / 2));
+            var y = ((intParentHeight / 2) - (intHeight / 2));
+
+            this.jq.css("left", x);
+            this.jq.css("top", y);
+        }
+
         protected setEventos(): void
         {
             this.divBtnFechar.addEvtOnClickListener(this);
+
+            this.setEventosPermitirMover();
+        }
+
+        private setEventosPermitirMover(): void
+        {
+            if (!this.booPermitirMover)
+            {
+                return;
+            }
+
             this.divCabecalho.addEvtOnMouseDownListener(this);
+            this.divCabecalho.addEvtOnMouseLeaveListener(this);
             this.divCabecalho.addEvtOnMouseMoveListener(this);
             this.divCabecalho.addEvtOnMouseUpListener(this);
         }
@@ -242,6 +324,31 @@ module NetZ_Web_TypeScript
                 {
                     case this.divCabecalho:
                         this.divCabecalhoOnMouseDown(arg);
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this.divCabecalho:
+                        this.booDragging = false;
                         return;
                 }
             }

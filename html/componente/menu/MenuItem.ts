@@ -49,7 +49,7 @@ module NetZ_Web_TypeScript
             return this._arrStrTag;
         }
 
-        private get divItemConteudo(): PainelHtml
+        private get divItemConteudo(): Div
         {
             if (this._divItemConteudo != null)
             {

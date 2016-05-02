@@ -1,4 +1,5 @@
-﻿/// <reference path="../Div.ts"/>
+﻿/// <reference path="../../LayoutFixoManager.ts"/>
+/// <reference path="../Div.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -14,12 +15,32 @@ module NetZ_Web_TypeScript
         // #endregion Constantes
 
         // #region Atributos
+
+        private _strLayoutFixo: string;
+
+        protected get strLayoutFixo(): string
+        {
+            if (this._strLayoutFixo != null)
+            {
+                return this._strLayoutFixo;
+            }
+
+            this._strLayoutFixo = LayoutFixoManager.i.getStrLayoutFixo(this.strClassNome);
+
+            return this._strLayoutFixo;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
         // #endregion Construtores
 
         // #region Métodos
+
+        protected montarLayoutFixo(): void
+        {
+        }
+
         // #endregion Métodos
 
         // #region Eventos

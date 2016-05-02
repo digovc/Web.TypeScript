@@ -113,12 +113,14 @@ module NetZ_Web_TypeScript
 
         protected get pagPrincipal(): PagPrincipal
         {
-            return this._pagPrincipal;
-        }
+            if (this._pagPrincipal != null)
+            {
+                return this._pagPrincipal;
+            }
 
-        protected set pagPrincipal(pagPrincipal: PagPrincipal)
-        {
-            this._pagPrincipal = pagPrincipal;
+            this._pagPrincipal = this.getPagPrincipal();
+
+            return this._pagPrincipal;
         }
 
         private get srcJs(): string
@@ -173,11 +175,11 @@ module NetZ_Web_TypeScript
 
         // #region Construtores
 
-        constructor(strId: string, pagPrincipal: PagPrincipal)
+        constructor()
         {
-            super(strId, pagPrincipal);
+            super(null, AppWeb.i.pag);
 
-            this.pagPrincipal = pagPrincipal;
+            this.strId = this.strClassNome;
         }
 
         // #endregion Construtores
@@ -317,6 +319,21 @@ module NetZ_Web_TypeScript
             }
 
             return this.cmpIntId.tagInput.intValor;
+        }
+
+        private getPagPrincipal(): PagPrincipal
+        {
+            if (AppWeb.i.pag == null)
+            {
+                return null;
+            }
+
+            if (!(AppWeb.i.pag instanceof PagPrincipal))
+            {
+                return null;
+            }
+
+            return (<PagPrincipal>AppWeb.i.pag);
         }
 
         private getSrcJs(): string

@@ -56,7 +56,7 @@
 
     // #region Inicialização
 
-    $(document).ready(() => { new JnlFiltroCadastro("JnlFiltroCadastro", (<PagPrincipal>AppWeb.i.pag)).iniciar(); });
+    $(document).ready(() => { new JnlFiltroCadastro().iniciar(); });
 
     // #endregion Inicialização
 }

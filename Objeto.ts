@@ -17,6 +17,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _intObjetoId: number;
+        private _strClassNome: string;
         private _strNome: string;
         private _strNomeExibicao: string;
         private static _intObjetoIdStatic: number;
@@ -102,6 +103,18 @@ module NetZ_Web_TypeScript
             Objeto._intObjetoIdStatic = intObjetoIdStatic;
         }
 
+        protected get strClassNome(): string
+        {
+            if (this._strClassNome != null)
+            {
+                return this._strClassNome;
+            }
+
+            this._strClassNome = this.getStrClassNome();
+
+            return this._strClassNome;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -127,6 +140,11 @@ module NetZ_Web_TypeScript
             this.limparMemoria();
 
             this.dispararEvtOnDisposedListener();
+        }
+
+        private getStrClassNome(): string
+        {
+            return this.constructor.toString().match(/\w+/g)[1];
         }
 
         protected limparMemoria(): void
