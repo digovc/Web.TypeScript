@@ -21,11 +21,24 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
+        private _booMostrarTituloSempre: boolean;
         private _clnWeb: ColunaWeb;
         private _divTitulo: Div;
         private _frm: FormHtml;
         private _strCritica: string;
         private _tagInput: Input;
+
+        private get booMostrarTituloSempre(): boolean
+        {
+            if (this._booMostrarTituloSempre != null)
+            {
+                return this._booMostrarTituloSempre;
+            }
+
+            this._booMostrarTituloSempre = (!Utils.getBooStrVazia(this.jq.attr("mostrar_titulo_sempre")));
+
+            return this._booMostrarTituloSempre;
+        }
 
         public get clnWeb(): ColunaWeb
         {
@@ -98,6 +111,20 @@ module NetZ_Web_TypeScript
             this.strTitle = this.strCritica;
         }
 
+        protected atualizarStrPlaceholder(): void
+        {
+            super.atualizarStrPlaceholder();
+
+            if (!Utils.getBooStrVazia(this.strPlaceholder))
+            {
+                this.tagInput.jq.attr("placeholder", this.strPlaceholder);
+            }
+            else
+            {
+                this.tagInput.jq.removeAttr("placeholder");
+            }
+        }
+
         private atualizarStrValor(): void
         {
             this.atualizarStrValorCln();
@@ -156,6 +183,20 @@ module NetZ_Web_TypeScript
             this.tagInput.iniciar();
 
             this.atualizarStrValor();
+
+            this.inicializarMostrarTituloSempre();
+        }
+
+        private inicializarMostrarTituloSempre(): void
+        {
+            if (!this.booMostrarTituloSempre)
+            {
+                return;
+            }
+
+            this.strPlaceholder = null;
+
+            this.mostrarDivTitulo(true);
         }
 
         protected mostrarDivTitulo(booMostrar: boolean): void
@@ -163,6 +204,11 @@ module NetZ_Web_TypeScript
             if (booMostrar)
             {
                 this.divTitulo.jq.animate({ opacity: 1 }, 200);
+                return;
+            }
+
+            if (this.booMostrarTituloSempre)
+            {
                 return;
             }
 

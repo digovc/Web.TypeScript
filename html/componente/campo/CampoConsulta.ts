@@ -17,7 +17,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _clnWebRef: ColunaWeb;
-        private _strClnWebRef: string;
+        private _clnWebRefNome: ColunaWeb;
         private _strTblWebRefNome: string;
         private _tblWebRef: TabelaWeb;
         private _txtPesquisa: Input;
@@ -29,21 +29,21 @@ module NetZ_Web_TypeScript
                 return this._clnWebRef;
             }
 
-            this._clnWebRef = this.getClnWebRef();
+            this._clnWebRef = new ColunaWeb(this.getStrAttValor("cln_web_ref"));
 
             return this._clnWebRef;
         }
 
-        private get strClnWebRef(): string
+        private get clnWebRefNome(): ColunaWeb
         {
-            if (this._strClnWebRef != null)
+            if (this._clnWebRefNome != null)
             {
-                return this._strClnWebRef;
+                return this._clnWebRefNome;
             }
 
-            this._strClnWebRef = this.getStrAttValor("cln_web_ref");
+            this._clnWebRefNome = new ColunaWeb(this.getStrAttValor("cln_web_ref_nome"));
 
-            return this._strClnWebRef;
+            return this._clnWebRefNome;
         }
 
         private get strTblWebRefNome(): string
@@ -89,16 +89,6 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        private getClnWebRef(): ColunaWeb
-        {
-            if (Utils.getBooStrVazia(this.strClnWebRef))
-            {
-                return null;
-            }
-
-            return new ColunaWeb(this.strClnWebRef);
-        }
-
         private getTblWebRef(): TabelaWeb
         {
             if (Utils.getBooStrVazia(this.strTblWebRefNome))
@@ -137,7 +127,13 @@ module NetZ_Web_TypeScript
 
             this.tblWebRef.limparFiltro();
 
-            this.tblWebRef.addFil2(this.clnWebRef, this.txtPesquisa.strValor);
+            var fil = new FiltroWeb();
+
+            fil.clnWeb = this.clnWebRefNome;
+            fil.enmOperador = FiltroWeb_EnmOperador.LIKE;
+            fil.objValor = this.txtPesquisa.strValor;
+
+            this.tblWebRef.addFil(fil);
 
             this.cmb.carregarDados(this.tblWebRef);
 

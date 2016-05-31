@@ -35,6 +35,7 @@
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridRow.ts" />
+    <TypeScriptCompile Include="html\componente\grid\OnRowClickListener.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowDoubleClickListener.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroItemCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroCadastro.ts" />

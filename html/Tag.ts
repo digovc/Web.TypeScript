@@ -123,7 +123,7 @@ module NetZ_Web_TypeScript
         {
             this._strPlaceholder = strPlaceholder;
 
-            this.jq.attr("placeholder", this._strPlaceholder);
+            this.atualizarStrPlaceholder();
         }
 
         public get strTitle(): string
@@ -168,6 +168,18 @@ module NetZ_Web_TypeScript
         private atualizarStrJqSelector(): void
         {
             this.jq = null;
+        }
+
+        protected atualizarStrPlaceholder(): void
+        {
+            if (!Utils.getBooStrVazia(this.strPlaceholder))
+            {
+                this.jq.attr("placeholder", this.strPlaceholder);
+            }
+            else
+            {
+                this.jq.removeAttr("placeholder");
+            }
         }
 
         private atualizarStrTitle(): void

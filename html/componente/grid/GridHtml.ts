@@ -1,6 +1,7 @@
-﻿/// <reference path="GridRow.ts"/>
-/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Utils.ts"/>
+/// <reference path="GridRow.ts"/>
+/// <reference path="OnRowClickListener.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -25,27 +26,12 @@ module NetZ_Web_TypeScript
 
         private get arrTagGridRow(): Array<GridRow>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrTagGridRow != null)
+            {
+                return this._arrTagGridRow;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrTagGridRow != null)
-                {
-                    return this._arrTagGridRow;
-                }
-
-                this._arrTagGridRow = this.getArrTagGridRow();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrTagGridRow = this.getArrTagGridRow();
 
             return this._arrTagGridRow;
         }
@@ -64,81 +50,36 @@ module NetZ_Web_TypeScript
 
         private get tagTable(): Tag
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._tagTable != null)
+            {
+                return this._tagTable;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._tagTable != null)
-                {
-                    return this._tagTable;
-                }
-
-                this._tagTable = new Tag(this.strId + "_table");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._tagTable = new Tag(this.strId + "_table");
 
             return this._tagTable;
         }
 
         private get tagTbody(): Tag
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._tagTbody != null)
+            {
+                return this._tagTbody;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._tagTbody != null)
-                {
-                    return this._tagTbody;
-                }
-
-                this._tagTbody = new Tag(this.strId + "_tbody");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._tagTbody = new Tag(this.strId + "_tbody");
 
             return this._tagTbody;
         }
 
         private get tblWeb(): TabelaWeb
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._tblWeb != null)
+            {
+                return this._tblWeb;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._tblWeb != null)
-                {
-                    return this._tblWeb;
-                }
-
-                this._tblWeb = this.getTblWeb();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._tblWeb = this.getTblWeb();
 
             return this._tblWeb;
         }
@@ -153,206 +94,172 @@ module NetZ_Web_TypeScript
 
         private getArrTagGridRow(): Array<GridRow>
         {
-            // #region Variáveis
-
-            var arrJqGridRow: JQuery;
-            var arrTagGridRowResultado: Array<GridRow>;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.tagTbody == null)
             {
-                if (this.tagTbody == null)
-                {
-                    return;
-                }
-
-                if (this.tagTbody.jq == null)
-                {
-                    return;
-                }
-
-                arrJqGridRow = this.tagTbody.jq.find('[clazz=GridRow]');
-
-                if (arrJqGridRow == null)
-                {
-                    return;
-                }
-
-                arrTagGridRowResultado = new Array<GridRow>();
-
-                for (var i = 0; i < arrJqGridRow.length; i++)
-                {
-                    this.getArrTagGridRow2(arrTagGridRowResultado, arrJqGridRow[i]);
-                }
-
-                return arrTagGridRowResultado;
+                return;
             }
-            catch (ex)
+
+            if (this.tagTbody.jq == null)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            var arrJqGridRow = this.tagTbody.jq.find('[clazz=GridRow]');
+
+            if (arrJqGridRow == null)
             {
+                return;
             }
-            // #endregion Ações
+
+            var arrTagGridRowResultado = new Array<GridRow>();
+
+            for (var i = 0; i < arrJqGridRow.length; i++)
+            {
+                this.getArrTagGridRow2(arrTagGridRowResultado, arrJqGridRow[i]);
+            }
+
+            return arrTagGridRowResultado;
         }
 
         private getArrTagGridRow2(arrTagGridRow: Array<GridRow>, jqGridRow: any): void
         {
-            // #region Variáveis
-
-            var tagGridRow: GridRow;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (jqGridRow == null)
             {
-                if (jqGridRow == null)
-                {
-                    return;
-                }
-
-                if (Utils.getBooStrVazia(jqGridRow.id))
-                {
-                    return;
-                }
-
-                tagGridRow = new GridRow(jqGridRow.id);
-
-                tagGridRow.tagGridHtml = this;
-
-                arrTagGridRow.push(tagGridRow);
+                return;
             }
-            catch (ex)
+
+            if (Utils.getBooStrVazia(jqGridRow.id))
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            var tagGridRow = new GridRow(jqGridRow.id);
+
+            tagGridRow.tagGridHtml = this;
+
+            arrTagGridRow.push(tagGridRow);
         }
 
         private getTblWeb(): TabelaWeb
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.jq == null)
             {
-                if (this.jq == null)
-                {
-                    return null;
-                }
+                return null;
+            }
 
-                if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
-                {
-                    return null;
-                }
+            if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
+            {
+                return null;
+            }
 
-                return new TabelaWeb(this.jq.attr("tbl_web_nome"));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            return new TabelaWeb(this.jq.attr("tbl_web_nome"));
         }
 
         protected inicializar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.inicializarCabecalhoFixo();
-                this.inicializarLstTagRow();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.inicializarCabecalhoFixo();
+            this.inicializarLstTagRow();
         }
 
         private inicializarCabecalhoFixo(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.tagTable.jq == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.tagTable.jq == null)
-                {
-                    return;
-                }
-
-                //this.tagTable.jq.floatThead({
-                //    scrollContainer: function ()
-                //    {
-                //        return this.tagTable.jq.closest('#divGrid');
-                //    }
-                //});
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            //this.tagTable.jq.floatThead({
+            //    scrollContainer: function ()
+            //    {
+            //        return this.tagTable.jq.closest('#divGrid');
+            //    }
+            //});
         }
 
         private inicializarLstTagRow(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.arrTagGridRow == null)
             {
-                if (this.arrTagGridRow == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrTagGridRow.length < 1)
-                {
-                    return;
-                }
+            if (this.arrTagGridRow.length < 1)
+            {
+                return;
+            }
 
-                for (var i = 0; i < this.arrTagGridRow.length; i++)
-                {
-                    this.arrTagGridRow[i].iniciar();
-                }
-            }
-            catch (ex)
+            for (var i = 0; i < this.arrTagGridRow.length; i++)
             {
-                throw ex;
+                this.arrTagGridRow[i].iniciar();
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Métodos
 
         // #region Eventos
+
+        // #region Evento OnRowClickListener
+
+        private _arrEvtOnRowClickListener: Array<OnRowClickListener>;
+
+        private get arrEvtOnRowClickListener(): Array<OnRowClickListener>
+        {
+            if (this._arrEvtOnRowClickListener != null)
+            {
+                return this._arrEvtOnRowClickListener;
+            }
+
+            this._arrEvtOnRowClickListener = new Array<OnRowClickListener>();
+
+            return this._arrEvtOnRowClickListener;
+        }
+
+        public addEvtOnRowClickListener(evtOnRowClickListener: OnRowClickListener): void
+        {
+            if (evtOnRowClickListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnRowClickListener.indexOf(evtOnRowClickListener) > -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnRowClickListener.push(evtOnRowClickListener);
+        }
+
+        public dispararEvtOnRowClickListener(tagGridRow: GridRow): void
+        {
+            if (this.arrEvtOnRowClickListener.length == 0)
+            {
+                return;
+            }
+
+            if (tagGridRow == null)
+            {
+                return;
+            }
+
+            this.arrEvtOnRowClickListener.forEach((evt) => { evt.onRowClick(this, tagGridRow); });
+        }
+
+        public removerEvtOnRowClickListener(evtOnRowClickListener: OnRowClickListener): void
+        {
+            if (evtOnRowClickListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnRowClickListener.indexOf(evtOnRowClickListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnRowClickListener.splice(this.arrEvtOnRowClickListener.indexOf(evtOnRowClickListener));
+        }
+
+        // #endregion Evento OnRowClickListener
 
         // #region Evento OnRowDoubleClickListener
 
@@ -360,119 +267,59 @@ module NetZ_Web_TypeScript
 
         private get arrEvtOnRowDoubleClickListener(): Array<OnRowDoubleClickListener>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrEvtOnRowDoubleClickListener != null)
+            {
+                return this._arrEvtOnRowDoubleClickListener;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrEvtOnRowDoubleClickListener != null)
-                {
-                    return this._arrEvtOnRowDoubleClickListener;
-                }
-
-                this._arrEvtOnRowDoubleClickListener = new Array<OnRowDoubleClickListener>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrEvtOnRowDoubleClickListener = new Array<OnRowDoubleClickListener>();
 
             return this._arrEvtOnRowDoubleClickListener;
         }
 
         public addEvtOnRowDoubleClickListener(evtOnRowDoubleClickListener: OnRowDoubleClickListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnRowDoubleClickListener == null)
             {
-                if (evtOnRowDoubleClickListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) > -1)
-                {
-                    return;
-                }
+            if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) > -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnRowDoubleClickListener.push(evtOnRowDoubleClickListener);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnRowDoubleClickListener.push(evtOnRowDoubleClickListener);
         }
 
         public dispararEvtOnRowDoubleClickListener(tagGridRow: GridRow): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.arrEvtOnRowDoubleClickListener.length == 0)
             {
-                if (this.arrEvtOnRowDoubleClickListener.length == 0)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (tagGridRow == null)
-                {
-                    return;
-                }
+            if (tagGridRow == null)
+            {
+                return;
+            }
 
-                this.arrEvtOnRowDoubleClickListener.forEach((evt) => { evt.onRowDoubleClick(this, tagGridRow); });
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnRowDoubleClickListener.forEach((evt) => { evt.onRowDoubleClick(this, tagGridRow); });
         }
 
         public removerEvtOnRowDoubleClickListener(evtOnRowDoubleClickListener: OnRowDoubleClickListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnRowDoubleClickListener == null)
             {
-                if (evtOnRowDoubleClickListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) == -1)
-                {
-                    return;
-                }
+            if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) == -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnRowDoubleClickListener.splice(this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener));
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnRowDoubleClickListener.splice(this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener));
         }
 
         // #endregion Evento OnRowDoubleClickListener

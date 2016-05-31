@@ -1,4 +1,6 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="LayoutFixo.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
