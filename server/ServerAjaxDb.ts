@@ -58,9 +58,9 @@ module NetZ_Web_TypeScript
             $.ajaxSettings.url = this.url;
             $.ajaxSettings.xhrFields = { "withCredentials": true };
 
-            $.ajaxSettings.beforeSend = (objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacaoAjax.ajaxAntesEnviar() };
-            $.ajaxSettings.error = (objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objSolicitacaoAjax.ajaxErro(strTextStatus, strErrorThrown) };
-            $.ajaxSettings.success = (anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objSolicitacaoAjax.ajaxSucesso(anyData) };
+            //$.ajaxSettings.beforeSend = ((objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacaoAjax.ajaxAntesEnviar(); });
+            $.ajaxSettings.error = ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objSolicitacaoAjax.ajaxErro(strTextStatus, strErrorThrown); });
+            $.ajaxSettings.success = ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objSolicitacaoAjax.ajaxSucesso(anyData); });
 
             $.ajax($.ajaxSettings);
         }

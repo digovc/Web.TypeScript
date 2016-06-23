@@ -125,9 +125,6 @@
     <TypeScriptCompile Include="database\ColunaWeb.ts" />
     <TypeScriptCompile Include="database\FiltroWeb.ts" />
     <TypeScriptCompile Include="database\TabelaWeb.ts" />
-    <TypeScriptCompile Include="server\OnAjaxErroArg.ts" />
-    <TypeScriptCompile Include="server\OnAjaxListener.ts" />
-    <TypeScriptCompile Include="server\OnAjaxSucessoArg.ts" />
     <TypeScriptCompile Include="server\ServerAjax.ts" />
     <TypeScriptCompile Include="server\ServerAjaxDb.ts" />
     <TypeScriptCompile Include="server\ServerBase.ts" />

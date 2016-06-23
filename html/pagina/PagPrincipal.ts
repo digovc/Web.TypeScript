@@ -14,7 +14,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class PagPrincipal extends PaginaHtml implements OnAjaxListener, OnDisposedListener
+    export abstract class PagPrincipal extends PaginaHtml implements OnDisposedListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -93,7 +93,7 @@ module NetZ_Web_TypeScript
 
             objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO;
 
-            objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirCadastroSucesso(objSolicitacaoAjaxDb); });
             objSolicitacaoAjaxDb.addJsn(tblWeb);
 
             ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
@@ -132,7 +132,7 @@ module NetZ_Web_TypeScript
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirConsultaSucesso(objSolicitacaoAjaxDb); });
 
             objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CONSULTA;
             objSolicitacaoAjaxDb.strData = JSON.stringify(tblWeb);
@@ -266,43 +266,6 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
-
-        public onAjaxAntesEnviar(objSolicitacaoAjaxSender: SolicitacaoAjax): void
-        {
-        }
-
-        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxErroArg): void
-        {
-        }
-
-        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxSucessoArg): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                switch ((<SolicitacaoAjaxDb>objSolicitacaoAjaxSender).enmMetodo)
-                {
-                    case SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO:
-                        this.abrirCadastroSucesso(arg.objSolicitacaoAjaxDb);
-                        return;
-
-                    case SolicitacaoAjaxDb_EnmMetodo.ABRIR_CONSULTA:
-                        this.abrirConsultaSucesso(arg.objSolicitacaoAjaxDb);
-                        return;
-                }
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
         public onDisposed(objSender: Object): void
         {

@@ -15,8 +15,21 @@
 
         // #region Atributos
 
+        private _arrFncErro: Array<Function>;
         private _arrFncSucesso: Array<Function>;
         private _strData: string;
+
+        private get arrFncErro(): Array<Function>
+        {
+            if (this._arrFncErro != null)
+            {
+                return this._arrFncErro;
+            }
+
+            this._arrFncErro = new Array<Function>();
+
+            return this._arrFncErro;
+        }
 
         private get arrFncSucesso(): Array<Function>
         {
@@ -46,6 +59,26 @@
         // #endregion Construtores
 
         // #region Métodos
+
+        /**
+         * Adiciona uma função que será executada caso haja algum erro ao enviar a solicitação.
+         * Esta função receberá duas strings contendo detalhes do erro que aconteceu (strTextStatus, strErrorThrown).
+         * @param fncErro Função que será executada caso haja algum erro ao enviar a solicitação.
+         */
+        public addFncErro(fncErro: Function): void
+        {
+            if (fncErro == null)
+            {
+                return;
+            }
+
+            if (this.arrFncErro.indexOf(fncErro) > -1)
+            {
+                return;
+            }
+
+            this.arrFncErro.push(fncErro);
+        }
 
         /**
          * Adiciona uma função que será executada caso a solicitação seja bem sucedida.
@@ -89,15 +122,6 @@
         }
 
         /**
-         * Método disparado antes que esta solicitação AJAX seja
-         * enviada para o servidor.
-         */
-        public ajaxAntesEnviar(): void
-        {
-            this.dispararEvtOnAjaxListenerOnAjaxAntesEnviar();
-        }
-
-        /**
          * Método disparado quando o servidor devolve algum tipo de
          * exceção durante o processamento desta solicitação.
          * Isso não significa que o processo em si deu errado, mas que
@@ -107,7 +131,7 @@
          */
         public ajaxErro(strTextStatus: string, strErrorThrown: string): void
         {
-            this.dispararEvtOnAjaxListenerOnAjaxErroListener(strErrorThrown, strTextStatus);
+            this.dispararArrFncErro(strTextStatus, strErrorThrown);
         }
 
         /**
@@ -120,8 +144,6 @@
         public ajaxSucesso(anyData: any): void
         {
             this.dispararArrFncSucesso(anyData);
-
-            this.dispararEvtOnAjaxListenerOnAjaxSucesso(anyData);
         }
 
         private dispararArrFncSucesso(anyData: any): void
@@ -136,6 +158,11 @@
             objSolicitacaoAjax.copiarDados(anyData);
 
             this.arrFncSucesso.forEach((fnc) => { fnc(objSolicitacaoAjax); });
+        }
+
+        private dispararArrFncErro(strTextStatus: string, strErrorThrown: string): void
+        {
+            this.arrFncErro.forEach((fnc) => { fnc(strTextStatus, strErrorThrown); });
         }
 
         /**
@@ -170,93 +197,6 @@
         // #endregion Métodos
 
         // #region Eventos
-
-        // #region Evento OnAjaxListener
-
-        private _arrEvtOnAjaxListener: Array<OnAjaxListener>;
-
-        private get arrEvtOnAjaxListener(): Array<OnAjaxListener>
-        {
-            if (this._arrEvtOnAjaxListener != null)
-            {
-                return this._arrEvtOnAjaxListener;
-            }
-
-            this._arrEvtOnAjaxListener = new Array<OnAjaxListener>();
-
-            return this._arrEvtOnAjaxListener;
-        }
-
-        public addEvtOnAjaxListener(evtOnAjaxListener: OnAjaxListener): void
-        {
-            if (evtOnAjaxListener == null)
-            {
-                return;
-            }
-
-            if (this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener) > -1)
-            {
-                return;
-            }
-
-            this.arrEvtOnAjaxListener.push(evtOnAjaxListener);
-        }
-
-        public removeEvtOnAjaxListener(evtOnAjaxListener: OnAjaxListener): void
-        {
-            if (evtOnAjaxListener == null)
-            {
-                return;
-            }
-
-            if (this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener) == -1)
-            {
-                return;
-            }
-
-            this.arrEvtOnAjaxListener.splice(this.arrEvtOnAjaxListener.indexOf(evtOnAjaxListener));
-        }
-
-        private dispararEvtOnAjaxListenerOnAjaxAntesEnviar(): void
-        {
-            if (this.arrEvtOnAjaxListener.length == 0)
-            {
-                return;
-            }
-
-            this.arrEvtOnAjaxListener.forEach((evt) => { evt.onAjaxAntesEnviar(this); });
-        }
-
-        private dispararEvtOnAjaxListenerOnAjaxErroListener(strErrorThrown: string, strTextStatus: string): void
-        {
-            if (this.arrEvtOnAjaxListener.length == 0)
-            {
-                return;
-            }
-
-            var arg = new OnAjaxErroArg();
-
-            arg.strErrorThrown = strErrorThrown;
-            arg.strTextStatus = strTextStatus;
-
-            this.arrEvtOnAjaxListener.forEach((evt) => { evt.onAjaxErroListener(this, arg); });
-        }
-
-        private dispararEvtOnAjaxListenerOnAjaxSucesso(anyData: any): void
-        {
-            if (this.arrEvtOnAjaxListener.length == 0)
-            {
-                return;
-            }
-
-            var arg = new OnAjaxSucessoArg();
-
-            arg.anyData = anyData;
-
-            this.arrEvtOnAjaxListener.forEach((evt) => { evt.onAjaxSucesso(this, arg); });
-        }
-
-        // #endregion Evento OnAjaxListener
 
         // #endregion Eventos
     }

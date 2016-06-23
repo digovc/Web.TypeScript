@@ -62,7 +62,20 @@ module NetZ_Web_TypeScript
             return this._txtPesquisa;
         }
 
-        
+        private _tblWebRef: TabelaWeb;
+
+        private get tblWebRef(): TabelaWeb
+        {
+            if (this._tblWebRef != null)
+            {
+                return this._tblWebRef;
+            }
+
+            this._tblWebRef = this.getTblWebRef();
+
+            return this._tblWebRef;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -109,7 +122,7 @@ module NetZ_Web_TypeScript
 
         private pesquisar(): void
         {
-            if (this.tblWebRef == null) // TODO: Parei aqui.
+            if (this.tblWebRef == null)
             {
                 return;
             }
@@ -119,6 +132,7 @@ module NetZ_Web_TypeScript
             var fil = new FiltroWeb();
 
             fil.clnWeb = new ColunaWeb(this.strClnFiltroWebNome);
+
             fil.enmOperador = FiltroWeb_EnmOperador.LIKE;
             fil.objValor = this.txtPesquisa.strValor;
 
@@ -145,7 +159,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            // TODO: Parei aqui.
+            window.alert("Botão direito acionado.");
         }
 
         public receberFoco(): void

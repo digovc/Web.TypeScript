@@ -9,7 +9,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TabItem extends ComponenteHtml implements OnAjaxListener
+    export class TabItem extends ComponenteHtml
     {
         // #region Constantes
         // #endregion Constantes
@@ -177,7 +177,7 @@ module NetZ_Web_TypeScript
             objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID;
             objSolicitacaoAjaxDb.strData = JSON.stringify(this.tblWeb);
 
-            objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.pesquisarSucesso(objSolicitacaoAjaxDb); });
 
             ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
@@ -322,49 +322,6 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
-
-        public onAjaxAntesEnviar(objSolicitacaoAjaxSender: SolicitacaoAjax): void
-        {
-        }
-
-        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxErroArg): void
-        {
-        }
-
-        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxSucessoArg): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (arg == null)
-                {
-                    return;
-                }
-
-                if (arg.objSolicitacaoAjaxDb == null)
-                {
-                    return;
-                }
-
-                switch (arg.objSolicitacaoAjaxDb.enmMetodo)
-                {
-                    case SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID:
-                        this.pesquisarSucesso(arg.objSolicitacaoAjaxDb);
-                        return;
-                }
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
         // #endregion Eventos
     }

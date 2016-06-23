@@ -1,7 +1,4 @@
-﻿/// <reference path="../../../../server/OnAjaxErroArg.ts"/>
-/// <reference path="../../../../server/OnAjaxListener.ts"/>
-/// <reference path="../../../../server/OnAjaxSucessoArg.ts"/>
-/// <reference path="../../../../server/ServerAjaxDb.ts"/>
+﻿/// <reference path="../../../../server/ServerAjaxDb.ts"/>
 /// <reference path="../../../../server/SolicitacaoAjaxDb.ts"/>
 /// <reference path="../../campo/CampoAlfanumerico.ts"/>
 /// <reference path="../../campo/CampoCheckBox.ts"/>
@@ -22,7 +19,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlCadastro extends JanelaHtml implements OnAjaxListener, OnDisposedListener
+    export class JnlCadastro extends JanelaHtml implements OnDisposedListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -477,7 +474,7 @@ module NetZ_Web_TypeScript
 
             objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.SALVAR;
 
-            objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.salvarSucesso(objSolicitacaoAjaxDb); });
             objSolicitacaoAjaxDb.addJsn(this.tblWeb);
 
             ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
@@ -646,35 +643,6 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
-
-        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxSucessoArg): void
-        {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.salvarSucesso(arg.objSolicitacaoAjaxDb);
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxErroArg): void
-        {
-        }
-
-        public onAjaxAntesEnviar(objSolicitacaoAjaxSender: SolicitacaoAjax): void
-        {
-        }
 
         public onDisposed(objSender: Object): void
         {

@@ -15,7 +15,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class FrmFiltro extends FormHtml implements OnAjaxListener, OnClickListener, OnValorAlteradoListener
+    export class FrmFiltro extends FormHtml implements OnClickListener, OnValorAlteradoListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -208,29 +208,6 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
-
-        public onAjaxAntesEnviar(objSolicitacaoAjaxSender: SolicitacaoAjax): void { }
-
-        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxErroArg): void { }
-
-        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxSucessoArg): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
         public onClick(objSender: Object, arg: any): void
         {

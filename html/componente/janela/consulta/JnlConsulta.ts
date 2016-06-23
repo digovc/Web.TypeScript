@@ -1,5 +1,4 @@
-﻿/// <reference path="../../../../server/OnAjaxListener.ts"/>
-/// <reference path="../../../Div.ts"/>
+﻿/// <reference path="../../../Div.ts"/>
 /// <reference path="../../../pagina/PagPrincipal.ts"/>
 /// <reference path="../../grid/GridHtml.ts"/>
 /// <reference path="../../grid/OnRowDoubleClickListener.ts"/>
@@ -15,7 +14,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlConsulta extends JanelaHtml implements OnAjaxListener, OnRowDoubleClickListener
+    export class JnlConsulta extends JanelaHtml implements OnRowDoubleClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -285,7 +284,7 @@ module NetZ_Web_TypeScript
             objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID;
             objSolicitacaoAjaxDb.strData = JSON.stringify(this.tblWeb);
 
-            objSolicitacaoAjaxDb.addEvtOnAjaxListener(this);
+            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.pesquisarSucesso(objSolicitacaoAjaxDb); });
 
             ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
@@ -325,80 +324,6 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
-
-        public onAjaxAntesEnviar(objSolicitacaoAjaxSender: SolicitacaoAjax): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public onAjaxErroListener(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxErroArg): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public onAjaxSucesso(objSolicitacaoAjaxSender: SolicitacaoAjax, arg: OnAjaxSucessoArg): void
-        {
-            // #region Variáveis
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (arg == null)
-                {
-                    return;
-                }
-
-                if (arg.objSolicitacaoAjaxDb == null)
-                {
-                    return;
-                }
-
-                switch (arg.objSolicitacaoAjaxDb.enmMetodo)
-                {
-                    case SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID:
-                        this.pesquisarSucesso(arg.objSolicitacaoAjaxDb);
-                        return;
-                }
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
         public onRowDoubleClick(objSender: Object, tagGridRow: GridRow): void
         {
