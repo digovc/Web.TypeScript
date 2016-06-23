@@ -1,7 +1,8 @@
-﻿/// <reference path="../../botao/mini/BotaoAdicionarMini.ts"/>
-/// <reference path="../../botao/mini/BotaoAlterarMini.ts"/>
+﻿/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../botao/mini/BotaoAdicionarMini.ts"/>
-/// <reference path="../../../../OnClickListener.ts"/>
+/// <reference path="../../botao/mini/BotaoAdicionarMini.ts"/>
+/// <reference path="../../botao/mini/BotaoAlterarMini.ts"/>
+/// <reference path="../../grid/OnRowClickListener.ts"/>
 /// <reference path="../../painel/PainelAcao.ts"/>
 
 module NetZ_Web_TypeScript
@@ -12,7 +13,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class PainelAcaoConsulta extends PainelAcao implements OnClickListener
+    export class PainelAcaoConsulta extends PainelAcao implements OnClickListener, OnRowClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -22,57 +23,28 @@ module NetZ_Web_TypeScript
         private _btnAdicionar: BotaoAdicionarMini;
         private _btnAlterar: BotaoAlterarMini;
         private _jnlConsulta: JnlConsulta;
+        private _tagGridHtml: GridHtml = null;
 
         private get btnAdicionar(): BotaoAdicionarMini
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._btnAdicionar != null)
+            {
+                return this._btnAdicionar;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._btnAdicionar != null)
-                {
-                    return this._btnAdicionar;
-                }
-
-                this._btnAdicionar = new BotaoAdicionarMini("btnAdicionar");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._btnAdicionar = new BotaoAdicionarMini("btnAdicionar");
 
             return this._btnAdicionar;
         }
 
         private get btnAlterar(): BotaoAlterarMini
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._btnAlterar != null)
+            {
+                return this._btnAlterar;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._btnAlterar != null)
-                {
-                    return this._btnAlterar;
-                }
-
-                this._btnAlterar = new BotaoAlterarMini("btnAlterar");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._btnAlterar = new BotaoAlterarMini("btnAlterar");
 
             return this._btnAlterar;
         }
@@ -87,6 +59,23 @@ module NetZ_Web_TypeScript
             this._jnlConsulta = jnlConsulta;
         }
 
+        public get tagGridHtml(): GridHtml
+        {
+            return this._tagGridHtml;
+        }
+
+        public set tagGridHtml(tagGridHtml: GridHtml)
+        {
+            if (this._tagGridHtml == tagGridHtml)
+            {
+                return;
+            }
+
+            this._tagGridHtml = tagGridHtml;
+
+            this.atualizarTagGridHtml();
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -95,50 +84,40 @@ module NetZ_Web_TypeScript
         {
             super("jnlConsulta_pnlAcaoConsulta");
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.jnlConsulta = jnlConsulta;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.jnlConsulta = jnlConsulta;
         }
 
         // #endregion Construtores
 
         // #region Métodos
 
+        private atualizarBtnAlterarBooVisivel(): void
+        {
+            if (this.tagGridHtml == null)
+            {
+                return;
+            }
+
+            this.btnAlterar.booVisivel = (this.tagGridHtml.intRowSelecionadaQtd < 2);
+        }
+
+        private atualizarTagGridHtml(): void
+        {
+            if (this.tagGridHtml == null)
+            {
+                return;
+            }
+
+            this.tagGridHtml.addEvtOnRowClickListener(this);
+        }
+
         protected setEventos(): void
         {
             super.setEventos();
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.btnAcaoPrincipal.addEvtOnClickListener(this);
-                this.btnAdicionar.addEvtOnClickListener(this);
-                this.btnAlterar.addEvtOnClickListener(this);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.btnAcaoPrincipal.addEvtOnClickListener(this);
+            this.btnAdicionar.addEvtOnClickListener(this);
+            this.btnAlterar.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos
@@ -162,7 +141,31 @@ module NetZ_Web_TypeScript
                     case this.btnAdicionar:
                         this.jnlConsulta.abrirCadastro(0);
                         return;
+
+                    case this.btnAlterar:
+                        this.jnlConsulta.abrirCadastroSelecionado();
+                        return;
                 }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onRowClick(objSender: Object, tagGridRow: GridRow): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.atualizarBtnAlterarBooVisivel()
             }
             catch (ex)
             {

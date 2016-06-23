@@ -10,6 +10,8 @@
 /// <reference path="../../tab/TabHtml.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
 /// <reference path="DivComando.ts"/>
+/// <reference path="OnSalvarArg.ts"/>
+/// <reference path="OnSalvarListener.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -37,6 +39,7 @@ module NetZ_Web_TypeScript
         private _srcJs: string;
         private _strTblNome: string;
         private _tabHtml: TabHtml;
+        private _tabItem: TabItem;
         private _tblWeb: TabelaWeb;
 
         private get arrJnlCadastroFilho(): Array<JnlCadastro>
@@ -159,6 +162,18 @@ module NetZ_Web_TypeScript
             return this._tabHtml;
         }
 
+        private get tabItem(): TabItem
+        {
+            if (this._tabItem != null)
+            {
+                return this._tabItem;
+            }
+
+            this._tabItem = this.getTabItem();
+
+            return this._tabItem;
+        }
+
         public get tblWeb(): TabelaWeb
         {
             if (this._tblWeb != null)
@@ -205,19 +220,19 @@ module NetZ_Web_TypeScript
             this.booAtivo = false;
         }
 
-        private addJnlCadatroFilho(jnlCadastro: JnlCadastro): void
+        private addJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void
         {
-            if (jnlCadastro == null)
+            if (jnlCadastroFilho == null)
             {
                 return;
             }
 
-            if (this.arrJnlCadastroFilho.indexOf(jnlCadastro) > -1)
+            if (this.arrJnlCadastroFilho.indexOf(jnlCadastroFilho) > -1)
             {
                 return;
             }
 
-            this.arrJnlCadastroFilho.push(jnlCadastro);
+            this.arrJnlCadastroFilho.push(jnlCadastroFilho);
         }
 
         private atualizarJnlCadastroPai(): void
@@ -375,6 +390,21 @@ module NetZ_Web_TypeScript
             tabHtmlResultado.jnlCadastro = this;
 
             return tabHtmlResultado;
+        }
+
+        private getTabItem(): TabItem
+        {
+            if (this.jnlCadastroPai == null)
+            {
+                return;
+            }
+
+            if (this.jnlCadastroPai.tabHtml == null)
+            {
+                return;
+            }
+
+            return this.jnlCadastroPai.tabHtml.getTabItem(this.tblWeb);
         }
 
         private getTblWeb(): TabelaWeb
@@ -539,7 +569,10 @@ module NetZ_Web_TypeScript
         private salvarSucesso2Sucesso(tblWeb: TabelaWeb): void
         {
             this.salvarSucesso2SucessoCmpIntId(tblWeb);
+
             this.salvarSucesso2SucessoTabHtml();
+
+            this.salvarSucesso2SucessoTabItem();
 
             window.alert("Registro salvo com sucesso."); // TODO: Substituir por uma notificação.
         }
@@ -578,7 +611,21 @@ module NetZ_Web_TypeScript
 
             this.jq.height((this.jq.height() + 250));
 
+            var intTop = Number(this.jq.css("top").replace("px", Utils.STR_VAZIA));
+
+            this.jq.css("top", (intTop - 100));
+
             this.tabHtml.iniciar();
+        }
+
+        private salvarSucesso2SucessoTabItem(): void
+        {
+            if (this.tabItem == null)
+            {
+                return;
+            }
+
+            this.tabItem.pesquisar();
         }
 
         private validarDados(): boolean
@@ -651,6 +698,76 @@ module NetZ_Web_TypeScript
             }
             // #endregion Ações
         }
+
+        // #region Evento OnSalvarListener
+
+        private _arrEvtOnSalvarListener: Array<OnSalvarListener>;
+
+        private get arrEvtOnSalvarListener(): Array<OnSalvarListener>
+        {
+            if (this._arrEvtOnSalvarListener != null)
+            {
+                return this._arrEvtOnSalvarListener;
+            }
+
+            this._arrEvtOnSalvarListener = new Array<OnSalvarListener>();
+
+            return this._arrEvtOnSalvarListener;
+        }
+
+        public addEvtOnSalvarListener(evtOnSalvarListener: OnSalvarListener): void
+        {
+            if (evtOnSalvarListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnSalvarListener.indexOf(evtOnSalvarListener) > -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnSalvarListener.push(evtOnSalvarListener);
+        }
+
+        private dispararEvtOnSalvarListener(): void
+        {
+            if (this.arrEvtOnSalvarListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnSalvarListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                var arg = new OnSalvarArg();
+
+                arg.tblWeb = this.tblWeb;
+
+                evt.onSalvar(this, arg);
+            });
+        }
+
+        public removerEvtOnSalvarListener(evtOnSalvarListener: OnSalvarListener): void
+        {
+            if (evtOnSalvarListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnSalvarListener.indexOf(evtOnSalvarListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnSalvarListener.splice(this.arrEvtOnSalvarListener.indexOf(evtOnSalvarListener));
+        }
+
+        // #endregion Evento OnSalvarListener
 
         // #endregion Eventos
     }

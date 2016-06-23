@@ -1,6 +1,4 @@
-﻿/// <reference path="../../ComponenteHtml.ts"/>
-
-module NetZ_Web_TypeScript
+﻿module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
@@ -8,23 +6,23 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuContextoItem extends ComponenteHtml
+    export class OnSalvarArg
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _mnc: MenuContexto;
+        private _tblWeb: TabelaWeb;
 
-        public get mnc(): MenuContexto
+        public get tblWeb(): TabelaWeb
         {
-            return this._mnc;
+            return this._tblWeb;
         }
 
-        public set mnc(mnc: MenuContexto)
+        public set tblWeb(tblWeb: TabelaWeb)
         {
-            this._mnc = mnc;
+            this._tblWeb = tblWeb;
         }
 
         // #endregion Atributos
@@ -33,7 +31,6 @@ module NetZ_Web_TypeScript
         // #endregion Construtores
 
         // #region Métodos
-
         // #endregion Métodos
 
         // #region Eventos

@@ -2,6 +2,7 @@
 /// <reference path="html/pagina/PaginaHtml.ts"/>
 /// <reference path="html/pagina/PagPrincipal.ts"/>
 /// <reference path="Objeto.ts"/>
+/// <reference path="OnFocusChangeListener.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -31,32 +32,30 @@ module NetZ_Web_TypeScript
 
         public static set i(appWeb: AppWeb)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (AppWeb.i != null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (AppWeb.i != null)
-                {
-                    return;
-                }
-
-                AppWeb._i = appWeb;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            AppWeb._i = appWeb;
         }
 
+        private _arrTbl: Array<TabelaWeb>;
         private _booEmFoco: boolean = true;
         private _pag: PaginaHtml;
         private _strSessionId: string;
+
+        private get arrTbl(): Array<TabelaWeb>
+        {
+            if (this._arrTbl != null)
+            {
+                return this._arrTbl;
+            }
+
+            this._arrTbl = new Array<TabelaWeb>();
+
+            return this._arrTbl;
+        }
 
         public get booEmFoco(): boolean
         {
@@ -65,7 +64,14 @@ module NetZ_Web_TypeScript
 
         public set booEmFoco(booEmFoco: boolean)
         {
+            if (this._booEmFoco == booEmFoco)
+            {
+                return;
+            }
+
             this._booEmFoco = booEmFoco;
+
+            this.atualizarBooEmFoco();
         }
 
         public get pag(): PaginaHtml
@@ -80,27 +86,12 @@ module NetZ_Web_TypeScript
 
         public get strSessionId(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._strSessionId != null)
+            {
+                return this._strSessionId;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._strSessionId != null)
-                {
-                    return this._strSessionId;
-                }
-
-                this._strSessionId = this.getStrSessionId();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._strSessionId = this.getStrSessionId();
 
             return this._strSessionId;
         }
@@ -113,70 +104,95 @@ module NetZ_Web_TypeScript
         {
             super();
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                AppWeb.i = this;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            AppWeb.i = this;
         }
 
         // #endregion Construtores
 
         // #region Métodos
 
+        private addArrTbl(tblWeb: TabelaWeb): void
+        {
+            if (tblWeb == null)
+            {
+                return null;
+            }
+
+            if (this.arrTbl.indexOf(tblWeb) > -1)
+            {
+                return;
+            }
+
+            this.arrTbl.push(tblWeb);
+        }
+
+        private atualizarBooEmFoco(): void
+        {
+            this.dispararEvtOnFocusChangeListener();
+        }
+
+        public carregarTbl(strTblNome: string): void
+        {
+            if (Utils.getBooStrVazia(strTblNome))
+            {
+                return;
+            }
+
+            if (AppWeb.i.getTbl(strTblNome) != null)
+            {
+                return;
+            }
+
+            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.JSON_TABELA_WEB;
+            objSolicitacaoAjaxDb.addStr(strTblNome);
+            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjax: SolicitacaoAjax) => { this.carregarTblSucesso(objSolicitacaoAjax); });
+
+            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+        }
+
+        private carregarTblSucesso(objSolicitacaoAjax: SolicitacaoAjax): void
+        {
+            if (objSolicitacaoAjax == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(objSolicitacaoAjax.strData))
+            {
+                return;
+            }
+
+            var tblWeb = new TabelaWeb(null);
+
+            tblWeb.copiarDados(JSON.parse(objSolicitacaoAjax.strData));
+
+            this.addArrTbl(tblWeb);
+        }
+
         private getStrCookieValue(strCookieNome: string): string
         {
-            // #region Variáveis
-
-            var objRegExp: RegExp;
-            var objRegExpExecArray: RegExpExecArray;
-            var strResultado: string;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(strCookieNome))
             {
-                if (Utils.getBooStrVazia(strCookieNome))
-                {
-                    return null;
-                }
-
-                objRegExp = new RegExp(name + "=([^;]+)");
-
-                objRegExpExecArray = objRegExp.exec(document.cookie);
-
-                if (objRegExpExecArray == null)
-                {
-                    return null;
-                }
-
-                if (objRegExpExecArray.length < 1)
-                {
-                    return null;
-                }
-
-                return objRegExpExecArray[1];
+                return null;
             }
-            catch (ex)
+
+            var objRegExp = new RegExp(name + "=([^;]+)");
+
+            var objRegExpExecArray = objRegExp.exec(document.cookie);
+
+            if (objRegExpExecArray == null)
             {
-                throw ex;
+                return null;
             }
-            finally
+
+            if (objRegExpExecArray.length < 1)
             {
+                return null;
             }
-            // #endregion Ações
+
+            return objRegExpExecArray[1];
         }
 
         private getStrSessionId(): string
@@ -184,53 +200,47 @@ module NetZ_Web_TypeScript
             return this.getStrCookieValue(AppWeb.STR_COOKIE_SESSAO_ID_NOME);
         }
 
+        public getTbl(strTblNome: string): TabelaWeb
+        {
+            if (Utils.getBooStrVazia(strTblNome))
+            {
+                return null;
+            }
+
+            for (var i = 0; i < this.arrTbl.length; i++)
+            {
+                var tblWeb = this.arrTbl[i];
+
+                if (tblWeb == null)
+                {
+                    continue;
+                }
+
+                if (strTblNome.toLowerCase() == tblWeb.strNome.toLowerCase())
+                {
+                    continue;
+                }
+
+                return tblWeb;
+            }
+
+            return null;
+        }
+
         public imprimir(pag: string): void
         {
-            // #region Variáveis
+            var objWindow = window.open('', 'my div', 'height=400,width=600');
 
-            var objWindow: any;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                objWindow = window.open('', 'my div', 'height=400,width=600');
-
-                objWindow.document.write(pag);
-                objWindow.print();
-                objWindow.close();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            objWindow.document.write(pag);
+            objWindow.print();
+            objWindow.close();
         }
 
         public iniciar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.inicializar();
-                this.montarLayout();
-                this.setEventos();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
         }
 
         protected inicializar(): void
@@ -243,68 +253,79 @@ module NetZ_Web_TypeScript
 
         protected setEventos(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                window.onfocus = (e: FocusEvent) => this.AppWeb_onFocus(e);
-                window.onblur = (e: FocusEvent) => this.AppWeb_onBlur(e);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            window.onblur = (e: FocusEvent) => { this.booEmFoco = false; };
+            window.onfocus = (e: FocusEvent) => { this.booEmFoco = true; };
         }
 
         // #endregion Métodos
 
         // #region Eventos
 
-        private AppWeb_onBlur(e: FocusEvent): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
+        // #region Evento OnFocusChangeListener
 
-            // #region Ações
-            try
+        private _arrEvtOnFocusChangeListener: Array<OnFocusChangeListener>;
+
+        private get arrEvtOnFocusChangeListener(): Array<OnFocusChangeListener>
+        {
+            if (this._arrEvtOnFocusChangeListener != null)
             {
-                this.booEmFoco = false;
+                return this._arrEvtOnFocusChangeListener;
             }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this._arrEvtOnFocusChangeListener = new Array<OnFocusChangeListener>();
+
+            return this._arrEvtOnFocusChangeListener;
         }
 
-        private AppWeb_onFocus(e: FocusEvent): void
+        public addEvtOnFocusChangeListener(evtOnFocusChangeListener: OnFocusChangeListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (evtOnFocusChangeListener == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
+            if (this.arrEvtOnFocusChangeListener.indexOf(evtOnFocusChangeListener) > -1)
             {
-                this.booEmFoco = true;
+                return;
             }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.arrEvtOnFocusChangeListener.push(evtOnFocusChangeListener);
         }
+
+        private dispararEvtOnFocusChangeListener(): void
+        {
+            if (this.arrEvtOnFocusChangeListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnFocusChangeListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onFocusChange(this, this.booEmFoco);
+            });
+        }
+
+        public removerEvtOnFocusChangeListener(evtOnFocusChangeListener: OnFocusChangeListener): void
+        {
+            if (evtOnFocusChangeListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnFocusChangeListener.indexOf(evtOnFocusChangeListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnFocusChangeListener.splice(this.arrEvtOnFocusChangeListener.indexOf(evtOnFocusChangeListener));
+        }
+
+        // #endregion Evento OnFocusChangeListener
 
         // #endregion Eventos
     }

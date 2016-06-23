@@ -217,8 +217,6 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            console.log(arg);
-
             var x = (this.intCabecalhoLeft + arg.clientX - this.intCabecalhoX);
             var y = (this.intCabecalhoTop + (arg.clientY - this.intCabecalhoY));
 

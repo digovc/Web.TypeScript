@@ -78,6 +78,16 @@
             this.strData = JSON.stringify(obj);
         }
 
+        public addStr(str: string): void
+        {
+            if (Utils.getBooStrVazia(str))
+            {
+                return;
+            }
+
+            this.strData = str;
+        }
+
         /**
          * Método disparado antes que esta solicitação AJAX seja
          * enviada para o servidor.
@@ -126,11 +136,6 @@
             objSolicitacaoAjax.copiarDados(anyData);
 
             this.arrFncSucesso.forEach((fnc) => { fnc(objSolicitacaoAjax); });
-        }
-
-        public enviar(): void
-        {
-            return;
         }
 
         /**

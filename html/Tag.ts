@@ -26,11 +26,17 @@ module NetZ_Web_TypeScript
     export class Tag extends Objeto
     {
         // #region Constantes
+
+        public static get INT_MOUSE_BUTTON_LEFT(): number { return 1 };
+        public static get INT_MOUSE_BUTTON_MIDDLE(): number { return 2 };
+        public static get INT_MOUSE_BUTTON_RIGHT(): number { return 3 };
+
         // #endregion Constantes
 
         // #region Atributos
 
         private _booVisivel: boolean;
+        private _intClickTimer: number = -1;
         private _jq: any;
         private _strConteudo: string;
         private _strId: string;
@@ -50,6 +56,16 @@ module NetZ_Web_TypeScript
             this._booVisivel = booVisivel;
 
             this._booVisivel ? this.mostrar() : this.esconder();
+        }
+
+        private get intClickTimer(): number
+        {
+            return this._intClickTimer;
+        }
+
+        private set intClickTimer(intClickTimer: number)
+        {
+            this._intClickTimer = intClickTimer;
         }
 
         public get strConteudo(): string
@@ -341,7 +357,7 @@ module NetZ_Web_TypeScript
 
             if (this.arrEvtOnClickListener.length == 0)
             {
-                this.jq.click((arg) => this.dispararEvtOnClickListener(arg));
+                this.jq.click((arg) => { this.dispararEvtOnClickListener(arg) });
             }
 
             this.arrEvtOnClickListener.push(evtOnClickListener);
@@ -364,6 +380,8 @@ module NetZ_Web_TypeScript
 
         private dispararEvtOnClickListener(arg: JQueryEventObject): void
         {
+            this.intClickTimer = -1;
+
             if (this.arrEvtOnClickListener.length == 0)
             {
                 return;

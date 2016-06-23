@@ -15,6 +15,7 @@ module NetZ_Web_TypeScript
         ADICIONAR,
         APAGAR,
         FILTRO,
+        JSON_TABELA_WEB,
         NONE,
         PESQUISAR_COMBO_BOX,
         PESQUISAR_GRID,
@@ -50,44 +51,22 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public enviar(): void
-        {
-            super.enviar();
-
-            ServerAjaxDb.i.enviar(this);
-        }
-
         public validarDados(): boolean
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (!super.validarDados())
             {
-                if (!super.validarDados())
-                {
-                    return false;
-                }
+                return false;
+            }
 
-                if (SolicitacaoAjaxDb_EnmMetodo.NONE == this.enmMetodo)
-                {
-                    return false;
-                }
+            if (SolicitacaoAjaxDb_EnmMetodo.NONE == this.enmMetodo)
+            {
+                return false;
+            }
 
-                if (Utils.getBooStrVazia(this.strData))
-                {
-                    return false;
-                }
-            }
-            catch (ex)
+            if (Utils.getBooStrVazia(this.strData))
             {
-                throw ex;
+                return false;
             }
-            finally
-            {
-            }
-            // #endregion Ações
 
             return true;
         }

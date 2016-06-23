@@ -43,7 +43,7 @@ module NetZ_Web_TypeScript
 
         public get booValor(): boolean
         {
-            this._booValor = Utils.strToBoo(this.strValor);
+            this._booValor = Utils.getBoo(this.strValor);
 
             return this._booValor;
         }

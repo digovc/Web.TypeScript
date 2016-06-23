@@ -18,34 +18,50 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _arrTagGridRow: Array<GridRow>;
-        private _btnAdicionar: BotaoAdicionarMini;
+        private _arrRow: Array<GridRow>;
+        private _arrRowSelecionada: Array<GridRow>;
+        private _intRowSelecionadaQtd: number;
+        private _rowSelecionada: GridRow;
         private _tagTable: Tag;
         private _tagTbody: Tag;
         private _tblWeb: TabelaWeb;
 
-        private get arrTagGridRow(): Array<GridRow>
+        private get arrRow(): Array<GridRow>
         {
-            if (this._arrTagGridRow != null)
+            if (this._arrRow != null)
             {
-                return this._arrTagGridRow;
+                return this._arrRow;
             }
 
-            this._arrTagGridRow = this.getArrTagGridRow();
+            this._arrRow = this.getArrRow();
 
-            return this._arrTagGridRow;
+            return this._arrRow;
         }
 
-        public get btnAdicionar(): BotaoAdicionarMini
+        private get arrRowSelecionada(): Array<GridRow>
         {
-            if (this._btnAdicionar != null)
+            if (this._arrRowSelecionada != null)
             {
-                return this._btnAdicionar;
+                return this._arrRowSelecionada;
             }
 
-            this._btnAdicionar = new BotaoAdicionarMini(this.strId + "_btnAdicionar");
+            this._arrRowSelecionada = new Array<GridRow>();
 
-            return this._btnAdicionar;
+            return this._arrRowSelecionada;
+        }
+
+        public get intRowSelecionadaQtd(): number
+        {
+            this._intRowSelecionadaQtd = this.arrRowSelecionada.length;
+
+            return this._intRowSelecionadaQtd;
+        }
+
+        public get rowSelecionada(): GridRow
+        {
+            this._rowSelecionada = this.getRowSelecionada();
+
+            return this._rowSelecionada;
         }
 
         private get tagTable(): Tag
@@ -92,7 +108,22 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        private getArrTagGridRow(): Array<GridRow>
+        public addRowSelecionada(rowSelecionada: GridRow): void
+        {
+            if (rowSelecionada == null)
+            {
+                return;
+            }
+
+            if (this.arrRowSelecionada.indexOf(rowSelecionada) > -1)
+            {
+                return;
+            }
+
+            this.arrRowSelecionada.push(rowSelecionada);
+        }
+
+        private getArrRow(): Array<GridRow>
         {
             if (this.tagTbody == null)
             {
@@ -115,13 +146,13 @@ module NetZ_Web_TypeScript
 
             for (var i = 0; i < arrJqGridRow.length; i++)
             {
-                this.getArrTagGridRow2(arrTagGridRowResultado, arrJqGridRow[i]);
+                this.getArrRow2(arrTagGridRowResultado, arrJqGridRow[i]);
             }
 
             return arrTagGridRowResultado;
         }
 
-        private getArrTagGridRow2(arrTagGridRow: Array<GridRow>, jqGridRow: any): void
+        private getArrRow2(arrTagGridRow: Array<GridRow>, jqGridRow: any): void
         {
             if (jqGridRow == null)
             {
@@ -138,6 +169,26 @@ module NetZ_Web_TypeScript
             tagGridRow.tagGridHtml = this;
 
             arrTagGridRow.push(tagGridRow);
+        }
+
+        public getIntRowSelecionadaId(): number
+        {
+            if (this.rowSelecionada == null)
+            {
+                return 0;
+            }
+
+            return this.rowSelecionada.intId;
+        }
+
+        private getRowSelecionada(): GridRow
+        {
+            if (this.arrRowSelecionada.length < 1)
+            {
+                return;
+            }
+
+            return this.arrRowSelecionada[0];
         }
 
         private getTblWeb(): TabelaWeb
@@ -178,20 +229,71 @@ module NetZ_Web_TypeScript
 
         private inicializarLstTagRow(): void
         {
-            if (this.arrTagGridRow == null)
+            if (this.arrRow == null)
             {
                 return;
             }
 
-            if (this.arrTagGridRow.length < 1)
+            if (this.arrRow.length < 1)
             {
                 return;
             }
 
-            for (var i = 0; i < this.arrTagGridRow.length; i++)
+            for (var i = 0; i < this.arrRow.length; i++)
             {
-                this.arrTagGridRow[i].iniciar();
+                this.arrRow[i].iniciar();
             }
+        }
+
+        public removerRowSelecionada(rowSelecionada: GridRow): void
+        {
+            if (rowSelecionada == null)
+            {
+                return;
+            }
+
+            if (this.arrRowSelecionada.indexOf(rowSelecionada) < 0)
+            {
+                return;
+            }
+
+            this.arrRowSelecionada.splice(this.arrRowSelecionada.indexOf(rowSelecionada));
+        }
+
+        public selecinar(intId: number, booSelecionar: boolean): void
+        {
+            if (intId < 1)
+            {
+                return;
+            }
+
+            for (var i = 0; i < this.arrRow.length; i++)
+            {
+                var row = this.arrRow[i];
+
+                if (row == null)
+                {
+                    continue;
+                }
+
+                if (row.intId != intId)
+                {
+                    continue;
+                }
+
+                row.booSelecionada = booSelecionar;
+                return;
+            }
+        }
+
+        public selecinarTudo(booSelecionar: boolean): void
+        {
+            if (this.arrRowSelecionada.length < 1)
+            {
+                return;
+            }
+
+            this.arrRow.forEach((row) => { row.booSelecionada = booSelecionar; });
         }
 
         // #endregion Métodos

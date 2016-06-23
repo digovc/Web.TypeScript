@@ -62,7 +62,7 @@ module NetZ_Web_TypeScript
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.carregarDadosSucesso(objSolicitacaoAjaxDb); });
             objSolicitacaoAjaxDb.addJsn(tblWeb);
 
-            objSolicitacaoAjaxDb.enviar();
+            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
 
         private carregarDadosSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void

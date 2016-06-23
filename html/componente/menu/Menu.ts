@@ -163,7 +163,7 @@ module NetZ_Web_TypeScript
 
         public pagPrincipalOnClick(arg: JQueryEventObject): void
         {
-            this.divGaveta.esconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+            this.divGaveta.esconder();
         }
 
         private pagPrincipalOnKeyDown(arg: JQueryKeyEventObject): void
@@ -278,7 +278,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.divGaveta.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+                this.divGaveta.mostrar();
             }
             catch (ex)
             {

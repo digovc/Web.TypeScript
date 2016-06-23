@@ -141,7 +141,7 @@
          * @param strValor Texto que se deseja verificar o valor booleano.
          * @return True caso strValor contenha: 1, sim, s, true, t. E false em qualquer outra possibilidade.
          */
-        public static strToBoo(strValor: string): boolean
+        public static getBoo(strValor: string): boolean
         {
             if (Utils.getBooStrVazia(strValor))
             {
@@ -156,10 +156,9 @@
                 case "t":
                 case "true":
                     return true;
-
-                default:
-                    return false;
             }
+
+            return false;
         }
 
         // #endregion Métodos

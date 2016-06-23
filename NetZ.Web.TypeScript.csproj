@@ -31,6 +31,7 @@
     <TypeScriptCompile Include="database\ParValorNome.ts" />
     <TypeScriptCompile Include="database\TblFiltro.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
+    <TypeScriptCompile Include="html\CheckBox.ts" />
     <TypeScriptCompile Include="html\componente\ActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
@@ -39,6 +40,8 @@
     <TypeScriptCompile Include="html\componente\grid\OnRowDoubleClickListener.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroItemCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroCadastro.ts" />
+    <TypeScriptCompile Include="html\componente\janela\cadastro\OnSalvarArg.ts" />
+    <TypeScriptCompile Include="html\componente\janela\cadastro\OnSalvarListener.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltro.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltroConteudo.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
@@ -58,6 +61,7 @@
     <TypeScriptCompile Include="LayoutFixoManager.ts" />
     <TypeScriptCompile Include="OnDisposedListener.ts" />
     <TypeScriptCompile Include="OnDoubleClickListener.ts" />
+    <TypeScriptCompile Include="OnFocusChangeListener.ts" />
     <TypeScriptCompile Include="OnKeyDownListener.ts" />
     <TypeScriptCompile Include="OnKeyPressListener.ts" />
     <TypeScriptCompile Include="OnLeaveListener.ts" />
@@ -132,9 +136,6 @@
     <TypeScriptCompile Include="server\SolicitacaoAjaxDb.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="websocket\ServerWs.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="zzz.js" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

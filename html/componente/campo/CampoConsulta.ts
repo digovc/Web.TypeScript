@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Keys.ts"/>
+/// <reference path="../../../OnClickListener.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -9,41 +10,32 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class CampoConsulta extends CampoComboBox implements OnKeyDownListener
+    export class CampoConsulta extends CampoComboBox implements OnClickListener, OnKeyDownListener
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _clnWebRef: ColunaWeb;
-        private _clnWebRefNome: ColunaWeb;
+        private _strClnFiltroWebNome: string;
         private _strTblWebRefNome: string;
-        private _tblWebRef: TabelaWeb;
         private _txtPesquisa: Input;
 
-        private get clnWebRef(): ColunaWeb
+        private get strClnFiltroWebNome(): string
         {
-            if (this._clnWebRef != null)
+            if (this._strClnFiltroWebNome != null)
             {
-                return this._clnWebRef;
+                return this._strClnFiltroWebNome;
             }
 
-            this._clnWebRef = new ColunaWeb(this.getStrAttValor("cln_web_ref"));
+            this._strClnFiltroWebNome = this.getStrAttValor("cln_web_filtro_nome");
 
-            return this._clnWebRef;
+            return this._strClnFiltroWebNome;
         }
 
-        private get clnWebRefNome(): ColunaWeb
+        private set strClnFiltroWebNome(strClnFiltroWebNome: string)
         {
-            if (this._clnWebRefNome != null)
-            {
-                return this._clnWebRefNome;
-            }
-
-            this._clnWebRefNome = new ColunaWeb(this.getStrAttValor("cln_web_ref_nome"));
-
-            return this._clnWebRefNome;
+            this._strClnFiltroWebNome = strClnFiltroWebNome;
         }
 
         private get strTblWebRefNome(): string
@@ -53,21 +45,9 @@ module NetZ_Web_TypeScript
                 return this._strTblWebRefNome;
             }
 
-            this._strTblWebRefNome = this.getStrAttValor("tbl_web_ref");
+            this._strTblWebRefNome = this.getStrAttValor("tbl_web_ref_nome");
 
             return this._strTblWebRefNome;
-        }
-
-        private get tblWebRef(): TabelaWeb
-        {
-            if (this._tblWebRef != null)
-            {
-                return this._tblWebRef;
-            }
-
-            this._tblWebRef = this.getTblWebRef();
-
-            return this._tblWebRef;
         }
 
         private get txtPesquisa(): Input
@@ -82,6 +62,7 @@ module NetZ_Web_TypeScript
             return this._txtPesquisa;
         }
 
+        
         // #endregion Atributos
 
         // #region Construtores
@@ -96,7 +77,7 @@ module NetZ_Web_TypeScript
                 return null;
             }
 
-            return new TabelaWeb(this.strTblWebRefNome);
+            return AppWeb.i.getTbl(this.strTblWebRefNome);
         }
 
         protected inicializar(): void
@@ -104,15 +85,23 @@ module NetZ_Web_TypeScript
             super.inicializar();
 
             this.txtPesquisa.iniciar();
+
+            this.inicializarTblWebRef();
+        }
+
+        private inicializarTblWebRef(): void
+        {
+            AppWeb.i.carregarTbl(this.strTblWebRefNome);
         }
 
         public limparDados(): void
         {
             super.limparDados();
 
-            this.cmb.esconder();
-
             this.txtPesquisa.strValor = null;
+
+            this.cmb.jq.hide();
+
             this.txtPesquisa.mostrar();
 
             this.txtPesquisa.receberFoco();
@@ -120,7 +109,7 @@ module NetZ_Web_TypeScript
 
         private pesquisar(): void
         {
-            if (this.tblWebRef == null)
+            if (this.tblWebRef == null) // TODO: Parei aqui.
             {
                 return;
             }
@@ -129,7 +118,7 @@ module NetZ_Web_TypeScript
 
             var fil = new FiltroWeb();
 
-            fil.clnWeb = this.clnWebRefNome;
+            fil.clnWeb = new ColunaWeb(this.strClnFiltroWebNome);
             fil.enmOperador = FiltroWeb_EnmOperador.LIKE;
             fil.objValor = this.txtPesquisa.strValor;
 
@@ -137,11 +126,26 @@ module NetZ_Web_TypeScript
 
             this.cmb.carregarDados(this.tblWebRef);
 
-            this.txtPesquisa.esconder();
+            this.txtPesquisa.jq.hide();
 
             this.txtPesquisa.strValor = null;
 
             this.cmb.mostrar();
+        }
+
+        private processarOnClick(arg: JQueryEventObject): void
+        {
+            this.processarOnClickDireito(arg);
+        }
+
+        private processarOnClickDireito(arg: JQueryEventObject): void
+        {
+            if (arg.which != Tag.INT_MOUSE_BUTTON_RIGHT)
+            {
+                return;
+            }
+
+            // TODO: Parei aqui.
         }
 
         public receberFoco(): void
@@ -161,12 +165,38 @@ module NetZ_Web_TypeScript
         {
             super.setEventos();
 
+            this.addEvtOnClickListener(this);
             this.addEvtOnKeyDownListener(this);
         }
 
         // #endregion Métodos
 
         // #region Eventos
+
+        public onClick(objSender: Object, arg: JQueryEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this:
+                        this.processarOnClick(arg);
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
         {

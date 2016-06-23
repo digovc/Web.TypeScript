@@ -1,5 +1,5 @@
-﻿/// <reference path="../../OnDisposedListener.ts"/>
-/// <reference path="../../database/TabelaWeb.ts"/>
+﻿/// <reference path="../../database/TabelaWeb.ts"/>
+/// <reference path="../../OnDisposedListener.ts"/>
 /// <reference path="../../server/ServerHttp.ts"/>
 /// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>

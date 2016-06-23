@@ -29,6 +29,7 @@ module NetZ_Web_TypeScript
         private _pnlFiltro: PainelFiltro;
         private _tagGridHtml: GridHtml;
         private _tblWeb: TabelaWeb;
+        private _viwAtual: TabelaWeb;
 
         private get divGrid(): Div
         {
@@ -93,7 +94,14 @@ module NetZ_Web_TypeScript
 
         private set tagGridHtml(tagGridHtml: GridHtml)
         {
+            if (this._tagGridHtml == tagGridHtml)
+            {
+                return;
+            }
+
             this._tagGridHtml = tagGridHtml;
+
+            this.atualizarTagGridHtml();
         }
 
         public get tblWeb(): TabelaWeb
@@ -106,6 +114,18 @@ module NetZ_Web_TypeScript
             this._tblWeb = this.getTblWeb();
 
             return this._tblWeb;
+        }
+
+        public get viwAtual(): TabelaWeb
+        {
+            if (this._viwAtual != null)
+            {
+                return this._viwAtual;
+            }
+
+            this._viwAtual = this.getViwAtual();
+
+            return this._viwAtual;
         }
 
         // #endregion Atributos
@@ -133,16 +153,40 @@ module NetZ_Web_TypeScript
             this.tblWeb.clnIntId.intValor = intRegistroId;
 
             this.pagPrincipal.abrirCadastro(this.tblWeb);
+
+            this.abrirCadastroTagGridHtml(intRegistroId);
         }
 
-        public abrirFiltroCadastro(): void
+        public abrirCadastroSelecionado(): void
         {
-            if (this.tblWeb == null)
+            if (this.tagGridHtml == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(this.tblWeb.strNome))
+            if (this.tagGridHtml.rowSelecionada == null)
+            {
+                window.alert("Selecione um registro primeiro.");
+                return;
+            }
+
+            this.abrirCadastro(this.tagGridHtml.rowSelecionada.intId);
+        }
+
+        private abrirCadastroTagGridHtml(intRegistroId: number): void
+        {
+            if (this.tagGridHtml == null)
+            {
+                return;
+            }
+
+            this.tagGridHtml.selecinarTudo(false);
+            this.tagGridHtml.selecinar(intRegistroId, true);
+        }
+
+        public abrirFiltroCadastro(): void
+        {
+            if (this.viwAtual == null)
             {
                 return;
             }
@@ -165,6 +209,21 @@ module NetZ_Web_TypeScript
             this.abrirCadastro(tagGridRow.intId);
         }
 
+        private atualizarTagGridHtml(): void
+        {
+            this.pnlAcaoConsulta.tagGridHtml = this.tagGridHtml;
+        }
+
+        private getViwAtual(): TabelaWeb
+        {
+            if (this.jq == null)
+            {
+                return null;
+            }
+
+            return new TabelaWeb(this.jq.attr("viw_web_nome"));
+        }
+
         private getTblWeb(): TabelaWeb
         {
             if (this.jq == null)
@@ -182,6 +241,8 @@ module NetZ_Web_TypeScript
 
         protected inicializar(): void
         {
+            super.inicializar();
+
             this.booPermitirMover = false;
 
             ServerHttp.i.atualizarCssMain();
@@ -192,12 +253,12 @@ module NetZ_Web_TypeScript
 
         private inicializarGridHtml(): void
         {
-            if (this.tblWeb == null)
+            if (this.jq == null)
             {
                 return;
             }
 
-            this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
+            this.tagGridHtml = new GridHtml(this.jq.find("[clazz=GridHtml]")[0].id);
 
             this.tagGridHtml.iniciar();
 
@@ -206,12 +267,12 @@ module NetZ_Web_TypeScript
 
         public maximinizarGrid(): void
         {
-            if (this.divGrid.jq.css("top") == "60")
+            if (this.divGrid.jq.css("top") == "40")
             {
                 return;
             }
 
-            this.divGrid.jq.animate({ top: 60 });
+            this.divGrid.jq.animate({ top: 40 });
             this.pnlFiltro.esconderFiltro();
         }
 
@@ -257,7 +318,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.divGrid.jq.animate({ top: 150 });
+            this.divGrid.jq.animate({ top: 130 });
             this.pnlFiltro.mostrarFiltro();
         }
 

@@ -25,7 +25,7 @@ module NetZ_Web_TypeScript
         private _btnAdicionar: BotaoAdicionarMini;
         private _cmpIntFiltroId: CampoComboBox;
         private _pnlFiltro: PainelFiltro;
-        private _tblWebConsulta: TabelaWeb;
+        private _viwAtual: TabelaWeb;
 
         private get btnAdicionar(): BotaoAdicionarMini
         {
@@ -61,16 +61,16 @@ module NetZ_Web_TypeScript
             this._pnlFiltro = pnlFiltro;
         }
 
-        private get tblWebConsulta(): TabelaWeb
+        private get viwAtual(): TabelaWeb
         {
-            if (this._tblWebConsulta != null)
+            if (this._viwAtual != null)
             {
-                return this._tblWebConsulta;
+                return this._viwAtual;
             }
 
-            this._tblWebConsulta = this.getTblWebConsulta();
+            this._viwAtual = this.getViwAtual();
 
-            return this._tblWebConsulta;
+            return this._viwAtual;
         }
 
         // #endregion Atributos
@@ -112,7 +112,7 @@ module NetZ_Web_TypeScript
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirFiltroConteudoSucesso(objSolicitacaoAjaxDb); });
             objSolicitacaoAjaxDb.addJsn(TblFiltro.i);
 
-            objSolicitacaoAjaxDb.enviar();
+            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
 
         private abrirFiltroCadastro(): void
@@ -154,24 +154,24 @@ module NetZ_Web_TypeScript
 
         private carregarDadosCmpFiltro(): void
         {
-            if (this.tblWebConsulta == null)
+            if (this.viwAtual == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(this.tblWebConsulta.strNome))
+            if (Utils.getBooStrVazia(this.viwAtual.strNome))
             {
                 return;
             }
 
             TblFiltro.i.limparFiltro();
 
-            TblFiltro.i.addFil2(TblFiltro.i.clnStrTabelaNome, this.tblWebConsulta.strNome);
+            TblFiltro.i.addFil2(TblFiltro.i.clnStrTabelaNome, this.viwAtual.strNome);
 
             this.cmpIntFiltroId.carregarDados(TblFiltro.i);
         }
 
-        private getTblWebConsulta(): TabelaWeb
+        private getViwAtual(): TabelaWeb
         {
             if (this.pnlFiltro == null)
             {
@@ -183,12 +183,12 @@ module NetZ_Web_TypeScript
                 return null;
             }
 
-            if (this.pnlFiltro.jnlConsulta.tblWeb == null)
+            if (this.pnlFiltro.jnlConsulta.viwAtual == null)
             {
                 return null;
             }
 
-            return this.pnlFiltro.jnlConsulta.tblWeb;
+            return this.pnlFiltro.jnlConsulta.viwAtual;
         }
 
         public receberFoco(): void

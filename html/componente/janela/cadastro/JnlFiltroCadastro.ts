@@ -40,12 +40,12 @@
                 return;
             }
 
-            if (this.pagPrincipal.jnlConsulta.tblWeb == null)
+            if (this.pagPrincipal.jnlConsulta.viwAtual == null)
             {
                 return;
             }
 
-            this.tblWeb.getClnWeb("str_tabela_nome").strValor = (<PagPrincipal>this.pag).jnlConsulta.tblWeb.strNome;
+            this.tblWeb.getClnWeb("str_tabela_nome").strValor = (<PagPrincipal>this.pag).jnlConsulta.viwAtual.strNome;
         }
 
         // #endregion Métodos

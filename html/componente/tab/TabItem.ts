@@ -9,7 +9,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TabItem extends ComponenteHtml implements OnAjaxListener, OnClickListener
+    export class TabItem extends ComponenteHtml implements OnAjaxListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -21,6 +21,7 @@ module NetZ_Web_TypeScript
         private _tabItemHead: TabItemHead;
         private _tagGridHtml: GridHtml;
         private _tblWeb: TabelaWeb;
+        private _tblWebPrincipal: TabelaWeb;
 
         public get booAtiva(): boolean
         {
@@ -71,7 +72,7 @@ module NetZ_Web_TypeScript
             this._tagGridHtml = tagGridHtml;
         }
 
-        private get tblWeb(): TabelaWeb
+        public get tblWeb(): TabelaWeb
         {
             if (this._tblWeb != null)
             {
@@ -83,6 +84,18 @@ module NetZ_Web_TypeScript
             return this._tblWeb;
         }
 
+        public get tblWebPrincipal(): TabelaWeb
+        {
+            if (this._tblWebPrincipal != null)
+            {
+                return this._tblWebPrincipal;
+            }
+
+            this._tblWebPrincipal = this.getTblWebPrincipal();
+
+            return this._tblWebPrincipal;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -90,7 +103,7 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        private abrirCadastro(): void
+        public abrirCadastro(booAlterar: boolean): void
         {
             if (this.tblWeb == null)
             {
@@ -112,10 +125,37 @@ module NetZ_Web_TypeScript
                 return;
             }
 
+            if (booAlterar && (this.tagGridHtml.getIntRowSelecionadaId() < 1))
+            {
+                window.alert("Selecione um registro para ser alterado.");
+                return;
+            }
+
+            this.tblWeb.clnIntId.intValor = (booAlterar) ? this.tagGridHtml.getIntRowSelecionadaId() : 0;
+
             this.tabHtml.jnlCadastro.abrirCadastroFilho(this.tblWeb);
         }
 
-        private pesquisar(): void
+        public apagar(): void
+        {
+            var intRegistroId = this.tagGridHtml.getIntRowSelecionadaId();
+
+            // TODO: Validar se esta tabela permite a exclusão de registros.
+            if (intRegistroId < 1)
+            {
+                window.alert("Selecione um registro antes.");
+                return;
+            }
+
+            if (this.tblWeb == null)
+            {
+                return;
+            }
+
+            // TODO: Implementar.
+        }
+
+        public pesquisar(): void
         {
             if (!this.booAtiva)
             {
@@ -128,11 +168,6 @@ module NetZ_Web_TypeScript
             }
 
             if (this.tblWeb.intRegistroPaiId < 1)
-            {
-                return;
-            }
-
-            if (this.tagGridHtml != null)
             {
                 return;
             }
@@ -163,7 +198,19 @@ module NetZ_Web_TypeScript
 
             this.jq.html(objSolicitacaoAjaxDb.strData);
 
-            this.inicializarGridHtml();
+            this.pesquisarSucessoGridHtml();
+        }
+
+        private pesquisarSucessoGridHtml(): void
+        {
+            if (this.tblWeb == null)
+            {
+                return;
+            }
+
+            this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
+
+            this.tagGridHtml.iniciar();
         }
 
         public ativar(): void
@@ -178,10 +225,14 @@ module NetZ_Web_TypeScript
 
         private atualizarBooAtiva(): void
         {
-            if (this.tabItemHead != null)
+            this.tabItemHead.booAtiva = this.booAtiva;
+
+            if (!this.booAtiva)
             {
-                this.tabItemHead.booAtiva = this.booAtiva;
+                return;
             }
+
+            this.tabHtml.tabItemAtiva = this;
 
             this.pesquisar();
         }
@@ -207,14 +258,35 @@ module NetZ_Web_TypeScript
                 return null;
             }
 
-            if (Utils.getBooStrVazia(this.jq.attr("tbl_web_nome")))
+            var strTblWebNome: string = this.jq.attr("tbl_web_nome");
+
+            if (Utils.getBooStrVazia(strTblWebNome))
             {
                 return null;
             }
 
-            var tblWebResultado: TabelaWeb = new TabelaWeb(this.jq.attr("tbl_web_nome"));
+            var tblWebResultado: TabelaWeb = new TabelaWeb(strTblWebNome);
 
             this.getTblWebTblPai(tblWebResultado);
+
+            return tblWebResultado;
+        }
+
+        private getTblWebPrincipal(): TabelaWeb
+        {
+            if (this.jq == null)
+            {
+                return null;
+            }
+
+            var strTblWebNome: string = this.jq.attr("tbl_web_principal_nome");
+
+            if (Utils.getBooStrVazia(strTblWebNome))
+            {
+                return null;
+            }
+
+            var tblWebResultado: TabelaWeb = new TabelaWeb(strTblWebNome);
 
             return tblWebResultado;
         }
@@ -245,20 +317,6 @@ module NetZ_Web_TypeScript
             super.inicializar();
 
             this.tabItemHead.iniciar();
-        }
-
-        private inicializarGridHtml(): void
-        {
-            if (this.tblWeb == null)
-            {
-                return;
-            }
-
-            this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
-
-            this.tagGridHtml.iniciar();
-
-            this.tagGridHtml.btnAdicionar.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos
@@ -297,26 +355,6 @@ module NetZ_Web_TypeScript
                         this.pesquisarSucesso(arg.objSolicitacaoAjaxDb);
                         return;
                 }
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
-
-        public onClick(objSender: Object, arg: any): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.abrirCadastro();
             }
             catch (ex)
             {

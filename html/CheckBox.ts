@@ -1,4 +1,4 @@
-﻿/// <reference path="../../ComponenteHtml.ts"/>
+﻿/// <reference path="Input.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -8,32 +8,18 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuContextoItem extends ComponenteHtml
+    export class CheckBox extends Input
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
-
-        private _mnc: MenuContexto;
-
-        public get mnc(): MenuContexto
-        {
-            return this._mnc;
-        }
-
-        public set mnc(mnc: MenuContexto)
-        {
-            this._mnc = mnc;
-        }
-
         // #endregion Atributos
 
         // #region Construtores
         // #endregion Construtores
 
         // #region Métodos
-
         // #endregion Métodos
 
         // #region Eventos

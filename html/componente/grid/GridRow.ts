@@ -1,6 +1,8 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnDoubleClickListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
+/// <reference path="../../../Utils.ts"/>
 /// <reference path="../../Tag.ts"/>
 
 module NetZ_Web_TypeScript
@@ -12,39 +14,45 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class GridRow extends Tag implements OnDoubleClickListener, OnMouseLeaveListener, OnMouseOverListener
+    export class GridRow extends Tag implements OnClickListener, OnDoubleClickListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
+
+        private static get COR_ROW_SELECINADA(): string { return "#dadada" };
+
         // #endregion Constantes
 
         // #region Atributos
 
+        private _booSelecionada: boolean;
         private _intId: number;
         private _tagGridHtml: GridHtml = null;
 
+        public get booSelecionada(): boolean
+        {
+            return this._booSelecionada;
+        }
+
+        public set booSelecionada(booSelecionada: boolean)
+        {
+            if (this._booSelecionada == booSelecionada)
+            {
+                return;
+            }
+
+            this._booSelecionada = booSelecionada;
+
+            this.atualizarBooSelecionado();
+        }
+
         public get intId(): number
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._intId != null)
+            {
+                return this._intId;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._intId != null)
-                {
-                    return this._intId;
-                }
-
-                this._intId = this.getIntId();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._intId = this.getIntId();
 
             return this._intId;
         }
@@ -66,88 +74,120 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
+        private atualizarBooSelecionado(): void
+        {
+            if (this.tagGridHtml == null)
+            {
+                return;
+            }
+
+            this.jq.css("background-color", this.booSelecionada ? GridRow.COR_ROW_SELECINADA : Utils.STR_VAZIA);
+
+            if (this.booSelecionada)
+            {
+                this.tagGridHtml.addRowSelecionada(this);
+            }
+            else
+            {
+                this.tagGridHtml.removerRowSelecionada(this);
+            }
+        }
+
         private getIntId(): number
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.jq == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.jq == null)
-                {
-                    return;
-                }
+            return Number(this.jq.attr("int_id"));
+        }
 
-                return Number(this.jq.attr("int_id"));
-            }
-            catch (ex)
+        private processarOnClick(arg: JQueryEventObject): void
+        {
+            if (this.intId < 1)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            this.selecionar(arg);
+
+            if (this.tagGridHtml == null)
             {
+                return;
             }
-            // #endregion Ações
+
+            this.tagGridHtml.dispararEvtOnRowClickListener(this);
         }
 
         private processarOnDoubleClick(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.intId < 1)
             {
-                if (this.intId < 1)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.tagGridHtml == null)
-                {
-                    return;
-                }
+            if (this.tagGridHtml == null)
+            {
+                return;
+            }
 
-                this.tagGridHtml.dispararEvtOnRowDoubleClickListener(this);
-            }
-            catch (ex)
+            this.tagGridHtml.dispararEvtOnRowDoubleClickListener(this);
+        }
+
+        private selecionar(arg: JQueryEventObject): void
+        {
+            if (this.tagGridHtml == null)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            if (arg.ctrlKey)
             {
+                this.booSelecionada = !this.booSelecionada;
+                return;
             }
-            // #endregion Ações
+
+            this.tagGridHtml.selecinarTudo(false);
+
+            this.booSelecionada = !this.booSelecionada;
         }
 
         protected setEventos(): void
         {
             super.setEventos();
 
+            this.addEvtOnClickListener(this);
+            this.addEvtOnMouseLeaveListener(this);
+            this.addEvtOnMouseOverListener(this);
+
+            // TODO: Não é possível disparar o click e double-click para um mesmo componente.
+            //this.addEvtOnDoubleClickListener(this);
+        }
+
+        // #endregion Métodos
+
+        // #region Eventos
+
+        public onClick(objSender: Object, arg: JQueryEventObject): void
+        {
             // #region Variáveis
             // #endregion Variáveis
 
             // #region Ações
             try
             {
-                this.addEvtOnDoubleClickListener(this);
-                this.addEvtOnMouseLeaveListener(this);
-                this.addEvtOnMouseOverListener(this);
+                this.processarOnClick(arg);
             }
             catch (ex)
             {
-                throw ex;
+                new Erro("Erro desconhecido.", ex);
             }
             finally
             {
             }
             // #endregion Ações
         }
-
-        // #endregion Métodos
-
-        // #region Eventos
 
         public onDoubleClick(objSender: Object, arg: JQueryEventObject): void
         {
@@ -177,7 +217,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.jq.css("background-color", "");
+                this.jq.css("background-color", this.booSelecionada ? GridRow.COR_ROW_SELECINADA : Utils.STR_VAZIA);
             }
             catch (ex)
             {

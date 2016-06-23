@@ -1,5 +1,7 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿/// <reference path="../../../database/TabelaWeb.ts"/>
+/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../../../OnMouseLeaveListener.ts"/>
+/// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../painel/PainelHtml.ts"/>
 
 module NetZ_Web_TypeScript
@@ -10,7 +12,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuItem extends ComponenteHtml implements OnClickListener
+    export class MenuItem extends ComponenteHtml implements OnClickListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -309,6 +311,9 @@ module NetZ_Web_TypeScript
         {
             super.setEventos();
 
+            this.addEvtOnMouseLeaveListener(this);
+            this.addEvtOnMouseOverListener(this);
+
             this.divTitulo.addEvtOnClickListener(this);
         }
 
@@ -330,6 +335,56 @@ module NetZ_Web_TypeScript
                         this.divTituloOnClick();
                         return;
                 }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.mniPai == null)
+                {
+                    return;
+                }
+
+                this.jq.css("background-color", Utils.STR_VAZIA);
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onMouseOver(objSender: Object, arg: JQueryMouseEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (this.mniPai == null)
+                {
+                    return;
+                }
+
+                this.jq.css("background-color", "rgb(128,197,195)");
             }
             catch (ex)
             {

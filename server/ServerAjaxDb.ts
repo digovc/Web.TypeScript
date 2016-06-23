@@ -22,27 +22,12 @@ module NetZ_Web_TypeScript
 
         public static get i(): ServerAjaxDb
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (ServerAjaxDb._i != null)
+            {
+                return ServerAjaxDb._i;
+            }
 
-            // #region Ações
-            try
-            {
-                if (ServerAjaxDb._i != null)
-                {
-                    return ServerAjaxDb._i;
-                }
-
-                ServerAjaxDb._i = new ServerAjaxDb();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            ServerAjaxDb._i = new ServerAjaxDb();
 
             return ServerAjaxDb._i;
         }
@@ -56,43 +41,28 @@ module NetZ_Web_TypeScript
 
         public enviar(objSolicitacaoAjax: SolicitacaoAjax): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (objSolicitacaoAjax == null)
             {
-                if (objSolicitacaoAjax == null)
-                {
-                    return;
-                }
-
-                if (!objSolicitacaoAjax.validarDados())
-                {
-                    return;
-                }
-
-                $.ajaxSettings.crossDomain = true;
-                $.ajaxSettings.data = objSolicitacaoAjax.toJson();
-                $.ajaxSettings.dataType = "json";
-                $.ajaxSettings.method = "POST";
-                $.ajaxSettings.url = this.url;
-                $.ajaxSettings.xhrFields = { "withCredentials": true };
-
-                $.ajaxSettings.beforeSend = (objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacaoAjax.ajaxAntesEnviar() };
-                $.ajaxSettings.error = (objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objSolicitacaoAjax.ajaxErro(strTextStatus, strErrorThrown) };
-                $.ajaxSettings.success = (anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objSolicitacaoAjax.ajaxSucesso(anyData) };
-
-                $.ajax($.ajaxSettings);
+                return;
             }
-            catch (ex)
+
+            if (!objSolicitacaoAjax.validarDados())
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            $.ajaxSettings.crossDomain = true;
+            $.ajaxSettings.data = objSolicitacaoAjax.toJson();
+            $.ajaxSettings.dataType = "json";
+            $.ajaxSettings.method = "POST";
+            $.ajaxSettings.url = this.url;
+            $.ajaxSettings.xhrFields = { "withCredentials": true };
+
+            $.ajaxSettings.beforeSend = (objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacaoAjax.ajaxAntesEnviar() };
+            $.ajaxSettings.error = (objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objSolicitacaoAjax.ajaxErro(strTextStatus, strErrorThrown) };
+            $.ajaxSettings.success = (anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objSolicitacaoAjax.ajaxSucesso(anyData) };
+
+            $.ajax($.ajaxSettings);
         }
 
         protected getIntPort(): number
