@@ -98,6 +98,7 @@ module NetZ_Web_TypeScript
             return this._tagInput;
         }
 
+
         // #endregion Atributos
 
         // #region Construtores

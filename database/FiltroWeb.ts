@@ -36,12 +36,12 @@ module NetZ_Web_TypeScript
         private _enmOperador: FiltroWeb_EnmOperador = FiltroWeb_EnmOperador.IGUAL;
         private _objValor: Object;
 
-        public get clnWeb(): ColunaWeb
+        private get clnWeb(): ColunaWeb
         {
             return this._clnWeb;
         }
 
-        public set clnWeb(clnWeb: ColunaWeb)
+        private set clnWeb(clnWeb: ColunaWeb)
         {
             this._clnWeb = clnWeb;
         }
@@ -56,12 +56,12 @@ module NetZ_Web_TypeScript
             this._enmOperador = enmOperador;
         }
 
-        public get objValor(): Object
+        private get objValor(): Object
         {
             return this._objValor;
         }
 
-        public set objValor(strValor: Object)
+        private set objValor(strValor: Object)
         {
             this._objValor = strValor;
         }
@@ -69,6 +69,15 @@ module NetZ_Web_TypeScript
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor(clnWeb: ColunaWeb, objValor: Object)
+        {
+            super();
+
+            this.clnWeb = clnWeb;
+            this.objValor = objValor;
+        }
+
         // #endregion Construtores
 
         // #region Métodos

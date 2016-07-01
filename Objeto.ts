@@ -16,37 +16,33 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
+        private static _intObjetoIdStatic: number = 0;
+
+        private static get intObjetoIdStatic(): number
+        {
+            return Objeto._intObjetoIdStatic;
+        }
+
+        private static set intObjetoIdStatic(intObjetoIdStatic: number)
+        {
+            Objeto._intObjetoIdStatic = intObjetoIdStatic;
+        }
+
         private _intObjetoId: number;
         private _strClassNome: string;
         private _strNome: string;
         private _strNomeExibicao: string;
-        private static _intObjetoIdStatic: number;
 
         public get intObjetoId(): number
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this._intObjetoId > 0)
             {
-                if (this._intObjetoId > 0)
-                {
-                    return this._intObjetoId;
-                }
+                return this._intObjetoId;
+            }
 
-                this._intObjetoId = Objeto.intObjetoIdStatic;
+            this._intObjetoId = Objeto.intObjetoIdStatic;
 
-                Objeto.intObjetoIdStatic++;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            Objeto.intObjetoIdStatic++;
 
             return this._intObjetoId;
         }
@@ -63,27 +59,12 @@ module NetZ_Web_TypeScript
 
         public get strNomeExibicao(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (!Utils.getBooStrVazia(this._strNomeExibicao))
+            {
+                return this._strNomeExibicao;
+            }
 
-            // #region Ações
-            try
-            {
-                if (!Utils.getBooStrVazia(this._strNomeExibicao))
-                {
-                    return this._strNomeExibicao;
-                }
-
-                this._strNomeExibicao = this.strNome;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._strNomeExibicao = this.strNome;
 
             return this._strNomeExibicao;
         }
@@ -91,16 +72,6 @@ module NetZ_Web_TypeScript
         public set strNomeExibicao(strNomeExibicao: string)
         {
             this._strNomeExibicao = strNomeExibicao;
-        }
-
-        private static get intObjetoIdStatic(): number
-        {
-            return Objeto._intObjetoIdStatic;
-        }
-
-        private static set intObjetoIdStatic(intObjetoIdStatic: number)
-        {
-            Objeto._intObjetoIdStatic = intObjetoIdStatic;
         }
 
         protected get strClassNome(): string

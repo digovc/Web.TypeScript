@@ -237,7 +237,7 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.jq.css("background-color", "lightgray");
+                this.jq.css("background-color", AppWeb.i.objTema.corMouseOver);
             }
             catch (ex)
             {

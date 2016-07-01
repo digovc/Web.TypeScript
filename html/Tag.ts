@@ -208,6 +208,13 @@ module NetZ_Web_TypeScript
             this.jq.attr("title", this.strTitle);
         }
 
+        public dispose(): void
+        {
+            super.dispose()
+
+            this.jq.remove();
+        }
+
         public esconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
         {
             this.jq.stop();

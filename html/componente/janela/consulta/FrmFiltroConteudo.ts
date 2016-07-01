@@ -73,11 +73,9 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            var fil = new FiltroWeb();
+            var fil = new FiltroWeb(cmpFiltro.clnWeb, cmpFiltro.tagInput.strValor);
 
-            fil.clnWeb = cmpFiltro.clnWeb;
             fil.enmOperador = this.getEnmOperador(cmpFiltro);
-            fil.objValor = cmpFiltro.tagInput.strValor;
 
             tblWeb.addFil(fil);
         }

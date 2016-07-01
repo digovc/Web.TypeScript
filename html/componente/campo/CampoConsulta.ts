@@ -1,6 +1,11 @@
-﻿/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿/// <reference path="../../../AppWeb.ts"/>
+/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Keys.ts"/>
 /// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../../../OnKeyDownListener.ts"/>
+/// <reference path="../botao/mini/BotaoMenuMini.ts"/>
+/// <reference path="../menu/contexto/MenuContexto.ts"/>
+/// <reference path="CampoComboBox.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -17,25 +22,32 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _strClnFiltroWebNome: string;
+        private _btnMenu: BotaoMenuMini;
+        private _clnWebFiltro: ColunaWeb;
         private _strTblWebRefNome: string;
+        private _tblWebRef: TabelaWeb;
         private _txtPesquisa: Input;
 
-        private get strClnFiltroWebNome(): string
+        private get clnWebFiltro(): ColunaWeb
         {
-            if (this._strClnFiltroWebNome != null)
-            {
-                return this._strClnFiltroWebNome;
-            }
-
-            this._strClnFiltroWebNome = this.getStrAttValor("cln_web_filtro_nome");
-
-            return this._strClnFiltroWebNome;
+            return this._clnWebFiltro;
         }
 
-        private set strClnFiltroWebNome(strClnFiltroWebNome: string)
+        private set clnWebFiltro(clnWebFiltro: ColunaWeb)
         {
-            this._strClnFiltroWebNome = strClnFiltroWebNome;
+            this._clnWebFiltro = clnWebFiltro;
+        }
+
+        private get btnMenu(): BotaoMenuMini
+        {
+            if (this._btnMenu != null)
+            {
+                return this._btnMenu;
+            }
+
+            this._btnMenu = new BotaoMenuMini(this.strId + "_btnMenu");
+
+            return this._btnMenu;
         }
 
         private get strTblWebRefNome(): string
@@ -50,20 +62,6 @@ module NetZ_Web_TypeScript
             return this._strTblWebRefNome;
         }
 
-        private get txtPesquisa(): Input
-        {
-            if (this._txtPesquisa != null)
-            {
-                return this._txtPesquisa;
-            }
-
-            this._txtPesquisa = new Input(this.strId + "_txtPesquisa");
-
-            return this._txtPesquisa;
-        }
-
-        private _tblWebRef: TabelaWeb;
-
         private get tblWebRef(): TabelaWeb
         {
             if (this._tblWebRef != null)
@@ -76,12 +74,65 @@ module NetZ_Web_TypeScript
             return this._tblWebRef;
         }
 
+        private get txtPesquisa(): Input
+        {
+            if (this._txtPesquisa != null)
+            {
+                return this._txtPesquisa;
+            }
+
+            this._txtPesquisa = new Input(this.strId + "_txtPesquisa");
+
+            return this._txtPesquisa;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
         // #endregion Construtores
 
         // #region Métodos
+
+        private abrirOpcao(arg: JQueryEventObject): void
+        {
+            var mnc = new MenuContexto();
+
+            mnc.addOpcao("Pesquisar", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.pesquisar(); }));
+            mnc.addOpcao("Pesquisar por", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.abrirOpcaoPesquisarPor(mci, arg); }));
+            //mnc.addOpcao("Critério de pesquisa");
+            mnc.addOpcao("Limpar", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.limparDados(); }));
+
+            mnc.abrirMenu(arg);
+        }
+
+        private abrirOpcaoPesquisarPor(mci: MenuContextoItem, arg: JQueryEventObject): void
+        {
+            if (this.tblWebRef == null)
+            {
+                return;
+            }
+
+            var mnc = new MenuContexto();
+
+            this.tblWebRef.arrClnWeb.forEach((clnWeb) => { this.abrirOpcaoPesquisarPorCln(mnc, clnWeb); });
+
+            mnc.abrirMenu(arg);
+        }
+
+        private abrirOpcaoPesquisarPorCln(mnc: MenuContexto, clnWeb: ColunaWeb): void
+        {
+            if (clnWeb == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(clnWeb.strNomeExibicao))
+            {
+                return;
+            }
+
+            mnc.addOpcao(clnWeb.strNomeExibicao, ((cln: ColunaWeb) => { this.selecionarColunaPesquisa(cln); }));
+        }
 
         private getTblWebRef(): TabelaWeb
         {
@@ -127,14 +178,16 @@ module NetZ_Web_TypeScript
                 return;
             }
 
+            if (this.clnWebFiltro == null)
+            {
+                this.clnWebFiltro = this.tblWebRef.clnWebNome;
+            }
+
             this.tblWebRef.limparFiltro();
 
-            var fil = new FiltroWeb();
-
-            fil.clnWeb = new ColunaWeb(this.strClnFiltroWebNome);
+            var fil = new FiltroWeb(this.clnWebFiltro, this.txtPesquisa.strValor);
 
             fil.enmOperador = FiltroWeb_EnmOperador.LIKE;
-            fil.objValor = this.txtPesquisa.strValor;
 
             this.tblWebRef.addFil(fil);
 
@@ -145,21 +198,6 @@ module NetZ_Web_TypeScript
             this.txtPesquisa.strValor = null;
 
             this.cmb.mostrar();
-        }
-
-        private processarOnClick(arg: JQueryEventObject): void
-        {
-            this.processarOnClickDireito(arg);
-        }
-
-        private processarOnClickDireito(arg: JQueryEventObject): void
-        {
-            if (arg.which != Tag.INT_MOUSE_BUTTON_RIGHT)
-            {
-                return;
-            }
-
-            window.alert("Botão direito acionado.");
         }
 
         public receberFoco(): void
@@ -175,12 +213,30 @@ module NetZ_Web_TypeScript
             this.cmb.jq.focus();
         }
 
+        private selecionarColunaPesquisa(clnWeb: ColunaWeb): void
+        {
+            if (clnWeb == null)
+            {
+                return;
+            }
+
+            if (this.tblWebRef.arrClnWeb.indexOf(clnWeb) < 0)
+            {
+                return;
+            }
+
+            this.clnWebFiltro = clnWeb;
+
+            window.alert("Pesquisando por " + clnWeb.strNomeExibicao);
+        }
+
         protected setEventos(): void
         {
             super.setEventos();
 
-            this.addEvtOnClickListener(this);
             this.addEvtOnKeyDownListener(this);
+
+            this.btnMenu.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos
@@ -197,8 +253,8 @@ module NetZ_Web_TypeScript
             {
                 switch (objSender)
                 {
-                    case this:
-                        this.processarOnClick(arg);
+                    case this.btnMenu:
+                        this.abrirOpcao(arg)
                         return;
                 }
             }

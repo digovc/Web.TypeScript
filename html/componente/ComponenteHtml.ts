@@ -18,14 +18,14 @@ module NetZ_Web_TypeScript
 
         private _strLayoutFixo: string;
 
-        protected get strLayoutFixo(): string
+        public get strLayoutFixo(): string
         {
             if (this._strLayoutFixo != null)
             {
                 return this._strLayoutFixo;
             }
 
-            this._strLayoutFixo = LayoutFixoManager.i.getStrLayoutFixo(this.strClassNome);
+            this._strLayoutFixo = this.getStrLayoutFixo();
 
             return this._strLayoutFixo;
         }
@@ -37,8 +37,21 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        protected montarLayoutFixo(): void
+        private getStrLayoutFixo(): string
         {
+            var strLayoutFixo = LayoutFixoManager.i.getStrLayoutFixo(this.strClassNome);
+
+            if (Utils.getBooStrVazia(strLayoutFixo))
+            {
+                return null;
+            }
+
+            return this.montarLayoutFixo(strLayoutFixo);
+        }
+
+        protected montarLayoutFixo(strLayoutFixo: string): string
+        {
+            return strLayoutFixo;
         }
 
         // #endregion Métodos

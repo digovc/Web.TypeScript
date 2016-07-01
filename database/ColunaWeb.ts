@@ -16,9 +16,20 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
+        private _booNome: boolean;
         private _intValor: number;
         private _strCritica: string;
         private _strValor: string;
+
+        public get booNome(): boolean
+        {
+            return this._booNome;
+        }
+
+        public set booNome(booNome: boolean)
+        {
+            this._booNome = booNome;
+        }
 
         public get intValor(): number
         {

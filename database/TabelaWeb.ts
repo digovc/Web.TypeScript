@@ -19,6 +19,7 @@ module NetZ_Web_TypeScript
         private _arrClnWeb: Array<ColunaWeb>;
         private _arrFil: Array<FiltroWeb>;
         private _clnIntId: ColunaWeb;
+        private _clnWebNome: ColunaWeb;
         private _intRegistroPaiId: number;
         private _strCritica: string;
         private _strTblPaiNome: string;
@@ -62,6 +63,18 @@ module NetZ_Web_TypeScript
             this._clnIntId = this.getClnWeb("int_id");
 
             return this._clnIntId;
+        }
+
+        public get clnWebNome(): ColunaWeb
+        {
+            if (this._clnWebNome != null)
+            {
+                return this._clnWebNome;
+            }
+
+            this._clnWebNome = this.getClnWebNome();
+
+            return this._clnWebNome;
         }
 
         public get intRegistroPaiId(): number
@@ -141,10 +154,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            var filWeb = new FiltroWeb();
-
-            filWeb.objValor = objValor;
-            filWeb.clnWeb = clnWeb;
+            var filWeb = new FiltroWeb(clnWeb, objValor);
 
             this.arrFil.push(filWeb);
         }
@@ -268,6 +278,28 @@ module NetZ_Web_TypeScript
             this.addClnWeb(clnWebNew);
 
             return clnWebNew;
+        }
+
+        private getClnWebNome(): ColunaWeb
+        {
+            for (var i = 0; i < this.arrClnWeb.length; i++)
+            {
+                var clnWeb = this.arrClnWeb[i];
+
+                if (clnWeb == null)
+                {
+                    continue;
+                }
+
+                if (!clnWeb.booNome)
+                {
+                    continue;
+                }
+
+                return clnWeb;
+            }
+
+            return this.clnIntId;
         }
 
         public limparFiltro(): void

@@ -35,6 +35,7 @@
     <TypeScriptCompile Include="html\componente\ActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
+    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMenuMini.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridRow.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowClickListener.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowDoubleClickListener.ts" />
@@ -113,7 +114,7 @@
     <TypeScriptCompile Include="html\componente\painel\PainelAtalho.ts" />
     <TypeScriptCompile Include="html\componente\painel\PainelHtml.ts" />
     <TypeScriptCompile Include="html\componente\painel\PainelNivel.ts" />
-    <TypeScriptCompile Include="html\design\Tema.ts" />
+    <TypeScriptCompile Include="design\Tema.ts" />
     <TypeScriptCompile Include="html\Div.ts" />
     <TypeScriptCompile Include="html\Imagem.ts" />
     <TypeScriptCompile Include="html\Input.ts" />

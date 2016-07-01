@@ -42,6 +42,8 @@ module NetZ_Web_TypeScript
 
         private _arrTbl: Array<TabelaWeb>;
         private _booEmFoco: boolean = true;
+        private _mnc: MenuContexto;
+        private _objTema: Tema;
         private _pag: PaginaHtml;
         private _strSessionId: string;
 
@@ -72,6 +74,28 @@ module NetZ_Web_TypeScript
             this._booEmFoco = booEmFoco;
 
             this.atualizarBooEmFoco();
+        }
+
+        private get mnc(): MenuContexto
+        {
+            return this._mnc;
+        }
+
+        private set mnc(mnc: MenuContexto)
+        {
+            this._mnc = mnc;
+        }
+
+        public get objTema(): Tema
+        {
+            if (this._objTema != null)
+            {
+                return this._objTema;
+            }
+
+            this._objTema = this.getObjTema();
+
+            return this._objTema;
         }
 
         public get pag(): PaginaHtml
@@ -111,6 +135,21 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
+        public abrirMenu(mnc: MenuContexto): void
+        {
+            if (mnc == null)
+            {
+                return;
+            }
+
+            if (this.mnc != null)
+            {
+                this.mnc.dispose();
+            }
+
+            this.mnc = mnc;
+        }
+
         private addArrTbl(tblWeb: TabelaWeb): void
         {
             if (tblWeb == null)
@@ -145,7 +184,8 @@ module NetZ_Web_TypeScript
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.JSON_TABELA_WEB;
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.CARREGAR_TBL_WEB;
+
             objSolicitacaoAjaxDb.addStr(strTblNome);
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjax: SolicitacaoAjax) => { this.carregarTblSucesso(objSolicitacaoAjax); });
 
@@ -169,6 +209,11 @@ module NetZ_Web_TypeScript
             tblWeb.copiarDados(JSON.parse(objSolicitacaoAjax.strData));
 
             this.addArrTbl(tblWeb);
+        }
+
+        protected getObjTema(): Tema
+        {
+            return new Tema();
         }
 
         private getStrCookieValue(strCookieNome: string): string
@@ -216,7 +261,7 @@ module NetZ_Web_TypeScript
                     continue;
                 }
 
-                if (strTblNome.toLowerCase() == tblWeb.strNome.toLowerCase())
+                if (strTblNome.toLowerCase() != tblWeb.strNome.toLowerCase())
                 {
                     continue;
                 }
