@@ -246,19 +246,22 @@ module NetZ_Web_TypeScript
             this.inicializarPosicao();
         }
 
-        private inicializarPosicao(): void
+        protected inicializarPosicao(): void
         {
-            var intParentHeight = this.jq.parent().height();
-            var intParentWidth = this.jq.parent().width();
+            //var intParentHeight = this.jq.parent().height();
+            //var intParentWidth = this.jq.parent().width();
+
+            var intParentHeight = window.screen.height;
+            var intParentWidth = window.screen.width;
 
             var intHeight = this.jq.height();
             var intWidth = this.jq.width();
 
-            var x = ((intParentWidth / 2) - (intWidth / 2));
-            var y = ((intParentHeight / 2) - (intHeight / 2));
+            var intLeft = ((intParentWidth / 2) - (intWidth / 2));
+            var intTop = ((intParentHeight / 2) - (intHeight / 2) - 150);
 
-            this.jq.css("left", x);
-            this.jq.css("top", y);
+            this.jq.css("left", intLeft);
+            this.jq.css("top", intTop);
         }
 
         protected setEventos(): void

@@ -161,7 +161,7 @@ module NetZ_Web_TypeScript
         {
             TblFiltro.i.limparFiltro();
 
-            TblFiltro.i.addFil2(TblFiltro.i.clnIntId, intFiltroId);
+            TblFiltro.i.clnWebIntId.intValor = intFiltroId;
 
             this.abrirCadastro(TblFiltro.i);
         }

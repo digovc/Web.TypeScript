@@ -20,6 +20,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _arrCmp: Array<CampoHtml>;
+        private _cmpEmFoco: CampoHtml;
         private _tblWeb: TabelaWeb;
 
         protected get arrCmp(): Array<CampoHtml>
@@ -32,6 +33,16 @@ module NetZ_Web_TypeScript
             this._arrCmp = this.getArrCmp();
 
             return this._arrCmp;
+        }
+
+        public get cmpEmFoco(): CampoHtml
+        {
+            return this._cmpEmFoco;
+        }
+
+        public set cmpEmFoco(cmpEmFoco: CampoHtml)
+        {
+            this._cmpEmFoco = cmpEmFoco;
         }
 
         public get tblWeb(): TabelaWeb

@@ -23,6 +23,8 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _btnAdicionar: BotaoAdicionarMini;
+        private _btnAlterar: BotaoAlterarMini;
+        private _btnApagar: BotaoApagarMini;
         private _cmpIntFiltroId: CampoComboBox;
         private _pnlFiltro: PainelFiltro;
         private _viwAtual: TabelaWeb;
@@ -37,6 +39,30 @@ module NetZ_Web_TypeScript
             this._btnAdicionar = new BotaoAdicionarMini(this.strId + "_btnAdicionar");
 
             return this._btnAdicionar;
+        }
+
+        private get btnAlterar(): BotaoAlterarMini
+        {
+            if (this._btnAlterar != null)
+            {
+                return this._btnAlterar;
+            }
+
+            this._btnAlterar = new BotaoAlterarMini(this.strId +"_btnAlterar");
+
+            return this._btnAlterar;
+        }
+
+        private get btnApagar(): BotaoApagarMini
+        {
+            if (this._btnApagar != null)
+            {
+                return this._btnApagar;
+            }
+
+            this._btnApagar = new BotaoApagarMini(this.strId + "_btnApagar");
+
+            return this._btnApagar;
         }
 
         private get cmpIntFiltroId(): CampoComboBox
@@ -73,6 +99,7 @@ module NetZ_Web_TypeScript
             return this._viwAtual;
         }
 
+
         // #endregion Atributos
 
         // #region Construtores
@@ -103,7 +130,7 @@ module NetZ_Web_TypeScript
 
             TblFiltro.i.limparFiltro();
 
-            TblFiltro.i.addFil2(TblFiltro.i.clnIntId, this.cmpIntFiltroId.tagInput.intValor);
+            TblFiltro.i.addFil2(TblFiltro.i.clnWebIntId, this.cmpIntFiltroId.tagInput.intValor);
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
@@ -115,7 +142,7 @@ module NetZ_Web_TypeScript
             ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
         }
 
-        private abrirFiltroCadastro(): void
+        private abrirFiltroCadastro(intFiltroId: number): void
         {
             if (this.pnlFiltro == null)
             {
@@ -127,7 +154,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.pnlFiltro.jnlConsulta.abrirFiltroCadastro();
+            this.pnlFiltro.jnlConsulta.abrirFiltroCadastro(intFiltroId);
         }
 
         private abrirFiltroConteudoSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
@@ -143,6 +170,10 @@ module NetZ_Web_TypeScript
             }
 
             this.pnlFiltro.atualizarFrmFiltroConteudo(objSolicitacaoAjaxDb.strData);
+        }
+
+        private apagarFiltro(): void
+        {
         }
 
         protected carregarDados(): void
@@ -202,6 +233,10 @@ module NetZ_Web_TypeScript
         {
             this.btnAdicionar.addEvtOnClickListener(this);
 
+            this.btnAlterar.addEvtOnClickListener(this);
+
+            this.btnApagar.addEvtOnClickListener(this);
+
             this.cmpIntFiltroId.tagInput.addEvtOnValorAlteradoListener(this);
         }
 
@@ -214,7 +249,15 @@ module NetZ_Web_TypeScript
             switch (objSender)
             {
                 case this.btnAdicionar:
-                    this.abrirFiltroCadastro();
+                    this.abrirFiltroCadastro(0);
+                    return;
+
+                case this.btnAlterar:
+                    this.abrirFiltroCadastro(this.cmpIntFiltroId.tagInput.intValor);
+                    return;
+
+                case this.btnApagar:
+                    this.apagarFiltro();
                     return;
             }
         }

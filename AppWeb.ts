@@ -1,8 +1,10 @@
-﻿/// <reference path="erro/Erro.ts"/>
+﻿/// <reference path="design/Tema.ts"/>
+/// <reference path="erro/Erro.ts"/>
 /// <reference path="html/pagina/PaginaHtml.ts"/>
 /// <reference path="html/pagina/PagPrincipal.ts"/>
 /// <reference path="Objeto.ts"/>
 /// <reference path="OnFocusChangeListener.ts"/>
+/// <reference path="OnFocusOutListener.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -167,7 +169,14 @@ module NetZ_Web_TypeScript
 
         private atualizarBooEmFoco(): void
         {
-            this.dispararEvtOnFocusChangeListener();
+            if (this.booEmFoco)
+            {
+                this.dispararEvtOnFocusInListener();
+            }
+            else
+            {
+                this.dispararEvtOnFocusOutListener();
+            }
         }
 
         public carregarTbl(strTblNome: string): void
@@ -298,79 +307,145 @@ module NetZ_Web_TypeScript
 
         protected setEventos(): void
         {
-            window.onblur = (e: FocusEvent) => { this.booEmFoco = false; };
-            window.onfocus = (e: FocusEvent) => { this.booEmFoco = true; };
+            window.onblur = ((arg: FocusEvent) => { this.booEmFoco = false; });
+            window.onfocus = ((arg: FocusEvent) => { this.booEmFoco = true; });
         }
 
         // #endregion Métodos
 
         // #region Eventos
 
-        // #region Evento OnFocusChangeListener
+        // #region Evento OnFocusInListener
 
-        private _arrEvtOnFocusChangeListener: Array<OnFocusChangeListener>;
+        private _arrEvtOnFocusInListener: Array<OnFocusInListener>;
 
-        private get arrEvtOnFocusChangeListener(): Array<OnFocusChangeListener>
+        private get arrEvtOnFocusInListener(): Array<OnFocusInListener>
         {
-            if (this._arrEvtOnFocusChangeListener != null)
+            if (this._arrEvtOnFocusInListener != null)
             {
-                return this._arrEvtOnFocusChangeListener;
+                return this._arrEvtOnFocusInListener;
             }
 
-            this._arrEvtOnFocusChangeListener = new Array<OnFocusChangeListener>();
+            this._arrEvtOnFocusInListener = new Array<OnFocusInListener>();
 
-            return this._arrEvtOnFocusChangeListener;
+            return this._arrEvtOnFocusInListener;
         }
 
-        public addEvtOnFocusChangeListener(evtOnFocusChangeListener: OnFocusChangeListener): void
+        public addEvtOnFocusInListener(evtOnFocusInListener: OnFocusInListener): void
         {
-            if (evtOnFocusChangeListener == null)
+            if (evtOnFocusInListener == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusChangeListener.indexOf(evtOnFocusChangeListener) > -1)
+            if (this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnFocusChangeListener.push(evtOnFocusChangeListener);
+            this.arrEvtOnFocusInListener.push(evtOnFocusInListener);
         }
 
-        private dispararEvtOnFocusChangeListener(): void
+        private dispararEvtOnFocusInListener(): void
         {
-            if (this.arrEvtOnFocusChangeListener.length == 0)
+            if (this.arrEvtOnFocusInListener.length == 0)
             {
                 return;
             }
 
-            this.arrEvtOnFocusChangeListener.forEach((evt) =>
+            this.arrEvtOnFocusInListener.forEach((evt) =>
             {
                 if (evt == null)
                 {
                     return;
                 }
 
-                evt.onFocusChange(this, this.booEmFoco);
+                evt.onFocusIn(this);
             });
         }
 
-        public removerEvtOnFocusChangeListener(evtOnFocusChangeListener: OnFocusChangeListener): void
+        public removerEvtOnFocusInListener(evtOnFocusInListener: OnFocusInListener): void
         {
-            if (evtOnFocusChangeListener == null)
+            if (evtOnFocusInListener == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusChangeListener.indexOf(evtOnFocusChangeListener) == -1)
+            if (this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnFocusChangeListener.splice(this.arrEvtOnFocusChangeListener.indexOf(evtOnFocusChangeListener));
+            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener));
         }
 
-        // #endregion Evento OnFocusChangeListener
+        // #endregion Evento OnFocusInListener
+
+        // #region Evento OnFocusOutListener
+
+        private _arrEvtOnFocusOutListener: Array<OnFocusOutListener>;
+
+        private get arrEvtOnFocusOutListener(): Array<OnFocusOutListener>
+        {
+            if (this._arrEvtOnFocusOutListener != null)
+            {
+                return this._arrEvtOnFocusOutListener;
+            }
+
+            this._arrEvtOnFocusOutListener = new Array<OnFocusOutListener>();
+
+            return this._arrEvtOnFocusOutListener;
+        }
+
+        public addEvtOnFocusOutListener(evtOnFocusOutListener: OnFocusOutListener): void
+        {
+            if (evtOnFocusOutListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener) > -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnFocusOutListener.push(evtOnFocusOutListener);
+        }
+
+        private dispararEvtOnFocusOutListener(): void
+        {
+            if (this.arrEvtOnFocusOutListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnFocusOutListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onFocusOut(this);
+            });
+        }
+
+        public removerEvtOnFocusOutListener(evtOnFocusOutListener: OnFocusOutListener): void
+        {
+            if (evtOnFocusOutListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener));
+        }
+
+        // #endregion Evento OnFocusOutListener
 
         // #endregion Eventos
     }

@@ -131,7 +131,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.tblWeb.clnIntId.intValor = (booAlterar) ? this.tagGridHtml.getIntRowSelecionadaId() : 0;
+            this.tblWeb.clnWebIntId.intValor = (booAlterar) ? this.tagGridHtml.getIntRowSelecionadaId() : 0;
 
             this.tabHtml.jnlCadastro.abrirCadastroFilho(this.tblWeb);
         }

@@ -18,7 +18,7 @@ module NetZ_Web_TypeScript
 
         private _arrClnWeb: Array<ColunaWeb>;
         private _arrFil: Array<FiltroWeb>;
-        private _clnIntId: ColunaWeb;
+        private _clnWebIntId: ColunaWeb;
         private _clnWebNome: ColunaWeb;
         private _intRegistroPaiId: number;
         private _strCritica: string;
@@ -53,16 +53,16 @@ module NetZ_Web_TypeScript
             return this._arrFil;
         }
 
-        public get clnIntId(): ColunaWeb
+        public get clnWebIntId(): ColunaWeb
         {
-            if (this._clnIntId != null)
+            if (this._clnWebIntId != null)
             {
-                return this._clnIntId;
+                return this._clnWebIntId;
             }
 
-            this._clnIntId = this.getClnWeb("int_id");
+            this._clnWebIntId = this.getClnWeb("int_id");
 
-            return this._clnIntId;
+            return this._clnWebIntId;
         }
 
         public get clnWebNome(): ColunaWeb
@@ -299,7 +299,7 @@ module NetZ_Web_TypeScript
                 return clnWeb;
             }
 
-            return this.clnIntId;
+            return this.clnWebIntId;
         }
 
         public limparFiltro(): void

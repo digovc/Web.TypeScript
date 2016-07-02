@@ -14,19 +14,37 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class CampoHtml extends ComponenteHtml implements OnValorAlteradoListener
+    export class CampoHtml extends ComponenteHtml implements OnFocusInListener, OnFocusOutListener, OnValorAlteradoListener
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
+        private _booEmFoco: boolean;
         private _booMostrarTituloSempre: boolean;
         private _clnWeb: ColunaWeb;
         private _divTitulo: Div;
         private _frm: FormHtml;
         private _strCritica: string;
         private _tagInput: Input;
+
+        protected get booEmFoco(): boolean
+        {
+            return this._booEmFoco;
+        }
+
+        protected set booEmFoco(booSEmFoco: boolean)
+        {
+            if (this._booEmFoco == booSEmFoco)
+            {
+                return;
+            }
+
+            this._booEmFoco = booSEmFoco;
+
+            this.atualizarBooEmFoco();
+        }
 
         private get booMostrarTituloSempre(): boolean
         {
@@ -52,7 +70,7 @@ module NetZ_Web_TypeScript
             return this._clnWeb;
         }
 
-        private get divTitulo(): Div
+        protected get divTitulo(): Div
         {
             if (this._divTitulo != null)
             {
@@ -98,13 +116,41 @@ module NetZ_Web_TypeScript
             return this._tagInput;
         }
 
-
         // #endregion Atributos
 
         // #region Construtores
         // #endregion Construtores
 
         // #region Métodos
+
+        protected atualizarBooEmFoco(): void
+        {
+            //this.jq.css("border", this.booEmFoco ? "1px solid #afafaf" : Utils.STR_VAZIA);
+            //this.jq.css("border-radius", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
+            //this.jq.css("box-shadow", this.booEmFoco ? "0px 1px 2px 1px #747474" : Utils.STR_VAZIA);
+
+            this.divTitulo.jq.css("color", this.booEmFoco ? "black" : Utils.STR_VAZIA);
+            this.divTitulo.jq.css("font-weight", this.booEmFoco ? "bold" : Utils.STR_VAZIA);
+
+            this.tagInput.jq.css("border-bottom", this.booEmFoco ? "2px solid black" : Utils.STR_VAZIA);
+
+            this.atualizarBooEmFocoFrm();
+        }
+
+        private atualizarBooEmFocoFrm(): void
+        {
+            if (!this.booEmFoco)
+            {
+                return;
+            }
+
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            this.frm.cmpEmFoco = this;
+        }
 
         private atualizarStrCritica(): void
         {
@@ -237,6 +283,8 @@ module NetZ_Web_TypeScript
         {
             super.setEventos();
 
+            this.tagInput.addEvtOnFocusInListener(this);
+            this.tagInput.addEvtOnFocusOutListener(this);
             this.tagInput.addEvtOnValorAlteradoListener(this);
         }
 
@@ -248,6 +296,56 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
+
+        public onFocusIn(objSender: Object): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this.tagInput:
+                        this.booEmFoco = true;
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onFocusOut(objSender: Object): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this.tagInput:
+                        this.booEmFoco = false;
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
         {

@@ -217,6 +217,27 @@ module NetZ_Web_TypeScript
             this.booAtivo = false;
         }
 
+        private abrirTabHtml(): void
+        {
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            if (this.tabHtml == null)
+            {
+                return;
+            }
+
+            this.jq.height((this.jq.height() + 250));
+
+            var intTop = Number(this.jq.css("top").replace("px", Utils.STR_VAZIA));
+
+            this.jq.css("top", (intTop - 100));
+
+            this.tabHtml.iniciar();
+        }
+
         private addJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void
         {
             if (jnlCadastroFilho == null)
@@ -427,6 +448,8 @@ module NetZ_Web_TypeScript
             this.inicializarJnlCadastroPai();
 
             this.divComando.iniciar();
+
+            this.inicializarTabHtml();
         }
 
         private inicializarJnlCadastroPai(): void
@@ -442,6 +465,16 @@ module NetZ_Web_TypeScript
             }
 
             this.jnlCadastroPai = this.pagPrincipal.jnlCadastro;
+        }
+
+        private inicializarTabHtml(): void
+        {
+            if (this.intRegistroId < 1)
+            {
+                return;
+            }
+
+            this.abrirTabHtml();
         }
 
         private removerJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void
@@ -567,7 +600,7 @@ module NetZ_Web_TypeScript
         {
             this.salvarSucesso2SucessoCmpIntId(tblWeb);
 
-            this.salvarSucesso2SucessoTabHtml();
+            this.abrirTabHtml();
 
             this.salvarSucesso2SucessoTabItem();
 
@@ -592,27 +625,6 @@ module NetZ_Web_TypeScript
             }
 
             this.cmpIntId.tagInput.intValor = tblWeb.getClnWeb(this.cmpIntId.clnWeb.strNome).intValor;
-        }
-
-        private salvarSucesso2SucessoTabHtml(): void
-        {
-            if (this.jq == null)
-            {
-                return;
-            }
-
-            if (this.tabHtml == null)
-            {
-                return;
-            }
-
-            this.jq.height((this.jq.height() + 250));
-
-            var intTop = Number(this.jq.css("top").replace("px", Utils.STR_VAZIA));
-
-            this.jq.css("top", (intTop - 100));
-
-            this.tabHtml.iniciar();
         }
 
         private salvarSucesso2SucessoTabItem(): void

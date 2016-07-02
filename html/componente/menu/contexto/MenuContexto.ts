@@ -1,4 +1,5 @@
-﻿/// <reference path="../../ComponenteHtml.ts"/>
+﻿/// <reference path="../../../../OnClickListener.ts"/>
+/// <reference path="../../ComponenteHtml.ts"/>
 /// <reference path="MenuContextoItem.ts"/>
 
 module NetZ_Web_TypeScript
@@ -9,7 +10,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuContexto extends ComponenteHtml
+    export class MenuContexto extends ComponenteHtml implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -127,6 +128,13 @@ module NetZ_Web_TypeScript
             this.addMci(mci);
         }
 
+        public dispose(): void
+        {
+            super.dispose();
+
+            AppWeb.i.pag.removeEvtOnClickListener(this);
+        }
+
         protected inicializar(): void
         {
             super.inicializar();
@@ -172,9 +180,36 @@ module NetZ_Web_TypeScript
             this.dispose();
         }
 
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            window.setTimeout(() => { AppWeb.i.pag.addEvtOnClickListener(this); }, 1);
+        }
+
         // #endregion Métodos
 
         // #region Eventos
+
+        public onClick(objSender: Object, arg: JQueryEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.dispose();
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         // #endregion Eventos
     }

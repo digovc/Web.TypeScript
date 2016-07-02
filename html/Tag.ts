@@ -462,6 +462,148 @@ module NetZ_Web_TypeScript
 
         // #endregion Evento OnDoubleClickListener
 
+        // #region Evento OnFocusInListener
+
+        private _arrEvtOnFocusInListener: Array<OnFocusInListener>;
+
+        private get arrEvtOnFocusInListener(): Array<OnFocusInListener>
+        {
+            if (this._arrEvtOnFocusInListener != null)
+            {
+                return this._arrEvtOnFocusInListener;
+            }
+
+            this._arrEvtOnFocusInListener = new Array<OnFocusInListener>();
+
+            return this._arrEvtOnFocusInListener;
+        }
+
+        public addEvtOnFocusInListener(evtOnFocusInListener: OnFocusInListener): void
+        {
+            if (evtOnFocusInListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener) > -1)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnFocusInListener.length == 0)
+            {
+                this.jq.focusin((arg) => this.dispararEvtOnFocusInListener(arg));
+            }
+
+            this.arrEvtOnFocusInListener.push(evtOnFocusInListener);
+        }
+
+        private dispararEvtOnFocusInListener(arg: JQueryEventObject): void
+        {
+            if (this.arrEvtOnFocusInListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnFocusInListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onFocusIn(this);
+            });
+        }
+
+        public removerEvtOnFocusInListener(evtOnFocusInListener: OnFocusInListener): void
+        {
+            if (evtOnFocusInListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener));
+        }
+
+        // #endregion Evento OnFocusInListener
+
+        // #region Evento OnFocusOutListener
+
+        private _arrEvtOnFocusOutListener: Array<OnFocusOutListener>;
+
+        private get arrEvtOnFocusOutListener(): Array<OnFocusOutListener>
+        {
+            if (this._arrEvtOnFocusOutListener != null)
+            {
+                return this._arrEvtOnFocusOutListener;
+            }
+
+            this._arrEvtOnFocusOutListener = new Array<OnFocusOutListener>();
+
+            return this._arrEvtOnFocusOutListener;
+        }
+
+        public addEvtOnFocusOutListener(evtOnFocusOutListener: OnFocusOutListener): void
+        {
+            if (evtOnFocusOutListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener) > -1)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnFocusOutListener.length == 0)
+            {
+                this.jq.focusout((arg) => this.dispararEvtOnFocusOutListener(arg));
+            }
+
+            this.arrEvtOnFocusOutListener.push(evtOnFocusOutListener);
+        }
+
+        private dispararEvtOnFocusOutListener(arg: JQueryEventObject): void
+        {
+            if (this.arrEvtOnFocusOutListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnFocusOutListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onFocusOut(this);
+            });
+        }
+
+        public removerEvtOnFocusOutListener(evtOnFocusOutListener: OnFocusOutListener): void
+        {
+            if (evtOnFocusOutListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener));
+        }
+
+        // #endregion Evento OnFocusOutListener
+
         // #region Evento OnKeyDownListener
 
         private _arrEvtOnKeyDownListener: Array<OnKeyDownListener>;

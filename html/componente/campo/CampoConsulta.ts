@@ -2,6 +2,7 @@
 /// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Keys.ts"/>
 /// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../../../OnFocusInListener.ts"/>
 /// <reference path="../../../OnKeyDownListener.ts"/>
 /// <reference path="../botao/mini/BotaoMenuMini.ts"/>
 /// <reference path="../menu/contexto/MenuContexto.ts"/>
@@ -35,7 +36,14 @@ module NetZ_Web_TypeScript
 
         private set clnWebFiltro(clnWebFiltro: ColunaWeb)
         {
+            if (this._clnWebFiltro == clnWebFiltro)
+            {
+                return;
+            }
+
             this._clnWebFiltro = clnWebFiltro;
+
+            this.atualizarClnWebFiltro();
         }
 
         private get btnMenu(): BotaoMenuMini
@@ -97,10 +105,15 @@ module NetZ_Web_TypeScript
         {
             var mnc = new MenuContexto();
 
-            mnc.addOpcao("Pesquisar", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.pesquisar(); }));
-            mnc.addOpcao("Pesquisar por", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.abrirOpcaoPesquisarPor(mci, arg); }));
-            //mnc.addOpcao("Critério de pesquisa");
-            mnc.addOpcao("Limpar", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.limparDados(); }));
+            if (this.txtPesquisa.booVisivel)
+            {
+                mnc.addOpcao("Pesquisar", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.pesquisar(); }));
+                mnc.addOpcao("Pesquisar por", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.abrirOpcaoPesquisarPor(mci, arg); }));
+            }
+            else
+            {
+                mnc.addOpcao("Limpar", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.limparDados(); }));
+            }
 
             mnc.abrirMenu(arg);
         }
@@ -131,7 +144,30 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            mnc.addOpcao(clnWeb.strNomeExibicao, ((cln: ColunaWeb) => { this.selecionarColunaPesquisa(cln); }));
+            mnc.addOpcao(clnWeb.strNomeExibicao, (() => { this.selecionarColunaPesquisa(clnWeb); }));
+        }
+
+        private atualizarClnWebFiltro(): void
+        {
+            if (this.clnWebFiltro == null)
+            {
+                this.clnWebFiltro = this.tblWebRef.clnWebNome;
+                return;
+            }
+
+            var strTitulo = "_campo_nome (_cln_web_ref_nome)";
+
+            strTitulo = strTitulo.replace("_campo_nome", this.getStrAttValor("cln_ref_nome_exibicao"));
+            strTitulo = strTitulo.replace("_cln_web_ref_nome", this.clnWebFiltro.strNomeExibicao);
+
+            this.divTitulo.strConteudo = strTitulo;
+        }
+
+        protected atualizarBooEmFoco(): void
+        {
+            super.atualizarBooEmFoco();
+
+            this.btnMenu.booVisivel = this.booEmFoco;
         }
 
         private getTblWebRef(): TabelaWeb
@@ -151,6 +187,20 @@ module NetZ_Web_TypeScript
             this.txtPesquisa.iniciar();
 
             this.inicializarTblWebRef();
+
+            this.inicializarIntValor();
+        }
+
+        private inicializarIntValor(): void
+        {
+            if (this.tagInput.intValor < 1)
+            {
+                return;
+            }
+
+            this.txtPesquisa.jq.hide();
+
+            this.cmb.mostrar();
         }
 
         private inicializarTblWebRef(): void
@@ -220,14 +270,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            if (this.tblWebRef.arrClnWeb.indexOf(clnWeb) < 0)
-            {
-                return;
-            }
-
             this.clnWebFiltro = clnWeb;
-
-            window.alert("Pesquisando por " + clnWeb.strNomeExibicao);
         }
 
         protected setEventos(): void
@@ -237,6 +280,9 @@ module NetZ_Web_TypeScript
             this.addEvtOnKeyDownListener(this);
 
             this.btnMenu.addEvtOnClickListener(this);
+
+            this.txtPesquisa.addEvtOnFocusInListener(this);
+            this.txtPesquisa.addEvtOnFocusOutListener(this);
         }
 
         // #endregion Métodos
@@ -255,6 +301,60 @@ module NetZ_Web_TypeScript
                 {
                     case this.btnMenu:
                         this.abrirOpcao(arg)
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onFocusIn(objSender: Object): void
+        {
+            super.onFocusIn(objSender);
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this.txtPesquisa:
+                        this.booEmFoco = true;
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onFocusOut(objSender: Object): void
+        {
+            super.onFocusOut(objSender);
+
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this.txtPesquisa:
+                        this.booEmFoco = false;
                         return;
                 }
             }

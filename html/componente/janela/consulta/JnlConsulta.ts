@@ -149,7 +149,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.tblWeb.clnIntId.intValor = intRegistroId;
+            this.tblWeb.clnWebIntId.intValor = intRegistroId;
 
             this.pagPrincipal.abrirCadastro(this.tblWeb);
 
@@ -183,14 +183,14 @@ module NetZ_Web_TypeScript
             this.tagGridHtml.selecinar(intRegistroId, true);
         }
 
-        public abrirFiltroCadastro(): void
+        public abrirFiltroCadastro(intFiltroId: number): void
         {
             if (this.viwAtual == null)
             {
                 return;
             }
 
-            this.pagPrincipal.abrirFiltroCadastro(0);
+            this.pagPrincipal.abrirFiltroCadastro(intFiltroId);
         }
 
         private alterar(tagGridRow: GridRow): void
@@ -262,6 +262,11 @@ module NetZ_Web_TypeScript
             this.tagGridHtml.iniciar();
 
             this.tagGridHtml.addEvtOnRowDoubleClickListener(this);
+        }
+
+        protected inicializarPosicao(): void
+        {
+            //super.inicializarPosicao();
         }
 
         public maximinizarGrid(): void
