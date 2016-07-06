@@ -3,6 +3,7 @@
 /// <reference path="../campo/CampoComboBox.ts"/>
 /// <reference path="../campo/CampoConsulta.ts"/>
 /// <reference path="../campo/CampoNumerico.ts"/>
+/// <reference path="OnCmpEmFocoAlterado.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -42,7 +43,14 @@ module NetZ_Web_TypeScript
 
         public set cmpEmFoco(cmpEmFoco: CampoHtml)
         {
+            if (this._cmpEmFoco == cmpEmFoco)
+            {
+                return;
+            }
+
             this._cmpEmFoco = cmpEmFoco;
+
+            this.atualizarCmpEmFoco();
         }
 
         public get tblWeb(): TabelaWeb
@@ -68,6 +76,11 @@ module NetZ_Web_TypeScript
         // #endregion Construtores
 
         // #region Métodos
+
+        private atualizarCmpEmFoco(): void
+        {
+            this.dispararEvtOnCmpEmFocoAlterado();
+        }
 
         private atualizarTblWeb(): void
         {
@@ -341,6 +354,73 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
+
+        // #region Evento OnCmpEmFocoAlterado
+
+        private _arrEvtOnCmpEmFocoAlterado: Array<OnCmpEmFocoAlterado>;
+
+        private get arrEvtOnCmpEmFocoAlterado(): Array<OnCmpEmFocoAlterado>
+        {
+            if (this._arrEvtOnCmpEmFocoAlterado != null)
+            {
+                return this._arrEvtOnCmpEmFocoAlterado;
+            }
+
+            this._arrEvtOnCmpEmFocoAlterado = new Array<OnCmpEmFocoAlterado>();
+
+            return this._arrEvtOnCmpEmFocoAlterado;
+        }
+
+        public addEvtOnCmpEmFocoAlterado(evtOnCmpEmFocoAlterado: OnCmpEmFocoAlterado): void
+        {
+            if (evtOnCmpEmFocoAlterado == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnCmpEmFocoAlterado.indexOf(evtOnCmpEmFocoAlterado) > -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnCmpEmFocoAlterado.push(evtOnCmpEmFocoAlterado);
+        }
+
+        private dispararEvtOnCmpEmFocoAlterado(): void
+        {
+            if (this.arrEvtOnCmpEmFocoAlterado.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnCmpEmFocoAlterado.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onCmpEmFocoAlterado(this, this.cmpEmFoco);
+            });
+        }
+
+        public removerEvtOnCmpEmFocoAlterado(evtOnCmpEmFocoAlterado: OnCmpEmFocoAlterado): void
+        {
+            if (evtOnCmpEmFocoAlterado == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnCmpEmFocoAlterado.indexOf(evtOnCmpEmFocoAlterado) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnCmpEmFocoAlterado.splice(this.arrEvtOnCmpEmFocoAlterado.indexOf(evtOnCmpEmFocoAlterado));
+        }
+
+        // #endregion Evento OnCmpEmFocoAlterado
+
         // #endregion Eventos
     }
 }

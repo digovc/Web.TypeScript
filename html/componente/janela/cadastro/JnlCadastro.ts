@@ -19,7 +19,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlCadastro extends JanelaHtml implements OnDisposedListener
+    export class JnlCadastro extends JanelaHtml implements OnCmpEmFocoAlterado, OnDisposedListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -33,6 +33,7 @@ module NetZ_Web_TypeScript
         private _intRegistroId: number;
         private _jnlCadastroPai: JnlCadastro;
         private _pagPrincipal: PagPrincipal;
+        private _pnlDica: PainelNivel;
         private _srcJs: string;
         private _strTblNome: string;
         private _tabHtml: TabHtml;
@@ -109,6 +110,18 @@ module NetZ_Web_TypeScript
             this._jnlCadastroPai = jnlCadastroPai;
 
             this.atualizarJnlCadastroPai();
+        }
+
+        private get pnlDica(): PainelNivel
+        {
+            if (this._pnlDica != null)
+            {
+                return this._pnlDica;
+            }
+
+            this._pnlDica = new PainelNivel(this.strId + "_pnlDica");
+
+            return this._pnlDica;
         }
 
         protected get pagPrincipal(): PagPrincipal
@@ -225,6 +238,11 @@ module NetZ_Web_TypeScript
             }
 
             if (this.tabHtml == null)
+            {
+                return;
+            }
+
+            if (this.tabHtml.booVisivel)
             {
                 return;
             }
@@ -450,6 +468,8 @@ module NetZ_Web_TypeScript
             this.divComando.iniciar();
 
             this.inicializarTabHtml();
+
+            this.inicializarPnlDica();
         }
 
         private inicializarJnlCadastroPai(): void
@@ -467,6 +487,28 @@ module NetZ_Web_TypeScript
             this.jnlCadastroPai = this.pagPrincipal.jnlCadastro;
         }
 
+        private inicializarPnlDica(): void
+        {
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            if (this.frm.cmpEmFoco == null)
+            {
+                return;
+            }
+
+            this.pnlDica.strConteudo = this.frm.cmpEmFoco.strDica;
+        }
+
+        protected inicializarPosicao(): void
+        {
+            super.inicializarPosicao();
+
+            this.mostrar();
+        }
+
         private inicializarTabHtml(): void
         {
             if (this.intRegistroId < 1)
@@ -475,6 +517,23 @@ module NetZ_Web_TypeScript
             }
 
             this.abrirTabHtml();
+        }
+
+        private processarOnCmpEmFocoAlterado(cmpEmFoco: CampoHtml): void
+        {
+            this.pnlDica.strConteudo = null;
+
+            if (cmpEmFoco == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(cmpEmFoco.strDica))
+            {
+                return;
+            }
+
+            this.pnlDica.strConteudo = cmpEmFoco.strDica;
         }
 
         private removerJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void
@@ -637,6 +696,13 @@ module NetZ_Web_TypeScript
             this.tabItem.pesquisar();
         }
 
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            this.frm.addEvtOnCmpEmFocoAlterado(this);
+        }
+
         private validarDados(): boolean
         {
             if (this.tblWeb == null)
@@ -655,6 +721,26 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
+
+        public onCmpEmFocoAlterado(objSender: Object, cmpEmFoco: CampoHtml): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                this.processarOnCmpEmFocoAlterado(cmpEmFoco);
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         public onDisposed(objSender: Object): void
         {

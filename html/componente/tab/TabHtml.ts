@@ -1,6 +1,4 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../botao/mini/BotaoAdicionarMini.ts"/>
-/// <reference path="../botao/mini/BotaoApagarMini.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="../janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="TabItem.ts"/>
@@ -21,9 +19,9 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _arrTabItem: Array<TabItem>;
-        private _btnAdicionar: BotaoAdicionarMini;
-        private _btnAlterar: BotaoAlterarMini;
-        private _btnApagar: BotaoApagarMini;
+        private _btnAdicionar: BotaoCircular;
+        private _btnAlterar: BotaoCircular;
+        private _btnApagar: BotaoCircular;
         private _jnlCadastro: JnlCadastro;
         private _tabItemAtiva: TabItem;
         private _tabItemAtivaAnterior: TabItem;
@@ -40,38 +38,38 @@ module NetZ_Web_TypeScript
             return this._arrTabItem;
         }
 
-        private get btnAdicionar(): BotaoAdicionarMini
+        private get btnAdicionar(): BotaoCircular
         {
             if (this._btnAdicionar != null)
             {
                 return this._btnAdicionar;
             }
 
-            this._btnAdicionar = new BotaoAdicionarMini(this.strId + "_btnAdicionar");
+            this._btnAdicionar = new BotaoCircular(this.strId + "_btnAdicionar");
 
             return this._btnAdicionar;
         }
 
-        private get btnAlterar(): BotaoAlterarMini
+        private get btnAlterar(): BotaoCircular
         {
             if (this._btnAlterar != null)
             {
                 return this._btnAlterar;
             }
 
-            this._btnAlterar = new BotaoAlterarMini(this.strId + "_btnAlterar");
+            this._btnAlterar = new BotaoCircular(this.strId + "_btnAlterar");
 
             return this._btnAlterar;
         }
 
-        private get btnApagar(): BotaoApagarMini
+        private get btnApagar(): BotaoCircular
         {
             if (this._btnApagar != null)
             {
                 return this._btnApagar;
             }
 
-            this._btnApagar = new BotaoApagarMini(this.strId + "_btnApagar");
+            this._btnApagar = new BotaoCircular(this.strId + "_btnApagar");
 
             return this._btnApagar;
         }

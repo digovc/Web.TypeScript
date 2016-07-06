@@ -1,7 +1,4 @@
 ﻿/// <reference path="../../../../OnClickListener.ts"/>
-/// <reference path="../../botao/mini/BotaoAdicionarMini.ts"/>
-/// <reference path="../../botao/mini/BotaoAdicionarMini.ts"/>
-/// <reference path="../../botao/mini/BotaoAlterarMini.ts"/>
 /// <reference path="../../grid/OnRowClickListener.ts"/>
 /// <reference path="../../painel/PainelAcao.ts"/>
 
@@ -20,31 +17,31 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _btnAdicionar: BotaoAdicionarMini;
-        private _btnAlterar: BotaoAlterarMini;
+        private _btnAdicionar: BotaoCircular;
+        private _btnAlterar: BotaoCircular;
         private _jnlConsulta: JnlConsulta;
         private _tagGridHtml: GridHtml = null;
 
-        private get btnAdicionar(): BotaoAdicionarMini
+        private get btnAdicionar(): BotaoCircular
         {
             if (this._btnAdicionar != null)
             {
                 return this._btnAdicionar;
             }
 
-            this._btnAdicionar = new BotaoAdicionarMini("btnAdicionar");
+            this._btnAdicionar = new BotaoCircular(this.strId + "_btnAdicionar");
 
             return this._btnAdicionar;
         }
 
-        private get btnAlterar(): BotaoAlterarMini
+        private get btnAlterar(): BotaoCircular
         {
             if (this._btnAlterar != null)
             {
                 return this._btnAlterar;
             }
 
-            this._btnAlterar = new BotaoAlterarMini("btnAlterar");
+            this._btnAlterar = new BotaoCircular(this.strId + "_btnAlterar");
 
             return this._btnAlterar;
         }
@@ -82,7 +79,7 @@ module NetZ_Web_TypeScript
 
         constructor(jnlConsulta: JnlConsulta)
         {
-            super("jnlConsulta_pnlAcaoConsulta");
+            super("pnlAcaoConsulta");
 
             this.jnlConsulta = jnlConsulta;
         }

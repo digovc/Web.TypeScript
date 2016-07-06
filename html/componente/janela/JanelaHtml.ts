@@ -4,7 +4,6 @@
 /// <reference path="../../../OnMouseMoveListener.ts"/>
 /// <reference path="../../../OnMouseUpListener.ts"/>
 /// <reference path="../../pagina/PaginaHtml.ts"/>
-/// <reference path="../botao/mini/BotaoFecharMini.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -74,7 +73,7 @@ module NetZ_Web_TypeScript
                 return this._divBtnFechar;
             }
 
-            this._divBtnFechar = new BotaoFecharMini(this.strId + "_divBtnFechar");
+            this._divBtnFechar = new BotaoCircular(this.strId + "_divBtnFechar");
 
             return this._divBtnFechar;
         }

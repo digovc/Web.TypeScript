@@ -1,5 +1,4 @@
 ﻿/// <reference path="../../../../OnClickListener.ts"/>
-/// <reference path="../../botao/comando/BotaoSalvarComando.ts"/>
 /// <reference path="../../painel/PainelNivel.ts"/>
 /// <reference path="JnlCadastro.ts"/>
 
@@ -19,17 +18,17 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _btnSalvar: BotaoSalvarComando;
+        private _btnSalvar: BotaoCircular;
         private _jnlCadastro: JnlCadastro;
 
-        private get btnSalvar(): BotaoSalvarComando
+        private get btnSalvar(): BotaoCircular
         {
             if (this._btnSalvar != null)
             {
                 return this._btnSalvar;
             }
 
-            this._btnSalvar = new BotaoSalvarComando((this.strId + "_btnSalvar"));
+            this._btnSalvar = new BotaoCircular(this.strId + "_btnSalvar");
 
             return this._btnSalvar;
         }

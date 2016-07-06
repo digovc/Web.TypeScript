@@ -27,6 +27,7 @@ module NetZ_Web_TypeScript
         private _divTitulo: Div;
         private _frm: FormHtml;
         private _strCritica: string;
+        private _strDica: string;
         private _tagInput: Input;
 
         protected get booEmFoco(): boolean
@@ -102,6 +103,23 @@ module NetZ_Web_TypeScript
             this._strCritica = strCritica;
 
             this.atualizarStrCritica();
+        }
+
+        public get strDica(): string
+        {
+            if (this._strDica != null)
+            {
+                return this._strDica;
+            }
+
+            this._strDica = this.getStrAttValor("str_dica");
+
+            return this._strDica;
+        }
+
+        public set strDica(strDica: string)
+        {
+            this._strDica = strDica;
         }
 
         public get tagInput(): Input
@@ -277,6 +295,18 @@ module NetZ_Web_TypeScript
             }
 
             this.tagInput.jq.focus();
+
+            this.receberFocoFrm();
+        }
+
+        private receberFocoFrm(): void
+        {
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            this.frm.cmpEmFoco = this;
         }
 
         protected setEventos(): void

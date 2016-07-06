@@ -1,5 +1,6 @@
 ﻿/// <reference path="design/Tema.ts"/>
 /// <reference path="erro/Erro.ts"/>
+/// <reference path="html/componente/Mensagem.ts"/>
 /// <reference path="html/pagina/PaginaHtml.ts"/>
 /// <reference path="html/pagina/PagPrincipal.ts"/>
 /// <reference path="Objeto.ts"/>
@@ -45,6 +46,7 @@ module NetZ_Web_TypeScript
         private _arrTbl: Array<TabelaWeb>;
         private _booEmFoco: boolean = true;
         private _mnc: MenuContexto;
+        private _msg: Mensagem;
         private _objTema: Tema;
         private _pag: PaginaHtml;
         private _strSessionId: string;
@@ -86,6 +88,16 @@ module NetZ_Web_TypeScript
         private set mnc(mnc: MenuContexto)
         {
             this._mnc = mnc;
+        }
+
+        private get msg(): Mensagem
+        {
+            return this._msg;
+        }
+
+        private set msg(msg: Mensagem)
+        {
+            this._msg = msg;
         }
 
         public get objTema(): Tema
@@ -136,6 +148,21 @@ module NetZ_Web_TypeScript
         // #endregion Construtores
 
         // #region Métodos
+
+        public abrirMensagem(msg: Mensagem): void
+        {
+            if (msg == null)
+            {
+                return;
+            }
+
+            if (this.msg != null)
+            {
+                this.msg.dispose();
+            }
+
+            this.msg = msg;
+        }
 
         public abrirMenu(mnc: MenuContexto): void
         {
@@ -288,6 +315,17 @@ module NetZ_Web_TypeScript
             objWindow.document.write(pag);
             objWindow.print();
             objWindow.close();
+        }
+
+        public informarErro(strErro: string): void
+        {
+            if (Utils.getBooStrVazia(strErro))
+            {
+                return;
+            }
+
+            // TODO: Revisar.
+            window.alert(strErro);
         }
 
         public iniciar(): void

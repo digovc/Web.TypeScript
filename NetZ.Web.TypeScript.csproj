@@ -35,7 +35,7 @@
     <TypeScriptCompile Include="html\componente\ActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMenuMini.ts" />
+    <TypeScriptCompile Include="html\componente\form\OnCmpEmFocoAlterado.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridRow.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowClickListener.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowDoubleClickListener.ts" />
@@ -48,6 +48,7 @@
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelAcaoConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelFiltro.ts" />
+    <TypeScriptCompile Include="html\componente\Mensagem.ts" />
     <TypeScriptCompile Include="html\componente\menu\contexto\MenuContexto.ts" />
     <TypeScriptCompile Include="html\componente\menu\contexto\MenuContextoItem.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuMobile.ts" />
@@ -80,15 +81,6 @@
     <TypeScriptCompile Include="html\componente\painel\PainelAcao.ts" />
     <TypeScriptCompile Include="html\componente\botao\atalho\BotaoAtalho.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoHtml.ts" />
-    <TypeScriptCompile Include="html\componente\botao\comando\BotaoComando.ts" />
-    <TypeScriptCompile Include="html\componente\botao\comando\BotaoNovoComando.ts" />
-    <TypeScriptCompile Include="html\componente\botao\comando\BotaoSalvarComando.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoMini.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoAdicionarMini.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoAlterarMini.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoApagarMini.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoFecharMini.ts" />
-    <TypeScriptCompile Include="html\componente\botao\mini\BotaoPesquisarMini.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoNumerico.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoAlfanumerico.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoAnexo.ts" />
@@ -109,7 +101,7 @@
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlLogin.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlMensagem.ts" />
-    <TypeScriptCompile Include="html\componente\Mensagem.ts" />
+    <TypeScriptCompile Include="html\componente\MensagemOld.ts" />
     <TypeScriptCompile Include="html\componente\menu\chat\DivChatUsuario.ts" />
     <TypeScriptCompile Include="html\componente\menu\Menu.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuItem.ts" />
@@ -136,15 +128,6 @@
     <TypeScriptCompile Include="server\SolicitacaoAjaxDb.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="websocket\ServerWs.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="web.config" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Data.DataSetExtensions" />

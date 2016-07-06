@@ -4,7 +4,6 @@
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnFocusInListener.ts"/>
 /// <reference path="../../../OnKeyDownListener.ts"/>
-/// <reference path="../botao/mini/BotaoMenuMini.ts"/>
 /// <reference path="../menu/contexto/MenuContexto.ts"/>
 /// <reference path="CampoComboBox.ts"/>
 
@@ -23,7 +22,7 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
-        private _btnMenu: BotaoMenuMini;
+        private _btnMenu: BotaoCircular;
         private _clnWebFiltro: ColunaWeb;
         private _strTblWebRefNome: string;
         private _tblWebRef: TabelaWeb;
@@ -46,14 +45,14 @@ module NetZ_Web_TypeScript
             this.atualizarClnWebFiltro();
         }
 
-        private get btnMenu(): BotaoMenuMini
+        private get btnMenu(): BotaoCircular
         {
             if (this._btnMenu != null)
             {
                 return this._btnMenu;
             }
 
-            this._btnMenu = new BotaoMenuMini(this.strId + "_btnMenu");
+            this._btnMenu = new BotaoCircular(this.strId + "_btnMenu");
 
             return this._btnMenu;
         }

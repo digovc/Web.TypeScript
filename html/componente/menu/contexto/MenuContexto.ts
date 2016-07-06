@@ -83,8 +83,8 @@ module NetZ_Web_TypeScript
             this.jq.css("left", (arg.pageX - 50));
             this.jq.css("top", (arg.pageY - 10));
 
-            this.mostrar();
             this.iniciar();
+            this.mostrar();
 
             AppWeb.i.abrirMenu(this);
         }

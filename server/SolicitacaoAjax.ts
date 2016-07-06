@@ -1,4 +1,6 @@
-﻿module NetZ_Web_TypeScript
+﻿/// <reference path="../AppWeb.ts"/>
+
+module NetZ_Web_TypeScript
 {
     // #region Importações
 
@@ -18,6 +20,7 @@
         private _arrFncErro: Array<Function>;
         private _arrFncSucesso: Array<Function>;
         private _strData: string;
+        private _strErro: string;
 
         private get arrFncErro(): Array<Function>
         {
@@ -51,6 +54,16 @@
         public set strData(jsn: string)
         {
             this._strData = jsn;
+        }
+
+        public get strErro(): string
+        {
+            return this._strErro;
+        }
+
+        public set strErro(strErro: string)
+        {
+            this._strErro = strErro;
         }
 
         // #endregion Atributos
@@ -156,6 +169,12 @@
             var objSolicitacaoAjax = new SolicitacaoAjax();
 
             objSolicitacaoAjax.copiarDados(anyData);
+
+            if (!Utils.getBooStrVazia(objSolicitacaoAjax.strErro))
+            {
+                AppWeb.i.informarErro(objSolicitacaoAjax.strErro);
+                return;
+            }
 
             this.arrFncSucesso.forEach((fnc) => { fnc(objSolicitacaoAjax); });
         }

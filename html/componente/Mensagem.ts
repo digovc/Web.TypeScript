@@ -1,129 +1,98 @@
-﻿declare var Notification: any;
-
-module NetZ_Web_TypeScript
+﻿module NetZ_Web_TypeScript
 {
     // #region Importações
     // #endregion Importações
 
     // #region Enumerados
 
-    export enum EnmTipo
+    export enum Mensagem_EnmTipo
     {
-        ALERTA,
-        LOAD,
         NEGATIVA,
+        PERGUNTA,
         POSITIVA,
     }
 
     // #endregion Enumerados
 
-    export class Mensagem extends ComponenteHtml
+    export class Mensagem extends ComponenteHtml implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _booBloquearTela: boolean = true;
-        private _enmTipo: EnmTipo = EnmTipo.POSITIVA;
-        private _srcIcon: string;
-        private _strMsg: string;
+        private _btnCancelar: BotaoCircular;
+        private _btnConfirmar: BotaoCircular;
+        private _divContainerFaixa: Div;
+        private _enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA;
+        private _fncOnConfirmar: Function;
+        private _strMensagem: string;
         private _strTitulo: string;
-        private static _booMensagemVisivel: boolean;
-        private static _strEstruturaAlerta: string;
-        private static _strEstruturaLoad: string;
-        private static _strEstruturaNegativa: string;
-        private static _strEstruturaPositiva: string;
-        private static _strMensagemUltima: string;
 
-        private get booBloquearTela(): boolean
+        private get btnCancelar(): BotaoCircular
         {
-            return this._booBloquearTela;
+            if (this._btnCancelar != null)
+            {
+                return this._btnCancelar;
+            }
+
+            this._btnCancelar = new BotaoCircular(this.strId + "_btnCancelar");
+
+            return this._btnCancelar;
         }
 
-        private set booBloquearTela(booBloquearTela: boolean)
+        private get btnConfirmar(): BotaoCircular
         {
-            this._booBloquearTela = booBloquearTela;
+            if (this._btnConfirmar != null)
+            {
+                return this._btnConfirmar;
+            }
+
+            this._btnConfirmar = new BotaoCircular(this.strId + "_btnConfirmar");
+
+            return this._btnConfirmar;
         }
 
-        private get enmTipo(): EnmTipo
+        private get divContainerFaixa(): Div
+        {
+            if (this._divContainerFaixa != null)
+            {
+                return this._divContainerFaixa;
+            }
+
+            this._divContainerFaixa = new Div(this.strId + "_divContainerFaixa");
+
+            return this._divContainerFaixa;
+        }
+
+        private get enmTipo(): Mensagem_EnmTipo
         {
             return this._enmTipo;
         }
 
-        private set enmTipo(enmTipo: EnmTipo)
+        private set enmTipo(enmTipo: Mensagem_EnmTipo)
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this._enmTipo = enmTipo;
-                this.booBloquearTela = !(this._enmTipo == EnmTipo.POSITIVA);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._enmTipo = enmTipo;
         }
 
-        private get srcIcon(): string
+        private get fncOnConfirmar(): Function
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (this._srcIcon != null)
-                {
-                    return this._srcIcon;
-                }
-
-                switch (this.enmTipo)
-                {
-                    case EnmTipo.LOAD:
-                        this._srcIcon = "res/media/gif/load.gif";
-                        break;
-
-                    case EnmTipo.NEGATIVA:
-                        this._srcIcon = "res/media/png/info_negativa.png";
-                        break;
-
-                    case EnmTipo.POSITIVA:
-                        this._srcIcon = "res/media/png/info_positiva.png";
-                        break;
-
-                    default:
-                        this._srcIcon = "res/media/png/info_alerta.png";
-                        break;
-                }
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-
-            return this._srcIcon;
+            return this._fncOnConfirmar;
         }
 
-        private get strMsg(): string
+        private set fncOnConfirmar(fncOnConfirmar: Function)
         {
-            return this._strMsg;
+            this._fncOnConfirmar = fncOnConfirmar;
         }
 
-        private set strMsg(strMsg: string)
+        private get strMensagem(): string
         {
-            this._strMsg = strMsg;
+            return this._strMensagem;
+        }
+
+        private set strMensagem(strMensagem: string)
+        {
+            this._strMensagem = strMensagem;
         }
 
         private get strTitulo(): string
@@ -136,308 +105,167 @@ module NetZ_Web_TypeScript
             this._strTitulo = strTitulo;
         }
 
-        private static get booMensagemVisivel(): boolean
-        {
-            return Mensagem._booMensagemVisivel;
-        }
-
-        private static set booMensagemVisivel(booMensagemVisivel: boolean)
-        {
-            Mensagem._booMensagemVisivel = booMensagemVisivel;
-        }
-
-        public static get strEstruturaAlerta(): string
-        {
-            return Mensagem._strEstruturaAlerta;
-        }
-
-        public static set strEstruturaAlerta(strEstruturaAlerta: string)
-        {
-            Mensagem._strEstruturaAlerta = strEstruturaAlerta;
-        }
-
-        public static get strEstruturaLoad(): string
-        {
-            return Mensagem._strEstruturaLoad;
-        }
-
-        public static set strEstruturaLoad(strEstruturaLoad: string)
-        {
-            Mensagem._strEstruturaLoad = strEstruturaLoad;
-        }
-
-        public static get strEstruturaNegativa(): string
-        {
-            return Mensagem._strEstruturaNegativa;
-        }
-
-        public static set strEstruturaNegativa(strEstruturaNegativa: string)
-        {
-            Mensagem._strEstruturaNegativa = strEstruturaNegativa;
-        }
-
-        public static get strEstruturaPositiva(): string
-        {
-            return Mensagem._strEstruturaPositiva;
-        }
-
-        public static set strEstruturaPositiva(strEstruturaPositiva: string)
-        {
-            Mensagem._strEstruturaPositiva = strEstruturaPositiva;
-        }
-
-        private static get strMensagemUltima(): string
-        {
-            return Mensagem._strMensagemUltima;
-        }
-
-        private static set strMensagemUltima(strMensagemUltima: string)
-        {
-            Mensagem._strMensagemUltima = strMensagemUltima;
-        }
 
         // #endregion Atributos
 
         // #region Construtores
 
-        constructor(strTitulo: string, strMsg: string, enmTipo: EnmTipo)
+        constructor(strTitulo: string, strMensagem: string)
         {
-            super(null); // TODO: Passar o id do elemento desta mensagem, e não apenas null.
+            super(null);
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.enmTipo = enmTipo;
-                this.strTitulo = strTitulo;
-                this.strMsg = strMsg;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.strId = ("tagMensagem_" + this.intObjetoId);
+            this.strMensagem = strMensagem;
+            this.strTitulo = strTitulo;
         }
 
         // #endregion Construtores
 
         // #region Métodos
 
-        public esconder(): void
+        public abrirMensagem(enmTipo: Mensagem_EnmTipo, fncOnConfirmar: Function): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (Utils.getBooStrVazia(this.strTitulo))
+            {
+                return;
+            }
 
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(this.strMensagem))
             {
-                $(document).find("#msg").fadeOut("slow");
+                return;
+            }
 
-                window.setTimeout(() =>
-                {
-                    $(document).find("#msg").remove();
-                    Mensagem.booMensagemVisivel = false;
-                }, 400);
-            }
-            catch (ex)
+            if (Utils.getBooStrVazia(this.strLayoutFixo))
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            $(document.body).append(this.strLayoutFixo);
+
+            this.enmTipo = enmTipo;
+            this.fncOnConfirmar = fncOnConfirmar;
+
+            this.iniciar();
+            this.mostrar();
+
+            AppWeb.i.abrirMensagem(this);
         }
 
-        protected montarLayout(): void
+        private btnCancelarOnClick(): void
         {
-            super.montarLayout();
-
-            // #region Variáveis
-
-            var tag: string;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                switch (this.enmTipo)
-                {
-                    case 0:
-                        tag = Mensagem.strEstruturaAlerta;
-                        break;
-
-                    case 1:
-                        tag = Mensagem.strEstruturaLoad;
-                        break;
-
-                    case 2:
-                        tag = Mensagem.strEstruturaNegativa;
-                        break;
-
-                    default:
-                        tag = Mensagem.strEstruturaPositiva;
-                        break;
-                }
-
-                tag = tag.replace("_titulo", this.strTitulo);
-                tag = tag.replace("_msg", this.strMsg);
-
-                this.montarLayoutBloquearTela(tag)
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.dispose();
         }
 
-        public mostrar(): void
+        private btnConfirmarOnClick(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this.dispose();
 
-            // #region Ações
-            try
-            {
-                var intTempo: number;
-
-                if (!AppWeb.i.booEmFoco)
-                {
-                    this.mostrarNotificacao();
-                    return;
-                }
-
-                if (Mensagem.booMensagemVisivel)
-                {
-                    window.setTimeout(function ()
-                    {
-                        this.mostrar();
-                    }, 250);
-
-                    return;
-                }
-
-                intTempo = this.strMsg.length * 75;
-
-                //$("body").append(this.toHtml());
-
-                Mensagem.booMensagemVisivel = true;
-
-                if (this.enmTipo == EnmTipo.LOAD)
-                {
-                    return;
-                }
-
-                window.setTimeout(function ()
-                {
-                    this.esconder();
-                }, intTempo);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.btnConfirmarFncOnConfirmar();
         }
 
-        private montarLayoutBloquearTela(tag: string): void
+        private btnConfirmarFncOnConfirmar(): void
         {
-            // #region Variáveis
-
-            var tagJq: any;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.fncOnConfirmar == null)
             {
-                if (!this.booBloquearTela)
-                {
-                    //this.strEstrutura = tag;
-                    return;
-                }
+                return;
+            }
 
-                tagJq = $(tag).css("background", "rgba(0, 0, 0, 0.15)");
-                tagJq = $(tag).css("bottom", "0px");
-
-                //this.strEstrutura = tagJq[0];
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.fncOnConfirmar();
         }
 
-        public mostrarNotificacao(): void
+        protected inicializar(): void
         {
-            // #region Variáveis
+            super.inicializar();
 
-            var objNotificacaoOption: any;
+            this.inicializarEnmTipo();
+        }
 
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+        private inicializarEnmTipo(): void
+        {
+            switch (this.enmTipo)
             {
-                if (Mensagem.strMensagemUltima == (this.strTitulo + this.strMsg))
-                {
+                case Mensagem_EnmTipo.NEGATIVA:
+                    this.inicializarEnmTipoNegativa();
                     return;
-                }
 
-                objNotificacaoOption = {
-                    body: this.strMsg,
-                    icon: this.srcIcon,
-                }
-
-                if (!("Notification" in window))
-                {
+                case Mensagem_EnmTipo.PERGUNTA:
+                    this.inicializarEnmTipoPergunta();
                     return;
-                } else if (Notification.permission === "granted")
-                {
-                    new Notification(this.strTitulo, objNotificacaoOption);
-                } else if (Notification.permission !== 'denied')
-                {
-                    Notification.requestPermission(function (permission: any)
-                    {
-                        if (permission === "granted")
-                        {
-                            new Notification(this.getStrTitulo(), objNotificacaoOption);
-                        }
-                    });
-                }
+            }
+        }
 
-                Mensagem.strMensagemUltima = (this.strTitulo + this.strMsg);
-            }
-            catch (ex)
+        private inicializarEnmTipoNegativa(): void
+        {
+            this.divContainerFaixa.jq.css("background-color", "rgb(161,65,58)");
+        }
+
+        private inicializarEnmTipoPergunta(): void
+        {
+            this.divContainerFaixa.jq.css("background-color", "#ca8116");
+
+            this.btnCancelar.booVisivel = true;
+        }
+
+        protected montarLayoutFixo(strLayoutFixo: string): string
+        {
+            strLayoutFixo = super.montarLayoutFixo(strLayoutFixo);
+
+            if (Utils.getBooStrVazia(strLayoutFixo))
             {
-                throw ex;
+                return strLayoutFixo;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            strLayoutFixo = strLayoutFixo.replace("_str_id", this.strId);
+            strLayoutFixo = strLayoutFixo.replace("_str_msg_mensagem", this.strMensagem);
+            strLayoutFixo = strLayoutFixo.replace("_str_msg_titulo", this.strTitulo);
+            strLayoutFixo = strLayoutFixo.replace("_btn_cancelar_str_id", this.btnCancelar.strId);
+            strLayoutFixo = strLayoutFixo.replace("_btn_confirmar_str_id", this.btnConfirmar.strId);
+            strLayoutFixo = strLayoutFixo.replace("_div_container_faixa_str_id", this.divContainerFaixa.strId);
+
+            return strLayoutFixo;
+        }
+
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            this.btnConfirmar.addEvtOnClickListener(this);
+            this.btnCancelar.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos
 
         // #region Eventos
+
+        public onClick(objSender: Object, arg: JQueryEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this.btnCancelar:
+                        this.btnCancelarOnClick();
+                        return;
+
+                    case this.btnConfirmar:
+                        this.btnConfirmarOnClick();
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         // #endregion Eventos
     }
 }
