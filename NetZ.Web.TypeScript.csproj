@@ -37,6 +37,7 @@
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
     <TypeScriptCompile Include="html\componente\form\OnCmpEmFocoAlterado.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridRow.ts" />
+    <TypeScriptCompile Include="html\componente\grid\MenuGrid.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowClickListener.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowDoubleClickListener.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroItemCadastro.ts" />
@@ -61,6 +62,7 @@
     <TypeScriptCompile Include="Keys.ts" />
     <TypeScriptCompile Include="LayoutFixo.ts" />
     <TypeScriptCompile Include="LayoutFixoManager.ts" />
+    <TypeScriptCompile Include="OnClickRightListener.ts" />
     <TypeScriptCompile Include="OnFocusOutListener.ts" />
     <TypeScriptCompile Include="OnFocusInListener.ts" />
     <TypeScriptCompile Include="OnDisposedListener.ts" />

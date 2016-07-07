@@ -27,9 +27,9 @@ module NetZ_Web_TypeScript
     {
         // #region Constantes
 
-        public static get INT_MOUSE_BUTTON_LEFT(): number { return 1 };
-        public static get INT_MOUSE_BUTTON_MIDDLE(): number { return 2 };
-        public static get INT_MOUSE_BUTTON_RIGHT(): number { return 3 };
+        public static get INT_MOUSE_BUTTON_LEFT(): number { return 0 };
+        public static get INT_MOUSE_BUTTON_MIDDLE(): number { return 1 };
+        public static get INT_MOUSE_BUTTON_RIGHT(): number { return 2 };
 
         // #endregion Constantes
 
@@ -398,6 +398,89 @@ module NetZ_Web_TypeScript
         }
 
         // #endregion Evento OnClickListener
+
+        // #region Evento OnClickRightListener
+
+        private _arrEvtOnClickRightListener: Array<OnClickRightListener>;
+
+        private get arrEvtOnClickRightListener(): Array<OnClickRightListener>
+        {
+            if (this._arrEvtOnClickRightListener != null)
+            {
+                return this._arrEvtOnClickRightListener;
+            }
+
+            this._arrEvtOnClickRightListener = new Array<OnClickRightListener>();
+
+            return this._arrEvtOnClickRightListener;
+        }
+
+        public addEvtOnClickRightListener(evtOnClickRightListener: OnClickRightListener): void
+        {
+            if (evtOnClickRightListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnClickRightListener.indexOf(evtOnClickRightListener) > -1)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnClickRightListener.length == 0)
+            {
+                this.jq.bind('contextmenu', (() => { return false; }));
+
+                this.jq.mouseup((arg) => { this.dispararEvtOnClickRightListener(arg) });
+            }
+
+            this.arrEvtOnClickRightListener.push(evtOnClickRightListener);
+        }
+
+        private dispararEvtOnClickRightListener(arg: JQueryMouseEventObject): void
+        {
+            if (arg == null)
+            {
+                return;
+            }
+
+            if (arg.button != Tag.INT_MOUSE_BUTTON_RIGHT)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnClickRightListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnClickRightListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onClickRight(this, arg);
+            });
+        }
+
+        public removerEvtOnClickRightListener(evtOnClickRightListener: OnClickRightListener): void
+        {
+            if (evtOnClickRightListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnClickRightListener.indexOf(evtOnClickRightListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnClickRightListener.splice(this.arrEvtOnClickRightListener.indexOf(evtOnClickRightListener));
+        }
+
+        // #endregion Evento OnClickRightListener
 
         // #region Evento OnDoubleClickListener
 

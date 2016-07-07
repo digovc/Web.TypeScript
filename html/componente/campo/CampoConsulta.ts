@@ -106,8 +106,8 @@ module NetZ_Web_TypeScript
 
             if (this.txtPesquisa.booVisivel)
             {
-                mnc.addOpcao("Pesquisar", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.pesquisar(); }));
-                mnc.addOpcao("Pesquisar por", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.abrirOpcaoPesquisarPor(mci, arg); }));
+                mnc.addOpcao("Pesquisar", ((mci: MenuContextoItem, arg2: JQueryEventObject) => { this.pesquisar(); }));
+                mnc.addOpcao("Pesquisar por", ((mci: MenuContextoItem, arg2: JQueryEventObject) => { this.abrirOpcaoPesquisarPor(mci, arg); }));
             }
             else
             {

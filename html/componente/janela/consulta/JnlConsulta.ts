@@ -271,12 +271,12 @@ module NetZ_Web_TypeScript
 
         public maximinizarGrid(): void
         {
-            if (this.divGrid.jq.css("top") == "40")
+            if (this.divGrid.jq.css("top") == "50")
             {
                 return;
             }
 
-            this.divGrid.jq.animate({ top: 40 });
+            this.divGrid.jq.animate({ top: 50 });
             this.pnlFiltro.esconderFiltro();
         }
 
@@ -322,7 +322,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.divGrid.jq.animate({ top: 130 });
+            this.divGrid.jq.animate({ top: 140 });
             this.pnlFiltro.mostrarFiltro();
         }
 

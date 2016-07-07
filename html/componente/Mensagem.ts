@@ -148,7 +148,7 @@
             this.iniciar();
             this.mostrar();
 
-            AppWeb.i.abrirMensagem(this);
+            AppWeb.i.abrirTagFocoExclusivo(this);
         }
 
         private btnCancelarOnClick(): void

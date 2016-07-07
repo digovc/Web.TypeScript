@@ -45,11 +45,11 @@ module NetZ_Web_TypeScript
 
         private _arrTbl: Array<TabelaWeb>;
         private _booEmFoco: boolean = true;
-        private _mnc: MenuContexto;
         private _msg: Mensagem;
         private _objTema: Tema;
         private _pag: PaginaHtml;
         private _strSessionId: string;
+        private _tagFocoExclusivo: ComponenteHtml;
 
         private get arrTbl(): Array<TabelaWeb>
         {
@@ -78,16 +78,6 @@ module NetZ_Web_TypeScript
             this._booEmFoco = booEmFoco;
 
             this.atualizarBooEmFoco();
-        }
-
-        private get mnc(): MenuContexto
-        {
-            return this._mnc;
-        }
-
-        private set mnc(mnc: MenuContexto)
-        {
-            this._mnc = mnc;
         }
 
         private get msg(): Mensagem
@@ -134,6 +124,16 @@ module NetZ_Web_TypeScript
             return this._strSessionId;
         }
 
+        private get tagFocoExclusivo(): ComponenteHtml
+        {
+            return this._tagFocoExclusivo;
+        }
+
+        private set tagFocoExclusivo(tagFocoExclusivo: ComponenteHtml)
+        {
+            this._tagFocoExclusivo = tagFocoExclusivo;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -149,34 +149,24 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
-        public abrirMensagem(msg: Mensagem): void
+        public abrirTagFocoExclusivo(tagFocoExclusivo: ComponenteHtml): void
         {
-            if (msg == null)
+            if (tagFocoExclusivo == null)
             {
                 return;
             }
 
-            if (this.msg != null)
-            {
-                this.msg.dispose();
-            }
-
-            this.msg = msg;
-        }
-
-        public abrirMenu(mnc: MenuContexto): void
-        {
-            if (mnc == null)
+            if (this.tagFocoExclusivo == tagFocoExclusivo)
             {
                 return;
             }
 
-            if (this.mnc != null)
+            if (this.tagFocoExclusivo != null)
             {
-                this.mnc.dispose();
+                this.tagFocoExclusivo.dispose();
             }
 
-            this.mnc = mnc;
+            this.tagFocoExclusivo = tagFocoExclusivo;
         }
 
         private addArrTbl(tblWeb: TabelaWeb): void

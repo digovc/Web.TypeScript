@@ -14,7 +14,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class GridRow extends Tag implements OnClickListener, OnDoubleClickListener, OnMouseLeaveListener, OnMouseOverListener
+    export class GridRow extends Tag implements OnClickListener, OnClickRightListener, OnDoubleClickListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
 
@@ -110,7 +110,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.selecionar(arg);
+            this.selecionar(arg.ctrlKey);
 
             if (this.tagGridHtml == null)
             {
@@ -118,6 +118,13 @@ module NetZ_Web_TypeScript
             }
 
             this.tagGridHtml.dispararEvtOnRowClickListener(this);
+        }
+
+        private processarOnClickRight(arg: JQueryMouseEventObject): void
+        {
+            this.selecionar(arg.ctrlKey);
+
+            new MenuGrid().abrirMenuGrid(arg);
         }
 
         private processarOnDoubleClick(): void
@@ -135,14 +142,14 @@ module NetZ_Web_TypeScript
             this.tagGridHtml.dispararEvtOnRowDoubleClickListener(this);
         }
 
-        private selecionar(arg: JQueryEventObject): void
+        private selecionar(booControl: boolean): void
         {
             if (this.tagGridHtml == null)
             {
                 return;
             }
 
-            if (arg.ctrlKey)
+            if (booControl)
             {
                 this.booSelecionada = !this.booSelecionada;
                 return;
@@ -158,6 +165,7 @@ module NetZ_Web_TypeScript
             super.setEventos();
 
             this.addEvtOnClickListener(this);
+            this.addEvtOnClickRightListener(this);
             this.addEvtOnMouseLeaveListener(this);
             this.addEvtOnMouseOverListener(this);
 
@@ -177,7 +185,37 @@ module NetZ_Web_TypeScript
             // #region Ações
             try
             {
-                this.processarOnClick(arg);
+                switch (objSender)
+                {
+                    case this:
+                        this.processarOnClick(arg);
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onClickRight(objSender: Object, arg: JQueryMouseEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this:
+                        this.processarOnClickRight(arg);
+                        return;
+                }
             }
             catch (ex)
             {

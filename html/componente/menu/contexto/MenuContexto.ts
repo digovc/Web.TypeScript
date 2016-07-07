@@ -86,7 +86,7 @@ module NetZ_Web_TypeScript
             this.iniciar();
             this.mostrar();
 
-            AppWeb.i.abrirMenu(this);
+            AppWeb.i.abrirTagFocoExclusivo(this);
         }
 
         private addMci(mci: MenuContextoItem): void
