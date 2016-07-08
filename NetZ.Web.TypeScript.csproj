@@ -110,7 +110,7 @@
     <TypeScriptCompile Include="html\componente\painel\PainelAtalho.ts" />
     <TypeScriptCompile Include="html\componente\painel\PainelHtml.ts" />
     <TypeScriptCompile Include="html\componente\painel\PainelNivel.ts" />
-    <TypeScriptCompile Include="design\Tema.ts" />
+    <TypeScriptCompile Include="design\TemaDefault.ts" />
     <TypeScriptCompile Include="html\Div.ts" />
     <TypeScriptCompile Include="html\Imagem.ts" />
     <TypeScriptCompile Include="html\Input.ts" />

@@ -225,15 +225,20 @@ module NetZ_Web_TypeScript
 
             if (this.frm == null)
             {
-                return new ColunaWeb(this.jq.attr("cln_web_nome"));
+                return null;
             }
 
-            if (this.frm.tblWeb == null)
+            if (this.frm.jnlCadastro == null)
             {
-                return new ColunaWeb(this.jq.attr("cln_web_nome"));
+                return null;
             }
 
-            return this.frm.tblWeb.getClnWeb(this.jq.attr("cln_web_nome"));
+            if (this.frm.jnlCadastro.tblWeb == null)
+            {
+                return null;
+            }
+
+            return this.frm.jnlCadastro.tblWeb.getClnWeb(this.jq.attr("cln_web_nome"));
         }
 
         protected getTagInput(): Input

@@ -19,7 +19,7 @@ module NetZ_Web_TypeScript
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlCadastro extends JanelaHtml implements OnCmpEmFocoAlterado, OnDisposedListener
+    export class JnlCadastro extends JanelaHtml implements OnDisposedListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -28,16 +28,12 @@ module NetZ_Web_TypeScript
 
         private _arrJnlCadastroFilho: Array<JnlCadastro>;
         private _cmpIntId: CampoNumerico;
-        private _divComando: DivComando;
         private _frm: FormHtml;
         private _intRegistroId: number;
         private _jnlCadastroPai: JnlCadastro;
         private _pagPrincipal: PagPrincipal;
-        private _pnlDica: PainelNivel;
         private _srcJs: string;
         private _strTblNome: string;
-        private _tabHtml: TabHtml;
-        private _tabItem: TabItem;
         private _tblWeb: TabelaWeb;
 
         private get arrJnlCadastroFilho(): Array<JnlCadastro>
@@ -62,18 +58,6 @@ module NetZ_Web_TypeScript
             this._cmpIntId = this.getCmpIntId();
 
             return this._cmpIntId;
-        }
-
-        private get divComando(): DivComando
-        {
-            if (this._divComando != null)
-            {
-                return this._divComando;
-            }
-
-            this._divComando = new DivComando((this.strId + "_divComando"), this);
-
-            return this._divComando;
         }
 
         private get frm(): FormHtml
@@ -112,18 +96,6 @@ module NetZ_Web_TypeScript
             this.atualizarJnlCadastroPai();
         }
 
-        private get pnlDica(): PainelNivel
-        {
-            if (this._pnlDica != null)
-            {
-                return this._pnlDica;
-            }
-
-            this._pnlDica = new PainelNivel(this.strId + "_pnlDica");
-
-            return this._pnlDica;
-        }
-
         protected get pagPrincipal(): PagPrincipal
         {
             if (this._pagPrincipal != null)
@@ -158,30 +130,6 @@ module NetZ_Web_TypeScript
             this._strTblNome = this.getStrTblNome();
 
             return this._strTblNome;
-        }
-
-        private get tabHtml(): TabHtml
-        {
-            if (this._tabHtml != null)
-            {
-                return this._tabHtml;
-            }
-
-            this._tabHtml = this.getTabHtml();
-
-            return this._tabHtml;
-        }
-
-        private get tabItem(): TabItem
-        {
-            if (this._tabItem != null)
-            {
-                return this._tabItem;
-            }
-
-            this._tabItem = this.getTabItem();
-
-            return this._tabItem;
         }
 
         public get tblWeb(): TabelaWeb
@@ -228,32 +176,6 @@ module NetZ_Web_TypeScript
             this.pagPrincipal.abrirCadastro(tblWebFilho);
 
             this.booAtivo = false;
-        }
-
-        private abrirTabHtml(): void
-        {
-            if (this.jq == null)
-            {
-                return;
-            }
-
-            if (this.tabHtml == null)
-            {
-                return;
-            }
-
-            if (this.tabHtml.booVisivel)
-            {
-                return;
-            }
-
-            this.jq.height((this.jq.height() + 250));
-
-            var intTop = Number(this.jq.css("top").replace("px", Utils.STR_VAZIA));
-
-            this.jq.css("top", (intTop - 100));
-
-            this.tabHtml.iniciar();
         }
 
         private addJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void
@@ -352,7 +274,7 @@ module NetZ_Web_TypeScript
         {
             var frmResultado = new FormHtml(this.strId + "_frm");
 
-            frmResultado.tblWeb = this.tblWeb;
+            frmResultado.jnlCadastro = this;
 
             return frmResultado;
         }
@@ -412,37 +334,6 @@ module NetZ_Web_TypeScript
             return this.jq.attr("tbl_web_nome");
         }
 
-        private getTabHtml(): TabHtml
-        {
-            var strTabHtmlId: string = (this.strId + "_tabHtml");
-
-            if (document.getElementById(strTabHtmlId) == null)
-            {
-                return null;
-            }
-
-            var tabHtmlResultado: TabHtml = new TabHtml(strTabHtmlId);
-
-            tabHtmlResultado.jnlCadastro = this;
-
-            return tabHtmlResultado;
-        }
-
-        private getTabItem(): TabItem
-        {
-            if (this.jnlCadastroPai == null)
-            {
-                return;
-            }
-
-            if (this.jnlCadastroPai.tabHtml == null)
-            {
-                return;
-            }
-
-            return this.jnlCadastroPai.tabHtml.getTabItem(this.tblWeb);
-        }
-
         private getTblWeb(): TabelaWeb
         {
             if (Utils.getBooStrVazia(this.strTblNome))
@@ -464,12 +355,6 @@ module NetZ_Web_TypeScript
             this.frm.iniciar();
 
             this.inicializarJnlCadastroPai();
-
-            this.divComando.iniciar();
-
-            this.inicializarTabHtml();
-
-            this.inicializarPnlDica();
         }
 
         private inicializarJnlCadastroPai(): void
@@ -487,53 +372,11 @@ module NetZ_Web_TypeScript
             this.jnlCadastroPai = this.pagPrincipal.jnlCadastro;
         }
 
-        private inicializarPnlDica(): void
-        {
-            if (this.frm == null)
-            {
-                return;
-            }
-
-            if (this.frm.cmpEmFoco == null)
-            {
-                return;
-            }
-
-            this.pnlDica.strConteudo = this.frm.cmpEmFoco.strDica;
-        }
-
         protected inicializarPosicao(): void
         {
             super.inicializarPosicao();
 
             this.mostrar();
-        }
-
-        private inicializarTabHtml(): void
-        {
-            if (this.intRegistroId < 1)
-            {
-                return;
-            }
-
-            this.abrirTabHtml();
-        }
-
-        private processarOnCmpEmFocoAlterado(cmpEmFoco: CampoHtml): void
-        {
-            this.pnlDica.strConteudo = null;
-
-            if (cmpEmFoco == null)
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia(cmpEmFoco.strDica))
-            {
-                return;
-            }
-
-            this.pnlDica.strConteudo = cmpEmFoco.strDica;
         }
 
         private removerJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void
@@ -659,9 +502,7 @@ module NetZ_Web_TypeScript
         {
             this.salvarSucesso2SucessoCmpIntId(tblWeb);
 
-            this.abrirTabHtml();
-
-            this.salvarSucesso2SucessoTabItem();
+            this.salvarSucesso2SucessoTabHtml();
 
             window.alert("Registro salvo com sucesso."); // TODO: Substituir por uma notificação.
         }
@@ -686,21 +527,14 @@ module NetZ_Web_TypeScript
             this.cmpIntId.tagInput.intValor = tblWeb.getClnWeb(this.cmpIntId.clnWeb.strNome).intValor;
         }
 
-        private salvarSucesso2SucessoTabItem(): void
+        private salvarSucesso2SucessoTabHtml(): void
         {
-            if (this.tabItem == null)
+            if (this.frm == null)
             {
                 return;
             }
 
-            this.tabItem.pesquisar();
-        }
-
-        protected setEventos(): void
-        {
-            super.setEventos();
-
-            this.frm.addEvtOnCmpEmFocoAlterado(this);
+            this.frm.pesquisarTabItemPrincipal();
         }
 
         private validarDados(): boolean
@@ -721,26 +555,6 @@ module NetZ_Web_TypeScript
         // #endregion Métodos
 
         // #region Eventos
-
-        public onCmpEmFocoAlterado(objSender: Object, cmpEmFoco: CampoHtml): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.processarOnCmpEmFocoAlterado(cmpEmFoco);
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
         public onDisposed(objSender: Object): void
         {

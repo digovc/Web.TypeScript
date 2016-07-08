@@ -1,4 +1,4 @@
-﻿/// <reference path="design/Tema.ts"/>
+﻿/// <reference path="design/TemaDefault.ts"/>
 /// <reference path="erro/Erro.ts"/>
 /// <reference path="html/componente/Mensagem.ts"/>
 /// <reference path="html/pagina/PaginaHtml.ts"/>
@@ -46,7 +46,7 @@ module NetZ_Web_TypeScript
         private _arrTbl: Array<TabelaWeb>;
         private _booEmFoco: boolean = true;
         private _msg: Mensagem;
-        private _objTema: Tema;
+        private _objTema: TemaDefault;
         private _pag: PaginaHtml;
         private _strSessionId: string;
         private _tagFocoExclusivo: ComponenteHtml;
@@ -90,7 +90,7 @@ module NetZ_Web_TypeScript
             this._msg = msg;
         }
 
-        public get objTema(): Tema
+        public get objTema(): TemaDefault
         {
             if (this._objTema != null)
             {
@@ -237,9 +237,9 @@ module NetZ_Web_TypeScript
             this.addArrTbl(tblWeb);
         }
 
-        protected getObjTema(): Tema
+        protected getObjTema(): TemaDefault
         {
-            return new Tema();
+            return new TemaDefault();
         }
 
         private getStrCookieValue(strCookieNome: string): string

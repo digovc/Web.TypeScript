@@ -22,6 +22,10 @@ module NetZ_Web_TypeScript
 
         private _arrCmp: Array<CampoHtml>;
         private _cmpEmFoco: CampoHtml;
+        private _divComando: DivComando;
+        private _jnlCadastro: JnlCadastro;
+        private _pnlDica: PainelNivel;
+        private _tabHtml: TabHtml;
         private _tblWeb: TabelaWeb;
 
         protected get arrCmp(): Array<CampoHtml>
@@ -53,12 +57,65 @@ module NetZ_Web_TypeScript
             this.atualizarCmpEmFoco();
         }
 
-        public get tblWeb(): TabelaWeb
+        private get divComando(): DivComando
+        {
+            if (this._divComando != null)
+            {
+                return this._divComando;
+            }
+
+            this._divComando = new DivComando((this.strId + "_divComando"), this);
+
+            return this._divComando;
+        }
+
+        public get jnlCadastro(): JnlCadastro
+        {
+            return this._jnlCadastro;
+        }
+
+        public set jnlCadastro(jnlCadastro: JnlCadastro)
+        {
+            if (this._jnlCadastro == jnlCadastro)
+            {
+                return;
+            }
+
+            this._jnlCadastro = jnlCadastro;
+
+            this.atualizarJnlCadastro();
+        }
+
+        private get pnlDica(): PainelNivel
+        {
+            if (this._pnlDica != null)
+            {
+                return this._pnlDica;
+            }
+
+            this._pnlDica = new PainelNivel(this.strId + "_pnlDica");
+
+            return this._pnlDica;
+        }
+
+        private get tabHtml(): TabHtml
+        {
+            if (this._tabHtml != null)
+            {
+                return this._tabHtml;
+            }
+
+            this._tabHtml = this.getTabHtml();
+
+            return this._tabHtml;
+        }
+
+        private get tblWeb(): TabelaWeb
         {
             return this._tblWeb;
         }
 
-        public set tblWeb(tblWeb: TabelaWeb)
+        private set tblWeb(tblWeb: TabelaWeb)
         {
             if (this._tblWeb == tblWeb)
             {
@@ -77,9 +134,74 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
+        public abrirCadastroFilho(tblWeb: TabelaWeb): void
+        {
+            if (this.jnlCadastro == null)
+            {
+                return;
+            }
+
+            this.jnlCadastro.abrirCadastroFilho(tblWeb);
+        }
+
+        private abrirTabHtml(): void
+        {
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            if (this.tabHtml == null)
+            {
+                return;
+            }
+
+            if (this.tabHtml.booVisivel)
+            {
+                return;
+            }
+
+            this.jq.height((this.jq.height() + 250));
+
+            var intTop = Number(this.jq.css("top").replace("px", Utils.STR_VAZIA));
+
+            this.jq.css("top", (intTop - 100));
+
+            this.tabHtml.iniciar();
+        }
+
         private atualizarCmpEmFoco(): void
         {
             this.dispararEvtOnCmpEmFocoAlterado();
+
+            this.atualizarCmpEmFocoPnlDica();
+        }
+
+        private atualizarCmpEmFocoPnlDica(): void
+        {
+            this.pnlDica.strConteudo = null;
+
+            if (this.cmpEmFoco == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(this.cmpEmFoco.strDica))
+            {
+                return;
+            }
+
+            this.pnlDica.strConteudo = this.cmpEmFoco.strDica;
+        }
+
+        private atualizarJnlCadastro(): void
+        {
+            if (this.jnlCadastro == null)
+            {
+                return;
+            }
+
+            this.tblWeb = this.jnlCadastro.tblWeb;
         }
 
         private atualizarTblWeb(): void
@@ -279,7 +401,13 @@ module NetZ_Web_TypeScript
         {
             super.inicializar();
 
+            this.divComando.iniciar();
+
             this.inicializarArrCmp();
+
+            this.inicializarPnlDica();
+
+            this.inicializarTabHtml();
         }
 
         private inicializarArrCmp(): void
@@ -290,6 +418,62 @@ module NetZ_Web_TypeScript
             }
 
             this.arrCmp.forEach((cmp) => { cmp.iniciar(); });
+        }
+
+        private inicializarPnlDica(): void
+        {
+            if (this.cmpEmFoco == null)
+            {
+                return;
+            }
+
+            this.pnlDica.strConteudo = this.cmpEmFoco.strDica;
+        }
+
+        private inicializarTabHtml(): void
+        {
+            if (this.tabHtml == null)
+            {
+                return;
+            }
+
+            this.tabHtml.iniciar();
+        }
+
+        private getTabHtml(): TabHtml
+        {
+            var strTabHtmlId: string = (this.strId + "_tabHtml");
+
+            if (document.getElementById(strTabHtmlId) == null)
+            {
+                return null;
+            }
+
+            var tabHtmlResultado: TabHtml = new TabHtml(strTabHtmlId);
+
+            tabHtmlResultado.frm = this;
+
+            return tabHtmlResultado;
+        }
+
+        public pesquisarTabItemPrincipal(): void
+        {
+            if (this.tabHtml == null)
+            {
+                return;
+            }
+
+            this.tabHtml.pesquisarTabItemPrincipal();
+        }
+
+        public salvar(): void
+        {
+            if (this.jnlCadastro == null)
+            {
+                return;
+            }
+
+            this.jnlCadastro.salvar();
         }
 
         private selecionarCampo(): void

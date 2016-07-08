@@ -120,7 +120,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            if (this.tabHtml.jnlCadastro == null)
+            if (this.tabHtml.frm == null)
             {
                 return;
             }
@@ -133,7 +133,7 @@ module NetZ_Web_TypeScript
 
             this.tblWeb.clnWebIntId.intValor = (booAlterar) ? this.tagGridHtml.getIntRowSelecionadaId() : 0;
 
-            this.tabHtml.jnlCadastro.abrirCadastroFilho(this.tblWeb);
+            this.tabHtml.frm.abrirCadastroFilho(this.tblWeb);
         }
 
         public apagar(): void
@@ -303,13 +303,18 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            if (this.tabHtml.jnlCadastro == null)
+            if (this.tabHtml.frm == null)
             {
                 return;
             }
 
-            tblWeb.intRegistroPaiId = this.tabHtml.jnlCadastro.intRegistroId;
-            tblWeb.strTblPaiNome = this.tabHtml.jnlCadastro.tblWeb.strNome;
+            if (this.tabHtml.frm.jnlCadastro == null)
+            {
+                return;
+            }
+
+            tblWeb.intRegistroPaiId = this.tabHtml.frm.jnlCadastro.intRegistroId;
+            tblWeb.strTblPaiNome = this.tabHtml.frm.jnlCadastro.tblWeb.strNome;
         }
 
         protected inicializar(): void

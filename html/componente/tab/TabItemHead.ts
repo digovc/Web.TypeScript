@@ -67,7 +67,7 @@
                 return;
             }
 
-            this.jq.css("background-color", this.booAtiva ? "#549A84" : "white"); // TODO: Colocar a cor do tema da aplicação.
+            this.jq.css("background-color", this.booAtiva ? AppWeb.i.objTema.corFundo : Utils.STR_VAZIA);
         }
 
         protected setEventos(): void

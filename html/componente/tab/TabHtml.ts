@@ -22,7 +22,8 @@ module NetZ_Web_TypeScript
         private _btnAdicionar: BotaoCircular;
         private _btnAlterar: BotaoCircular;
         private _btnApagar: BotaoCircular;
-        private _jnlCadastro: JnlCadastro;
+        private _divComando: Div;
+        private _frm: FormHtml;
         private _tabItemAtiva: TabItem;
         private _tabItemAtivaAnterior: TabItem;
 
@@ -74,14 +75,26 @@ module NetZ_Web_TypeScript
             return this._btnApagar;
         }
 
-        public get jnlCadastro(): JnlCadastro
+        private get divComando(): Div
         {
-            return this._jnlCadastro;
+            if (this._divComando != null)
+            {
+                return this._divComando;
+            }
+
+            this._divComando = new Div(this.strId + "_divComando");
+
+            return this._divComando;
         }
 
-        public set jnlCadastro(jnlCadastro: JnlCadastro)
+        public get frm(): FormHtml
         {
-            this._jnlCadastro = jnlCadastro;
+            return this._frm;
+        }
+
+        public set frm(frm: FormHtml)
+        {
+            this._frm = frm;
         }
 
         public get tabItemAtiva(): TabItem
@@ -112,6 +125,7 @@ module NetZ_Web_TypeScript
         {
             this._tabItemAtivaAnterior = tabItemAtivaAnterior;
         }
+
 
         // #endregion Atributos
 
@@ -276,7 +290,7 @@ module NetZ_Web_TypeScript
 
             this.inicializarArrTabItem();
 
-            this.mostrar();
+            this.mostrarDivComando();
         }
 
         private inicializarArrTabItem(): void
@@ -287,6 +301,48 @@ module NetZ_Web_TypeScript
             }
 
             this.arrTabItem.forEach((tabItem) => { tabItem.iniciar(); });
+        }
+
+        public mostrarDivComando(): void
+        {
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            if (this.frm.jnlCadastro == null)
+            {
+                return;
+            }
+
+            if (this.frm.jnlCadastro.intRegistroId < 1)
+            {
+                return;
+            }
+
+            this.divComando.mostrar();
+        }
+
+        public pesquisarTabItemPrincipal(): void
+        {
+            if (this.arrTabItem == null)
+            {
+                return;
+            }
+
+            if (this.arrTabItem.length < 1)
+            {
+                return;
+            }
+
+            var tabItemPrincipal = this.arrTabItem[0];
+
+            if (tabItemPrincipal == null)
+            {
+                return;
+            }
+
+            tabItemPrincipal.booAtiva = true;
         }
 
         protected setEventos()

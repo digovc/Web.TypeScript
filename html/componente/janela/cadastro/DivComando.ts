@@ -19,7 +19,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _btnSalvar: BotaoCircular;
-        private _jnlCadastro: JnlCadastro;
+        private _frm: FormHtml;
 
         private get btnSalvar(): BotaoCircular
         {
@@ -33,25 +33,25 @@ module NetZ_Web_TypeScript
             return this._btnSalvar;
         }
 
-        private get jnlCadastro(): JnlCadastro
+        private get frm(): FormHtml
         {
-            return this._jnlCadastro;
+            return this._frm;
         }
 
-        private set jnlCadastro(jnlCadastro: JnlCadastro)
+        private set frm(frm: FormHtml)
         {
-            this._jnlCadastro = jnlCadastro;
+            this._frm = frm;
         }
 
         // #endregion Atributos
 
         // #region Construtores
 
-        constructor(strId: string, jnlCadastro: JnlCadastro)
+        constructor(strId: string, frm: FormHtml)
         {
             super(strId);
 
-            this.jnlCadastro = jnlCadastro;
+            this.frm = frm;
         }
 
         // #endregion Construtores
@@ -60,12 +60,12 @@ module NetZ_Web_TypeScript
 
         private salvar(): void
         {
-            if (this.jnlCadastro == null)
+            if (this.frm == null)
             {
                 return;
             }
 
-            this.jnlCadastro.salvar();
+            this.frm.salvar();
         }
 
         protected setEventos(): void
