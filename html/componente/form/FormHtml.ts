@@ -1,9 +1,4 @@
-﻿/// <reference path="../campo/CampoAlfanumerico.ts"/>
-/// <reference path="../campo/CampoCheckBox.ts"/>
-/// <reference path="../campo/CampoComboBox.ts"/>
-/// <reference path="../campo/CampoConsulta.ts"/>
-/// <reference path="../campo/CampoNumerico.ts"/>
-/// <reference path="OnCmpEmFocoAlterado.ts"/>
+﻿/// <reference path="OnCmpEmFocoAlterado.ts"/>
 
 module NetZ_Web_TypeScript
 {
@@ -275,35 +270,17 @@ module NetZ_Web_TypeScript
                 return;
             }
 
+            if (Utils.getBooStrVazia($(cmpJq).attr("clazz")))
+            {
+                return;
+            }
+
             if (Utils.getBooStrVazia(cmpJq.id))
             {
                 return;
             }
 
-            var cmp: CampoHtml;
-
-            switch ($(cmpJq).attr("clazz"))
-            {
-                case "CampoAlfanumerico":
-                    cmp = new CampoAlfanumerico(cmpJq.id);
-                    break;
-
-                case "CampoCheckBox":
-                    cmp = new CampoCheckBox(cmpJq.id);
-                    break;
-
-                case "CampoComboBox":
-                    cmp = new CampoComboBox(cmpJq.id);
-                    break;
-
-                case "CampoConsulta":
-                    cmp = new CampoConsulta(cmpJq.id);
-                    break;
-
-                case "CampoNumerico":
-                    cmp = new CampoNumerico(cmpJq.id);
-                    break;
-            }
+            var cmp: CampoHtml = new (<any>window)["NetZ_Web_TypeScript"][$(cmpJq).attr("clazz")](cmpJq.id);
 
             cmp.frm = this;
 

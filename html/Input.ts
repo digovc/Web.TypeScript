@@ -179,7 +179,7 @@ module NetZ_Web_TypeScript
             }
         }
 
-        private atualizarStrValor(): void
+        protected atualizarStrValor(): void
         {
             if (this.jq.val() != this.strValor)
             {

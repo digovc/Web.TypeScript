@@ -5,6 +5,7 @@
 /// <reference path="html/pagina/PagPrincipal.ts"/>
 /// <reference path="Objeto.ts"/>
 /// <reference path="OnFocusChangeListener.ts"/>
+/// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
 
 module NetZ_Web_TypeScript

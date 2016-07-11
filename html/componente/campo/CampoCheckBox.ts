@@ -12,6 +12,21 @@
         // #endregion Constantes
 
         // #region Atributos
+
+        private _ckb: CheckBox;
+
+        private get ckb(): CheckBox
+        {
+            if (this._ckb != null)
+            {
+                return this._ckb;
+            }
+
+            this._ckb = new CheckBox(this.tagInput.strId);
+
+            return this._ckb;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -23,7 +38,9 @@
         {
             super.inicializar();
 
-            this.mostrarDivTitulo(true);
+            this.ckb.iniciar();
+
+            this.mostrarDivTitulo(false);
         }
 
         // #endregion Métodos

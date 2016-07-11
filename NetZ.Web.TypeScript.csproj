@@ -35,6 +35,7 @@
     <TypeScriptCompile Include="html\componente\ActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoMarkdown.ts" />
     <TypeScriptCompile Include="html\componente\form\OnCmpEmFocoAlterado.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridRow.ts" />
     <TypeScriptCompile Include="html\componente\grid\MenuGrid.ts" />

@@ -148,6 +148,7 @@ module NetZ_Web_TypeScript
             try
             {
                 this.jq.css("background-color", Utils.STR_VAZIA);
+                this.jq.css("color", Utils.STR_VAZIA);
             }
             catch (ex)
             {
@@ -168,6 +169,7 @@ module NetZ_Web_TypeScript
             try
             {
                 this.jq.css("background-color", AppWeb.i.objTema.corMouseOver);
+                this.jq.css("color", "black");
             }
             catch (ex)
             {
