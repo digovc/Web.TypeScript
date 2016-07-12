@@ -127,7 +127,7 @@ module NetZ_Web_TypeScript
 
             if (booAlterar && (this.tagGridHtml.getIntRowSelecionadaId() < 1))
             {
-                window.alert("Selecione um registro para ser alterado.");
+                new Notificacao("Selecione um registro primeiro.").abrirNotificacao();
                 return;
             }
 
@@ -143,7 +143,7 @@ module NetZ_Web_TypeScript
             // TODO: Validar se esta tabela permite a exclusão de registros.
             if (intRegistroId < 1)
             {
-                window.alert("Selecione um registro antes.");
+                new Notificacao("Selecione um registro primeiro.").abrirNotificacao();
                 return;
             }
 

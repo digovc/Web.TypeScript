@@ -175,7 +175,30 @@ module NetZ_Web_TypeScript
 
             this.pagPrincipal.abrirCadastro(tblWebFilho);
 
-            this.booAtivo = false;
+            // TODO: Verificar se vai colocar a tela pai desativada ao abrir uma janela filho.
+            //this.booAtivo = false;
+        }
+
+        public abrirJnlTag(): void
+        {
+            if (this.pagPrincipal == null)
+            {
+                return;
+            }
+
+            if (this.tblWeb == null)
+            {
+                return;
+            }
+
+            if (this.intRegistroId < 1)
+            {
+                return;
+            }
+
+            this.tblWeb.clnWebIntId.intValor = this.intRegistroId;
+
+            this.pagPrincipal.abrirJnlTag(this.tblWeb);
         }
 
         private addJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void
@@ -459,8 +482,7 @@ module NetZ_Web_TypeScript
 
             if (!Utils.getBooStrVazia(tblWeb.strCritica))
             {
-                // TOD: Criar mecanismo de mensagens para o usuário e substituir esta função de "alert".
-                window.alert(tblWeb.strCritica);
+                new Mensagem("Erro", tblWeb.strCritica, Mensagem_EnmTipo.NEGATIVA);
             }
 
             if (tblWeb.arrClnWeb == null)
@@ -504,7 +526,7 @@ module NetZ_Web_TypeScript
 
             this.salvarSucesso2SucessoTabHtml();
 
-            window.alert("Registro salvo com sucesso."); // TODO: Substituir por uma notificação.
+            new Notificacao("Registro salvo com sucesso.").abrirNotificacao();
         }
 
         private salvarSucesso2SucessoCmpIntId(tblWeb: TabelaWeb): void
@@ -644,7 +666,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnSalvarListener.splice(this.arrEvtOnSalvarListener.indexOf(evtOnSalvarListener));
+            this.arrEvtOnSalvarListener.splice(this.arrEvtOnSalvarListener.indexOf(evtOnSalvarListener), 1);
         }
 
         // #endregion Evento OnSalvarListener

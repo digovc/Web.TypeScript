@@ -12,6 +12,9 @@ module NetZ_Web_TypeScript
     export class TabelaWeb extends Objeto
     {
         // #region Constantes
+
+        public static get SQL_CLN_STR_TAG_NOME(): string { return "str_tag" };
+
         // #endregion Constantes
 
         // #region Atributos
@@ -302,9 +305,19 @@ module NetZ_Web_TypeScript
             return this.clnWebIntId;
         }
 
+        public limparDados(): void
+        {
+            this.arrClnWeb.forEach((clnWeb) => { clnWeb.strValor = null; });
+        }
+
         public limparFiltro(): void
         {
-            this.arrFil.splice(0, this.arrFil.length);
+            if (this.arrFil.length < 1)
+            {
+                return;
+            }
+
+            this.arrFil.splice(0);
         }
 
         // #endregion Métodos

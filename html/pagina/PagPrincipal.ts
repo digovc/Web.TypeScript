@@ -2,6 +2,7 @@
 /// <reference path="../../OnDisposedListener.ts"/>
 /// <reference path="../../server/ServerHttp.ts"/>
 /// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
+/// <reference path="../componente/janela/cadastro/jnltag.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
 /// <reference path="../Div.ts"/>
 /// <reference path="PaginaHtml.ts"/>
@@ -166,6 +167,50 @@ module NetZ_Web_TypeScript
             this.abrirCadastro(TblFiltro.i);
         }
 
+        public abrirJnlTag(tblWeb: TabelaWeb): void
+        {
+            if (tblWeb == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(tblWeb.strNome))
+            {
+                return;
+            }
+
+            if (tblWeb.clnWebIntId.intValor < 1)
+            {
+                return;
+            }
+
+            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+
+            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_JANELA_TAG;
+
+            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirJnlTagSucesso(tblWeb, objSolicitacaoAjaxDb); });
+            objSolicitacaoAjaxDb.addJsn(tblWeb);
+
+            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+        }
+
+        private abrirJnlTagSucesso(tblWeb: TabelaWeb, objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        {
+            if (objSolicitacaoAjaxDb == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
+            {
+                return;
+            }
+
+            this.divCadastro.jq.append(objSolicitacaoAjaxDb.strData);
+
+            this.inicializarJnlTag(tblWeb);
+        }
+
         private carregarJsCadastro(): void
         {
             var arrJnlCadastroJq = this.divCadastro.jq.children();
@@ -177,11 +222,11 @@ module NetZ_Web_TypeScript
 
             for (var i = 0; i < arrJnlCadastroJq.length; i++)
             {
-                this.carregarJsCadastro2(arrJnlCadastroJq[i]);
+                this.carregarJsCadastroItem(arrJnlCadastroJq[i]);
             }
         }
 
-        private carregarJsCadastro2(jnlCadastroJq: HTMLElement): void
+        private carregarJsCadastroItem(jnlCadastroJq: HTMLElement): void
         {
             if (jnlCadastroJq == null)
             {
@@ -247,6 +292,23 @@ module NetZ_Web_TypeScript
             this.jnlConsulta.addEvtOnDisposedListener(this);
 
             this.jnlConsulta.iniciar();
+        }
+
+        private inicializarJnlTag(tblWeb: TabelaWeb): void
+        {
+            if (tblWeb == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(tblWeb.strNome))
+            {
+                return;
+            }
+
+            var jnlTag = new JnlTag(this, tblWeb);
+
+            jnlTag.iniciar();
         }
 
         public removerJs(srcJs: string): void

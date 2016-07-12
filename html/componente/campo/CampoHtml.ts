@@ -218,24 +218,26 @@ module NetZ_Web_TypeScript
 
         private getClnWeb(): ColunaWeb
         {
+            var clnWebResultado = new ColunaWeb(this.jq.attr("cln_web_nome"));
+
             if (this.jq == null)
             {
-                return null;
+                return clnWebResultado;
             }
 
             if (this.frm == null)
             {
-                return null;
+                return clnWebResultado;
             }
 
             if (this.frm.jnlCadastro == null)
             {
-                return null;
+                return clnWebResultado;
             }
 
             if (this.frm.jnlCadastro.tblWeb == null)
             {
-                return null;
+                return clnWebResultado;
             }
 
             return this.frm.jnlCadastro.tblWeb.getClnWeb(this.jq.attr("cln_web_nome"));

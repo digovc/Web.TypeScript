@@ -75,12 +75,12 @@
             this._enmTipo = enmTipo;
         }
 
-        private get fncOnConfirmar(): Function
+        public get fncOnConfirmar(): Function
         {
             return this._fncOnConfirmar;
         }
 
-        private set fncOnConfirmar(fncOnConfirmar: Function)
+        public set fncOnConfirmar(fncOnConfirmar: Function)
         {
             this._fncOnConfirmar = fncOnConfirmar;
         }
@@ -110,10 +110,11 @@
 
         // #region Construtores
 
-        constructor(strTitulo: string, strMensagem: string)
+        constructor(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA)
         {
             super(null);
 
+            this.enmTipo = enmTipo;
             this.strId = ("tagMensagem_" + this.intObjetoId);
             this.strMensagem = strMensagem;
             this.strTitulo = strTitulo;
@@ -123,7 +124,7 @@
 
         // #region Métodos
 
-        public abrirMensagem(enmTipo: Mensagem_EnmTipo, fncOnConfirmar: Function): void
+        public abrirMensagem(): void
         {
             if (Utils.getBooStrVazia(this.strTitulo))
             {
@@ -141,9 +142,6 @@
             }
 
             $(document.body).append(this.strLayoutFixo);
-
-            this.enmTipo = enmTipo;
-            this.fncOnConfirmar = fncOnConfirmar;
 
             this.iniciar();
             this.mostrar();

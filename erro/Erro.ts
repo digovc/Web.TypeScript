@@ -29,32 +29,17 @@
 
         private get strMensagemFormatada(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._strMensagemFormatada = this.strMensagem;
 
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(this.strMensagemTecnica))
             {
-                this._strMensagemFormatada = this.strMensagem;
+                return this._strMensagemFormatada;
+            }
 
-                if (Utils.getBooStrVazia(this.strMensagemTecnica))
-                {
-                    return this._strMensagemFormatada;
-                }
-
-                this._strMensagemFormatada += "\n\n"
-                this._strMensagemFormatada += "Detalhes:"
-                this._strMensagemFormatada += "\n\n"
-                this._strMensagemFormatada += this.strMensagemTecnica;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._strMensagemFormatada += "\n\n"
+            this._strMensagemFormatada += "Detalhes:"
+            this._strMensagemFormatada += "\n\n"
+            this._strMensagemFormatada += this.strMensagemTecnica;
 
             return this._strMensagemFormatada;
         }
@@ -77,29 +62,14 @@
         {
             super();
 
-            // #region Variáveis
-            // #endregion Variáveis
+            this.strMensagem = strMensagem;
 
-            // #region Ações
-            try
+            if (e != null)
             {
-                this.strMensagem = strMensagem;
+                this.strMensagemTecnica = e.message;
+            }
 
-                if (e != null)
-                {
-                    this.strMensagemTecnica = e.message;
-                }
-
-                this.mostrarMensagem();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.mostrarMensagem();
         }
 
         // #endregion Construtores
@@ -108,23 +78,7 @@
 
         private mostrarMensagem(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                // TODO: Usar a classe Mensagem para mostrar as mensagens de erro para o usuário.
-                window.alert(this.strMensagemFormatada);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            new Mensagem("Erro", this.strMensagemFormatada, Mensagem_EnmTipo.NEGATIVA).abrirMensagem();
         }
 
         // #endregion Métodos

@@ -12,6 +12,7 @@ module NetZ_Web_TypeScript
         ABRIR_CADASTRO,
         ABRIR_CADASTRO_FILTRO_CONTEUDO,
         ABRIR_CONSULTA,
+        ABRIR_JANELA_TAG,
         ADICIONAR,
         APAGAR,
         CARREGAR_TBL_WEB,

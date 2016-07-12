@@ -382,7 +382,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evtOnClickListener));
+            this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evtOnClickListener), 1);
         }
 
         private dispararEvtOnClickListener(arg: JQueryEventObject): void
@@ -477,7 +477,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnClickRightListener.splice(this.arrEvtOnClickRightListener.indexOf(evtOnClickRightListener));
+            this.arrEvtOnClickRightListener.splice(this.arrEvtOnClickRightListener.indexOf(evtOnClickRightListener), 1);
         }
 
         // #endregion Evento OnClickRightListener
@@ -540,7 +540,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnDoubleClickListener.splice(this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener));
+            this.arrEvtOnDoubleClickListener.splice(this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener), 1);
         }
 
         // #endregion Evento OnDoubleClickListener
@@ -611,7 +611,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener));
+            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener), 1);
         }
 
         // #endregion Evento OnFocusInListener
@@ -682,7 +682,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener));
+            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener), 1);
         }
 
         // #endregion Evento OnFocusOutListener
@@ -753,7 +753,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener));
+            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener), 1);
         }
 
         // #endregion Evento OnKeyDownListener
@@ -824,7 +824,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnKeyPressListener.splice(this.arrEvtOnKeyPressListener.indexOf(evtOnKeyPressListener));
+            this.arrEvtOnKeyPressListener.splice(this.arrEvtOnKeyPressListener.indexOf(evtOnKeyPressListener), 1);
         }
 
         // #endregion Evento OnKeyPressListener
@@ -895,7 +895,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnMouseDownListener.splice(this.arrEvtOnMouseDownListener.indexOf(evtOnMouseDownListener));
+            this.arrEvtOnMouseDownListener.splice(this.arrEvtOnMouseDownListener.indexOf(evtOnMouseDownListener), 1);
         }
 
         // #endregion Evento OnMouseDownListener
@@ -958,7 +958,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnMouseLeaveListener.splice(this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener));
+            this.arrEvtOnMouseLeaveListener.splice(this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener), 1);
         }
 
         // #endregion Evento OnMouseLeaveListener
@@ -1029,7 +1029,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnMouseMoveListener.splice(this.arrEvtOnMouseMoveListener.indexOf(evtOnMouseMoveListener));
+            this.arrEvtOnMouseMoveListener.splice(this.arrEvtOnMouseMoveListener.indexOf(evtOnMouseMoveListener), 1);
         }
 
         // #endregion Evento OnMouseMoveListener
@@ -1092,7 +1092,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnMouseOverListener.splice(this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener));
+            this.arrEvtOnMouseOverListener.splice(this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener), 1);
         }
 
         // #endregion Evento OnMouseOverListener
@@ -1163,7 +1163,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnMouseUpListener.splice(this.arrEvtOnMouseUpListener.indexOf(evtOnMouseUpListener));
+            this.arrEvtOnMouseUpListener.splice(this.arrEvtOnMouseUpListener.indexOf(evtOnMouseUpListener), 1);
         }
 
         // #endregion Evento OnMouseUpListener

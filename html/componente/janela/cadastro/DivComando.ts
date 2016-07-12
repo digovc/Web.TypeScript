@@ -19,6 +19,7 @@ module NetZ_Web_TypeScript
         // #region Atributos
 
         private _btnSalvar: BotaoCircular;
+        private _btnTag: BotaoCircular;
         private _frm: FormHtml;
 
         private get btnSalvar(): BotaoCircular
@@ -31,6 +32,18 @@ module NetZ_Web_TypeScript
             this._btnSalvar = new BotaoCircular(this.strId + "_btnSalvar");
 
             return this._btnSalvar;
+        }
+
+        private get btnTag(): BotaoCircular
+        {
+            if (this._btnTag != null)
+            {
+                return this._btnTag;
+            }
+
+            this._btnTag = new BotaoCircular(this.strId + "_btnTag");
+
+            return this._btnTag;
         }
 
         private get frm(): FormHtml
@@ -58,6 +71,16 @@ module NetZ_Web_TypeScript
 
         // #region Métodos
 
+        private abrirJnlTag(): void
+        {
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            this.frm.abrirJnlTag();
+        }
+
         private salvar(): void
         {
             if (this.frm == null)
@@ -73,6 +96,7 @@ module NetZ_Web_TypeScript
             super.setEventos();
 
             this.btnSalvar.addEvtOnClickListener(this);
+            this.btnTag.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos
@@ -91,6 +115,9 @@ module NetZ_Web_TypeScript
                 {
                     case this.btnSalvar:
                         return this.salvar();
+
+                    case this.btnTag:
+                        return this.abrirJnlTag();
                 }
             }
             catch (ex)

@@ -347,7 +347,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnEnterListener.splice(this.arrEvtOnEnterListener.indexOf(evtOnEnterListener));
+                this.arrEvtOnEnterListener.splice(this.arrEvtOnEnterListener.indexOf(evtOnEnterListener), 1);
             }
             catch (ex)
             {
@@ -470,7 +470,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnLeaveListener.splice(this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener));
+                this.arrEvtOnLeaveListener.splice(this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener), 1);
             }
             catch (ex)
             {
@@ -594,7 +594,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnValorAlteradoListener.splice(this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener));
+                this.arrEvtOnValorAlteradoListener.splice(this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener), 1);
             }
             catch (ex)
             {

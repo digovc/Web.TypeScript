@@ -12,6 +12,9 @@ module NetZ_Web_TypeScript
     export class ColunaWeb extends Objeto
     {
         // #region Constantes
+
+        public static get STR_VALOR_NULL(): string { return "<<<null>>>" };
+
         // #endregion Constantes
 
         // #region Atributos

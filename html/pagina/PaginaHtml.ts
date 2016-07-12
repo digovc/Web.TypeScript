@@ -15,7 +15,20 @@ module NetZ_Web_TypeScript
 
         // #region Atributos
 
+        private _divNotificacao: Div;
         private _tagBody: Tag;
+
+        public get divNotificacao(): Div
+        {
+            if (this._divNotificacao != null)
+            {
+                return this._divNotificacao;
+            }
+
+            this._divNotificacao = new Div("divNotificacao");
+
+            return this._divNotificacao;
+        }
 
         protected get tagBody(): Tag
         {
@@ -28,6 +41,7 @@ module NetZ_Web_TypeScript
 
             return this._tagBody;
         }
+
 
         // #endregion Atributos
 
@@ -168,7 +182,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evtOnClickListener));
+                this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evtOnClickListener), 1);
             }
             catch (ex)
             {
@@ -273,7 +287,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener));
+            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener), 1);
         }
 
         // #endregion Evento OnKeyDownListener

@@ -165,7 +165,7 @@ module NetZ_Web_TypeScript
 
             if (this.tagGridHtml.rowSelecionada == null)
             {
-                window.alert("Selecione um registro primeiro.");
+                new Notificacao("Selecione um registro primeiro.").abrirNotificacao();
                 return;
             }
 

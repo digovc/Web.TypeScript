@@ -43,8 +43,10 @@
     <TypeScriptCompile Include="html\componente\grid\OnRowDoubleClickListener.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroItemCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroCadastro.ts" />
+    <TypeScriptCompile Include="html\componente\janela\cadastro\JnlTag.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\OnSalvarArg.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\OnSalvarListener.ts" />
+    <TypeScriptCompile Include="html\componente\janela\cadastro\TagCard.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltro.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltroConteudo.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
@@ -55,6 +57,7 @@
     <TypeScriptCompile Include="html\componente\menu\contexto\MenuContextoItem.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuMobile.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuMobileItem.ts" />
+    <TypeScriptCompile Include="html\componente\Notificacao.ts" />
     <TypeScriptCompile Include="html\componente\tab\TabHtml.ts" />
     <TypeScriptCompile Include="html\componente\tab\TabItem.ts" />
     <TypeScriptCompile Include="html\componente\tab\TabItemHead.ts" />

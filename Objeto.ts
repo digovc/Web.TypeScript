@@ -230,7 +230,7 @@ module NetZ_Web_TypeScript
                     return;
                 }
 
-                this.arrEvtOnDisposedListener.splice(this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener));
+                this.arrEvtOnDisposedListener.splice(this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener), 1);
             }
             catch (ex)
             {

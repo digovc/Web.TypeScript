@@ -257,7 +257,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrRowSelecionada.splice(this.arrRowSelecionada.indexOf(rowSelecionada));
+            this.arrRowSelecionada.splice(this.arrRowSelecionada.indexOf(rowSelecionada), 1);
         }
 
         public selecinar(intId: number, booSelecionar: boolean): void
@@ -358,7 +358,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnRowClickListener.splice(this.arrEvtOnRowClickListener.indexOf(evtOnRowClickListener));
+            this.arrEvtOnRowClickListener.splice(this.arrEvtOnRowClickListener.indexOf(evtOnRowClickListener), 1);
         }
 
         // #endregion Evento OnRowClickListener
@@ -421,7 +421,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnRowDoubleClickListener.splice(this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener));
+            this.arrEvtOnRowDoubleClickListener.splice(this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener), 1);
         }
 
         // #endregion Evento OnRowDoubleClickListener

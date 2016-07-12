@@ -144,6 +144,8 @@ module NetZ_Web_TypeScript
          */
         public ajaxErro(strTextStatus: string, strErrorThrown: string): void
         {
+            this.mostrarMsgErro(strTextStatus, strErrorThrown);
+
             this.dispararArrFncErro(strTextStatus, strErrorThrown);
         }
 
@@ -172,7 +174,7 @@ module NetZ_Web_TypeScript
 
             if (!Utils.getBooStrVazia(objSolicitacaoAjax.strErro))
             {
-                AppWeb.i.informarErro(objSolicitacaoAjax.strErro);
+                new Mensagem("Erro no servidor", objSolicitacaoAjax.strErro, Mensagem_EnmTipo.NEGATIVA).abrirMensagem();
                 return;
             }
 
@@ -182,6 +184,16 @@ module NetZ_Web_TypeScript
         private dispararArrFncErro(strTextStatus: string, strErrorThrown: string): void
         {
             this.arrFncErro.forEach((fnc) => { fnc(strTextStatus, strErrorThrown); });
+        }
+
+        private mostrarMsgErro(strTextStatus: string, strErrorThrown: string): void
+        {
+            if (Utils.getBooStrVazia(strErrorThrown))
+            {
+                strErrorThrown = "Erro desconhecido no servidor.";
+            }
+
+            new Mensagem(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA).abrirMensagem();
         }
 
         /**

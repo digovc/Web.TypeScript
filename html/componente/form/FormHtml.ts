@@ -139,6 +139,16 @@ module NetZ_Web_TypeScript
             this.jnlCadastro.abrirCadastroFilho(tblWeb);
         }
 
+        public abrirJnlTag(): void
+        {
+            if (this.jnlCadastro == null)
+            {
+                return;
+            }
+
+            this.jnlCadastro.abrirJnlTag();
+        }
+
         private abrirTabHtml(): void
         {
             if (this.jq == null)
@@ -577,7 +587,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnCmpEmFocoAlterado.splice(this.arrEvtOnCmpEmFocoAlterado.indexOf(evtOnCmpEmFocoAlterado));
+            this.arrEvtOnCmpEmFocoAlterado.splice(this.arrEvtOnCmpEmFocoAlterado.indexOf(evtOnCmpEmFocoAlterado), 1);
         }
 
         // #endregion Evento OnCmpEmFocoAlterado

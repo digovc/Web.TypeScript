@@ -1,6 +1,7 @@
 ﻿/// <reference path="design/TemaDefault.ts"/>
 /// <reference path="erro/Erro.ts"/>
 /// <reference path="html/componente/Mensagem.ts"/>
+/// <reference path="html/componente/Notificacao.ts"/>
 /// <reference path="html/pagina/PaginaHtml.ts"/>
 /// <reference path="html/pagina/PagPrincipal.ts"/>
 /// <reference path="Objeto.ts"/>
@@ -308,17 +309,6 @@ module NetZ_Web_TypeScript
             objWindow.close();
         }
 
-        public informarErro(strErro: string): void
-        {
-            if (Utils.getBooStrVazia(strErro))
-            {
-                return;
-            }
-
-            // TODO: Revisar.
-            window.alert(strErro);
-        }
-
         public iniciar(): void
         {
             this.inicializar();
@@ -405,7 +395,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener));
+            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener), 1);
         }
 
         // #endregion Evento OnFocusInListener
@@ -471,7 +461,7 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener));
+            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener), 1);
         }
 
         // #endregion Evento OnFocusOutListener
