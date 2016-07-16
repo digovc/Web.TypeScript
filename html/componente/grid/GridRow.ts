@@ -1,11 +1,12 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../../../OnClickRightListener.ts"/>
 /// <reference path="../../../OnDoubleClickListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../../Tag.ts"/>
+/// <reference path="MenuGrid.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
 

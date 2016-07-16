@@ -1,4 +1,4 @@
-﻿module NetZ_Web_TypeScript
+﻿module NetZ_Web
 {
     export interface OnRowClickListener
     {

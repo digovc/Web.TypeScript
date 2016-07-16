@@ -3,7 +3,7 @@
 /// <reference path="GridRow.ts"/>
 /// <reference path="OnRowClickListener.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
     // #endregion Importações

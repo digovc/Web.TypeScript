@@ -4,7 +4,7 @@
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../painel/PainelHtml.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
     // #endregion Importações

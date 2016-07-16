@@ -10,7 +10,7 @@
 /// <reference path="OnSalvarArg.ts"/>
 /// <reference path="OnSalvarListener.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
 

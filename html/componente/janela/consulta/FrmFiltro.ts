@@ -7,7 +7,7 @@
 /// <reference path="../../form/FormHtml.ts"/>
 /// <reference path="PainelFiltro.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
     // #endregion Importações

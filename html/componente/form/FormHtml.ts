@@ -5,7 +5,7 @@
 /// <reference path="../campo/CampoNumerico.ts"/>
 /// <reference path="OnCmpEmFocoAlterado.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
     // #endregion Importações

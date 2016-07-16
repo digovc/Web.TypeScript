@@ -2,7 +2,7 @@
 /// <reference path="../../Input.ts"/>
 /// <reference path="CampoHtml.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
     // #endregion Importações
