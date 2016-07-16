@@ -34,6 +34,7 @@ module NetZ_Web_TypeScript
         private _pagPrincipal: PagPrincipal;
         private _srcJs: string;
         private _strTblNome: string;
+        private _tabItem: TabItem;
         private _tblWeb: TabelaWeb;
 
         private get arrJnlCadastroFilho(): Array<JnlCadastro>
@@ -132,6 +133,18 @@ module NetZ_Web_TypeScript
             return this._strTblNome;
         }
 
+        private get tabItem(): TabItem
+        {
+            if (this._tabItem != null)
+            {
+                return this._tabItem;
+            }
+
+            this._tabItem = this.getTabItem();
+
+            return this._tabItem;
+        }
+
         public get tblWeb(): TabelaWeb
         {
             if (this._tblWeb != null)
@@ -143,6 +156,7 @@ module NetZ_Web_TypeScript
 
             return this._tblWeb;
         }
+
 
         // #endregion Atributos
 
@@ -357,6 +371,26 @@ module NetZ_Web_TypeScript
             return this.jq.attr("tbl_web_nome");
         }
 
+        private getTabItem(): TabItem
+        {
+            if (this.jnlCadastroPai == null)
+            {
+                return;
+            }
+
+            return this.jnlCadastroPai.getTabItem2(this.tblWeb);
+        }
+
+        private getTabItem2(tblWeb:TabelaWeb): TabItem
+        {
+            if (this.frm == null)
+            {
+                return null;
+            }
+
+            return this.frm.getTabItem(tblWeb);
+        }
+
         private getTblWeb(): TabelaWeb
         {
             if (Utils.getBooStrVazia(this.strTblNome))
@@ -557,6 +591,13 @@ module NetZ_Web_TypeScript
             }
 
             this.frm.pesquisarTabItemPrincipal();
+
+            if (this.tabItem == null)
+            {
+                return;
+            }
+
+            this.tabItem.pesquisar();
         }
 
         private validarDados(): boolean

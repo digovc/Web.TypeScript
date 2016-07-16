@@ -18,7 +18,7 @@ module NetZ_Web_TypeScript
         private _btnAdicionar: BotaoCircular;
         private _btnAlterar: BotaoCircular;
         private _btnApagar: BotaoCircular;
-        private _btnOpcao: BotaoCircular;
+        private _btnMenu: BotaoCircular;
 
         private get btnAdicionar(): BotaoCircular
         {
@@ -56,16 +56,16 @@ module NetZ_Web_TypeScript
             return this._btnApagar;
         }
 
-        private get btnOpcao(): BotaoCircular
+        private get btnMenu(): BotaoCircular
         {
-            if (this._btnOpcao != null)
+            if (this._btnMenu != null)
             {
-                return this._btnOpcao;
+                return this._btnMenu;
             }
 
-            this._btnOpcao = new BotaoCircular(this.strId + "_btnOpcao");
+            this._btnMenu = new BotaoCircular(this.strId + "_btnOpcao");
 
-            return this._btnOpcao;
+            return this._btnMenu;
         }
 
         // #endregion Atributos
@@ -136,7 +136,7 @@ module NetZ_Web_TypeScript
             strLayoutFixo = strLayoutFixo.replace("_btn_adicionar_str_id", this.btnAdicionar.strId);
             strLayoutFixo = strLayoutFixo.replace("_btn_alterar_str_id", this.btnAlterar.strId);
             strLayoutFixo = strLayoutFixo.replace("_btn_apagar_str_id", this.btnApagar.strId);
-            strLayoutFixo = strLayoutFixo.replace("_btn_opcao_str_id", this.btnOpcao.strId);
+            strLayoutFixo = strLayoutFixo.replace("_btn_menu_str_id", this.btnMenu.strId);
 
             return strLayoutFixo;
         }

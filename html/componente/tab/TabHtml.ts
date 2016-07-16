@@ -343,6 +343,8 @@ module NetZ_Web_TypeScript
             }
 
             tabItemPrincipal.booAtiva = true;
+
+            this.divComando.mostrar();
         }
 
         protected setEventos()

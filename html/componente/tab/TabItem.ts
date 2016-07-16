@@ -110,11 +110,6 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            if (this.tblWeb.intRegistroPaiId < 1)
-            {
-                return;
-            }
-
             if (this.tabHtml == null)
             {
                 return;
@@ -124,6 +119,18 @@ module NetZ_Web_TypeScript
             {
                 return;
             }
+
+            if (this.tabHtml.frm.jnlCadastro == null)
+            {
+                return;
+            }
+
+            if (this.tabHtml.frm.jnlCadastro.intRegistroId < 1)
+            {
+                return;
+            }
+
+            this.tblWeb.intRegistroPaiId = this.tabHtml.frm.jnlCadastro.intRegistroId;
 
             if (booAlterar && (this.tagGridHtml.getIntRowSelecionadaId() < 1))
             {

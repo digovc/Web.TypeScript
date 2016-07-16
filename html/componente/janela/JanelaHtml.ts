@@ -216,11 +216,11 @@ module NetZ_Web_TypeScript
                 return;
             }
 
-            var x = (this.intCabecalhoLeft + arg.clientX - this.intCabecalhoX);
-            var y = (this.intCabecalhoTop + (arg.clientY - this.intCabecalhoY));
+            var intLeft = (this.intCabecalhoLeft + (arg.clientX - this.intCabecalhoX));
+            var intTop = (this.intCabecalhoTop + (arg.clientY - this.intCabecalhoY));
 
-            this.jq.css("left", x);
-            this.jq.css("top", y);
+            this.jq.css("left", intLeft);
+            this.jq.css("top", intTop);
         }
 
         private divCabecalhoOnMouseUp(arg: JQueryMouseEventObject): void
@@ -257,7 +257,7 @@ module NetZ_Web_TypeScript
             var intWidth = this.jq.width();
 
             var intLeft = ((intParentWidth / 2) - (intWidth / 2));
-            var intTop = ((intParentHeight / 2) - (intHeight / 2) - 150);
+            var intTop = ((intParentHeight / 2) - (intHeight / 2) - 50);
 
             this.jq.css("left", intLeft);
             this.jq.css("top", intTop);

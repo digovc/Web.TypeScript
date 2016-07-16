@@ -384,6 +384,16 @@ module NetZ_Web_TypeScript
             return cmp;
         }
 
+        public getTabItem(tblWeb: TabelaWeb): TabItem
+        {
+            if (this.tabHtml == null)
+            {
+                return null;
+            }
+
+            return this.tabHtml.getTabItem(tblWeb);
+        }
+
         protected inicializar(): void
         {
             super.inicializar();
