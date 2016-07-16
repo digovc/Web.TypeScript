@@ -2,7 +2,7 @@
 /// <reference path="botao/actionbar/BotaoActionBar.ts"/>
 /// <reference path="ComponenteHtml.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
     // #endregion Importações
@@ -122,32 +122,14 @@ module NetZ_Web_TypeScript
 
         protected btnMenu_onClick()
         {
-            if (this.pagMobile == null)
-            {
-                return;
-            }
-
-            this.pagMobile.onActionBarMenuClick();
         }
 
         protected btnVoltar_onClick()
         {
-            if (this.pagMobile == null)
-            {
-                return;
-            }
-
-            this.pagMobile.onActionBarVoltarClick();
         }
 
         protected divTitulo_onClick()
         {
-            if (this.pagMobile == null)
-            {
-                return;
-            }
-
-            this.pagMobile.onActionBarTituloClick();
         }
 
         protected setEventos(): void

@@ -2,7 +2,7 @@
 /// <reference path="../../painel/PainelNivel.ts"/>
 /// <reference path="JnlCadastro.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
 

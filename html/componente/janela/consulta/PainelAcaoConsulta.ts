@@ -2,7 +2,7 @@
 /// <reference path="../../grid/OnRowClickListener.ts"/>
 /// <reference path="../../painel/PainelAcao.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
     // #endregion Importações

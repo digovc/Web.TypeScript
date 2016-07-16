@@ -1,11 +1,8 @@
 ﻿/// <reference path="ServerAjax.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
-
-    import ServerAjax = NetZ_Web_TypeScript.ServerAjax;
-
     // #endregion Importações
 
     // #region Enumerados
