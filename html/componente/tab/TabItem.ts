@@ -162,6 +162,32 @@ module NetZ_Web
             // TODO: Implementar.
         }
 
+        public ativar(): void
+        {
+            if (this.tabHtml == null)
+            {
+                return;
+            }
+
+            this.tabHtml.ativar(this);
+        }
+
+        private atualizarBooAtiva(): void
+        {
+            this.tabItemHead.booAtiva = this.booAtiva;
+
+            if (!this.booAtiva)
+            {
+                this.booVisivel = false;
+                return;
+            }
+
+            this.tabHtml.tabItemAtiva = this;
+
+            this.pesquisar();
+            this.mostrar();
+        }
+
         public pesquisar(): void
         {
             if (!this.booAtiva)
@@ -218,30 +244,6 @@ module NetZ_Web
             this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
 
             this.tagGridHtml.iniciar();
-        }
-
-        public ativar(): void
-        {
-            if (this.tabHtml == null)
-            {
-                return;
-            }
-
-            this.tabHtml.ativar(this);
-        }
-
-        private atualizarBooAtiva(): void
-        {
-            this.tabItemHead.booAtiva = this.booAtiva;
-
-            if (!this.booAtiva)
-            {
-                return;
-            }
-
-            this.tabHtml.tabItemAtiva = this;
-
-            this.pesquisar();
         }
 
         private getTabItemHead(): TabItemHead

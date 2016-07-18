@@ -109,6 +109,18 @@ module NetZ_Web
             ServerHttp.i.atualizarCssMain();
         }
 
+        protected inicializarArrCmp(): void
+        {
+            super.inicializarArrCmp();
+
+            if (this.arrCmp == null)
+            {
+                return;
+            }
+
+            this.arrCmp.forEach((cmp) => { cmp.tagInput.booDisabled = false; });
+        }
+
         private pesquisar(): void
         {
             if (this.pnlFiltro == null)

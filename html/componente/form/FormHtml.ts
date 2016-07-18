@@ -290,7 +290,7 @@ module NetZ_Web
                 return;
             }
 
-            var cmp: CampoHtml = new (<any>window)["NetZ_Web_TypeScript"][$(cmpJq).attr("clazz")](cmpJq.id);
+            var cmp: CampoHtml = new (<any>window)["NetZ_Web"][$(cmpJq).attr("clazz")](cmpJq.id);
 
             cmp.frm = this;
 
@@ -407,7 +407,7 @@ module NetZ_Web
             this.inicializarTabHtml();
         }
 
-        private inicializarArrCmp(): void
+        protected inicializarArrCmp(): void
         {
             if (this.arrCmp == null)
             {

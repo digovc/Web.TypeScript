@@ -157,7 +157,6 @@ module NetZ_Web
             return this._tblWeb;
         }
 
-
         // #endregion Atributos
 
         // #region Construtores
@@ -244,6 +243,28 @@ module NetZ_Web
 
         protected carregarDados(): void
         {
+            this.carregarDadosTblWeb();
+        }
+
+        private carregarDadosTblWeb(): void
+        {
+            if (this.tblWeb == null)
+            {
+                return;
+            }
+
+            if (this.jnlCadastroPai == null)
+            {
+                return;
+            }
+
+            if (this.jnlCadastroPai.tblWeb == null)
+            {
+                return;
+            }
+
+            this.tblWeb.intRegistroPaiId = this.jnlCadastroPai.intRegistroId;
+            this.tblWeb.strTblPaiNome = this.jnlCadastroPai.tblWeb.strNome;
         }
 
         protected fechar(): void
@@ -348,11 +369,6 @@ module NetZ_Web
 
         private getSrcJs(): string
         {
-            if (this.pagPrincipal == null)
-            {
-                return null;
-            }
-
             if (this.jq == null)
             {
                 return null;
@@ -381,7 +397,7 @@ module NetZ_Web
             return this.jnlCadastroPai.getTabItem2(this.tblWeb);
         }
 
-        private getTabItem2(tblWeb:TabelaWeb): TabItem
+        private getTabItem2(tblWeb: TabelaWeb): TabItem
         {
             if (this.frm == null)
             {

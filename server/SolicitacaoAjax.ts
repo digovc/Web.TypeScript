@@ -174,7 +174,7 @@ module NetZ_Web
 
             if (!Utils.getBooStrVazia(objSolicitacaoAjax.strErro))
             {
-                new Mensagem("Erro no servidor", objSolicitacaoAjax.strErro, Mensagem_EnmTipo.NEGATIVA).abrirMensagem();
+                this.mostrarMsgErro("Erro no servidor", objSolicitacaoAjax.strErro);
                 return;
             }
 

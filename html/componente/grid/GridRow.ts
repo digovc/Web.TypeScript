@@ -7,7 +7,7 @@
 /// <reference path="../../Tag.ts"/>
 /// <reference path="MenuGrid.ts"/>
 
-module NetZ_Web_TypeScript
+module NetZ_Web
 {
     // #region Importações
 

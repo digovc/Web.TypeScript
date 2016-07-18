@@ -164,7 +164,7 @@ module NetZ_Web
 
         private atualizarBooDisabled(): void
         {
-            if (this.jq)
+            if (this.jq == null)
             {
                 return;
             }

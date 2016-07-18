@@ -17,6 +17,7 @@ module NetZ_Web
     export enum Tag_EnmAnimacaoTipo
     {
         FADE,
+        IMEDIATAMENTE,
         SLIDE_HORIZONTAL,
         SLIDE_VERTICAL,
     }
@@ -55,7 +56,7 @@ module NetZ_Web
         {
             this._booVisivel = booVisivel;
 
-            this._booVisivel ? this.mostrar() : this.esconder();
+            this._booVisivel ? this.mostrar(Tag_EnmAnimacaoTipo.IMEDIATAMENTE) : this.esconder(Tag_EnmAnimacaoTipo.IMEDIATAMENTE);
         }
 
         private get intClickTimer(): number
@@ -221,6 +222,10 @@ module NetZ_Web
 
             switch (enmAnimacaoTipo)
             {
+                case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
+                    this.jq.hide(0);
+                    return;
+
                 case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
                     this.jq.slideUp();
                     return;
@@ -297,6 +302,10 @@ module NetZ_Web
 
             switch (enmAnimacaoTipo)
             {
+                case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
+                    this.jq.show(0);
+                    return;
+
                 case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
                     this.jq.slideDown();
                     return;
