@@ -22,7 +22,7 @@
                 return this._ckb;
             }
 
-            this._ckb = new CheckBox(this.tagInput.strId);
+            this._ckb = new CheckBox(this.strId + "_tagInput");
 
             return this._ckb;
         }
@@ -34,9 +34,16 @@
 
         // #region Métodos
 
+        protected getTagInput(): Input
+        {
+            return this.ckb;
+        }
+
         protected inicializar(): void
         {
             super.inicializar();
+
+            this.booMostrarTituloNunca = true;
 
             this.ckb.iniciar();
 

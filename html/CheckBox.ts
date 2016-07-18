@@ -38,8 +38,18 @@ module NetZ_Web
 
         protected atualizarStrValor(): void
         {
+            super.atualizarStrValor();
+
             this.divSeletor.jq.animate({ "left": this.booValor ? "15px" : "1px" }, 200);
             this.divSeletor.jq.css("background-color", this.booValor ? "rgb(132,202,156)" : Utils.STR_VAZIA);
+        }
+
+        protected inicializarStrValor(): void
+        {
+            //super.inicializarStrValor();
+
+            this.strValor = this.getStrAttValor("value");
+            this.strValorInicial = this.strValor;
         }
 
         protected setEventos(): void

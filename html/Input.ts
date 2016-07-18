@@ -38,7 +38,7 @@ module NetZ_Web
         {
             this._booDisabled = booDisabled;
 
-            this.atualizarBooDisabled();
+            this.atualizarBooDisabled(this._booDisabled);
         }
 
         public get booValor(): boolean
@@ -145,12 +145,12 @@ module NetZ_Web
             this._strValorAnterior = strValorAnterior;
         }
 
-        private get strValorInicial(): string
+        protected get strValorInicial(): string
         {
             return this._strValorInicial;
         }
 
-        private set strValorInicial(strValorInicial: string)
+        protected set strValorInicial(strValorInicial: string)
         {
             this._strValorInicial = strValorInicial;
         }
@@ -162,14 +162,9 @@ module NetZ_Web
 
         // #region Métodos
 
-        private atualizarBooDisabled(): void
+        private atualizarBooDisabled(booDisabled: boolean): void
         {
-            if (this.jq == null)
-            {
-                return;
-            }
-
-            if (this.booDisabled)
+            if (booDisabled)
             {
                 this.jq.attr("disabled", "true");
             }
@@ -211,7 +206,7 @@ module NetZ_Web
             this.inicializarStrValor();
         }
 
-        private inicializarStrValor(): void
+        protected inicializarStrValor(): void
         {
             this.strValor = this.jq.val();
             this.strValorInicial = this.strValor;

@@ -17,11 +17,13 @@ module NetZ_Web
     export class CampoHtml extends ComponenteHtml implements OnFocusInListener, OnFocusOutListener, OnValorAlteradoListener
     {
         // #region Constantes
+
         // #endregion Constantes
 
         // #region Atributos
 
         private _booEmFoco: boolean;
+        private _booMostrarTituloNunca: boolean;
         private _booMostrarTituloSempre: boolean;
         private _clnWeb: ColunaWeb;
         private _divTitulo: Div;
@@ -45,6 +47,16 @@ module NetZ_Web
             this._booEmFoco = booSEmFoco;
 
             this.atualizarBooEmFoco();
+        }
+
+        public get booMostrarTituloNunca(): boolean
+        {
+            return this._booMostrarTituloNunca;
+        }
+
+        public set booMostrarTituloNunca(booMostrarTituloNunca: boolean)
+        {
+            this._booMostrarTituloNunca = booMostrarTituloNunca;
         }
 
         private get booMostrarTituloSempre(): boolean
@@ -133,6 +145,7 @@ module NetZ_Web
 
             return this._tagInput;
         }
+
 
         // #endregion Atributos
 
@@ -273,18 +286,16 @@ module NetZ_Web
 
         protected mostrarDivTitulo(booMostrar: boolean): void
         {
-            if (booMostrar)
+            if (booMostrar && !this.booMostrarTituloNunca)
             {
                 this.divTitulo.jq.animate({ opacity: 1 }, 200);
                 return;
             }
 
-            if (this.booMostrarTituloSempre)
+            if (!this.booMostrarTituloSempre)
             {
-                return;
+                this.divTitulo.jq.animate({ opacity: 0 }, 200);
             }
-
-            this.divTitulo.jq.animate({ opacity: 0 }, 200);
         }
 
         public receberFoco(): void
