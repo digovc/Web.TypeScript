@@ -206,6 +206,7 @@ module NetZ_Web
 
             if (this.intRegistroId < 1)
             {
+                new Notificacao("Salve o registro antes.").abrirNotificacao();
                 return;
             }
 

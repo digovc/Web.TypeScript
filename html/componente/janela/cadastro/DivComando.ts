@@ -88,7 +88,35 @@ module NetZ_Web
                 return;
             }
 
+            this.btnTag.mostrar();
             this.frm.salvar();
+        }
+
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.inicializarBtnTag();
+        }
+
+        private inicializarBtnTag(): void
+        {
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            if (this.frm.jnlCadastro == null)
+            {
+                return;
+            }
+
+            if (this.frm.jnlCadastro.intRegistroId < 1)
+            {
+                return;
+            }
+
+            this.btnTag.mostrar();
         }
 
         protected setEventos(): void

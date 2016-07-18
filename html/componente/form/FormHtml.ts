@@ -398,9 +398,9 @@ module NetZ_Web
         {
             super.inicializar();
 
-            this.divComando.iniciar();
-
             this.inicializarArrCmp();
+
+            this.divComando.iniciar();
 
             this.inicializarPnlDica();
 
