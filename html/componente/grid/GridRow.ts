@@ -126,7 +126,7 @@ module NetZ_Web
         {
             this.selecionar(arg.ctrlKey);
 
-            new MenuGrid().abrirMenuGrid(arg);
+            new MenuGrid(this).abrirMenuGrid(arg);
         }
 
         private processarOnDoubleClick(): void
@@ -142,6 +142,21 @@ module NetZ_Web
             }
 
             this.tagGridHtml.dispararEvtOnRowDoubleClickListener(this);
+        }
+
+        public processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        {
+            if (arg == null)
+            {
+                return;
+            }
+
+            if (this.tagGridHtml == null)
+            {
+                return;
+            }
+
+            this.tagGridHtml.processarOnGridMenuClick(arg);
         }
 
         private selecionar(booControl: boolean): void

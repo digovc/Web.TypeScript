@@ -14,7 +14,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlConsulta extends JanelaHtml implements OnRowDoubleClickListener
+    export class JnlConsulta extends JanelaHtml implements OnGridMenuClickListener, OnRowDoubleClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -193,6 +193,11 @@ module NetZ_Web
             this.pagPrincipal.abrirFiltroCadastro(intFiltroId);
         }
 
+        private abrirMenu(arg: JQueryEventObject): void
+        {
+            // TODO: Implementar.
+        }
+
         private alterar(tagGridRow: GridRow): void
         {
             if (tagGridRow == null)
@@ -250,7 +255,12 @@ module NetZ_Web
             this.pnlFiltro.iniciar();
         }
 
-        private inicializarGridHtml(): void
+        protected inicializarPosicao(): void
+        {
+            //super.inicializarPosicao();
+        }
+
+        private inicializartagGridHtml(): void
         {
             if (this.jq == null)
             {
@@ -261,12 +271,8 @@ module NetZ_Web
 
             this.tagGridHtml.iniciar();
 
+            this.tagGridHtml.addEvtOnGridMenuClickListener(this);
             this.tagGridHtml.addEvtOnRowDoubleClickListener(this);
-        }
-
-        protected inicializarPosicao(): void
-        {
-            //super.inicializarPosicao();
         }
 
         public maximinizarGrid(): void
@@ -310,9 +316,27 @@ module NetZ_Web
 
             this.divGrid.jq.html(objSolicitacaoAjaxDb.strData);
 
-            this.inicializarGridHtml();
+            this.inicializartagGridHtml();
 
             this.maximinizarGrid();
+        }
+
+        private processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        {
+            switch (arg.enmTipo)
+            {
+                case OnGridMenuClickArg_EnmAcao.ADICIONAR:
+                    this.abrirCadastro(0);
+                    return;
+
+                case OnGridMenuClickArg_EnmAcao.ALTERAR:
+                    this.alterar(arg.tagGridRow);
+                    return;
+
+                case OnGridMenuClickArg_EnmAcao.MENU:
+                    this.abrirMenu(arg.argOrigem);
+                    return;
+            }
         }
 
         public restaurarGrid(): void
@@ -329,6 +353,36 @@ module NetZ_Web
         // #endregion Métodos
 
         // #region Eventos
+
+        public onGridMenuClick(objSender: Object, arg: OnGridMenuClickArg): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (objSender != this.tagGridHtml)
+                {
+                    return;
+                }
+
+                if (arg == null)
+                {
+                    return;
+                }
+
+                this.processarOnGridMenuClick(arg);
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         public onRowDoubleClick(objSender: Object, tagGridRow: GridRow): void
         {

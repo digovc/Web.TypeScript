@@ -88,7 +88,7 @@ module NetZ_Web
             return this._tagTbody;
         }
 
-        private get tblWeb(): TabelaWeb
+        public get tblWeb(): TabelaWeb
         {
             if (this._tblWeb != null)
             {
@@ -245,6 +245,11 @@ module NetZ_Web
             }
         }
 
+        public processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        {
+            this.dispararEvtOnGridMenuClickListener(arg);
+        }
+
         public removerRowSelecionada(rowSelecionada: GridRow): void
         {
             if (rowSelecionada == null)
@@ -299,6 +304,77 @@ module NetZ_Web
         // #endregion Métodos
 
         // #region Eventos
+
+        // #region Evento OnGridMenuClickListener
+
+        private _arrEvtOnGridMenuClickListener: Array<OnGridMenuClickListener>;
+
+        private get arrEvtOnGridMenuClickListener(): Array<OnGridMenuClickListener>
+        {
+            if (this._arrEvtOnGridMenuClickListener != null)
+            {
+                return this._arrEvtOnGridMenuClickListener;
+            }
+
+            this._arrEvtOnGridMenuClickListener = new Array<OnGridMenuClickListener>();
+
+            return this._arrEvtOnGridMenuClickListener;
+        }
+
+        public addEvtOnGridMenuClickListener(evtOnGridMenuClickListener: OnGridMenuClickListener): void
+        {
+            if (evtOnGridMenuClickListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnGridMenuClickListener.indexOf(evtOnGridMenuClickListener) > -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnGridMenuClickListener.push(evtOnGridMenuClickListener);
+        }
+
+        private dispararEvtOnGridMenuClickListener(arg: OnGridMenuClickArg): void
+        {
+            if (arg == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnGridMenuClickListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnGridMenuClickListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onGridMenuClick(this, arg);
+            });
+        }
+
+        public removerEvtOnGridMenuClickListener(evtOnGridMenuClickListener: OnGridMenuClickListener): void
+        {
+            if (evtOnGridMenuClickListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnGridMenuClickListener.indexOf(evtOnGridMenuClickListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnGridMenuClickListener.splice(this.arrEvtOnGridMenuClickListener.indexOf(evtOnGridMenuClickListener), 1);
+        }
+
+        // #endregion Evento OnGridMenuClickListener
 
         // #region Evento OnRowClickListener
 

@@ -19,6 +19,7 @@ module NetZ_Web
         private _btnAlterar: BotaoCircular;
         private _btnApagar: BotaoCircular;
         private _btnMenu: BotaoCircular;
+        private _tagGridRow: GridRow = null;
 
         private get btnAdicionar(): BotaoCircular
         {
@@ -68,15 +69,26 @@ module NetZ_Web
             return this._btnMenu;
         }
 
+        private get tagGridRow(): GridRow
+        {
+            return this._tagGridRow;
+        }
+
+        private set tagGridRow(tagGridRow: GridRow)
+        {
+            this._tagGridRow = tagGridRow;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
 
-        constructor()
+        constructor(tagGridRow: GridRow)
         {
             super(null);
 
             this.strId = ("tagMenuGrid_" + this.intObjetoId);
+            this.tagGridRow = tagGridRow;
         }
 
         // #endregion Construtores
@@ -85,6 +97,11 @@ module NetZ_Web
 
         public abrirMenuGrid(arg: JQueryMouseEventObject): void
         {
+            if (this.tagGridRow == null)
+            {
+                return;
+            }
+
             if (arg == null)
             {
                 return;
@@ -141,11 +158,58 @@ module NetZ_Web
             return strLayoutFixo;
         }
 
+        private processarClick(objSender: Object, argOrigem: JQueryEventObject): void
+        {
+            if (objSender == null)
+            {
+                return;
+            }
+
+            if (argOrigem == null)
+            {
+                return;
+            }
+
+            if (this.tagGridRow == null)
+            {
+                return;
+            }
+
+            var arg = new OnGridMenuClickArg();
+
+            arg.argOrigem = argOrigem;
+            arg.tagGridRow = this.tagGridRow;
+
+            switch (objSender)
+            {
+                case this.btnAdicionar:
+                    arg.enmTipo = OnGridMenuClickArg_EnmAcao.ADICIONAR;
+                    break;
+
+                case this.btnAlterar:
+                    arg.enmTipo = OnGridMenuClickArg_EnmAcao.ALTERAR;
+                    break;
+
+                case this.btnApagar:
+                    arg.enmTipo = OnGridMenuClickArg_EnmAcao.APAGAR;
+                    break;
+
+                case this.btnMenu:
+                    arg.enmTipo = OnGridMenuClickArg_EnmAcao.MENU;
+                    break;
+            }
+
+            this.tagGridRow.processarOnGridMenuClick(arg);
+        }
+
         protected setEventos(): void
         {
             super.setEventos();
 
             window.setTimeout(() => { AppWeb.i.pag.addEvtOnClickListener(this); }, 1);
+
+            this.btnAdicionar.addEvtOnClickListener(this);
+            this.btnAlterar.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos
@@ -160,6 +224,16 @@ module NetZ_Web
             // #region Ações
             try
             {
+                switch (objSender)
+                {
+                    case this.btnAdicionar:
+                    case this.btnAlterar:
+                    case this.btnApagar:
+                    case this.btnMenu:
+                        this.processarClick(objSender, arg);
+                        return;
+                }
+
                 this.dispose();
             }
             catch (ex)

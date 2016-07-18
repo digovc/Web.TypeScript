@@ -9,7 +9,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TabItem extends ComponenteHtml
+    export class TabItem extends ComponenteHtml implements OnGridMenuClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -143,6 +143,10 @@ module NetZ_Web
             this.tabHtml.frm.abrirCadastroFilho(this.tblWeb);
         }
 
+        private abrirMenu(arg: JQueryEventObject): void
+        {
+        }
+
         public apagar(): void
         {
             var intRegistroId = this.tagGridHtml.getIntRowSelecionadaId();
@@ -244,6 +248,8 @@ module NetZ_Web
             this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
 
             this.tagGridHtml.iniciar();
+
+            this.tagGridHtml.addEvtOnGridMenuClickListener(this);
         }
 
         private getTabItemHead(): TabItemHead
@@ -333,9 +339,57 @@ module NetZ_Web
             this.tabItemHead.iniciar();
         }
 
+        private processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        {
+            switch (arg.enmTipo)
+            {
+                case OnGridMenuClickArg_EnmAcao.ADICIONAR:
+                    this.abrirCadastro(false);
+                    return;
+
+                case OnGridMenuClickArg_EnmAcao.ALTERAR:
+                    this.abrirCadastro(true);
+                    return;
+
+                case OnGridMenuClickArg_EnmAcao.MENU:
+                    this.abrirMenu(arg.argOrigem);
+                    return;
+            }
+        }
+
         // #endregion Métodos
 
         // #region Eventos
+
+        public onGridMenuClick(objSender: Object, arg: OnGridMenuClickArg): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                if (objSender != this.tagGridHtml)
+                {
+                    return;
+                }
+
+                if (arg == null)
+                {
+                    return;
+                }
+
+                this.processarOnGridMenuClick(arg);
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
 
         // #endregion Eventos
     }
