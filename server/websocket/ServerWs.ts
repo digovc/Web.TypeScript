@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class ServerWs extends Objeto
+    export abstract class ServerWs extends Objeto
     {
         // #region Constantes
         // #endregion Constantes

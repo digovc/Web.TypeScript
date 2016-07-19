@@ -1,4 +1,5 @@
 ﻿/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="OnGridMenuClickArg.ts"/>
 
 module NetZ_Web
 {

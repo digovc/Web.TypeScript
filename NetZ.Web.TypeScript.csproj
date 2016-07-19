@@ -135,7 +135,7 @@
     <TypeScriptCompile Include="server\SolicitacaoAjax.ts" />
     <TypeScriptCompile Include="server\SolicitacaoAjaxDb.ts" />
     <TypeScriptCompile Include="Utils.ts" />
-    <TypeScriptCompile Include="websocket\ServerWs.ts" />
+    <TypeScriptCompile Include="server\websocket\ServerWs.ts" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Data.DataSetExtensions" />
@@ -173,7 +173,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
     <TypeScriptSourceMap>False</TypeScriptSourceMap>
-    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptTarget>ES6</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>

@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="GridRow.ts"/>
+/// <reference path="OnGridMenuClickListener.ts"/>
 /// <reference path="OnRowClickListener.ts"/>
 
 module NetZ_Web
