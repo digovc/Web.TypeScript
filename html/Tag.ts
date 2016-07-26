@@ -213,6 +213,12 @@ module NetZ_Web
         {
             super.dispose()
 
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            this.esconder();
             this.jq.remove();
         }
 

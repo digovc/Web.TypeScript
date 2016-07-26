@@ -8,6 +8,9 @@
 /// <reference path="OnFocusChangeListener.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
+/// <reference path="server/ajax/ServerAjaxDb.ts"/>
+/// <reference path="server/ajax/SolicitacaoAjax.ts"/>
+/// <reference path="server/ajax/SolicitacaoAjaxDb.ts"/>
 
 module NetZ_Web
 {
@@ -50,6 +53,7 @@ module NetZ_Web
         private _msg: Mensagem;
         private _objTema: TemaDefault;
         private _pag: PaginaHtml;
+        private _srvAjaxDb: ServerAjaxDb;
         private _strSessionId: string;
         private _tagFocoExclusivo: ComponenteHtml;
 
@@ -112,6 +116,18 @@ module NetZ_Web
         public set pag(pag: PaginaHtml)
         {
             this._pag = pag;
+        }
+
+        public get srvAjaxDb(): ServerAjaxDb
+        {
+            if (this._srvAjaxDb != null)
+            {
+                return this._srvAjaxDb;
+            }
+
+            this._srvAjaxDb = this.getSrvAjaxDb();
+
+            return this._srvAjaxDb;
         }
 
         public get strSessionId(): string
@@ -200,6 +216,11 @@ module NetZ_Web
 
         public carregarTbl(strTblNome: string): void
         {
+            if (this.srvAjaxDb == null)
+            {
+                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+            }
+
             if (Utils.getBooStrVazia(strTblNome))
             {
                 return;
@@ -212,12 +233,12 @@ module NetZ_Web
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.CARREGAR_TBL_WEB;
+            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_CARREGAR_TBL_WEB;
 
             objSolicitacaoAjaxDb.addStr(strTblNome);
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjax: SolicitacaoAjax) => { this.carregarTblSucesso(objSolicitacaoAjax); });
 
-            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            this.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
         }
 
         private carregarTblSucesso(objSolicitacaoAjax: SolicitacaoAjax): void
@@ -243,6 +264,8 @@ module NetZ_Web
         {
             return new TemaDefault();
         }
+
+        protected abstract getSrvAjaxDb(): ServerAjaxDb;
 
         private getStrCookieValue(strCookieNome: string): string
         {

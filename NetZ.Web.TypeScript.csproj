@@ -30,6 +30,7 @@
     <TypeScriptCompile Include="database\DataTable.ts" />
     <TypeScriptCompile Include="database\ParValorNome.ts" />
     <TypeScriptCompile Include="database\TblFiltro.ts" />
+    <TypeScriptCompile Include="database\dominio\DominioBase.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
     <TypeScriptCompile Include="html\componente\ActionBar.ts" />
@@ -66,8 +67,8 @@
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
     <TypeScriptCompile Include="Keys.ts" />
-    <TypeScriptCompile Include="LayoutFixo.ts" />
-    <TypeScriptCompile Include="LayoutFixoManager.ts" />
+    <TypeScriptCompile Include="Constante.ts" />
+    <TypeScriptCompile Include="ConstanteManager.ts" />
     <TypeScriptCompile Include="OnClickRightListener.ts" />
     <TypeScriptCompile Include="OnFocusOutListener.ts" />
     <TypeScriptCompile Include="OnFocusInListener.ts" />
@@ -128,12 +129,12 @@
     <TypeScriptCompile Include="database\ColunaWeb.ts" />
     <TypeScriptCompile Include="database\FiltroWeb.ts" />
     <TypeScriptCompile Include="database\TabelaWeb.ts" />
-    <TypeScriptCompile Include="server\ServerAjax.ts" />
-    <TypeScriptCompile Include="server\ServerAjaxDb.ts" />
+    <TypeScriptCompile Include="server\ajax\ServerAjax.ts" />
+    <TypeScriptCompile Include="server\ajax\ServerAjaxDb.ts" />
     <TypeScriptCompile Include="server\ServerBase.ts" />
     <TypeScriptCompile Include="server\ServerHttp.ts" />
-    <TypeScriptCompile Include="server\SolicitacaoAjax.ts" />
-    <TypeScriptCompile Include="server\SolicitacaoAjaxDb.ts" />
+    <TypeScriptCompile Include="server\ajax\SolicitacaoAjax.ts" />
+    <TypeScriptCompile Include="server\ajax\SolicitacaoAjaxDb.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="server\websocket\ServerWs.ts" />
   </ItemGroup>
@@ -176,7 +177,7 @@
     <TypeScriptTarget>ES6</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
-    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptModuleKind>None</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
     <TypeScriptOutDir>../Principal/bin/Debug/res/js/Web.TypeScript</TypeScriptOutDir>

@@ -241,6 +241,11 @@ module NetZ_Web
 
         private salvar(): void
         {
+            if (AppWeb.i.srvAjaxDb == null)
+            {
+                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+            }
+
             if (this.tblWeb == null)
             {
                 return;
@@ -275,9 +280,9 @@ module NetZ_Web
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.salvarSucesso(objSolicitacaoAjaxDb); }); // TODO: Informar ao usuário.
             objSolicitacaoAjaxDb.addJsn(this.tblWeb);
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.SALVAR;
+            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
 
-            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
         }
 
         private salvarSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void

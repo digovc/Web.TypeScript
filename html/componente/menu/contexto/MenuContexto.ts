@@ -46,7 +46,7 @@ module NetZ_Web
 
         // #region Métodos
 
-        public abrirMenu(arg: JQueryEventObject): void
+        public abrirMenu(arg: BaseJQueryEventObject): void
         {
             if (arg == null)
             {
@@ -80,7 +80,9 @@ module NetZ_Web
 
             $(document.body).append(this.strLayoutFixo);
 
-            this.jq.css("left", (arg.pageX - 50));
+            var intLeft = this.calcularLeft(arg.pageX);
+
+            this.jq.css("left", intLeft);
             this.jq.css("top", (arg.pageY - 10));
 
             this.iniciar();
@@ -126,6 +128,18 @@ module NetZ_Web
             mci.strTitulo = strOpcaoTitulo;
 
             this.addMci(mci);
+        }
+
+        private calcularLeft(intPageX: number): number
+        {
+            var intResultado = (intPageX + 250 - window.screen.width);
+
+            if (intResultado < 0)
+            {
+                return (intPageX - 50);
+            }
+
+            return (intPageX - 50 - intResultado);
         }
 
         public dispose(): void

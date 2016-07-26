@@ -44,6 +44,32 @@
         }
 
         /**
+         * Converte o valor de strValor para seu correspondente booleano (true ou false).
+         * A string será transformada para minúsculo, logo "S" é o mesmo que "s".
+         * @param strValor Texto que se deseja verificar o valor booleano.
+         * @return True caso strValor contenha: 1, sim, s, true, t. E false em qualquer outra possibilidade.
+         */
+        public static getBoo(strValor: string): boolean
+        {
+            if (Utils.getBooStrVazia(strValor))
+            {
+                return false;
+            }
+
+            switch (strValor.toLowerCase())
+            {
+                case "1":
+                case "s":
+                case "sim":
+                case "t":
+                case "true":
+                    return true;
+            }
+
+            return false;
+        }
+
+        /**
          * Valida se um texto é igual a null ou vazio (""). Caso ele seja
          * retorna true.
          */
@@ -67,25 +93,69 @@
             return false;
         }
 
-        /**
-         * Verifica se o email contido em strEmail é válido. Retorna true
-         * em caso afirmativo.
-         */
-        public static validarEmail(strEmail: string): boolean
+        public static getIntRandom(intMinimo: number, intMaximo: number): number
         {
-            if (Utils.getBooStrVazia(strEmail))
+            var intRandom = Math.random();
+
+            var intDiff = (intMaximo - intMinimo);
+
+            intDiff = (intDiff * intRandom);
+
+            return Math.abs(Math.floor(intMinimo + intDiff));
+        }
+
+        public static getStrDataAmigavel(dtt: Date): string
+        {
+            if (dtt == null)
             {
-                return false;
+                return null;
             }
 
-            var objRegExp = new RegExp("/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/");
+            var dttTemp = new Date();
 
-            if (objRegExp.test(strEmail))
+            dttTemp.setDate(dttTemp.getDate() + 2);
+
+            var strResultado: string;
+
+            if (dtt.toDateString() == dttTemp.toDateString())
             {
-                return true;
+                strResultado = "Depois de amanhã às _str_time";
+                return strResultado.replace("_str_time", dtt.toLocaleTimeString());
             }
 
-            return false;
+            dttTemp.setDate(dttTemp.getDate() - 1);
+
+            if (dtt.toDateString() == dttTemp.toDateString())
+            {
+                strResultado = "Amanhã às _str_time";
+                return strResultado.replace("_str_time", dtt.toLocaleTimeString());
+            }
+
+            dttTemp.setDate(dttTemp.getDate() - 1);
+
+            if (dtt.toDateString() == dttTemp.toDateString())
+            {
+                strResultado = "Hoje às _str_time";
+                return strResultado.replace("_str_time", dtt.toLocaleTimeString());
+            }
+
+            dttTemp.setDate(dttTemp.getDate() - 1);
+
+            if (dtt.toDateString() == dttTemp.toDateString())
+            {
+                strResultado = "Ontem às _str_time";
+                return strResultado.replace("_str_time", dtt.toLocaleTimeString());
+            }
+
+            dttTemp.setDate(dttTemp.getDate() - 1);
+
+            if (dtt.toDateString() == dttTemp.toDateString())
+            {
+                strResultado = "Ontem de ontem às _str_time";
+                return strResultado.replace("_str_time", dtt.toLocaleTimeString());
+            }
+
+            return dtt.toLocaleString();
         }
 
         public static getStrTamanhoFixo(str: string, intTamanho: number, strComplemento: string = " ", booDireita: boolean = true): string
@@ -136,26 +206,21 @@
         }
 
         /**
-         * Converte o valor de strValor para seu correspondente booleano (true ou false).
-         * A string será transformada para minúsculo, logo "S" é o mesmo que "s".
-         * @param strValor Texto que se deseja verificar o valor booleano.
-         * @return True caso strValor contenha: 1, sim, s, true, t. E false em qualquer outra possibilidade.
+         * Verifica se o email contido em strEmail é válido. Retorna true
+         * em caso afirmativo.
          */
-        public static getBoo(strValor: string): boolean
+        public static validarEmail(strEmail: string): boolean
         {
-            if (Utils.getBooStrVazia(strValor))
+            if (Utils.getBooStrVazia(strEmail))
             {
                 return false;
             }
 
-            switch (strValor.toLowerCase())
+            var objRegExp = new RegExp("/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/");
+
+            if (objRegExp.test(strEmail))
             {
-                case "1":
-                case "s":
-                case "sim":
-                case "t":
-                case "true":
-                    return true;
+                return true;
             }
 
             return false;

@@ -80,6 +80,11 @@ module NetZ_Web
 
         public abrirCadastro(tblWeb: TabelaWeb): void
         {
+            if (AppWeb.i.srvAjaxDb == null)
+            {
+                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+            }
+
             if (tblWeb == null)
             {
                 return;
@@ -92,12 +97,12 @@ module NetZ_Web
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO;
+            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO;
 
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirCadastroSucesso(objSolicitacaoAjaxDb); });
             objSolicitacaoAjaxDb.addJsn(tblWeb);
 
-            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
         }
 
         private abrirCadastroSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
@@ -119,6 +124,11 @@ module NetZ_Web
 
         public abrirConsulta(tblWeb: TabelaWeb): void
         {
+            if (AppWeb.i.srvAjaxDb == null)
+            {
+                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+            }
+
             if (tblWeb == null)
             {
                 return;
@@ -135,10 +145,10 @@ module NetZ_Web
 
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirConsultaSucesso(objSolicitacaoAjaxDb); });
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CONSULTA;
+            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CONSULTA;
             objSolicitacaoAjaxDb.strData = JSON.stringify(tblWeb);
 
-            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
         }
 
         private abrirConsultaSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
@@ -169,6 +179,11 @@ module NetZ_Web
 
         public abrirJnlTag(tblWeb: TabelaWeb): void
         {
+            if (AppWeb.i.srvAjaxDb == null)
+            {
+                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+            }
+
             if (tblWeb == null)
             {
                 return;
@@ -186,12 +201,12 @@ module NetZ_Web
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_JANELA_TAG;
+            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_JANELA_TAG;
 
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirJnlTagSucesso(tblWeb, objSolicitacaoAjaxDb); });
             objSolicitacaoAjaxDb.addJsn(tblWeb);
 
-            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
         }
 
         private abrirJnlTagSucesso(tblWeb: TabelaWeb, objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void

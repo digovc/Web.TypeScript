@@ -194,6 +194,11 @@ module NetZ_Web
 
         public pesquisar(): void
         {
+            if (AppWeb.i.srvAjaxDb == null)
+            {
+                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+            }
+
             if (!this.booAtiva)
             {
                 return;
@@ -211,12 +216,12 @@ module NetZ_Web
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_GRID;
+            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_GRID;
             objSolicitacaoAjaxDb.strData = JSON.stringify(this.tblWeb);
 
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.pesquisarSucesso(objSolicitacaoAjaxDb); });
 
-            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
         }
 
         private pesquisarSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void

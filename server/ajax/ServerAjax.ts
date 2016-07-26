@@ -1,4 +1,4 @@
-﻿/// <reference path="ServerBase.ts"/>
+﻿/// <reference path="../ServerBase.ts"/>
 
 module NetZ_Web
 {

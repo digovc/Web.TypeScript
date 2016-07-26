@@ -1,6 +1,4 @@
-﻿/// <reference path="../../../../server/ServerAjaxDb.ts"/>
-/// <reference path="../../../../server/SolicitacaoAjaxDb.ts"/>
-/// <reference path="../../campo/CampoAlfanumerico.ts"/>
+﻿/// <reference path="../../campo/CampoAlfanumerico.ts"/>
 /// <reference path="../../campo/CampoCheckBox.ts"/>
 /// <reference path="../../campo/CampoHtml.ts"/>
 /// <reference path="../../campo/CampoNumerico.ts"/>
@@ -472,6 +470,11 @@ module NetZ_Web
 
         public salvar(): void
         {
+            if (AppWeb.i.srvAjaxDb == null)
+            {
+                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+            }
+
             this.carregarDados();
 
             if (!this.validarDados())
@@ -481,12 +484,12 @@ module NetZ_Web
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.SALVAR;
+            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
 
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.salvarSucesso(objSolicitacaoAjaxDb); });
             objSolicitacaoAjaxDb.addJsn(this.tblWeb);
 
-            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
         }
 
         private salvarSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void

@@ -1,6 +1,4 @@
-﻿/// <reference path="../AppWeb.ts"/>
-
-module NetZ_Web
+﻿module NetZ_Web
 {
     // #region Importações
 
@@ -21,6 +19,7 @@ module NetZ_Web
         private _arrFncSucesso: Array<Function>;
         private _strData: string;
         private _strErro: string;
+        private _strJsonTipo: string;
 
         private get arrFncErro(): Array<Function>
         {
@@ -64,6 +63,16 @@ module NetZ_Web
         public set strErro(strErro: string)
         {
             this._strErro = strErro;
+        }
+
+        public get strJsonTipo(): string
+        {
+            return this._strJsonTipo;
+        }
+
+        public set strJsonTipo(strJsonTipo: string)
+        {
+            this._strJsonTipo = strJsonTipo;
         }
 
         // #endregion Atributos
@@ -114,7 +123,7 @@ module NetZ_Web
             this.arrFncSucesso.push(fncSucesso);
         }
 
-        public addJsn(obj: any): void
+        public addJsn(obj: Object): void
         {
             if (obj == null)
             {
@@ -122,6 +131,7 @@ module NetZ_Web
             }
 
             this.strData = JSON.stringify(obj);
+            this.strJsonTipo = obj.constructor.name;
         }
 
         public addStr(str: string): void

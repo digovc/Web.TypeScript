@@ -117,6 +117,11 @@ module NetZ_Web
 
         private abrirFiltroConteudo(): void
         {
+            if (AppWeb.i.srvAjaxDb == null)
+            {
+                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+            }
+
             if (this.pnlFiltro == null)
             {
                 return;
@@ -134,12 +139,12 @@ module NetZ_Web
 
             var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.ABRIR_CADASTRO_FILTRO_CONTEUDO;
+            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
 
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirFiltroConteudoSucesso(objSolicitacaoAjaxDb); });
             objSolicitacaoAjaxDb.addJsn(TblFiltro.i);
 
-            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
         }
 
         private abrirFiltroCadastro(intFiltroId: number): void

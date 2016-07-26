@@ -45,6 +45,11 @@ module NetZ_Web
         {
             this.limparDados();
 
+            if (AppWeb.i.srvAjaxDb == null)
+            {
+                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+            }
+
             if (tblWeb == null)
             {
                 return;
@@ -57,12 +62,12 @@ module NetZ_Web
 
             var objSolicitacaoAjaxDb: SolicitacaoAjaxDb = new SolicitacaoAjaxDb();
 
-            objSolicitacaoAjaxDb.enmMetodo = SolicitacaoAjaxDb_EnmMetodo.PESQUISAR_COMBO_BOX;
+            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_COMBO_BOX;
 
             objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.carregarDadosSucesso(objSolicitacaoAjaxDb); });
             objSolicitacaoAjaxDb.addJsn(tblWeb);
 
-            ServerAjaxDb.i.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
         }
 
         private carregarDadosSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void

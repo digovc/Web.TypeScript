@@ -1,4 +1,4 @@
-﻿/// <reference path="../../LayoutFixoManager.ts"/>
+﻿/// <reference path="../../ConstanteManager.ts"/>
 /// <reference path="../Div.ts"/>
 
 module NetZ_Web
@@ -39,7 +39,7 @@ module NetZ_Web
 
         private getStrLayoutFixo(): string
         {
-            var strLayoutFixo = LayoutFixoManager.i.getStrLayoutFixo(this.strClassNome);
+            var strLayoutFixo = ConstanteManager.i.getStrConstante(this.strClassNome + "_layoutFixo");
 
             if (Utils.getBooStrVazia(strLayoutFixo))
             {

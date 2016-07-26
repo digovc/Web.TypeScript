@@ -7,42 +7,26 @@ module NetZ_Web
 
     // #region Enumerados
 
-    export enum SolicitacaoAjaxDb_EnmMetodo
-    {
-        ABRIR_CADASTRO,
-        ABRIR_CADASTRO_FILTRO_CONTEUDO,
-        ABRIR_CONSULTA,
-        ABRIR_JANELA_TAG,
-        ADICIONAR,
-        APAGAR,
-        CARREGAR_TBL_WEB,
-        FILTRO,
-        NONE,
-        PESQUISAR_COMBO_BOX,
-        PESQUISAR_GRID,
-        RECUPERAR,
-        SALVAR,
-    }
-
     // #endregion Enumerados
 
     export class SolicitacaoAjaxDb extends SolicitacaoAjax
     {
         // #region Constantes
+
         // #endregion Constantes
 
         // #region Atributos
 
-        private _enmMetodo: SolicitacaoAjaxDb_EnmMetodo = SolicitacaoAjaxDb_EnmMetodo.NONE;
+        private _strMetodo: string;
 
-        public get enmMetodo(): SolicitacaoAjaxDb_EnmMetodo
+        public get strMetodo(): string
         {
-            return this._enmMetodo;
+            return this._strMetodo;
         }
 
-        public set enmMetodo(enmMetodo: SolicitacaoAjaxDb_EnmMetodo)
+        public set strMetodo(strMetodo: string)
         {
-            this._enmMetodo = enmMetodo;
+            this._strMetodo = strMetodo;
         }
 
         // #endregion Atributos
@@ -59,12 +43,7 @@ module NetZ_Web
                 return false;
             }
 
-            if (SolicitacaoAjaxDb_EnmMetodo.NONE == this.enmMetodo)
-            {
-                return false;
-            }
-
-            if (Utils.getBooStrVazia(this.strData))
+            if (Utils.getBooStrVazia(this.strMetodo))
             {
                 return false;
             }
