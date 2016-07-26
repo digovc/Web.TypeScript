@@ -275,31 +275,31 @@ module NetZ_Web
             this.tblWeb.clnWebIntId.intValor = intRegistroId;
             this.tblWeb.getClnWeb(TabelaWeb.SQL_CLN_STR_TAG_NOME).strValor = strTagFormatada;
 
-            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
 
-            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.salvarSucesso(objSolicitacaoAjaxDb); }); // TODO: Informar ao usuário.
-            objSolicitacaoAjaxDb.addJsn(this.tblWeb);
+            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.salvarSucesso(objInterlocutorAjaxDb); }); // TODO: Informar ao usuário.
+            objInterlocutorAjaxDb.addJsn(this.tblWeb);
 
-            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
+            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
 
-            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
         }
 
-        private salvarSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        private salvarSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
         {
-            if (objSolicitacaoAjaxDb == null)
+            if (objInterlocutorAjaxDb == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
             {
                 return;
             }
 
             var tblWeb = new TabelaWeb(null);
 
-            tblWeb.copiarDados(JSON.parse(objSolicitacaoAjaxDb.strData));
+            tblWeb.copiarDados(JSON.parse(objInterlocutorAjaxDb.strData));
 
             if (Utils.getBooStrVazia(tblWeb.strCritica))
             {

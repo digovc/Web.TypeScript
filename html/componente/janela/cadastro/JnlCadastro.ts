@@ -482,31 +482,31 @@ module NetZ_Web
                 return;
             }
 
-            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
 
-            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
+            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
 
-            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.salvarSucesso(objSolicitacaoAjaxDb); });
-            objSolicitacaoAjaxDb.addJsn(this.tblWeb);
+            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.salvarSucesso(objInterlocutorAjaxDb); });
+            objInterlocutorAjaxDb.addJsn(this.tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
         }
 
-        private salvarSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        private salvarSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
         {
-            if (objSolicitacaoAjaxDb == null)
+            if (objInterlocutorAjaxDb == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
             {
                 return; // TODO: Verificar a necessidade de validar o porque do JSON voltar vazio.
             }
 
             var tblWeb = new TabelaWeb(this.tblWeb.strNome);
 
-            tblWeb.copiarDados(JSON.parse(objSolicitacaoAjaxDb.strData));
+            tblWeb.copiarDados(JSON.parse(objInterlocutorAjaxDb.strData));
 
             this.salvarSucesso2(tblWeb);
         }

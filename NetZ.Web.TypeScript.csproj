@@ -131,10 +131,12 @@
     <TypeScriptCompile Include="database\TabelaWeb.ts" />
     <TypeScriptCompile Include="server\ajax\ServerAjax.ts" />
     <TypeScriptCompile Include="server\ajax\ServerAjaxDb.ts" />
+    <TypeScriptCompile Include="server\Interlocutor.ts" />
     <TypeScriptCompile Include="server\ServerBase.ts" />
     <TypeScriptCompile Include="server\ServerHttp.ts" />
-    <TypeScriptCompile Include="server\ajax\SolicitacaoAjax.ts" />
-    <TypeScriptCompile Include="server\ajax\SolicitacaoAjaxDb.ts" />
+    <TypeScriptCompile Include="server\ajax\InterlocutorAjax.ts" />
+    <TypeScriptCompile Include="server\ajax\InterlocutorAjaxDb.ts" />
+    <TypeScriptCompile Include="server\websocket\InterlocutorWs.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="server\websocket\ServerWs.ts" />
   </ItemGroup>

@@ -1,4 +1,6 @@
-﻿module NetZ_Web
+﻿/// <reference path="../Interlocutor.ts"/>
+
+module NetZ_Web
 {
     // #region Importações
 
@@ -8,7 +10,7 @@
 
     // #endregion Enumerados
 
-    export class SolicitacaoAjax extends Objeto
+    export class InterlocutorAjax extends Interlocutor
     {
         // #region Constantes
         // #endregion Constantes
@@ -17,9 +19,6 @@
 
         private _arrFncErro: Array<Function>;
         private _arrFncSucesso: Array<Function>;
-        private _strData: string;
-        private _strErro: string;
-        private _strJsonTipo: string;
 
         private get arrFncErro(): Array<Function>
         {
@@ -43,36 +42,6 @@
             this._arrFncSucesso = new Array<Function>();
 
             return this._arrFncSucesso;
-        }
-
-        public get strData(): string
-        {
-            return this._strData;
-        }
-
-        public set strData(jsn: string)
-        {
-            this._strData = jsn;
-        }
-
-        public get strErro(): string
-        {
-            return this._strErro;
-        }
-
-        public set strErro(strErro: string)
-        {
-            this._strErro = strErro;
-        }
-
-        public get strJsonTipo(): string
-        {
-            return this._strJsonTipo;
-        }
-
-        public set strJsonTipo(strJsonTipo: string)
-        {
-            this._strJsonTipo = strJsonTipo;
         }
 
         // #endregion Atributos
@@ -123,27 +92,6 @@
             this.arrFncSucesso.push(fncSucesso);
         }
 
-        public addJsn(obj: Object): void
-        {
-            if (obj == null)
-            {
-                return;
-            }
-
-            this.strData = JSON.stringify(obj);
-            this.strJsonTipo = obj.constructor.name;
-        }
-
-        public addStr(str: string): void
-        {
-            if (Utils.getBooStrVazia(str))
-            {
-                return;
-            }
-
-            this.strData = str;
-        }
-
         /**
          * Método disparado quando o servidor devolve algum tipo de
          * exceção durante o processamento desta solicitação.
@@ -178,7 +126,7 @@
                 return;
             }
 
-            var objSolicitacaoAjax = new SolicitacaoAjax();
+            var objSolicitacaoAjax = new InterlocutorAjax();
 
             objSolicitacaoAjax.copiarDados(anyData);
 
@@ -206,18 +154,15 @@
             new Mensagem(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA).abrirMensagem();
         }
 
-        /**
-         * Verifica se esta solicitação possui dados válidos
-         * para ser enviada para o servidor.
-         */
-        public validarDados(): boolean
-        {
-            return true;
-        }
 
         protected validarJson(strKey: string, anyValue: any): any
         {
             if (strKey == "_arrEvtOnAjaxListener")
+            {
+                return null;
+            }
+            
+            if (strKey == "_arrFncSucesso")
             {
                 return null;
             }
@@ -227,12 +172,7 @@
                 return null;
             }
 
-            return anyValue;
-        }
-
-        public toJson(): string
-        {
-            return JSON.stringify(this, (strKey, anyValue) => this.validarJson(strKey, anyValue));
+            return super.validarJson(strKey, anyValue);
         }
 
         // #endregion Métodos

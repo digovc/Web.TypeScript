@@ -38,32 +38,6 @@ module NetZ_Web
 
         // #region Métodos
 
-        public enviar(objSolicitacaoAjax: SolicitacaoAjax): void
-        {
-            if (objSolicitacaoAjax == null)
-            {
-                return;
-            }
-
-            if (!objSolicitacaoAjax.validarDados())
-            {
-                return;
-            }
-
-            $.ajaxSettings.crossDomain = true;
-            $.ajaxSettings.data = objSolicitacaoAjax.toJson();
-            $.ajaxSettings.dataType = "json";
-            $.ajaxSettings.method = "POST";
-            $.ajaxSettings.url = this.url;
-            $.ajaxSettings.xhrFields = { "withCredentials": true };
-
-            //$.ajaxSettings.beforeSend = ((objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacaoAjax.ajaxAntesEnviar(); });
-            $.ajaxSettings.error = ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objSolicitacaoAjax.ajaxErro(strTextStatus, strErrorThrown); });
-            $.ajaxSettings.success = ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objSolicitacaoAjax.ajaxSucesso(anyData); });
-
-            $.ajax($.ajaxSettings);
-        }
-
         protected getIntPort(): number
         {
             return 8081;

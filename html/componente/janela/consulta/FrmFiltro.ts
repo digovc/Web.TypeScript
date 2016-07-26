@@ -137,14 +137,14 @@ module NetZ_Web
 
             TblFiltro.i.addFil2(TblFiltro.i.clnWebIntId, this.cmpIntFiltroId.tagInput.intValor);
 
-            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
 
-            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
+            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
 
-            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.abrirFiltroConteudoSucesso(objSolicitacaoAjaxDb); });
-            objSolicitacaoAjaxDb.addJsn(TblFiltro.i);
+            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.abrirFiltroConteudoSucesso(objInterlocutorAjaxDb); });
+            objInterlocutorAjaxDb.addJsn(TblFiltro.i);
 
-            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
         }
 
         private abrirFiltroCadastro(intFiltroId: number): void
@@ -162,19 +162,19 @@ module NetZ_Web
             this.pnlFiltro.jnlConsulta.abrirFiltroCadastro(intFiltroId);
         }
 
-        private abrirFiltroConteudoSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        private abrirFiltroConteudoSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
         {
-            if (objSolicitacaoAjaxDb == null)
+            if (objInterlocutorAjaxDb == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
             {
                 return;
             }
 
-            this.pnlFiltro.atualizarFrmFiltroConteudo(objSolicitacaoAjaxDb.strData);
+            this.pnlFiltro.atualizarFrmFiltroConteudo(objInterlocutorAjaxDb.strData);
         }
 
         private apagarFiltro(): void

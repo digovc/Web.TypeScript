@@ -8,9 +8,10 @@
 /// <reference path="OnFocusChangeListener.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
+/// <reference path="server/ajax/InterlocutorAjax.ts"/>
+/// <reference path="server/ajax/InterlocutorAjaxDb.ts"/>
+/// <reference path="server/ajax/InterlocutorAjaxDb.ts"/>
 /// <reference path="server/ajax/ServerAjaxDb.ts"/>
-/// <reference path="server/ajax/SolicitacaoAjax.ts"/>
-/// <reference path="server/ajax/SolicitacaoAjaxDb.ts"/>
 
 module NetZ_Web
 {
@@ -231,17 +232,17 @@ module NetZ_Web
                 return;
             }
 
-            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
 
-            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_CARREGAR_TBL_WEB;
+            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_CARREGAR_TBL_WEB;
 
-            objSolicitacaoAjaxDb.addStr(strTblNome);
-            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjax: SolicitacaoAjax) => { this.carregarTblSucesso(objSolicitacaoAjax); });
+            objInterlocutorAjaxDb.addStr(strTblNome);
+            objInterlocutorAjaxDb.addFncSucesso((objSolicitacaoAjax: InterlocutorAjax) => { this.carregarTblSucesso(objSolicitacaoAjax); });
 
-            this.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
+            this.srvAjaxDb.enviar(objInterlocutorAjaxDb);
         }
 
-        private carregarTblSucesso(objSolicitacaoAjax: SolicitacaoAjax): void
+        private carregarTblSucesso(objSolicitacaoAjax: InterlocutorAjax): void
         {
             if (objSolicitacaoAjax == null)
             {

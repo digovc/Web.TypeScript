@@ -96,14 +96,14 @@ module NetZ_Web
                 return;
             }
 
-            var objSolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
 
-            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR_DOMINIO;
+            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR_DOMINIO;
 
-            objSolicitacaoAjaxDb.addJsn(this);
-            objSolicitacaoAjaxDb.addFncSucesso(fncSucesso);
+            objInterlocutorAjaxDb.addJsn(this);
+            objInterlocutorAjaxDb.addFncSucesso(fncSucesso);
 
-            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
         }
 
         // #endregion Métodos

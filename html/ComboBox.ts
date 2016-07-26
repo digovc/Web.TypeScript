@@ -60,29 +60,29 @@ module NetZ_Web
                 return;
             }
 
-            var objSolicitacaoAjaxDb: SolicitacaoAjaxDb = new SolicitacaoAjaxDb();
+            var objInterlocutorAjaxDb: InterlocutorAjaxDb = new InterlocutorAjaxDb();
 
-            objSolicitacaoAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_COMBO_BOX;
+            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_COMBO_BOX;
 
-            objSolicitacaoAjaxDb.addFncSucesso((objSolicitacaoAjaxDb: SolicitacaoAjaxDb) => { this.carregarDadosSucesso(objSolicitacaoAjaxDb); });
-            objSolicitacaoAjaxDb.addJsn(tblWeb);
+            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.carregarDadosSucesso(objInterlocutorAjaxDb); });
+            objInterlocutorAjaxDb.addJsn(tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objSolicitacaoAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
         }
 
-        private carregarDadosSucesso(objSolicitacaoAjaxDb: SolicitacaoAjaxDb): void
+        private carregarDadosSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
         {
-            if (objSolicitacaoAjaxDb == null)
+            if (objInterlocutorAjaxDb == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objSolicitacaoAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
             {
                 return;
             }
 
-            var arrData: Array<any> = JSON.parse(objSolicitacaoAjaxDb.strData);
+            var arrData: Array<any> = JSON.parse(objInterlocutorAjaxDb.strData);
 
             arrData.forEach((par) => { this.carregarDadosSucesso2(par); });
         }
