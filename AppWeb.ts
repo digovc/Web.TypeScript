@@ -8,9 +8,7 @@
 /// <reference path="OnFocusChangeListener.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
-/// <reference path="server/ajax/InterlocutorAjax.ts"/>
-/// <reference path="server/ajax/InterlocutorAjaxDb.ts"/>
-/// <reference path="server/ajax/InterlocutorAjaxDb.ts"/>
+/// <reference path="server/Interlocutor.ts"/>
 /// <reference path="server/ajax/ServerAjaxDb.ts"/>
 
 module NetZ_Web
@@ -51,6 +49,7 @@ module NetZ_Web
 
         private _arrTbl: Array<TabelaWeb>;
         private _booEmFoco: boolean = true;
+        private _lstSrv: Array<ServerBase>;
         private _msg: Mensagem;
         private _objTema: TemaDefault;
         private _pag: PaginaHtml;
@@ -85,6 +84,18 @@ module NetZ_Web
             this._booEmFoco = booEmFoco;
 
             this.atualizarBooEmFoco();
+        }
+
+        private get lstSrv(): Array<ServerBase>
+        {
+            if (this._lstSrv != null)
+            {
+                return this._lstSrv;
+            }
+
+            this._lstSrv = this.getLstSrv();
+
+            return this._lstSrv;
         }
 
         private get msg(): Mensagem
@@ -232,17 +243,17 @@ module NetZ_Web
                 return;
             }
 
-            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
+            var objInterlocutor = new Interlocutor();
 
-            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_CARREGAR_TBL_WEB;
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_CARREGAR_TBL_WEB;
 
-            objInterlocutorAjaxDb.addStr(strTblNome);
-            objInterlocutorAjaxDb.addFncSucesso((objSolicitacaoAjax: InterlocutorAjax) => { this.carregarTblSucesso(objSolicitacaoAjax); });
+            objInterlocutor.addStr(strTblNome);
+            objInterlocutor.addFncSucesso((objSolicitacaoAjax: Interlocutor) => { this.carregarTblSucesso(objSolicitacaoAjax); });
 
-            this.srvAjaxDb.enviar(objInterlocutorAjaxDb);
+            this.srvAjaxDb.enviar(objInterlocutor);
         }
 
-        private carregarTblSucesso(objSolicitacaoAjax: InterlocutorAjax): void
+        private carregarTblSucesso(objSolicitacaoAjax: Interlocutor): void
         {
             if (objSolicitacaoAjax == null)
             {
@@ -259,6 +270,15 @@ module NetZ_Web
             tblWeb.copiarDados(JSON.parse(objSolicitacaoAjax.strData));
 
             this.addArrTbl(tblWeb);
+        }
+
+        private getLstSrv(): Array<ServerBase>
+        {
+            var lstSrvResultado = new Array<ServerBase>();
+
+            this.inicializarLstSrv(lstSrvResultado);
+
+            return lstSrvResultado;
         }
 
         protected getObjTema(): TemaDefault
@@ -342,6 +362,14 @@ module NetZ_Web
 
         protected inicializar(): void
         {
+            this.inicializarLstSrv2();
+        }
+
+        protected abstract inicializarLstSrv(lstSrv: Array<ServerBase>): void;
+
+        private inicializarLstSrv2(): void
+        {
+            this.lstSrv.forEach((srv: ServerBase) => { srv.iniciar(); });
         }
 
         protected montarLayout(): void

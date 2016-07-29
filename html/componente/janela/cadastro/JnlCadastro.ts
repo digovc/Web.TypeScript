@@ -482,31 +482,31 @@ module NetZ_Web
                 return;
             }
 
-            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
+            var objInterlocutor = new Interlocutor();
 
-            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
 
-            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.salvarSucesso(objInterlocutorAjaxDb); });
-            objInterlocutorAjaxDb.addJsn(this.tblWeb);
+            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); });
+            objInterlocutor.addJsn(this.tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
-        private salvarSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
+        private salvarSucesso(objInterlocutor: Interlocutor): void
         {
-            if (objInterlocutorAjaxDb == null)
+            if (objInterlocutor == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutor.strData))
             {
                 return; // TODO: Verificar a necessidade de validar o porque do JSON voltar vazio.
             }
 
             var tblWeb = new TabelaWeb(this.tblWeb.strNome);
 
-            tblWeb.copiarDados(JSON.parse(objInterlocutorAjaxDb.strData));
+            tblWeb.copiarDados(JSON.parse(objInterlocutor.strData));
 
             this.salvarSucesso2(tblWeb);
         }

@@ -8,7 +8,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class DominioBase extends Objeto
+    export abstract class DominioWeb extends Objeto
     {
         // #region Constantes
 
@@ -96,14 +96,14 @@ module NetZ_Web
                 return;
             }
 
-            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
+            var objInterlocutor = new Interlocutor();
 
-            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_SALVAR_DOMINIO;
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_SALVAR_DOMINIO;
 
-            objInterlocutorAjaxDb.addJsn(this);
-            objInterlocutorAjaxDb.addFncSucesso(fncSucesso);
+            objInterlocutor.addJsn(this);
+            objInterlocutor.addFncSucesso(fncSucesso);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         // #endregion Métodos

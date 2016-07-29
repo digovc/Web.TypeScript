@@ -19,54 +19,24 @@
 
         public get intPort(): number
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._intPort != null)
+            {
+                return this._intPort;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._intPort != null)
-                {
-                    return this._intPort;
-                }
-
-                this._intPort = this.getIntPort();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._intPort = this.getIntPort();
 
             return this._intPort;
         }
 
         protected get url(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._url != null)
+            {
+                return this._url;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._url != null)
-                {
-                    return this._url;
-                }
-
-                this._url = this.getUrl();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._url = this.getUrl();
 
             return this._url;
         }
@@ -74,28 +44,6 @@
         // #endregion Atributos
 
         // #region Construtores
-
-        constructor()
-        {
-            super();
-
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.iniciar();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
         // #endregion Construtores
 
@@ -106,57 +54,24 @@
             return 8080;
         }
 
-        private getUrl(): string
+        protected getUrl(): string
         {
-            // #region Variáveis
+            var urlResultado = "http://_server_host:_server_port";
 
-            var urlResultado: string;
+            urlResultado = urlResultado.replace("_server_host", window.location.hostname);
+            urlResultado = urlResultado.replace("_server_port", String(this.intPort));
 
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                urlResultado = "http://_server_host:_server_port";
-
-                urlResultado = urlResultado.replace("_server_host", window.location.hostname);
-                urlResultado = urlResultado.replace("_server_port", String(this.intPort));
-
-                return urlResultado;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            return urlResultado;
         }
 
         protected inicializar(): void
         {
         }
 
-        private iniciar(): void
+        public iniciar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.inicializar();
-                this.setEventos();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.inicializar();
+            this.setEventos();
         }
 
         protected setEventos(): void

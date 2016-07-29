@@ -295,31 +295,31 @@ module NetZ_Web
 
             this.pnlFiltro.atualizarLstFiltro(this.tblWeb);
 
-            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
+            var objInterlocutor = new Interlocutor();
 
-            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_GRID;
-            objInterlocutorAjaxDb.strData = JSON.stringify(this.tblWeb);
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_GRID;
+            objInterlocutor.strData = JSON.stringify(this.tblWeb);
 
-            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.pesquisarSucesso(objInterlocutorAjaxDb); });
+            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarSucesso(objInterlocutor); });
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
-        private pesquisarSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
+        private pesquisarSucesso(objInterlocutor: Interlocutor): void
         {
-            if (objInterlocutorAjaxDb == null)
+            if (objInterlocutor == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutor.strData))
             {
                 return;
             }
 
             ServerHttp.i.atualizarCssMain();
 
-            this.divGrid.jq.html(objInterlocutorAjaxDb.strData);
+            this.divGrid.jq.html(objInterlocutor.strData);
 
             this.inicializartagGridHtml();
 

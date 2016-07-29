@@ -21,28 +21,28 @@ module NetZ_Web
 
         // #region Métodos
 
-        public enviar(objinterlocutorAjax: InterlocutorAjax): void
+        public enviar(objinterlocutor: Interlocutor): void
         {
-            if (objinterlocutorAjax == null)
+            if (objinterlocutor == null)
             {
                 return;
             }
 
-            if (!objinterlocutorAjax.validarDados())
+            if (!objinterlocutor.validarDados())
             {
                 return;
             }
 
             $.ajaxSettings.crossDomain = true;
-            $.ajaxSettings.data = objinterlocutorAjax.toJson();
+            $.ajaxSettings.data = objinterlocutor.toJson();
             $.ajaxSettings.dataType = "json";
             $.ajaxSettings.method = "POST";
             $.ajaxSettings.url = this.url;
             $.ajaxSettings.xhrFields = { "withCredentials": true };
 
             //$.ajaxSettings.beforeSend = ((objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacaoAjax.ajaxAntesEnviar(); });
-            $.ajaxSettings.error = ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objinterlocutorAjax.ajaxErro(strTextStatus, strErrorThrown); });
-            $.ajaxSettings.success = ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objinterlocutorAjax.ajaxSucesso(anyData); });
+            $.ajaxSettings.error = ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objinterlocutor.processarOnAjaxErro(strTextStatus, strErrorThrown); });
+            $.ajaxSettings.success = ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objinterlocutor.processarOnAjaxSucesso(anyData); });
 
             $.ajax($.ajaxSettings);
         }

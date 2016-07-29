@@ -137,14 +137,14 @@ module NetZ_Web
 
             TblFiltro.i.addFil2(TblFiltro.i.clnWebIntId, this.cmpIntFiltroId.tagInput.intValor);
 
-            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
+            var objInterlocutor = new Interlocutor();
 
-            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
 
-            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.abrirFiltroConteudoSucesso(objInterlocutorAjaxDb); });
-            objInterlocutorAjaxDb.addJsn(TblFiltro.i);
+            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirFiltroConteudoSucesso(objInterlocutor); });
+            objInterlocutor.addJsn(TblFiltro.i);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private abrirFiltroCadastro(intFiltroId: number): void
@@ -162,19 +162,19 @@ module NetZ_Web
             this.pnlFiltro.jnlConsulta.abrirFiltroCadastro(intFiltroId);
         }
 
-        private abrirFiltroConteudoSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
+        private abrirFiltroConteudoSucesso(objInterlocutor: Interlocutor): void
         {
-            if (objInterlocutorAjaxDb == null)
+            if (objInterlocutor == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutor.strData))
             {
                 return;
             }
 
-            this.pnlFiltro.atualizarFrmFiltroConteudo(objInterlocutorAjaxDb.strData);
+            this.pnlFiltro.atualizarFrmFiltroConteudo(objInterlocutor.strData);
         }
 
         private apagarFiltro(): void

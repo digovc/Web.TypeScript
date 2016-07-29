@@ -60,29 +60,29 @@ module NetZ_Web
                 return;
             }
 
-            var objInterlocutorAjaxDb: InterlocutorAjaxDb = new InterlocutorAjaxDb();
+            var objInterlocutor: Interlocutor = new Interlocutor();
 
-            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_COMBO_BOX;
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_COMBO_BOX;
 
-            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.carregarDadosSucesso(objInterlocutorAjaxDb); });
-            objInterlocutorAjaxDb.addJsn(tblWeb);
+            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.carregarDadosSucesso(objInterlocutor); });
+            objInterlocutor.addJsn(tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
-        private carregarDadosSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
+        private carregarDadosSucesso(objInterlocutor: Interlocutor): void
         {
-            if (objInterlocutorAjaxDb == null)
+            if (objInterlocutor == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutor.strData))
             {
                 return;
             }
 
-            var arrData: Array<any> = JSON.parse(objInterlocutorAjaxDb.strData);
+            var arrData: Array<any> = JSON.parse(objInterlocutor.strData);
 
             arrData.forEach((par) => { this.carregarDadosSucesso2(par); });
         }

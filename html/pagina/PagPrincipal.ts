@@ -95,29 +95,29 @@ module NetZ_Web
                 return;
             }
 
-            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
+            var objInterlocutor = new Interlocutor();
 
-            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO;
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO;
 
-            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.abrirCadastroSucesso(objInterlocutorAjaxDb); });
-            objInterlocutorAjaxDb.addJsn(tblWeb);
+            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirCadastroSucesso(objInterlocutor); });
+            objInterlocutor.addJsn(tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
-        private abrirCadastroSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
+        private abrirCadastroSucesso(objInterlocutor: Interlocutor): void
         {
-            if (objInterlocutorAjaxDb == null)
+            if (objInterlocutor == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutor.strData))
             {
                 return;
             }
 
-            this.divCadastro.jq.append(objInterlocutorAjaxDb.strData);
+            this.divCadastro.jq.append(objInterlocutor.strData);
 
             this.inicializarJnlCadastro();
         }
@@ -141,29 +141,29 @@ module NetZ_Web
 
             this.divConsulta.esconder();
 
-            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
+            var objInterlocutor = new Interlocutor();
 
-            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.abrirConsultaSucesso(objInterlocutorAjaxDb); });
+            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirConsultaSucesso(objInterlocutor); });
 
-            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CONSULTA;
-            objInterlocutorAjaxDb.strData = JSON.stringify(tblWeb);
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CONSULTA;
+            objInterlocutor.strData = JSON.stringify(tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
-        private abrirConsultaSucesso(objInterlocutorAjaxDb: InterlocutorAjaxDb): void
+        private abrirConsultaSucesso(objInterlocutor: Interlocutor): void
         {
-            if (objInterlocutorAjaxDb == null)
+            if (objInterlocutor == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutor.strData))
             {
                 return;
             }
 
-            this.divConsulta.jq.html(objInterlocutorAjaxDb.strData);
+            this.divConsulta.jq.html(objInterlocutor.strData);
 
             this.inicializarJnlConsulta();
         }
@@ -199,29 +199,29 @@ module NetZ_Web
                 return;
             }
 
-            var objInterlocutorAjaxDb = new InterlocutorAjaxDb();
+            var objInterlocutor = new Interlocutor();
 
-            objInterlocutorAjaxDb.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_JANELA_TAG;
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_JANELA_TAG;
 
-            objInterlocutorAjaxDb.addFncSucesso((objInterlocutorAjaxDb: InterlocutorAjaxDb) => { this.abrirJnlTagSucesso(tblWeb, objInterlocutorAjaxDb); });
-            objInterlocutorAjaxDb.addJsn(tblWeb);
+            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirJnlTagSucesso(tblWeb, objInterlocutor); });
+            objInterlocutor.addJsn(tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutorAjaxDb);
+            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
-        private abrirJnlTagSucesso(tblWeb: TabelaWeb, objInterlocutorAjaxDb: InterlocutorAjaxDb): void
+        private abrirJnlTagSucesso(tblWeb: TabelaWeb, objInterlocutor: Interlocutor): void
         {
-            if (objInterlocutorAjaxDb == null)
+            if (objInterlocutor == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutorAjaxDb.strData))
+            if (Utils.getBooStrVazia(objInterlocutor.strData))
             {
                 return;
             }
 
-            this.divCadastro.jq.append(objInterlocutorAjaxDb.strData);
+            this.divCadastro.jq.append(objInterlocutor.strData);
 
             this.inicializarJnlTag(tblWeb);
         }

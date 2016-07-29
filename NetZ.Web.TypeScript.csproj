@@ -28,9 +28,10 @@
     <TypeScriptCompile Include="database\DataCell.ts" />
     <TypeScriptCompile Include="database\DataRow.ts" />
     <TypeScriptCompile Include="database\DataTable.ts" />
+    <TypeScriptCompile Include="database\dominio\UsuarioDominio.ts" />
     <TypeScriptCompile Include="database\ParValorNome.ts" />
     <TypeScriptCompile Include="database\TblFiltro.ts" />
-    <TypeScriptCompile Include="database\dominio\DominioBase.ts" />
+    <TypeScriptCompile Include="database\dominio\DominioWeb.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
     <TypeScriptCompile Include="html\componente\ActionBar.ts" />
@@ -134,8 +135,6 @@
     <TypeScriptCompile Include="server\Interlocutor.ts" />
     <TypeScriptCompile Include="server\ServerBase.ts" />
     <TypeScriptCompile Include="server\ServerHttp.ts" />
-    <TypeScriptCompile Include="server\ajax\InterlocutorAjax.ts" />
-    <TypeScriptCompile Include="server\ajax\InterlocutorAjaxDb.ts" />
     <TypeScriptCompile Include="server\websocket\InterlocutorWs.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="server\websocket\ServerWs.ts" />
@@ -195,5 +194,38 @@
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug (main)'">
+    <TypeScriptTarget>ES6</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind />
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir>..\Principal\bin\Debug (local)\res\js\Web.TypeScript</TypeScriptOutDir>
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug (local)'">
+    <TypeScriptTarget>ES6</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind />
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir>..\Principal\bin\Debug (local)\res\js\Web.TypeScript</TypeScriptOutDir>
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)\lib\*.*" "$(SolutionDir)\principal\bin\Debug\res\js\lib\" /Y/D</PostBuildEvent>
+  </PropertyGroup>
 </Project>
