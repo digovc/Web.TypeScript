@@ -131,7 +131,7 @@ module NetZ_Web
             }
 
             this.strData = JSON.stringify(obj);
-            this.strJsonTipo = obj.constructor.name;
+            this.strJsonTipo = (obj.constructor as any).name;
         }
 
         public addStr(str: string): void

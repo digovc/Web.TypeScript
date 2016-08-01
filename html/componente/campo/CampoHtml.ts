@@ -156,14 +156,10 @@ module NetZ_Web
 
         protected atualizarBooEmFoco(): void
         {
-            //this.jq.css("border", this.booEmFoco ? "1px solid #afafaf" : Utils.STR_VAZIA);
-            //this.jq.css("border-radius", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
-            //this.jq.css("box-shadow", this.booEmFoco ? "0px 1px 2px 1px #747474" : Utils.STR_VAZIA);
-
             this.divTitulo.jq.css("color", this.booEmFoco ? "black" : Utils.STR_VAZIA);
             this.divTitulo.jq.css("font-weight", this.booEmFoco ? "bold" : Utils.STR_VAZIA);
 
-            this.tagInput.jq.css("border-bottom", this.booEmFoco ? "2px solid black" : Utils.STR_VAZIA);
+            //this.tagInput.jq.css("border-bottom", this.booEmFoco ? "2px solid black" : Utils.STR_VAZIA);
 
             this.atualizarBooEmFocoFrm();
         }
@@ -203,7 +199,7 @@ module NetZ_Web
             }
         }
 
-        private atualizarStrValor(): void
+        protected atualizarStrValor(): void
         {
             this.atualizarStrValorCln();
             this.atualizarStrValorDivTitulo();

@@ -22,11 +22,24 @@ module NetZ_Web
 
         // #region Atributos
 
-        private _btnMenu: BotaoCircular;
+        private _btnAcao: Tag;
         private _clnWebFiltro: ColunaWeb;
         private _strTblWebRefNome: string;
         private _tblWebRef: TabelaWeb;
+        private _txtIntId: Input;
         private _txtPesquisa: Input;
+
+        private get btnAcao(): Tag
+        {
+            if (this._btnAcao != null)
+            {
+                return this._btnAcao;
+            }
+
+            this._btnAcao = new Tag(this.strId + "_btnAcao");
+
+            return this._btnAcao;
+        }
 
         private get clnWebFiltro(): ColunaWeb
         {
@@ -43,18 +56,6 @@ module NetZ_Web
             this._clnWebFiltro = clnWebFiltro;
 
             this.atualizarClnWebFiltro();
-        }
-
-        private get btnMenu(): BotaoCircular
-        {
-            if (this._btnMenu != null)
-            {
-                return this._btnMenu;
-            }
-
-            this._btnMenu = new BotaoCircular(this.strId + "_btnMenu");
-
-            return this._btnMenu;
         }
 
         private get strTblWebRefNome(): string
@@ -79,6 +80,18 @@ module NetZ_Web
             this._tblWebRef = this.getTblWebRef();
 
             return this._tblWebRef;
+        }
+
+        private get txtIntId(): Input
+        {
+            if (this._txtIntId != null)
+            {
+                return this._txtIntId;
+            }
+
+            this._txtIntId = new Input(this.strId + "_txtIntId");
+
+            return this._txtIntId;
         }
 
         private get txtPesquisa(): Input
@@ -162,11 +175,22 @@ module NetZ_Web
             this.divTitulo.strConteudo = strTitulo;
         }
 
-        protected atualizarBooEmFoco(): void
+        protected atualizarStrValor(): void
         {
-            super.atualizarBooEmFoco();
+            super.atualizarStrValor();
 
-            this.btnMenu.booVisivel = this.booEmFoco;
+            this.atualizarStrValorTxtIntId();
+        }
+
+        private atualizarStrValorTxtIntId(): void
+        {
+            if (this.tagInput.intValor < 1)
+            {
+                this.txtIntId.strValor = null;
+                return;
+            }
+
+            this.txtIntId.intValor = this.tagInput.intValor;
         }
 
         private getTblWebRef(): TabelaWeb
@@ -209,8 +233,14 @@ module NetZ_Web
 
         public limparDados(): void
         {
+            if (this.tagInput.intValor < 1)
+            {
+                return;
+            }
+
             super.limparDados();
 
+            this.txtIntId.strValor = null;
             this.txtPesquisa.strValor = null;
 
             this.cmb.jq.hide();
@@ -222,6 +252,11 @@ module NetZ_Web
 
         private pesquisar(): void
         {
+            if (this.tagInput.booVisivel)
+            {
+                return;
+            }
+
             if (this.tblWebRef == null)
             {
                 return;
@@ -247,6 +282,19 @@ module NetZ_Web
             this.txtPesquisa.strValor = null;
 
             this.cmb.mostrar();
+
+            window.setTimeout((() => { this.cmb.receberFoco(); }), 10);
+        }
+
+        private processarBtnAcaoClick(): void
+        {
+            if (this.tagInput.intValor < 1)
+            {
+                this.pesquisar();
+                return;
+            }
+
+            this.limparDados();
         }
 
         public receberFoco(): void
@@ -278,7 +326,7 @@ module NetZ_Web
 
             this.addEvtOnKeyDownListener(this);
 
-            this.btnMenu.addEvtOnClickListener(this);
+            this.btnAcao.addEvtOnClickListener(this);
 
             this.txtPesquisa.addEvtOnFocusInListener(this);
             this.txtPesquisa.addEvtOnFocusOutListener(this);
@@ -298,8 +346,8 @@ module NetZ_Web
             {
                 switch (objSender)
                 {
-                    case this.btnMenu:
-                        this.abrirOpcao(arg)
+                    case this.btnAcao:
+                        this.processarBtnAcaoClick();
                         return;
                 }
             }
@@ -377,6 +425,7 @@ module NetZ_Web
             {
                 switch (arg.keyCode)
                 {
+                    case Keys.BACKSPACE:
                     case Keys.DELETE:
                         this.limparDados();
                         return;

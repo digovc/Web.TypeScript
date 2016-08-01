@@ -1,10 +1,10 @@
-﻿/// <reference path="../lib/jquery.d.ts"/>
-/// <reference path="../OnDoubleClickListener.ts"/>
+﻿/// <reference path="../OnDoubleClickListener.ts"/>
 /// <reference path="../OnKeyDownListener.ts"/>
 /// <reference path="../OnKeyPressListener.ts"/>
 /// <reference path="../OnMouseDownListener.ts"/>
 /// <reference path="../OnMouseLeaveListener.ts"/>
 /// <reference path="../OnMouseOverListener.ts"/>
+/// <reference path="../typedefinition/jquery.d.ts" />
 
 module NetZ_Web
 {

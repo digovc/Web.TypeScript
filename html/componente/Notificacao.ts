@@ -1,4 +1,5 @@
-﻿/// <reference path="ComponenteHtml.ts"/>
+﻿/// <reference path="botao/BotaoMini.ts"/>
+/// <reference path="ComponenteHtml.ts"/>
 
 module NetZ_Web
 {
@@ -15,35 +16,33 @@ module NetZ_Web
 
         // #region Atributos
 
-        private _divAdiar: Div;
-        private _divFechar: Div;
+        private static _intNotificacaoAberta: number = 0;
+
+        private static get intNotificacaoAberta(): number
+        {
+            return this._intNotificacaoAberta;
+        }
+
+        private static set intNotificacaoAberta(intNotificacaoAberta: number)
+        {
+            this._intNotificacaoAberta = intNotificacaoAberta;
+        }
+
+        private _btnFechar: BotaoMini;
         private _divIcone: Div;
-        private _divLink: Div;
         private _intFecharInterval: number;
         private _strNotificacao: string;
 
-        private get divAdiar(): Div
+        private get btnFechar(): BotaoMini
         {
-            if (this._divAdiar != null)
+            if (this._btnFechar != null)
             {
-                return this._divAdiar;
+                return this._btnFechar;
             }
 
-            this._divAdiar = new Div(this.strId + "_divAdiar");
+            this._btnFechar = new BotaoMini(this.strId + "_btnFechar");
 
-            return this._divAdiar;
-        }
-
-        private get divFechar(): Div
-        {
-            if (this._divFechar != null)
-            {
-                return this._divFechar;
-            }
-
-            this._divFechar = new Div(this.strId + "_divFechar");
-
-            return this._divFechar;
+            return this._btnFechar;
         }
 
         private get divIcone(): Div
@@ -56,18 +55,6 @@ module NetZ_Web
             this._divIcone = new Div(this.strId + "_divIcone");
 
             return this._divIcone;
-        }
-
-        private get divLink(): Div
-        {
-            if (this._divLink != null)
-            {
-                return this._divLink;
-            }
-
-            this._divLink = new Div(this.strId + "_divLink");
-
-            return this._divLink;
         }
 
         private get intFecharInterval(): number
@@ -118,7 +105,15 @@ module NetZ_Web
                 return;
             }
 
+            if (Notificacao.intNotificacaoAberta > 4)
+            {
+                window.setTimeout(() => { this.abrirNotificacao(); }, 500);
+                return;
+            }
+
             AppWeb.i.pag.divNotificacao.jq.append(this.strLayoutFixo);
+
+            Notificacao.intNotificacaoAberta++;
 
             this.iniciar();
 
@@ -131,12 +126,14 @@ module NetZ_Web
         {
             window.clearInterval(this.intFecharInterval);
 
+            Notificacao.intNotificacaoAberta--;
+
             this.dispose();
         }
 
         private iniciarIntervalFechar()
         {
-            var intTempo = (!Utils.getBooStrVazia(this.strConteudo)) ? (this.strNotificacao.length * 150) : 5000;
+            var intTempo = (!Utils.getBooStrVazia(this.strNotificacao)) ? (this.strNotificacao.length * 150) : 5000;
 
             intTempo = (intTempo > 250) ? intTempo : 5000;
 
@@ -158,10 +155,8 @@ module NetZ_Web
             }
 
             strLayoutFixo = strLayoutFixo.replace("_str_id", this.strId);
-            strLayoutFixo = strLayoutFixo.replace("_str_div_adiar_id", this.divAdiar.strId);
-            strLayoutFixo = strLayoutFixo.replace("_str_div_fechar_id", this.divFechar.strId);
+            strLayoutFixo = strLayoutFixo.replace("_str_div_fechar_id", this.btnFechar.strId);
             strLayoutFixo = strLayoutFixo.replace("_str_div_icone_id", this.divIcone.strId);
-            strLayoutFixo = strLayoutFixo.replace("_str_div_link_id", this.divLink.strId);
             strLayoutFixo = strLayoutFixo.replace("_str_div_texto_conteudo", this.strNotificacao);
 
             return strLayoutFixo;
@@ -174,7 +169,7 @@ module NetZ_Web
             this.addEvtOnMouseLeaveListener(this);
             this.addEvtOnMouseOverListener(this);
 
-            this.divFechar.addEvtOnClickListener(this);
+            this.btnFechar.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos
@@ -191,7 +186,7 @@ module NetZ_Web
             {
                 switch (objSender)
                 {
-                    case this.divFechar:
+                    case this.btnFechar:
                         this.fecharNotificacao();
                         return;
                 }

@@ -24,7 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="AppWeb.ts" />
-    <TypeScriptCompile Include="Boot.ts" />
     <TypeScriptCompile Include="database\DataCell.ts" />
     <TypeScriptCompile Include="database\DataRow.ts" />
     <TypeScriptCompile Include="database\DataTable.ts" />
@@ -37,6 +36,7 @@
     <TypeScriptCompile Include="html\componente\ActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
+    <TypeScriptCompile Include="html\componente\botao\BotaoMini.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoMarkdown.ts" />
     <TypeScriptCompile Include="html\componente\grafico\Canvas.ts" />
     <TypeScriptCompile Include="html\componente\form\OnCmpEmFocoAlterado.ts" />
@@ -126,7 +126,6 @@
     <TypeScriptCompile Include="html\Input.ts" />
     <TypeScriptCompile Include="html\pagina\PaginaHtml.ts" />
     <TypeScriptCompile Include="html\Tag.ts" />
-    <TypeScriptCompile Include="lib\jquery.d.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
     <TypeScriptCompile Include="OnClickListener.ts" />
     <TypeScriptCompile Include="database\ColunaWeb.ts" />
@@ -138,6 +137,10 @@
     <TypeScriptCompile Include="server\ServerBase.ts" />
     <TypeScriptCompile Include="server\ServerHttp.ts" />
     <TypeScriptCompile Include="server\websocket\InterlocutorWs.ts" />
+    <TypeScriptCompile Include="typedefinition\chart.d.ts" />
+    <TypeScriptCompile Include="typedefinition\google.maps.d.ts" />
+    <TypeScriptCompile Include="typedefinition\jquery.d.ts" />
+    <TypeScriptCompile Include="typedefinition\sugarpak.d.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="server\websocket\ServerWs.ts" />
   </ItemGroup>
@@ -191,6 +194,8 @@
     <TypeScriptSourceRoot>
     </TypeScriptSourceRoot>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
