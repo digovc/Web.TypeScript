@@ -42,7 +42,6 @@ module NetZ_Web
             return this._tagBody;
         }
 
-
         // #endregion Atributos
 
         // #region Construtores
@@ -51,8 +50,34 @@ module NetZ_Web
 
         // #region Métodos
 
+        public addJs(srcJs: string, fncOnLoad: Function = null): void
+        {
+            if (Utils.getBooStrVazia(srcJs))
+            {
+                return;
+            }
+
+            if (this.validarJsCarregado(srcJs))
+            {
+                return;
+            }
+
+            var tagScript = document.createElement("script");
+
+            tagScript.onload = (() => { fncOnLoad(); });
+            tagScript.src = srcJs;
+            tagScript.type = "text/javascript";
+
+            document.head.appendChild(tagScript);
+        }
+
         public atualizarCssMain(): void
         {
+            if (ServerHttp.i == null)
+            {
+                return;
+            }
+
             ServerHttp.i.atualizarCssMain();
         }
 
@@ -89,7 +114,7 @@ module NetZ_Web
         {
         }
 
-        protected validarJsCarregado(srcJq: string): boolean
+        public validarJsCarregado(srcJq: string): boolean
         {
             return ($("script[src='" + srcJq + "']").length > 0);
         }

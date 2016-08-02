@@ -26,6 +26,7 @@ module NetZ_Web
         private _booMostrarTituloNunca: boolean;
         private _booMostrarTituloSempre: boolean;
         private _clnWeb: ColunaWeb;
+        private _divInputContainer: Div;
         private _divTitulo: Div;
         private _frm: FormHtml;
         private _strCritica: string;
@@ -69,6 +70,18 @@ module NetZ_Web
             this._booMostrarTituloSempre = (!Utils.getBooStrVazia(this.jq.attr("mostrar_titulo_sempre")));
 
             return this._booMostrarTituloSempre;
+        }
+
+        protected get divInputContainer(): Div
+        {
+            if (this._divInputContainer != null)
+            {
+                return this._divInputContainer;
+            }
+
+            this._divInputContainer = new Div(this.strId + "_divInputContainer");
+
+            return this._divInputContainer;
         }
 
         public get clnWeb(): ColunaWeb
@@ -145,7 +158,6 @@ module NetZ_Web
 
             return this._tagInput;
         }
-
 
         // #endregion Atributos
 
