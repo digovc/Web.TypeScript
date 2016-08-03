@@ -20,27 +20,12 @@ module NetZ_Web
 
         public static get i(): ServerHttp
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (ServerHttp._i != null)
+            {
+                return ServerHttp._i;
+            }
 
-            // #region Ações
-            try
-            {
-                if (ServerHttp._i != null)
-                {
-                    return ServerHttp._i;
-                }
-
-                ServerHttp._i = new ServerHttp();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            ServerHttp._i = new ServerHttp();
 
             return ServerHttp._i;
         }
@@ -66,134 +51,55 @@ module NetZ_Web
 
         public atualizarCssMain(): void
         {
-            // #region Variáveis
+            var tagLink = <HTMLLinkElement>document.getElementById("cssMain");
 
-            var tagLink: HTMLLinkElement;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (tagLink == null)
             {
-                tagLink = <HTMLLinkElement>document.getElementById("cssMain");
+                return;
+            }
 
-                if (tagLink == null)
-                {
-                    return;
-                }
+            if (Utils.getBooStrVazia(tagLink.href))
+            {
+                return;
+            }
 
-                if (tagLink.href.indexOf("?x") == -1) // TODO: Em vez de usar o processo de agregar o "x", usar a data e hora.
-                {
-                    tagLink.href = tagLink.href + "?x";
-                }
-                else
-                {
-                    tagLink.href = tagLink.href + "x";
-                }
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            var strHref = (tagLink.href.indexOf("?") > -1) ? tagLink.href.split("?")[0] : tagLink.href;
+
+            tagLink.href = (strHref + "?" + Date.now());
         }
 
         public carregarHtml(urlImport: string, tabContainer: Tag, fncComplete: any): void
         {
-            // #region Variáveis
-
-            var tagLink: HTMLLinkElement;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(urlImport))
             {
-                if (Utils.getBooStrVazia(urlImport))
-                {
-                    return;
-                }
-
-                if (tabContainer == null)
-                {
-                    return;
-                }
-
-                if (tabContainer.jq == null)
-                {
-                    return;
-                }
-
-                tabContainer.jq.load(urlImport, null, () => this.carregarHtmlComplete(fncComplete));
+                return;
             }
-            catch (ex)
+
+            if (tabContainer == null)
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
-        }
 
-        private carregarHtmlComplete(fncComplete: Function): void
-        {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (tabContainer.jq == null)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                this.atualizarCssMain();
-
-                if (fncComplete != null)
-                {
-                    fncComplete();
-                }
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            tabContainer.jq.load(urlImport, null, (() => { this.atualizarCssMain(); }));
         }
 
         public carregarJq(strJqClass: string): void
         {
-            // #region Variáveis
-
-            var urlJq: string;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (Utils.getBooStrVazia(strJqClass))
             {
-                if (Utils.getBooStrVazia(strJqClass))
-                {
-                    return;
-                }
-
-                urlJq = "/res?method=getScript&class=_js_class";
-
-                urlJq = urlJq.replace("_js_class", strJqClass);
-
-                $.getScript(urlJq);
+                return;
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            var urlJq = "/res?method=getScript&class=_js_class";
+
+            urlJq = urlJq.replace("_js_class", strJqClass);
+
+            $.getScript(urlJq);
         }
 
         // #endregion Métodos

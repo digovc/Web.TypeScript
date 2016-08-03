@@ -9,7 +9,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class ComponenteHtml extends Div
+    export abstract class ComponenteHtml extends Div
     {
         // #region Constantes
         // #endregion Constantes

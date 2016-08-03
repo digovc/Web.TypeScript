@@ -1,4 +1,5 @@
-﻿/// <reference path="OnCmpEmFocoAlterado.ts"/>
+﻿/// <reference path="DivDica.ts"/>
+/// <reference path="OnCmpEmFocoAlterado.ts"/>
 
 module NetZ_Web
 {
@@ -19,7 +20,7 @@ module NetZ_Web
         private _cmpEmFoco: CampoHtml;
         private _divComando: DivComando;
         private _jnlCadastro: JnlCadastro;
-        private _pnlDica: PainelNivel;
+        private _divDica: DivDica;
         private _tabHtml: TabHtml;
         private _tblWeb: TabelaWeb;
 
@@ -81,16 +82,16 @@ module NetZ_Web
             this.atualizarJnlCadastro();
         }
 
-        private get pnlDica(): PainelNivel
+        private get divDica(): DivDica
         {
-            if (this._pnlDica != null)
+            if (this._divDica != null)
             {
-                return this._pnlDica;
+                return this._divDica;
             }
 
-            this._pnlDica = new PainelNivel(this.strId + "_pnlDica");
+            this._divDica = new DivDica(this.strId + "_divDica");
 
-            return this._pnlDica;
+            return this._divDica;
         }
 
         private get tabHtml(): TabHtml
@@ -179,12 +180,12 @@ module NetZ_Web
         {
             this.dispararEvtOnCmpEmFocoAlterado();
 
-            this.atualizarCmpEmFocoPnlDica();
+            this.atualizarCmpEmFocodivDica();
         }
 
-        private atualizarCmpEmFocoPnlDica(): void
+        private atualizarCmpEmFocodivDica(): void
         {
-            this.pnlDica.strConteudo = null;
+            this.divDica.strConteudo = null;
 
             if (this.cmpEmFoco == null)
             {
@@ -196,7 +197,7 @@ module NetZ_Web
                 return;
             }
 
-            this.pnlDica.strConteudo = this.cmpEmFoco.strDica;
+            this.divDica.strConteudo = this.cmpEmFoco.strDica;
         }
 
         private atualizarJnlCadastro(): void
@@ -402,7 +403,7 @@ module NetZ_Web
 
             this.divComando.iniciar();
 
-            this.inicializarPnlDica();
+            this.inicializardivDica();
 
             this.inicializarTabHtml();
         }
@@ -417,14 +418,14 @@ module NetZ_Web
             this.arrCmp.forEach((cmp) => { cmp.iniciar(); });
         }
 
-        private inicializarPnlDica(): void
+        private inicializardivDica(): void
         {
             if (this.cmpEmFoco == null)
             {
                 return;
             }
 
-            this.pnlDica.strConteudo = this.cmpEmFoco.strDica;
+            this.divDica.strConteudo = this.cmpEmFoco.strDica;
         }
 
         private inicializarTabHtml(): void

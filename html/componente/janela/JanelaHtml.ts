@@ -257,7 +257,7 @@ module NetZ_Web
             var intWidth = this.jq.width();
 
             var intLeft = ((intParentWidth / 2) - (intWidth / 2));
-            var intTop = ((intParentHeight / 2) - (intHeight / 2) - 50);
+            var intTop = ((intParentHeight / 2) - (intHeight / 2) - 75);
 
             this.jq.css("left", intLeft);
             this.jq.css("top", intTop);
