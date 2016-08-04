@@ -70,9 +70,19 @@ module NetZ_Web
             this.arrObjConstante.push(objConstante);
         }
 
-        public getStrConstante(strClassNome: string): string
+        public getDecConstante(strConstanteNome: string): number
         {
-            if (Utils.getBooStrVazia(strClassNome))
+            return Number(this.getStrConstante(strConstanteNome));
+        }
+
+        public getIntConstante(strConstanteNome: string): number
+        {
+            return Number(this.getStrConstante(strConstanteNome));
+        }
+
+        public getStrConstante(strConstanteNome: string): string
+        {
+            if (Utils.getBooStrVazia(strConstanteNome))
             {
                 return null;
             }
@@ -81,7 +91,7 @@ module NetZ_Web
             {
                 var objConstante = this.arrObjConstante[i];
 
-                if (strClassNome == objConstante.strNome)
+                if (strConstanteNome == objConstante.strNome)
                 {
                     return objConstante.strValor;
                 }
