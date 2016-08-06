@@ -134,12 +134,18 @@ module NetZ_Web
                 return;
             }
 
+            if (this.jnlConsulta != null && this.jnlConsulta.tblWeb.strNome == tblWeb.strNome)
+            {
+                Notificacao.notificar("Essa consulta já está aberta.");
+                return;
+            }
+
             if (Utils.getBooStrVazia(tblWeb.strNome))
             {
                 return;
             }
 
-            this.divConsulta.esconder();
+            this.divConsulta.esconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
 
             var objInterlocutor = new Interlocutor();
 
@@ -163,9 +169,7 @@ module NetZ_Web
                 return;
             }
 
-            this.divConsulta.jq.html(objInterlocutor.strData);
-
-            this.inicializarJnlConsulta();
+            this.divConsulta.jq.slideUp(200, (() => { this.inicializarJnlConsulta(objInterlocutor); }));
         }
 
         public abrirFiltroCadastro(intFiltroId: number): void
@@ -298,9 +302,11 @@ module NetZ_Web
             this.carregarJsCadastro();
         }
 
-        private inicializarJnlConsulta(): void
+        private inicializarJnlConsulta(objInterlocutor: Interlocutor): void
         {
-            this.divConsulta.mostrar();
+            this.divConsulta.jq.html(objInterlocutor.strData);
+
+            this.divConsulta.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
 
             this.jnlConsulta = new JnlConsulta(this);
 

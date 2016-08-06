@@ -162,6 +162,16 @@ module NetZ_Web
             return strLayoutFixo;
         }
 
+        public static notificar(strNotificacao: string): void
+        {
+            if (Utils.getBooStrVazia(strNotificacao))
+            {
+                return;
+            }
+
+            new Notificacao(strNotificacao).abrirNotificacao();
+        }
+
         protected setEventos(): void
         {
             super.setEventos();

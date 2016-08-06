@@ -218,6 +218,13 @@ module NetZ_Web
             this.pnlAcaoConsulta.tagGridHtml = this.tagGridHtml;
         }
 
+        protected fechar(): void
+        {
+            super.fechar();
+
+            this.pagPrincipal.jnlConsulta = null;
+        }
+
         private getViwAtual(): TabelaWeb
         {
             if (this.jq == null)

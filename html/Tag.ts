@@ -218,8 +218,7 @@ module NetZ_Web
                 return;
             }
 
-            this.esconder();
-            this.jq.remove();
+            this.jq.fadeOut(100, (() => { this.jq.remove(); }));
         }
 
         public esconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
@@ -284,18 +283,6 @@ module NetZ_Web
             this.montarLayout();
             this.setEventos();
             this.finalizar();
-        }
-
-        protected limparMemoria(): void
-        {
-            super.limparMemoria();
-
-            if (this.jq == null)
-            {
-                return;
-            }
-
-            this.jq.remove();
         }
 
         protected montarLayout(): void

@@ -108,6 +108,13 @@ module NetZ_Web
             this.tagGridHtml.addEvtOnRowClickListener(this);
         }
 
+        protected finalizar(): void
+        {
+            super.finalizar();
+
+            window.setTimeout(() => { this.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL); }, 400);
+        }
+
         protected setEventos(): void
         {
             super.setEventos();

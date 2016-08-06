@@ -49,6 +49,7 @@ module NetZ_Web
 
         private _arrTbl: Array<TabelaWeb>;
         private _booEmFoco: boolean = true;
+        private _dttLoad: Date = new Date();
         private _lstSrv: Array<ServerBase>;
         private _msg: Mensagem;
         private _objTema: TemaDefault;
@@ -84,6 +85,11 @@ module NetZ_Web
             this._booEmFoco = booEmFoco;
 
             this.atualizarBooEmFoco();
+        }
+
+        public get dttLoad(): Date
+        {
+            return this._dttLoad;
         }
 
         private get lstSrv(): Array<ServerBase>

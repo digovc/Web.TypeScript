@@ -438,6 +438,7 @@ module NetZ_Web
 
             if (this.pagPrincipal.jnlCadastro == null)
             {
+                this.pagPrincipal.jnlCadastro = this;
                 return;
             }
 

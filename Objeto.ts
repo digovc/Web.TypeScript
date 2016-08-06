@@ -108,18 +108,12 @@ module NetZ_Web
 
         public dispose(): void
         {
-            this.limparMemoria();
-
             this.dispararEvtOnDisposedListener();
         }
 
         private getStrClassNome(): string
         {
             return this.constructor.toString().match(/\w+/g)[1];
-        }
-
-        protected limparMemoria(): void
-        {
         }
 
         // #endregion Métodos
