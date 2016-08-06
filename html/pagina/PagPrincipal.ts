@@ -136,7 +136,7 @@ module NetZ_Web
 
             if (this.jnlConsulta != null && this.jnlConsulta.tblWeb.strNome == tblWeb.strNome)
             {
-                Notificacao.notificar("Essa consulta já está aberta.");
+                Notificacao.notificar("Essa consulta já está aberta.", Notificacao_EnmTipo.INFO);
                 return;
             }
 

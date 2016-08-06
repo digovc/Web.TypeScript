@@ -303,7 +303,7 @@ module NetZ_Web
 
             if (Utils.getBooStrVazia(tblWeb.strCritica))
             {
-                new Notificacao("Tags salvas com sucesso.").abrirNotificacao();
+                Notificacao.notificar("Tags salvas com sucesso.")
                 return;
             }
 

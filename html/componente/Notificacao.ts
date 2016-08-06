@@ -7,6 +7,14 @@ module NetZ_Web
     // #endregion Importações
 
     // #region Enumerados
+
+    export enum Notificacao_EnmTipo
+    {
+        INFO,
+        NEGATIVA,
+        POSITIVA,
+    }
+
     // #endregion Enumerados
 
     export class Notificacao extends ComponenteHtml implements OnClickListener, OnMouseLeaveListener, OnMouseOverListener
@@ -30,6 +38,7 @@ module NetZ_Web
 
         private _btnFechar: BotaoMini;
         private _divIcone: Div;
+        private _enmTipo: Notificacao_EnmTipo;
         private _intFecharInterval: number;
         private _strNotificacao: string;
 
@@ -57,6 +66,16 @@ module NetZ_Web
             return this._divIcone;
         }
 
+        private get enmTipo(): Notificacao_EnmTipo
+        {
+            return this._enmTipo;
+        }
+
+        private set enmTipo(enmTipo: Notificacao_EnmTipo)
+        {
+            this._enmTipo = enmTipo;
+        }
+
         private get intFecharInterval(): number
         {
             return this._intFecharInterval;
@@ -81,10 +100,11 @@ module NetZ_Web
 
         // #region Construtores
 
-        constructor(strNotificacao: string)
+        constructor(strNotificacao: string, enmTipo: Notificacao_EnmTipo = Notificacao_EnmTipo.POSITIVA)
         {
             super(null);
 
+            this.enmTipo = enmTipo;
             this.strId = ("tagNotificacao_" + this.intObjetoId);
             this.strNotificacao = strNotificacao;
         }
@@ -116,10 +136,6 @@ module NetZ_Web
             Notificacao.intNotificacaoAberta++;
 
             this.iniciar();
-
-            this.mostrar();
-
-            this.iniciarIntervalFechar();
         }
 
         private fecharNotificacao(): void
@@ -131,7 +147,37 @@ module NetZ_Web
             this.dispose();
         }
 
-        private iniciarIntervalFechar()
+        protected inicializar(): void
+        {
+            super.inicializar()
+
+            this.inicializarEnmTipo();
+
+            this.inicializarIntervalFechar();
+
+            this.mostrar();
+        }
+
+        private inicializarEnmTipo(): void
+        {
+            switch (this.enmTipo)
+            {
+                case Notificacao_EnmTipo.INFO:
+                    this.divIcone.jq.css("background-image", "url('/res/media/png/img_notificacao_info.png')");
+                    this.divIcone.jq.css("border-right", "5px solid #aca749");
+                    return;
+
+                case Notificacao_EnmTipo.NEGATIVA:
+                    this.divIcone.jq.css("background-image", "url('/res/media/png/img_notificacao_negativa.png')");
+                    this.divIcone.jq.css("border-right", "5px solid #ac4949");
+                    return;
+
+                default:
+                    return;
+            }
+        }
+
+        private inicializarIntervalFechar()
         {
             var intTempo = (!Utils.getBooStrVazia(this.strNotificacao)) ? (this.strNotificacao.length * 150) : 5000;
 
@@ -162,14 +208,14 @@ module NetZ_Web
             return strLayoutFixo;
         }
 
-        public static notificar(strNotificacao: string): void
+        public static notificar(strNotificacao: string, enmTipo: Notificacao_EnmTipo = Notificacao_EnmTipo.POSITIVA): void
         {
             if (Utils.getBooStrVazia(strNotificacao))
             {
                 return;
             }
 
-            new Notificacao(strNotificacao).abrirNotificacao();
+            new Notificacao(strNotificacao, enmTipo).abrirNotificacao();
         }
 
         protected setEventos(): void
@@ -222,7 +268,7 @@ module NetZ_Web
                 switch (objSender)
                 {
                     case this:
-                        this.iniciarIntervalFechar();
+                        this.inicializarIntervalFechar();
                         return;
                 }
             }

@@ -134,7 +134,7 @@ module NetZ_Web
 
             if (booAlterar && (this.tagGridHtml.getIntRowSelecionadaId() < 1))
             {
-                new Notificacao("Selecione um registro primeiro.").abrirNotificacao();
+                Notificacao.notificar("Selecione um registro primeiro.", Notificacao_EnmTipo.NEGATIVA);
                 return;
             }
 
@@ -154,7 +154,7 @@ module NetZ_Web
             // TODO: Validar se esta tabela permite a exclusão de registros.
             if (intRegistroId < 1)
             {
-                new Notificacao("Selecione um registro primeiro.").abrirNotificacao();
+                Notificacao.notificar("Selecione um registro primeiro.", Notificacao_EnmTipo.NEGATIVA);
                 return;
             }
 

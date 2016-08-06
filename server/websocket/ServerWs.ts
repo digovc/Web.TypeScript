@@ -117,7 +117,7 @@
             switch (objInterlocutor.strMetodo)
             {
                 case ServerWs.STR_METODO_WELCOME:
-                    new Notificacao("O servidor de notificação enviou olá.").abrirNotificacao();
+                    Notificacao.notificar("O servidor de notificação enviou olá.", Notificacao_EnmTipo.INFO);
                     return true;
             }
 

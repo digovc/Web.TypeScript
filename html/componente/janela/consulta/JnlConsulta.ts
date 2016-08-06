@@ -165,7 +165,7 @@ module NetZ_Web
 
             if (this.tagGridHtml.rowSelecionada == null)
             {
-                new Notificacao("Selecione um registro primeiro.").abrirNotificacao();
+                Notificacao.notificar("Selecione um registro primeiro.", Notificacao_EnmTipo.NEGATIVA);
                 return;
             }
 

@@ -204,7 +204,7 @@ module NetZ_Web
 
             if (this.intRegistroId < 1)
             {
-                new Notificacao("Salve o registro antes.").abrirNotificacao();
+                Notificacao.notificar("Salve o registro antes.", Notificacao_EnmTipo.NEGATIVA);
                 return;
             }
 
@@ -583,7 +583,7 @@ module NetZ_Web
 
             this.salvarSucesso2SucessoTabHtml();
 
-            new Notificacao("Registro salvo com sucesso.").abrirNotificacao();
+            Notificacao.notificar("Registro salvo com sucesso.");
         }
 
         private salvarSucesso2SucessoCmpIntId(tblWeb: TabelaWeb): void
@@ -637,7 +637,7 @@ module NetZ_Web
 
             if (!this.tblWeb.booSomenteLeitura && (this.intRegistroId > 0))
             {
-                Notificacao.notificar("Alterações não são permitidas nesta tabela.");
+                Notificacao.notificar("Alterações não são permitidas nesta tabela.", Notificacao_EnmTipo.NEGATIVA);
                 return false;
             }
 
