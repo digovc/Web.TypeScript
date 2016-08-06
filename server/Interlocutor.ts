@@ -170,9 +170,17 @@ module NetZ_Web
 
         private mostrarMsgErro(strTextStatus: string, strErrorThrown: string): void
         {
+            if (strTextStatus == "error")
+            {
+                strTextStatus = "Ops!";
+            }
+
             if (Utils.getBooStrVazia(strErrorThrown))
             {
-                strErrorThrown = "Erro desconhecido no servidor.";
+                strErrorThrown = Utils.STR_VAZIA;
+
+                strErrorThrown += "Erro desconhecido no servidor.<br/><br/>";
+                strErrorThrown += "Mas não se preocupe, nossos macacos astronautas já estão cuidando para que este problema seja resolvido.";
             }
 
             new Mensagem(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA).abrirMensagem();
