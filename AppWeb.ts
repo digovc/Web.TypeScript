@@ -47,16 +47,28 @@ module NetZ_Web
             AppWeb._i = appWeb;
         }
 
+        private _arrSrv: Array<ServerBase>;
         private _arrTbl: Array<TabelaWeb>;
         private _booEmFoco: boolean = true;
         private _dttLoad: Date = new Date();
-        private _lstSrv: Array<ServerBase>;
         private _msg: Mensagem;
         private _objTema: TemaDefault;
         private _pag: PaginaHtml;
         private _srvAjaxDb: ServerAjaxDb;
         private _strSessionId: string;
         private _tagFocoExclusivo: ComponenteHtml;
+
+        private get arrSrv(): Array<ServerBase>
+        {
+            if (this._arrSrv != null)
+            {
+                return this._arrSrv;
+            }
+
+            this._arrSrv = this.getArrSrv();
+
+            return this._arrSrv;
+        }
 
         private get arrTbl(): Array<TabelaWeb>
         {
@@ -90,18 +102,6 @@ module NetZ_Web
         public get dttLoad(): Date
         {
             return this._dttLoad;
-        }
-
-        private get lstSrv(): Array<ServerBase>
-        {
-            if (this._lstSrv != null)
-            {
-                return this._lstSrv;
-            }
-
-            this._lstSrv = this.getLstSrv();
-
-            return this._lstSrv;
         }
 
         private get msg(): Mensagem
@@ -278,13 +278,13 @@ module NetZ_Web
             this.addArrTbl(tblWeb);
         }
 
-        private getLstSrv(): Array<ServerBase>
+        private getArrSrv(): Array<ServerBase>
         {
-            var lstSrvResultado = new Array<ServerBase>();
+            var arrSrvResultado = new Array<ServerBase>();
 
-            this.inicializarLstSrv(lstSrvResultado);
+            this.inicializarArrSrv(arrSrvResultado);
 
-            return lstSrvResultado;
+            return arrSrvResultado;
         }
 
         protected getObjTema(): TemaDefault
@@ -368,14 +368,14 @@ module NetZ_Web
 
         protected inicializar(): void
         {
-            this.inicializarLstSrv2();
+            this.inicializarArrSrv2();
         }
 
-        protected abstract inicializarLstSrv(lstSrv: Array<ServerBase>): void;
+        protected abstract inicializarArrSrv(arrSrv: Array<ServerBase>): void;
 
-        private inicializarLstSrv2(): void
+        private inicializarArrSrv2(): void
         {
-            this.lstSrv.forEach((srv: ServerBase) => { srv.iniciar(); });
+            this.arrSrv.forEach((srv: ServerBase) => { srv.iniciar(); });
         }
 
         protected montarLayout(): void

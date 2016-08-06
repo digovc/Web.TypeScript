@@ -106,12 +106,12 @@ module NetZ_Web
             return this._tabHtml;
         }
 
-        private get tblWeb(): TabelaWeb
+        public get tblWeb(): TabelaWeb
         {
             return this._tblWeb;
         }
 
-        private set tblWeb(tblWeb: TabelaWeb)
+        public set tblWeb(tblWeb: TabelaWeb)
         {
             if (this._tblWeb == tblWeb)
             {
@@ -217,6 +217,11 @@ module NetZ_Web
                 return;
             }
 
+            this.atualizarTblWebArrCmp();
+        }
+
+        private atualizarTblWebArrCmp(): void
+        {
             if (this.arrCmp == null)
             {
                 return;
@@ -403,7 +408,7 @@ module NetZ_Web
 
             this.divComando.iniciar();
 
-            this.inicializardivDica();
+            this.inicializarDivDica();
 
             this.inicializarTabHtml();
         }
@@ -418,7 +423,7 @@ module NetZ_Web
             this.arrCmp.forEach((cmp) => { cmp.iniciar(); });
         }
 
-        private inicializardivDica(): void
+        private inicializarDivDica(): void
         {
             if (this.cmpEmFoco == null)
             {

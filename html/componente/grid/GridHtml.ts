@@ -210,7 +210,7 @@ module NetZ_Web
         protected inicializar(): void
         {
             this.inicializarCabecalhoFixo();
-            this.inicializarLstTagRow();
+            this.inicializarArrTagRow();
         }
 
         private inicializarCabecalhoFixo(): void
@@ -228,7 +228,7 @@ module NetZ_Web
             //});
         }
 
-        private inicializarLstTagRow(): void
+        private inicializarArrTagRow(): void
         {
             if (this.arrRow == null)
             {

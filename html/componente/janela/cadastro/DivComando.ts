@@ -21,6 +21,7 @@ module NetZ_Web
         private _btnSalvar: BotaoCircular;
         private _btnTag: BotaoCircular;
         private _frm: FormHtml;
+        private _tblWeb: TabelaWeb;
 
         private get btnSalvar(): BotaoCircular
         {
@@ -56,6 +57,18 @@ module NetZ_Web
             this._frm = frm;
         }
 
+        private get tblWeb(): TabelaWeb
+        {
+            if (this._tblWeb != null)
+            {
+                return this._tblWeb;
+            }
+
+            this._tblWeb = this.getTblWeb();
+
+            return this._tblWeb;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -81,15 +94,14 @@ module NetZ_Web
             this.frm.abrirJnlTag();
         }
 
-        private salvar(): void
+        private getTblWeb(): TabelaWeb
         {
             if (this.frm == null)
             {
-                return;
+                return null;
             }
 
-            this.btnTag.mostrar();
-            this.frm.salvar();
+            return this.frm.tblWeb;
         }
 
         protected inicializar(): void
@@ -97,6 +109,8 @@ module NetZ_Web
             super.inicializar();
 
             this.inicializarBtnTag();
+
+            this.inicializarTblWeb();
         }
 
         private inicializarBtnTag(): void
@@ -117,6 +131,52 @@ module NetZ_Web
             }
 
             this.btnTag.mostrar();
+        }
+
+        private inicializarTblWeb(): void
+        {
+            if (this.tblWeb == null)
+            {
+                return;
+            }
+
+            this.inicializarTblWebSomenteLeitura();
+        }
+
+        private inicializarTblWebSomenteLeitura(): void
+        {
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            if (this.frm.jnlCadastro == null)
+            {
+                return;
+            }
+
+            if (this.frm.jnlCadastro.intRegistroId < 1)
+            {
+                return;
+            }
+
+            if (!this.tblWeb.booSomenteLeitura)
+            {
+                return;
+            }
+
+            this.btnSalvar.booVisivel = false;
+        }
+
+        private salvar(): void
+        {
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            this.btnTag.mostrar();
+            this.frm.salvar();
         }
 
         protected setEventos(): void

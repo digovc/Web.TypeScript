@@ -249,6 +249,11 @@ module NetZ_Web
         {
         }
 
+        protected getBooAttValor(strAttNome: string): boolean
+        {
+            return Utils.getBoo(this.getStrAttValor(strAttNome));
+        }
+
         protected getStrAttValor(strAttNome: string): string
         {
             if (Utils.getBooStrVazia(strAttNome))

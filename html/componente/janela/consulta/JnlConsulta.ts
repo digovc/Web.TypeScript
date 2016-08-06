@@ -300,7 +300,7 @@ module NetZ_Web
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
 
-            this.pnlFiltro.atualizarLstFiltro(this.tblWeb);
+            this.pnlFiltro.atualizarArrFiltro(this.tblWeb);
 
             var objInterlocutor = new Interlocutor();
 

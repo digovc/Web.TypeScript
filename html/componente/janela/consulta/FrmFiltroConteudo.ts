@@ -44,7 +44,7 @@ module NetZ_Web
 
         // #region Métodos
 
-        public atualizarLstFiltro(tblWeb: TabelaWeb): void
+        public atualizarArrFiltro(tblWeb: TabelaWeb): void
         {
             if (tblWeb == null)
             {
@@ -58,10 +58,10 @@ module NetZ_Web
 
             tblWeb.limparFiltro();
 
-            this.arrCmp.forEach((cmpFiltro) => { this.atualizarLstFiltro2(tblWeb, cmpFiltro); });
+            this.arrCmp.forEach((cmpFiltro) => { this.atualizarArrFiltro2(tblWeb, cmpFiltro); });
         }
 
-        private atualizarLstFiltro2(tblWeb: TabelaWeb, cmpFiltro: CampoHtml): void
+        private atualizarArrFiltro2(tblWeb: TabelaWeb, cmpFiltro: CampoHtml): void
         {
             if (cmpFiltro == null)
             {

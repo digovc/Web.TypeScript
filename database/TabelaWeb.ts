@@ -21,6 +21,7 @@ module NetZ_Web
 
         private _arrClnWeb: Array<ColunaWeb>;
         private _arrFil: Array<FiltroWeb>;
+        private _booSomenteLeitura: boolean;
         private _clnWebIntId: ColunaWeb;
         private _clnWebNome: ColunaWeb;
         private _intRegistroPaiId: number;
@@ -54,6 +55,16 @@ module NetZ_Web
             this._arrFil = new Array<FiltroWeb>();
 
             return this._arrFil;
+        }
+
+        public get booSomenteLeitura(): boolean
+        {
+            return this._booSomenteLeitura;
+        }
+
+        public set booSomenteLeitura(booSomenteLeitura: boolean)
+        {
+            this._booSomenteLeitura = booSomenteLeitura;
         }
 
         public get clnWebIntId(): ColunaWeb
@@ -109,6 +120,7 @@ module NetZ_Web
         {
             this._strTblPaiNome = strTblPaiNome;
         }
+
 
         // #endregion Atributos
 

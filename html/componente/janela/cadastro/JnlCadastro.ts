@@ -415,6 +415,8 @@ module NetZ_Web
 
             var tblWebResultado = new TabelaWeb(this.strTblNome);
 
+            tblWebResultado.booSomenteLeitura = this.getBooAttValor("somente_leitura");
+
             return tblWebResultado;
         }
 
@@ -630,6 +632,12 @@ module NetZ_Web
 
             if (!this.frm.validarDados())
             {
+                return false;
+            }
+
+            if (!this.tblWeb.booSomenteLeitura && (this.intRegistroId > 0))
+            {
+                Notificacao.notificar("Alterações não são permitidas nesta tabela.");
                 return false;
             }
 

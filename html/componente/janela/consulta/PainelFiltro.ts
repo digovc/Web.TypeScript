@@ -123,14 +123,14 @@ module NetZ_Web
             this.inicializarFrmFiltroConteudo();
         }
 
-        public atualizarLstFiltro(tblWeb: TabelaWeb): void
+        public atualizarArrFiltro(tblWeb: TabelaWeb): void
         {
             if (this.frmFiltroConteudo == null)
             {
                 return;
             }
 
-            this.frmFiltroConteudo.atualizarLstFiltro(tblWeb);
+            this.frmFiltroConteudo.atualizarArrFiltro(tblWeb);
         }
 
         private divBarraOnClick(): void
