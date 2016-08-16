@@ -161,11 +161,6 @@ module NetZ_Web
                 return;
             }
 
-            if (!this.booSelecionado)
-            {
-                return;
-            }
-
             if (this.tblWeb == null)
             {
                 return;

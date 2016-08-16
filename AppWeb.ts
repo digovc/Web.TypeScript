@@ -1,5 +1,6 @@
 ﻿/// <reference path="design/TemaDefault.ts"/>
 /// <reference path="erro/Erro.ts"/>
+/// <reference path="Historico.ts"/>
 /// <reference path="html/componente/Mensagem.ts"/>
 /// <reference path="html/componente/Notificacao.ts"/>
 /// <reference path="html/pagina/PaginaHtml.ts"/>
@@ -8,8 +9,8 @@
 /// <reference path="OnFocusChangeListener.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
-/// <reference path="server/Interlocutor.ts"/>
 /// <reference path="server/ajax/ServerAjaxDb.ts"/>
+/// <reference path="server/Interlocutor.ts"/>
 
 module NetZ_Web
 {
@@ -230,6 +231,18 @@ module NetZ_Web
             {
                 this.dispararEvtOnFocusOutListener();
             }
+        }
+
+        public atualizarHistorico(objHistorico: Historico): void
+        {
+            if (objHistorico == null)
+            {
+                return;
+            }
+
+            // TODO: Parei aqui.
+
+            window.history.pushState(null, objHistorico.strTitulo, objHistorico.strParametro);
         }
 
         public carregarTbl(strTblNome: string): void

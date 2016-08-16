@@ -172,6 +172,11 @@ module NetZ_Web
             this.divConsulta.jq.slideUp(200, (() => { this.inicializarJnlConsulta(objInterlocutor); }));
         }
 
+        private abrirConsultaSucessoHistorico(): void
+        {
+
+        }
+
         public abrirFiltroCadastro(intFiltroId: number): void
         {
             TblFiltro.i.limparFiltro();

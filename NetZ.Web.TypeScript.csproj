@@ -32,6 +32,7 @@
     <TypeScriptCompile Include="database\TblFiltro.ts" />
     <TypeScriptCompile Include="database\dominio\DominioWeb.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
+    <TypeScriptCompile Include="Historico.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
     <TypeScriptCompile Include="html\componente\ActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />

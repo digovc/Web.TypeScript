@@ -260,6 +260,33 @@ module NetZ_Web
 
             this.pnlAcaoConsulta.iniciar();
             this.pnlFiltro.iniciar();
+
+            this.inicializarHistorico();
+        }
+
+        private inicializarHistorico(): void
+        {
+            if (AppWeb.i == null)
+            {
+                return;
+            }
+
+            if (this.tblWeb == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(this.tblWeb.strNomeExibicao))
+            {
+                return;
+            }
+
+            var objHistorico = new Historico();
+
+            objHistorico.addParametro("consulta", this.tblWeb.strNome);
+            objHistorico.strTitulo = this.tblWeb.strNomeExibicao;
+
+            AppWeb.i.atualizarHistorico(objHistorico);
         }
 
         protected inicializarPosicao(): void
