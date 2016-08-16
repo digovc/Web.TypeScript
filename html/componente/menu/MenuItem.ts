@@ -2,6 +2,7 @@
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnMouseLeaveListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
+/// <reference path="../circulo/DivCirculo.ts"/>
 /// <reference path="../painel/PainelHtml.ts"/>
 
 module NetZ_Web
@@ -21,6 +22,8 @@ module NetZ_Web
 
         private _arrMniFilho: Array<MenuItem>;
         private _arrStrTag: Array<string>;
+        private _booFilho: boolean;
+        private _divIcone: DivCirculo;
         private _divItemConteudo: Div;
         private _divTitulo: Div;
         private _mniPai: MenuItem;
@@ -51,6 +54,13 @@ module NetZ_Web
             return this._arrStrTag;
         }
 
+        private get booFilho(): boolean
+        {
+            this._booFilho = (this.arrMniFilho.length < 1);
+
+            return this._booFilho;
+        }
+
         private get divItemConteudo(): Div
         {
             if (this._divItemConteudo != null)
@@ -71,6 +81,18 @@ module NetZ_Web
         private set mniPai(mniPai: MenuItem)
         {
             this._mniPai = mniPai;
+        }
+
+        private get divIcone(): DivCirculo
+        {
+            if (this._divIcone != null)
+            {
+                return this._divIcone;
+            }
+
+            this._divIcone = new DivCirculo(this.strId + "_divIcone");
+
+            return this._divIcone;
         }
 
         private get divTitulo(): Div
@@ -106,6 +128,7 @@ module NetZ_Web
 
             return this._tblWeb;
         }
+
 
         // #endregion Atributos
 
@@ -186,17 +209,6 @@ module NetZ_Web
             mniFilho.mniPai = this;
 
             mniFilho.iniciar();
-        }
-
-        private divTituloOnClick(): void
-        {
-            if (this.arrMniFilho.length > 0)
-            {
-                this.mostrarEsconderDivItemConteudo();
-                return;
-            }
-
-            this.abrirConsulta(this.tblWeb);
         }
 
         public esconderDivItemConteudo(): void
@@ -281,10 +293,10 @@ module NetZ_Web
 
             this.arrMniFilho.forEach((mni) => { mni.pesquisar(strPesquisa); });
 
-            this.arrStrTag.forEach((strTag) => { this.pesquisar2(strPesquisa, strTag); });
+            this.arrStrTag.forEach((strTag) => { this.pesquisarItem(strPesquisa, strTag); });
         }
 
-        private pesquisar2(strPesquisa: string, strTag: string): void
+        private pesquisarItem(strPesquisa: string, strTag: string): void
         {
             if (Utils.getBooStrVazia(strTag))
             {
@@ -307,6 +319,17 @@ module NetZ_Web
             this.mniPai.divItemConteudo.mostrar();
         }
 
+        private processarOnClick(): void
+        {
+            if (this.arrMniFilho.length > 0)
+            {
+                this.mostrarEsconderDivItemConteudo();
+                return;
+            }
+
+            this.abrirConsulta(this.tblWeb);
+        }
+
         protected setEventos(): void
         {
             super.setEventos();
@@ -314,6 +337,24 @@ module NetZ_Web
             this.addEvtOnMouseLeaveListener(this);
             this.addEvtOnMouseOverListener(this);
 
+            if (this.booFilho)
+            {
+                this.setEventosFilho();
+            }
+            else
+            {
+                this.setEventosPai();
+            }
+        }
+
+        private setEventosFilho(): void
+        {
+            this.addEvtOnClickListener(this);
+        }
+
+        private setEventosPai(): void
+        {
+            this.divIcone.addEvtOnClickListener(this);
             this.divTitulo.addEvtOnClickListener(this);
         }
 
@@ -331,8 +372,10 @@ module NetZ_Web
             {
                 switch (objSender)
                 {
+                    case this:
+                    case this.divIcone:
                     case this.divTitulo:
-                        this.divTituloOnClick();
+                        this.processarOnClick();
                         return;
                 }
             }
