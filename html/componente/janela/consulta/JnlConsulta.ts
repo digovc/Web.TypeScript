@@ -351,6 +351,12 @@ module NetZ_Web
                 return;
             }
 
+            if (ServerAjax.STR_RESULTADO_VAZIO == objInterlocutor.strData)
+            {
+                Notificacao.notificar("Nenhum registro foi encontrado.", Notificacao_EnmTipo.INFO);
+                return;
+            }
+
             ServerHttp.i.atualizarCssMain();
 
             this.divGrid.jq.html(objInterlocutor.strData);

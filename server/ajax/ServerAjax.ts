@@ -11,6 +11,9 @@ module NetZ_Web
     export abstract class ServerAjax extends ServerBase
     {
         // #region Constantes
+
+        public static get STR_RESULTADO_VAZIO(): string { return "_____null_____" };
+
         // #endregion Constantes
 
         // #region Atributos

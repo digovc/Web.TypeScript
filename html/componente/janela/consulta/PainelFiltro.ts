@@ -226,7 +226,6 @@ module NetZ_Web
             }
 
             this.jnlConsulta.pesquisar();
-            this.jnlConsulta.maximinizarGrid();
         }
 
         protected setEventos(): void
