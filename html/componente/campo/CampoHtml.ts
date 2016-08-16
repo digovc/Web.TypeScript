@@ -274,6 +274,8 @@ module NetZ_Web
         {
             this.atualizarStrValorCln();
             this.atualizarStrValorDivTitulo();
+
+            this.strCritica = null;
         }
 
         private atualizarStrValorCln(): void
@@ -493,7 +495,12 @@ module NetZ_Web
             // #region Ações
             try
             {
-                this.atualizarStrValor();
+                switch (objSender)
+                {
+                    case this.tagInput:
+                        this.atualizarStrValor();
+                        return;
+                }
             }
             catch (ex)
             {
