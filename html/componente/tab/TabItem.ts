@@ -178,7 +178,7 @@ module NetZ_Web
 
         private atualizarBooAtiva(): void
         {
-            this.tabItemHead.booAtiva = this.booAtiva;
+            this.tabItemHead.booSelecionado = this.booAtiva;
 
             if (!this.booAtiva)
             {

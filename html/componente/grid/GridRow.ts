@@ -4,7 +4,7 @@
 /// <reference path="../../../OnDoubleClickListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../../../Utils.ts"/>
-/// <reference path="../../Tag.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="MenuGrid.ts"/>
 
 module NetZ_Web
@@ -16,36 +16,16 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class GridRow extends Tag implements OnClickListener, OnClickRightListener, OnDoubleClickListener, OnMouseLeaveListener, OnMouseOverListener
+    export class GridRow extends ComponenteHtml implements OnClickListener, OnClickRightListener, OnDoubleClickListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
-
-        private static get COR_ROW_SELECINADA(): string { return "#dadada" };
 
         // #endregion Constantes
 
         // #region Atributos
 
-        private _booSelecionada: boolean;
         private _intId: number;
         private _tagGridHtml: GridHtml = null;
-
-        public get booSelecionada(): boolean
-        {
-            return this._booSelecionada;
-        }
-
-        public set booSelecionada(booSelecionada: boolean)
-        {
-            if (this._booSelecionada == booSelecionada)
-            {
-                return;
-            }
-
-            this._booSelecionada = booSelecionada;
-
-            this.atualizarBooSelecionado();
-        }
 
         public get intId(): number
         {
@@ -76,16 +56,16 @@ module NetZ_Web
 
         // #region Métodos
 
-        private atualizarBooSelecionado(): void
+        protected atualizarBooSelecionado(): void
         {
+            super.atualizarBooSelecionado();
+
             if (this.tagGridHtml == null)
             {
                 return;
             }
 
-            this.jq.css("background-color", this.booSelecionada ? GridRow.COR_ROW_SELECINADA : Utils.STR_VAZIA);
-
-            if (this.booSelecionada)
+            if (this.booSelecionado)
             {
                 this.tagGridHtml.addRowSelecionada(this);
             }
@@ -168,13 +148,13 @@ module NetZ_Web
 
             if (booControl)
             {
-                this.booSelecionada = !this.booSelecionada;
+                this.booSelecionado = !this.booSelecionado;
                 return;
             }
 
             this.tagGridHtml.selecinarTudo(false);
 
-            this.booSelecionada = !this.booSelecionada;
+            this.booSelecionado = !this.booSelecionado;
         }
 
         protected setEventos(): void
@@ -272,7 +252,7 @@ module NetZ_Web
             // #region Ações
             try
             {
-                this.jq.css("background-color", this.booSelecionada ? GridRow.COR_ROW_SELECINADA : Utils.STR_VAZIA);
+                this.jq.css("background-color", this.booSelecionado ? AppWeb.i.objTema.corSelecionado : Utils.STR_VAZIA);
             }
             catch (ex)
             {

@@ -13,25 +13,7 @@
 
         // #region Atributos
 
-        private _booAtiva: boolean;
         private _tabItem: TabItem;
-
-        public get booAtiva(): boolean
-        {
-            return this._booAtiva;
-        }
-
-        public set booAtiva(booAtiva: boolean)
-        {
-            if (this._booAtiva == booAtiva)
-            {
-                return;
-            }
-
-            this._booAtiva = booAtiva;
-
-            this.atualizarBooAtiva();
-        }
 
         public get tabItem(): TabItem
         {
@@ -60,14 +42,9 @@
             this.tabItem.ativar();
         }
 
-        private atualizarBooAtiva(): void
+        protected getCorSelecionado(): string
         {
-            if (this.jq == null)
-            {
-                return;
-            }
-
-            this.jq.css("background-color", this.booAtiva ? AppWeb.i.objTema.corFundo : Utils.STR_VAZIA);
+            return AppWeb.i.objTema.corFundo;
         }
 
         protected setEventos(): void

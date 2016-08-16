@@ -17,7 +17,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class Menu extends ComponenteHtml implements OnClickListener, OnEnterListener, OnKeyDownListener, OnValorAlteradoListener
+    export abstract class Menu extends ComponenteHtml implements OnClickListener, OnEnterListener, OnKeyUpListener, OnValorAlteradoListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -25,7 +25,9 @@ module NetZ_Web
         // #region Atributos
 
         private _arrMni: Array<MenuItem>;
+        private _arrMniFilhoVisivel: Array<MenuItem>;
         private _divGaveta: Div;
+        private _mniSelecionado: MenuItem;
         private _pagPrincipal: PagPrincipal;
         private _txtPesquisa: Input;
 
@@ -41,6 +43,23 @@ module NetZ_Web
             return this._arrMni;
         }
 
+        private get arrMniFilhoVisivel(): Array<MenuItem>
+        {
+            if (this._arrMniFilhoVisivel != null)
+            {
+                return this._arrMniFilhoVisivel;
+            }
+
+            this._arrMniFilhoVisivel = this.getArrMniFilhoVisivel();
+
+            return this._arrMniFilhoVisivel;
+        }
+
+        private set arrMniFilhoVisivel(arrMniFilhoVisivel: Array<MenuItem>)
+        {
+            this._arrMniFilhoVisivel = arrMniFilhoVisivel;
+        }
+
         private get divGaveta(): Div
         {
             if (this._divGaveta != null)
@@ -51,6 +70,28 @@ module NetZ_Web
             this._divGaveta = new Div("divGaveta");
 
             return this._divGaveta;
+        }
+
+        public get mniSelecionado(): MenuItem
+        {
+            return this._mniSelecionado;
+        }
+
+        public set mniSelecionado(mniSelecionado: MenuItem)
+        {
+            if (this._mniSelecionado == mniSelecionado)
+            {
+                return;
+            }
+
+            if (this._mniSelecionado != null)
+            {
+                this._mniSelecionado.booSelecionado = false;
+            }
+
+            this._mniSelecionado = mniSelecionado;
+
+            this.atualizarMniSelecionado();
         }
 
         public get pagPrincipal(): PagPrincipal
@@ -105,13 +146,18 @@ module NetZ_Web
 
         private abrirConsultaPrimeira(): void
         {
-            for (var i = 0; i < this.arrMni.length; i++)
+            if (this.arrMniFilhoVisivel == null)
             {
-                if (this.arrMni[i].abrirConsultaPrimeira())
-                {
-                    return;
-                }
+                return;
             }
+
+            if (this.arrMniFilhoVisivel.length < 1)
+            {
+                return;
+            }
+
+            this.arrMniFilhoVisivel[0].booSelecionado = true;
+            this.arrMniFilhoVisivel[0].abrirConsulta();
         }
 
         public addMniFilho(mni: MenuItem): void
@@ -133,6 +179,14 @@ module NetZ_Web
             mni.iniciar();
         }
 
+        private atualizarMniSelecionado(): void
+        {
+            if (this.mniSelecionado != null)
+            {
+                this.mniSelecionado.booSelecionado = true;
+            }
+        }
+
         private fecharGrupos(): void
         {
             if (this.arrMni == null)
@@ -150,6 +204,52 @@ module NetZ_Web
             this.txtPesquisa.receberFoco();
         }
 
+        private getArrMniFilhoVisivel(): Array<MenuItem>
+        {
+            var arrMniFilhoVisivelResultado = new Array<MenuItem>();
+
+            for (var i = 0; i < this.arrMni.length; i++)
+            {
+                var mni = this.arrMni[i];
+
+                this.getArrMniFilhoVisivelItem(arrMniFilhoVisivelResultado, mni);
+            }
+
+            return arrMniFilhoVisivelResultado;
+        }
+
+        private getArrMniFilhoVisivelItem(arrMniFilho: Array<MenuItem>, mni: MenuItem): Array<MenuItem>
+        {
+            if (mni == null)
+            {
+                return;
+            }
+
+            if (this != mni.mnuPai)
+            {
+                return;
+            }
+
+            if (!mni.booVisivel)
+            {
+                return;
+            }
+
+            if (mni.arrMniFilhoVisivel == null)
+            {
+                return;
+            }
+
+            for (var i = 0; i < mni.arrMniFilhoVisivel.length; i++)
+            {
+                var mniFilho = mni.arrMniFilhoVisivel[i];
+
+                arrMniFilho.push(mniFilho);
+            }
+
+            return arrMniFilho;
+        }
+
         protected inicializar(): void
         {
             super.inicializar();
@@ -161,12 +261,30 @@ module NetZ_Web
 
         protected abstract inicializarItem(): void;
 
-        public pagPrincipalOnClick(arg: JQueryEventObject): void
+        private pesquisar(strPesquisa: string): void
+        {
+            this.arrMniFilhoVisivel = null;
+
+            if (this.arrMni == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(strPesquisa))
+            {
+                this.arrMni.forEach((mni) => { mni.limparPesquisa(); });
+                return;
+            }
+
+            this.arrMni.forEach((mni) => { mni.pesquisar(strPesquisa) });
+        }
+
+        public processarPagPrincipalOnClick(arg: JQueryEventObject): void
         {
             this.divGaveta.esconder();
         }
 
-        private pagPrincipalOnKeyDown(arg: JQueryKeyEventObject): void
+        private processarPagPrincipalOnKeyUp(arg: JQueryKeyEventObject): void
         {
             if (arg.keyCode != Keys.M)
             {
@@ -182,20 +300,34 @@ module NetZ_Web
             this.txtPesquisa.selecionarTudo();
         }
 
-        private pesquisar(strPesquisa: string): void
+        private processarTxtPesquisaOnKeyUp(arg: JQueryKeyEventObject): void
         {
-            if (this.arrMni == null)
+            this.processarTxtPesquisaOnKeyUpEnter(arg);
+            this.processarTxtPesquisaOnKeyUpSeta(arg);
+        }
+
+        private processarTxtPesquisaOnKeyUpEnter(arg: JQueryKeyEventObject): void
+        {
+            if (arg.keyCode != Keys.ENTER)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(strPesquisa))
-            {
-                this.arrMni.forEach((mni) => { mni.limparPesquisa() });
-                return;
-            }
+            this.abrirConsultaPrimeira();
+        }
 
-            this.arrMni.forEach((mni) => { mni.pesquisar(strPesquisa) });
+        private processarTxtPesquisaOnKeyUpSeta(arg: JQueryKeyEventObject): void
+        {
+            switch (arg.keyCode)
+            {
+                case Keys.DOWN_ARROW:
+                    this.selecionarPrimeiro();
+                    return;
+
+                case Keys.UP_ARROW:
+                    this.selecionarUltimo();
+                    return;
+            }
         }
 
         protected setEventos(): void
@@ -206,7 +338,7 @@ module NetZ_Web
 
             this.txtPesquisa.addEvtOnClickListener(this);
             this.txtPesquisa.addEvtOnEnterListener(this);
-            this.txtPesquisa.addEvtOnKeyDownListener(this);
+            this.txtPesquisa.addEvtOnKeyUpListener(this);
             this.txtPesquisa.addEvtOnValorAlteradoListener(this);
 
             this.setEventosGlobal();
@@ -220,17 +352,93 @@ module NetZ_Web
             }
 
             this.pagPrincipal.addEvtOnClickListener(this);
-            this.pagPrincipal.addEvtOnKeyDownListener(this);
+            this.pagPrincipal.addEvtOnKeyUpListener(this);
         }
 
-        private txtPesquisaOnKeyDown(arg: JQueryKeyEventObject): void
+        public selecionarAnterior(): void
         {
-            if (arg.keyCode != Keys.ENTER)
+            if (this.mniSelecionado == null)
             {
                 return;
             }
 
-            this.abrirConsultaPrimeira();
+            if (this.arrMniFilhoVisivel == null)
+            {
+                return;
+            }
+
+            var intIndex = this.arrMniFilhoVisivel.indexOf(this.mniSelecionado);
+
+            if (intIndex < 0)
+            {
+                return;
+            }
+
+            if (intIndex == 0)
+            {
+                this.arrMniFilhoVisivel[this.arrMniFilhoVisivel.length - 1].booSelecionado = true;
+                return;
+            }
+
+            this.arrMniFilhoVisivel[intIndex - 1].booSelecionado = true;
+        }
+
+        private selecionarPrimeiro(): void
+        {
+            if (this.arrMniFilhoVisivel == null)
+            {
+                return;
+            }
+
+            if (this.arrMniFilhoVisivel.length < 1)
+            {
+                return;
+            }
+
+            this.arrMniFilhoVisivel[0].booSelecionado = true;
+        }
+
+        public selecionarProximo(): void
+        {
+            if (this.mniSelecionado == null)
+            {
+                return;
+            }
+
+            if (this.arrMniFilhoVisivel == null)
+            {
+                return;
+            }
+
+            var intIndex = this.arrMniFilhoVisivel.indexOf(this.mniSelecionado);
+
+            if (intIndex < 0)
+            {
+                return;
+            }
+
+            if (intIndex == (this.arrMniFilhoVisivel.length - 1))
+            {
+                this.arrMniFilhoVisivel[0].booSelecionado = true;
+                return;
+            }
+
+            this.arrMniFilhoVisivel[intIndex + 1].booSelecionado = true;
+        }
+
+        private selecionarUltimo(): void
+        {
+            if (this.arrMniFilhoVisivel == null)
+            {
+                return;
+            }
+
+            if (this.arrMniFilhoVisivel.length < 1)
+            {
+                return;
+            }
+
+            this.arrMniFilhoVisivel[this.arrMniFilhoVisivel.length - 1].booSelecionado = true;
         }
 
         // #endregion Métodos
@@ -252,7 +460,7 @@ module NetZ_Web
                         return;
 
                     case this.pagPrincipal:
-                        this.pagPrincipalOnClick(arg);
+                        this.processarPagPrincipalOnClick(arg);
                         return;
 
                     case this.txtPesquisa:
@@ -290,7 +498,7 @@ module NetZ_Web
             // #endregion Ações
         }
 
-        public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyUp(objSender: Object, arg: JQueryKeyEventObject): void
         {
             // #region Variáveis
             // #endregion Variáveis
@@ -301,11 +509,11 @@ module NetZ_Web
                 switch (objSender)
                 {
                     case this.pagPrincipal:
-                        this.pagPrincipalOnKeyDown(arg);
+                        this.processarPagPrincipalOnKeyUp(arg);
                         return;
 
                     case this.txtPesquisa:
-                        this.txtPesquisaOnKeyDown(arg);
+                        this.processarTxtPesquisaOnKeyUp(arg);
                         return;
                 }
             }
@@ -327,7 +535,12 @@ module NetZ_Web
             // #region Ações
             try
             {
-                this.pesquisar(arg.strValor);
+                switch (objSender)
+                {
+                    case this.txtPesquisa:
+                        this.pesquisar(arg.strValor);
+                        return;
+                }
             }
             catch (ex)
             {

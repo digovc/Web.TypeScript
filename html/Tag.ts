@@ -836,6 +836,77 @@ module NetZ_Web
 
         // #endregion Evento OnKeyPressListener
 
+        // #region Evento OnKeyUpListener
+
+        private _arrEvtOnKeyUpListener: Array<OnKeyUpListener>;
+
+        private get arrEvtOnKeyUpListener(): Array<OnKeyUpListener>
+        {
+            if (this._arrEvtOnKeyUpListener != null)
+            {
+                return this._arrEvtOnKeyUpListener;
+            }
+
+            this._arrEvtOnKeyUpListener = new Array<OnKeyUpListener>();
+
+            return this._arrEvtOnKeyUpListener;
+        }
+
+        public addEvtOnKeyUpListener(evtOnKeyUpListener: OnKeyUpListener): void
+        {
+            if (evtOnKeyUpListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyUpListener.indexOf(evtOnKeyUpListener) > -1)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyUpListener.length == 0)
+            {
+                this.jq.keyup((arg) => this.dispararEvtOnKeyUpListener(arg));
+            }
+
+            this.arrEvtOnKeyUpListener.push(evtOnKeyUpListener);
+        }
+
+        private dispararEvtOnKeyUpListener(arg: JQueryKeyEventObject): void
+        {
+            if (this.arrEvtOnKeyUpListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyUpListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onKeyUp(this, arg);
+            });
+        }
+
+        public removerEvtOnKeyUpListener(evtOnKeyUpListener: OnKeyUpListener): void
+        {
+            if (evtOnKeyUpListener == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyUpListener.indexOf(evtOnKeyUpListener) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyUpListener.splice(this.arrEvtOnKeyUpListener.indexOf(evtOnKeyUpListener), 1);
+        }
+
+        // #endregion Evento OnKeyUpListener
+
         // #region Evento OnMouseDownListener
 
         private _arrEvtOnMouseDownListener: Array<OnMouseDownListener>;

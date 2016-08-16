@@ -82,6 +82,7 @@
     <TypeScriptCompile Include="OnDisposedListener.ts" />
     <TypeScriptCompile Include="OnDoubleClickListener.ts" />
     <TypeScriptCompile Include="OnFocusChangeListener.ts" />
+    <TypeScriptCompile Include="OnKeyUpListener.ts" />
     <TypeScriptCompile Include="OnKeyDownListener.ts" />
     <TypeScriptCompile Include="OnKeyPressListener.ts" />
     <TypeScriptCompile Include="OnLeaveListener.ts" />

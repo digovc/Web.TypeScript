@@ -556,7 +556,10 @@ module NetZ_Web
                 if (this.arrEvtOnValorAlteradoListener.length == 0)
                 {
                     this.jq.change((arg) => { this.strValor = this.jq.val(); });
-                    this.jq.keydown((arg) => { this.strValor = this.jq.val(); });
+                    this.jq.keyup((arg) =>
+                    {
+                        this.strValor = this.jq.val();
+                    });
                 }
 
                 this.arrEvtOnValorAlteradoListener.push(evtOnValorAlteradoListener);

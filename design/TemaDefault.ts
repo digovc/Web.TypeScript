@@ -15,6 +15,7 @@
 
         private _corFundo: string;
         private _corMouseOver: string;
+        private _corSelecionado: string;
 
         public get corFundo(): string
         {
@@ -39,6 +40,17 @@
 
             return this._corMouseOver;
         }
+        public get corSelecionado(): string
+        {
+            if (this._corSelecionado != null)
+            {
+                return this._corSelecionado;
+            }
+
+            this._corSelecionado = this.getCorSelecionado();
+
+            return this._corSelecionado;
+        }
 
         // #endregion Atributos
 
@@ -55,6 +67,10 @@
         protected getCorMouseOver(): string
         {
             return "lightgray";
+        }
+        protected getCorSelecionado(): string
+        {
+            return "#dadada";
         }
 
         // #endregion Métodos

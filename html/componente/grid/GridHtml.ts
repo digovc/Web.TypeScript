@@ -287,7 +287,7 @@ module NetZ_Web
                     continue;
                 }
 
-                row.booSelecionada = booSelecionar;
+                row.booSelecionado = booSelecionar;
                 return;
             }
         }
@@ -299,7 +299,7 @@ module NetZ_Web
                 return;
             }
 
-            this.arrRow.forEach((row) => { row.booSelecionada = booSelecionar; });
+            this.arrRow.forEach((row) => { row.booSelecionado = booSelecionar; });
         }
 
         // #endregion Métodos

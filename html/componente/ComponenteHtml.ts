@@ -16,7 +16,25 @@ module NetZ_Web
 
         // #region Atributos
 
+        private _booSelecionado: boolean;
         private _strLayoutFixo: string;
+
+        public get booSelecionado(): boolean
+        {
+            return this._booSelecionado;
+        }
+
+        public set booSelecionado(booSelecionado: boolean)
+        {
+            if (this._booSelecionado == booSelecionado)
+            {
+                return;
+            }
+
+            this._booSelecionado = booSelecionado;
+
+            this.atualizarBooSelecionado();
+        }
 
         public get strLayoutFixo(): string
         {
@@ -36,6 +54,29 @@ module NetZ_Web
         // #endregion Construtores
 
         // #region Métodos
+
+        protected atualizarBooSelecionado(): void
+        {
+            this.jq.css("background-color", this.booSelecionado ? this.getCorSelecionado() : Utils.STR_VAZIA);
+            this.jq.css("color", this.booSelecionado ? "black" : Utils.STR_VAZIA);
+
+            this.atualizarBooSelecionadoFoco();
+        }
+
+        private atualizarBooSelecionadoFoco(): void
+        {
+            if (!this.booSelecionado)
+            {
+                return;
+            }
+
+            this.receberFoco();
+        }
+
+        protected getCorSelecionado(): string
+        {
+            return AppWeb.i.objTema.corSelecionado;
+        }
 
         private getStrLayoutFixo(): string
         {

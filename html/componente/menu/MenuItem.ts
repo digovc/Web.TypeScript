@@ -13,7 +13,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuItem extends ComponenteHtml implements OnClickListener, OnMouseLeaveListener, OnMouseOverListener
+    export class MenuItem extends ComponenteHtml implements OnClickListener, OnKeyUpListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -21,6 +21,7 @@ module NetZ_Web
         // #region Atributos
 
         private _arrMniFilho: Array<MenuItem>;
+        private _arrMniFilhoVisivel: Array<MenuItem>;
         private _arrStrTag: Array<string>;
         private _booFilho: boolean;
         private _divIcone: DivCirculo;
@@ -40,6 +41,23 @@ module NetZ_Web
             this._arrMniFilho = new Array<MenuItem>();
 
             return this._arrMniFilho;
+        }
+
+        public get arrMniFilhoVisivel(): Array<MenuItem>
+        {
+            if (this._arrMniFilhoVisivel != null)
+            {
+                return this._arrMniFilhoVisivel;
+            }
+
+            this._arrMniFilhoVisivel = this.getArrMniFilhoVisivel();
+
+            return this._arrMniFilhoVisivel;
+        }
+
+        public set arrMniFilhoVisivel(arrMniFilhoVisivel: Array<MenuItem>)
+        {
+            this._arrMniFilhoVisivel = arrMniFilhoVisivel;
         }
 
         private get arrStrTag(): Array<string>
@@ -129,7 +147,6 @@ module NetZ_Web
             return this._tblWeb;
         }
 
-
         // #endregion Atributos
 
         // #region Construtores
@@ -137,59 +154,31 @@ module NetZ_Web
 
         // #region Métodos
 
-        private abrirConsulta(tblWeb: TabelaWeb): void
+        public abrirConsulta(): void
         {
-            if (tblWeb == null)
+            if (!this.booFilho)
             {
                 return;
             }
 
-            if (this.mniPai != null)
+            if (!this.booSelecionado)
             {
-                this.mniPai.abrirConsulta(tblWeb);
                 return;
             }
 
-            if (this.mnuPai != null)
+            if (this.tblWeb == null)
             {
-                this.mnuPai.abrirConsulta(tblWeb);
                 return;
             }
-        }
 
-        public abrirConsultaPrimeira(): boolean
-        {
-            for (var i = 0; i < this.arrMniFilho.length; i++)
+            if (this.mnuPai == null)
             {
-                if (this.arrMniFilho[i].abrirConsultaPrimeira())
-                {
-                    return true;
-                }
+                return;
             }
 
-            if (this.arrMniFilho.length > 0)
-            {
-                return false;
-            }
+            this.mnuPai.abrirConsulta(this.tblWeb);
 
-            if (this.mniPai == null)
-            {
-                return false;
-            }
-
-            if (!this.booVisivel)
-            {
-                return false;
-            }
-
-            if (!this.mniPai.divItemConteudo.booVisivel)
-            {
-                return false;
-            }
-
-            this.abrirConsulta(this.tblWeb);
-
-            return true;
+            this.booSelecionado = false;
         }
 
         public addMniFilho(mniFilho: MenuItem): void
@@ -207,8 +196,21 @@ module NetZ_Web
             this.arrMniFilho.push(mniFilho);
 
             mniFilho.mniPai = this;
+            mniFilho.mnuPai = this.mnuPai;
 
             mniFilho.iniciar();
+        }
+
+        protected atualizarBooSelecionado(): void
+        {
+            super.atualizarBooSelecionado();
+
+            if (this.mnuPai == null)
+            {
+                return;
+            }
+
+            this.mnuPai.mniSelecionado = this.booSelecionado ? this : null;
         }
 
         public esconderDivItemConteudo(): void
@@ -219,6 +221,35 @@ module NetZ_Web
             }
 
             this.divItemConteudo.esconder();
+        }
+
+        private getArrMniFilhoVisivel(): Array<MenuItem>
+        {
+            if (this.booFilho)
+            {
+                return null;
+            }
+
+            var arrMniFilhoVisivelResultado = new Array<MenuItem>();
+
+            for (var i = 0; i < this.arrMniFilho.length; i++)
+            {
+                var mniFilho = this.arrMniFilho[i];
+
+                if (mniFilho == null)
+                {
+                    continue;
+                }
+
+                if (!mniFilho.booVisivel)
+                {
+                    continue;
+                }
+
+                arrMniFilhoVisivelResultado.push(mniFilho);
+            }
+
+            return arrMniFilhoVisivelResultado;
         }
 
         private getTblWeb(): TabelaWeb
@@ -255,6 +286,8 @@ module NetZ_Web
 
         public limparPesquisa(): void
         {
+            this.arrMniFilhoVisivel = null;
+
             this.mostrar();
 
             if (this.arrMniFilho.length < 1)
@@ -279,6 +312,8 @@ module NetZ_Web
 
         public pesquisar(strPesquisa: string): void
         {
+            this.arrMniFilhoVisivel = null;
+
             if (this.arrMniFilho == null)
             {
                 return;
@@ -321,13 +356,63 @@ module NetZ_Web
 
         private processarOnClick(): void
         {
-            if (this.arrMniFilho.length > 0)
+            if (this.booFilho)
             {
-                this.mostrarEsconderDivItemConteudo();
+                this.abrirConsulta();
                 return;
             }
 
-            this.abrirConsulta(this.tblWeb);
+            this.mostrarEsconderDivItemConteudo();
+        }
+
+        private processarOnKeyUp(arg: JQueryKeyEventObject): void
+        {
+            this.processarOnKeyUpEnter(arg);
+            this.processarOnKeyUpSeta(arg);
+        }
+
+        private processarOnKeyUpEnter(arg: JQueryKeyEventObject): void
+        {
+            if (!this.booFilho)
+            {
+                return;
+            }
+
+            if (arg == null)
+            {
+                return;
+            }
+
+            if (arg.keyCode != Keys.ENTER)
+            {
+                return;
+            }
+
+            this.abrirConsulta();
+        }
+
+        private processarOnKeyUpSeta(arg: JQueryKeyEventObject): void
+        {
+            if (arg == null)
+            {
+                return;
+            }
+
+            if (this.mnuPai == null)
+            {
+                return;
+            }
+
+            switch (arg.keyCode)
+            {
+                case Keys.DOWN_ARROW:
+                    this.mnuPai.selecionarProximo();
+                    return;
+
+                case Keys.UP_ARROW:
+                    this.mnuPai.selecionarAnterior();
+                    return;
+            }
         }
 
         protected setEventos(): void
@@ -350,6 +435,7 @@ module NetZ_Web
         private setEventosFilho(): void
         {
             this.addEvtOnClickListener(this);
+            this.addEvtOnKeyUpListener(this);
         }
 
         private setEventosPai(): void
@@ -389,6 +475,31 @@ module NetZ_Web
             // #endregion Ações
         }
 
+        public onKeyUp(objSender: Object, arg: JQueryKeyEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this:
+                        this.processarOnKeyUp(arg);
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
         {
             // #region Variáveis
@@ -402,8 +513,8 @@ module NetZ_Web
                     return;
                 }
 
-                this.jq.css("background-color", Utils.STR_VAZIA);
-                this.jq.css("color", Utils.STR_VAZIA);
+                this.jq.css("background-color", this.booSelecionado ? this.getCorSelecionado() : Utils.STR_VAZIA);
+                this.jq.css("color", this.booSelecionado ? "black" : Utils.STR_VAZIA);
             }
             catch (ex)
             {
