@@ -51,7 +51,7 @@ module NetZ_Web
             return this._btnAdicionar;
         }
 
-        private get btnAlterar(): BotaoCircular
+        public get btnAlterar(): BotaoCircular
         {
             if (this._btnAlterar != null)
             {
@@ -125,7 +125,6 @@ module NetZ_Web
         {
             this._tabItemAtivaAnterior = tabItemAtivaAnterior;
         }
-
 
         // #endregion Atributos
 

@@ -9,7 +9,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TabItem extends ComponenteHtml implements OnGridMenuClickListener
+    export class TabItem extends ComponenteHtml implements OnGridMenuClickListener, OnRowClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -174,6 +174,25 @@ module NetZ_Web
             }
 
             this.tabHtml.ativar(this);
+
+            this.ativarTabHtmlBtnAlterar();
+        }
+
+        private ativarTabHtmlBtnAlterar(): void
+        {
+            this.tabHtml.btnAlterar.esconder();
+
+            if (this.tagGridHtml == null)
+            {
+                return;
+            }
+
+            if (this.tagGridHtml.intRowSelecionadaQtd < 1)
+            {
+                return;
+            }
+
+            this.tabHtml.btnAlterar.mostrar();
         }
 
         private atualizarBooAtiva(): void
@@ -236,6 +255,11 @@ module NetZ_Web
                 return;
             }
 
+            if (ServerAjax.STR_RESULTADO_VAZIO == objInterlocutor.strData)
+            {
+                return;
+            }
+
             ServerHttp.i.atualizarCssMain();
 
             this.jq.html(objInterlocutor.strData);
@@ -255,6 +279,7 @@ module NetZ_Web
             this.tagGridHtml.iniciar();
 
             this.tagGridHtml.addEvtOnGridMenuClickListener(this);
+            this.tagGridHtml.addEvtOnRowClickListener(this);
         }
 
         private getTabItemHead(): TabItemHead
@@ -362,6 +387,26 @@ module NetZ_Web
             }
         }
 
+        private processarOnRowClick(): void
+        {
+            if (this.tabHtml == null)
+            {
+                return;
+            }
+
+            if (this.tagGridHtml == null)
+            {
+                return;
+            }
+
+            if (this.tagGridHtml.intRowSelecionadaQtd < 1)
+            {
+                return;
+            }
+
+            this.tabHtml.btnAlterar.mostrar();
+        }
+
         // #endregion Métodos
 
         // #region Eventos
@@ -385,6 +430,31 @@ module NetZ_Web
                 }
 
                 this.processarOnGridMenuClick(arg);
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
+        public onRowClick(objSender: Object, tagGridRow: GridRow): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this.tagGridHtml:
+                        this.processarOnRowClick();
+                        return;
+                }
             }
             catch (ex)
             {
