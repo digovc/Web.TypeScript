@@ -187,7 +187,7 @@ module NetZ_Web
             }
         }
 
-        private fecharGrupos(): void
+        public fecharGrupos(): void
         {
             if (this.arrMni == null)
             {

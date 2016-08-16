@@ -362,7 +362,19 @@ module NetZ_Web
                 return;
             }
 
+            this.processarOnClickMnuPai();
+
             this.mostrarEsconderDivItemConteudo();
+        }
+
+        private processarOnClickMnuPai(): void
+        {
+            if (this.mnuPai == null)
+            {
+                return;
+            }
+
+            this.mnuPai.fecharGrupos();
         }
 
         private processarOnKeyUp(arg: JQueryKeyEventObject): void
