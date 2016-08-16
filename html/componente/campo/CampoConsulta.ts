@@ -18,25 +18,28 @@ module NetZ_Web
     export class CampoConsulta extends CampoComboBox implements OnClickListener, OnKeyDownListener
     {
         // #region Constantes
+
+        private static get SRC_IMAGEM_ACAO_LIMPAR(): string { return "url('/res/media/png/btn_limpar_25x25.png')" };
+
         // #endregion Constantes
 
         // #region Atributos
 
-        private _btnAcao: Tag;
+        private _btnAcao: BotaoMini;
         private _clnWebFiltro: ColunaWeb;
         private _strTblWebRefNome: string;
         private _tblWebRef: TabelaWeb;
         private _txtIntId: Input;
         private _txtPesquisa: Input;
 
-        private get btnAcao(): Tag
+        private get btnAcao(): BotaoMini
         {
             if (this._btnAcao != null)
             {
                 return this._btnAcao;
             }
 
-            this._btnAcao = new Tag(this.strId + "_btnAcao");
+            this._btnAcao = new BotaoMini(this.strId + "_btnAcao");
 
             return this._btnAcao;
         }
@@ -159,6 +162,13 @@ module NetZ_Web
             mnc.addOpcao(clnWeb.strNomeExibicao, (() => { this.selecionarColunaPesquisa(clnWeb); }));
         }
 
+        protected atualizarBooEmFoco(): void
+        {
+            super.atualizarBooEmFoco();
+
+            this.txtPesquisa.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
+        }
+
         private atualizarClnWebFiltro(): void
         {
             if (this.clnWebFiltro == null)
@@ -233,13 +243,14 @@ module NetZ_Web
 
         public limparDados(): void
         {
-            if (this.tagInput.intValor < 1)
+            if (!this.tagInput.booVisivel)
             {
                 return;
             }
 
             super.limparDados();
 
+            this.btnAcao.jq.css("background-image", Utils.STR_VAZIA);
             this.txtIntId.strValor = null;
             this.txtPesquisa.strValor = null;
 
@@ -279,6 +290,7 @@ module NetZ_Web
 
             this.txtPesquisa.jq.hide();
 
+            this.btnAcao.jq.css("background-image", CampoConsulta.SRC_IMAGEM_ACAO_LIMPAR);
             this.txtPesquisa.strValor = null;
 
             this.cmb.mostrar();
@@ -288,13 +300,13 @@ module NetZ_Web
 
         private processarBtnAcaoClick(): void
         {
-            if (this.tagInput.intValor < 1)
+            if (this.tagInput.booVisivel)
             {
-                this.pesquisar();
+                this.limparDados();
                 return;
             }
 
-            this.limparDados();
+            this.pesquisar();
         }
 
         public receberFoco(): void
@@ -426,7 +438,6 @@ module NetZ_Web
                 switch (arg.keyCode)
                 {
                     case Keys.BACKSPACE:
-                    case Keys.DELETE:
                         this.limparDados();
                         return;
 
