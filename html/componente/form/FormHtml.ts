@@ -20,6 +20,7 @@ module NetZ_Web
         private _cmpEmFoco: CampoHtml;
         private _divComando: DivComando;
         private _jnlCadastro: JnlCadastro;
+        private _divCritica: DivDica;
         private _divDica: DivDica;
         private _tabHtml: TabHtml;
         private _tblWeb: TabelaWeb;
@@ -80,6 +81,18 @@ module NetZ_Web
             this._jnlCadastro = jnlCadastro;
 
             this.atualizarJnlCadastro();
+        }
+
+        public get divCritica(): DivCritica
+        {
+            if (this._divCritica != null)
+            {
+                return this._divCritica;
+            }
+
+            this._divCritica = new DivCritica(this.strId + "_divCritica");
+
+            return this._divCritica;
         }
 
         private get divDica(): DivDica
@@ -180,7 +193,25 @@ module NetZ_Web
         {
             this.dispararEvtOnCmpEmFocoAlterado();
 
+            this.atualizarCmpEmFocodivCritica();
             this.atualizarCmpEmFocodivDica();
+        }
+
+        private atualizarCmpEmFocodivCritica(): void
+        {
+            this.divCritica.strConteudo = null;
+
+            if (this.cmpEmFoco == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(this.cmpEmFoco.strCritica))
+            {
+                return;
+            }
+
+            this.divCritica.strConteudo = this.cmpEmFoco.strCritica;
         }
 
         private atualizarCmpEmFocodivDica(): void

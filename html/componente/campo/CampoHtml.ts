@@ -25,6 +25,7 @@ module NetZ_Web
         private _booEmFoco: boolean;
         private _booMostrarTituloNunca: boolean;
         private _booMostrarTituloSempre: boolean;
+        private _booObrigatorio: boolean;
         private _clnWeb: ColunaWeb;
         private _divInputContainer: Div;
         private _divTitulo: Div;
@@ -70,6 +71,25 @@ module NetZ_Web
             this._booMostrarTituloSempre = (!Utils.getBooStrVazia(this.jq.attr("mostrar_titulo_sempre")));
 
             return this._booMostrarTituloSempre;
+        }
+
+        private get booObrigatorio(): boolean
+        {
+            this._booObrigatorio = this.getBooObrigatorio();
+
+            return this._booObrigatorio;
+        }
+
+        private set booObrigatorio(booObrigatorio: boolean)
+        {
+            if (this._booObrigatorio == booObrigatorio)
+            {
+                return;
+            }
+
+            this._booObrigatorio = booObrigatorio;
+
+            this.atualizarBooObrigatorio();
         }
 
         protected get divInputContainer(): Div
@@ -125,6 +145,11 @@ module NetZ_Web
 
         public set strCritica(strCritica: string)
         {
+            if (this._strCritica == strCritica)
+            {
+                return;
+            }
+
             this._strCritica = strCritica;
 
             this.atualizarStrCritica();
@@ -168,10 +193,9 @@ module NetZ_Web
 
         protected atualizarBooEmFoco(): void
         {
-            this.divTitulo.jq.css("color", this.booEmFoco ? "black" : Utils.STR_VAZIA);
+            this.divTitulo.jq.css("color", this.booEmFoco ? "black" : Utils.STR_VAZIA); // TODO: Colocar a cor do tema.
             this.divTitulo.jq.css("font-weight", this.booEmFoco ? "bold" : Utils.STR_VAZIA);
-
-            //this.tagInput.jq.css("border-bottom", this.booEmFoco ? "2px solid black" : Utils.STR_VAZIA);
+            this.tagInput.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
 
             this.atualizarBooEmFocoFrm();
         }
@@ -191,10 +215,45 @@ module NetZ_Web
             this.frm.cmpEmFoco = this;
         }
 
+        private atualizarBooObrigatorio(): void
+        {
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            if (this.booObrigatorio)
+            {
+                this.jq.attr("required", "true");
+            }
+            else
+            {
+                this.jq.removeAttr("required");
+            }
+        }
+
         private atualizarStrCritica(): void
         {
-            // TODO: Criar uma forma melhor para mostrar ao usuário que este campo está com crítica.
-            this.strTitle = this.strCritica;
+            if (Utils.getBooStrVazia(this.strCritica))
+            {
+                this.tagInput.jq.css("border-bottom-color", Utils.STR_VAZIA);
+            }
+            else
+            {
+                this.tagInput.jq.css("border-bottom-color", "red");
+            }
+
+            this.atualizarStrCriticaFrm();
+        }
+
+        private atualizarStrCriticaFrm(): void
+        {
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            this.frm.divCritica.strConteudo = this.strCritica;
         }
 
         protected atualizarStrPlaceholder(): void
@@ -235,6 +294,11 @@ module NetZ_Web
         private atualizarStrValorDivTitulo(): void
         {
             this.mostrarDivTitulo(!this.tagInput.booVazio);
+        }
+
+        private getBooObrigatorio(): boolean
+        {
+            return (!Utils.getBooStrVazia(this.getStrAttValor("required")));
         }
 
         private getClnWeb(): ColunaWeb
@@ -346,7 +410,25 @@ module NetZ_Web
 
         public validarDados(): boolean
         {
+            if (this.tagInput.booVazio && this.booObrigatorio)
+            {
+                this.validarDadosErro("O preenchimento do campo \"_campo_titulo\" é obrigatório.".replace("_campo_titulo", this.divTitulo.strConteudo));
+                return false;
+            }
+
             return true;
+        }
+
+        private validarDadosErro(strErro: string): void
+        {
+            if (Utils.getBooStrVazia(strErro))
+            {
+                return;
+            }
+
+            this.strCritica = strErro;
+
+            Notificacao.notificar(strErro, Notificacao_EnmTipo.NEGATIVA);
         }
 
         // #endregion Métodos
