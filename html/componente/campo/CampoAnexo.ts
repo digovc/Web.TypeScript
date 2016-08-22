@@ -22,6 +22,7 @@ module NetZ_Web
         private _divArquivoNome: Div;
         private _divArquivoTamanho: Div;
         private _divIcone: Div;
+        private _divProgressBar: ProgressBar;
         private _elmInput: HTMLInputElement;
 
         private get btnDownload(): BotaoCircular
@@ -84,6 +85,18 @@ module NetZ_Web
             return this._divIcone;
         }
 
+        private get divProgressBar(): ProgressBar
+        {
+            if (this._divProgressBar != null)
+            {
+                return this._divProgressBar;
+            }
+
+            this._divProgressBar = new ProgressBar(this.strId + "_divProgressBar");
+
+            return this._divProgressBar;
+        }
+
         private get elmInput(): HTMLInputElement
         {
             if (this._elmInput != null)
@@ -95,7 +108,6 @@ module NetZ_Web
 
             return this._elmInput;
         }
-
 
         // #endregion Atributos
 
@@ -220,6 +232,8 @@ module NetZ_Web
 
         private enviarArquivo(): void
         {
+            this.limparCampos();
+
             if (this.frm == null)
             {
                 return;
@@ -245,6 +259,8 @@ module NetZ_Web
                 return;
             }
 
+            this.divProgressBar.mostrar();
+
             this.enviarArquivoModificacao();
             this.enviarArquivoNome();
             this.enviarArquivoTamanho();
@@ -264,6 +280,7 @@ module NetZ_Web
 
             objInterlocutor.objData = frmData;
 
+            objInterlocutor.addFncProgresso((arg: ProgressEvent) => { this.enviarArquivoProgresso(arg); });
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.enviarArquivoSucesso(objInterlocutor); });
 
             AppWeb.i.srvAjaxDb.enviarArquivo(objInterlocutor);
@@ -293,16 +310,10 @@ module NetZ_Web
             this.frm.tblWeb.getClnWeb(strClnWebArquivoNomeNome).strValor = this.elmInput.files[0].name;
         }
 
-        private enviarArquivoTamanho(): void
+        private enviarArquivoProgresso(arg: ProgressEvent): void
         {
-            var strClnWebArquivoTamanhoNome = this.getStrAttValor("cln_web_arquivo_tamanho_nome");
-
-            if (Utils.getBooStrVazia(strClnWebArquivoTamanhoNome))
-            {
-                return;
-            }
-
-            this.frm.tblWeb.getClnWeb(strClnWebArquivoTamanhoNome).intValor = this.elmInput.files[0].size;
+            this.divProgressBar.intProgresso = arg.loaded;
+            this.divProgressBar.intProgressoMaximo = arg.total;
         }
 
         private enviarArquivoSucesso(objInterlocutor: Interlocutor): void
@@ -319,7 +330,21 @@ module NetZ_Web
                 return;
             }
 
+            this.divProgressBar.esconder();
+
             Notificacao.notificar(objInterlocutor.objData.toString());
+        }
+
+        private enviarArquivoTamanho(): void
+        {
+            var strClnWebArquivoTamanhoNome = this.getStrAttValor("cln_web_arquivo_tamanho_nome");
+
+            if (Utils.getBooStrVazia(strClnWebArquivoTamanhoNome))
+            {
+                return;
+            }
+
+            this.frm.tblWeb.getClnWeb(strClnWebArquivoTamanhoNome).intValor = this.elmInput.files[0].size;
         }
 
         private limparCampos(): void
@@ -327,8 +352,10 @@ module NetZ_Web
             this.divArquivoNome.strConteudo = null;
             this.divArquivoTamanho.strConteudo = null;
             this.divIcone.strConteudo = null;
+            this.divProgressBar.intProgresso = 0;
 
             this.divIcone.esconder();
+            this.divProgressBar.esconder();
         }
 
         private pesquisar(): void

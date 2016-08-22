@@ -86,7 +86,7 @@ module NetZ_Web
             var xhrResultado = <XMLHttpRequest>$.ajaxSettings.xhr();
 
             xhrResultado.upload.onerror = ((arg: Event) => { objInterlocutor.processarOnErro("Erro no upload", arg.toString()); });
-            xhrResultado.upload.onprogress = ((arg: ProgressEvent) => { objInterlocutor.processarOnProgress(arg); });
+            xhrResultado.upload.onprogress = ((arg: ProgressEvent) => { objInterlocutor.processarOnProgresso(arg); });
 
             return xhrResultado;
         }

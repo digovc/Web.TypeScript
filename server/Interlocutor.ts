@@ -16,7 +16,7 @@ module NetZ_Web
         // #region Atributos
 
         private _arrFncErro: Array<Function>;
-        private _arrFncProgress: Array<Function>;
+        private _arrFncProgresso: Array<Function>;
         private _arrFncSucesso: Array<Function>;
         private _objData: Object;
         private _strClazz: string;
@@ -35,16 +35,16 @@ module NetZ_Web
             return this._arrFncErro;
         }
 
-        private get arrFncProgress(): Array<Function>
+        private get arrFncProgresso(): Array<Function>
         {
-            if (this._arrFncProgress != null)
+            if (this._arrFncProgresso != null)
             {
-                return this._arrFncProgress;
+                return this._arrFncProgresso;
             }
 
-            this._arrFncProgress = new Array<Function>();
+            this._arrFncProgresso = new Array<Function>();
 
-            return this._arrFncProgress;
+            return this._arrFncProgresso;
         }
 
         private get arrFncSucesso(): Array<Function>
@@ -119,6 +119,21 @@ module NetZ_Web
             }
 
             this.arrFncErro.push(fncErro);
+        }
+
+        public addFncProgresso(fncProgresso: Function): void
+        {
+            if (fncProgresso == null)
+            {
+                return;
+            }
+
+            if (this.arrFncProgresso.indexOf(fncProgresso) > -1)
+            {
+                return;
+            }
+
+            this.arrFncProgresso.push(fncProgresso);
         }
 
         public addFncSucesso(fncSucesso: Function): void
@@ -201,9 +216,9 @@ module NetZ_Web
             this.arrFncErro.forEach((fnc) => { fnc(strTextStatus, strErrorThrown); });
         }
 
-        public processarOnProgress(arg: ProgressEvent): void
+        public processarOnProgresso(arg: ProgressEvent): void
         {
-            this.arrFncProgress.forEach((fnc) => { fnc(arg); });
+            this.arrFncProgresso.forEach((fnc) => { fnc(arg); });
         }
 
         public processarOnSucesso(anyData: any): void
