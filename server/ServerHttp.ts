@@ -9,26 +9,17 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class ServerHttp extends ServerBase
+    export abstract class ServerHttp extends ServerBase
     {
         // #region Constantes
+
+        private static get STR_GET_SCRIPT(): string { return "get-script" };
+
+        public static get URL_DATA_BASE_FILE_DOWNLOAD(): string { return "data-base-file-download" };
+
         // #endregion Constantes
 
         // #region Atributos
-
-        protected static _i: ServerHttp;
-
-        public static get i(): ServerHttp
-        {
-            if (ServerHttp._i != null)
-            {
-                return ServerHttp._i;
-            }
-
-            ServerHttp._i = new ServerHttp();
-
-            return ServerHttp._i;
-        }
 
         private _booResConsultaCarregado: boolean;
 
@@ -95,11 +86,16 @@ module NetZ_Web
                 return;
             }
 
-            var urlJq = "/res?method=getScript&class=_js_class";
+            var urlJq = "/res?method=_get_script&class=_js_class".replace("_get_script", ServerHttp.STR_GET_SCRIPT);
 
             urlJq = urlJq.replace("_js_class", strJqClass);
 
             $.getScript(urlJq);
+        }
+
+        public download(url: string): void
+        {
+            window.open(url, "_blank");
         }
 
         // #endregion Métodos

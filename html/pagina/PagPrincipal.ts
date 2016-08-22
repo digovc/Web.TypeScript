@@ -112,12 +112,12 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutor.strData))
+            if (objInterlocutor.objData == null)
             {
                 return;
             }
 
-            this.divCadastro.jq.append(objInterlocutor.strData);
+            this.divCadastro.jq.append(objInterlocutor.objData.toString());
 
             this.inicializarJnlCadastro();
         }
@@ -152,7 +152,8 @@ module NetZ_Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirConsultaSucesso(objInterlocutor); });
 
             objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CONSULTA;
-            objInterlocutor.strData = JSON.stringify(tblWeb);
+
+            objInterlocutor.addJsn(tblWeb);
 
             AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
@@ -164,7 +165,7 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutor.strData))
+            if (objInterlocutor.objData == null)
             {
                 return;
             }
@@ -225,12 +226,12 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutor.strData))
+            if (objInterlocutor.objData == null)
             {
                 return;
             }
 
-            this.divCadastro.jq.append(objInterlocutor.strData);
+            this.divCadastro.jq.append(objInterlocutor.objData.toString());
 
             this.inicializarJnlTag(tblWeb);
         }
@@ -309,7 +310,7 @@ module NetZ_Web
 
         private inicializarJnlConsulta(objInterlocutor: Interlocutor): void
         {
-            this.divConsulta.jq.html(objInterlocutor.strData);
+            this.divConsulta.jq.html(objInterlocutor.objData.toString());
 
             this.divConsulta.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
 

@@ -106,7 +106,7 @@ module NetZ_Web
         {
             super.inicializar();
 
-            ServerHttp.i.atualizarCssMain();
+            this.inicializarCssMain();
         }
 
         protected inicializarArrCmp(): void
@@ -119,6 +119,16 @@ module NetZ_Web
             }
 
             this.arrCmp.forEach((cmp) => { cmp.tagInput.booDisabled = false; });
+        }
+
+        private inicializarCssMain(): void
+        {
+            if (AppWeb.i.srvHttp == null)
+            {
+                return;
+            }
+
+            AppWeb.i.srvHttp.atualizarCssMain();
         }
 
         private pesquisar(): void

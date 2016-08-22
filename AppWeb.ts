@@ -56,6 +56,7 @@ module NetZ_Web
         private _objTema: TemaDefault;
         private _pag: PaginaHtml;
         private _srvAjaxDb: ServerAjaxDb;
+        private _srvHttp: ServerHttp;
         private _strSessionId: string;
         private _tagFocoExclusivo: ComponenteHtml;
 
@@ -149,6 +150,18 @@ module NetZ_Web
             return this._srvAjaxDb;
         }
 
+        public get srvHttp(): ServerHttp
+        {
+            if (this._srvHttp != null)
+            {
+                return this._srvHttp;
+            }
+
+            this._srvHttp = this.getSrvHttp();
+
+            return this._srvHttp;
+        }
+
         public get strSessionId(): string
         {
             if (this._strSessionId != null)
@@ -240,8 +253,7 @@ module NetZ_Web
                 return;
             }
 
-            // TODO: Parei aqui.
-
+            // TODO: Dar seguimento na implementação da navegação através do histórico.
             window.history.pushState(null, objHistorico.strTitulo, objHistorico.strParametro);
         }
 
@@ -279,14 +291,14 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objSolicitacaoAjax.strData))
+            if (objSolicitacaoAjax.objData == null)
             {
                 return;
             }
 
             var tblWeb = new TabelaWeb(null);
 
-            tblWeb.copiarDados(JSON.parse(objSolicitacaoAjax.strData));
+            tblWeb.copiarDados(JSON.parse(objSolicitacaoAjax.objData.toString()));
 
             this.addArrTbl(tblWeb);
         }
@@ -306,6 +318,8 @@ module NetZ_Web
         }
 
         protected abstract getSrvAjaxDb(): ServerAjaxDb;
+
+        protected abstract getSrvHttp(): ServerHttp;
 
         private getStrCookieValue(strCookieNome: string): string
         {

@@ -180,11 +180,21 @@ module NetZ_Web
         {
             super.inicializar();
 
-            ServerHttp.i.atualizarCssMain();
+            this.inicializarCssMain();
 
             this.inicializarTagInputTag();
 
             this.inicializarStrTag();
+        }
+
+        private inicializarCssMain(): void
+        {
+            if (AppWeb.i.srvHttp == null)
+            {
+                return;
+            }
+
+            AppWeb.i.srvHttp.atualizarCssMain();
         }
 
         private inicializarStrTag(): void
@@ -292,14 +302,14 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutor.strData))
+            if (objInterlocutor.objData == null)
             {
                 return;
             }
 
             var tblWeb = new TabelaWeb(null);
 
-            tblWeb.copiarDados(JSON.parse(objInterlocutor.strData));
+            tblWeb.copiarDados(JSON.parse(objInterlocutor.objData.toString()));
 
             if (Utils.getBooStrVazia(tblWeb.strCritica))
             {

@@ -16,10 +16,11 @@ module NetZ_Web
         // #region Atributos
 
         private _arrFncErro: Array<Function>;
+        private _arrFncProgress: Array<Function>;
         private _arrFncSucesso: Array<Function>;
-        private _strData: string;
+        private _objData: Object;
+        private _strClazz: string;
         private _strErro: string;
-        private _strJsonTipo: string;
         private _strMetodo: string;
 
         private get arrFncErro(): Array<Function>
@@ -34,6 +35,18 @@ module NetZ_Web
             return this._arrFncErro;
         }
 
+        private get arrFncProgress(): Array<Function>
+        {
+            if (this._arrFncProgress != null)
+            {
+                return this._arrFncProgress;
+            }
+
+            this._arrFncProgress = new Array<Function>();
+
+            return this._arrFncProgress;
+        }
+
         private get arrFncSucesso(): Array<Function>
         {
             if (this._arrFncSucesso != null)
@@ -46,14 +59,24 @@ module NetZ_Web
             return this._arrFncSucesso;
         }
 
-        public get strData(): string
+        public get objData(): Object
         {
-            return this._strData;
+            return this._objData;
         }
 
-        public set strData(jsn: string)
+        public set objData(objData: Object)
         {
-            this._strData = jsn;
+            this._objData = objData;
+        }
+
+        public get strClazz(): string
+        {
+            return this._strClazz;
+        }
+
+        public set strClazz(strClazz: string)
+        {
+            this._strClazz = strClazz;
         }
 
         public get strErro(): string
@@ -64,16 +87,6 @@ module NetZ_Web
         public set strErro(strErro: string)
         {
             this._strErro = strErro;
-        }
-
-        public get strJsonTipo(): string
-        {
-            return this._strJsonTipo;
-        }
-
-        public set strJsonTipo(strJsonTipo: string)
-        {
-            this._strJsonTipo = strJsonTipo;
         }
 
         public get strMetodo(): string
@@ -130,8 +143,8 @@ module NetZ_Web
                 return;
             }
 
-            this.strData = JSON.stringify(obj);
-            this.strJsonTipo = (obj.constructor as any).name;
+            this.objData = JSON.stringify(obj);
+            this.strClazz = (obj.constructor as any).name;
         }
 
         public addStr(str: string): void
@@ -141,8 +154,8 @@ module NetZ_Web
                 return;
             }
 
-            this.strData = str;
-            this.strJsonTipo = null;
+            this.objData = str;
+            this.strClazz = null;
         }
 
         private dispararArrFncSucesso(anyData: any): void
@@ -163,11 +176,6 @@ module NetZ_Web
             this.arrFncSucesso.forEach((fnc) => { fnc(this); });
         }
 
-        private dispararArrFncErro(strTextStatus: string, strErrorThrown: string): void
-        {
-            this.arrFncErro.forEach((fnc) => { fnc(strTextStatus, strErrorThrown); });
-        }
-
         private mostrarMsgErro(strTextStatus: string, strErrorThrown: string): void
         {
             if (strTextStatus == "error")
@@ -183,17 +191,22 @@ module NetZ_Web
                 strErrorThrown += "Mas não se preocupe, nossos macacos astronautas já estão cuidando para que este problema seja resolvido.";
             }
 
-            new Mensagem(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA).abrirMensagem();
+            Mensagem.mostrar(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA);
         }
 
-        public processarOnAjaxErro(strTextStatus: string, strErrorThrown: string): void
+        public processarOnErro(strTextStatus: string, strErrorThrown: string): void
         {
             this.mostrarMsgErro(strTextStatus, strErrorThrown);
 
-            this.dispararArrFncErro(strTextStatus, strErrorThrown);
+            this.arrFncErro.forEach((fnc) => { fnc(strTextStatus, strErrorThrown); });
         }
 
-        public processarOnAjaxSucesso(anyData: any): void
+        public processarOnProgress(arg: ProgressEvent): void
+        {
+            this.arrFncProgress.forEach((fnc) => { fnc(arg); });
+        }
+
+        public processarOnSucesso(anyData: any): void
         {
             this.dispararArrFncSucesso(anyData);
         }

@@ -77,12 +77,17 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutor.strData))
+            if (objInterlocutor.objData == null)
             {
                 return;
             }
 
-            var arrData: Array<any> = JSON.parse(objInterlocutor.strData);
+            if (objInterlocutor.objData == ServerAjax.STR_RESULTADO_VAZIO)
+            {
+                return;
+            }
+
+            var arrData: Array<any> = JSON.parse(objInterlocutor.objData.toString());
 
             arrData.forEach((par) => { this.carregarDadosSucesso2(par); });
         }

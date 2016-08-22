@@ -58,15 +58,15 @@
 
         // #region Construtores
 
-        constructor(strMensagem: string, e: Error)
+        constructor(strMensagem: string, ex: Error)
         {
             super();
 
             this.strMensagem = strMensagem;
 
-            if (e != null)
+            if (ex != null)
             {
-                this.strMensagemTecnica = e.message;
+                this.strMensagemTecnica = ex.message;
             }
 
             this.mostrarMensagem();
@@ -78,7 +78,7 @@
 
         private mostrarMensagem(): void
         {
-            new Mensagem("Erro", this.strMensagemFormatada, Mensagem_EnmTipo.NEGATIVA).abrirMensagem();
+            Mensagem.mostrar("Erro", this.strMensagemFormatada, Mensagem_EnmTipo.NEGATIVA);
         }
 
         // #endregion Métodos

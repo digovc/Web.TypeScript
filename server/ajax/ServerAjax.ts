@@ -24,30 +24,71 @@ module NetZ_Web
 
         // #region Métodos
 
-        public enviar(objinterlocutor: Interlocutor): void
+        public enviar(objInterlocutor: Interlocutor): void
         {
-            if (objinterlocutor == null)
+            if (objInterlocutor == null)
             {
                 return;
             }
 
-            if (!objinterlocutor.validarDados())
+            if (!objInterlocutor.validarDados())
             {
                 return;
             }
 
-            $.ajaxSettings.crossDomain = true;
-            $.ajaxSettings.data = objinterlocutor.toJson();
-            $.ajaxSettings.dataType = "json";
-            $.ajaxSettings.method = "POST";
-            $.ajaxSettings.url = this.url;
-            $.ajaxSettings.xhrFields = { "withCredentials": true };
+            var objAjaxSettings = this.getObjAjaxSettings(objInterlocutor);
 
-            //$.ajaxSettings.beforeSend = ((objJqXhr: JQueryXHR, cnf: JQueryAjaxSettings) => { objSolicitacaoAjax.ajaxAntesEnviar(); });
-            $.ajaxSettings.error = ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objinterlocutor.processarOnAjaxErro(strTextStatus, strErrorThrown); });
-            $.ajaxSettings.success = ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objinterlocutor.processarOnAjaxSucesso(anyData); });
+            objAjaxSettings.data = objInterlocutor.toJson();
+            objAjaxSettings.dataType = "json";
 
-            $.ajax($.ajaxSettings);
+            $.ajax(objAjaxSettings);
+        }
+
+        public enviarArquivo(objInterlocutor: Interlocutor): void
+        {
+            if (objInterlocutor == null)
+            {
+                return;
+            }
+
+            if (objInterlocutor.objData == null)
+            {
+                return;
+            }
+
+            var objAjaxSettings = this.getObjAjaxSettings(objInterlocutor);
+
+            objAjaxSettings.url = (this.url + "/?upload-file");
+            objAjaxSettings.contentType = false;
+            objAjaxSettings.data = objInterlocutor.objData;
+            objAjaxSettings.processData = false;
+            objAjaxSettings.xhr = (() => { return this.getXhrEnviarArquivo(objInterlocutor); });
+
+            $.ajax(objAjaxSettings);
+        }
+
+        private getObjAjaxSettings(objInterlocutor: Interlocutor): JQueryAjaxSettings
+        {
+            var objAjaxSettingsResultado: JQueryAjaxSettings = {
+                crossDomain: true,
+                error: ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objInterlocutor.processarOnErro(strTextStatus, strErrorThrown); }),
+                method: "POST",
+                success: ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objInterlocutor.processarOnSucesso(anyData); }),
+                url: this.url,
+                xhrFields: { withCredentials: true },
+            }
+
+            return objAjaxSettingsResultado;
+        }
+
+        private getXhrEnviarArquivo(objInterlocutor: Interlocutor): XMLHttpRequest
+        {
+            var xhrResultado = <XMLHttpRequest>$.ajaxSettings.xhr();
+
+            xhrResultado.upload.onerror = ((arg: Event) => { objInterlocutor.processarOnErro("Erro no upload", arg.toString()); });
+            xhrResultado.upload.onprogress = ((arg: ProgressEvent) => { objInterlocutor.processarOnProgress(arg); });
+
+            return xhrResultado;
         }
 
         // #endregion Métodos

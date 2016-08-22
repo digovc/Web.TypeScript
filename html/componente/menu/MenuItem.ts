@@ -281,8 +281,6 @@ module NetZ_Web
 
         public limparPesquisa(): void
         {
-            this.arrMniFilhoVisivel = null;
-
             this.mostrar();
 
             if (this.arrMniFilho.length < 1)
@@ -307,8 +305,6 @@ module NetZ_Web
 
         public pesquisar(strPesquisa: string): void
         {
-            this.arrMniFilhoVisivel = null;
-
             if (this.arrMniFilho == null)
             {
                 return;

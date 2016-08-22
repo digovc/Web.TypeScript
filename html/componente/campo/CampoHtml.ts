@@ -14,7 +14,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class CampoHtml extends ComponenteHtml implements OnFocusInListener, OnFocusOutListener, OnValorAlteradoListener
+    export abstract class CampoHtml extends ComponenteHtml implements OnFocusInListener, OnFocusOutListener, OnValorAlteradoListener
     {
         // #region Constantes
 

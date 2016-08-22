@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnEnterListener.ts"/>
 /// <reference path="../../../OnKeyDownListener.ts"/>
+/// <reference path="../../../OnKeyUpListener.ts"/>
 /// <reference path="../../../OnLeaveListener.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
 /// <reference path="../../pagina/PaginaHtml.ts"/>
@@ -261,10 +262,20 @@ module NetZ_Web
 
         protected abstract inicializarItem(): void;
 
-        private pesquisar(strPesquisa: string): void
+        private limparArrMniFilhoVisivel(): void
         {
             this.arrMniFilhoVisivel = null;
 
+            if (this.arrMni.length < 1)
+            {
+                return;
+            }
+
+            this.arrMni.forEach((mni) => { mni.arrMniFilhoVisivel = null; });
+        }
+
+        private pesquisar(strPesquisa: string): void
+        {
             if (this.arrMni == null)
             {
                 return;
@@ -385,6 +396,8 @@ module NetZ_Web
 
         private selecionarPrimeiro(): void
         {
+            this.limparArrMniFilhoVisivel();
+
             if (this.arrMniFilhoVisivel == null)
             {
                 return;
@@ -428,6 +441,8 @@ module NetZ_Web
 
         private selecionarUltimo(): void
         {
+            this.limparArrMniFilhoVisivel();
+
             if (this.arrMniFilhoVisivel == null)
             {
                 return;

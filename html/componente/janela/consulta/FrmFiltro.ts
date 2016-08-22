@@ -48,7 +48,7 @@ module NetZ_Web
                 return this._btnAlterar;
             }
 
-            this._btnAlterar = new BotaoCircular(this.strId +"_btnAlterar");
+            this._btnAlterar = new BotaoCircular(this.strId + "_btnAlterar");
 
             return this._btnAlterar;
         }
@@ -169,12 +169,12 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutor.strData))
+            if (objInterlocutor.objData == null)
             {
                 return;
             }
 
-            this.pnlFiltro.atualizarFrmFiltroConteudo(objInterlocutor.strData);
+            this.pnlFiltro.atualizarFrmFiltroConteudo(objInterlocutor.objData.toString());
         }
 
         private apagarFiltro(): void

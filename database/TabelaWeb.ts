@@ -24,6 +24,7 @@ module NetZ_Web
         private _booSomenteLeitura: boolean;
         private _clnWebIntId: ColunaWeb;
         private _clnWebNome: ColunaWeb;
+        private _dttUpload: Date;
         private _intRegistroPaiId: number;
         private _strCritica: string;
         private _strTblPaiNome: string;
@@ -96,6 +97,16 @@ module NetZ_Web
             return this._intRegistroPaiId;
         }
 
+        public get dttUpload(): Date
+        {
+            return this._dttUpload;
+        }
+
+        public set dttUpload(dttUpload: Date)
+        {
+            this._dttUpload = dttUpload;
+        }
+
         public set intRegistroPaiId(intRegistroPaiId: number)
         {
             this._intRegistroPaiId = intRegistroPaiId;
@@ -120,7 +131,6 @@ module NetZ_Web
         {
             this._strTblPaiNome = strTblPaiNome;
         }
-
 
         // #endregion Atributos
 

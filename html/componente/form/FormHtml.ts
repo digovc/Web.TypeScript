@@ -1,4 +1,5 @@
-﻿/// <reference path="DivDica.ts"/>
+﻿/// <reference path="DivCritica.ts"/>
+/// <reference path="DivDica.ts"/>
 /// <reference path="OnCmpEmFocoAlterado.ts"/>
 
 module NetZ_Web

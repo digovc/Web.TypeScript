@@ -113,7 +113,17 @@ module NetZ_Web
 
         // #region Métodos
 
-        public abrirNotificacao(): void
+        public static notificar(strNotificacao: string, enmTipo: Notificacao_EnmTipo = Notificacao_EnmTipo.POSITIVA): void
+        {
+            if (Utils.getBooStrVazia(strNotificacao))
+            {
+                return;
+            }
+
+            new Notificacao(strNotificacao, enmTipo).abrirNotificacao();
+        }
+
+        private abrirNotificacao(): void
         {
             if (Utils.getBooStrVazia(this.strNotificacao))
             {
@@ -206,16 +216,6 @@ module NetZ_Web
             strLayoutFixo = strLayoutFixo.replace("_str_div_texto_conteudo", this.strNotificacao);
 
             return strLayoutFixo;
-        }
-
-        public static notificar(strNotificacao: string, enmTipo: Notificacao_EnmTipo = Notificacao_EnmTipo.POSITIVA): void
-        {
-            if (Utils.getBooStrVazia(strNotificacao))
-            {
-                return;
-            }
-
-            new Notificacao(strNotificacao, enmTipo).abrirNotificacao();
         }
 
         protected setEventos(): void

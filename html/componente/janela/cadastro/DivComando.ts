@@ -175,7 +175,8 @@ module NetZ_Web
                 return;
             }
 
-            this.btnTag.mostrar();
+            this.btnTag.mostrar(); // TODO: Somente mostrar o botão de tag se o salvamento for bem sucedido.
+
             this.frm.salvar();
         }
 

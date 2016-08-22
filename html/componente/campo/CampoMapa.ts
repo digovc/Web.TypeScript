@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class CampoMapa extends CampoAlfanumerico
+    export class CampoMapa extends CampoMedia
     {
         // #region Constantes
 
@@ -16,23 +16,10 @@
 
         // #region Atributos
 
-        private _divMapa: Div;
         private _map: google.maps.Map;
         private _mapOption: google.maps.MapOptions;
         private _mrk: google.maps.Marker;
         private _mrkOption: google.maps.MarkerOptions;
-
-        private get divMapa(): Div
-        {
-            if (this._divMapa != null)
-            {
-                return this._divMapa;
-            }
-
-            this._divMapa = new Div(this.strId + "_divMapa");
-
-            return this._divMapa;
-        }
 
         private get map(): google.maps.Map
         {
@@ -135,19 +122,17 @@
         {
             super.inicializar();
 
-            this.mostrarDivTitulo(true);
-
             this.carregarGMapsApi();
         }
 
         private inicializarMap(): void
         {
-            if (this.divMapa.jq == null)
+            if (this.divContent.jq == null)
             {
                 return;
             }
 
-            this.map = new google.maps.Map(document.getElementById(this.divMapa.strId), this.mapOption);
+            this.map = new google.maps.Map(document.getElementById(this.divContent.strId), this.mapOption);
 
             this.inicializarMrk();
         }

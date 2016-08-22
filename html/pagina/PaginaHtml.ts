@@ -73,12 +73,12 @@ module NetZ_Web
 
         public atualizarCssMain(): void
         {
-            if (ServerHttp.i == null)
+            if (AppWeb.i.srvHttp == null)
             {
                 return;
             }
 
-            ServerHttp.i.atualizarCssMain();
+            AppWeb.i.srvHttp.atualizarCssMain();
         }
 
         protected finalizar(): void

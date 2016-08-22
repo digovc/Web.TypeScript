@@ -256,12 +256,22 @@ module NetZ_Web
 
             this.booPermitirMover = false;
 
-            ServerHttp.i.atualizarCssMain();
+            this.inicializarCssMain();
 
             this.pnlAcaoConsulta.iniciar();
             this.pnlFiltro.iniciar();
 
             this.inicializarHistorico();
+        }
+
+        private inicializarCssMain(): void
+        {
+            if (AppWeb.i.srvHttp == null)
+            {
+                return;
+            }
+
+            AppWeb.i.srvHttp.atualizarCssMain();
         }
 
         private inicializarHistorico(): void
@@ -332,7 +342,8 @@ module NetZ_Web
             var objInterlocutor = new Interlocutor();
 
             objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_GRID;
-            objInterlocutor.strData = JSON.stringify(this.tblWeb);
+
+            objInterlocutor.addJsn(this.tblWeb);
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarSucesso(objInterlocutor); });
 
@@ -346,24 +357,34 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutor.strData))
+            if (objInterlocutor.objData == null)
             {
                 return;
             }
 
-            if (ServerAjax.STR_RESULTADO_VAZIO == objInterlocutor.strData)
+            if (objInterlocutor.objData == ServerAjax.STR_RESULTADO_VAZIO)
             {
                 Notificacao.notificar("Nenhum registro foi encontrado.", Notificacao_EnmTipo.INFO);
                 return;
             }
 
-            ServerHttp.i.atualizarCssMain();
+            this.pesquisarSucessoCssMain();
 
-            this.divGrid.jq.html(objInterlocutor.strData);
+            this.divGrid.jq.html(objInterlocutor.objData.toString());
 
             this.inicializartagGridHtml();
 
             this.maximinizarGrid();
+        }
+
+        private pesquisarSucessoCssMain(): void
+        {
+            if (AppWeb.i.srvHttp == null)
+            {
+                return;
+            }
+
+            AppWeb.i.srvHttp.atualizarCssMain();
         }
 
         private processarOnGridMenuClick(arg: OnGridMenuClickArg): void

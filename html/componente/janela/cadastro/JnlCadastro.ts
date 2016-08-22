@@ -424,11 +424,21 @@ module NetZ_Web
         {
             super.inicializar();
 
-            ServerHttp.i.atualizarCssMain();
+            this.inicializarCssMain();
 
             this.frm.iniciar();
 
             this.inicializarJnlCadastroPai();
+        }
+
+        private inicializarCssMain(): void
+        {
+            if (AppWeb.i.srvHttp == null)
+            {
+                return;
+            }
+
+            AppWeb.i.srvHttp.atualizarCssMain();
         }
 
         private inicializarJnlCadastroPai(): void
@@ -502,14 +512,14 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutor.strData))
+            if (objInterlocutor.objData == null)
             {
                 return; // TODO: Verificar a necessidade de validar o porque do JSON voltar vazio.
             }
 
             var tblWeb = new TabelaWeb(this.tblWeb.strNome);
 
-            tblWeb.copiarDados(JSON.parse(objInterlocutor.strData));
+            tblWeb.copiarDados(JSON.parse(objInterlocutor.objData.toString()));
 
             this.salvarSucesso2(tblWeb);
         }
@@ -539,7 +549,7 @@ module NetZ_Web
 
             if (!Utils.getBooStrVazia(tblWeb.strCritica))
             {
-                new Mensagem("Erro", tblWeb.strCritica, Mensagem_EnmTipo.NEGATIVA);
+                Mensagem.mostrar("Erro", tblWeb.strCritica, Mensagem_EnmTipo.NEGATIVA);
             }
 
             if (tblWeb.arrClnWeb == null)

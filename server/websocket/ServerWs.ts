@@ -85,7 +85,7 @@
         {
             if ((<any>window)['WebSocket'] == null)
             {
-                throw new Mensagem("Erro", "Não foi encontrado suporte de WebSockets. Utilize um navegador mais moderno (Chrome, Firefox, Opera).").abrirMensagem();
+                throw "Não foi encontrado suporte de WebSockets. Utilize um navegador mais moderno (Chrome, Firefox, Opera).";
             }
 
             if (this.objWebSocket == null)

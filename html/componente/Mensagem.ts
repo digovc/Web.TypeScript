@@ -105,7 +105,6 @@
             this._strTitulo = strTitulo;
         }
 
-
         // #endregion Atributos
 
         // #region Construtores
@@ -124,7 +123,22 @@
 
         // #region Métodos
 
-        public abrirMensagem(): void
+        public static mostrar(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA): void
+        {
+            if (Utils.getBooStrVazia(strTitulo))
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(strMensagem))
+            {
+                return;
+            }
+
+            new Mensagem(strTitulo, strMensagem, enmTipo).abrirMensagem();
+        }
+
+        private abrirMensagem(): void
         {
             if (Utils.getBooStrVazia(this.strTitulo))
             {

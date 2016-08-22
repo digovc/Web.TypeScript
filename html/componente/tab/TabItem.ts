@@ -236,7 +236,7 @@ module NetZ_Web
             var objInterlocutor = new Interlocutor();
 
             objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_GRID;
-            objInterlocutor.strData = JSON.stringify(this.tblWeb);
+            objInterlocutor.objData = JSON.stringify(this.tblWeb);
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarSucesso(objInterlocutor); });
 
@@ -250,21 +250,31 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(objInterlocutor.strData))
+            if (objInterlocutor.objData == null)
             {
                 return;
             }
 
-            if (ServerAjax.STR_RESULTADO_VAZIO == objInterlocutor.strData)
+            if (objInterlocutor.objData == ServerAjax.STR_RESULTADO_VAZIO)
             {
                 return;
             }
 
-            ServerHttp.i.atualizarCssMain();
+            this.pesquisarSucessoCssMain();
 
-            this.jq.html(objInterlocutor.strData);
+            this.jq.html(objInterlocutor.objData.toString());
 
             this.pesquisarSucessoGridHtml();
+        }
+
+        private pesquisarSucessoCssMain(): void
+        {
+            if (AppWeb.i.srvHttp == null)
+            {
+                return;
+            }
+
+            AppWeb.i.srvHttp.atualizarCssMain();
         }
 
         private pesquisarSucessoGridHtml(): void
