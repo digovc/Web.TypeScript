@@ -59,6 +59,7 @@
     <TypeScriptCompile Include="html\componente\janela\cadastro\OnSalvarArg.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\OnSalvarListener.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\TagCard.ts" />
+    <TypeScriptCompile Include="html\componente\janela\consulta\BtnFavorito.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltro.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\FrmFiltroConteudo.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />

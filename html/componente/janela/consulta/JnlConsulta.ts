@@ -1,8 +1,10 @@
-﻿/// <reference path="../../../Div.ts"/>
+﻿/// <reference path="../../../../OnClickListener.ts"/>
+/// <reference path="../../../Div.ts"/>
 /// <reference path="../../../pagina/PagPrincipal.ts"/>
 /// <reference path="../../grid/GridHtml.ts"/>
 /// <reference path="../../grid/OnRowDoubleClickListener.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
+/// <reference path="BtnFavorito.ts"/>
 /// <reference path="PainelAcaoConsulta.ts"/>
 /// <reference path="PainelFiltro.ts"/>
 
@@ -21,6 +23,7 @@ module NetZ_Web
 
         // #region Atributos
 
+        private _btnFavorito: BtnFavorito;
         private _divGrid: Div;
         private _jnlCadastro: JnlCadastro;
         private _pagPrincipal: PagPrincipal;
@@ -29,6 +32,18 @@ module NetZ_Web
         private _tagGridHtml: GridHtml;
         private _tblWeb: TabelaWeb;
         private _viwAtual: TabelaWeb;
+
+        private get btnFavorito(): BtnFavorito
+        {
+            if (this._btnFavorito != null)
+            {
+                return this._btnFavorito;
+            }
+
+            this._btnFavorito = new BtnFavorito(this);
+
+            return this._btnFavorito;
+        }
 
         private get divGrid(): Div
         {
@@ -258,6 +273,7 @@ module NetZ_Web
 
             this.inicializarCssMain();
 
+            this.btnFavorito.iniciar();
             this.pnlAcaoConsulta.iniciar();
             this.pnlFiltro.iniciar();
 

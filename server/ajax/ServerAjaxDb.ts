@@ -26,6 +26,8 @@ module NetZ_Web
         public static get STR_METODO_RECUPERAR(): string { return "RECUPERAR" };
         public static get STR_METODO_SALVAR(): string { return "SALVAR" };
         public static get STR_METODO_SALVAR_DOMINIO(): string { return "SALVAR_DOMINIO" };
+        public static get STR_METODO_TABELA_FAVORITO_ADD(): string { return "TABELA_FAVORITO_ADD" };
+        public static get STR_METODO_TABELA_FAVORITO_VERIFICAR(): string { return "TABELA_FAVORITO_VERIFICAR" };
 
         // #endregion Constantes
 
