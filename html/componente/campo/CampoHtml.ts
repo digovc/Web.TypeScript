@@ -30,6 +30,7 @@ module NetZ_Web
         private _divInputContainer: Div;
         private _divTitulo: Div;
         private _frm: FormHtml;
+        private _intRegistroId: number;
         private _strCritica: string;
         private _strDica: string;
         private _tagInput: Input;
@@ -136,6 +137,13 @@ module NetZ_Web
         public set frm(frm: FormHtml)
         {
             this._frm = frm;
+        }
+
+        protected get intRegistroId(): number
+        {
+            this._intRegistroId = this.getIntRegistroId();
+
+            return this._intRegistroId;
         }
 
         public get strCritica(): string
@@ -328,6 +336,21 @@ module NetZ_Web
             }
 
             return this.frm.jnlCadastro.tblWeb.getClnWeb(this.jq.attr("cln_web_nome"));
+        }
+
+        private getIntRegistroId(): number
+        {
+            if (this.frm == null)
+            {
+                return 0;
+            }
+
+            if (this.frm.jnlCadastro == null)
+            {
+                return 0;
+            }
+
+            return this.frm.jnlCadastro.intRegistroId;
         }
 
         protected getTagInput(): Input

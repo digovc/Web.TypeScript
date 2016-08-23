@@ -211,7 +211,7 @@ module NetZ_Web
                 return;
             }
 
-            if (this.frm.jnlCadastro.intRegistroId < 1)
+            if (this.intRegistroId < 1)
             {
                 return;
             }
@@ -225,7 +225,7 @@ module NetZ_Web
 
             url = url.replace("_url_db_file_download", ServerHttp.URL_DATA_BASE_FILE_DOWNLOAD);
             url = url.replace("_tbl_web_nome", this.frm.tblWeb.strNome);
-            url = url.replace("_registro_id", this.frm.jnlCadastro.intRegistroId.toString());
+            url = url.replace("_registro_id", this.intRegistroId.toString());
 
             AppWeb.i.srvHttp.download(url);
         }
@@ -347,6 +347,19 @@ module NetZ_Web
             this.frm.tblWeb.getClnWeb(strClnWebArquivoTamanhoNome).intValor = this.elmInput.files[0].size;
         }
 
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.inicializarBtn();
+        }
+
+        private inicializarBtn(): void
+        {
+            this.btnDownload.booVisivel = (this.intRegistroId > 0);
+            this.btnPesquisar.booVisivel = (this.intRegistroId < 1);
+        }
+
         private limparCampos(): void
         {
             this.divArquivoNome.strConteudo = null;
@@ -360,6 +373,11 @@ module NetZ_Web
 
         private pesquisar(): void
         {
+            if (this.intRegistroId > 0)
+            {
+                return;
+            }
+
             this.tagInput.jq.click();
         }
 
