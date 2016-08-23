@@ -212,6 +212,13 @@ module NetZ_Web
             this.strValorInicial = this.strValor;
         }
 
+        public reverterValor(): void
+        {
+            this._strValor = this._strValorInicial;
+
+            this.jq.val(this._strValorInicial);
+        }
+
         public selecionarTudo(): void
         {
             if (Utils.getBooStrVazia(this.strValor))

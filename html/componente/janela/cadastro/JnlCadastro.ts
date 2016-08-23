@@ -415,7 +415,7 @@ module NetZ_Web
 
             var tblWebResultado = new TabelaWeb(this.strTblNome);
 
-            tblWebResultado.booSomenteLeitura = this.getBooAttValor("somente_leitura");
+            tblWebResultado.booPermitirAlterar = this.getBooAttValor("permitir_alterar");
 
             return tblWebResultado;
         }
@@ -645,7 +645,7 @@ module NetZ_Web
                 return false;
             }
 
-            if (this.tblWeb.booSomenteLeitura && (this.intRegistroId > 0))
+            if (this.tblWeb.booPermitirAlterar && (this.intRegistroId > 0))
             {
                 Notificacao.notificar("Alterações não são permitidas.", Notificacao_EnmTipo.NEGATIVA);
                 return false;

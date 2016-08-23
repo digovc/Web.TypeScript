@@ -26,6 +26,8 @@ module NetZ_Web
         private _booMostrarTituloNunca: boolean;
         private _booMostrarTituloSempre: boolean;
         private _booObrigatorio: boolean;
+        private _booPermitirAlterar: boolean;
+        private _booSomenteLeitura: boolean;
         private _clnWeb: ColunaWeb;
         private _divInputContainer: Div;
         private _divTitulo: Div;
@@ -74,6 +76,20 @@ module NetZ_Web
             return this._booMostrarTituloSempre;
         }
 
+        private get booPermitirAlterar(): boolean
+        {
+            this._booPermitirAlterar = (this.getStrAttValor("permitir_alterar") != "false");
+
+            return this._booPermitirAlterar;
+        }
+
+        private set booPermitirAlterar(booPermitirAlterar: boolean)
+        {
+            this._booPermitirAlterar = booPermitirAlterar;
+
+            this.atualizarBooPermitirAlterar();
+        }
+
         private get booObrigatorio(): boolean
         {
             this._booObrigatorio = this.getBooObrigatorio();
@@ -91,6 +107,16 @@ module NetZ_Web
             this._booObrigatorio = booObrigatorio;
 
             this.atualizarBooObrigatorio();
+        }
+
+        private get booSomenteLeitura(): boolean
+        {
+            return this._booSomenteLeitura;
+        }
+
+        private set booSomenteLeitura(booSomenteLeitura: boolean)
+        {
+            this._booSomenteLeitura = booSomenteLeitura;
         }
 
         protected get divInputContainer(): Div
@@ -240,6 +266,11 @@ module NetZ_Web
             }
         }
 
+        private atualizarBooPermitirAlterar(): void
+        {
+            this.jq.attr("permitir_alterar", String(this._booPermitirAlterar));
+        }
+
         private atualizarStrCritica(): void
         {
             if (Utils.getBooStrVazia(this.strCritica))
@@ -280,6 +311,13 @@ module NetZ_Web
 
         protected atualizarStrValor(): void
         {
+            if (!this.booPermitirAlterar)
+            {
+                Notificacao.notificar("O campo \"_campo_nome\" não pode ser alterado.".replace("_campo_nome", this.divTitulo.strConteudo), Notificacao_EnmTipo.NEGATIVA);
+                this.tagInput.reverterValor();
+                return;
+            }
+
             this.atualizarStrValorCln();
             this.atualizarStrValorDivTitulo();
 

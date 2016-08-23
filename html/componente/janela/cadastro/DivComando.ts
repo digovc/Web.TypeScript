@@ -160,7 +160,7 @@ module NetZ_Web
                 return;
             }
 
-            if (!this.tblWeb.booSomenteLeitura)
+            if (this.tblWeb.booPermitirAlterar)
             {
                 return;
             }

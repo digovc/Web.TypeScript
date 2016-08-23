@@ -21,7 +21,7 @@ module NetZ_Web
 
         private _arrClnWeb: Array<ColunaWeb>;
         private _arrFil: Array<FiltroWeb>;
-        private _booSomenteLeitura: boolean;
+        private _booPermitirAlterar: boolean = true;
         private _clnWebIntId: ColunaWeb;
         private _clnWebNome: ColunaWeb;
         private _dttUpload: Date;
@@ -58,14 +58,14 @@ module NetZ_Web
             return this._arrFil;
         }
 
-        public get booSomenteLeitura(): boolean
+        public get booPermitirAlterar(): boolean
         {
-            return this._booSomenteLeitura;
+            return this._booPermitirAlterar;
         }
 
-        public set booSomenteLeitura(booSomenteLeitura: boolean)
+        public set booPermitirAlterar(booPermitirAlterar: boolean)
         {
-            this._booSomenteLeitura = booSomenteLeitura;
+            this._booPermitirAlterar = booPermitirAlterar;
         }
 
         public get clnWebIntId(): ColunaWeb
