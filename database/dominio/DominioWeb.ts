@@ -81,12 +81,14 @@ module NetZ_Web
 
         // #region Métodos
 
-        public copiarDados(obj: any): void
+        public copiarDados(obj: any): DominioWeb
         {
             super.copiarDados(obj);
 
             this.dttAlteracao = new Date(String(this.dttAlteracao));
             this.dttCadastro = new Date(String(this.dttCadastro));
+
+            return this;
         }
 
         public salvar(fncSucesso: Function): void

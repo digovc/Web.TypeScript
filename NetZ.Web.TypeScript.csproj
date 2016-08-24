@@ -27,6 +27,7 @@
     <TypeScriptCompile Include="database\DataCell.ts" />
     <TypeScriptCompile Include="database\DataRow.ts" />
     <TypeScriptCompile Include="database\DataTable.ts" />
+    <TypeScriptCompile Include="database\dominio\FavoritoDominio.ts" />
     <TypeScriptCompile Include="database\dominio\UsuarioDominio.ts" />
     <TypeScriptCompile Include="database\ParValorNome.ts" />
     <TypeScriptCompile Include="database\TblFiltro.ts" />
@@ -68,6 +69,8 @@
     <TypeScriptCompile Include="html\componente\Mensagem.ts" />
     <TypeScriptCompile Include="html\componente\menu\contexto\MenuContexto.ts" />
     <TypeScriptCompile Include="html\componente\menu\contexto\MenuContextoItem.ts" />
+    <TypeScriptCompile Include="html\componente\menu\DivFavorito.ts" />
+    <TypeScriptCompile Include="html\componente\menu\DivFavoritoItem.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuMobile.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuMobileItem.ts" />
     <TypeScriptCompile Include="html\componente\Notificacao.ts" />

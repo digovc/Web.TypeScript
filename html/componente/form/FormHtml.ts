@@ -294,45 +294,45 @@ module NetZ_Web
                 return;
             }
 
-            var arrCmpJq = this.jq.find("[clazz*=Campo]");
+            var arrElmCmp = this.jq.find("[clazz*=Campo]");
 
-            if (arrCmpJq == null)
+            if (arrElmCmp == null)
             {
                 return;
             }
 
             var arrCmpResultado = new Array<CampoHtml>();
 
-            for (var i = 0; i < arrCmpJq.length; i++)
+            for (var i = 0; i < arrElmCmp.length; i++)
             {
-                this.getArrCmp2(arrCmpResultado, arrCmpJq[i]);
+                this.getArrCmp2(arrCmpResultado, arrElmCmp[i]);
             }
 
             return arrCmpResultado;
         }
 
-        private getArrCmp2(arrCmpResultado: Array<CampoHtml>, cmpJq: HTMLElement): void
+        private getArrCmp2(arrCmp: Array<CampoHtml>, elmCmp: HTMLElement): void
         {
-            if (cmpJq == null)
+            if (elmCmp == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia($(cmpJq).attr("clazz")))
+            if (Utils.getBooStrVazia($(elmCmp).attr("clazz")))
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(cmpJq.id))
+            if (Utils.getBooStrVazia(elmCmp.id))
             {
                 return;
             }
 
-            var cmp: CampoHtml = new (<any>window)["NetZ_Web"][$(cmpJq).attr("clazz")](cmpJq.id);
+            var cmp: CampoHtml = new (<any>window)["NetZ_Web"][$(elmCmp).attr("clazz")](elmCmp.id);
 
             cmp.frm = this;
 
-            arrCmpResultado.push(cmp);
+            arrCmp.push(cmp);
         }
 
         public getCmp(strCmpId: string): CampoHtml
