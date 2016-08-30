@@ -181,7 +181,12 @@ module NetZ_Web
 
         private divCabecalhoOnMouseDown(arg: JQueryMouseEventObject): void
         {
-            if (arg.button != 0)
+            if (arg.button != Tag.INT_MOUSE_BUTTON_LEFT)
+            {
+                return;
+            }
+
+            if (arg.buttons < 1)
             {
                 return;
             }
@@ -210,9 +215,13 @@ module NetZ_Web
                 return;
             }
 
-            if (arg.button != 0)
+            if (arg.button != Tag.INT_MOUSE_BUTTON_LEFT)
             {
-                this.booDragging;
+                return;
+            }
+
+            if (arg.buttons < 1)
+            {
                 return;
             }
 
@@ -225,11 +234,6 @@ module NetZ_Web
 
         private divCabecalhoOnMouseUp(arg: JQueryMouseEventObject): void
         {
-            if (arg.button != 0)
-            {
-                return;
-            }
-
             this.booDragging = false;
         }
 
