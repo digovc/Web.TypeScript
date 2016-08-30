@@ -317,9 +317,15 @@ module NetZ_Web
             return new TemaDefault();
         }
 
-        protected abstract getSrvAjaxDb(): ServerAjaxDb;
+        protected getSrvAjaxDb(): ServerAjaxDb
+        {
+            return null;
+        }
 
-        protected abstract getSrvHttp(): ServerHttp;
+        protected getSrvHttp(): ServerHttp
+        {
+            return null;
+        }
 
         private getStrCookieValue(strCookieNome: string): string
         {
@@ -398,7 +404,9 @@ module NetZ_Web
             this.inicializarArrSrv2();
         }
 
-        protected abstract inicializarArrSrv(arrSrv: Array<ServerBase>): void;
+        protected inicializarArrSrv(arrSrv: Array<ServerBase>): void
+        {
+        }
 
         private inicializarArrSrv2(): void
         {

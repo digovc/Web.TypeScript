@@ -41,8 +41,8 @@ module NetZ_Web
         private _jq: any;
         private _strConteudo: string;
         private _strId: string;
-        private _strJqSelector: string = null;
         private _strPlaceholder: string;
+        private _strSelector: string = null;
         private _strTitle: string;
 
         public get booVisivel(): boolean
@@ -90,7 +90,7 @@ module NetZ_Web
                 return this._jq;
             }
 
-            this._jq = $(this.strJqSelector);
+            this._jq = $(this.strSelector);
 
             return this._jq;
         }
@@ -98,25 +98,6 @@ module NetZ_Web
         public set jq(jq: JQuery)
         {
             this._jq = jq;
-        }
-
-        public get strJqSelector(): string
-        {
-            if (!Utils.getBooStrVazia(this._strJqSelector))
-            {
-                return this._strJqSelector;
-            }
-
-            this._strJqSelector = this.getStrJqSelector();
-
-            return this._strJqSelector;
-        }
-
-        public set strJqSelector(strJqSelector: string)
-        {
-            this._strJqSelector = strJqSelector;
-
-            this.atualizarStrJqSelector();
         }
 
         public get strId(): string
@@ -141,6 +122,30 @@ module NetZ_Web
             this._strPlaceholder = strPlaceholder;
 
             this.atualizarStrPlaceholder();
+        }
+
+        public get strSelector(): string
+        {
+            if (this._strSelector != null)
+            {
+                return this._strSelector;
+            }
+
+            this._strSelector = this.getStrSelector();
+
+            return this._strSelector;
+        }
+
+        public set strSelector(strJqSelector: string)
+        {
+            if (this._strSelector == strJqSelector)
+            {
+                return;
+            }
+
+            this._strSelector = strJqSelector;
+
+            this.atualizarStrJqSelector();
         }
 
         public get strTitle(): string
@@ -269,7 +274,7 @@ module NetZ_Web
             return this.jq.attr(strAttNome);
         }
 
-        private getStrJqSelector(): string
+        private getStrSelector(): string
         {
             var strJqSelector = "#_tag_id";
 

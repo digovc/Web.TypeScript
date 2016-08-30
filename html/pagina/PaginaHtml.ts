@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../Objeto.ts"/>
+/// <reference path="../../OnKeyUpListener.ts"/>
 
 module NetZ_Web
 {
@@ -89,7 +90,7 @@ module NetZ_Web
         {
             var tagBodyResultado = new Tag(null);
 
-            tagBodyResultado.strJqSelector = "body";
+            tagBodyResultado.strSelector = "body";
 
             return tagBodyResultado;
         }

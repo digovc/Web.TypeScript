@@ -1,4 +1,5 @@
-﻿/// <reference path="TagCard.ts"/>
+﻿/// <reference path="../../../../Keys.ts"/>
+/// <reference path="TagCard.ts"/>
 
 module NetZ_Web
 {
