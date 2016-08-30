@@ -12,11 +12,12 @@ module NetZ_Web
     {
         // #region Constantes
 
+        public static get INT_CODIGO_RETORNO_SUCESSO(): number { return 0 };
+
         public static get STR_EXCEPTION_NULL(): string { return "O servidor de acesso ao banco de dados está nulo." };
         public static get STR_METODO_ABRIR_CADASTRO(): string { return "ABRIR_CADASTRO" };
         public static get STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO(): string { return "ABRIR_CADASTRO_FILTRO_CONTEUDO" };
         public static get STR_METODO_ABRIR_CONSULTA(): string { return "ABRIR_CONSULTA" };
-        public static get STR_METODO_ABRIR_JANELA_TAG(): string { return "ABRIR_JANELA_TAG" };
         public static get STR_METODO_ADICIONAR(): string { return "ADICIONAR" };
         public static get STR_METODO_APAGAR(): string { return "APAGAR" };
         public static get STR_METODO_CARREGAR_TBL_WEB(): string { return "CARREGAR_TBL_WEB" };
@@ -29,6 +30,8 @@ module NetZ_Web
         public static get STR_METODO_TABELA_FAVORITO_ADD(): string { return "TABELA_FAVORITO_ADD" };
         public static get STR_METODO_TABELA_FAVORITO_PESQUISAR(): string { return "TABELA_FAVORITO_PESQUISAR" };
         public static get STR_METODO_TABELA_FAVORITO_VERIFICAR(): string { return "TABELA_FAVORITO_VERIFICAR" };
+        public static get STR_METODO_TAG_ABRIR_JANELA(): string { return "TAG_ABRIR_JANELA" };
+        public static get STR_METODO_TAG_SALVAR(): string { return "TAG_SALVAR" };
 
         // #endregion Constantes
 

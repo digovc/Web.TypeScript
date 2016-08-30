@@ -236,6 +236,8 @@ module NetZ_Web
                 return;
             }
 
+            mni.arrMniFilhoVisivel = null;
+
             if (mni.arrMniFilhoVisivel == null)
             {
                 return;
@@ -280,6 +282,8 @@ module NetZ_Web
             {
                 return;
             }
+
+            this.arrMniFilhoVisivel = null;
 
             if (Utils.getBooStrVazia(strPesquisa))
             {

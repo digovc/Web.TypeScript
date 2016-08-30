@@ -211,7 +211,7 @@ module NetZ_Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_JANELA_TAG;
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_TAG_ABRIR_JANELA;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirJnlTagSucesso(tblWeb, objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);

@@ -291,7 +291,7 @@ module NetZ_Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); }); // TODO: Informar ao usuário.
             objInterlocutor.addJsn(this.tblWeb);
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
+            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_TAG_SALVAR;
 
             AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
         }
