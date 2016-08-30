@@ -645,7 +645,7 @@ module NetZ_Web
                 return false;
             }
 
-            if (this.tblWeb.booPermitirAlterar && (this.intRegistroId > 0))
+            if (!this.tblWeb.booPermitirAlterar && (this.intRegistroId > 0))
             {
                 Notificacao.notificar("Alterações não são permitidas.", Notificacao_EnmTipo.NEGATIVA);
                 return false;
