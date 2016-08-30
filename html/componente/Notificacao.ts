@@ -174,12 +174,12 @@ module NetZ_Web
             {
                 case Notificacao_EnmTipo.INFO:
                     this.divIcone.jq.css("background-image", "url('/res/media/png/img_notificacao_info.png')");
-                    this.divIcone.jq.css("border-right", "5px solid #aca749");
+                    this.divIcone.jq.css("border-right", "5px solid #9bcad1");
                     return;
 
                 case Notificacao_EnmTipo.NEGATIVA:
                     this.divIcone.jq.css("background-image", "url('/res/media/png/img_notificacao_negativa.png')");
-                    this.divIcone.jq.css("border-right", "5px solid #ac4949");
+                    this.divIcone.jq.css("border-right", "5px solid #f15b28");
                     return;
 
                 default:
