@@ -1,4 +1,5 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
 
 module NetZ_Web
 {
@@ -8,7 +9,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DivFavoritoItem extends ComponenteHtml
+    export class DivFavoritoItem extends ComponenteHtml implements OnClickListener
     {
         // #region Constantes
 
@@ -23,6 +24,7 @@ module NetZ_Web
         private _divTitulo: Div;
         private _imgIcone: Imagem;
         private _objFavorito: FavoritoDominio;
+        private _tblWeb: TabelaWeb;
 
         private get divFavorito(): DivFavorito
         {
@@ -75,6 +77,18 @@ module NetZ_Web
             this.atualizarObjFavorito();
         }
 
+        private get tblWeb(): TabelaWeb
+        {
+            if (this._tblWeb != null)
+            {
+                return this._tblWeb;
+            }
+
+            this._tblWeb = this.getTblWeb();
+
+            return this._tblWeb;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -90,6 +104,31 @@ module NetZ_Web
 
         // #region Métodos
 
+        private abrirConsulta(): void
+        {
+            if (AppWeb.i == null)
+            {
+                return;
+            }
+
+            if (AppWeb.i.pag == null)
+            {
+                return;
+            }
+
+            if (!(AppWeb.i.pag instanceof PagPrincipal))
+            {
+                return;
+            }
+
+            if (this.tblWeb == null)
+            {
+                return;
+            }
+
+            (AppWeb.i.pag as PagPrincipal).abrirConsulta(this.tblWeb);
+        }
+
         private atualizarObjFavorito(): void
         {
             if (this.objFavorito == null)
@@ -103,9 +142,57 @@ module NetZ_Web
             this.imgIcone.jq.attr("src", DivFavoritoItem.SRC_IMAGEM_CARREGADO);
         }
 
+        private getTblWeb(): TabelaWeb
+        {
+            if (this.objFavorito == null)
+            {
+                return null;
+            }
+
+            if (Utils.getBooStrVazia(this.objFavorito.strNome))
+            {
+                return null;
+            }
+
+            return new TabelaWeb(this.objFavorito.strNome);
+        }
+
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            this.addEvtOnClickListener(this);
+        }
+
         // #endregion Métodos
 
         // #region Eventos
+
+        public onClick(objSender: Object, arg: JQueryEventObject): void
+        {
+            // #region Variáveis
+            // #endregion Variáveis
+
+            // #region Ações
+            try
+            {
+                switch (objSender)
+                {
+                    case this:
+                        this.abrirConsulta();
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+            finally
+            {
+            }
+            // #endregion Ações
+        }
+
         // #endregion Eventos
     }
 }

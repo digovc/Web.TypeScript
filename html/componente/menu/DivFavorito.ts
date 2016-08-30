@@ -108,6 +108,8 @@ module NetZ_Web
             var divFavoritoItem = new DivFavoritoItem(elmDivFavoritoItem.id, this);
 
             arrDivFavoritoItem.push(divFavoritoItem);
+
+            divFavoritoItem.iniciar();
         }
 
         protected inicializar(): void
