@@ -201,8 +201,7 @@
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
-    <TypeScriptOutDir>
-    </TypeScriptOutDir>
+    <TypeScriptOutDir>bin\js</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot>
