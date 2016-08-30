@@ -248,7 +248,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)lib\*.*" "$(SolutionDir)principal\bin\Debug\res\js\lib\" /Y/D/S
+xcopy "$(TargetDir)js\*.*" "$(SolutionDir)principal\bin\Debug\res\js\web\" /Y/D/S</PostBuildEvent>
   </PropertyGroup>
 </Project>
