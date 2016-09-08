@@ -96,9 +96,9 @@ module NetZ_Web
 
         // #region Métodos
 
-        public abrirMenuGrid(arg: JQueryMouseEventObject): void
+        public static abrirMenuGrid(tagGridRow: GridRow, arg: JQueryMouseEventObject): void
         {
-            if (this.tagGridRow == null)
+            if (tagGridRow == null)
             {
                 return;
             }
@@ -118,20 +118,22 @@ module NetZ_Web
                 return;
             }
 
-            if (Utils.getBooStrVazia(this.strLayoutFixo))
+            var mnuGrid = new MenuGrid(tagGridRow);
+
+            if (Utils.getBooStrVazia(mnuGrid.strLayoutFixo))
             {
                 return;
             }
 
-            $(document.body).append(this.strLayoutFixo);
+            $(document.body).append(mnuGrid.strLayoutFixo);
 
-            this.jq.css("left", (arg.pageX - 100));
-            this.jq.css("top", (arg.pageY - 45));
+            mnuGrid.jq.css("left", (arg.pageX - 75));
+            mnuGrid.jq.css("top", (arg.pageY - 85));
 
-            this.iniciar();
-            this.mostrar();
+            mnuGrid.iniciar();
+            mnuGrid.mostrar();
 
-            AppWeb.i.abrirTagFocoExclusivo(this);
+            AppWeb.i.abrirTagFocoExclusivo(mnuGrid);
         }
 
         public dispose(): void
@@ -206,6 +208,8 @@ module NetZ_Web
         protected setEventos(): void
         {
             super.setEventos();
+
+            this.jq.bind("contextmenu", (() => { return false; }));
 
             window.setTimeout(() => { AppWeb.i.pag.addEvtOnClickListener(this); }, 1);
 

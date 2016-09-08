@@ -441,9 +441,17 @@ module NetZ_Web
 
             if (this.arrEvtOnClickRightListener.length == 0)
             {
-                this.jq.bind('contextmenu', (() => { return false; }));
+                this.jq.bind("contextmenu", ((arg: JQueryMouseEventObject) => { return false; }));
 
-                this.jq.mouseup((arg) => { this.dispararEvtOnClickRightListener(arg) });
+                this.jq.mousedown((arg) =>
+                {
+                    arg.stopPropagation();
+                    arg.preventDefault();
+
+                    this.dispararEvtOnClickRightListener(arg);
+
+                    return false;
+                });
             }
 
             this.arrEvtOnClickRightListener.push(evtOnClickRightListener);

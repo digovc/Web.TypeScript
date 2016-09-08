@@ -106,7 +106,9 @@ module NetZ_Web
         {
             this.selecionar(arg.ctrlKey);
 
-            new MenuGrid(this).abrirMenuGrid(arg);
+            MenuGrid.abrirMenuGrid(this, arg);
+
+            arg.stopPropagation();
         }
 
         private processarOnDoubleClick(): void
