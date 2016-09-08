@@ -166,6 +166,14 @@ module NetZ_Web
         {
             super.atualizarBooEmFoco();
 
+            this.btnAcao.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
+            this.btnAcao.jq.css("border-color", this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA);
+            this.btnAcao.jq.css("height", this.booEmFoco ? 26 : 25);
+
+            this.txtIntId.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
+            this.txtIntId.jq.css("border-color", this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA);
+
+            this.txtPesquisa.jq.css("border-bottom-color", this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA);
             this.txtPesquisa.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
         }
 

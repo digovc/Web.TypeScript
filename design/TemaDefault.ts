@@ -16,6 +16,8 @@
         private _corFundo: string;
         private _corMouseOver: string;
         private _corSelecionado: string;
+        private _corTelaFundo: string;
+        private _corTema: string;
 
         public get corFundo(): string
         {
@@ -40,6 +42,7 @@
 
             return this._corMouseOver;
         }
+
         public get corSelecionado(): string
         {
             if (this._corSelecionado != null)
@@ -50,6 +53,30 @@
             this._corSelecionado = this.getCorSelecionado();
 
             return this._corSelecionado;
+        }
+
+        public get corTelaFundo(): string
+        {
+            if (this._corTelaFundo != null)
+            {
+                return this._corTelaFundo;
+            }
+
+            this._corTelaFundo = this.getCorTelaFundo();
+
+            return this._corTelaFundo;
+        }
+
+        public get corTema(): string
+        {
+            if (this._corTema != null)
+            {
+                return this._corTema;
+            }
+
+            this._corTema = this.getCorTema();
+
+            return this._corTema;
         }
 
         // #endregion Atributos
@@ -68,9 +95,20 @@
         {
             return "lightgray";
         }
+
         protected getCorSelecionado(): string
         {
             return "#dadada";
+        }
+
+        protected getCorTelaFundo(): string
+        {
+            return "black";
+        }
+
+        protected getCorTema(): string
+        {
+            return "black";
         }
 
         // #endregion Métodos

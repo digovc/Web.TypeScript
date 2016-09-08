@@ -227,8 +227,9 @@ module NetZ_Web
 
         protected atualizarBooEmFoco(): void
         {
-            this.divTitulo.jq.css("color", this.booEmFoco ? "black" : Utils.STR_VAZIA); // TODO: Colocar a cor do tema.
+            this.divTitulo.jq.css("color", this.booEmFoco ? "black" : Utils.STR_VAZIA);
             this.divTitulo.jq.css("font-weight", this.booEmFoco ? "bold" : Utils.STR_VAZIA);
+            this.tagInput.jq.css("border-bottom-color", this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA);
             this.tagInput.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
 
             this.atualizarBooEmFocoFrm();
