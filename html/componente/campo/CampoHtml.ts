@@ -92,6 +92,11 @@ module NetZ_Web
 
         private get booObrigatorio(): boolean
         {
+            if (this._booObrigatorio != null)
+            {
+                return this._booObrigatorio;
+            }
+
             this._booObrigatorio = this.getBooObrigatorio();
 
             return this._booObrigatorio;
@@ -227,10 +232,15 @@ module NetZ_Web
 
         protected atualizarBooEmFoco(): void
         {
-            this.divTitulo.jq.css("color", this.booEmFoco ? "black" : Utils.STR_VAZIA);
-            this.divTitulo.jq.css("font-weight", this.booEmFoco ? "bold" : Utils.STR_VAZIA);
-            this.tagInput.jq.css("border-bottom-color", this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA);
-            this.tagInput.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
+            this.divTitulo.jq.css("color", (this.booEmFoco ? "black" : Utils.STR_VAZIA));
+            this.divTitulo.jq.css("font-weight", (this.booEmFoco ? "bold" : Utils.STR_VAZIA));
+            this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+            this.tagInput.jq.css("border-bottom-width", (this.booEmFoco ? 2 : 1));
+
+            if (!Utils.getBooStrVazia(this.strCritica))
+            {
+                this.tagInput.jq.css("border-bottom-color", "#f8b2b2");
+            }
 
             this.atualizarBooEmFocoFrm();
         }
@@ -272,15 +282,15 @@ module NetZ_Web
             this.jq.attr("permitir_alterar", String(this._booPermitirAlterar));
         }
 
-        private atualizarStrCritica(): void
+        protected atualizarStrCritica(): void
         {
             if (Utils.getBooStrVazia(this.strCritica))
             {
-                this.tagInput.jq.css("border-bottom-color", Utils.STR_VAZIA);
+                this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
             }
             else
             {
-                this.tagInput.jq.css("border-bottom-color", "red");
+                this.tagInput.jq.css("border-bottom-color", "#f8b2b2");
             }
 
             this.atualizarStrCriticaFrm();
@@ -406,6 +416,18 @@ module NetZ_Web
             this.atualizarStrValor();
 
             this.inicializarMostrarTituloSempre();
+
+            this.inicializarBooObrigatorio();
+        }
+
+        protected inicializarBooObrigatorio(): void
+        {
+            if (!this.booObrigatorio)
+            {
+                return;
+            }
+
+            this.strCritica = "Obrigatório.";
         }
 
         private inicializarMostrarTituloSempre(): void

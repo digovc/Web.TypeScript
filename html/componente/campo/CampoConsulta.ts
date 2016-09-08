@@ -166,15 +166,24 @@ module NetZ_Web
         {
             super.atualizarBooEmFoco();
 
-            this.btnAcao.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
-            this.btnAcao.jq.css("border-color", this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA);
-            this.btnAcao.jq.css("height", this.booEmFoco ? 26 : 25);
+            this.btnAcao.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
+            this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+            this.btnAcao.jq.css("height", (this.booEmFoco ? 26 : 25));
 
-            this.txtIntId.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
-            this.txtIntId.jq.css("border-color", this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA);
+            this.cmb.jq.css("height", (this.booEmFoco ? 23 : 22));
 
-            this.txtPesquisa.jq.css("border-bottom-color", this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA);
-            this.txtPesquisa.jq.css("border-bottom-width", this.booEmFoco ? "2px" : Utils.STR_VAZIA);
+            this.txtIntId.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
+            this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+
+            this.txtPesquisa.jq.css("border-bottom-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+            this.txtPesquisa.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
+
+            if (!Utils.getBooStrVazia(this.strCritica))
+            {
+                this.btnAcao.jq.css("border-color", "#f8b2b2");
+                this.txtIntId.jq.css("border-color", "#f8b2b2");
+                this.txtPesquisa.jq.css("border-color", "#f8b2b2");
+            }
         }
 
         private atualizarClnWebFiltro(): void
@@ -192,6 +201,25 @@ module NetZ_Web
 
             this.divTitulo.strConteudo = strTitulo;
         }
+
+        protected atualizarStrCritica(): void
+        {
+            super.atualizarStrCritica();
+
+            if (Utils.getBooStrVazia(this.strCritica))
+            {
+                this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+                this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+                this.txtPesquisa.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+            }
+            else
+            {
+                this.btnAcao.jq.css("border-color", "#f8b2b2");
+                this.txtIntId.jq.css("border-color", "#f8b2b2");
+                this.txtPesquisa.jq.css("border-color", "#f8b2b2");
+            }
+        }
+
 
         protected atualizarStrValor(): void
         {
