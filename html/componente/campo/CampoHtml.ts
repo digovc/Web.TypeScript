@@ -422,12 +422,17 @@ module NetZ_Web
 
         protected inicializarBooObrigatorio(): void
         {
+            if (this.intRegistroId > 0)
+            {
+                return;
+            }
+
             if (!this.booObrigatorio)
             {
                 return;
             }
 
-            this.strCritica = "Obrigatório.";
+            this.strCritica = "O preenchimento deste campo é obrigatório.";
         }
 
         private inicializarMostrarTituloSempre(): void

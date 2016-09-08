@@ -220,7 +220,6 @@ module NetZ_Web
             }
         }
 
-
         protected atualizarStrValor(): void
         {
             super.atualizarStrValor();
@@ -270,6 +269,8 @@ module NetZ_Web
             this.txtPesquisa.jq.hide();
 
             this.cmb.mostrar();
+
+            this.btnAcao.jq.css("background-image", CampoConsulta.SRC_IMAGEM_ACAO_LIMPAR);
         }
 
         private inicializarTblWebRef(): void
