@@ -1,4 +1,6 @@
-﻿module NetZ_Web
+﻿/// <reference path="ComponenteHtml.ts"/>
+
+module NetZ_Web
 {
     // #region Importações
     // #endregion Importações

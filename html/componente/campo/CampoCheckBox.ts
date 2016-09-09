@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../CheckBox.ts"/>
+/// <reference path="CampoHtml.ts"/>
 
 module NetZ_Web
 {

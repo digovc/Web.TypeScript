@@ -3,6 +3,7 @@
 /// <reference path="../../../OnMouseLeaveListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../circulo/DivCirculo.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="../painel/PainelHtml.ts"/>
 
 module NetZ_Web

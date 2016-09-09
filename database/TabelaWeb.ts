@@ -1,4 +1,5 @@
-﻿/// <reference path="DataTable.ts"/>
+﻿/// <reference path="../Objeto.ts"/>
+/// <reference path="DataTable.ts"/>
 /// <reference path="FiltroWeb.ts"/>
 
 module NetZ_Web

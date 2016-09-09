@@ -1,4 +1,6 @@
-﻿module NetZ_Web
+﻿/// <reference path="JnlCadastro.ts"/>
+
+module NetZ_Web
 {
     // #region Importações
 

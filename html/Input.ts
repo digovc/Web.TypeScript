@@ -1,6 +1,7 @@
 ﻿/// <reference path="../OnEnterListener.ts"/>
 /// <reference path="../OnLeaveListener.ts"/>
 /// <reference path="../OnValorAlteradoListener.ts"/>
+/// <reference path="Tag.ts"/>
 
 module NetZ_Web
 {

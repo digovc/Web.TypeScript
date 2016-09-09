@@ -4,6 +4,7 @@
 /// <reference path="../../../OnMouseMoveListener.ts"/>
 /// <reference path="../../../OnMouseUpListener.ts"/>
 /// <reference path="../../pagina/PaginaHtml.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
 
 module NetZ_Web
 {

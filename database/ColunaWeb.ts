@@ -1,4 +1,5 @@
-﻿/// <reference path="../OnValorAlteradoArg.ts"/>
+﻿/// <reference path="../Objeto.ts"/>
+/// <reference path="../OnValorAlteradoArg.ts"/>
 /// <reference path="../OnValorAlteradoListener.ts"/>
 
 module NetZ_Web

@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../../database/TabelaWeb.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="TabItemHead.ts"/>
 
 module NetZ_Web

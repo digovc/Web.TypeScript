@@ -1,4 +1,5 @@
-﻿/// <reference path="../OnDoubleClickListener.ts"/>
+﻿/// <reference path="../Objeto.ts"/>
+/// <reference path="../OnDoubleClickListener.ts"/>
 /// <reference path="../OnKeyDownListener.ts"/>
 /// <reference path="../OnKeyPressListener.ts"/>
 /// <reference path="../OnMouseDownListener.ts"/>

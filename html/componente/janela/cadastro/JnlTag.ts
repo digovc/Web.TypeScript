@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../../../Keys.ts"/>
+/// <reference path="../JanelaHtml.ts"/>
 /// <reference path="TagCard.ts"/>
 
 module NetZ_Web

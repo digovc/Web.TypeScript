@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Utils.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="GridRow.ts"/>
 /// <reference path="OnGridMenuClickListener.ts"/>
 /// <reference path="OnRowClickListener.ts"/>

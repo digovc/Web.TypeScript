@@ -1,4 +1,5 @@
-﻿/// <reference path="DivCritica.ts"/>
+﻿/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="DivCritica.ts"/>
 /// <reference path="DivDica.ts"/>
 /// <reference path="OnCmpEmFocoAlterado.ts"/>
 
