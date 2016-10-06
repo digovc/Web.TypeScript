@@ -276,7 +276,7 @@ module NetZ_Web
             this.arrMni.forEach((mni) => { mni.arrMniFilhoVisivel = null; });
         }
 
-        private pesquisar(strPesquisa: string): void
+        protected pesquisar(strPesquisa: string): void
         {
             if (this.arrMni == null)
             {
