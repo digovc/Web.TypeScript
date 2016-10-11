@@ -232,7 +232,7 @@ module NetZ_Web
         {
             super.setEventos();
 
-            AppWeb.i.pag.addEvtOnKeyDownListener(this);
+            AppWebBase.i.pag.addEvtOnKeyDownListener(this);
             this.divBarra.addEvtOnClickListener(this);
         }
 
@@ -275,7 +275,7 @@ module NetZ_Web
             {
                 switch (objSender)
                 {
-                    case AppWeb.i.pag:
+                    case AppWebBase.i.pag:
                         this.pagOnKeyDown(arg);
                         return;
                 }

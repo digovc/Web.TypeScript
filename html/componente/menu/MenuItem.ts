@@ -543,7 +543,7 @@ module NetZ_Web
                     return;
                 }
 
-                this.jq.css("background-color", AppWeb.i.objTema.corMouseOver);
+                this.jq.css("background-color", AppWebBase.i.objTema.corMouseOver);
                 this.jq.css("color", "black");
             }
             catch (ex)

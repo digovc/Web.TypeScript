@@ -117,7 +117,7 @@ module NetZ_Web
 
         private abrirFiltroConteudo(): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
@@ -144,7 +144,7 @@ module NetZ_Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirFiltroConteudoSucesso(objInterlocutor); });
             objInterlocutor.addJsn(TblFiltro.i);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private abrirFiltroCadastro(intFiltroId: number): void

@@ -60,7 +60,7 @@ module NetZ_Web
                 return;
             }
 
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 return;
             }
@@ -72,7 +72,7 @@ module NetZ_Web
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.favoritarSucesso(objInterlocutor); });
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private favoritarSucesso(objInterlocutor: Interlocutor): void
@@ -104,7 +104,7 @@ module NetZ_Web
 
         private verificarFavorito(): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 return;
             }
@@ -131,7 +131,7 @@ module NetZ_Web
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.verificarFavoritoSucesso(objInterlocutor); });
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private verificarFavoritoSucesso(objInterlocutor: Interlocutor): void

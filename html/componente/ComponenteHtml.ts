@@ -17,6 +17,7 @@ module NetZ_Web
         // #region Atributos
 
         private _booSelecionado: boolean;
+        private _objAnexo: Object;
         private _strLayoutFixo: string;
 
         public get booSelecionado(): boolean
@@ -36,6 +37,16 @@ module NetZ_Web
             this.atualizarBooSelecionado();
         }
 
+        public get objAnexo(): Object
+        {
+            return this._objAnexo;
+        }
+
+        public set objAnexo(objAnexo: Object)
+        {
+            this._objAnexo = objAnexo;
+        }
+
         public get strLayoutFixo(): string
         {
             if (this._strLayoutFixo != null)
@@ -47,6 +58,7 @@ module NetZ_Web
 
             return this._strLayoutFixo;
         }
+
 
         // #endregion Atributos
 
@@ -75,7 +87,7 @@ module NetZ_Web
 
         protected getCorSelecionado(): string
         {
-            return AppWeb.i.objTema.corSelecionado;
+            return AppWebBase.i.objTema.corSelecionado;
         }
 
         private getStrLayoutFixo(): string

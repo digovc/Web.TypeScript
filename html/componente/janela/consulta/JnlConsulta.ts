@@ -282,17 +282,17 @@ module NetZ_Web
 
         private inicializarCssMain(): void
         {
-            if (AppWeb.i.srvHttp == null)
+            if (AppWebBase.i.srvHttp == null)
             {
                 return;
             }
 
-            AppWeb.i.srvHttp.atualizarCssMain();
+            AppWebBase.i.srvHttp.atualizarCssMain();
         }
 
         private inicializarHistorico(): void
         {
-            if (AppWeb.i == null)
+            if (AppWebBase.i == null)
             {
                 return;
             }
@@ -312,7 +312,7 @@ module NetZ_Web
             objHistorico.addParametro("consulta", this.tblWeb.strNome);
             objHistorico.strTitulo = this.tblWeb.strNomeExibicao;
 
-            AppWeb.i.atualizarHistorico(objHistorico);
+            AppWebBase.i.atualizarHistorico(objHistorico);
         }
 
         protected inicializarPosicao(): void
@@ -348,7 +348,7 @@ module NetZ_Web
 
         public pesquisar(): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
@@ -363,7 +363,7 @@ module NetZ_Web
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarSucesso(objInterlocutor); });
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private pesquisarSucesso(objInterlocutor: Interlocutor): void
@@ -395,12 +395,12 @@ module NetZ_Web
 
         private pesquisarSucessoCssMain(): void
         {
-            if (AppWeb.i.srvHttp == null)
+            if (AppWebBase.i.srvHttp == null)
             {
                 return;
             }
 
-            AppWeb.i.srvHttp.atualizarCssMain();
+            AppWebBase.i.srvHttp.atualizarCssMain();
         }
 
         private processarOnGridMenuClick(arg: OnGridMenuClickArg): void

@@ -162,7 +162,7 @@ module NetZ_Web
             this.iniciar();
             this.mostrar();
 
-            AppWeb.i.abrirTagFocoExclusivo(this);
+            AppWebBase.i.abrirTagFocoExclusivo(this);
         }
 
         private btnCancelarOnClick(): void

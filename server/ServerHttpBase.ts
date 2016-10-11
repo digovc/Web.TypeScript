@@ -9,7 +9,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ServerHttp extends ServerBase
+    export abstract class ServerHttpBase extends ServerBase
     {
         // #region Constantes
 
@@ -86,7 +86,7 @@ module NetZ_Web
                 return;
             }
 
-            var urlJq = "/res?method=_get_script&class=_js_class".replace("_get_script", ServerHttp.STR_GET_SCRIPT);
+            var urlJq = "/res?method=_get_script&class=_js_class".replace("_get_script", ServerHttpBase.STR_GET_SCRIPT);
 
             urlJq = urlJq.replace("_js_class", strJqClass);
 

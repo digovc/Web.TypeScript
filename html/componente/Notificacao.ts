@@ -130,7 +130,7 @@ module NetZ_Web
                 return;
             }
 
-            if (AppWeb.i.pag == null)
+            if (AppWebBase.i.pag == null)
             {
                 return;
             }
@@ -141,7 +141,7 @@ module NetZ_Web
                 return;
             }
 
-            AppWeb.i.pag.divNotificacao.jq.append(this.strLayoutFixo);
+            AppWebBase.i.pag.divNotificacao.jq.append(this.strLayoutFixo);
 
             Notificacao.intNotificacaoAberta++;
 

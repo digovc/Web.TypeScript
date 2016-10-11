@@ -93,7 +93,7 @@ module NetZ_Web
 
         public salvar(fncSucesso: Function): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 return;
             }
@@ -105,7 +105,7 @@ module NetZ_Web
             objInterlocutor.addJsn(this);
             objInterlocutor.addFncSucesso(fncSucesso);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         // #endregion Métodos

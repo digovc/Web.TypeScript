@@ -254,7 +254,7 @@ module NetZ_Web
             // #region Ações
             try
             {
-                this.jq.css("background-color", this.booSelecionado ? AppWeb.i.objTema.corSelecionado : Utils.STR_VAZIA);
+                this.jq.css("background-color", this.booSelecionado ? AppWebBase.i.objTema.corSelecionado : Utils.STR_VAZIA);
             }
             catch (ex)
             {
@@ -274,7 +274,7 @@ module NetZ_Web
             // #region Ações
             try
             {
-                this.jq.css("background-color", AppWeb.i.objTema.corMouseOver);
+                this.jq.css("background-color", AppWebBase.i.objTema.corMouseOver);
             }
             catch (ex)
             {

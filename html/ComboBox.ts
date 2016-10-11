@@ -46,7 +46,7 @@ module NetZ_Web
         {
             this.limparDados();
 
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
@@ -68,7 +68,7 @@ module NetZ_Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.carregarDadosSucesso(objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private carregarDadosSucesso(objInterlocutor: Interlocutor): void

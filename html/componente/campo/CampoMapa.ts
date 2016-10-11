@@ -76,19 +76,19 @@ module NetZ_Web
 
         private carregarGMapsApi(): void
         {
-            if (AppWeb.i == null)
+            if (AppWebBase.i == null)
             {
                 return;
             }
 
-            if (AppWeb.i.pag == null)
+            if (AppWebBase.i.pag == null)
             {
                 return;
             }
 
-            if (!AppWeb.i.pag.validarJsCarregado(CampoMapa.SRC_GOOGLE_MAPS_API))
+            if (!AppWebBase.i.pag.validarJsCarregado(CampoMapa.SRC_GOOGLE_MAPS_API))
             {
-                AppWeb.i.pag.addJs(CampoMapa.SRC_GOOGLE_MAPS_API, (() => { this.inicializarMap(); }));
+                AppWebBase.i.pag.addJs(CampoMapa.SRC_GOOGLE_MAPS_API, (() => { this.inicializarMap(); }));
             }
             else
             {
