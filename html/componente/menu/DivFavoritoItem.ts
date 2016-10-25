@@ -106,17 +106,17 @@ module NetZ_Web
 
         private abrirConsulta(): void
         {
-            if (AppWeb.i == null)
+            if (AppWebBase.i == null)
             {
                 return;
             }
 
-            if (AppWeb.i.pag == null)
+            if (AppWebBase.i.pag == null)
             {
                 return;
             }
 
-            if (!(AppWeb.i.pag instanceof PagPrincipal))
+            if (!(AppWebBase.i.pag instanceof PagPrincipal))
             {
                 return;
             }
@@ -126,7 +126,7 @@ module NetZ_Web
                 return;
             }
 
-            (AppWeb.i.pag as PagPrincipal).abrirConsulta(this.tblWeb);
+            (AppWebBase.i.pag as PagPrincipal).abrirConsulta(this.tblWeb);
         }
 
         private atualizarObjFavorito(): void

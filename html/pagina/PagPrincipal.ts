@@ -1,6 +1,5 @@
 ﻿/// <reference path="../../database/TabelaWeb.ts"/>
 /// <reference path="../../OnDisposedListener.ts"/>
-/// <reference path="../../server/ServerHttp.ts"/>
 /// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="../componente/janela/cadastro/jnltag.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
@@ -80,7 +79,7 @@ module NetZ_Web
 
         public abrirCadastro(tblWeb: TabelaWeb): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
@@ -102,7 +101,7 @@ module NetZ_Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirCadastroSucesso(objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private abrirCadastroSucesso(objInterlocutor: Interlocutor): void
@@ -124,7 +123,7 @@ module NetZ_Web
 
         public abrirConsulta(tblWeb: TabelaWeb): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
@@ -155,7 +154,7 @@ module NetZ_Web
 
             objInterlocutor.addJsn(tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private abrirConsultaSucesso(objInterlocutor: Interlocutor): void
@@ -189,7 +188,7 @@ module NetZ_Web
 
         public abrirJnlTag(tblWeb: TabelaWeb): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
@@ -216,7 +215,7 @@ module NetZ_Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirJnlTagSucesso(tblWeb, objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private abrirJnlTagSucesso(tblWeb: TabelaWeb, objInterlocutor: Interlocutor): void

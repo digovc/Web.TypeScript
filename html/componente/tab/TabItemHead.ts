@@ -46,7 +46,7 @@ module NetZ_Web
 
         protected getCorSelecionado(): string
         {
-            return AppWeb.i.objTema.corFundo;
+            return AppWebBase.i.objTema.corFundo;
         }
 
         protected setEventos(): void

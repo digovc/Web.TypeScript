@@ -1,5 +1,4 @@
-﻿/// <reference path="../../../AppWeb.ts"/>
-/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Keys.ts"/>
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnFocusInListener.ts"/>
@@ -167,15 +166,15 @@ module NetZ_Web
             super.atualizarBooEmFoco();
 
             this.btnAcao.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
-            this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+            this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
             this.btnAcao.jq.css("height", (this.booEmFoco ? 26 : 25));
 
             this.cmb.jq.css("height", (this.booEmFoco ? 23 : 22));
 
             this.txtIntId.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
-            this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+            this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
 
-            this.txtPesquisa.jq.css("border-bottom-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+            this.txtPesquisa.jq.css("border-bottom-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
             this.txtPesquisa.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
 
             if (!Utils.getBooStrVazia(this.strCritica))
@@ -208,9 +207,9 @@ module NetZ_Web
 
             if (Utils.getBooStrVazia(this.strCritica))
             {
-                this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
-                this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
-                this.txtPesquisa.jq.css("border-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+                this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+                this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+                this.txtPesquisa.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
             }
             else
             {
@@ -245,7 +244,7 @@ module NetZ_Web
                 return null;
             }
 
-            return AppWeb.i.getTbl(this.strTblWebRefNome);
+            return AppWebBase.i.getTbl(this.strTblWebRefNome);
         }
 
         protected inicializar(): void
@@ -275,7 +274,7 @@ module NetZ_Web
 
         private inicializarTblWebRef(): void
         {
-            AppWeb.i.carregarTbl(this.strTblWebRefNome);
+            AppWebBase.i.carregarTbl(this.strTblWebRefNome);
         }
 
         public limparDados(): void

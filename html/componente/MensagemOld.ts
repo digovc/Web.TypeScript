@@ -313,7 +313,7 @@ module NetZ_Web
             {
                 var intTempo: number;
 
-                if (!AppWeb.i.booEmFoco)
+                if (!AppWebBase.i.booEmFoco)
                 {
                     this.mostrarNotificacao();
                     return;

@@ -133,14 +133,14 @@ module NetZ_Web
             mnuGrid.iniciar();
             mnuGrid.mostrar();
 
-            AppWeb.i.abrirTagFocoExclusivo(mnuGrid);
+            AppWebBase.i.abrirTagFocoExclusivo(mnuGrid);
         }
 
         public dispose(): void
         {
             super.dispose();
 
-            AppWeb.i.pag.removeEvtOnClickListener(this);
+            AppWebBase.i.pag.removeEvtOnClickListener(this);
         }
 
         protected montarLayoutFixo(strLayoutFixo: string): string
@@ -211,7 +211,7 @@ module NetZ_Web
 
             this.jq.bind("contextmenu", (() => { return false; }));
 
-            window.setTimeout(() => { AppWeb.i.pag.addEvtOnClickListener(this); }, 1);
+            window.setTimeout(() => { AppWebBase.i.pag.addEvtOnClickListener(this); }, 1);
 
             this.btnAdicionar.addEvtOnClickListener(this);
             this.btnAlterar.addEvtOnClickListener(this);

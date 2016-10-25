@@ -11,6 +11,7 @@
 /// <reference path="OnFocusOutListener.ts"/>
 /// <reference path="server/ajax/ServerAjaxDb.ts"/>
 /// <reference path="server/Interlocutor.ts"/>
+/// <reference path="server/ServerHttpBase.ts"/>
 
 module NetZ_Web
 {
@@ -21,7 +22,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class AppWeb extends Objeto
+    export abstract class AppWebBase extends Objeto
     {
         // #region Constantes
 
@@ -31,21 +32,21 @@ module NetZ_Web
 
         // #region Atributos
 
-        protected static _i: AppWeb;
+        protected static _i: AppWebBase;
 
-        public static get i(): AppWeb
+        public static get i(): AppWebBase
         {
-            return AppWeb._i;
+            return AppWebBase._i;
         }
 
-        public static set i(appWeb: AppWeb)
+        public static set i(appWeb: AppWebBase)
         {
-            if (AppWeb.i != null)
+            if (AppWebBase.i != null)
             {
                 return;
             }
 
-            AppWeb._i = appWeb;
+            AppWebBase._i = appWeb;
         }
 
         private _arrSrv: Array<ServerBase>;
@@ -56,7 +57,7 @@ module NetZ_Web
         private _objTema: TemaDefault;
         private _pag: PaginaHtml;
         private _srvAjaxDb: ServerAjaxDb;
-        private _srvHttp: ServerHttp;
+        private _srvHttp: ServerHttpBase;
         private _strSessionId: string;
         private _tagFocoExclusivo: ComponenteHtml;
 
@@ -150,7 +151,7 @@ module NetZ_Web
             return this._srvAjaxDb;
         }
 
-        public get srvHttp(): ServerHttp
+        public get srvHttp(): ServerHttpBase
         {
             if (this._srvHttp != null)
             {
@@ -192,7 +193,7 @@ module NetZ_Web
         {
             super();
 
-            AppWeb.i = this;
+            AppWebBase.i = this;
         }
 
         // #endregion Construtores
@@ -269,7 +270,7 @@ module NetZ_Web
                 return;
             }
 
-            if (AppWeb.i.getTbl(strTblNome) != null)
+            if (AppWebBase.i.getTbl(strTblNome) != null)
             {
                 return;
             }
@@ -322,7 +323,7 @@ module NetZ_Web
             return null;
         }
 
-        protected getSrvHttp(): ServerHttp
+        protected getSrvHttp(): ServerHttpBase
         {
             return null;
         }
@@ -353,7 +354,7 @@ module NetZ_Web
 
         private getStrSessionId(): string
         {
-            return this.getStrCookieValue(AppWeb.STR_COOKIE_SESSAO_ID_NOME);
+            return this.getStrCookieValue(AppWebBase.STR_COOKIE_SESSAO_ID_NOME);
         }
 
         public getTbl(strTblNome: string): TabelaWeb

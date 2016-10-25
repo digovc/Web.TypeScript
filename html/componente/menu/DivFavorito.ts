@@ -121,7 +121,7 @@ module NetZ_Web
 
         private pesquisarFavorito(): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 return;
             }
@@ -132,7 +132,7 @@ module NetZ_Web
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarFavoritoSucesso(objInterlocutor); });
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private pesquisarFavoritoSucesso(objInterlocutor: Interlocutor): void

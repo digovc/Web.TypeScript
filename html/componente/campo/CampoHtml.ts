@@ -234,7 +234,7 @@ module NetZ_Web
         {
             this.divTitulo.jq.css("color", (this.booEmFoco ? "black" : Utils.STR_VAZIA));
             this.divTitulo.jq.css("font-weight", (this.booEmFoco ? "bold" : Utils.STR_VAZIA));
-            this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+            this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
             this.tagInput.jq.css("border-bottom-width", (this.booEmFoco ? 2 : 1));
 
             if (!Utils.getBooStrVazia(this.strCritica))
@@ -286,7 +286,7 @@ module NetZ_Web
         {
             if (Utils.getBooStrVazia(this.strCritica))
             {
-                this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWeb.i.objTema.corTema : Utils.STR_VAZIA));
+                this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
             }
             else
             {

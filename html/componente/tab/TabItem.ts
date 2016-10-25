@@ -214,7 +214,7 @@ module NetZ_Web
 
         public pesquisar(): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
@@ -241,7 +241,7 @@ module NetZ_Web
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarSucesso(objInterlocutor); });
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private pesquisarSucesso(objInterlocutor: Interlocutor): void
@@ -270,12 +270,12 @@ module NetZ_Web
 
         private pesquisarSucessoCssMain(): void
         {
-            if (AppWeb.i.srvHttp == null)
+            if (AppWebBase.i.srvHttp == null)
             {
                 return;
             }
 
-            AppWeb.i.srvHttp.atualizarCssMain();
+            AppWebBase.i.srvHttp.atualizarCssMain();
         }
 
         private pesquisarSucessoGridHtml(): void

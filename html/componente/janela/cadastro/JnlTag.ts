@@ -191,12 +191,12 @@ module NetZ_Web
 
         private inicializarCssMain(): void
         {
-            if (AppWeb.i.srvHttp == null)
+            if (AppWebBase.i.srvHttp == null)
             {
                 return;
             }
 
-            AppWeb.i.srvHttp.atualizarCssMain();
+            AppWebBase.i.srvHttp.atualizarCssMain();
         }
 
         private inicializarStrTag(): void
@@ -253,7 +253,7 @@ module NetZ_Web
 
         private salvar(): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
@@ -294,7 +294,7 @@ module NetZ_Web
 
             objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_TAG_SALVAR;
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private salvarSucesso(objInterlocutor: Interlocutor): void

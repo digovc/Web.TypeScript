@@ -88,7 +88,7 @@ module NetZ_Web
             this.iniciar();
             this.mostrar();
 
-            AppWeb.i.abrirTagFocoExclusivo(this);
+            AppWebBase.i.abrirTagFocoExclusivo(this);
         }
 
         private addMci(mci: MenuContextoItem): void
@@ -146,7 +146,7 @@ module NetZ_Web
         {
             super.dispose();
 
-            AppWeb.i.pag.removeEvtOnClickListener(this);
+            AppWebBase.i.pag.removeEvtOnClickListener(this);
         }
 
         protected inicializar(): void
@@ -198,7 +198,7 @@ module NetZ_Web
         {
             super.setEventos();
 
-            window.setTimeout(() => { AppWeb.i.pag.addEvtOnClickListener(this); }, 1);
+            window.setTimeout(() => { AppWebBase.i.pag.addEvtOnClickListener(this); }, 1);
         }
 
         // #endregion Métodos

@@ -196,7 +196,7 @@ module NetZ_Web
 
         private download(): void
         {
-            if (AppWeb.i.srvHttp == null)
+            if (AppWebBase.i.srvHttp == null)
             {
                 return;
             }
@@ -223,11 +223,11 @@ module NetZ_Web
 
             var url = "/_url_db_file_download?tbl_web_nome=_tbl_web_nome&registro_id=_registro_id";
 
-            url = url.replace("_url_db_file_download", ServerHttp.URL_DATA_BASE_FILE_DOWNLOAD);
+            url = url.replace("_url_db_file_download", ServerHttpBase.URL_DATA_BASE_FILE_DOWNLOAD);
             url = url.replace("_tbl_web_nome", this.frm.tblWeb.strNome);
             url = url.replace("_registro_id", this.intRegistroId.toString());
 
-            AppWeb.i.srvHttp.download(url);
+            AppWebBase.i.srvHttp.download(url);
         }
 
         private enviarArquivo(): void
@@ -254,7 +254,7 @@ module NetZ_Web
                 return;
             }
 
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 return;
             }
@@ -283,7 +283,7 @@ module NetZ_Web
             objInterlocutor.addFncProgresso((arg: ProgressEvent) => { this.enviarArquivoProgresso(arg); });
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.enviarArquivoSucesso(objInterlocutor); });
 
-            AppWeb.i.srvAjaxDb.enviarArquivo(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviarArquivo(objInterlocutor);
         }
 
         private enviarArquivoModificacao(): void

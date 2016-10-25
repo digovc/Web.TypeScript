@@ -123,12 +123,12 @@ module NetZ_Web
 
         private inicializarCssMain(): void
         {
-            if (AppWeb.i.srvHttp == null)
+            if (AppWebBase.i.srvHttp == null)
             {
                 return;
             }
 
-            AppWeb.i.srvHttp.atualizarCssMain();
+            AppWebBase.i.srvHttp.atualizarCssMain();
         }
 
         private pesquisar(): void

@@ -161,7 +161,7 @@ module NetZ_Web
 
         constructor()
         {
-            super(null, AppWeb.i.pag);
+            super(null, AppWebBase.i.pag);
 
             this.strId = this.strClassNome;
         }
@@ -353,17 +353,17 @@ module NetZ_Web
 
         private getPagPrincipal(): PagPrincipal
         {
-            if (AppWeb.i.pag == null)
+            if (AppWebBase.i.pag == null)
             {
                 return null;
             }
 
-            if (!(AppWeb.i.pag instanceof PagPrincipal))
+            if (!(AppWebBase.i.pag instanceof PagPrincipal))
             {
                 return null;
             }
 
-            return (<PagPrincipal>AppWeb.i.pag);
+            return (<PagPrincipal>AppWebBase.i.pag);
         }
 
         private getSrcJs(): string
@@ -433,12 +433,12 @@ module NetZ_Web
 
         private inicializarCssMain(): void
         {
-            if (AppWeb.i.srvHttp == null)
+            if (AppWebBase.i.srvHttp == null)
             {
                 return;
             }
 
-            AppWeb.i.srvHttp.atualizarCssMain();
+            AppWebBase.i.srvHttp.atualizarCssMain();
         }
 
         private inicializarJnlCadastroPai(): void
@@ -483,7 +483,7 @@ module NetZ_Web
 
         public salvar(): void
         {
-            if (AppWeb.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDb == null)
             {
                 throw ServerAjaxDb.STR_EXCEPTION_NULL;
             }
@@ -502,7 +502,7 @@ module NetZ_Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); });
             objInterlocutor.addJsn(this.tblWeb);
 
-            AppWeb.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
         private salvarSucesso(objInterlocutor: Interlocutor): void

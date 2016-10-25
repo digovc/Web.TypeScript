@@ -23,7 +23,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="AppWeb.ts" />
+    <TypeScriptCompile Include="AppWebBase.ts" />
     <TypeScriptCompile Include="database\DataCell.ts" />
     <TypeScriptCompile Include="database\DataRow.ts" />
     <TypeScriptCompile Include="database\DataTable.ts" />
@@ -78,6 +78,9 @@
     <TypeScriptCompile Include="html\componente\tab\TabHtml.ts" />
     <TypeScriptCompile Include="html\componente\tab\TabItem.ts" />
     <TypeScriptCompile Include="html\componente\tab\TabItemHead.ts" />
+    <TypeScriptCompile Include="html\componente\treeview\OnTreeViewNodeClickListener.ts" />
+    <TypeScriptCompile Include="html\componente\treeview\TreeViewHtml.ts" />
+    <TypeScriptCompile Include="html\componente\treeview\TreeViewNode.ts" />
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
     <TypeScriptCompile Include="Keys.ts" />
@@ -147,7 +150,7 @@
     <TypeScriptCompile Include="server\ajax\ServerAjaxDb.ts" />
     <TypeScriptCompile Include="server\Interlocutor.ts" />
     <TypeScriptCompile Include="server\ServerBase.ts" />
-    <TypeScriptCompile Include="server\ServerHttp.ts" />
+    <TypeScriptCompile Include="server\ServerHttpBase.ts" />
     <TypeScriptCompile Include="server\websocket\InterlocutorWs.ts" />
     <TypeScriptCompile Include="typedefinition\chart.d.ts" />
     <TypeScriptCompile Include="typedefinition\google.maps.d.ts" />
