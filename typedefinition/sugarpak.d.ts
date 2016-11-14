@@ -4,9 +4,10 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 /** SugarPak.js - Domain Specific Language -  Syntactical Sugar */
-declare namespace sugarpak {
-
-    export interface IAddOrientation {
+declare namespace sugarpak
+{
+    export interface IAddOrientation
+    {
         millisecond(): Date;
         second(): Date;
         minute(): Date;
@@ -26,7 +27,8 @@ declare namespace sugarpak {
         years(): Date;
     }
 
-    export interface IOrientation extends IAddOrientation {
+    export interface IOrientation extends IAddOrientation
+    {
         monday(): Date;
         tuesday(): Date;
         wednesday(): Date;
@@ -70,7 +72,8 @@ declare namespace sugarpak {
         dec(): Date;
     }
 
-    export interface IPredicate {
+    export interface IPredicate
+    {
         today(): boolean;
 
         monday(): boolean;
@@ -120,11 +123,10 @@ declare namespace sugarpak {
         week(date?: Date): boolean;
         month(date?: Date): boolean;
         year(date?: Date): boolean;
-
-
     }
 
-    export interface IDatePartComparer {
+    export interface IDatePartComparer
+    {
         millisecond(date?: Date): boolean;
         second(date?: Date): boolean;
         minute(date?: Date): boolean;
@@ -135,14 +137,16 @@ declare namespace sugarpak {
         year(date?: Date): boolean;
     }
 
-    export interface IDateElementEvaluator {
+    export interface IDateElementEvaluator
+    {
         ago(): Date;
         before(): Date;
         fromNow(): Date;
         after(): Date;
     }
 
-    export interface IDateElement {
+    export interface IDateElement
+    {
         millisecond(): IDateElementEvaluator;
         second(): IDateElementEvaluator;
         minute(): IDateElementEvaluator;
@@ -162,23 +166,25 @@ declare namespace sugarpak {
         years(): IDateElementEvaluator;
     }
 
-    export interface IDateLiteral extends ITimeLiteral {
+    export interface IDateLiteral extends ITimeLiteral
+    {
         day: number;
         week: number;
         month: number;
         year: number;
     }
 
-    export interface ITimeLiteral {
+    export interface ITimeLiteral
+    {
         millisecond: number;
         second: number;
         minute: number;
         hour: number;
     }
-
 }
 
-interface Date {
+interface Date
+{
     add(n: number): sugarpak.IAddOrientation;
     at(time: string): Date;
     at(time: sugarpak.ITimeLiteral): Date;
@@ -199,7 +205,8 @@ interface Date {
     toObject(): sugarpak.IDateLiteral;
 }
 
-interface DateConstructor {
+interface DateConstructor
+{
     /** Contains the day-of-week value for Monday */
     MONDAY: number;
     /** Contains the day-of-week value for Tuesday */
@@ -263,9 +270,9 @@ interface DateConstructor {
     oct(): Date;
     nov(): Date;
     dec(): Date;
-
 }
 
-interface Number extends sugarpak.IDateElement {
+interface Number extends sugarpak.IDateElement
+{
     // extend the Number type with all the Date goodness
 }

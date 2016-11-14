@@ -174,7 +174,6 @@ module NetZ_Web
 
         private abrirConsultaSucessoHistorico(): void
         {
-
         }
 
         public abrirFiltroCadastro(intFiltroId: number): void

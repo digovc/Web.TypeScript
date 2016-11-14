@@ -59,7 +59,6 @@ module NetZ_Web
             return this._strLayoutFixo;
         }
 
-
         // #endregion Atributos
 
         // #region Construtores

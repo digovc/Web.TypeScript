@@ -3,7 +3,8 @@
 // Definitions by: Steve Fenton <https://github.com/Steve-Fenton>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-interface ChartDataSet {
+interface ChartDataSet
+{
     label: string;
     fillColor: string;
     strokeColor: string;
@@ -20,19 +21,22 @@ interface ChartDataSet {
     data: number[];
 }
 
-interface LinearChartData {
+interface LinearChartData
+{
     labels: string[];
     datasets: ChartDataSet[];
 }
 
-interface CircularChartData {
+interface CircularChartData
+{
     value: number;
     color?: string;
     highlight?: string;
     label?: string;
 }
 
-interface ChartSettings {
+interface ChartSettings
+{
     animation?: boolean;
     animationSteps?: number;
     animationEasing?: string;
@@ -75,16 +79,18 @@ interface ChartSettings {
     onAnimationComplete?: () => any;
 }
 
-interface ChartOptions extends ChartSettings {
+interface ChartOptions extends ChartSettings
+{
     scaleShowGridLines?: boolean;
     scaleGridLineColor?: string;
     scaleGridLineWidth?: number;
     scaleShowHorizontalLines?: boolean;
-    scaleShowVerticalLines?: boolean;  
+    scaleShowVerticalLines?: boolean;
     legendTemplate?: string;
 }
 
-interface PointsAtEvent {
+interface PointsAtEvent
+{
     value: number;
     label: string;
     datasetLabel: string;
@@ -96,7 +102,8 @@ interface PointsAtEvent {
     y: number;
 }
 
-interface ChartInstance {
+interface ChartInstance
+{
     clear: () => void;
     stop: () => void;
     resize: () => void;
@@ -105,14 +112,16 @@ interface ChartInstance {
     generateLegend: () => string;
 }
 
-interface LinearInstance extends ChartInstance {
+interface LinearInstance extends ChartInstance
+{
     getPointsAtEvent: (event: Event) => PointsAtEvent[];
     update: () => void;
     addData: (valuesArray: number[], label: string) => void;
     removeData: (index?: number) => void;
 }
 
-interface CircularInstance extends ChartInstance {
+interface CircularInstance extends ChartInstance
+{
     getSegmentsAtEvent: (event: Event) => {}[];
     update: () => void;
     addData: (valuesArray: CircularChartData, index?: number) => void;
@@ -120,7 +129,8 @@ interface CircularInstance extends ChartInstance {
     segments: Array<CircularChartData>;
 }
 
-interface LineChartOptions extends ChartOptions {
+interface LineChartOptions extends ChartOptions
+{
     bezierCurve?: boolean;
     bezierCurveTension?: number;
     pointDot?: boolean;
@@ -132,15 +142,17 @@ interface LineChartOptions extends ChartOptions {
     datasetFill?: boolean;
 }
 
-interface BarChartOptions extends ChartOptions {
+interface BarChartOptions extends ChartOptions
+{
     scaleBeginAtZero?: boolean;
     barShowStroke?: boolean;
     barStrokeWidth?: number;
     barValueSpacing?: number;
-    barDatasetSpacing?: number;  
+    barDatasetSpacing?: number;
 }
 
-interface RadarChartOptions extends ChartSettings {
+interface RadarChartOptions extends ChartSettings
+{
     scaleShowLine?: boolean;
     angleShowLineOut?: boolean;
     scaleShowLabels?: boolean;
@@ -161,7 +173,8 @@ interface RadarChartOptions extends ChartSettings {
     legendTemplate?: string;
 }
 
-interface PolarAreaChartOptions extends ChartSettings {
+interface PolarAreaChartOptions extends ChartSettings
+{
     scaleShowLabelBackdrop?: boolean;
     scaleBackdropColor?: string;
     scaleBeginAtZero?: boolean;
@@ -178,7 +191,8 @@ interface PolarAreaChartOptions extends ChartSettings {
     legendTemplate?: string;
 }
 
-interface PieChartOptions extends ChartSettings {
+interface PieChartOptions extends ChartSettings
+{
     segmentShowStroke?: boolean;
     segmentStrokeColor?: string;
     segmentStrokeWidth?: number;
@@ -190,7 +204,8 @@ interface PieChartOptions extends ChartSettings {
     legendTemplate?: string;
 }
 
-interface Chart {
+interface Chart
+{
     Line(data: LinearChartData, options?: LineChartOptions): LinearInstance;
     Bar(data: LinearChartData, options?: BarChartOptions): LinearInstance;
     Radar(data: LinearChartData, options?: RadarChartOptions): LinearInstance;
