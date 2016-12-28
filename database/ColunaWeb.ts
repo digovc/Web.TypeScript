@@ -37,10 +37,6 @@ module NetZ_Web
 
         public get intValor(): number
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 this._intValor = parseInt(this.strValor);
@@ -49,34 +45,15 @@ module NetZ_Web
             {
                 return 0;
             }
-            finally
-            {
-            }
-            // #endregion Ações
 
             return this._intValor;
         }
 
         public set intValor(intValor: number)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._intValor = intValor;
 
-            // #region Ações
-            try
-            {
-                this._intValor = intValor;
-
-                this.strValor = this._intValor.toString();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.strValor = this._intValor.toString();
         }
 
         public get strCritica(): string
@@ -107,22 +84,7 @@ module NetZ_Web
         {
             super();
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.strNome = strNome;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.strNome = strNome;
         }
 
         // #endregion Construtores

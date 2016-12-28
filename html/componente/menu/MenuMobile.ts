@@ -20,27 +20,12 @@ module NetZ_Web
 
         private get arrMmi(): Array<MenuMobileItem>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrMmi != null)
+            {
+                return this._arrMmi;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrMmi != null)
-                {
-                    return this._arrMmi;
-                }
-
-                this._arrMmi = new Array<MenuMobileItem>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrMmi = new Array<MenuMobileItem>();
 
             return this._arrMmi;
         }
@@ -59,36 +44,21 @@ module NetZ_Web
 
         public addMniFilho(mmiFilho: MenuMobileItem): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (mmiFilho == null)
             {
-                if (mmiFilho == null)
-                {
-                    return;
-                }
-
-                if (this.arrMmi.indexOf(mmiFilho) > -1)
-                {
-                    return;
-                }
-
-                this.arrMmi.push(mmiFilho);
-
-                mmiFilho.mnm = this;
-
-                mmiFilho.iniciar();
+                return;
             }
-            catch (ex)
+
+            if (this.arrMmi.indexOf(mmiFilho) > -1)
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            this.arrMmi.push(mmiFilho);
+
+            mmiFilho.mnm = this;
+
+            mmiFilho.iniciar();
         }
 
         protected inicializar(): void

@@ -130,10 +130,6 @@ module NetZ_Web
 
         public onClick(objSender: Object, arg: any): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -155,18 +151,10 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onRowClick(objSender: Object, tagGridRow: GridRow): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 this.atualizarBtnAlterarBooVisivel()
@@ -175,10 +163,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos

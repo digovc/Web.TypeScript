@@ -207,10 +207,6 @@ module NetZ_Web
 
         public onClick(objSender: Object, arg: JQueryEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 this.dispose();
@@ -219,10 +215,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos

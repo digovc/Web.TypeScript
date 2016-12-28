@@ -423,10 +423,6 @@ module NetZ_Web
 
         public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -440,10 +436,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos

@@ -130,119 +130,59 @@ module NetZ_Web
 
         private get arrEvtOnClickListener(): Array<OnClickListener>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrEvtOnClickListener != null)
+            {
+                return this._arrEvtOnClickListener;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrEvtOnClickListener != null)
-                {
-                    return this._arrEvtOnClickListener;
-                }
-
-                this._arrEvtOnClickListener = new Array<OnClickListener>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrEvtOnClickListener = new Array<OnClickListener>();
 
             return this._arrEvtOnClickListener;
         }
 
         public addEvtOnClickListener(evtOnClickListener: OnClickListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnClickListener == null)
             {
-                if (evtOnClickListener == null)
-                {
-                    return;
-                }
-
-                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) > -1)
-                {
-                    return;
-                }
-
-                if (this.arrEvtOnClickListener.length == 0)
-                {
-                    $(document).click((arg) => this.dispararEvtOnClickListener(arg));
-                }
-
-                this.arrEvtOnClickListener.push(evtOnClickListener);
+                return;
             }
-            catch (ex)
+
+            if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) > -1)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            if (this.arrEvtOnClickListener.length == 0)
             {
+                $(document).click((arg) => this.dispararEvtOnClickListener(arg));
             }
-            // #endregion Ações
+
+            this.arrEvtOnClickListener.push(evtOnClickListener);
         }
 
         public removeEvtOnClickListener(evtOnClickListener: OnClickListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnClickListener == null)
             {
-                if (evtOnClickListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) == -1)
-                {
-                    return;
-                }
+            if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) == -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evtOnClickListener), 1);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evtOnClickListener), 1);
         }
 
         private dispararEvtOnClickListener(arg: JQueryEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.arrEvtOnClickListener.length == 0)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.arrEvtOnClickListener.length == 0)
-                {
-                    return;
-                }
-
-                this.arrEvtOnClickListener.forEach((evt) => { evt.onClick(this, arg); });
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnClickListener.forEach((evt) => { evt.onClick(this, arg); });
         }
 
         // #endregion Evento OnClickListener

@@ -55,65 +55,36 @@ module NetZ_Web
 
         private set enmTipo(enmTipo: EnmTipo)
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            this._enmTipo = enmTipo;
 
-            // #region Ações
-            try
-            {
-                this._enmTipo = enmTipo;
-                this.booBloquearTela = !(this._enmTipo == EnmTipo.POSITIVA);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.booBloquearTela = !(this._enmTipo == EnmTipo.POSITIVA);
         }
 
         private get srcIcon(): string
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this._srcIcon != null)
             {
-                if (this._srcIcon != null)
-                {
-                    return this._srcIcon;
-                }
-
-                switch (this.enmTipo)
-                {
-                    case EnmTipo.LOAD:
-                        this._srcIcon = "res/media/gif/load.gif";
-                        break;
-
-                    case EnmTipo.NEGATIVA:
-                        this._srcIcon = "res/media/png/info_negativa.png";
-                        break;
-
-                    case EnmTipo.POSITIVA:
-                        this._srcIcon = "res/media/png/info_positiva.png";
-                        break;
-
-                    default:
-                        this._srcIcon = "res/media/png/info_alerta.png";
-                        break;
-                }
+                return this._srcIcon;
             }
-            catch (ex)
+
+            switch (this.enmTipo)
             {
-                throw ex;
+                case EnmTipo.LOAD:
+                    this._srcIcon = "res/media/gif/load.gif";
+                    break;
+
+                case EnmTipo.NEGATIVA:
+                    this._srcIcon = "res/media/png/info_negativa.png";
+                    break;
+
+                case EnmTipo.POSITIVA:
+                    this._srcIcon = "res/media/png/info_positiva.png";
+                    break;
+
+                default:
+                    this._srcIcon = "res/media/png/info_alerta.png";
+                    break;
             }
-            finally
-            {
-            }
-            // #endregion Ações
 
             return this._srcIcon;
         }
@@ -206,24 +177,9 @@ module NetZ_Web
         {
             super(null); // TODO: Passar o id do elemento desta mensagem, e não apenas null.
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                this.enmTipo = enmTipo;
-                this.strTitulo = strTitulo;
-                this.strMsg = strMsg;
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.enmTipo = enmTipo;
+            this.strTitulo = strTitulo;
+            this.strMsg = strMsg;
         }
 
         // #endregion Construtores
@@ -232,209 +188,128 @@ module NetZ_Web
 
         public esconder(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            $(document).find("#msg").fadeOut("slow");
 
-            // #region Ações
-            try
+            window.setTimeout(() =>
             {
-                $(document).find("#msg").fadeOut("slow");
-
-                window.setTimeout(() =>
-                {
-                    $(document).find("#msg").remove();
-                    MensagemOld.booMensagemVisivel = false;
-                }, 400);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+                $(document).find("#msg").remove();
+                MensagemOld.booMensagemVisivel = false;
+            }, 400);
         }
 
         protected montarLayout(): void
         {
             super.montarLayout();
 
-            // #region Variáveis
-
             var tag: string;
 
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            switch (this.enmTipo)
             {
-                switch (this.enmTipo)
-                {
-                    case 0:
-                        tag = MensagemOld.strEstruturaAlerta;
-                        break;
+                case 0:
+                    tag = MensagemOld.strEstruturaAlerta;
+                    break;
 
-                    case 1:
-                        tag = MensagemOld.strEstruturaLoad;
-                        break;
+                case 1:
+                    tag = MensagemOld.strEstruturaLoad;
+                    break;
 
-                    case 2:
-                        tag = MensagemOld.strEstruturaNegativa;
-                        break;
+                case 2:
+                    tag = MensagemOld.strEstruturaNegativa;
+                    break;
 
-                    default:
-                        tag = MensagemOld.strEstruturaPositiva;
-                        break;
-                }
-
-                tag = tag.replace("_titulo", this.strTitulo);
-                tag = tag.replace("_msg", this.strMsg);
-
-                this.montarLayoutBloquearTela(tag)
+                default:
+                    tag = MensagemOld.strEstruturaPositiva;
+                    break;
             }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            tag = tag.replace("_titulo", this.strTitulo);
+            tag = tag.replace("_msg", this.strMsg);
+
+            this.montarLayoutBloquearTela(tag)
         }
 
         public mostrar(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            var intTempo: number;
 
-            // #region Ações
-            try
+            if (!AppWebBase.i.booEmFoco)
             {
-                var intTempo: number;
+                this.mostrarNotificacao();
+                return;
+            }
 
-                if (!AppWebBase.i.booEmFoco)
-                {
-                    this.mostrarNotificacao();
-                    return;
-                }
-
-                if (MensagemOld.booMensagemVisivel)
-                {
-                    window.setTimeout(function ()
-                    {
-                        this.mostrar();
-                    }, 250);
-
-                    return;
-                }
-
-                intTempo = this.strMsg.length * 75;
-
-                //$("body").append(this.toHtml());
-
-                MensagemOld.booMensagemVisivel = true;
-
-                if (this.enmTipo == EnmTipo.LOAD)
-                {
-                    return;
-                }
-
+            if (MensagemOld.booMensagemVisivel)
+            {
                 window.setTimeout(function ()
                 {
-                    this.esconder();
-                }, intTempo);
+                    this.mostrar();
+                }, 250);
+
+                return;
             }
-            catch (ex)
+
+            intTempo = this.strMsg.length * 75;
+
+            //$("body").append(this.toHtml());
+
+            MensagemOld.booMensagemVisivel = true;
+
+            if (this.enmTipo == EnmTipo.LOAD)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            window.setTimeout(function ()
             {
-            }
-            // #endregion Ações
+                this.esconder();
+            }, intTempo);
         }
 
         private montarLayoutBloquearTela(tag: string): void
         {
-            // #region Variáveis
-
-            var tagJq: any;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (!this.booBloquearTela)
             {
-                if (!this.booBloquearTela)
-                {
-                    //this.strEstrutura = tag;
-                    return;
-                }
+                //this.strEstrutura = tag;
+                return;
+            }
 
-                tagJq = $(tag).css("background", "rgba(0, 0, 0, 0.15)");
-                tagJq = $(tag).css("bottom", "0px");
+            var tagJq: any = $(tag).css("background", "rgba(0, 0, 0, 0.15)");
 
-                //this.strEstrutura = tagJq[0];
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            tagJq = $(tag).css("bottom", "0px");
+
+            //this.strEstrutura = tagJq[0];
         }
 
         public mostrarNotificacao(): void
         {
-            // #region Variáveis
-
-            var objNotificacaoOption: any;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (MensagemOld.strMensagemUltima == (this.strTitulo + this.strMsg))
             {
-                if (MensagemOld.strMensagemUltima == (this.strTitulo + this.strMsg))
-                {
-                    return;
-                }
+                return;
+            }
 
-                objNotificacaoOption = {
-                    body: this.strMsg,
-                    icon: this.srcIcon,
-                }
+            var objNotificacaoOption = {
+                body: this.strMsg,
+                icon: this.srcIcon,
+            }
 
-                if (!("Notification" in window))
+            if (!("Notification" in window))
+            {
+                return;
+            } else if (Notification.permission === "granted")
+            {
+                new Notification(this.strTitulo, objNotificacaoOption);
+            } else if (Notification.permission !== 'denied')
+            {
+                Notification.requestPermission(function (permission: any)
                 {
-                    return;
-                } else if (Notification.permission === "granted")
-                {
-                    new Notification(this.strTitulo, objNotificacaoOption);
-                } else if (Notification.permission !== 'denied')
-                {
-                    Notification.requestPermission(function (permission: any)
+                    if (permission === "granted")
                     {
-                        if (permission === "granted")
-                        {
-                            new Notification(this.getStrTitulo(), objNotificacaoOption);
-                        }
-                    });
-                }
+                        new Notification(this.getStrTitulo(), objNotificacaoOption);
+                    }
+                });
+            }
 
-                MensagemOld.strMensagemUltima = (this.strTitulo + this.strMsg);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            MensagemOld.strMensagemUltima = (this.strTitulo + this.strMsg);
         }
 
         // #endregion Métodos

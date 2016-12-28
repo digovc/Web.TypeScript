@@ -22,109 +22,48 @@ module NetZ_Web
 
         private get btnEnter(): PainelAcao
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._btnEntrar != null)
+            {
+                return this._btnEntrar;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._btnEntrar != null)
-                {
-                    return this._btnEntrar;
-                }
-
-                this._btnEntrar = new PainelAcao("btnEntrar");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._btnEntrar = new PainelAcao("btnEntrar");
 
             return this._btnEntrar;
         }
 
         private get cmpLogin(): CampoAlfanumerico
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._cmpLogin != null)
+            {
+                return this._cmpLogin;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._cmpLogin != null)
-                {
-                    return this._cmpLogin;
-                }
-
-                this._cmpLogin = new CampoAlfanumerico("cmpLogin");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._cmpLogin = new CampoAlfanumerico("cmpLogin");
 
             return this._cmpLogin;
         }
 
         private get cmpSenha(): CampoSenha
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._cmpSenha != null)
+            {
+                return this._cmpSenha;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._cmpSenha != null)
-                {
-                    return this._cmpSenha;
-                }
-
-                this._cmpSenha = new CampoSenha("cmpSenha");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._cmpSenha = new CampoSenha("cmpSenha");
 
             return this._cmpSenha;
         }
 
         private get frmLogin(): FormHtml
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._frmLogin != null)
+            {
+                return this._frmLogin;
+            }
 
-            // #region Ações
-            try
-            {
-                super.inicializar
-                if (this._frmLogin != null)
-                {
-                    return this._frmLogin;
-                }
-
-                this._frmLogin = new FormHtml("frmLogin");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._frmLogin = new FormHtml("frmLogin");
 
             return this._frmLogin;
         }
@@ -138,24 +77,9 @@ module NetZ_Web
 
         private validarDados(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
-            {
-                if (Utils.getBooStrVazia(this.cmpLogin.tagInput.strValor))
-                {
-                }
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
+            if (Utils.getBooStrVazia(this.cmpLogin.tagInput.strValor))
             {
             }
-            // #endregion Ações
         }
 
         // #endregion Métodos

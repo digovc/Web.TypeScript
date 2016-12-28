@@ -660,10 +660,6 @@ module NetZ_Web
 
         public onDisposed(objSender: Object): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 if (objSender instanceof JnlCadastro)
@@ -675,10 +671,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #region Evento OnSalvarListener

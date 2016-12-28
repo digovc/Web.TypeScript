@@ -19,27 +19,12 @@ module NetZ_Web
 
         protected get btnAcaoPrincipal(): BotaoCircular
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._btnAcaoPrincipal != null)
+            {
+                return this._btnAcaoPrincipal;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._btnAcaoPrincipal != null)
-                {
-                    return this._btnAcaoPrincipal;
-                }
-
-                this._btnAcaoPrincipal = new BotaoCircular("btnAcaoPrincipal");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._btnAcaoPrincipal = new BotaoCircular("btnAcaoPrincipal");
 
             return this._btnAcaoPrincipal;
         }

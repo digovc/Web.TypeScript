@@ -294,10 +294,6 @@ module NetZ_Web
 
         public onClick(objSender: Object, arg: any): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -311,18 +307,10 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onMouseDown(objSender: Object, arg: JQueryMouseEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -336,18 +324,10 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -361,18 +341,10 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onMouseMove(objSender: Object, arg: JQueryMouseEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -386,18 +358,10 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onMouseUp(objSender: Object, arg: JQueryMouseEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -411,10 +375,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos

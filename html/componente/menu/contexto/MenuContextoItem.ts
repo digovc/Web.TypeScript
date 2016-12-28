@@ -120,10 +120,6 @@ module NetZ_Web
 
         public onClick(objSender: Object, arg: JQueryEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 this.processarClick(arg);
@@ -132,18 +128,10 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 this.jq.css("background-color", Utils.STR_VAZIA);
@@ -153,18 +141,10 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onMouseOver(objSender: Object, arg: JQueryMouseEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 this.jq.css("background-color", AppWebBase.i.objTema.corMouseOver);
@@ -174,10 +154,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos

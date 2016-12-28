@@ -386,10 +386,6 @@ module NetZ_Web
 
         public onClick(objSender: Object, arg: JQueryEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -403,20 +399,12 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onFocusIn(objSender: Object): void
         {
             super.onFocusIn(objSender);
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -430,20 +418,12 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onFocusOut(objSender: Object): void
         {
             super.onFocusOut(objSender);
 
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -457,18 +437,10 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (arg.keyCode)
@@ -486,10 +458,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos

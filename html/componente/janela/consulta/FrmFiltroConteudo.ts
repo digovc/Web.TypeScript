@@ -169,10 +169,6 @@ module NetZ_Web
 
         public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 if (objSender instanceof CampoHtml)
@@ -184,10 +180,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos

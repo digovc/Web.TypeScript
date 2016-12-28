@@ -356,10 +356,6 @@ module NetZ_Web
 
         public onDisposed(objSender: Object): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 if (objSender instanceof JnlConsulta)
@@ -372,10 +368,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos

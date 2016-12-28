@@ -424,10 +424,6 @@ module NetZ_Web
 
         public onGridMenuClick(objSender: Object, arg: OnGridMenuClickArg): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 if (objSender != this.tagGridHtml)
@@ -446,18 +442,10 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         public onRowClick(objSender: Object, tagGridRow: GridRow): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -471,10 +459,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos

@@ -243,10 +243,6 @@ module NetZ_Web
 
         public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 if (this.strValor == this.jq.val())
@@ -260,10 +256,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #region Evento OnEnterListener
@@ -272,119 +264,59 @@ module NetZ_Web
 
         private get arrEvtOnEnterListener(): Array<OnEnterListener>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrEvtOnEnterListener != null)
+            {
+                return this._arrEvtOnEnterListener;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrEvtOnEnterListener != null)
-                {
-                    return this._arrEvtOnEnterListener;
-                }
-
-                this._arrEvtOnEnterListener = new Array<OnEnterListener>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrEvtOnEnterListener = new Array<OnEnterListener>();
 
             return this._arrEvtOnEnterListener;
         }
 
         public addEvtOnEnterListener(evtOnEnterListener: OnEnterListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnEnterListener == null)
             {
-                if (evtOnEnterListener == null)
-                {
-                    return;
-                }
-
-                if (this.arrEvtOnEnterListener.indexOf(evtOnEnterListener) > -1)
-                {
-                    return;
-                }
-
-                if (this.arrEvtOnEnterListener.length == 0)
-                {
-                    this.jq.focusin(() => this.dispararEvtOnEnterListener());
-                }
-
-                this.arrEvtOnEnterListener.push(evtOnEnterListener);
+                return;
             }
-            catch (ex)
+
+            if (this.arrEvtOnEnterListener.indexOf(evtOnEnterListener) > -1)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            if (this.arrEvtOnEnterListener.length == 0)
             {
+                this.jq.focusin(() => this.dispararEvtOnEnterListener());
             }
-            // #endregion Ações
+
+            this.arrEvtOnEnterListener.push(evtOnEnterListener);
         }
 
         public removeEvtOnEnterListener(evtOnEnterListener: OnEnterListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnEnterListener == null)
             {
-                if (evtOnEnterListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnEnterListener.indexOf(evtOnEnterListener) == -1)
-                {
-                    return;
-                }
+            if (this.arrEvtOnEnterListener.indexOf(evtOnEnterListener) == -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnEnterListener.splice(this.arrEvtOnEnterListener.indexOf(evtOnEnterListener), 1);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnEnterListener.splice(this.arrEvtOnEnterListener.indexOf(evtOnEnterListener), 1);
         }
 
         private dispararEvtOnEnterListener(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.arrEvtOnEnterListener.length == 0)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.arrEvtOnEnterListener.length == 0)
-                {
-                    return;
-                }
-
-                this.arrEvtOnEnterListener.forEach((evt) => { evt.onEnter(this); });
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnEnterListener.forEach((evt) => { evt.onEnter(this); });
         }
 
         // #endregion Evento OnEnterListener
@@ -395,119 +327,59 @@ module NetZ_Web
 
         private get arrEvtOnLeaveListener(): Array<OnLeaveListener>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrEvtOnLeaveListener != null)
+            {
+                return this._arrEvtOnLeaveListener;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrEvtOnLeaveListener != null)
-                {
-                    return this._arrEvtOnLeaveListener;
-                }
-
-                this._arrEvtOnLeaveListener = new Array<OnLeaveListener>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrEvtOnLeaveListener = new Array<OnLeaveListener>();
 
             return this._arrEvtOnLeaveListener;
         }
 
         public addEvtOnLeaveListener(evtOnLeaveListener: OnLeaveListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnLeaveListener == null)
             {
-                if (evtOnLeaveListener == null)
-                {
-                    return;
-                }
-
-                if (this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener) > -1)
-                {
-                    return;
-                }
-
-                if (this.arrEvtOnLeaveListener.length == 0)
-                {
-                    this.jq.focusout((arg) => this.dispararEvtOnLeaveListener(arg));
-                }
-
-                this.arrEvtOnLeaveListener.push(evtOnLeaveListener);
+                return;
             }
-            catch (ex)
+
+            if (this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener) > -1)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            if (this.arrEvtOnLeaveListener.length == 0)
             {
+                this.jq.focusout((arg) => this.dispararEvtOnLeaveListener(arg));
             }
-            // #endregion Ações
+
+            this.arrEvtOnLeaveListener.push(evtOnLeaveListener);
         }
 
         public removeEvtOnLeaveListener(evtOnLeaveListener: OnLeaveListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnLeaveListener == null)
             {
-                if (evtOnLeaveListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener) == -1)
-                {
-                    return;
-                }
+            if (this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener) == -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnLeaveListener.splice(this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener), 1);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnLeaveListener.splice(this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener), 1);
         }
 
         private dispararEvtOnLeaveListener(arg: JQueryEventObject): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.arrEvtOnLeaveListener.length == 0)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.arrEvtOnLeaveListener.length == 0)
-                {
-                    return;
-                }
-
-                this.arrEvtOnLeaveListener.forEach((evt) => { evt.onLeave(this); });
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnLeaveListener.forEach((evt) => { evt.onLeave(this); });
         }
 
         // #endregion Evento OnLeaveListener
@@ -518,136 +390,73 @@ module NetZ_Web
 
         private get arrEvtOnValorAlteradoListener(): Array<OnValorAlteradoListener>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrEvtOnValorAlteradoListener != null)
+            {
+                return this._arrEvtOnValorAlteradoListener;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrEvtOnValorAlteradoListener != null)
-                {
-                    return this._arrEvtOnValorAlteradoListener;
-                }
-
-                this._arrEvtOnValorAlteradoListener = new Array<OnValorAlteradoListener>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrEvtOnValorAlteradoListener = new Array<OnValorAlteradoListener>();
 
             return this._arrEvtOnValorAlteradoListener;
         }
 
         public addEvtOnValorAlteradoListener(evtOnValorAlteradoListener: OnValorAlteradoListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnValorAlteradoListener == null)
             {
-                if (evtOnValorAlteradoListener == null)
-                {
-                    return;
-                }
-
-                if (this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener) > -1)
-                {
-                    return;
-                }
-
-                if (this.arrEvtOnValorAlteradoListener.length == 0)
-                {
-                    this.jq.change((arg) => { this.strValor = this.jq.val(); });
-                    this.jq.keyup((arg) =>
-                    {
-                        this.strValor = this.jq.val();
-                    });
-                }
-
-                this.arrEvtOnValorAlteradoListener.push(evtOnValorAlteradoListener);
+                return;
             }
-            catch (ex)
+
+            if (this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener) > -1)
             {
-                throw ex;
+                return;
             }
-            finally
+
+            if (this.arrEvtOnValorAlteradoListener.length == 0)
             {
+                this.jq.change((arg) => { this.strValor = this.jq.val(); });
+                this.jq.keyup((arg) =>
+                {
+                    this.strValor = this.jq.val();
+                });
             }
-            // #endregion Ações
+
+            this.arrEvtOnValorAlteradoListener.push(evtOnValorAlteradoListener);
         }
 
         public removeEvtOnValorAlteradoListener(evtOnValorAlteradoListener: OnValorAlteradoListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnValorAlteradoListener == null)
             {
-                if (evtOnValorAlteradoListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener) == -1)
-                {
-                    return;
-                }
+            if (this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener) == -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnValorAlteradoListener.splice(this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener), 1);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnValorAlteradoListener.splice(this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener), 1);
         }
 
         private dispararEvtOnValorAlteradoListener(): void
         {
-            // #region Variáveis
-
-            var arg: OnValorAlteradoArg;
-
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (this.arrEvtOnValorAlteradoListener.length == 0)
             {
-                if (this.arrEvtOnValorAlteradoListener.length == 0)
-                {
-                    return;
-                }
-
-                if (this.strValor == this.strValorAnterior)
-                {
-                    return;
-                }
-
-                arg = new OnValorAlteradoArg();
-
-                arg.strValor = this.strValor;
-                arg.strValorAnterior = this.strValorAnterior;
-
-                this.arrEvtOnValorAlteradoListener.forEach((evt) => { evt.onValorAlterado(this, arg); });
+                return;
             }
-            catch (ex)
+
+            if (this.strValor == this.strValorAnterior)
             {
-                throw ex;
+                return;
             }
-            finally
-            {
-            }
-            // #endregion Ações
+
+            var arg = new OnValorAlteradoArg();
+
+            arg.strValor = this.strValor;
+            arg.strValorAnterior = this.strValorAnterior;
+
+            this.arrEvtOnValorAlteradoListener.forEach((evt) => { evt.onValorAlterado(this, arg); });
         }
 
         // #endregion Evento OnValorAlteradoListener

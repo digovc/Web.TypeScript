@@ -126,114 +126,54 @@ module NetZ_Web
 
         private get arrEvtOnDisposedListener(): Array<OnDisposedListener>
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._arrEvtOnDisposedListener != null)
+            {
+                return this._arrEvtOnDisposedListener;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._arrEvtOnDisposedListener != null)
-                {
-                    return this._arrEvtOnDisposedListener;
-                }
-
-                this._arrEvtOnDisposedListener = new Array<OnDisposedListener>();
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._arrEvtOnDisposedListener = new Array<OnDisposedListener>();
 
             return this._arrEvtOnDisposedListener;
         }
 
         public addEvtOnDisposedListener(evtOnDisposedListener: OnDisposedListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnDisposedListener == null)
             {
-                if (evtOnDisposedListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener) > -1)
-                {
-                    return;
-                }
+            if (this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener) > -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnDisposedListener.push(evtOnDisposedListener);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnDisposedListener.push(evtOnDisposedListener);
         }
 
         private dispararEvtOnDisposedListener(): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this.arrEvtOnDisposedListener.length == 0)
+            {
+                return;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this.arrEvtOnDisposedListener.length == 0)
-                {
-                    return;
-                }
-
-                this.arrEvtOnDisposedListener.forEach((evt) => { evt.onDisposed(this); });
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnDisposedListener.forEach((evt) => { evt.onDisposed(this); });
         }
 
         public removerEvtOnDisposedListener(evtOnDisposedListener: OnDisposedListener): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
-            try
+            if (evtOnDisposedListener == null)
             {
-                if (evtOnDisposedListener == null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener) == -1)
-                {
-                    return;
-                }
+            if (this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener) == -1)
+            {
+                return;
+            }
 
-                this.arrEvtOnDisposedListener.splice(this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener), 1);
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this.arrEvtOnDisposedListener.splice(this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener), 1);
         }
 
         // #endregion Evento OnDisposedListener

@@ -24,81 +24,36 @@ module NetZ_Web
 
         private get btnMenu(): BotaoActionBar
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._btnMenu != null)
+            {
+                return this._btnMenu;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._btnMenu != null)
-                {
-                    return this._btnMenu;
-                }
-
-                this._btnMenu = new BotaoActionBar(this.strId + "_btnMenu");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._btnMenu = new BotaoActionBar(this.strId + "_btnMenu");
 
             return this._btnMenu;
         }
 
         private get btnVoltar(): BotaoActionBar
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._btnVoltar != null)
+            {
+                return this._btnVoltar;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._btnVoltar != null)
-                {
-                    return this._btnVoltar;
-                }
-
-                this._btnVoltar = new BotaoActionBar(this.strId + "_btnVoltar");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._btnVoltar = new BotaoActionBar(this.strId + "_btnVoltar");
 
             return this._btnVoltar;
         }
 
         private get divTitulo(): Div
         {
-            // #region Variáveis
-            // #endregion Variáveis
+            if (this._divTitulo != null)
+            {
+                return this._divTitulo;
+            }
 
-            // #region Ações
-            try
-            {
-                if (this._divTitulo != null)
-                {
-                    return this._divTitulo;
-                }
-
-                this._divTitulo = new Div(this.strId + "_divTitulo");
-            }
-            catch (ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            // #endregion Ações
+            this._divTitulo = new Div(this.strId + "_divTitulo");
 
             return this._divTitulo;
         }
@@ -147,10 +102,6 @@ module NetZ_Web
 
         public onClick(objSender: Object, arg: any): void
         {
-            // #region Variáveis
-            // #endregion Variáveis
-
-            // #region Ações
             try
             {
                 switch (objSender)
@@ -172,10 +123,6 @@ module NetZ_Web
             {
                 new Erro("Erro desconhecido.", ex);
             }
-            finally
-            {
-            }
-            // #endregion Ações
         }
 
         // #endregion Eventos
