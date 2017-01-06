@@ -58,7 +58,7 @@ module NetZ_Web
 
         protected getUrl(): string
         {
-            var urlResultado = "http://_server_host:_server_port";
+            var urlResultado = "_server_host:_server_port";
 
             urlResultado = urlResultado.replace("_server_host", window.location.hostname);
             urlResultado = urlResultado.replace("_server_port", String(this.intPort));

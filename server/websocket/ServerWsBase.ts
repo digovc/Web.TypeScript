@@ -8,7 +8,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ServerWs extends ServerBase
+    export abstract class ServerWsBase extends ServerBase
     {
         // #region Constantes
 
@@ -62,6 +62,11 @@ module NetZ_Web
             }
 
             this.objWebSocket.send(objInterlocutor.toJson());
+        }
+
+        protected getIntPort(): number
+        {
+            return 443;
         }
 
         private getObjWebSocket(): WebSocket
@@ -118,7 +123,7 @@ module NetZ_Web
 
             switch (objInterlocutor.strMetodo)
             {
-                case ServerWs.STR_METODO_WELCOME:
+                case ServerWsBase.STR_METODO_WELCOME:
                     Notificacao.notificar("O servidor de notificação enviou olá.", Notificacao_EnmTipo.INFO);
                     return true;
             }
@@ -154,7 +159,7 @@ module NetZ_Web
         {
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerWs.STR_METODO_WELCOME;
+            objInterlocutor.strMetodo = ServerWsBase.STR_METODO_WELCOME;
 
             this.enviar(objInterlocutor);
         }

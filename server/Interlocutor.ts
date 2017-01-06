@@ -191,6 +191,21 @@ module NetZ_Web
             this.arrFncSucesso.forEach((fnc) => { fnc(this); });
         }
 
+        public getObjJson<T>(): T
+        {
+            if (this.objData == null)
+            {
+                return null;
+            }
+
+            if (Utils.getBooStrVazia(this.objData.toString()))
+            {
+                return null;
+            }
+
+            return JSON.parse(this.objData.toString());
+        }
+
         private mostrarMsgErro(strTextStatus: string, strErrorThrown: string): void
         {
             if (strTextStatus == "error")

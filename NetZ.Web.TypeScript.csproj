@@ -157,7 +157,7 @@
     <TypeScriptCompile Include="typedefinition\jquery.d.ts" />
     <TypeScriptCompile Include="typedefinition\sugarpak.d.ts" />
     <TypeScriptCompile Include="Utils.ts" />
-    <TypeScriptCompile Include="server\websocket\ServerWs.ts" />
+    <TypeScriptCompile Include="server\websocket\ServerWsBase.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
