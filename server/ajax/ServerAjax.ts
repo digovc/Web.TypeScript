@@ -74,7 +74,7 @@ module NetZ_Web
                 error: ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objInterlocutor.processarOnErro(strTextStatus, strErrorThrown); }),
                 method: "POST",
                 success: ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objInterlocutor.processarOnSucesso(anyData); }),
-                url: this.url,
+                url: ("http://" + this.url),
                 xhrFields: { withCredentials: true },
             }
 
