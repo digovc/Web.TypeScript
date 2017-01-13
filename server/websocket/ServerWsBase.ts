@@ -12,7 +12,7 @@ module NetZ_Web
     {
         // #region Constantes
 
-        private static get STR_METODO_WELCOME(): string { return "WELCOME" };
+        public static get STR_METODO_WELCOME(): string { return "WELCOME" };
 
         // #endregion Constantes
 
@@ -90,9 +90,9 @@ module NetZ_Web
 
         private inicializarObjWebSocket(): void
         {
-            if ((<any>window)['WebSocket'] == null)
+            if ((<any>window)["WebSocket"] == null)
             {
-                throw "Não foi encontrado suporte de WebSockets. Utilize um navegador mais moderno (Chrome, Firefox, Opera).";
+                throw "Não foi encontrado suporte para WebSockets. Utilize um navegador mais moderno (Chrome, Firefox, Edge).";
             }
 
             if (this.objWebSocket == null)
@@ -100,25 +100,19 @@ module NetZ_Web
                 return;
             }
 
+            this.objWebSocket.binaryType = "arraybuffer";
+
             this.objWebSocket.onclose = ((arg: CloseEvent) => { this.processarOnCloseLocal(arg); });
             this.objWebSocket.onerror = ((arg: Event) => { this.processarOnErrorLocal(arg); });
             this.objWebSocket.onmessage = ((arg: MessageEvent) => { this.processarOnMessageLocal(arg); });
-            this.objWebSocket.onopen = ((arg: Event) => { this.processarOnOpen(arg); });
+            this.objWebSocket.onopen = ((arg: Event) => { this.processarOnOpenLocal(arg); });
         }
 
-        private processarOnCloseLocal(arg: CloseEvent): void
-        {
-        }
-
-        private processarOnErrorLocal(arg: Event): void
-        {
-        }
-
-        protected processarOnMessage(objInterlocutor: Interlocutor): boolean
+        protected processarMessage(objInterlocutor: Interlocutor): boolean
         {
             if (objInterlocutor == null)
             {
-                return;
+                return false;
             }
 
             switch (objInterlocutor.strMetodo)
@@ -129,6 +123,14 @@ module NetZ_Web
             }
 
             return false;
+        }
+
+        private processarOnCloseLocal(arg: CloseEvent): void
+        {
+        }
+
+        private processarOnErrorLocal(arg: Event): void
+        {
         }
 
         private processarOnMessageLocal(arg: MessageEvent): void
@@ -147,15 +149,10 @@ module NetZ_Web
 
             objInterlocutor.copiarDados(JSON.parse(arg.data));
 
-            if (Utils.getBooStrVazia(objInterlocutor.strMetodo))
-            {
-                return;
-            }
-
-            this.processarOnMessage(objInterlocutor);
+            this.processarMessage(objInterlocutor);
         }
 
-        protected processarOnOpen(arg: Event): void
+        protected processarOnOpenLocal(arg: Event): void
         {
             var objInterlocutor = new Interlocutor();
 
