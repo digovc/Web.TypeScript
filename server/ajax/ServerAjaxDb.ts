@@ -44,7 +44,7 @@ module NetZ_Web
 
         // #region Métodos
 
-        protected getIntPort(): number
+        protected getIntPorta(): number
         {
             return 8081;
         }

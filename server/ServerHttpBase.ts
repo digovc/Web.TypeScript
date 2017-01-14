@@ -36,6 +36,12 @@ module NetZ_Web
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor()
+        {
+            super("Servidor HTTP");
+        }
+
         // #endregion Construtores
 
         // #region Métodos

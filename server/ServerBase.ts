@@ -26,7 +26,7 @@ module NetZ_Web
                 return this._intPort;
             }
 
-            this._intPort = this.getIntPort();
+            this._intPort = this.getIntPorta();
 
             return this._intPort;
         }
@@ -47,11 +47,18 @@ module NetZ_Web
 
         // #region Construtores
 
+        constructor(strNome: string)
+        {
+            super();
+
+            this.strNome = strNome;
+        }
+
         // #endregion Construtores
 
         // #region Métodos
 
-        protected getIntPort(): number
+        protected getIntPorta(): number
         {
             return 8080;
         }

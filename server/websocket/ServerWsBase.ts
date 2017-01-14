@@ -64,7 +64,7 @@ module NetZ_Web
             this.objWebSocket.send(objInterlocutor.toJson());
         }
 
-        protected getIntPort(): number
+        protected getIntPorta(): number
         {
             return 443;
         }
@@ -100,8 +100,6 @@ module NetZ_Web
                 return;
             }
 
-            this.objWebSocket.binaryType = "arraybuffer";
-
             this.objWebSocket.onclose = ((arg: CloseEvent) => { this.processarOnCloseLocal(arg); });
             this.objWebSocket.onerror = ((arg: Event) => { this.processarOnErrorLocal(arg); });
             this.objWebSocket.onmessage = ((arg: MessageEvent) => { this.processarOnMessageLocal(arg); });
@@ -118,7 +116,7 @@ module NetZ_Web
             switch (objInterlocutor.strMetodo)
             {
                 case ServerWsBase.STR_METODO_WELCOME:
-                    Notificacao.notificar("O servidor de notificação enviou olá.", Notificacao_EnmTipo.INFO);
+                    Notificacao.notificar('O servidor "_srv_nome" enviou olá.'.replace("_srv_nome", this.strNome), Notificacao_EnmTipo.INFO);
                     return true;
             }
 
