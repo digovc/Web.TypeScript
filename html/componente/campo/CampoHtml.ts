@@ -35,6 +35,7 @@ module NetZ_Web
         private _intRegistroId: number;
         private _strCritica: string;
         private _strDica: string;
+        private _strTitulo: string;
         private _tagInput: Input;
 
         protected get booEmFoco(): boolean
@@ -211,6 +212,25 @@ module NetZ_Web
             this._strDica = strDica;
         }
 
+        public get strTitulo(): string
+        {
+            this._strTitulo = this.divTitulo.strConteudo;
+
+            return this._strTitulo;
+        }
+
+        public set strTitulo(strTitulo: string)
+        {
+            if (this._strTitulo == strTitulo)
+            {
+                return;
+            }
+
+            this._strTitulo = strTitulo;
+
+            this.setStrTitulo(this._strTitulo);
+        }
+
         public get tagInput(): Input
         {
             if (this._tagInput != null)
@@ -362,6 +382,11 @@ module NetZ_Web
 
         private getClnWeb(): ColunaWeb
         {
+            if (NetZ_Web["ColunaWeb"] == null)
+            {
+                return;
+            }
+
             var clnWebResultado = new ColunaWeb(this.jq.attr("cln_web_nome"));
 
             if (this.jq == null)
@@ -497,6 +522,12 @@ module NetZ_Web
             this.tagInput.addEvtOnFocusInListener(this);
             this.tagInput.addEvtOnFocusOutListener(this);
             this.tagInput.addEvtOnValorAlteradoListener(this);
+        }
+
+        private setStrTitulo(strTitulo: string): void
+        {
+            this.divTitulo.strConteudo = strTitulo;
+            this.tagInput.strPlaceholder = strTitulo;
         }
 
         public validarDados(): boolean

@@ -140,14 +140,14 @@ module NetZ_Web
             return this._arrEvtOnClickListener;
         }
 
-        public addEvtOnClickListener(evtOnClickListener: OnClickListener): void
+        public addEvtOnClickListener(evt: OnClickListener): void
         {
-            if (evtOnClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) > -1)
+            if (this.arrEvtOnClickListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -157,7 +157,7 @@ module NetZ_Web
                 $(document).click((arg) => this.dispararEvtOnClickListener(arg));
             }
 
-            this.arrEvtOnClickListener.push(evtOnClickListener);
+            this.arrEvtOnClickListener.push(evt);
         }
 
         public removeEvtOnClickListener(evtOnClickListener: OnClickListener): void
@@ -203,14 +203,14 @@ module NetZ_Web
             return this._arrEvtOnKeyDownListener;
         }
 
-        public addEvtOnKeyDownListener(evtOnKeyDownListener: OnKeyDownListener): void
+        public addEvtOnKeyDownListener(evt: OnKeyDownListener): void
         {
-            if (evtOnKeyDownListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener) > -1)
+            if (this.arrEvtOnKeyDownListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -220,7 +220,7 @@ module NetZ_Web
                 $(document).keydown((arg) => this.dispararEvtOnKeyDownListener(arg));
             }
 
-            this.arrEvtOnKeyDownListener.push(evtOnKeyDownListener);
+            this.arrEvtOnKeyDownListener.push(evt);
         }
 
         private dispararEvtOnKeyDownListener(arg: JQueryKeyEventObject): void
@@ -241,19 +241,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnKeyDownListener(evtOnKeyDownListener: OnKeyDownListener): void
+        public removerEvtOnKeyDownListener(evt: OnKeyDownListener): void
         {
-            if (evtOnKeyDownListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener) == -1)
+            if (this.arrEvtOnKeyDownListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener), 1);
+            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnKeyDownListener
@@ -274,14 +274,14 @@ module NetZ_Web
             return this._arrEvtOnKeyUpListener;
         }
 
-        public addEvtOnKeyUpListener(evtOnKeyUpListener: OnKeyUpListener): void
+        public addEvtOnKeyUpListener(evt: OnKeyUpListener): void
         {
-            if (evtOnKeyUpListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyUpListener.indexOf(evtOnKeyUpListener) > -1)
+            if (this.arrEvtOnKeyUpListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -291,7 +291,7 @@ module NetZ_Web
                 $(document).keyup((arg) => this.dispararEvtOnKeyUpListener(arg));
             }
 
-            this.arrEvtOnKeyUpListener.push(evtOnKeyUpListener);
+            this.arrEvtOnKeyUpListener.push(evt);
         }
 
         private dispararEvtOnKeyUpListener(arg: JQueryKeyEventObject): void
@@ -312,19 +312,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnKeyUpListener(evtOnKeyUpListener: OnKeyUpListener): void
+        public removerEvtOnKeyUpListener(evt: OnKeyUpListener): void
         {
-            if (evtOnKeyUpListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyUpListener.indexOf(evtOnKeyUpListener) == -1)
+            if (this.arrEvtOnKeyUpListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnKeyUpListener.splice(this.arrEvtOnKeyUpListener.indexOf(evtOnKeyUpListener), 1);
+            this.arrEvtOnKeyUpListener.splice(this.arrEvtOnKeyUpListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnKeyUpListener

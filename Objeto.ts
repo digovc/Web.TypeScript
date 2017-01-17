@@ -136,19 +136,19 @@ module NetZ_Web
             return this._arrEvtOnDisposedListener;
         }
 
-        public addEvtOnDisposedListener(evtOnDisposedListener: OnDisposedListener): void
+        public addEvtOnDisposedListener(evt: OnDisposedListener): void
         {
-            if (evtOnDisposedListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener) > -1)
+            if (this.arrEvtOnDisposedListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnDisposedListener.push(evtOnDisposedListener);
+            this.arrEvtOnDisposedListener.push(evt);
         }
 
         private dispararEvtOnDisposedListener(): void
@@ -161,19 +161,19 @@ module NetZ_Web
             this.arrEvtOnDisposedListener.forEach((evt) => { evt.onDisposed(this); });
         }
 
-        public removerEvtOnDisposedListener(evtOnDisposedListener: OnDisposedListener): void
+        public removerEvtOnDisposedListener(evt: OnDisposedListener): void
         {
-            if (evtOnDisposedListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener) == -1)
+            if (this.arrEvtOnDisposedListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnDisposedListener.splice(this.arrEvtOnDisposedListener.indexOf(evtOnDisposedListener), 1);
+            this.arrEvtOnDisposedListener.splice(this.arrEvtOnDisposedListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnDisposedListener

@@ -117,19 +117,19 @@ module NetZ_Web
             return this._arrEvtOnTreeViewNodeClickListener;
         }
 
-        public addEvtOnTreeViewNodeClickListener(evtOnTreeViewNodeClickListener: OnTreeViewNodeClickListener): void
+        public addEvtOnTreeViewNodeClickListener(evt: OnTreeViewNodeClickListener): void
         {
-            if (evtOnTreeViewNodeClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnTreeViewNodeClickListener.indexOf(evtOnTreeViewNodeClickListener) > -1)
+            if (this.arrEvtOnTreeViewNodeClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnTreeViewNodeClickListener.push(evtOnTreeViewNodeClickListener);
+            this.arrEvtOnTreeViewNodeClickListener.push(evt);
         }
 
         private dispararEvtOnTreeViewNodeClickListener(tvn: TreeViewNode, arg: JQueryEventObject): void
@@ -150,19 +150,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnTreeViewNodeClickListener(evtOnTreeViewNodeClickListener: OnTreeViewNodeClickListener): void
+        public removerEvtOnTreeViewNodeClickListener(evt: OnTreeViewNodeClickListener): void
         {
-            if (evtOnTreeViewNodeClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnTreeViewNodeClickListener.indexOf(evtOnTreeViewNodeClickListener) == -1)
+            if (this.arrEvtOnTreeViewNodeClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnTreeViewNodeClickListener.splice(this.arrEvtOnTreeViewNodeClickListener.indexOf(evtOnTreeViewNodeClickListener), 1);
+            this.arrEvtOnTreeViewNodeClickListener.splice(this.arrEvtOnTreeViewNodeClickListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnTreeViewNodeClickListener

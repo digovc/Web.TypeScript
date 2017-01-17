@@ -12,7 +12,7 @@ module NetZ_Web
     {
         // #region Constantes
 
-        public static get STR_METODO_WELCOME(): string { return "WELCOME" };
+        public static get STR_METODO_WELCOME(): string { return "metodo_welcome" };
 
         // #endregion Constantes
 
@@ -116,11 +116,16 @@ module NetZ_Web
             switch (objInterlocutor.strMetodo)
             {
                 case ServerWsBase.STR_METODO_WELCOME:
-                    Notificacao.notificar('O servidor "_srv_nome" enviou olá.'.replace("_srv_nome", this.strNome), Notificacao_EnmTipo.INFO);
+                    this.processarMensagemWelcome();
                     return true;
             }
 
             return false;
+        }
+
+        protected processarMensagemWelcome(): void
+        {
+            Notificacao.notificar('O servidor "_srv_nome" enviou olá.'.replace("_srv_nome", this.strNome), Notificacao_EnmTipo.INFO);
         }
 
         private processarOnCloseLocal(arg: CloseEvent): void

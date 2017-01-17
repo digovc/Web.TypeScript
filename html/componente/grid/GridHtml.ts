@@ -323,19 +323,19 @@ module NetZ_Web
             return this._arrEvtOnGridMenuClickListener;
         }
 
-        public addEvtOnGridMenuClickListener(evtOnGridMenuClickListener: OnGridMenuClickListener): void
+        public addEvtOnGridMenuClickListener(evt: OnGridMenuClickListener): void
         {
-            if (evtOnGridMenuClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnGridMenuClickListener.indexOf(evtOnGridMenuClickListener) > -1)
+            if (this.arrEvtOnGridMenuClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnGridMenuClickListener.push(evtOnGridMenuClickListener);
+            this.arrEvtOnGridMenuClickListener.push(evt);
         }
 
         private dispararEvtOnGridMenuClickListener(arg: OnGridMenuClickArg): void
@@ -361,19 +361,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnGridMenuClickListener(evtOnGridMenuClickListener: OnGridMenuClickListener): void
+        public removerEvtOnGridMenuClickListener(evt: OnGridMenuClickListener): void
         {
-            if (evtOnGridMenuClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnGridMenuClickListener.indexOf(evtOnGridMenuClickListener) == -1)
+            if (this.arrEvtOnGridMenuClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnGridMenuClickListener.splice(this.arrEvtOnGridMenuClickListener.indexOf(evtOnGridMenuClickListener), 1);
+            this.arrEvtOnGridMenuClickListener.splice(this.arrEvtOnGridMenuClickListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnGridMenuClickListener
@@ -394,19 +394,19 @@ module NetZ_Web
             return this._arrEvtOnRowClickListener;
         }
 
-        public addEvtOnRowClickListener(evtOnRowClickListener: OnRowClickListener): void
+        public addEvtOnRowClickListener(evt: OnRowClickListener): void
         {
-            if (evtOnRowClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowClickListener.indexOf(evtOnRowClickListener) > -1)
+            if (this.arrEvtOnRowClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowClickListener.push(evtOnRowClickListener);
+            this.arrEvtOnRowClickListener.push(evt);
         }
 
         public dispararEvtOnRowClickListener(tagGridRow: GridRow): void
@@ -424,19 +424,19 @@ module NetZ_Web
             this.arrEvtOnRowClickListener.forEach((evt) => { evt.onRowClick(this, tagGridRow); });
         }
 
-        public removerEvtOnRowClickListener(evtOnRowClickListener: OnRowClickListener): void
+        public removerEvtOnRowClickListener(evt: OnRowClickListener): void
         {
-            if (evtOnRowClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowClickListener.indexOf(evtOnRowClickListener) == -1)
+            if (this.arrEvtOnRowClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowClickListener.splice(this.arrEvtOnRowClickListener.indexOf(evtOnRowClickListener), 1);
+            this.arrEvtOnRowClickListener.splice(this.arrEvtOnRowClickListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnRowClickListener
@@ -457,19 +457,19 @@ module NetZ_Web
             return this._arrEvtOnRowDoubleClickListener;
         }
 
-        public addEvtOnRowDoubleClickListener(evtOnRowDoubleClickListener: OnRowDoubleClickListener): void
+        public addEvtOnRowDoubleClickListener(evt: OnRowDoubleClickListener): void
         {
-            if (evtOnRowDoubleClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) > -1)
+            if (this.arrEvtOnRowDoubleClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowDoubleClickListener.push(evtOnRowDoubleClickListener);
+            this.arrEvtOnRowDoubleClickListener.push(evt);
         }
 
         public dispararEvtOnRowDoubleClickListener(tagGridRow: GridRow): void
@@ -487,19 +487,19 @@ module NetZ_Web
             this.arrEvtOnRowDoubleClickListener.forEach((evt) => { evt.onRowDoubleClick(this, tagGridRow); });
         }
 
-        public removerEvtOnRowDoubleClickListener(evtOnRowDoubleClickListener: OnRowDoubleClickListener): void
+        public removerEvtOnRowDoubleClickListener(evt: OnRowDoubleClickListener): void
         {
-            if (evtOnRowDoubleClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener) == -1)
+            if (this.arrEvtOnRowDoubleClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowDoubleClickListener.splice(this.arrEvtOnRowDoubleClickListener.indexOf(evtOnRowDoubleClickListener), 1);
+            this.arrEvtOnRowDoubleClickListener.splice(this.arrEvtOnRowDoubleClickListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnRowDoubleClickListener

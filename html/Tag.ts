@@ -363,14 +363,14 @@ module NetZ_Web
             return this._arrEvtOnClickListener;
         }
 
-        public addEvtOnClickListener(evtOnClickListener: OnClickListener): void
+        public addEvtOnClickListener(evt: OnClickListener): void
         {
-            if (evtOnClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) > -1)
+            if (this.arrEvtOnClickListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -380,22 +380,22 @@ module NetZ_Web
                 this.jq.click((arg) => { this.dispararEvtOnClickListener(arg) });
             }
 
-            this.arrEvtOnClickListener.push(evtOnClickListener);
+            this.arrEvtOnClickListener.push(evt);
         }
 
-        public removeEvtOnClickListener(evtOnClickListener: OnClickListener): void
+        public removeEvtOnClickListener(evt: OnClickListener): void
         {
-            if (evtOnClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnClickListener.indexOf(evtOnClickListener) == -1)
+            if (this.arrEvtOnClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evtOnClickListener), 1);
+            this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evt), 1);
         }
 
         private dispararEvtOnClickListener(arg: JQueryEventObject): void
@@ -428,14 +428,14 @@ module NetZ_Web
             return this._arrEvtOnClickRightListener;
         }
 
-        public addEvtOnClickRightListener(evtOnClickRightListener: OnClickRightListener): void
+        public addEvtOnClickRightListener(evt: OnClickRightListener): void
         {
-            if (evtOnClickRightListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnClickRightListener.indexOf(evtOnClickRightListener) > -1)
+            if (this.arrEvtOnClickRightListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -455,7 +455,7 @@ module NetZ_Web
                 });
             }
 
-            this.arrEvtOnClickRightListener.push(evtOnClickRightListener);
+            this.arrEvtOnClickRightListener.push(evt);
         }
 
         private dispararEvtOnClickRightListener(arg: JQueryMouseEventObject): void
@@ -486,19 +486,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnClickRightListener(evtOnClickRightListener: OnClickRightListener): void
+        public removerEvtOnClickRightListener(evt: OnClickRightListener): void
         {
-            if (evtOnClickRightListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnClickRightListener.indexOf(evtOnClickRightListener) == -1)
+            if (this.arrEvtOnClickRightListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnClickRightListener.splice(this.arrEvtOnClickRightListener.indexOf(evtOnClickRightListener), 1);
+            this.arrEvtOnClickRightListener.splice(this.arrEvtOnClickRightListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnClickRightListener
@@ -519,14 +519,14 @@ module NetZ_Web
             return this._arrEvtOnDoubleClickListener;
         }
 
-        public addEvtOnDoubleClickListener(evtOnDoubleClickListener: OnDoubleClickListener): void
+        public addEvtOnDoubleClickListener(evt: OnDoubleClickListener): void
         {
-            if (evtOnDoubleClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener) > -1)
+            if (this.arrEvtOnDoubleClickListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -536,7 +536,7 @@ module NetZ_Web
                 this.jq.dblclick((arg) => this.dispararEvtOnDoubleClickListener(arg));
             }
 
-            this.arrEvtOnDoubleClickListener.push(evtOnDoubleClickListener);
+            this.arrEvtOnDoubleClickListener.push(evt);
         }
 
         private dispararEvtOnDoubleClickListener(arg: JQueryEventObject): void
@@ -549,19 +549,19 @@ module NetZ_Web
             this.arrEvtOnDoubleClickListener.forEach((evt) => { evt.onDoubleClick(this, arg); });
         }
 
-        public removerEvtOnDoubleClickListener(evtOnDoubleClickListener: OnDoubleClickListener): void
+        public removerEvtOnDoubleClickListener(evt: OnDoubleClickListener): void
         {
-            if (evtOnDoubleClickListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener) == -1)
+            if (this.arrEvtOnDoubleClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnDoubleClickListener.splice(this.arrEvtOnDoubleClickListener.indexOf(evtOnDoubleClickListener), 1);
+            this.arrEvtOnDoubleClickListener.splice(this.arrEvtOnDoubleClickListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnDoubleClickListener
@@ -582,14 +582,14 @@ module NetZ_Web
             return this._arrEvtOnFocusInListener;
         }
 
-        public addEvtOnFocusInListener(evtOnFocusInListener: OnFocusInListener): void
+        public addEvtOnFocusInListener(evt: OnFocusInListener): void
         {
-            if (evtOnFocusInListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener) > -1)
+            if (this.arrEvtOnFocusInListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -599,7 +599,7 @@ module NetZ_Web
                 this.jq.focusin((arg) => this.dispararEvtOnFocusInListener(arg));
             }
 
-            this.arrEvtOnFocusInListener.push(evtOnFocusInListener);
+            this.arrEvtOnFocusInListener.push(evt);
         }
 
         private dispararEvtOnFocusInListener(arg: JQueryEventObject): void
@@ -620,19 +620,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnFocusInListener(evtOnFocusInListener: OnFocusInListener): void
+        public removerEvtOnFocusInListener(evt: OnFocusInListener): void
         {
-            if (evtOnFocusInListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener) == -1)
+            if (this.arrEvtOnFocusInListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener), 1);
+            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnFocusInListener
@@ -653,14 +653,14 @@ module NetZ_Web
             return this._arrEvtOnFocusOutListener;
         }
 
-        public addEvtOnFocusOutListener(evtOnFocusOutListener: OnFocusOutListener): void
+        public addEvtOnFocusOutListener(evt: OnFocusOutListener): void
         {
-            if (evtOnFocusOutListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener) > -1)
+            if (this.arrEvtOnFocusOutListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -670,7 +670,7 @@ module NetZ_Web
                 this.jq.focusout((arg) => this.dispararEvtOnFocusOutListener(arg));
             }
 
-            this.arrEvtOnFocusOutListener.push(evtOnFocusOutListener);
+            this.arrEvtOnFocusOutListener.push(evt);
         }
 
         private dispararEvtOnFocusOutListener(arg: JQueryEventObject): void
@@ -691,19 +691,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnFocusOutListener(evtOnFocusOutListener: OnFocusOutListener): void
+        public removerEvtOnFocusOutListener(evt: OnFocusOutListener): void
         {
-            if (evtOnFocusOutListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener) == -1)
+            if (this.arrEvtOnFocusOutListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener), 1);
+            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnFocusOutListener
@@ -724,14 +724,14 @@ module NetZ_Web
             return this._arrEvtOnKeyDownListener;
         }
 
-        public addEvtOnKeyDownListener(evtOnKeyDownListener: OnKeyDownListener): void
+        public addEvtOnKeyDownListener(evt: OnKeyDownListener): void
         {
-            if (evtOnKeyDownListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener) > -1)
+            if (this.arrEvtOnKeyDownListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -741,7 +741,7 @@ module NetZ_Web
                 this.jq.keydown((arg) => this.dispararEvtOnKeyDownListener(arg));
             }
 
-            this.arrEvtOnKeyDownListener.push(evtOnKeyDownListener);
+            this.arrEvtOnKeyDownListener.push(evt);
         }
 
         private dispararEvtOnKeyDownListener(arg: JQueryKeyEventObject): void
@@ -762,19 +762,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnKeyDownListener(evtOnKeyDownListener: OnKeyDownListener): void
+        public removerEvtOnKeyDownListener(evt: OnKeyDownListener): void
         {
-            if (evtOnKeyDownListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener) == -1)
+            if (this.arrEvtOnKeyDownListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evtOnKeyDownListener), 1);
+            this.arrEvtOnKeyDownListener.splice(this.arrEvtOnKeyDownListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnKeyDownListener
@@ -795,14 +795,14 @@ module NetZ_Web
             return this._arrEvtOnKeyPressListener;
         }
 
-        public addEvtOnKeyPressListener(evtOnKeyPressListener: OnKeyPressListener): void
+        public addEvtOnKeyPressListener(evt: OnKeyPressListener): void
         {
-            if (evtOnKeyPressListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyPressListener.indexOf(evtOnKeyPressListener) > -1)
+            if (this.arrEvtOnKeyPressListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -812,7 +812,7 @@ module NetZ_Web
                 this.jq.keypress((arg) => this.dispararEvtOnKeyPressListener(arg));
             }
 
-            this.arrEvtOnKeyPressListener.push(evtOnKeyPressListener);
+            this.arrEvtOnKeyPressListener.push(evt);
         }
 
         private dispararEvtOnKeyPressListener(arg: JQueryKeyEventObject): void
@@ -833,19 +833,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnKeyPressListener(evtOnKeyPressListener: OnKeyPressListener): void
+        public removerEvtOnKeyPressListener(evt: OnKeyPressListener): void
         {
-            if (evtOnKeyPressListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyPressListener.indexOf(evtOnKeyPressListener) == -1)
+            if (this.arrEvtOnKeyPressListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnKeyPressListener.splice(this.arrEvtOnKeyPressListener.indexOf(evtOnKeyPressListener), 1);
+            this.arrEvtOnKeyPressListener.splice(this.arrEvtOnKeyPressListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnKeyPressListener
@@ -866,14 +866,14 @@ module NetZ_Web
             return this._arrEvtOnKeyUpListener;
         }
 
-        public addEvtOnKeyUpListener(evtOnKeyUpListener: OnKeyUpListener): void
+        public addEvtOnKeyUpListener(evt: OnKeyUpListener): void
         {
-            if (evtOnKeyUpListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyUpListener.indexOf(evtOnKeyUpListener) > -1)
+            if (this.arrEvtOnKeyUpListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -883,7 +883,7 @@ module NetZ_Web
                 this.jq.keyup((arg) => this.dispararEvtOnKeyUpListener(arg));
             }
 
-            this.arrEvtOnKeyUpListener.push(evtOnKeyUpListener);
+            this.arrEvtOnKeyUpListener.push(evt);
         }
 
         private dispararEvtOnKeyUpListener(arg: JQueryKeyEventObject): void
@@ -904,19 +904,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnKeyUpListener(evtOnKeyUpListener: OnKeyUpListener): void
+        public removerEvtOnKeyUpListener(evt: OnKeyUpListener): void
         {
-            if (evtOnKeyUpListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnKeyUpListener.indexOf(evtOnKeyUpListener) == -1)
+            if (this.arrEvtOnKeyUpListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnKeyUpListener.splice(this.arrEvtOnKeyUpListener.indexOf(evtOnKeyUpListener), 1);
+            this.arrEvtOnKeyUpListener.splice(this.arrEvtOnKeyUpListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnKeyUpListener
@@ -937,14 +937,14 @@ module NetZ_Web
             return this._arrEvtOnMouseDownListener;
         }
 
-        public addEvtOnMouseDownListener(evtOnMouseDownListener: OnMouseDownListener): void
+        public addEvtOnMouseDownListener(evt: OnMouseDownListener): void
         {
-            if (evtOnMouseDownListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseDownListener.indexOf(evtOnMouseDownListener) > -1)
+            if (this.arrEvtOnMouseDownListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -954,7 +954,7 @@ module NetZ_Web
                 this.jq.mousedown((arg) => { this.dispararEvtOnMouseDownListener(arg); });
             }
 
-            this.arrEvtOnMouseDownListener.push(evtOnMouseDownListener);
+            this.arrEvtOnMouseDownListener.push(evt);
         }
 
         private dispararEvtOnMouseDownListener(arg: JQueryMouseEventObject): void
@@ -975,19 +975,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnMouseDownListener(evtOnMouseDownListener: OnMouseDownListener): void
+        public removerEvtOnMouseDownListener(evt: OnMouseDownListener): void
         {
-            if (evtOnMouseDownListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseDownListener.indexOf(evtOnMouseDownListener) == -1)
+            if (this.arrEvtOnMouseDownListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnMouseDownListener.splice(this.arrEvtOnMouseDownListener.indexOf(evtOnMouseDownListener), 1);
+            this.arrEvtOnMouseDownListener.splice(this.arrEvtOnMouseDownListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnMouseDownListener
@@ -1008,14 +1008,14 @@ module NetZ_Web
             return this._arrEvtOnMouseLeaveListener;
         }
 
-        public addEvtOnMouseLeaveListener(evtOnMouseLeaveListener: OnMouseLeaveListener): void
+        public addEvtOnMouseLeaveListener(evt: OnMouseLeaveListener): void
         {
-            if (evtOnMouseLeaveListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener) > -1)
+            if (this.arrEvtOnMouseLeaveListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -1025,7 +1025,7 @@ module NetZ_Web
                 this.jq.mouseleave((arg) => this.dispararEvtOnMouseLeaveListener(arg));
             }
 
-            this.arrEvtOnMouseLeaveListener.push(evtOnMouseLeaveListener);
+            this.arrEvtOnMouseLeaveListener.push(evt);
         }
 
         private dispararEvtOnMouseLeaveListener(arg: JQueryMouseEventObject): void
@@ -1038,19 +1038,19 @@ module NetZ_Web
             this.arrEvtOnMouseLeaveListener.forEach((evt) => { evt.onMouseLeave(this, arg); });
         }
 
-        public removerEvtOnMouseLeaveListener(evtOnMouseLeaveListener: OnMouseLeaveListener): void
+        public removerEvtOnMouseLeaveListener(evt: OnMouseLeaveListener): void
         {
-            if (evtOnMouseLeaveListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener) == -1)
+            if (this.arrEvtOnMouseLeaveListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnMouseLeaveListener.splice(this.arrEvtOnMouseLeaveListener.indexOf(evtOnMouseLeaveListener), 1);
+            this.arrEvtOnMouseLeaveListener.splice(this.arrEvtOnMouseLeaveListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnMouseLeaveListener
@@ -1071,14 +1071,14 @@ module NetZ_Web
             return this._arrEvtOnMouseMoveListener;
         }
 
-        public addEvtOnMouseMoveListener(evtOnMouseMoveListener: OnMouseMoveListener): void
+        public addEvtOnMouseMoveListener(evt: OnMouseMoveListener): void
         {
-            if (evtOnMouseMoveListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseMoveListener.indexOf(evtOnMouseMoveListener) > -1)
+            if (this.arrEvtOnMouseMoveListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -1088,7 +1088,7 @@ module NetZ_Web
                 this.jq.mousemove((arg) => { this.dispararEvtOnMouseMoveListener(arg); });
             }
 
-            this.arrEvtOnMouseMoveListener.push(evtOnMouseMoveListener);
+            this.arrEvtOnMouseMoveListener.push(evt);
         }
 
         private dispararEvtOnMouseMoveListener(arg: JQueryMouseEventObject): void
@@ -1109,19 +1109,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnMouseMoveListener(evtOnMouseMoveListener: OnMouseMoveListener): void
+        public removerEvtOnMouseMoveListener(evt: OnMouseMoveListener): void
         {
-            if (evtOnMouseMoveListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseMoveListener.indexOf(evtOnMouseMoveListener) == -1)
+            if (this.arrEvtOnMouseMoveListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnMouseMoveListener.splice(this.arrEvtOnMouseMoveListener.indexOf(evtOnMouseMoveListener), 1);
+            this.arrEvtOnMouseMoveListener.splice(this.arrEvtOnMouseMoveListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnMouseMoveListener
@@ -1142,14 +1142,14 @@ module NetZ_Web
             return this._arrEvtOnMouseOverListener;
         }
 
-        public addEvtOnMouseOverListener(evtOnMouseOverListener: OnMouseOverListener): void
+        public addEvtOnMouseOverListener(evt: OnMouseOverListener): void
         {
-            if (evtOnMouseOverListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener) > -1)
+            if (this.arrEvtOnMouseOverListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -1159,7 +1159,7 @@ module NetZ_Web
                 this.jq.mouseover((arg) => this.dispararEvtOnMouseOverListener(arg));
             }
 
-            this.arrEvtOnMouseOverListener.push(evtOnMouseOverListener);
+            this.arrEvtOnMouseOverListener.push(evt);
         }
 
         private dispararEvtOnMouseOverListener(arg: JQueryMouseEventObject): void
@@ -1172,19 +1172,19 @@ module NetZ_Web
             this.arrEvtOnMouseOverListener.forEach((evt) => { evt.onMouseOver(this, arg); });
         }
 
-        public removerEvtOnMouseOverListener(evtOnMouseOverListener: OnMouseOverListener): void
+        public removerEvtOnMouseOverListener(evt: OnMouseOverListener): void
         {
-            if (evtOnMouseOverListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener) == -1)
+            if (this.arrEvtOnMouseOverListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnMouseOverListener.splice(this.arrEvtOnMouseOverListener.indexOf(evtOnMouseOverListener), 1);
+            this.arrEvtOnMouseOverListener.splice(this.arrEvtOnMouseOverListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnMouseOverListener
@@ -1205,14 +1205,14 @@ module NetZ_Web
             return this._arrEvtOnMouseUpListener;
         }
 
-        public addEvtOnMouseUpListener(evtOnMouseUpListener: OnMouseUpListener): void
+        public addEvtOnMouseUpListener(evt: OnMouseUpListener): void
         {
-            if (evtOnMouseUpListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseUpListener.indexOf(evtOnMouseUpListener) > -1)
+            if (this.arrEvtOnMouseUpListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -1222,7 +1222,7 @@ module NetZ_Web
                 this.jq.mouseup((arg) => { this.dispararEvtOnMouseUpListener(arg); });
             }
 
-            this.arrEvtOnMouseUpListener.push(evtOnMouseUpListener);
+            this.arrEvtOnMouseUpListener.push(evt);
         }
 
         private dispararEvtOnMouseUpListener(arg: JQueryMouseEventObject): void
@@ -1243,19 +1243,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnMouseUpListener(evtOnMouseUpListener: OnMouseUpListener): void
+        public removerEvtOnMouseUpListener(evt: OnMouseUpListener): void
         {
-            if (evtOnMouseUpListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnMouseUpListener.indexOf(evtOnMouseUpListener) == -1)
+            if (this.arrEvtOnMouseUpListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnMouseUpListener.splice(this.arrEvtOnMouseUpListener.indexOf(evtOnMouseUpListener), 1);
+            this.arrEvtOnMouseUpListener.splice(this.arrEvtOnMouseUpListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnMouseUpListener

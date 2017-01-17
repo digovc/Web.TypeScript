@@ -274,14 +274,14 @@ module NetZ_Web
             return this._arrEvtOnEnterListener;
         }
 
-        public addEvtOnEnterListener(evtOnEnterListener: OnEnterListener): void
+        public addEvtOnEnterListener(evt: OnEnterListener): void
         {
-            if (evtOnEnterListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnEnterListener.indexOf(evtOnEnterListener) > -1)
+            if (this.arrEvtOnEnterListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -291,7 +291,7 @@ module NetZ_Web
                 this.jq.focusin(() => this.dispararEvtOnEnterListener());
             }
 
-            this.arrEvtOnEnterListener.push(evtOnEnterListener);
+            this.arrEvtOnEnterListener.push(evt);
         }
 
         public removeEvtOnEnterListener(evtOnEnterListener: OnEnterListener): void
@@ -337,14 +337,14 @@ module NetZ_Web
             return this._arrEvtOnLeaveListener;
         }
 
-        public addEvtOnLeaveListener(evtOnLeaveListener: OnLeaveListener): void
+        public addEvtOnLeaveListener(evt: OnLeaveListener): void
         {
-            if (evtOnLeaveListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnLeaveListener.indexOf(evtOnLeaveListener) > -1)
+            if (this.arrEvtOnLeaveListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -354,7 +354,7 @@ module NetZ_Web
                 this.jq.focusout((arg) => this.dispararEvtOnLeaveListener(arg));
             }
 
-            this.arrEvtOnLeaveListener.push(evtOnLeaveListener);
+            this.arrEvtOnLeaveListener.push(evt);
         }
 
         public removeEvtOnLeaveListener(evtOnLeaveListener: OnLeaveListener): void
@@ -400,14 +400,14 @@ module NetZ_Web
             return this._arrEvtOnValorAlteradoListener;
         }
 
-        public addEvtOnValorAlteradoListener(evtOnValorAlteradoListener: OnValorAlteradoListener): void
+        public addEvtOnValorAlteradoListener(evt: OnValorAlteradoListener): void
         {
-            if (evtOnValorAlteradoListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener) > -1)
+            if (this.arrEvtOnValorAlteradoListener.indexOf(evt) > -1)
             {
                 return;
             }
@@ -421,7 +421,7 @@ module NetZ_Web
                 });
             }
 
-            this.arrEvtOnValorAlteradoListener.push(evtOnValorAlteradoListener);
+            this.arrEvtOnValorAlteradoListener.push(evt);
         }
 
         public removeEvtOnValorAlteradoListener(evtOnValorAlteradoListener: OnValorAlteradoListener): void

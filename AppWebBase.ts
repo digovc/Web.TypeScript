@@ -444,19 +444,19 @@ module NetZ_Web
             return this._arrEvtOnFocusInListener;
         }
 
-        public addEvtOnFocusInListener(evtOnFocusInListener: OnFocusInListener): void
+        public addEvtOnFocusInListener(evt: OnFocusInListener): void
         {
-            if (evtOnFocusInListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener) > -1)
+            if (this.arrEvtOnFocusInListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnFocusInListener.push(evtOnFocusInListener);
+            this.arrEvtOnFocusInListener.push(evt);
         }
 
         private dispararEvtOnFocusInListener(): void
@@ -477,19 +477,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnFocusInListener(evtOnFocusInListener: OnFocusInListener): void
+        public removerEvtOnFocusInListener(evt: OnFocusInListener): void
         {
-            if (evtOnFocusInListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener) == -1)
+            if (this.arrEvtOnFocusInListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evtOnFocusInListener), 1);
+            this.arrEvtOnFocusInListener.splice(this.arrEvtOnFocusInListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnFocusInListener
@@ -510,19 +510,19 @@ module NetZ_Web
             return this._arrEvtOnFocusOutListener;
         }
 
-        public addEvtOnFocusOutListener(evtOnFocusOutListener: OnFocusOutListener): void
+        public addEvtOnFocusOutListener(evt: OnFocusOutListener): void
         {
-            if (evtOnFocusOutListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener) > -1)
+            if (this.arrEvtOnFocusOutListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnFocusOutListener.push(evtOnFocusOutListener);
+            this.arrEvtOnFocusOutListener.push(evt);
         }
 
         private dispararEvtOnFocusOutListener(): void
@@ -543,19 +543,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnFocusOutListener(evtOnFocusOutListener: OnFocusOutListener): void
+        public removerEvtOnFocusOutListener(evt: OnFocusOutListener): void
         {
-            if (evtOnFocusOutListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener) == -1)
+            if (this.arrEvtOnFocusOutListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evtOnFocusOutListener), 1);
+            this.arrEvtOnFocusOutListener.splice(this.arrEvtOnFocusOutListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnFocusOutListener

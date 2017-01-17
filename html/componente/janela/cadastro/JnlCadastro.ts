@@ -689,19 +689,19 @@ module NetZ_Web
             return this._arrEvtOnSalvarListener;
         }
 
-        public addEvtOnSalvarListener(evtOnSalvarListener: OnSalvarListener): void
+        public addEvtOnSalvarListener(evt: OnSalvarListener): void
         {
-            if (evtOnSalvarListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnSalvarListener.indexOf(evtOnSalvarListener) > -1)
+            if (this.arrEvtOnSalvarListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnSalvarListener.push(evtOnSalvarListener);
+            this.arrEvtOnSalvarListener.push(evt);
         }
 
         private dispararEvtOnSalvarListener(): void
@@ -726,19 +726,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnSalvarListener(evtOnSalvarListener: OnSalvarListener): void
+        public removerEvtOnSalvarListener(evt: OnSalvarListener): void
         {
-            if (evtOnSalvarListener == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnSalvarListener.indexOf(evtOnSalvarListener) == -1)
+            if (this.arrEvtOnSalvarListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnSalvarListener.splice(this.arrEvtOnSalvarListener.indexOf(evtOnSalvarListener), 1);
+            this.arrEvtOnSalvarListener.splice(this.arrEvtOnSalvarListener.indexOf(evt), 1);
         }
 
         // #endregion Evento OnSalvarListener

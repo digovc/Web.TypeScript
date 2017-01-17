@@ -591,19 +591,19 @@ module NetZ_Web
             return this._arrEvtOnCmpEmFocoAlterado;
         }
 
-        public addEvtOnCmpEmFocoAlterado(evtOnCmpEmFocoAlterado: OnCmpEmFocoAlterado): void
+        public addEvtOnCmpEmFocoAlterado(evt: OnCmpEmFocoAlterado): void
         {
-            if (evtOnCmpEmFocoAlterado == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnCmpEmFocoAlterado.indexOf(evtOnCmpEmFocoAlterado) > -1)
+            if (this.arrEvtOnCmpEmFocoAlterado.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnCmpEmFocoAlterado.push(evtOnCmpEmFocoAlterado);
+            this.arrEvtOnCmpEmFocoAlterado.push(evt);
         }
 
         private dispararEvtOnCmpEmFocoAlterado(): void
@@ -624,19 +624,19 @@ module NetZ_Web
             });
         }
 
-        public removerEvtOnCmpEmFocoAlterado(evtOnCmpEmFocoAlterado: OnCmpEmFocoAlterado): void
+        public removerEvtOnCmpEmFocoAlterado(evt: OnCmpEmFocoAlterado): void
         {
-            if (evtOnCmpEmFocoAlterado == null)
+            if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnCmpEmFocoAlterado.indexOf(evtOnCmpEmFocoAlterado) == -1)
+            if (this.arrEvtOnCmpEmFocoAlterado.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnCmpEmFocoAlterado.splice(this.arrEvtOnCmpEmFocoAlterado.indexOf(evtOnCmpEmFocoAlterado), 1);
+            this.arrEvtOnCmpEmFocoAlterado.splice(this.arrEvtOnCmpEmFocoAlterado.indexOf(evt), 1);
         }
 
         // #endregion Evento OnCmpEmFocoAlterado
