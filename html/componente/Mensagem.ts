@@ -140,7 +140,9 @@ module NetZ_Web
             new Mensagem(strTitulo, strMensagem, enmTipo).abrirMensagem();
         }
 
-        private abrirMensagem(): void
+
+        // TODO: Tornar este método privado e melhorar o "static mostrar".
+        public abrirMensagem(): void
         {
             if (Utils.getBooStrVazia(this.strTitulo))
             {
