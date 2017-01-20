@@ -114,7 +114,7 @@ module NetZ_Web
          * opção clicada e outro do tipo @see JQueryEventObject contendo informações do evento
          * click.
          */
-        public addOpcao(strOpcaoTitulo: string, fncOnClick: Function = null): void
+        public addOpcao(strOpcaoTitulo: string, fncOnClick: Function = null): string
         {
             if (Utils.getBooStrVazia(strOpcaoTitulo))
             {
@@ -128,6 +128,8 @@ module NetZ_Web
             mci.strTitulo = strOpcaoTitulo;
 
             this.addMci(mci);
+
+            return mci.strId;
         }
 
         private calcularLeft(intPageX: number): number
