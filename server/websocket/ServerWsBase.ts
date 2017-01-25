@@ -12,7 +12,8 @@ module NetZ_Web
     {
         // #region Constantes
 
-        public static get STR_METODO_WELCOME(): string { return "metodo_welcome" };
+        private static get STR_METODO_ERRO(): string { return "STR_METODO_ERRO" };
+        private static get STR_METODO_WELCOME(): string { return "STR_METODO_WELCOME" };
 
         // #endregion Constantes
 
@@ -115,12 +116,31 @@ module NetZ_Web
 
             switch (objInterlocutor.strMetodo)
             {
+                case ServerWsBase.STR_METODO_ERRO:
+                    this.processarMensagemErro(objInterlocutor);
+                    return true;
+
                 case ServerWsBase.STR_METODO_WELCOME:
                     this.processarMensagemWelcome();
                     return true;
             }
 
             return false;
+        }
+
+        private processarMensagemErro(objInterlocutor: Interlocutor): void
+        {
+            if (objInterlocutor.objData == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(objInterlocutor.objData.toString()))
+            {
+                return;
+            }
+
+            new Erro('Erro no servidor "_srv_nome"'.replace("_srv_nome", this.strNome), new Error(objInterlocutor.objData.toString()));
         }
 
         protected processarMensagemWelcome(): void
