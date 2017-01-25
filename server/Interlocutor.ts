@@ -102,6 +102,15 @@ module NetZ_Web
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor(strMetodo: string = "<desconhecido>", objJson: Object = null)
+        {
+            super();
+
+            this.strMetodo = strMetodo;
+            this.addJsn(objJson);
+        }
+
         // #endregion Construtores
 
         // #region Métodos
