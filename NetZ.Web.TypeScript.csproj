@@ -152,6 +152,9 @@
     <TypeScriptCompile Include="server\ServerBase.ts" />
     <TypeScriptCompile Include="server\ServerHttpBase.ts" />
     <TypeScriptCompile Include="server\websocket\InterlocutorWs.ts" />
+    <TypeScriptCompile Include="server\websocket\OnWsOpenListenner.ts" />
+    <TypeScriptCompile Include="server\websocket\OnWsErrorListenner.ts" />
+    <TypeScriptCompile Include="server\websocket\OnWsCloseListenner.ts" />
     <TypeScriptCompile Include="typedefinition\chart.d.ts" />
     <TypeScriptCompile Include="typedefinition\md5.d.ts" />
     <TypeScriptCompile Include="typedefinition\clipboard.d.ts" />

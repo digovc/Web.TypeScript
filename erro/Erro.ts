@@ -60,7 +60,7 @@ module NetZ_Web
 
         // #region Construtores
 
-        constructor(strMensagem: string, ex: Error)
+        constructor(strMensagem: string, ex: Error = null)
         {
             super();
 

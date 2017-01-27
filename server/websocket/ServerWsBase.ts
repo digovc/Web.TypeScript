@@ -1,4 +1,7 @@
 ﻿/// <reference path="../ServerBase.ts"/>
+/// <reference path="OnWsCloseListenner.ts"/>
+/// <reference path="OnWsErrorListenner.ts"/>
+/// <reference path="OnWsOpenListenner.ts"/>
 
 module NetZ_Web
 {
@@ -72,6 +75,11 @@ module NetZ_Web
 
         private getObjWebSocket(): WebSocket
         {
+            if (!("WebSocket" in window))
+            {
+                new Erro("Não foi encontrado suporte para WebSockets. Utilize um navegador mais moderno (Chrome, Firefox, Edge).");
+            }
+
             if (Utils.getBooStrVazia(this.url))
             {
                 return null;
@@ -80,31 +88,6 @@ module NetZ_Web
             var objWebSocketResultado = new WebSocket("ws://" + this.url);
 
             return objWebSocketResultado;
-        }
-
-        protected inicializar(): void
-        {
-            super.inicializar();
-
-            this.inicializarObjWebSocket();
-        }
-
-        private inicializarObjWebSocket(): void
-        {
-            if (!("WebSocket" in window))
-            {
-                throw "Não foi encontrado suporte para WebSockets. Utilize um navegador mais moderno (Chrome, Firefox, Edge).";
-            }
-
-            if (this.objWebSocket == null)
-            {
-                return;
-            }
-
-            this.objWebSocket.onclose = ((arg: CloseEvent) => { this.processarOnCloseLocal(arg); });
-            this.objWebSocket.onerror = ((arg: Event) => { this.processarOnErrorLocal(arg); });
-            this.objWebSocket.onmessage = ((arg: MessageEvent) => { this.processarOnMessageLocal(arg); });
-            this.objWebSocket.onopen = ((arg: Event) => { this.processarOnOpenLocal(arg); });
         }
 
         protected processarMessage(objInterlocutor: Interlocutor): boolean
@@ -150,10 +133,16 @@ module NetZ_Web
 
         private processarOnCloseLocal(arg: CloseEvent): void
         {
+            Notificacao.notificar('O servidor "_server_name" fechou a conexão.'.replace("_server_name", this.strNome));
+
+            this.dispararEvtOnWsCloseListenner(arg);
         }
 
         private processarOnErrorLocal(arg: Event): void
         {
+            Notificacao.notificar('Aconteceu um erro no servidor "_server_name".'.replace("_server_name", this.strNome));
+
+            this.dispararEvtOnWsErrorListenner(arg);
         }
 
         private processarOnMessageLocal(arg: MessageEvent): void
@@ -177,16 +166,233 @@ module NetZ_Web
 
         protected processarOnOpenLocal(arg: Event): void
         {
-            var objInterlocutor = new Interlocutor();
+            this.enviar(new Interlocutor(ServerWsBase.STR_METODO_WELCOME));
 
-            objInterlocutor.strMetodo = ServerWsBase.STR_METODO_WELCOME;
+            this.dispararEvtOnWsOpenListenner(arg);
+        }
 
-            this.enviar(objInterlocutor);
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            this.setEventosObjWebSocket();
+        }
+
+        private setEventosObjWebSocket(): void
+        {
+            if (this.objWebSocket == null)
+            {
+                return;
+            }
+
+            this.objWebSocket.onclose = ((arg: CloseEvent) => { this.processarOnCloseLocal(arg); });
+            this.objWebSocket.onerror = ((arg: Event) => { this.processarOnErrorLocal(arg); });
+            this.objWebSocket.onmessage = ((arg: MessageEvent) => { this.processarOnMessageLocal(arg); });
+            this.objWebSocket.onopen = ((arg: Event) => { this.processarOnOpenLocal(arg); });
         }
 
         // #endregion Métodos
 
         // #region Eventos
+
+        // #region Evento OnWsCloseListenner
+
+        private _arrEvtOnWsCloseListenner: Array<OnWsCloseListenner>;
+
+        private get arrEvtOnWsCloseListenner(): Array<OnWsCloseListenner>
+        {
+            if (this._arrEvtOnWsCloseListenner != null)
+            {
+                return this._arrEvtOnWsCloseListenner;
+            }
+
+            this._arrEvtOnWsCloseListenner = new Array<OnWsCloseListenner>();
+
+            return this._arrEvtOnWsCloseListenner;
+        }
+
+        public addEvtOnWsCloseListenner(evt: OnWsCloseListenner): void
+        {
+            if (evt == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnWsCloseListenner.indexOf(evt) > -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnWsCloseListenner.push(evt);
+        }
+
+        private dispararEvtOnWsCloseListenner(arg: CloseEvent): void
+        {
+            if (this.arrEvtOnWsCloseListenner.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnWsCloseListenner.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onWsClose(this, arg);
+            });
+        }
+
+        public removerEvtOnWsCloseListenner(evt: OnWsCloseListenner): void
+        {
+            if (evt == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnWsCloseListenner.indexOf(evt) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnWsCloseListenner.splice(this.arrEvtOnWsCloseListenner.indexOf(evt), 1);
+        }
+
+        // #endregion Evento OnWsCloseListenner
+
+        // #region Evento OnWsErrorListenner
+
+        private _arrEvtOnWsErrorListenner: Array<OnWsErrorListenner>;
+
+        private get arrEvtOnWsErrorListenner(): Array<OnWsErrorListenner>
+        {
+            if (this._arrEvtOnWsErrorListenner != null)
+            {
+                return this._arrEvtOnWsErrorListenner;
+            }
+
+            this._arrEvtOnWsErrorListenner = new Array<OnWsErrorListenner>();
+
+            return this._arrEvtOnWsErrorListenner;
+        }
+
+        public addEvtOnWsErrorListenner(evt: OnWsErrorListenner): void
+        {
+            if (evt == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnWsErrorListenner.indexOf(evt) > -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnWsErrorListenner.push(evt);
+        }
+
+        private dispararEvtOnWsErrorListenner(arg: Event): void
+        {
+            if (this.arrEvtOnWsErrorListenner.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnWsErrorListenner.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onWsOpen(this, arg);
+            });
+        }
+
+        public removerEvtOnWsErrorListenner(evt: OnWsErrorListenner): void
+        {
+            if (evt == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnWsErrorListenner.indexOf(evt) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnWsErrorListenner.splice(this.arrEvtOnWsErrorListenner.indexOf(evt), 1);
+        }
+
+        // #endregion Evento OnWsErrorListenner
+
+        // #region Evento OnWsOpenListenner
+
+        private _arrEvtOnWsOpenListenner: Array<OnWsOpenListenner>;
+
+        private get arrEvtOnWsOpenListenner(): Array<OnWsOpenListenner>
+        {
+            if (this._arrEvtOnWsOpenListenner != null)
+            {
+                return this._arrEvtOnWsOpenListenner;
+            }
+
+            this._arrEvtOnWsOpenListenner = new Array<OnWsOpenListenner>();
+
+            return this._arrEvtOnWsOpenListenner;
+        }
+
+        public addEvtOnWsOpenListenner(evt: OnWsOpenListenner): void
+        {
+            if (evt == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnWsOpenListenner.indexOf(evt) > -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnWsOpenListenner.push(evt);
+        }
+
+        private dispararEvtOnWsOpenListenner(arg: Event): void
+        {
+            if (this.arrEvtOnWsOpenListenner.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnWsOpenListenner.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onWsOpen(this, arg);
+            });
+        }
+
+        public removerEvtOnWsOpenListenner(evt: OnWsOpenListenner): void
+        {
+            if (evt == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnWsOpenListenner.indexOf(evt) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnWsOpenListenner.splice(this.arrEvtOnWsOpenListenner.indexOf(evt), 1);
+        }
+
+        // #endregion Evento OnWsOpenListenner
+
         // #endregion Eventos
     }
 }
