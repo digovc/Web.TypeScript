@@ -1,7 +1,5 @@
 ﻿/// <reference path="ComponenteHtml.ts"/>
 
-declare var Notification: any;
-
 module NetZ_Web
 {
     // #region Importações
@@ -292,13 +290,15 @@ module NetZ_Web
                 icon: this.srcIcon,
             }
 
-            if (!("Notification" in window))
+            if (!(Notification.name in window))
             {
                 return;
-            } else if (Notification.permission === "granted")
+            }
+            else if (Notification.permission === "granted")
             {
                 new Notification(this.strTitulo, objNotificacaoOption);
-            } else if (Notification.permission !== 'denied')
+            }
+            else if (Notification.permission !== 'denied')
             {
                 Notification.requestPermission(function (permission: any)
                 {

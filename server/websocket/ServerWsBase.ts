@@ -91,7 +91,7 @@ module NetZ_Web
 
         private inicializarObjWebSocket(): void
         {
-            if ((<any>window)["WebSocket"] == null)
+            if (!("WebSocket" in window))
             {
                 throw "Não foi encontrado suporte para WebSockets. Utilize um navegador mais moderno (Chrome, Firefox, Edge).";
             }

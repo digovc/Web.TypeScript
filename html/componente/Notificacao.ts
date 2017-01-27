@@ -1,6 +1,8 @@
 ﻿/// <reference path="botao/BotaoMini.ts"/>
 /// <reference path="ComponenteHtml.ts"/>
 
+declare var Notification: any;
+
 module NetZ_Web
 {
     // #region Importações
@@ -20,11 +22,15 @@ module NetZ_Web
     export class Notificacao extends ComponenteHtml implements OnClickListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
+
+        private static get STR_PERMISSAO_DENIED(): string { return "denied" };
+        private static get STR_PERMISSAO_GRANTED(): string { return "granted" };
+
         // #endregion Constantes
 
         // #region Atributos
 
-        private static _intNotificacaoAberta: number = 0;
+        private static _intNotificacaoAberta: number;
 
         private static get intNotificacaoAberta(): number
         {
@@ -39,8 +45,10 @@ module NetZ_Web
         private _btnFechar: BotaoMini;
         private _divIcone: Div;
         private _enmTipo: Notificacao_EnmTipo;
-        private _intFecharInterval: number;
+        private _intFecharTimeout: number;
+        private _intTempo: number;
         private _strNotificacao: string;
+        private _objNotificacao: any;
 
         private get btnFechar(): BotaoMini
         {
@@ -76,14 +84,36 @@ module NetZ_Web
             this._enmTipo = enmTipo;
         }
 
-        private get intFecharInterval(): number
+        private get intFecharTimeout(): number
         {
-            return this._intFecharInterval;
+            return this._intFecharTimeout;
         }
 
-        private set intFecharInterval(intFecharInterval: number)
+        private set intFecharTimeout(intFecharTimeout: number)
         {
-            this._intFecharInterval = intFecharInterval;
+            this._intFecharTimeout = intFecharTimeout;
+        }
+
+        private get intTempo(): number
+        {
+            if (this._intTempo > 0)
+            {
+                return this._intTempo;
+            }
+
+            this._intTempo = this.getIntTempo();
+
+            return this._intTempo;
+        }
+
+        private get objNotificacao(): any
+        {
+            return this._objNotificacao;
+        }
+
+        private set objNotificacao(objNotificacao: any)
+        {
+            this._objNotificacao = objNotificacao;
         }
 
         private get strNotificacao(): string
@@ -130,17 +160,24 @@ module NetZ_Web
                 return;
             }
 
+            if (Notificacao.intNotificacaoAberta > 4)
+            {
+                this.atrasarNotificacao();
+                return;
+            }
+
             if (AppWebBase.i.pag == null)
             {
                 return;
             }
 
-            if (Notificacao.intNotificacaoAberta > 4)
+            if (!AppWebBase.i.booEmFoco)
             {
-                window.setTimeout(() => { this.abrirNotificacao(); }, 500);
+                this.abrirNotificacaoExterna();
                 return;
             }
 
+            // TODO: Adicionar a notificação para dentro do próprio body, removendo a necessidade dessa "divNotificacao".
             AppWebBase.i.pag.divNotificacao.jq.append(this.strLayoutFixo);
 
             Notificacao.intNotificacaoAberta++;
@@ -148,13 +185,85 @@ module NetZ_Web
             this.iniciar();
         }
 
+        private abrirNotificacaoExterna(): void
+        {
+            if (!(Notification.name in window))
+            {
+                this.atrasarNotificacao();
+                return;
+            }
+
+            if (Notification.permission == Notificacao.STR_PERMISSAO_DENIED)
+            {
+                this.atrasarNotificacao();
+                return;
+            }
+
+            if (Notification.permission == Notificacao.STR_PERMISSAO_GRANTED)
+            {
+                this.abrirNotificacaoExternaPermitido();
+                return;
+            }
+
+            Notification.requestPermission(() => { this.abrirNotificacaoExterna() });
+            return;
+        }
+
+        private abrirNotificacaoExternaPermitido(): void
+        {
+            var objOptions =
+                {
+                    body: this.strNotificacao,
+                    icon: this.getUrlIcon(),
+                    onclose: (() => { this.fecharNotificacao(); }),
+                }
+
+            this.objNotificacao = new Notification((!Utils.getBooStrVazia(AppWebBase.i.strNome) ? AppWebBase.i.strNome : "Notificação"), objOptions);
+
+            Notificacao.intNotificacaoAberta++;
+
+            this.intFecharTimeout = window.setTimeout((() => { this.fecharNotificacao() }), this.intTempo)
+        }
+
+        private atrasarNotificacao(): void
+        {
+            window.setTimeout(() => { this.abrirNotificacao() }, 1000);
+        }
+
         private fecharNotificacao(): void
         {
-            window.clearInterval(this.intFecharInterval);
+            window.clearTimeout(this.intFecharTimeout);
 
             Notificacao.intNotificacaoAberta--;
 
+            if (this.objNotificacao != null)
+            {
+                this.objNotificacao.close();
+            }
+
             this.dispose();
+        }
+
+        private getIntTempo(): number
+        {
+            var intTempoResultado = (!Utils.getBooStrVazia(this.strNotificacao)) ? (this.strNotificacao.length * 150) : 5000;
+
+            return ((intTempoResultado > 250) ? intTempoResultado : 5000);
+        }
+
+        private getUrlIcon(): string
+        {
+            switch (this.enmTipo)
+            {
+                case Notificacao_EnmTipo.INFO:
+                    return "/res/media/png/img_notificacao_info.png";
+
+                case Notificacao_EnmTipo.NEGATIVA:
+                    return "/res/media/png/img_notificacao_negativa.png";
+
+                default:
+                    return "/res/media/png/img_notificacao_positiva.png";
+            }
         }
 
         protected inicializar(): void
@@ -163,7 +272,7 @@ module NetZ_Web
 
             this.inicializarEnmTipo();
 
-            this.inicializarIntervalFechar();
+            this.inicializarTimeoutFechar();
 
             this.mostrar();
         }
@@ -181,19 +290,12 @@ module NetZ_Web
                     this.divIcone.jq.css("background-image", "url('/res/media/png/img_notificacao_negativa.png')");
                     this.divIcone.jq.css("border-right", "5px solid #f15b28");
                     return;
-
-                default:
-                    return;
             }
         }
 
-        private inicializarIntervalFechar()
+        private inicializarTimeoutFechar()
         {
-            var intTempo = (!Utils.getBooStrVazia(this.strNotificacao)) ? (this.strNotificacao.length * 150) : 5000;
-
-            intTempo = (intTempo > 250) ? intTempo : 5000;
-
-            this.intFecharInterval = window.setTimeout(() => { this.fecharNotificacao(); }, intTempo);
+            this.intFecharTimeout = window.setTimeout(() => { this.fecharNotificacao() }, this.intTempo);
         }
 
         protected montarLayoutFixo(strLayoutFixo: string): string
@@ -256,7 +358,7 @@ module NetZ_Web
                 switch (objSender)
                 {
                     case this:
-                        this.inicializarIntervalFechar();
+                        this.inicializarTimeoutFechar();
                         return;
                 }
             }
@@ -273,7 +375,7 @@ module NetZ_Web
                 switch (objSender)
                 {
                     case this:
-                        window.clearInterval(this.intFecharInterval);
+                        window.clearTimeout(this.intFecharTimeout);
                         return;
                 }
             }
