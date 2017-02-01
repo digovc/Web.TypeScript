@@ -18,6 +18,7 @@ module Web
 
         private _arrDivItem: Array<SumarioItem>;
         private _divConteudo: Div;
+        private _divItemSelecionado: SumarioItem;
         private _pagMarkdown: PagMarkdownBase;
 
         private get arrDivItem(): Array<SumarioItem>
@@ -42,6 +43,16 @@ module Web
             this._divConteudo = new Div(this.strId + "_divConteudo");
 
             return this._divConteudo;
+        }
+
+        private get divItemSelecionado(): SumarioItem
+        {
+            return this._divItemSelecionado;
+        }
+
+        private set divItemSelecionado(divItemSelecionado: SumarioItem)
+        {
+            this._divItemSelecionado = divItemSelecionado;
         }
 
         public get pagMarkdown(): PagMarkdownBase
@@ -76,10 +87,22 @@ module Web
                 return;
             }
 
+            if (divSumarioItem == this.divItemSelecionado)
+            {
+                return;
+            }
+
             if (this.pagMarkdown == null)
             {
                 return;
             }
+
+            if (this.divItemSelecionado != null)
+            {
+                this.divItemSelecionado.divIndice.esconder();
+            }
+
+            this.divItemSelecionado = divSumarioItem;
 
             this.pagMarkdown.abrirConteudo(divSumarioItem);
         }

@@ -42,11 +42,17 @@ module Web
 
         // #region Métodos
 
+        protected inicializar(): void
+        {
+            super.inicializar();
+        }
+
         protected montarLayoutFixo(strLayoutFixo: string): string
         {
             strLayoutFixo = super.montarLayoutFixo(strLayoutFixo);
 
             strLayoutFixo = strLayoutFixo.replace("_conteudo", this.elmHead.textContent);
+            strLayoutFixo = strLayoutFixo.replace("_link", ("#" + this.elmHead.id));
 
             return strLayoutFixo;
         }

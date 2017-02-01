@@ -52,7 +52,7 @@ module Web
             return this._divConteudo;
         }
 
-        private get divIndice(): Div
+        public get divIndice(): Div
         {
             if (this._divIndice != null)
             {
@@ -254,6 +254,7 @@ module Web
         {
             if (this.divIndice.jq[0].childElementCount > 0)
             {
+                this.divIndice.mostrar();
                 return;
             }
 
@@ -266,8 +267,14 @@ module Web
 
             for (var i = 0; i < arrElmHead.length; i++)
             {
-                this.divIndice.jq.append(new IndiceItem(arrElmHead[i]).strLayoutFixo);
+                var divIndiceItem = new IndiceItem(arrElmHead[i]);
+
+                this.divIndice.jq.append(divIndiceItem.strLayoutFixo);
+
+                divIndiceItem.iniciar();
             }
+
+            this.divIndice.mostrar();
         }
 
         protected setEventos(): void
