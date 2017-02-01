@@ -98,7 +98,6 @@ module Web
             return this._divTitulo;
         }
 
-
         private get strHeadSelecionada(): string
         {
             return this._strHeadSelecionada;
@@ -161,7 +160,7 @@ module Web
 
         // #region Métodos
 
-        private abrirConteudo(): void
+        public abrirConteudo(): void
         {
             this.divConteudo.mostrarEsconder();
 

@@ -94,6 +94,7 @@ module Web
         {
             if (location.href.indexOf(PagMarkdownBase.URL_MARKDOWN_FOLDER) < 0)
             {
+                this.inicializarUrlBranco();
                 return;
             }
 
@@ -102,6 +103,11 @@ module Web
             var urlMarkdown = location.href.substring(intIndex + PagMarkdownBase.URL_MARKDOWN_FOLDER.length);
 
             this.divSumario.inicializarUrl(urlMarkdown);
+        }
+
+        private inicializarUrlBranco(): void
+        {
+            this.divSumario.inicializarUrlBranco();
         }
 
         protected setEventos(): void

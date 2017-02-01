@@ -182,6 +182,21 @@ module Web
             }
         }
 
+        public inicializarUrlBranco(): void
+        {
+            if (this.arrDivItem == null)
+            {
+                return;
+            }
+
+            if (this.arrDivItem.length < 1)
+            {
+                return;
+            }
+
+            this.arrDivItem[0].abrirConteudo();
+        }
+
         // #endregion Métodos
 
         // #region Eventos
