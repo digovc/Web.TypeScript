@@ -24,6 +24,7 @@ module Web
         private _divSumario: Sumario;
         private _divSumarioItemPai: SumarioItem;
         private _divTitulo: Div;
+        private _strHeadSelecionada: string;
         private _strHtmlConteudo: string;
         private _strMarkdownConteudo: string;
         private _url: string;
@@ -95,6 +96,17 @@ module Web
             this._divTitulo = new Div(this.strId + "_divTitulo");
 
             return this._divTitulo;
+        }
+
+
+        private get strHeadSelecionada(): string
+        {
+            return this._strHeadSelecionada;
+        }
+
+        private set strHeadSelecionada(strHeadSelecionada: string)
+        {
+            this._strHeadSelecionada = strHeadSelecionada;
         }
 
         public get strHtmlConteudo(): string
@@ -238,9 +250,8 @@ module Web
 
         public inicializarUrl(urlMarkdown: string): boolean
         {
-            if (this.urlMarkdown == urlMarkdown)
+            if (this.inicializarUrlLocal(urlMarkdown))
             {
-                this.divTitulo.jq.click();
                 return true;
             }
 
@@ -253,10 +264,45 @@ module Web
             }
         }
 
+        private inicializarUrlLocal(urlMarkdown: string): boolean
+        {
+            if (urlMarkdown.indexOf(this.urlMarkdown) < 0)
+            {
+                return false;
+            }
+
+            this.abrirConteudo();
+
+            var intIndex = urlMarkdown.lastIndexOf("#");
+
+            if (intIndex < 0)
+            {
+                return true;
+            }
+
+            this.strHeadSelecionada = urlMarkdown.substring((intIndex + 1));
+
+            return true;
+        }
+
         public processarConteudo(): void
         {
+            this.processarConteudoHierarquia();
             this.processarConteudoHistorico();
             this.processarConteudoIndice();
+            this.processarConteudoStrHeadSelecionada();
+        }
+
+        private processarConteudoHierarquia(): void
+        {
+            var divItemPai = this.divSumarioItemPai;
+
+            while (divItemPai != null)
+            {
+                divItemPai.divConteudo.mostrar();
+
+                divItemPai = divItemPai.divSumarioItemPai;
+            }
         }
 
         private processarConteudoHistorico(): void
@@ -302,6 +348,18 @@ module Web
             }
 
             this.divIndice.mostrar();
+        }
+
+        private processarConteudoStrHeadSelecionada(): void
+        {
+            if (Utils.getBooStrVazia(this.strHeadSelecionada))
+            {
+                return;
+            }
+
+            location.href += ("#" + this.strHeadSelecionada);
+
+            this.strHeadSelecionada = null;
         }
 
         protected setEventos(): void
