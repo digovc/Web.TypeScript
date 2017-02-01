@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../../erro/Erro.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="IndiceItem.ts"/>
 
 module Web
 {
@@ -18,6 +19,7 @@ module Web
 
         private _arrDivItem: Array<SumarioItem>;
         private _divConteudo: Div;
+        private _divIndice: Div;
         private _divSumario: Sumario;
         private _divSumarioItemPai: SumarioItem;
         private _divTitulo: Div;
@@ -48,6 +50,18 @@ module Web
             this._divConteudo = new Div(this.strId + "_divConteudo");
 
             return this._divConteudo;
+        }
+
+        private get divIndice(): Div
+        {
+            if (this._divIndice != null)
+            {
+                return this._divIndice;
+            }
+
+            this._divIndice = new Div(this.strId + "_divIndice");
+
+            return this._divIndice;
         }
 
         public get divSumario(): Sumario
@@ -238,7 +252,22 @@ module Web
 
         private processarConteudoIndice(): void
         {
+            if (this.divIndice.jq[0].childElementCount > 0)
+            {
+                return;
+            }
 
+            var arrElmHead = this.divSumario.pagMarkdown.divViewer.divConteudo.jq[0].getElementsByTagName("h2");
+
+            if (arrElmHead == null)
+            {
+                return;
+            }
+
+            for (var i = 0; i < arrElmHead.length; i++)
+            {
+                this.divIndice.jq.append(new IndiceItem(arrElmHead[i]).strLayoutFixo);
+            }
         }
 
         protected setEventos(): void

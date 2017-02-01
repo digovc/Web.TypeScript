@@ -44,12 +44,12 @@ module Web
             return this._divConteudo;
         }
 
-        private get pagMarkdown(): PagMarkdownBase
+        public get pagMarkdown(): PagMarkdownBase
         {
             return this._pagMarkdown;
         }
 
-        private set pagMarkdown(pagMarkdown: PagMarkdownBase)
+        public set pagMarkdown(pagMarkdown: PagMarkdownBase)
         {
             this._pagMarkdown = pagMarkdown;
         }

@@ -15,27 +15,27 @@ module Web
 
         // #region Atributos
 
-        private _elmH1: HTMLHeadElement;
+        private _elmHead: HTMLHeadingElement;
 
-        private get elmH1(): HTMLHeadElement
+        private get elmHead(): HTMLHeadingElement
         {
-            return this._elmH1;
+            return this._elmHead;
         }
 
-        private set elmH1(elmH1: HTMLHeadElement)
+        private set elmHead(elmHead: HTMLHeadingElement)
         {
-            this._elmH1 = elmH1;
+            this._elmHead = elmHead;
         }
 
         // #endregion Atributos
 
         // #region Construtores
 
-        constructor(elmH1: HTMLHeadElement)
+        constructor(elmHead: HTMLHeadingElement)
         {
             super(null);
 
-            this.elmH1 = elmH1;
+            this.elmHead = elmHead;
         }
 
         // #endregion Construtores
@@ -46,7 +46,7 @@ module Web
         {
             strLayoutFixo = super.montarLayoutFixo(strLayoutFixo);
 
-            strLayoutFixo = strLayoutFixo.replace("_conteudo", this.elmH1.textContent);
+            strLayoutFixo = strLayoutFixo.replace("_conteudo", this.elmHead.textContent);
 
             return strLayoutFixo;
         }

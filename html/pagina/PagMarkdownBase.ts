@@ -47,7 +47,7 @@ module Web
             return this._divSumario;
         }
 
-        private get divViewer(): Viewer
+        public get divViewer(): Viewer
         {
             if (this._divViewer != null)
             {
