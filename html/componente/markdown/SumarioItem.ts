@@ -224,6 +224,7 @@ module Web
         public processarConteudo(): void
         {
             this.processarConteudoHistorico();
+            this.processarConteudoIndice();
         }
 
         private processarConteudoHistorico(): void
@@ -233,6 +234,11 @@ module Web
             window.history.pushState(null, this.divTitulo.strConteudo, url);
 
             document.title = this.divTitulo.strConteudo;
+        }
+
+        private processarConteudoIndice(): void
+        {
+
         }
 
         protected setEventos(): void
