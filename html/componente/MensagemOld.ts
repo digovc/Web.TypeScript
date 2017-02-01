@@ -70,19 +70,19 @@ module Web
             switch (this.enmTipo)
             {
                 case EnmTipo.LOAD:
-                    this._srcIcon = "res/media/gif/load.gif";
+                    this._srcIcon = "/res/media/gif/load.gif";
                     break;
 
                 case EnmTipo.NEGATIVA:
-                    this._srcIcon = "res/media/png/info_negativa.png";
+                    this._srcIcon = "/res/media/png/info_negativa.png";
                     break;
 
                 case EnmTipo.POSITIVA:
-                    this._srcIcon = "res/media/png/info_positiva.png";
+                    this._srcIcon = "/res/media/png/info_positiva.png";
                     break;
 
                 default:
-                    this._srcIcon = "res/media/png/info_alerta.png";
+                    this._srcIcon = "/res/media/png/info_alerta.png";
                     break;
             }
 

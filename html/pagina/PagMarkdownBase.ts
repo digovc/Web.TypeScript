@@ -14,6 +14,9 @@ module Web
     export abstract class PagMarkdownBase extends PagMobile implements OnMenuClickListener
     {
         // #region Constantes
+
+        public static get URL_MARKDOWN_FOLDER(): string { return "/url-md" };
+
         // #endregion Constantes
 
         // #region Atributos
@@ -83,11 +86,29 @@ module Web
             this.divActionBar.iniciar();
             this.divSumario.iniciar();
             this.divViewer.iniciar();
+
+            this.inicializarUrl();
+        }
+
+        private inicializarUrl(): void
+        {
+            if (location.href.indexOf(PagMarkdownBase.URL_MARKDOWN_FOLDER) < 0)
+            {
+                return;
+            }
+
+            var intIndex = location.href.indexOf(PagMarkdownBase.URL_MARKDOWN_FOLDER);
+
+            var urlMarkdown = location.href.substring(intIndex + PagMarkdownBase.URL_MARKDOWN_FOLDER.length);
+
+            this.divSumario.inicializarUrl(urlMarkdown);
         }
 
         protected setEventos(): void
         {
             super.setEventos();
+
+            window.onpopstate = (() => { this.inicializarUrl() });
 
             this.divActionBar.addEvtOnMenuClickListener(this);
         }

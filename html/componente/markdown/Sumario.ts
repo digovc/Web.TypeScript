@@ -171,6 +171,17 @@ module Web
             this.arrDivItem.forEach((divItem) => { divItem.iniciar() });
         }
 
+        public inicializarUrl(urlMarkdown: string): void
+        {
+            for (var i = 0; i < this.arrDivItem.length; i++)
+            {
+                if (this.arrDivItem[i].inicializarUrl(urlMarkdown))
+                {
+                    return;
+                }
+            }
+        }
+
         // #endregion Métodos
 
         // #region Eventos

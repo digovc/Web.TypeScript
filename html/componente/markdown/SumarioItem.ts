@@ -13,6 +13,7 @@ module Web
     export class SumarioItem extends ComponenteHtml implements OnClickListener
     {
         // #region Constantes
+
         // #endregion Constantes
 
         // #region Atributos
@@ -235,6 +236,23 @@ module Web
             this.arrDivItem.forEach((divItem) => { divItem.iniciar() });
         }
 
+        public inicializarUrl(urlMarkdown: string): boolean
+        {
+            if (this.urlMarkdown == urlMarkdown)
+            {
+                this.divTitulo.jq.click();
+                return true;
+            }
+
+            for (var i = 0; i < this.arrDivItem.length; i++)
+            {
+                if (this.arrDivItem[i].inicializarUrl(urlMarkdown))
+                {
+                    return true;
+                }
+            }
+        }
+
         public processarConteudo(): void
         {
             this.processarConteudoHistorico();
@@ -243,9 +261,18 @@ module Web
 
         private processarConteudoHistorico(): void
         {
-            var url = (location.protocol + '//' + location.host + location.pathname + "?url=" + this.urlMarkdown);
+            var url = location.href;
 
-            window.history.pushState(null, this.divTitulo.strConteudo, url);
+            if (location.href.indexOf(PagMarkdownBase.URL_MARKDOWN_FOLDER) < 0)
+            {
+                url = (url + PagMarkdownBase.URL_MARKDOWN_FOLDER + this.urlMarkdown);
+            }
+            else
+            {
+                url = (location.href.substring(0, location.href.indexOf(PagMarkdownBase.URL_MARKDOWN_FOLDER)) + PagMarkdownBase.URL_MARKDOWN_FOLDER + this.urlMarkdown);
+            }
+
+            window.history.pushState(new Object(), this.divTitulo.strConteudo, url);
 
             document.title = this.divTitulo.strConteudo;
         }
