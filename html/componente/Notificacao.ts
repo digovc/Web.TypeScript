@@ -1,7 +1,7 @@
 ﻿/// <reference path="botao/BotaoMini.ts"/>
 /// <reference path="ComponenteHtml.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

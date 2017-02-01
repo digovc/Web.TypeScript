@@ -2,7 +2,7 @@
 /// <reference path="../../ComponenteHtml.ts"/>
 /// <reference path="MenuContextoItem.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

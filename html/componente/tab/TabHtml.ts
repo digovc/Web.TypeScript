@@ -3,7 +3,7 @@
 /// <reference path="../janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="TabItem.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

@@ -5,7 +5,7 @@
 /// <reference path="OnGridMenuClickListener.ts"/>
 /// <reference path="OnRowClickListener.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

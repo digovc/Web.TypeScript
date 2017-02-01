@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="CampoMedia.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

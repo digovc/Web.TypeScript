@@ -1,6 +1,6 @@
 ﻿/// <reference path="DivDica.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

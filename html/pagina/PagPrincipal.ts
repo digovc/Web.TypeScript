@@ -6,7 +6,7 @@
 /// <reference path="../Div.ts"/>
 /// <reference path="PaginaHtml.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

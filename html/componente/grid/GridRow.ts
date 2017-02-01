@@ -7,7 +7,7 @@
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="MenuGrid.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
 
@@ -222,7 +222,7 @@ module NetZ_Web
             }
         }
 
-        public onMouseLeave(objSender: Object, arg: any): void
+        public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
         {
             try
             {
@@ -234,7 +234,7 @@ module NetZ_Web
             }
         }
 
-        public onMouseOver(objSender: Object, arg: any): void
+        public onMouseOver(objSender: Object, arg: JQueryMouseEventObject): void
         {
             try
             {

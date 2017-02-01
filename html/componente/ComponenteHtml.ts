@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../ConstanteManager.ts"/>
 /// <reference path="../Div.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

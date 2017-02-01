@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../Objeto.ts"/>
 /// <reference path="../../OnKeyUpListener.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

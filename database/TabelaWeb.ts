@@ -2,7 +2,7 @@
 /// <reference path="DataTable.ts"/>
 /// <reference path="FiltroWeb.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

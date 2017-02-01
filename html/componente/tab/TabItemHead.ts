@@ -1,6 +1,6 @@
 ﻿/// <reference path="../ComponenteHtml.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -60,7 +60,7 @@ module NetZ_Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: any): void
+        public onClick(objSender: Object, arg: JQueryEventObject): void
         {
             try
             {

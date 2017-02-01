@@ -6,7 +6,7 @@
 /// <reference path="../../Input.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -382,7 +382,7 @@ module NetZ_Web
 
         private getClnWeb(): ColunaWeb
         {
-            if (NetZ_Web["ColunaWeb"] == null)
+            if (Web["ColunaWeb"] == null)
             {
                 return;
             }

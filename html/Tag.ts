@@ -7,7 +7,7 @@
 /// <reference path="../OnMouseOverListener.ts"/>
 /// <reference path="../typedefinition/jquery.d.ts" />
 
-module NetZ_Web
+module Web
 {
     // #region Importações
 

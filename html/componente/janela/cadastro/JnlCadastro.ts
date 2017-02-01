@@ -8,7 +8,7 @@
 /// <reference path="OnSalvarArg.ts"/>
 /// <reference path="OnSalvarListener.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
 

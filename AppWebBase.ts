@@ -13,7 +13,7 @@
 /// <reference path="server/Interlocutor.ts"/>
 /// <reference path="server/ServerHttpBase.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
 

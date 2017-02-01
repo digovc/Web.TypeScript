@@ -1,4 +1,4 @@
-﻿module NetZ_Web
+﻿module Web
 {
     export interface OnEnterListener
     {

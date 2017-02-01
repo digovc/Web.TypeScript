@@ -7,7 +7,7 @@
 /// <reference path="../../form/FormHtml.ts"/>
 /// <reference path="PainelFiltro.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -248,7 +248,7 @@ module NetZ_Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: any): void
+        public onClick(objSender: Object, arg: JQueryEventObject): void
         {
             switch (objSender)
             {

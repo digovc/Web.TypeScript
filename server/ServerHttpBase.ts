@@ -1,7 +1,7 @@
 ﻿/// <reference path="../html/Tag.ts"/>
 /// <reference path="ServerBase.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
