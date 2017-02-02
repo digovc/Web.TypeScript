@@ -1,4 +1,4 @@
-﻿/// <reference path="ServerAjax.ts"/>
+﻿/// <reference path="SrvAjaxBase.ts"/>
 
 module Web
 {
@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ServerAjaxDb extends ServerAjax
+    export abstract class SrvAjaxDbeBase extends SrvAjaxBase
     {
         // #region Constantes
 

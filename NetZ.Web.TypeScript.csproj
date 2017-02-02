@@ -35,6 +35,7 @@
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="Historico.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
+    <TypeScriptCompile Include="html\componente\markdown\EmailRegistro.ts" />
     <TypeScriptCompile Include="html\componente\markdown\IndiceItem.ts" />
     <TypeScriptCompile Include="html\componente\mobile\ActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
@@ -87,7 +88,7 @@
     <TypeScriptCompile Include="html\componente\treeview\OnTreeViewNodeClickListener.ts" />
     <TypeScriptCompile Include="html\componente\treeview\TreeViewHtml.ts" />
     <TypeScriptCompile Include="html\componente\treeview\TreeViewNode.ts" />
-    <TypeScriptCompile Include="html\pagina\PagMarkdownBase.ts" />
+    <TypeScriptCompile Include="html\pagina\PagDocumentacaoBase.ts" />
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
     <TypeScriptCompile Include="Keys.ts" />
@@ -153,11 +154,12 @@
     <TypeScriptCompile Include="database\ColunaWeb.ts" />
     <TypeScriptCompile Include="database\FiltroWeb.ts" />
     <TypeScriptCompile Include="database\TabelaWeb.ts" />
-    <TypeScriptCompile Include="server\ajax\ServerAjax.ts" />
-    <TypeScriptCompile Include="server\ajax\ServerAjaxDb.ts" />
+    <TypeScriptCompile Include="server\ajax\SrvAjaxBase.ts" />
+    <TypeScriptCompile Include="server\ajax\SrvAjaxDbeBase.ts" />
+    <TypeScriptCompile Include="server\ajax\SrvAjaxDocumentacao.ts" />
     <TypeScriptCompile Include="server\Interlocutor.ts" />
     <TypeScriptCompile Include="server\ServerBase.ts" />
-    <TypeScriptCompile Include="server\ServerHttpBase.ts" />
+    <TypeScriptCompile Include="server\SrvHttpBase.ts" />
     <TypeScriptCompile Include="server\websocket\InterlocutorWs.ts" />
     <TypeScriptCompile Include="typedefinition\chart.d.ts" />
     <TypeScriptCompile Include="typedefinition\clipboard.d.ts" />
@@ -166,7 +168,7 @@
     <TypeScriptCompile Include="typedefinition\marked.d.ts" />
     <TypeScriptCompile Include="typedefinition\sugarpak.d.ts" />
     <TypeScriptCompile Include="Utils.ts" />
-    <TypeScriptCompile Include="server\websocket\ServerWsBase.ts" />
+    <TypeScriptCompile Include="server\websocket\SrvWsBase.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

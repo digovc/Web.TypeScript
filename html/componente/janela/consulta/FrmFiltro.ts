@@ -118,7 +118,7 @@ module Web
         {
             if (AppWebBase.i.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             if (this.pnlFiltro == null)
@@ -138,7 +138,7 @@ module Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirFiltroConteudoSucesso(objInterlocutor); });
             objInterlocutor.addJsn(TblFiltro.i);

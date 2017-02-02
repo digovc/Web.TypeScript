@@ -350,14 +350,14 @@ module Web
         {
             if (AppWebBase.i.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             this.pnlFiltro.atualizarArrFiltro(this.tblWeb);
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_GRID;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_GRID;
 
             objInterlocutor.addJsn(this.tblWeb);
 
@@ -378,7 +378,7 @@ module Web
                 return;
             }
 
-            if (objInterlocutor.objData == ServerAjax.STR_RESULTADO_VAZIO)
+            if (objInterlocutor.objData == SrvAjaxBase.STR_RESULTADO_VAZIO)
             {
                 Notificacao.notificar("Nenhum registro foi encontrado.", Notificacao_EnmTipo.INFO);
                 return;

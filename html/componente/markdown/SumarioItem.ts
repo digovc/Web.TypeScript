@@ -308,18 +308,18 @@ module Web
         {
             var url = location.href;
 
-            if (location.href.indexOf(PagMarkdownBase.URL_MARKDOWN_FOLDER) < 0)
+            if (location.href.indexOf(PagDocumentacaoBase.URL_MARKDOWN_FOLDER) < 0)
             {
-                url = (url + PagMarkdownBase.URL_MARKDOWN_FOLDER + this.urlMarkdown);
+                url = (url + PagDocumentacaoBase.URL_MARKDOWN_FOLDER + this.urlMarkdown);
             }
             else
             {
-                url = (location.href.substring(0, location.href.indexOf(PagMarkdownBase.URL_MARKDOWN_FOLDER)) + PagMarkdownBase.URL_MARKDOWN_FOLDER + this.urlMarkdown);
+                url = (location.href.substring(0, location.href.indexOf(PagDocumentacaoBase.URL_MARKDOWN_FOLDER)) + PagDocumentacaoBase.URL_MARKDOWN_FOLDER + this.urlMarkdown);
             }
 
             window.history.pushState(new Object(), this.divTitulo.strConteudo, url);
 
-            document.title = (this.divTitulo.strConteudo + " - " + this.divSumario.pagMarkdown.divActionBar.divTitulo.strConteudo);
+            document.title = (this.divTitulo.strConteudo + " - " + this.divSumario.pagDoc.divActionBar.divTitulo.strConteudo);
         }
 
         private processarConteudoIndice(): void
@@ -330,7 +330,7 @@ module Web
                 return;
             }
 
-            var arrElmHead = this.divSumario.pagMarkdown.divViewer.divConteudo.jq[0].getElementsByTagName("h2");
+            var arrElmHead = this.divSumario.pagDoc.divViewer.divConteudo.jq[0].getElementsByTagName("h2");
 
             if (arrElmHead == null)
             {

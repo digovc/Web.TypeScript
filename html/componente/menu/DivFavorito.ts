@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../../database/dominio/FavoritoDominio.ts"/>
+/// <reference path="../../../server/ajax/SrvAjaxDbeBase.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="DivFavoritoItem.ts"/>
 
@@ -128,7 +129,7 @@ module Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_TABELA_FAVORITO_PESQUISAR;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TABELA_FAVORITO_PESQUISAR;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarFavoritoSucesso(objInterlocutor); });
 

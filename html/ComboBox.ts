@@ -48,7 +48,7 @@ module Web
 
             if (AppWebBase.i.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             if (tblWeb == null)
@@ -63,7 +63,7 @@ module Web
 
             var objInterlocutor: Interlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_PESQUISAR_COMBO_BOX;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_COMBO_BOX;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.carregarDadosSucesso(objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);
@@ -83,7 +83,7 @@ module Web
                 return;
             }
 
-            if (objInterlocutor.objData == ServerAjax.STR_RESULTADO_VAZIO)
+            if (objInterlocutor.objData == SrvAjaxBase.STR_RESULTADO_VAZIO)
             {
                 return;
             }

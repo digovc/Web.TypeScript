@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ServerAjax extends ServerBase
+    export abstract class SrvAjaxBase extends ServerBase
     {
         // #region Constantes
 

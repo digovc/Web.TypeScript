@@ -11,7 +11,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class PagMarkdownBase extends PagMobile implements OnMenuClickListener
+    export abstract class PagDocumentacaoBase extends PagMobile implements OnMenuClickListener
     {
         // #region Constantes
 
@@ -92,15 +92,15 @@ module Web
 
         private inicializarUrl(): void
         {
-            if (location.href.indexOf(PagMarkdownBase.URL_MARKDOWN_FOLDER) < 0)
+            if (location.href.indexOf(PagDocumentacaoBase.URL_MARKDOWN_FOLDER) < 0)
             {
                 this.inicializarUrlBranco();
                 return;
             }
 
-            var intIndex = location.href.indexOf(PagMarkdownBase.URL_MARKDOWN_FOLDER);
+            var intIndex = location.href.indexOf(PagDocumentacaoBase.URL_MARKDOWN_FOLDER);
 
-            var urlMarkdown = location.href.substring(intIndex + PagMarkdownBase.URL_MARKDOWN_FOLDER.length);
+            var urlMarkdown = location.href.substring(intIndex + PagDocumentacaoBase.URL_MARKDOWN_FOLDER.length);
 
             this.divSumario.inicializarUrl(urlMarkdown);
         }
@@ -108,6 +108,11 @@ module Web
         private inicializarUrlBranco(): void
         {
             this.divSumario.inicializarUrlBranco();
+        }
+
+        public registrarEmail(strEmail: string): void
+        {
+            
         }
 
         protected setEventos(): void

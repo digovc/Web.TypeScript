@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ServerHttpBase extends ServerBase
+    export abstract class SrvHttpBase extends ServerBase
     {
         // #region Constantes
 
@@ -92,7 +92,7 @@ module Web
                 return;
             }
 
-            var urlJq = "/res?method=_get_script&class=_js_class".replace("_get_script", ServerHttpBase.STR_GET_SCRIPT);
+            var urlJq = "/res?method=_get_script&class=_js_class".replace("_get_script", SrvHttpBase.STR_GET_SCRIPT);
 
             urlJq = urlJq.replace("_js_class", strJqClass);
 

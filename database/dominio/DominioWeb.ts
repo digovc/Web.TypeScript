@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../Objeto.ts"/>
+/// <reference path="../../server/ajax/SrvAjaxDbeBase.ts"/>
 
 module Web
 {
@@ -100,7 +101,7 @@ module Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_SALVAR_DOMINIO;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_SALVAR_DOMINIO;
 
             objInterlocutor.addJsn(this);
             objInterlocutor.addFncSucesso(fncSucesso);

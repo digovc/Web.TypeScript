@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ServerWsBase extends ServerBase
+    export abstract class SrvWsBase extends ServerBase
     {
         // #region Constantes
 
@@ -115,7 +115,7 @@ module Web
 
             switch (objInterlocutor.strMetodo)
             {
-                case ServerWsBase.STR_METODO_WELCOME:
+                case SrvWsBase.STR_METODO_WELCOME:
                     this.processarMensagemWelcome();
                     return true;
             }
@@ -159,7 +159,7 @@ module Web
         {
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerWsBase.STR_METODO_WELCOME;
+            objInterlocutor.strMetodo = SrvWsBase.STR_METODO_WELCOME;
 
             this.enviar(objInterlocutor);
         }

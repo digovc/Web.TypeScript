@@ -485,7 +485,7 @@ module Web
         {
             if (AppWebBase.i.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             this.carregarDados();
@@ -497,7 +497,7 @@ module Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_SALVAR;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_SALVAR;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); });
             objInterlocutor.addJsn(this.tblWeb);

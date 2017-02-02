@@ -1,4 +1,5 @@
 ﻿/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="EmailRegistro.ts"/>
 /// <reference path="SumarioItem.ts"/>
 
 module Web
@@ -19,7 +20,7 @@ module Web
         private _arrDivItem: Array<SumarioItem>;
         private _divConteudo: Div;
         private _divItemSelecionado: SumarioItem;
-        private _pagMarkdown: PagMarkdownBase;
+        private _pagDoc: PagDocumentacaoBase;
 
         private get arrDivItem(): Array<SumarioItem>
         {
@@ -45,6 +46,20 @@ module Web
             return this._divConteudo;
         }
 
+        private _divEmailRegistro: EmailRegistro;
+
+        private get divEmailRegistro(): EmailRegistro
+        {
+            if (this._divEmailRegistro != null)
+            {
+                return this._divEmailRegistro;
+            }
+
+            this._divEmailRegistro = new EmailRegistro(this);
+
+            return this._divEmailRegistro;
+        }
+
         private get divItemSelecionado(): SumarioItem
         {
             return this._divItemSelecionado;
@@ -55,25 +70,25 @@ module Web
             this._divItemSelecionado = divItemSelecionado;
         }
 
-        public get pagMarkdown(): PagMarkdownBase
+        public get pagDoc(): PagDocumentacaoBase
         {
-            return this._pagMarkdown;
+            return this._pagDoc;
         }
 
-        public set pagMarkdown(pagMarkdown: PagMarkdownBase)
+        public set pagDoc(pagDoc: PagDocumentacaoBase)
         {
-            this._pagMarkdown = pagMarkdown;
+            this._pagDoc = pagDoc;
         }
 
         // #endregion Atributos
 
         // #region Construtores
 
-        constructor(pagMarkdown: PagMarkdownBase)
+        constructor(pagMarkdown: PagDocumentacaoBase)
         {
             super(Sumario.name);
 
-            this.pagMarkdown = pagMarkdown;
+            this.pagDoc = pagMarkdown;
         }
 
         // #endregion Construtores
@@ -92,7 +107,7 @@ module Web
                 return;
             }
 
-            if (this.pagMarkdown == null)
+            if (this.pagDoc == null)
             {
                 return;
             }
@@ -104,7 +119,7 @@ module Web
 
             this.divItemSelecionado = divSumarioItem;
 
-            this.pagMarkdown.abrirConteudo(divSumarioItem);
+            this.pagDoc.abrirConteudo(divSumarioItem);
         }
 
         private getArrDivItem(): Array<SumarioItem>
@@ -168,6 +183,8 @@ module Web
         {
             super.inicializar();
 
+            this.divEmailRegistro.iniciar();
+
             this.arrDivItem.forEach((divItem) => { divItem.iniciar() });
         }
 
@@ -195,6 +212,11 @@ module Web
             }
 
             this.arrDivItem[0].abrirConteudo();
+        }
+
+        public registrarEmail(strEmail: string): void
+        {
+            this.pagDoc.registrarEmail(strEmail);
         }
 
         // #endregion Métodos

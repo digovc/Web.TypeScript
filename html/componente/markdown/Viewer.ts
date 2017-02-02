@@ -18,7 +18,7 @@ module Web
 
         private _divConteudo: Div;
         private _divSumarioItem: SumarioItem;
-        private _pagMarkdown: PagMarkdownBase;
+        private _pagMarkdown: PagDocumentacaoBase;
 
         public get divConteudo(): Div
         {
@@ -42,12 +42,12 @@ module Web
             this._divSumarioItem = divSumarioItem;
         }
 
-        private get pagMarkdown(): PagMarkdownBase
+        private get pagMarkdown(): PagDocumentacaoBase
         {
             return this._pagMarkdown;
         }
 
-        private set pagMarkdown(pagMarkdown: PagMarkdownBase)
+        private set pagMarkdown(pagMarkdown: PagDocumentacaoBase)
         {
             this._pagMarkdown = pagMarkdown;
         }
@@ -56,7 +56,7 @@ module Web
 
         // #region Construtores
 
-        constructor(pagMarkdown: PagMarkdownBase)
+        constructor(pagMarkdown: PagDocumentacaoBase)
         {
             super(Viewer.name);
 
