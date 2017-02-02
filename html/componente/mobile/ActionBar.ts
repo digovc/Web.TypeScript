@@ -47,7 +47,7 @@ module Web
             return this._btnVoltar;
         }
 
-        private get divTitulo(): Div
+        public get divTitulo(): Div
         {
             if (this._divTitulo != null)
             {

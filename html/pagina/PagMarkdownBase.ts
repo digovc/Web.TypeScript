@@ -26,7 +26,7 @@ module Web
 
         private _divActionBar: ActionBar;
 
-        private get divActionBar(): ActionBar
+        public get divActionBar(): ActionBar
         {
             if (this._divActionBar != null)
             {

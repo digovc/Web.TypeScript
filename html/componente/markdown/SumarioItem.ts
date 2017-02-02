@@ -319,7 +319,7 @@ module Web
 
             window.history.pushState(new Object(), this.divTitulo.strConteudo, url);
 
-            document.title = this.divTitulo.strConteudo;
+            document.title = (this.divTitulo.strConteudo + " - " + this.divSumario.pagMarkdown.divActionBar.divTitulo.strConteudo);
         }
 
         private processarConteudoIndice(): void
