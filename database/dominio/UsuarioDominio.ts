@@ -1,4 +1,4 @@
-﻿/// <reference path="DominioWeb.ts"/>
+﻿/// <reference path="DominioWebBase.ts"/>
 
 module Web
 {
@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class UsuarioDominio extends DominioWeb
+    export class UsuarioDominio extends DominioWebBase
     {
         // #region Constantes
         // #endregion Constantes

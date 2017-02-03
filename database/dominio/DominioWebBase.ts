@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class DominioWeb extends Objeto
+    export abstract class DominioWebBase extends Objeto
     {
         // #region Constantes
 
@@ -82,7 +82,7 @@ module Web
 
         // #region Métodos
 
-        public copiarDados(obj: any): DominioWeb
+        public copiarDados(obj: any): DominioWebBase
         {
             super.copiarDados(obj);
 

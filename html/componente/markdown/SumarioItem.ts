@@ -308,13 +308,13 @@ module Web
         {
             var url = location.href;
 
-            if (location.href.indexOf(PagDocumentacaoBase.URL_MARKDOWN_FOLDER) < 0)
+            if (location.href.indexOf(SrvAjaxDocumentacao.URL_MARKDOWN_FOLDER) < 0)
             {
-                url = (url + PagDocumentacaoBase.URL_MARKDOWN_FOLDER + this.urlMarkdown);
+                url = (url + SrvAjaxDocumentacao.URL_MARKDOWN_FOLDER + this.urlMarkdown);
             }
             else
             {
-                url = (location.href.substring(0, location.href.indexOf(PagDocumentacaoBase.URL_MARKDOWN_FOLDER)) + PagDocumentacaoBase.URL_MARKDOWN_FOLDER + this.urlMarkdown);
+                url = (location.href.substring(0, location.href.indexOf(SrvAjaxDocumentacao.URL_MARKDOWN_FOLDER)) + SrvAjaxDocumentacao.URL_MARKDOWN_FOLDER + this.urlMarkdown);
             }
 
             window.history.pushState(new Object(), this.divTitulo.strConteudo, url);

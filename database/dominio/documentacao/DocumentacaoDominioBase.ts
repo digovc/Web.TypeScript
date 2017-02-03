@@ -1,4 +1,4 @@
-﻿/// <reference path="DominioWebBase.ts"/>
+﻿/// <reference path="../DominioWebBase.ts"/>
 
 module Web
 {
@@ -8,25 +8,12 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class FavoritoDominio extends DominioWebBase
+    export abstract class DocumentacaoDominioBase extends DominioWebBase
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
-
-        private _strTitulo: string;
-
-        public get strTitulo(): string
-        {
-            return this._strTitulo;
-        }
-
-        public set strTitulo(strTitulo: string)
-        {
-            this._strTitulo = strTitulo;
-        }
-
         // #endregion Atributos
 
         // #region Construtores

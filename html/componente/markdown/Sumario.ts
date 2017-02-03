@@ -18,7 +18,9 @@ module Web
         // #region Atributos
 
         private _arrDivItem: Array<SumarioItem>;
+        private _dirDocumentacao: string;
         private _divConteudo: Div;
+        private _divEmailRegistro: EmailRegistro;
         private _divItemSelecionado: SumarioItem;
         private _pagDoc: PagDocumentacaoBase;
 
@@ -34,6 +36,18 @@ module Web
             return this._arrDivItem;
         }
 
+        public get dirDocumentacao(): string
+        {
+            if (this._dirDocumentacao != null)
+            {
+                return this._dirDocumentacao;
+            }
+
+            this._dirDocumentacao = this.getStrAttValor("dir-documentacao");
+
+            return this._dirDocumentacao;
+        }
+
         private get divConteudo(): Div
         {
             if (this._divConteudo != null)
@@ -45,8 +59,6 @@ module Web
 
             return this._divConteudo;
         }
-
-        private _divEmailRegistro: EmailRegistro;
 
         private get divEmailRegistro(): EmailRegistro
         {
@@ -212,11 +224,6 @@ module Web
             }
 
             this.arrDivItem[0].abrirConteudo();
-        }
-
-        public registrarEmail(strEmail: string): void
-        {
-            this.pagDoc.registrarEmail(strEmail);
         }
 
         // #endregion Métodos

@@ -27,11 +27,13 @@
     <TypeScriptCompile Include="database\DataCell.ts" />
     <TypeScriptCompile Include="database\DataRow.ts" />
     <TypeScriptCompile Include="database\DataTable.ts" />
+    <TypeScriptCompile Include="database\dominio\documentacao\DocumentacaoDominioBase.ts" />
+    <TypeScriptCompile Include="database\dominio\documentacao\EmailRegistroDominio.ts" />
     <TypeScriptCompile Include="database\dominio\FavoritoDominio.ts" />
     <TypeScriptCompile Include="database\dominio\UsuarioDominio.ts" />
     <TypeScriptCompile Include="database\ParValorNome.ts" />
     <TypeScriptCompile Include="database\TblFiltro.ts" />
-    <TypeScriptCompile Include="database\dominio\DominioWeb.ts" />
+    <TypeScriptCompile Include="database\dominio\DominioWebBase.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="Historico.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />

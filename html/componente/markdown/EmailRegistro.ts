@@ -1,4 +1,6 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../../../database/dominio/documentacao/EmailRegistroDominio.ts"/>
+/// <reference path="../../../server/ajax/SrvAjaxDocumentacao.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
 
 module Web
 {
@@ -100,7 +102,14 @@ module Web
                 return;
             }
 
-            this.divSumario.registrarEmail(this.txtEmail.strValor);
+            var objEmailRegistro = new EmailRegistroDominio();
+
+            objEmailRegistro.dirDocumentacao = this.divSumario.dirDocumentacao;
+            objEmailRegistro.strDocumentacaoTitulo = this.divSumario.pagDoc.divActionBar.divTitulo.strConteudo;
+            objEmailRegistro.strEmail = this.txtEmail.strValor;
+            objEmailRegistro.urlDocumentacao = location.href.substring(0, location.href.indexOf(SrvAjaxDocumentacao.URL_MARKDOWN_FOLDER));
+
+            SrvAjaxDocumentacao.i.registrarEmail(objEmailRegistro);
         }
 
         protected setEventos(): void
