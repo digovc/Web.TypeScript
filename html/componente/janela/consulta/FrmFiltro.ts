@@ -7,7 +7,7 @@
 /// <reference path="../../form/FormHtml.ts"/>
 /// <reference path="PainelFiltro.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -118,7 +118,7 @@ module NetZ_Web
         {
             if (AppWebBase.i.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             if (this.pnlFiltro == null)
@@ -138,7 +138,7 @@ module NetZ_Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirFiltroConteudoSucesso(objInterlocutor); });
             objInterlocutor.addJsn(TblFiltro.i);
@@ -248,7 +248,7 @@ module NetZ_Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: any): void
+        public onClick(objSender: Object, arg: JQueryEventObject): void
         {
             switch (objSender)
             {

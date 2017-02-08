@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="CampoMedia.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -223,7 +223,7 @@ module NetZ_Web
 
             var url = "/_url_db_file_download?tbl_web_nome=_tbl_web_nome&registro_id=_registro_id";
 
-            url = url.replace("_url_db_file_download", ServerHttpBase.URL_DATA_BASE_FILE_DOWNLOAD);
+            url = url.replace("_url_db_file_download", SrvHttpBase.URL_DATA_BASE_FILE_DOWNLOAD);
             url = url.replace("_tbl_web_nome", this.frm.tblWeb.strNome);
             url = url.replace("_registro_id", this.intRegistroId.toString());
 

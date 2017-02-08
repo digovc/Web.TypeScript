@@ -1,6 +1,6 @@
 ﻿/// <reference path="JnlMensagem.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

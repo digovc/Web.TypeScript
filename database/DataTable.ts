@@ -2,7 +2,7 @@
 /// <reference path="DataRow.ts"/>
 /// <reference path="TabelaWeb.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
 

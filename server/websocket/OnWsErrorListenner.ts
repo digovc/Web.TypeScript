@@ -1,7 +1,7 @@
-﻿module NetZ_Web
+﻿module Web
 {
     export interface OnWsErrorListenner
     {
-        onWsOpen(srvWs: ServerWsBase, arg: Event): void;
+        onWsOpen(srvWs: SrvWsBase, arg: Event): void;
     }
 }

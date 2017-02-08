@@ -6,7 +6,7 @@
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="../painel/PainelHtml.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -197,16 +197,16 @@ module NetZ_Web
             mniFilho.iniciar();
         }
 
-        protected atualizarBooSelecionado(): void
+        protected setBooSelecionado(booSelecionado: boolean): void
         {
-            super.atualizarBooSelecionado();
+            super.setBooSelecionado(booSelecionado);
 
             if (this.mnuPai == null)
             {
                 return;
             }
 
-            this.mnuPai.mniSelecionado = this.booSelecionado ? this : null;
+            this.mnuPai.mniSelecionado = booSelecionado ? this : null;
         }
 
         public esconderDivItemConteudo(): void
@@ -452,7 +452,7 @@ module NetZ_Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: any): void
+        public onClick(objSender: Object, arg: JQueryEventObject): void
         {
             try
             {

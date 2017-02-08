@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../Objeto.ts"/>
+/// <reference path="../../server/ajax/SrvAjaxDbeBase.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -8,7 +9,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class DominioWeb extends Objeto
+    export abstract class DominioWebBase extends Objeto
     {
         // #region Constantes
 
@@ -81,7 +82,7 @@ module NetZ_Web
 
         // #region Métodos
 
-        public copiarDados(obj: any): DominioWeb
+        public copiarDados(obj: any): DominioWebBase
         {
             super.copiarDados(obj);
 
@@ -100,7 +101,7 @@ module NetZ_Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_SALVAR_DOMINIO;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_SALVAR_DOMINIO;
 
             objInterlocutor.addJsn(this);
             objInterlocutor.addFncSucesso(fncSucesso);

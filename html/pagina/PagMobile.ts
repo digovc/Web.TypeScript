@@ -1,7 +1,6 @@
-﻿/// <reference path="../componente/ActionBar.ts"/>
-/// <reference path="PaginaHtml.ts"/>
+﻿/// <reference path="PaginaHtml.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

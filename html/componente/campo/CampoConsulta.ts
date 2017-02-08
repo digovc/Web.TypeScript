@@ -6,7 +6,7 @@
 /// <reference path="../menu/contexto/MenuContexto.ts"/>
 /// <reference path="CampoComboBox.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

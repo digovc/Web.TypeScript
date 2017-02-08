@@ -1,7 +1,7 @@
-﻿module NetZ_Web
+﻿module Web
 {
     export interface OnWsCloseListenner
     {
-        onWsClose(srvWs: ServerWsBase, arg: CloseEvent): void;
+        onWsClose(srvWs: SrvWsBase, arg: CloseEvent): void;
     }
 }

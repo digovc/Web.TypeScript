@@ -1,6 +1,6 @@
-﻿/// <reference path="DominioWeb.ts"/>
+﻿/// <reference path="DominioWebBase.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -8,7 +8,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class FavoritoDominio extends DominioWeb
+    export class FavoritoDominio extends DominioWebBase
     {
         // #region Constantes
         // #endregion Constantes

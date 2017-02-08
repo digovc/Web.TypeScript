@@ -3,7 +3,7 @@
 /// <reference path="DivDica.ts"/>
 /// <reference path="OnCmpEmFocoAlterado.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -329,7 +329,7 @@ module NetZ_Web
                 return;
             }
 
-            var cmp: CampoHtml = new (<any>window)["NetZ_Web"][$(elmCmp).attr("clazz")](elmCmp.id);
+            var cmp: CampoHtml = new (<any>window)["Web"][$(elmCmp).attr("clazz")](elmCmp.id);
 
             cmp.frm = this;
 

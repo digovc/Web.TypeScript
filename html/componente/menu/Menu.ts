@@ -10,7 +10,7 @@
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="MenuItem.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

@@ -2,7 +2,7 @@
 /// <reference path="../JanelaHtml.ts"/>
 /// <reference path="TagCard.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -255,7 +255,7 @@ module NetZ_Web
         {
             if (AppWebBase.i.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             if (this.tblWeb == null)
@@ -292,7 +292,7 @@ module NetZ_Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); }); // TODO: Informar ao usuário.
             objInterlocutor.addJsn(this.tblWeb);
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_TAG_SALVAR;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TAG_SALVAR;
 
             AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }

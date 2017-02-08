@@ -1,7 +1,7 @@
 ﻿/// <reference path="OnDisposedListener.ts"/>
 /// <reference path="Utils.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações

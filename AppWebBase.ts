@@ -9,11 +9,12 @@
 /// <reference path="OnFocusChangeListener.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
-/// <reference path="server/ajax/ServerAjaxDb.ts"/>
+/// <reference path="server/ajax/SrvAjaxDbeBase.ts"/>
 /// <reference path="server/Interlocutor.ts"/>
-/// <reference path="server/ServerHttpBase.ts"/>
+/// <reference path="server/ServerBase.ts"/>
+/// <reference path="server/SrvHttpBase.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
 
@@ -56,8 +57,8 @@ module NetZ_Web
         private _msg: Mensagem;
         private _objTema: TemaDefault;
         private _pag: PaginaHtml;
-        private _srvAjaxDb: ServerAjaxDb;
-        private _srvHttp: ServerHttpBase;
+        private _srvAjaxDb: SrvAjaxDbeBase;
+        private _srvHttp: SrvHttpBase;
         private _strSessaoId: string;
         private _tagFocoExclusivo: ComponenteHtml;
 
@@ -139,19 +140,19 @@ module NetZ_Web
             this._pag = pag;
         }
 
-        public get srvAjaxDb(): ServerAjaxDb
+        public get srvAjaxDb(): SrvAjaxDbeBase
         {
             if (this._srvAjaxDb != null)
             {
                 return this._srvAjaxDb;
             }
 
-            this._srvAjaxDb = this.getSrvAjaxDb();
+            this._srvAjaxDb = this.getSrvAjaxDbe();
 
             return this._srvAjaxDb;
         }
 
-        public get srvHttp(): ServerHttpBase
+        public get srvHttp(): SrvHttpBase
         {
             if (this._srvHttp != null)
             {
@@ -262,7 +263,7 @@ module NetZ_Web
         {
             if (this.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             if (Utils.getBooStrVazia(strTblNome))
@@ -277,7 +278,7 @@ module NetZ_Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_CARREGAR_TBL_WEB;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_CARREGAR_TBL_WEB;
 
             objInterlocutor.addStr(strTblNome);
             objInterlocutor.addFncSucesso((objSolicitacaoAjax: Interlocutor) => { this.carregarTblSucesso(objSolicitacaoAjax); });
@@ -318,12 +319,12 @@ module NetZ_Web
             return new TemaDefault();
         }
 
-        protected getSrvAjaxDb(): ServerAjaxDb
+        protected getSrvAjaxDbe(): SrvAjaxDbeBase
         {
             return null;
         }
 
-        protected getSrvHttp(): ServerHttpBase
+        protected getSrvHttp(): SrvHttpBase
         {
             return null;
         }

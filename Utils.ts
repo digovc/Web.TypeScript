@@ -1,4 +1,4 @@
-﻿module NetZ_Web
+﻿module Web
 {
     // #region Importações
     // #endregion Importações
@@ -216,7 +216,7 @@
                 return false;
             }
 
-            var objRegExp = new RegExp("/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/");
+            var objRegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
             if (objRegExp.test(strEmail))
             {

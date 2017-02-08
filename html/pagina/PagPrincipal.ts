@@ -6,7 +6,7 @@
 /// <reference path="../Div.ts"/>
 /// <reference path="PaginaHtml.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -81,7 +81,7 @@ module NetZ_Web
         {
             if (AppWebBase.i.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             if (tblWeb == null)
@@ -96,7 +96,7 @@ module NetZ_Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CADASTRO;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CADASTRO;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirCadastroSucesso(objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);
@@ -125,7 +125,7 @@ module NetZ_Web
         {
             if (AppWebBase.i.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             if (tblWeb == null)
@@ -150,7 +150,7 @@ module NetZ_Web
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirConsultaSucesso(objInterlocutor); });
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_ABRIR_CONSULTA;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CONSULTA;
 
             objInterlocutor.addJsn(tblWeb);
 
@@ -189,7 +189,7 @@ module NetZ_Web
         {
             if (AppWebBase.i.srvAjaxDb == null)
             {
-                throw ServerAjaxDb.STR_EXCEPTION_NULL;
+                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
             if (tblWeb == null)
@@ -209,7 +209,7 @@ module NetZ_Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_TAG_ABRIR_JANELA;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TAG_ABRIR_JANELA;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirJnlTagSucesso(tblWeb, objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);

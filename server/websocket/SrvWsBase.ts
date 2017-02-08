@@ -3,15 +3,16 @@
 /// <reference path="OnWsErrorListenner.ts"/>
 /// <reference path="OnWsOpenListenner.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
+
     // #endregion Importações
 
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ServerWsBase extends ServerBase
+    export abstract class SrvWsBase extends ServerBase
     {
         // #region Constantes
 
@@ -99,11 +100,11 @@ module NetZ_Web
 
             switch (objInterlocutor.strMetodo)
             {
-                case ServerWsBase.STR_METODO_ERRO:
+                case SrvWsBase.STR_METODO_ERRO:
                     this.processarMensagemErro(objInterlocutor);
                     return true;
 
-                case ServerWsBase.STR_METODO_WELCOME:
+                case SrvWsBase.STR_METODO_WELCOME:
                     this.processarMensagemWelcome();
                     return true;
             }
@@ -166,7 +167,7 @@ module NetZ_Web
 
         protected processarOnOpenLocal(arg: Event): void
         {
-            this.enviar(new Interlocutor(ServerWsBase.STR_METODO_WELCOME));
+            this.enviar(new Interlocutor(SrvWsBase.STR_METODO_WELCOME));
 
             this.dispararEvtOnWsOpenListenner(arg);
         }

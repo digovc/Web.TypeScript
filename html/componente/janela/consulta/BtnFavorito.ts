@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../botao/BotaoCircular.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -68,7 +68,7 @@ module NetZ_Web
             var objInterlocutor = new Interlocutor();
 
             objInterlocutor.objData = this.jnlConsulta.tblWeb.strNome;
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_TABELA_FAVORITO_ADD;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TABELA_FAVORITO_ADD;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.favoritarSucesso(objInterlocutor); });
 
@@ -126,7 +126,7 @@ module NetZ_Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = ServerAjaxDb.STR_METODO_TABELA_FAVORITO_VERIFICAR;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TABELA_FAVORITO_VERIFICAR;
             objInterlocutor.objData = this.jnlConsulta.tblWeb.strNome;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.verificarFavoritoSucesso(objInterlocutor); });

@@ -1,6 +1,6 @@
-﻿/// <reference path="ServerAjax.ts"/>
+﻿/// <reference path="SrvAjaxBase.ts"/>
 
-module NetZ_Web
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -8,7 +8,7 @@ module NetZ_Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ServerAjaxDb extends ServerAjax
+    export abstract class SrvAjaxDbeBase extends SrvAjaxBase
     {
         // #region Constantes
 
