@@ -138,7 +138,6 @@
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlLogin.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlMensagem.ts" />
-    <TypeScriptCompile Include="html\componente\MensagemOld.ts" />
     <TypeScriptCompile Include="html\componente\menu\chat\DivChatUsuario.ts" />
     <TypeScriptCompile Include="html\componente\menu\Menu.ts" />
     <TypeScriptCompile Include="html\componente\menu\MenuItem.ts" />
@@ -163,7 +162,11 @@
     <TypeScriptCompile Include="server\ServerBase.ts" />
     <TypeScriptCompile Include="server\SrvHttpBase.ts" />
     <TypeScriptCompile Include="server\websocket\InterlocutorWs.ts" />
+    <TypeScriptCompile Include="server\websocket\OnWsOpenListenner.ts" />
+    <TypeScriptCompile Include="server\websocket\OnWsErrorListenner.ts" />
+    <TypeScriptCompile Include="server\websocket\OnWsCloseListenner.ts" />
     <TypeScriptCompile Include="typedefinition\chart.d.ts" />
+    <TypeScriptCompile Include="typedefinition\md5.d.ts" />
     <TypeScriptCompile Include="typedefinition\clipboard.d.ts" />
     <TypeScriptCompile Include="typedefinition\google.maps.d.ts" />
     <TypeScriptCompile Include="typedefinition\jquery.d.ts" />

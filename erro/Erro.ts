@@ -15,9 +15,20 @@ module Web
 
         // #region Atributos
 
+        private _exp: Error;
         private _strMensagem: string = "Erro inesperado.";
         private _strMensagemFormatada: string;
-        private _strMensagemTecnica: string = "<Sem detalhes>";
+        private _strMensagemTecnica: string;
+
+        private get exp(): Error
+        {
+            return this._exp;
+        }
+
+        private set exp(exp: Error)
+        {
+            this._exp = exp;
+        }
 
         public get strMensagem(): string
         {
@@ -31,45 +42,38 @@ module Web
 
         private get strMensagemFormatada(): string
         {
-            this._strMensagemFormatada = this.strMensagem;
-
-            if (Utils.getBooStrVazia(this.strMensagemTecnica))
+            if (this._strMensagemFormatada != null)
             {
                 return this._strMensagemFormatada;
             }
 
-            this._strMensagemFormatada += "\n\n"
-            this._strMensagemFormatada += "Detalhes:"
-            this._strMensagemFormatada += "\n\n"
-            this._strMensagemFormatada += this.strMensagemTecnica;
+            this._strMensagemFormatada = this.getStrMensagemFormatada();
 
             return this._strMensagemFormatada;
         }
 
         private get strMensagemTecnica(): string
         {
-            return this._strMensagemTecnica;
-        }
+            if (this._strMensagemTecnica != null)
+            {
+                return this._strMensagemTecnica;
+            }
 
-        private set strMensagemTecnica(strMensagemTecnica: string)
-        {
-            this._strMensagemTecnica = strMensagemTecnica;
+            this._strMensagemTecnica = this.getStrMensagemTecnica()
+
+            return this._strMensagemTecnica;
         }
 
         // #endregion Atributos
 
         // #region Construtores
 
-        constructor(strMensagem: string, ex: Error)
+        constructor(strMensagem: string, exp: Error = null)
         {
             super();
 
             this.strMensagem = strMensagem;
-
-            if (ex != null)
-            {
-                this.strMensagemTecnica = ex.message;
-            }
+            this.exp = exp;
 
             this.mostrarMensagem();
         }
@@ -77,6 +81,42 @@ module Web
         // #endregion Construtores
 
         // #region Métodos
+
+        private getStrMensagemFormatada(): string
+        {
+            var strResultado = this.strMensagem;
+
+            if (Utils.getBooStrVazia(this.strMensagemTecnica))
+            {
+                return strResultado;
+            }
+
+            strResultado += "<br/>"
+            strResultado += "<br/>"
+            strResultado += "Detalhes:"
+            strResultado += "<br/>"
+            strResultado += "<br/>"
+            strResultado += this.strMensagemTecnica;
+
+            return strResultado;
+        }
+
+        private getStrMensagemTecnica(): string
+        {
+            var strResultado = "Sem maiores informações.";
+
+            if (this.exp == null)
+            {
+                return strResultado;
+            }
+
+            if (Utils.getBooStrVazia(this.exp.message))
+            {
+                return strResultado;
+            }
+
+            return this.exp.message;
+        }
 
         private mostrarMensagem(): void
         {

@@ -59,7 +59,7 @@ module Web
         private _pag: PaginaHtml;
         private _srvAjaxDb: SrvAjaxDbeBase;
         private _srvHttp: SrvHttpBase;
-        private _strSessionId: string;
+        private _strSessaoId: string;
         private _tagFocoExclusivo: ComponenteHtml;
 
         private get arrSrv(): Array<ServerBase>
@@ -147,7 +147,7 @@ module Web
                 return this._srvAjaxDb;
             }
 
-            this._srvAjaxDb = this.getSrvAjaxDb();
+            this._srvAjaxDb = this.getSrvAjaxDbe();
 
             return this._srvAjaxDb;
         }
@@ -164,16 +164,16 @@ module Web
             return this._srvHttp;
         }
 
-        public get strSessionId(): string
+        public get strSessaoId(): string
         {
-            if (this._strSessionId != null)
+            if (this._strSessaoId != null)
             {
-                return this._strSessionId;
+                return this._strSessaoId;
             }
 
-            this._strSessionId = this.getStrSessionId();
+            this._strSessaoId = this.getStrSessaoId();
 
-            return this._strSessionId;
+            return this._strSessaoId;
         }
 
         private get tagFocoExclusivo(): ComponenteHtml
@@ -319,7 +319,7 @@ module Web
             return new TemaDefault();
         }
 
-        protected getSrvAjaxDb(): SrvAjaxDbeBase
+        protected getSrvAjaxDbe(): SrvAjaxDbeBase
         {
             return null;
         }
@@ -353,7 +353,7 @@ module Web
             return objRegExpExecArray[1];
         }
 
-        private getStrSessionId(): string
+        private getStrSessaoId(): string
         {
             return this.getStrCookieValue(AppWebBase.STR_COOKIE_SESSAO_ID_NOME);
         }
