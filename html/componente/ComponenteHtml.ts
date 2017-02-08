@@ -34,7 +34,7 @@ module Web
 
             this._booSelecionado = booSelecionado;
 
-            this.atualizarBooSelecionado();
+            this.setBooSelecionado(this._booSelecionado);
         }
 
         public get objAnexo(): Object
@@ -66,17 +66,17 @@ module Web
 
         // #region Métodos
 
-        protected atualizarBooSelecionado(): void
+        protected setBooSelecionado(booSelecionado: boolean): void
         {
-            this.jq.css("background-color", this.booSelecionado ? this.getCorSelecionado() : Utils.STR_VAZIA);
-            this.jq.css("color", this.booSelecionado ? "black" : Utils.STR_VAZIA);
+            this.jq.css("background-color", booSelecionado ? this.getCorSelecionado() : Utils.STR_VAZIA);
+            this.jq.css("color", booSelecionado ? "black" : Utils.STR_VAZIA);
 
-            this.atualizarBooSelecionadoFoco();
+            this.setBooSelecionadoFoco(booSelecionado);
         }
 
-        private atualizarBooSelecionadoFoco(): void
+        private setBooSelecionadoFoco(booSelecionado: boolean): void
         {
-            if (!this.booSelecionado)
+            if (!booSelecionado)
             {
                 return;
             }

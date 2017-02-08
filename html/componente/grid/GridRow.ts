@@ -56,16 +56,16 @@ module Web
 
         // #region Métodos
 
-        protected atualizarBooSelecionado(): void
+        protected setBooSelecionado(booSelecionado: boolean): void
         {
-            super.atualizarBooSelecionado();
+            super.setBooSelecionado(booSelecionado);
 
             if (this.tagGridHtml == null)
             {
                 return;
             }
 
-            if (this.booSelecionado)
+            if (booSelecionado)
             {
                 this.tagGridHtml.addRowSelecionada(this);
             }
