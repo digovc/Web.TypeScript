@@ -134,7 +134,7 @@ module Web
 
         private processarOnCloseLocal(arg: CloseEvent): void
         {
-            Notificacao.notificar('O servidor "_server_name" fechou a conexão.'.replace("_server_name", this.strNome));
+            Notificacao.notificar('O servidor "_server_name" fechou a conexão.'.replace("_server_name", this.strNome), Notificacao_EnmTipo.NEGATIVA);
 
             this.dispararEvtOnWsCloseListenner(arg);
         }
