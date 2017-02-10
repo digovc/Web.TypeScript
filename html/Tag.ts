@@ -57,7 +57,7 @@ module Web
         {
             this._booVisivel = booVisivel;
 
-            this._booVisivel ? this.mostrar(Tag_EnmAnimacaoTipo.IMEDIATAMENTE) : this.esconder(Tag_EnmAnimacaoTipo.IMEDIATAMENTE);
+            this.setBooVisivel(this._booVisivel);
         }
 
         private get intClickTimer(): number
@@ -337,6 +337,18 @@ module Web
             }
 
             this.jq.focus();
+        }
+
+        private setBooVisivel(booVisivel: boolean): void
+        {
+            if (booVisivel)
+            {
+                this.mostrar(Tag_EnmAnimacaoTipo.IMEDIATAMENTE);
+            }
+            else
+            {
+                this.esconder(Tag_EnmAnimacaoTipo.IMEDIATAMENTE);
+            }
         }
 
         protected setEventos(): void
