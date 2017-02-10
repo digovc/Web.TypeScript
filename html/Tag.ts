@@ -260,6 +260,11 @@ module Web
             return Utils.getBoo(this.getStrAttValor(strAttNome));
         }
 
+        protected getIntAttValor(strAttNome: string): number
+        {
+            return Number(this.getStrAttValor(strAttNome));
+        }
+
         protected getStrAttValor(strAttNome: string): string
         {
             if (Utils.getBooStrVazia(strAttNome))
