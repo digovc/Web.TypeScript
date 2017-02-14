@@ -92,7 +92,7 @@ module Web
 
             this._mniSelecionado = mniSelecionado;
 
-            this.atualizarMniSelecionado();
+            this.setMniSelecionado(this._mniSelecionado);
         }
 
         public get pagPrincipal(): PagPrincipal
@@ -178,14 +178,6 @@ module Web
             mni.mnuPai = this;
 
             mni.iniciar();
-        }
-
-        private atualizarMniSelecionado(): void
-        {
-            if (this.mniSelecionado != null)
-            {
-                this.mniSelecionado.booSelecionado = true;
-            }
         }
 
         public fecharGrupos(): void
@@ -345,31 +337,6 @@ module Web
             }
         }
 
-        protected setEventos(): void
-        {
-            super.setEventos();
-
-            this.divGaveta.addEvtOnClickListener(this);
-
-            this.txtPesquisa.addEvtOnClickListener(this);
-            this.txtPesquisa.addEvtOnEnterListener(this);
-            this.txtPesquisa.addEvtOnKeyUpListener(this);
-            this.txtPesquisa.addEvtOnValorAlteradoListener(this);
-
-            this.setEventosGlobal();
-        }
-
-        private setEventosGlobal(): void
-        {
-            if (this.pagPrincipal == null)
-            {
-                return;
-            }
-
-            this.pagPrincipal.addEvtOnClickListener(this);
-            this.pagPrincipal.addEvtOnKeyUpListener(this);
-        }
-
         public selecionarAnterior(): void
         {
             if (this.mniSelecionado == null)
@@ -458,6 +425,39 @@ module Web
             }
 
             this.arrMniFilhoVisivel[this.arrMniFilhoVisivel.length - 1].booSelecionado = true;
+        }
+
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            this.divGaveta.addEvtOnClickListener(this);
+
+            this.txtPesquisa.addEvtOnClickListener(this);
+            this.txtPesquisa.addEvtOnEnterListener(this);
+            this.txtPesquisa.addEvtOnKeyUpListener(this);
+            this.txtPesquisa.addEvtOnValorAlteradoListener(this);
+
+            this.setEventosGlobal();
+        }
+
+        private setEventosGlobal(): void
+        {
+            if (this.pagPrincipal == null)
+            {
+                return;
+            }
+
+            this.pagPrincipal.addEvtOnClickListener(this);
+            this.pagPrincipal.addEvtOnKeyUpListener(this);
+        }
+
+        private setMniSelecionado(mniSelecionado: MenuItem): void
+        {
+            if (mniSelecionado != null)
+            {
+                mniSelecionado.booSelecionado = true;
+            }
         }
 
         // #endregion Métodos

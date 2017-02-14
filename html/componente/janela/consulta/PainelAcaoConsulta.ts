@@ -70,7 +70,7 @@ module Web
 
             this._tagGridHtml = tagGridHtml;
 
-            this.atualizarTagGridHtml();
+            this.setTagGridHtml(this._tagGridHtml);
         }
 
         // #endregion Atributos
@@ -98,16 +98,6 @@ module Web
             this.btnAlterar.booVisivel = (this.tagGridHtml.intRowSelecionadaQtd < 2);
         }
 
-        private atualizarTagGridHtml(): void
-        {
-            if (this.tagGridHtml == null)
-            {
-                return;
-            }
-
-            this.tagGridHtml.addEvtOnRowClickListener(this);
-        }
-
         protected finalizar(): void
         {
             super.finalizar();
@@ -122,6 +112,16 @@ module Web
             this.btnAcaoPrincipal.addEvtOnClickListener(this);
             this.btnAdicionar.addEvtOnClickListener(this);
             this.btnAlterar.addEvtOnClickListener(this);
+        }
+
+        private setTagGridHtml(tagGridHtml: GridHtml): void
+        {
+            if (tagGridHtml == null)
+            {
+                return;
+            }
+
+            tagGridHtml.addEvtOnRowClickListener(this);
         }
 
         // #endregion Métodos

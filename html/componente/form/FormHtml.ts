@@ -53,7 +53,7 @@ module Web
 
             this._cmpEmFoco = cmpEmFoco;
 
-            this.atualizarCmpEmFoco();
+            this.setCmpEmFoco(this._cmpEmFoco);
         }
 
         private get divComando(): DivComando
@@ -82,7 +82,7 @@ module Web
 
             this._jnlCadastro = jnlCadastro;
 
-            this.atualizarJnlCadastro();
+            this.setJnlCadastro(this._jnlCadastro);
         }
 
         public get divCritica(): DivCritica
@@ -135,7 +135,7 @@ module Web
 
             this._tblWeb = tblWeb;
 
-            this.atualizarTblWeb();
+            this.setTblWeb(this._tblWeb);
         }
 
         // #endregion Atributos
@@ -189,78 +189,6 @@ module Web
             this.jq.css("top", (intTop - 100));
 
             this.tabHtml.iniciar();
-        }
-
-        private atualizarCmpEmFoco(): void
-        {
-            this.dispararEvtOnCmpEmFocoAlterado();
-
-            this.atualizarCmpEmFocodivCritica();
-            this.atualizarCmpEmFocodivDica();
-        }
-
-        private atualizarCmpEmFocodivCritica(): void
-        {
-            this.divCritica.strConteudo = null;
-
-            if (this.cmpEmFoco == null)
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia(this.cmpEmFoco.strCritica))
-            {
-                return;
-            }
-
-            this.divCritica.strConteudo = this.cmpEmFoco.strCritica;
-        }
-
-        private atualizarCmpEmFocodivDica(): void
-        {
-            this.divDica.strConteudo = null;
-
-            if (this.cmpEmFoco == null)
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia(this.cmpEmFoco.strDica))
-            {
-                return;
-            }
-
-            this.divDica.strConteudo = this.cmpEmFoco.strDica;
-        }
-
-        private atualizarJnlCadastro(): void
-        {
-            if (this.jnlCadastro == null)
-            {
-                return;
-            }
-
-            this.tblWeb = this.jnlCadastro.tblWeb;
-        }
-
-        private atualizarTblWeb(): void
-        {
-            if (this.tblWeb == null)
-            {
-                return;
-            }
-
-            this.atualizarTblWebArrCmp();
-        }
-
-        private atualizarTblWebArrCmp(): void
-        {
-            if (this.arrCmp == null)
-            {
-                return;
-            }
-
-            this.arrCmp.forEach((cmp) => { this.tblWeb.addClnWeb(cmp.clnWeb); });
         }
 
         protected carregarDados(): void
@@ -538,6 +466,73 @@ module Web
             }
         }
 
+        private setCmpEmFoco(cmpEmFoco: CampoHtml): void
+        {
+            this.dispararEvtOnCmpEmFocoAlterado(cmpEmFoco);
+
+            this.setCmpEmFocodivCritica(cmpEmFoco);
+            this.setCmpEmFocodivDica(cmpEmFoco);
+        }
+
+        private setCmpEmFocodivCritica(cmpEmFoco: CampoHtml): void
+        {
+            this.divCritica.strConteudo = null;
+
+            if (cmpEmFoco == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(cmpEmFoco.strCritica))
+            {
+                return;
+            }
+
+            this.divCritica.strConteudo = cmpEmFoco.strCritica;
+        }
+
+        private setCmpEmFocodivDica(cmpEmFoco: CampoHtml): void
+        {
+            this.divDica.strConteudo = null;
+
+            if (cmpEmFoco == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(cmpEmFoco.strDica))
+            {
+                return;
+            }
+
+            this.divDica.strConteudo = cmpEmFoco.strDica;
+        }
+
+        private setJnlCadastro(jnlCadastro: JnlCadastro): void
+        {
+            if (jnlCadastro == null)
+            {
+                return;
+            }
+
+            this.tblWeb = jnlCadastro.tblWeb;
+        }
+
+        private setTblWeb(tblWeb: TabelaWeb): void
+        {
+            if (tblWeb == null)
+            {
+                return;
+            }
+
+            if (this.arrCmp == null)
+            {
+                return;
+            }
+
+            this.arrCmp.forEach((cmp) => { tblWeb.addClnWeb(cmp.clnWeb); });
+        }
+
         public validarDados(): boolean
         {
             if (!this.validarDadosCmp())
@@ -606,7 +601,7 @@ module Web
             this.arrEvtOnCmpEmFocoAlterado.push(evt);
         }
 
-        private dispararEvtOnCmpEmFocoAlterado(): void
+        private dispararEvtOnCmpEmFocoAlterado(cmpEmFoco: CampoHtml): void
         {
             if (this.arrEvtOnCmpEmFocoAlterado.length == 0)
             {
@@ -620,7 +615,7 @@ module Web
                     return;
                 }
 
-                evt.onCmpEmFocoAlterado(this, this.cmpEmFoco);
+                evt.onCmpEmFocoAlterado(this, cmpEmFoco);
             });
         }
 

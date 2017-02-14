@@ -44,7 +44,7 @@ module Web
 
             this._jnlTag = jnlTag;
 
-            this.atualizarJnlTag();
+            this.setJnlTag(this._jnlTag);
         }
 
         // #endregion Atributos
@@ -70,21 +70,6 @@ module Web
             }
 
             this.jnlTag.removerTagCard(this);
-        }
-
-        private atualizarJnlTag(): void
-        {
-            if (this.jnlTag == null)
-            {
-                return;
-            }
-
-            var strId = "_str_jnl_tag_id__int_index";
-
-            strId = strId.replace("_str_jnl_tag_id", this.jnlTag.strId);
-            strId = strId.replace("_int_index", String(this.jnlTag.arrTagCard.length));
-
-            this.strId = strId;
         }
 
         private getStrTagNomeFormatada(): string
@@ -122,6 +107,21 @@ module Web
             super.setEventos();
 
             this.divFechar.addEvtOnClickListener(this);
+        }
+
+        private setJnlTag(jnlTag: JnlTag): void
+        {
+            if (jnlTag == null)
+            {
+                return;
+            }
+
+            var strId = "_str_jnl_tag_id__int_index";
+
+            strId = strId.replace("_str_jnl_tag_id", jnlTag.strId);
+            strId = strId.replace("_int_index", String(jnlTag.arrTagCard.length));
+
+            this.strId = strId;
         }
 
         // #endregion Métodos

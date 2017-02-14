@@ -122,7 +122,7 @@ module Web
         {
             this._strPlaceholder = strPlaceholder;
 
-            this.atualizarStrPlaceholder();
+            this.setStrPlaceholder(this._strPlaceholder);
         }
 
         public get strSelector(): string
@@ -146,7 +146,7 @@ module Web
 
             this._strSelector = strJqSelector;
 
-            this.atualizarStrJqSelector();
+            this.setStrJqSelector(this._strSelector);
         }
 
         public get strTitle(): string
@@ -165,7 +165,7 @@ module Web
         {
             this._strTitle = strTitle;
 
-            this.atualizarStrTitle();
+            this.setStrTitle(this._strTitle);
         }
 
         // #endregion Atributos
@@ -186,33 +186,6 @@ module Web
         public addStrConteudo(strConteudo: string): void
         {
             this.jq.append(strConteudo);
-        }
-
-        private atualizarStrJqSelector(): void
-        {
-            this.jq = null;
-        }
-
-        protected atualizarStrPlaceholder(): void
-        {
-            if (!Utils.getBooStrVazia(this.strPlaceholder))
-            {
-                this.jq.attr("placeholder", this.strPlaceholder);
-            }
-            else
-            {
-                this.jq.removeAttr("placeholder");
-            }
-        }
-
-        private atualizarStrTitle(): void
-        {
-            if (this.jq == null)
-            {
-                return;
-            }
-
-            this.jq.attr("title", this.strTitle);
         }
 
         public dispose(): void
@@ -358,6 +331,38 @@ module Web
 
         protected setEventos(): void
         {
+        }
+
+        protected setStrPlaceholder(strPlaceholder: string): void
+        {
+            if (!Utils.getBooStrVazia(strPlaceholder))
+            {
+                this.jq.attr("placeholder", strPlaceholder);
+                return;
+            }
+
+            this.jq.removeAttr("placeholder");
+        }
+
+        private setStrJqSelector(strJqSelector: string): void
+        {
+            this.jq = null;
+        }
+
+        private setStrTitle(strTitle: string): void
+        {
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            if (!Utils.getBooStrVazia(strTitle))
+            {
+                this.jq.attr("title", strTitle);
+                return;
+            }
+
+            this.jq.removeAttr("title");
         }
 
         // #endregion Métodos

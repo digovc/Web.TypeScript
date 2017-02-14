@@ -38,7 +38,7 @@ module Web
 
             this._booAtiva = booAtiva;
 
-            this.atualizarBooAtiva();
+            this.setBooAtiva(this._booAtiva);
         }
 
         public get tabHtml(): TabHtml
@@ -194,22 +194,6 @@ module Web
             }
 
             this.tabHtml.btnAlterar.mostrar();
-        }
-
-        private atualizarBooAtiva(): void
-        {
-            this.tabItemHead.booSelecionado = this.booAtiva;
-
-            if (!this.booAtiva)
-            {
-                this.booVisivel = false;
-                return;
-            }
-
-            this.tabHtml.tabItemAtiva = this;
-
-            this.pesquisar();
-            this.mostrar();
         }
 
         public pesquisar(): void
@@ -416,6 +400,22 @@ module Web
             }
 
             this.tabHtml.btnAlterar.mostrar();
+        }
+
+        private setBooAtiva(booAtiva: boolean): void
+        {
+            this.tabItemHead.booSelecionado = booAtiva;
+
+            if (!booAtiva)
+            {
+                this.booVisivel = false;
+                return;
+            }
+
+            this.tabHtml.tabItemAtiva = this;
+
+            this.pesquisar();
+            this.mostrar();
         }
 
         // #endregion Métodos

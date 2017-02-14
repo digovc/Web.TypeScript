@@ -25,7 +25,6 @@ module Web
         private _divComando: Div;
         private _frm: FormHtml;
         private _tabItemAtiva: TabItem;
-        private _tabItemAtivaAnterior: TabItem;
 
         private get arrTabItem(): Array<TabItem>
         {
@@ -109,21 +108,14 @@ module Web
                 return;
             }
 
-            this.tabItemAtivaAnterior = this._tabItemAtiva;
+            if (this._tabItemAtiva != null)
+            {
+                this._tabItemAtiva.booAtiva = false;
+            }
 
             this._tabItemAtiva = tabItemAtiva;
 
-            this.atualizarTabItemAtiva();
-        }
-
-        private get tabItemAtivaAnterior(): TabItem
-        {
-            return this._tabItemAtivaAnterior;
-        }
-
-        private set tabItemAtivaAnterior(tabItemAtivaAnterior: TabItem)
-        {
-            this._tabItemAtivaAnterior = tabItemAtivaAnterior;
+            this.setTabItemAtiva(this._tabItemAtiva);
         }
 
         // #endregion Atributos
@@ -176,21 +168,6 @@ module Web
             }
 
             this.tabItemAtiva = tabItem;
-        }
-
-        private atualizarTabItemAtiva(): void
-        {
-            if (this.tabItemAtiva == null)
-            {
-                return;
-            }
-
-            if (this.tabItemAtivaAnterior != null)
-            {
-                this.tabItemAtivaAnterior.booAtiva = false;
-            }
-
-            this.tabItemAtiva.booAtiva = true;
         }
 
         protected finalizar()
@@ -353,6 +330,16 @@ module Web
             this.btnAdicionar.addEvtOnClickListener(this);
             this.btnAlterar.addEvtOnClickListener(this);
             this.btnApagar.addEvtOnClickListener(this);
+        }
+
+        private setTabItemAtiva(tabItemAtiva: TabItem): void
+        {
+            if (this.tabItemAtiva == null)
+            {
+                return;
+            }
+
+            this.tabItemAtiva.booAtiva = true;
         }
 
         // #endregion Métodos

@@ -36,14 +36,6 @@ module Web
 
         // #region Métodos
 
-        protected atualizarStrValor(): void
-        {
-            super.atualizarStrValor();
-
-            this.divSeletor.jq.animate({ "left": this.booValor ? "15px" : "1px" }, 200);
-            this.divSeletor.jq.css("background-color", this.booValor ? "rgb(132,202,156)" : Utils.STR_VAZIA);
-        }
-
         protected inicializarStrValor(): void
         {
             //super.inicializarStrValor();
@@ -57,6 +49,14 @@ module Web
             super.setEventos();
 
             this.addEvtOnClickListener(this);
+        }
+
+        protected setStrValor(strValor: string): void
+        {
+            super.setStrValor(strValor);
+
+            this.divSeletor.jq.animate({ "left": (Utils.getBoo(strValor) ? "15px" : "1px") }, 200);
+            this.divSeletor.jq.css("background-color", (Utils.getBoo(strValor) ? "rgb(132,202,156)" : Utils.STR_VAZIA));
         }
 
         // #endregion Métodos

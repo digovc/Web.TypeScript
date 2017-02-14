@@ -59,7 +59,7 @@ module Web
 
             this._tblWeb = tblWeb;
 
-            this.atualizarTblWeb();
+            this.setTblWeb(this._tblWeb);
         }
 
         // #endregion Atributos
@@ -118,31 +118,6 @@ module Web
             }
 
             this.arrTagCard.push(tagCard);
-        }
-
-        private atualizarTblWeb(): void
-        {
-            if (this.tblWeb == null)
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia(this.tblWeb.strNome))
-            {
-                return;
-            }
-
-            if (this.tblWeb.clnWebIntId.intValor < 1)
-            {
-                return;
-            }
-
-            var strId = "jnlTag__tbl_nome__int_registro_id";
-
-            strId = strId.replace("_tbl_nome", this.tblWeb.strNome);
-            strId = strId.replace("_int_registro_id", String(this.tblWeb.clnWebIntId.intValor));
-
-            this.strId = strId;
         }
 
         protected fechar(): void
@@ -327,6 +302,31 @@ module Web
             super.setEventos();
 
             this.tagInputTag.addEvtOnKeyDownListener(this);
+        }
+
+        private setTblWeb(tblWeb: TabelaWeb): void
+        {
+            if (tblWeb == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(tblWeb.strNome))
+            {
+                return;
+            }
+
+            if (tblWeb.clnWebIntId.intValor < 1)
+            {
+                return;
+            }
+
+            var strId = "jnlTag__tbl_nome__int_registro_id";
+
+            strId = strId.replace("_tbl_nome", tblWeb.strNome);
+            strId = strId.replace("_int_registro_id", String(tblWeb.clnWebIntId.intValor));
+
+            this.strId = strId;
         }
 
         private tagInputTagOnKeyDown(arg: JQueryKeyEventObject): void

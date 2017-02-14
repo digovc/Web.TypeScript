@@ -115,7 +115,7 @@ module Web
 
             this._tagGridHtml = tagGridHtml;
 
-            this.atualizarTagGridHtml();
+            this.setTagGridHtml(tagGridHtml);
         }
 
         public get tblWeb(): TabelaWeb
@@ -226,11 +226,6 @@ module Web
             }
 
             this.abrirCadastro(tagGridRow.intId);
-        }
-
-        private atualizarTagGridHtml(): void
-        {
-            this.pnlAcaoConsulta.tagGridHtml = this.tagGridHtml;
         }
 
         protected fechar(): void
@@ -430,6 +425,11 @@ module Web
 
             this.divGrid.jq.animate({ top: 140 });
             this.pnlFiltro.mostrarFiltro();
+        }
+
+        private setTagGridHtml(tagGridHtml: GridHtml): void
+        {
+            this.pnlAcaoConsulta.tagGridHtml = tagGridHtml;
         }
 
         // #endregion Métodos

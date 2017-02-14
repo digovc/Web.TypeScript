@@ -100,7 +100,7 @@ module Web
 
             this._booEmFoco = booEmFoco;
 
-            this.atualizarBooEmFoco();
+            this.setBooEmFoco(this._booEmFoco);
         }
 
         public get dttLoad(): Date
@@ -234,18 +234,6 @@ module Web
             }
 
             this.arrTbl.push(tblWeb);
-        }
-
-        private atualizarBooEmFoco(): void
-        {
-            if (this.booEmFoco)
-            {
-                this.dispararEvtOnFocusInListener();
-            }
-            else
-            {
-                this.dispararEvtOnFocusOutListener();
-            }
         }
 
         public atualizarHistorico(objHistorico: Historico): void
@@ -417,6 +405,18 @@ module Web
 
         protected montarLayout(): void
         {
+        }
+
+        private setBooEmFoco(booEmFoco: boolean): void
+        {
+            if (booEmFoco)
+            {
+                this.dispararEvtOnFocusInListener();
+            }
+            else
+            {
+                this.dispararEvtOnFocusOutListener();
+            }
         }
 
         protected setEventos(): void

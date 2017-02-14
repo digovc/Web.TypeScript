@@ -92,7 +92,7 @@ module Web
 
             this._jnlCadastroPai = jnlCadastroPai;
 
-            this.atualizarJnlCadastroPai();
+            this.setJnlCadastroPai(this._jnlCadastroPai);
         }
 
         protected get pagPrincipal(): PagPrincipal
@@ -228,16 +228,16 @@ module Web
             this.arrJnlCadastroFilho.push(jnlCadastroFilho);
         }
 
-        private atualizarJnlCadastroPai(): void
+        private setJnlCadastroPai(jnlCadastroPai: JnlCadastro): void
         {
-            if (this.jnlCadastroPai == null)
+            if (jnlCadastroPai == null)
             {
                 return;
             }
 
-            this.jnlCadastroPai.addJnlCadatroFilho(this);
+            jnlCadastroPai.addJnlCadatroFilho(this);
 
-            this.addEvtOnDisposedListener(this.jnlCadastroPai);
+            this.addEvtOnDisposedListener(jnlCadastroPai);
         }
 
         protected carregarDados(): void

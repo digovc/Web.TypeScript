@@ -44,7 +44,7 @@ module Web
         {
             this._booAtivo = booAtivo;
 
-            this.atualizarBooAtivo();
+            this.setBooAtivo(this._booAtivo);
         }
 
         private get booDragging(): boolean
@@ -168,18 +168,6 @@ module Web
 
         // #region Métodos
 
-        private atualizarBooAtivo(): void
-        {
-            if (this.booAtivo)
-            {
-                this.divInativa.esconder();
-            }
-            else
-            {
-                this.divInativa.mostrar();
-            }
-        }
-
         private divCabecalhoOnMouseDown(arg: JQueryMouseEventObject): void
         {
             if (arg.button != Tag.INT_MOUSE_BUTTON_LEFT)
@@ -266,6 +254,17 @@ module Web
 
             this.jq.css("left", intLeft);
             this.jq.css("top", intTop);
+        }
+
+        private setBooAtivo(booAtivo: boolean): void
+        {
+            if (booAtivo)
+            {
+                this.divInativa.esconder();
+                return;
+            }
+
+            this.divInativa.mostrar();
         }
 
         protected setEventos(): void

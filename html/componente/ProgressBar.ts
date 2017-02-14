@@ -45,7 +45,7 @@ module Web
 
             this._intProgresso = intProgresso;
 
-            this.atualizarIntProgresso();
+            this.setIntProgresso(this._intProgresso);
         }
 
         public get intProgressoMaximo(): number
@@ -65,9 +65,9 @@ module Web
 
         // #region Métodos
 
-        private atualizarIntProgresso(): void
+        private setIntProgresso(intProgresso: number): void
         {
-            var intPercentual = ((this.intProgresso / this.intProgressoMaximo) * 100);
+            var intPercentual = ((intProgresso / this.intProgressoMaximo) * 100);
 
             if (intPercentual > 100)
             {

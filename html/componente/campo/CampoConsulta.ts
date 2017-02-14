@@ -57,7 +57,7 @@ module Web
 
             this._clnWebFiltro = clnWebFiltro;
 
-            this.atualizarClnWebFiltro();
+            this.setClnWebFiltro(this._clnWebFiltro);
         }
 
         private get strTblWebRefNome(): string
@@ -161,9 +161,9 @@ module Web
             mnc.addOpcao(clnWeb.strNomeExibicao, (() => { this.selecionarColunaPesquisa(clnWeb); }));
         }
 
-        protected atualizarBooEmFoco(): void
+        protected setBooEmFoco(): void
         {
-            super.atualizarBooEmFoco();
+            super.setBooEmFoco();
 
             this.btnAcao.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
             this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
@@ -185,38 +185,21 @@ module Web
             }
         }
 
-        private atualizarClnWebFiltro(): void
+        protected setStrCritica(strCritica: string): void
         {
-            if (this.clnWebFiltro == null)
-            {
-                this.clnWebFiltro = this.tblWebRef.clnWebNome;
-                return;
-            }
+            super.setStrCritica(strCritica);
 
-            var strTitulo = "_campo_nome (_cln_web_ref_nome)";
-
-            strTitulo = strTitulo.replace("_campo_nome", this.getStrAttValor("cln_ref_nome_exibicao"));
-            strTitulo = strTitulo.replace("_cln_web_ref_nome", this.clnWebFiltro.strNomeExibicao);
-
-            this.divTitulo.strConteudo = strTitulo;
-        }
-
-        protected atualizarStrCritica(): void
-        {
-            super.atualizarStrCritica();
-
-            if (Utils.getBooStrVazia(this.strCritica))
+            if (Utils.getBooStrVazia(strCritica))
             {
                 this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
                 this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
                 this.txtPesquisa.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+                return;
             }
-            else
-            {
-                this.btnAcao.jq.css("border-color", "#f8b2b2");
-                this.txtIntId.jq.css("border-color", "#f8b2b2");
-                this.txtPesquisa.jq.css("border-color", "#f8b2b2");
-            }
+
+            this.btnAcao.jq.css("border-color", "#f8b2b2");
+            this.txtIntId.jq.css("border-color", "#f8b2b2");
+            this.txtPesquisa.jq.css("border-color", "#f8b2b2");
         }
 
         protected atualizarStrValor(): void
@@ -366,6 +349,22 @@ module Web
             }
 
             this.clnWebFiltro = clnWeb;
+        }
+
+        private setClnWebFiltro(clnWebFiltro: ColunaWeb): void
+        {
+            if (clnWebFiltro == null)
+            {
+                clnWebFiltro = this.tblWebRef.clnWebNome;
+                return;
+            }
+
+            var strTitulo = "_campo_nome (_cln_web_ref_nome)";
+
+            strTitulo = strTitulo.replace("_campo_nome", this.getStrAttValor("cln_ref_nome_exibicao"));
+            strTitulo = strTitulo.replace("_cln_web_ref_nome", clnWebFiltro.strNomeExibicao);
+
+            this.divTitulo.strConteudo = strTitulo;
         }
 
         protected setEventos(): void

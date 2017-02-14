@@ -74,7 +74,7 @@ module Web
 
             this._objFavorito = objFavorito;
 
-            this.atualizarObjFavorito();
+            this.setObjFavorito(this._objFavorito);
         }
 
         private get tblWeb(): TabelaWeb
@@ -129,19 +129,6 @@ module Web
             (AppWebBase.i.pag as PagPrincipal).abrirConsulta(this.tblWeb);
         }
 
-        private atualizarObjFavorito(): void
-        {
-            if (this.objFavorito == null)
-            {
-                this.divTitulo.strConteudo = null;
-                this.imgIcone.jq.attr("src", DivFavoritoItem.SRC_IMAGEM_VAZIO);
-                return;
-            }
-
-            this.divTitulo.strConteudo = this.objFavorito.strTitulo;
-            this.imgIcone.jq.attr("src", DivFavoritoItem.SRC_IMAGEM_CARREGADO);
-        }
-
         private getTblWeb(): TabelaWeb
         {
             if (this.objFavorito == null)
@@ -162,6 +149,19 @@ module Web
             super.setEventos();
 
             this.addEvtOnClickListener(this);
+        }
+
+        private setObjFavorito(objFavorito: FavoritoDominio): void
+        {
+            if (objFavorito == null)
+            {
+                this.divTitulo.strConteudo = null;
+                this.imgIcone.jq.attr("src", DivFavoritoItem.SRC_IMAGEM_VAZIO);
+                return;
+            }
+
+            this.divTitulo.strConteudo = objFavorito.strTitulo;
+            this.imgIcone.jq.attr("src", DivFavoritoItem.SRC_IMAGEM_CARREGADO);
         }
 
         // #endregion Métodos

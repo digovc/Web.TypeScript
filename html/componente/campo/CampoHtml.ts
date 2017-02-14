@@ -52,7 +52,7 @@ module Web
 
             this._booEmFoco = booSEmFoco;
 
-            this.atualizarBooEmFoco();
+            this.setBooEmFoco(this._booEmFoco);
         }
 
         public get booMostrarTituloNunca(): boolean
@@ -88,7 +88,7 @@ module Web
         {
             this._booPermitirAlterar = booPermitirAlterar;
 
-            this.atualizarBooPermitirAlterar();
+            this.setBooPermitirAlterar(this._booPermitirAlterar);
         }
 
         private get booObrigatorio(): boolean
@@ -112,7 +112,7 @@ module Web
 
             this._booObrigatorio = booObrigatorio;
 
-            this.atualizarBooObrigatorio();
+            this.setBooObrigatorio(this._booObrigatorio);
         }
 
         private get booSomenteLeitura(): boolean
@@ -192,7 +192,7 @@ module Web
 
             this._strCritica = strCritica;
 
-            this.atualizarStrCritica();
+            this.setStrCritica(this._strCritica);
         }
 
         public get strDica(): string
@@ -249,96 +249,6 @@ module Web
         // #endregion Construtores
 
         // #region Métodos
-
-        protected atualizarBooEmFoco(): void
-        {
-            this.divTitulo.jq.css("color", (this.booEmFoco ? "black" : Utils.STR_VAZIA));
-            this.divTitulo.jq.css("font-weight", (this.booEmFoco ? "bold" : Utils.STR_VAZIA));
-            this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-            this.tagInput.jq.css("border-bottom-width", (this.booEmFoco ? 2 : 1));
-
-            if (!Utils.getBooStrVazia(this.strCritica))
-            {
-                this.tagInput.jq.css("border-bottom-color", "#f8b2b2");
-            }
-
-            this.atualizarBooEmFocoFrm();
-        }
-
-        private atualizarBooEmFocoFrm(): void
-        {
-            if (!this.booEmFoco)
-            {
-                return;
-            }
-
-            if (this.frm == null)
-            {
-                return;
-            }
-
-            this.frm.cmpEmFoco = this;
-        }
-
-        private atualizarBooObrigatorio(): void
-        {
-            if (this.jq == null)
-            {
-                return;
-            }
-
-            if (this.booObrigatorio)
-            {
-                this.jq.attr("required", "true");
-            }
-            else
-            {
-                this.jq.removeAttr("required");
-            }
-        }
-
-        private atualizarBooPermitirAlterar(): void
-        {
-            this.jq.attr("permitir_alterar", String(this._booPermitirAlterar));
-        }
-
-        protected atualizarStrCritica(): void
-        {
-            if (Utils.getBooStrVazia(this.strCritica))
-            {
-                this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-            }
-            else
-            {
-                this.tagInput.jq.css("border-bottom-color", "#f8b2b2");
-            }
-
-            this.atualizarStrCriticaFrm();
-        }
-
-        private atualizarStrCriticaFrm(): void
-        {
-            if (this.frm == null)
-            {
-                return;
-            }
-
-            this.frm.divCritica.strConteudo = this.strCritica;
-        }
-
-        protected atualizarStrPlaceholder(): void
-        {
-            super.atualizarStrPlaceholder();
-
-            if (!Utils.getBooStrVazia(this.strPlaceholder))
-            {
-                this.tagInput.jq.attr("placeholder", this.strPlaceholder);
-            }
-            else
-            {
-                this.tagInput.jq.removeAttr("placeholder");
-            }
-        }
 
         protected atualizarStrValor(): void
         {
@@ -515,6 +425,57 @@ module Web
             this.frm.cmpEmFoco = this;
         }
 
+        protected setBooEmFoco(booEmFoco: boolean): void
+        {
+            this.divTitulo.jq.css("color", (booEmFoco ? "black" : Utils.STR_VAZIA));
+            this.divTitulo.jq.css("font-weight", (booEmFoco ? "bold" : Utils.STR_VAZIA));
+            this.tagInput.jq.css("border-bottom-color", (booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+            this.tagInput.jq.css("border-bottom-width", (booEmFoco ? 2 : 1));
+
+            if (!Utils.getBooStrVazia(this.strCritica))
+            {
+                this.tagInput.jq.css("border-bottom-color", "#f8b2b2");
+            }
+
+            this.setBooEmFocoFrm(booEmFoco);
+        }
+
+        private setBooEmFocoFrm(booEmFoco: boolean): void
+        {
+            if (!booEmFoco)
+            {
+                return;
+            }
+
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            this.frm.cmpEmFoco = this;
+        }
+
+        private setBooObrigatorio(booObrigatorio: boolean): void
+        {
+            if (this.jq == null)
+            {
+                return;
+            }
+
+            if (booObrigatorio)
+            {
+                this.jq.attr("required", "true");
+                return;
+            }
+
+            this.jq.removeAttr("required");
+        }
+
+        private setBooPermitirAlterar(booPermitirAlterar: boolean): void
+        {
+            this.jq.attr("permitir_alterar", String(booPermitirAlterar));
+        }
+
         protected setEventos(): void
         {
             super.setEventos();
@@ -522,6 +483,43 @@ module Web
             this.tagInput.addEvtOnFocusInListener(this);
             this.tagInput.addEvtOnFocusOutListener(this);
             this.tagInput.addEvtOnValorAlteradoListener(this);
+        }
+
+        protected setStrCritica(strCritica: string): void
+        {
+            if (Utils.getBooStrVazia(strCritica))
+            {
+                this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+            }
+            else
+            {
+                this.tagInput.jq.css("border-bottom-color", "#f8b2b2");
+            }
+
+            this.setStrCriticaFrm(strCritica);
+        }
+
+        private setStrCriticaFrm(strCritica: string): void
+        {
+            if (this.frm == null)
+            {
+                return;
+            }
+
+            this.frm.divCritica.strConteudo = strCritica;
+        }
+
+        protected setStrPlaceholder(strPlaceholder: string): void
+        {
+            super.setStrPlaceholder(strPlaceholder);
+
+            if (!Utils.getBooStrVazia(strPlaceholder))
+            {
+                this.tagInput.jq.attr("placeholder", strPlaceholder);
+                return;
+            }
+
+            this.tagInput.jq.removeAttr("placeholder");
         }
 
         private setStrTitulo(strTitulo: string): void

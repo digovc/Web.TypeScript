@@ -39,7 +39,7 @@ module Web
         {
             this._booDisabled = booDisabled;
 
-            this.atualizarBooDisabled(this._booDisabled);
+            this.setBooDisabled(this._booDisabled);
         }
 
         public get booValor(): boolean
@@ -133,7 +133,7 @@ module Web
 
             this._strValor = strValor;
 
-            this.atualizarStrValor();
+            this.setStrValor(this._strValor);
         }
 
         public get strValorAnterior(): string
@@ -162,28 +162,6 @@ module Web
         // #endregion Construtores
 
         // #region Métodos
-
-        private atualizarBooDisabled(booDisabled: boolean): void
-        {
-            if (booDisabled)
-            {
-                this.jq.attr("disabled", "true");
-            }
-            else
-            {
-                this.jq.removeAttr("disabled");
-            }
-        }
-
-        protected atualizarStrValor(): void
-        {
-            if (this.jq.val() != this.strValor)
-            {
-                this.jq.val(this.strValor);
-            }
-
-            this.dispararEvtOnValorAlteradoListener();
-        }
 
         private getBooDisabled(): boolean
         {
@@ -230,11 +208,32 @@ module Web
             this.jq.select();
         }
 
+        private setBooDisabled(booDisabled: boolean): void
+        {
+            if (booDisabled)
+            {
+                this.jq.attr("disabled", "true");
+                return;
+            }
+
+            this.jq.removeAttr("disabled");
+        }
+
         protected setEventos(): void
         {
             super.setEventos();
 
             this.addEvtOnValorAlteradoListener(this);
+        }
+
+        protected setStrValor(strValor: string): void
+        {
+            if (this.jq.val() != strValor)
+            {
+                this.jq.val(strValor);
+            }
+
+            this.dispararEvtOnValorAlteradoListener(strValor);
         }
 
         // #endregion Métodos
@@ -439,21 +438,21 @@ module Web
             this.arrEvtOnValorAlteradoListener.splice(this.arrEvtOnValorAlteradoListener.indexOf(evtOnValorAlteradoListener), 1);
         }
 
-        private dispararEvtOnValorAlteradoListener(): void
+        private dispararEvtOnValorAlteradoListener(strValor: string): void
         {
             if (this.arrEvtOnValorAlteradoListener.length == 0)
             {
                 return;
             }
 
-            if (this.strValor == this.strValorAnterior)
+            if (strValor == this.strValorAnterior)
             {
                 return;
             }
 
             var arg = new OnValorAlteradoArg();
 
-            arg.strValor = this.strValor;
+            arg.strValor = strValor;
             arg.strValorAnterior = this.strValorAnterior;
 
             this.arrEvtOnValorAlteradoListener.forEach((evt) => { evt.onValorAlterado(this, arg); });
