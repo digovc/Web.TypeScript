@@ -161,39 +161,24 @@ module Web
             mnc.addOpcao(clnWeb.strNomeExibicao, (() => { this.selecionarColunaPesquisa(clnWeb); }));
         }
 
-        protected setBooEmFoco(): void
+        protected setBooEmFoco(booEmFoco: boolean): void
         {
-            super.setBooEmFoco();
+            super.setBooEmFoco(booEmFoco);
 
-            this.btnAcao.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
-            this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-            this.btnAcao.jq.css("height", (this.booEmFoco ? 26 : 25));
+            this.btnAcao.jq.css("border-bottom-width", (booEmFoco ? "2px" : Utils.STR_VAZIA));
+            this.btnAcao.jq.css("border-color", (booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+            this.btnAcao.jq.css("height", (booEmFoco ? 26 : 25));
 
-            this.cmb.jq.css("height", (this.booEmFoco ? 23 : 22));
+            this.cmb.jq.css("height", (booEmFoco ? 23 : 22));
 
-            this.txtIntId.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
-            this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+            this.txtIntId.jq.css("border-bottom-width", (booEmFoco ? "2px" : Utils.STR_VAZIA));
+            this.txtIntId.jq.css("border-color", (booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
 
-            this.txtPesquisa.jq.css("border-bottom-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-            this.txtPesquisa.jq.css("border-bottom-width", (this.booEmFoco ? "2px" : Utils.STR_VAZIA));
+            this.txtPesquisa.jq.css("border-bottom-color", (booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+            this.txtPesquisa.jq.css("border-bottom-width", (booEmFoco ? "2px" : Utils.STR_VAZIA));
 
-            if (!Utils.getBooStrVazia(this.strCritica))
+            if (Utils.getBooStrVazia(this.strCritica))
             {
-                this.btnAcao.jq.css("border-color", "#f8b2b2");
-                this.txtIntId.jq.css("border-color", "#f8b2b2");
-                this.txtPesquisa.jq.css("border-color", "#f8b2b2");
-            }
-        }
-
-        protected setStrCritica(strCritica: string): void
-        {
-            super.setStrCritica(strCritica);
-
-            if (Utils.getBooStrVazia(strCritica))
-            {
-                this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-                this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-                this.txtPesquisa.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
                 return;
             }
 
@@ -377,6 +362,23 @@ module Web
 
             this.txtPesquisa.addEvtOnFocusInListener(this);
             this.txtPesquisa.addEvtOnFocusOutListener(this);
+        }
+
+        protected setStrCritica(strCritica: string): void
+        {
+            super.setStrCritica(strCritica);
+
+            if (Utils.getBooStrVazia(strCritica))
+            {
+                this.btnAcao.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+                this.txtIntId.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+                this.txtPesquisa.jq.css("border-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
+                return;
+            }
+
+            this.btnAcao.jq.css("border-color", "#f8b2b2");
+            this.txtIntId.jq.css("border-color", "#f8b2b2");
+            this.txtPesquisa.jq.css("border-color", "#f8b2b2");
         }
 
         // #endregion Métodos
