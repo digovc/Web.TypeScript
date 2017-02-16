@@ -104,7 +104,7 @@
             return Math.abs(Math.floor(intMinimo + intDiff));
         }
 
-        public static getStrDataAmigavel(dtt: Date): string
+        public static getStrDttAmigavel(dtt: Date): string
         {
             if (dtt == null)
             {
