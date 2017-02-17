@@ -197,7 +197,7 @@ module Web
                 return;
             }
 
-            this.jq.fadeOut(100, (() => { this.jq.remove(); }));
+            this.jq.remove();
         }
 
         public esconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
