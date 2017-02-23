@@ -187,7 +187,7 @@ module Web
 
         private abrirNotificacaoExterna(): void
         {
-            if (!(Notification.name in window))
+            if (!("Notification" in window))
             {
                 this.atrasarNotificacao();
                 return;
