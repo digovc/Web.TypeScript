@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class MenuMobile extends ComponenteHtml
+    export abstract class MenuMobileBase extends ComponenteHtml implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -27,6 +27,8 @@ module Web
 
             this._arrMmi = new Array<MenuMobileItem>();
 
+            this.inicializarItem(this._arrMmi);
+
             return this._arrMmi;
         }
 
@@ -42,37 +44,48 @@ module Web
             this.mostrar(Tag_EnmAnimacaoTipo.FADE);
         }
 
-        public addMniFilho(mmiFilho: MenuMobileItem): void
+        private fechar(): void
         {
-            if (mmiFilho == null)
-            {
-                return;
-            }
-
-            if (this.arrMmi.indexOf(mmiFilho) > -1)
-            {
-                return;
-            }
-
-            this.arrMmi.push(mmiFilho);
-
-            mmiFilho.mnm = this;
-
-            mmiFilho.iniciar();
+            this.esconder(Tag_EnmAnimacaoTipo.FADE);
         }
 
         protected inicializar(): void
         {
             super.inicializar();
 
-            this.inicializarItem();
+            this.arrMmi.forEach((mmi) => { mmi.iniciar(); });
         }
 
-        protected abstract inicializarItem(): void;
+        protected abstract inicializarItem(arrMmi: Array<MenuMobileItem>): void;
+
+        protected setEventos(): void
+        {
+            super.setEventos();
+
+            this.addEvtOnClickListener(this);
+        }
 
         // #endregion Métodos
 
         // #region Eventos
+
+        public onClick(objSender: Object, arg: JQueryEventObject): void
+        {
+            try
+            {
+                switch (objSender)
+                {
+                    case this:
+                        this.fechar();
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+        }
+
         // #endregion Eventos
     }
 }

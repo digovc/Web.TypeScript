@@ -105,7 +105,7 @@ module Web
             var objEmailRegistro = new EmailRegistroDominio();
 
             objEmailRegistro.dirDocumentacao = this.divSumario.dirDocumentacao;
-            objEmailRegistro.strDocumentacaoTitulo = this.divSumario.pagDoc.divActionBar.divTitulo.strConteudo;
+            objEmailRegistro.strDocumentacaoTitulo = this.divSumario.pagDoc.divActionBarDocumentacao.divTitulo.strConteudo;
             objEmailRegistro.strEmail = this.txtEmail.strValor;
             objEmailRegistro.urlDocumentacao = location.href.substring(0, location.href.indexOf(SrvAjaxDocumentacao.URL_MARKDOWN_FOLDER));
 

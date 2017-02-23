@@ -1,7 +1,7 @@
-﻿/// <reference path="../componente/markdown/Sumario.ts"/>
-/// <reference path="../componente/markdown/Viewer.ts"/>
-/// <reference path="../componente/mobile/ActionBar.ts"/>
-/// <reference path="PagMobile.ts"/>
+﻿/// <reference path="../../componente/documentacao/ActionBarDocumentacao.ts"/>
+/// <reference path="../../componente/markdown/Sumario.ts"/>
+/// <reference path="../../componente/markdown/Viewer.ts"/>
+/// <reference path="../PagMobile.ts"/>
 
 module Web
 {
@@ -19,20 +19,20 @@ module Web
 
         // #region Atributos
 
-        private _divActionBar: ActionBar;
+        private _divActionBarDocumentacao: ActionBarDocumentacao;
         private _divSumario: Sumario;
         private _divViewer: Viewer;
 
-        public get divActionBar(): ActionBar
+        public get divActionBarDocumentacao(): ActionBarDocumentacao
         {
-            if (this._divActionBar != null)
+            if (this._divActionBarDocumentacao != null)
             {
-                return this._divActionBar;
+                return this._divActionBarDocumentacao;
             }
 
-            this._divActionBar = new ActionBar();
+            this._divActionBarDocumentacao = new ActionBarDocumentacao();
 
-            return this._divActionBar;
+            return this._divActionBarDocumentacao;
         }
 
         private get divSumario(): Sumario
@@ -112,7 +112,7 @@ module Web
         {
             super.inicializar();
 
-            this.divActionBar.iniciar();
+            this.divActionBarDocumentacao.iniciar();
             this.divSumario.iniciar();
             this.divViewer.iniciar();
 
@@ -152,7 +152,7 @@ module Web
 
             window.onpopstate = (() => { this.inicializarUrl() });
 
-            this.divActionBar.addEvtOnMenuClickListener(this);
+            this.divActionBarDocumentacao.addEvtOnMenuClickListener(this);
         }
 
         // #endregion Métodos
@@ -165,7 +165,7 @@ module Web
             {
                 switch (objSender)
                 {
-                    case this.divActionBar:
+                    case this.divActionBarDocumentacao:
                         this.divSumario.mostrarEsconder();
                         return;
                 }

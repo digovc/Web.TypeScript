@@ -12,7 +12,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class ActionBar extends ComponenteHtml implements OnClickListener
+    export abstract class ActionBarBase extends ComponenteHtml implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -62,11 +62,6 @@ module Web
         // #endregion Atributos
 
         // #region Construtores
-
-        constructor()
-        {
-            super(ActionBar.name);
-        }
 
         // #endregion Construtores
 

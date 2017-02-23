@@ -37,9 +37,10 @@
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="Historico.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
+    <TypeScriptCompile Include="html\componente\documentacao\ActionBarDocumentacao.ts" />
     <TypeScriptCompile Include="html\componente\markdown\EmailRegistro.ts" />
     <TypeScriptCompile Include="html\componente\markdown\IndiceItem.ts" />
-    <TypeScriptCompile Include="html\componente\mobile\ActionBar.ts" />
+    <TypeScriptCompile Include="html\componente\mobile\ActionBarBase.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoMini.ts" />
@@ -78,8 +79,8 @@
     <TypeScriptCompile Include="html\componente\menu\contexto\MenuContextoItem.ts" />
     <TypeScriptCompile Include="html\componente\menu\DivFavorito.ts" />
     <TypeScriptCompile Include="html\componente\menu\DivFavoritoItem.ts" />
-    <TypeScriptCompile Include="html\componente\menu\MenuMobile.ts" />
-    <TypeScriptCompile Include="html\componente\menu\MenuMobileItem.ts" />
+    <TypeScriptCompile Include="html\componente\mobile\MenuMobileBase.ts" />
+    <TypeScriptCompile Include="html\componente\mobile\MenuMobileItem.ts" />
     <TypeScriptCompile Include="html\componente\mobile\OnMenuClickListener.ts" />
     <TypeScriptCompile Include="html\componente\mobile\OnVoltarClickListener.ts" />
     <TypeScriptCompile Include="html\componente\Notificacao.ts" />
@@ -90,7 +91,7 @@
     <TypeScriptCompile Include="html\componente\treeview\OnTreeViewNodeClickListener.ts" />
     <TypeScriptCompile Include="html\componente\treeview\TreeViewHtml.ts" />
     <TypeScriptCompile Include="html\componente\treeview\TreeViewNode.ts" />
-    <TypeScriptCompile Include="html\pagina\PagDocumentacaoBase.ts" />
+    <TypeScriptCompile Include="html\pagina\documentacao\PagDocumentacaoBase.ts" />
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
     <TypeScriptCompile Include="Keys.ts" />
@@ -175,6 +176,7 @@
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="server\websocket\SrvWsBase.ts" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
@@ -195,7 +197,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>19148</DevelopmentServerPort>
+          <DevelopmentServerPort>20309</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:15328/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
