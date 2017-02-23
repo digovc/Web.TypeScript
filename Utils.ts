@@ -104,7 +104,7 @@
             return Math.abs(Math.floor(intMinimo + intDiff));
         }
 
-        public static getStrDataAmigavel(dtt: Date): string
+        public static getStrDttAmigavel(dtt: Date): string
         {
             if (dtt == null)
             {
@@ -203,6 +203,38 @@
             }
 
             return str;
+        }
+
+        public static simplificar(str: string): string
+        {
+            if (Utils.getBooStrVazia(str))
+            {
+                return null;
+            }
+
+            str = str.toLowerCase();
+            str = str.trim();
+
+            var arrStrAcentos = ["ç", "á", "é", "í", "ó", "ú", "ý", "à", "è", "ì", "ò", "ù", "ã", "õ", "ñ", "ä", "ë", "ï", "ö", "ü", "ÿ", "â", "ê", "î", "ô", "û"];
+            var arrStrSemAcento = ["c", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u", "a", "o", "n", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u"];
+            var arrStrCaracteresEspeciais = ["\\.", "\\", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", ".", "(", ")", "/"];
+
+            for (var i = 0; i < arrStrAcentos.length; i++)
+            {
+                str = Utils.replaceAll(str, arrStrAcentos[i], arrStrSemAcento[i]);
+            }
+
+            for (var i = 0; i < arrStrCaracteresEspeciais.length; i++)
+            {
+                str = Utils.replaceAll(str, arrStrCaracteresEspeciais[i], "");
+            }
+
+            if (Utils.getBooStrVazia(str))
+            {
+                return null;
+            }
+
+            return str.replace(" ", "_");
         }
 
         /**

@@ -32,6 +32,7 @@ module Web
         private _strClassNome: string;
         private _strNome: string;
         private _strNomeExibicao: string;
+        private _strNomeSimplificado: string;
 
         public get intObjetoId(): number
         {
@@ -72,6 +73,18 @@ module Web
         public set strNomeExibicao(strNomeExibicao: string)
         {
             this._strNomeExibicao = strNomeExibicao;
+        }
+
+        public get strNomeSimplificado(): string
+        {
+            if (!Utils.getBooStrVazia(this._strNomeSimplificado))
+            {
+                return this._strNomeSimplificado;
+            }
+
+            this._strNomeSimplificado = Utils.simplificar(this.strNome);
+
+            return this._strNomeSimplificado;
         }
 
         protected get strClassNome(): string
