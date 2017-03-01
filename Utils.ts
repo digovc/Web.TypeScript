@@ -27,6 +27,47 @@
 
         // #region Métodos
 
+        public static appendBuffer(arrBuffer1: ArrayBuffer, arrBuffer2: ArrayBuffer): ArrayBuffer
+        {
+            if (arrBuffer1 == null)
+            {
+                return null;
+            }
+
+            if (arrBuffer2 == null)
+            {
+                return null;
+            }
+
+            var arrUInt8 = new Uint8Array(arrBuffer1.byteLength + arrBuffer2.byteLength);
+
+            arrUInt8.set(new Uint8Array(arrBuffer1), 0);
+            arrUInt8.set(new Uint8Array(arrBuffer2), arrBuffer1.byteLength);
+
+            return arrUInt8.buffer;
+        }
+
+        public static base64ToArrayBuffer(strBase64: string): ArrayBuffer
+        {
+            if (Utils.getBooStrVazia(strBase64))
+            {
+                return null;
+            }
+
+            var strBinary = window.atob(strBase64);
+
+            var intLength = strBinary.length;
+
+            var arrBte = new Uint8Array(intLength);
+
+            for (var i = 0; i < intLength; i++)
+            {
+                arrBte[i] = strBinary.charCodeAt(i);
+            }
+
+            return arrBte.buffer;
+        }
+
         /**
          * Carrega uma imagem no servidor e a retorna, podendo ser usada
          * na página.
