@@ -447,6 +447,7 @@ module Web
                 switch (arg.keyCode)
                 {
                     case Keys.BACKSPACE:
+                    case Keys.DELETE:
                         this.limparDados();
                         return;
 
