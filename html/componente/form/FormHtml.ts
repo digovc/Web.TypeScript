@@ -264,7 +264,7 @@ module Web
             arrCmp.push(cmp);
         }
 
-        public getCmp(strCmpId: string): CampoHtml
+        public getCmpPorId<T>(strCmpId: string): T
         {
             if (Utils.getBooStrVazia(strCmpId))
             {
@@ -288,7 +288,7 @@ module Web
                     continue;
                 }
 
-                return this.arrCmp[i];
+                return <any>this.arrCmp[i];
             }
 
             return null;
@@ -297,11 +297,11 @@ module Web
         /**
          * Busca na lista de campos desta janela de cadastro o
          * campo que represente a coluna com o nome passado por parãmetro.
-         * @param strClnNome Nome da coluna que o campo representa.
+         * @param sqlClnNome Nome da coluna que o campo representa.
          */
-        public getCmpClnWebStrNome(strClnNome: string): CampoHtml
+        public getCmpPorClnWebSqlNome<T>(sqlClnNome: string): T
         {
-            if (Utils.getBooStrVazia(strClnNome))
+            if (Utils.getBooStrVazia(sqlClnNome))
             {
                 return null;
             }
@@ -311,22 +311,20 @@ module Web
                 return null;
             }
 
-            var cmpResultado: CampoHtml;
-
             for (var i = 0; i < this.arrCmp.length; i++)
             {
-                cmpResultado = this.getCmpClnWebStrNome2(strClnNome, this.arrCmp[i]);
+                var cmpResultado = this.getCmpPorClnWebSqlNome2(sqlClnNome, this.arrCmp[i]);
 
                 if (cmpResultado != null)
                 {
-                    return cmpResultado;
+                    return <any>cmpResultado;
                 }
             }
 
             return null;
         }
 
-        private getCmpClnWebStrNome2(strClnNome: string, cmp: CampoHtml): CampoHtml
+        private getCmpPorClnWebSqlNome2(sqlClnNome: string, cmp: CampoHtml): CampoHtml
         {
             if (cmp == null)
             {
@@ -343,7 +341,7 @@ module Web
                 return null;
             }
 
-            if (strClnNome.toLowerCase() != cmp.clnWeb.strNome.toLowerCase())
+            if (sqlClnNome.toLowerCase() != cmp.clnWeb.strNome.toLowerCase())
             {
                 return null;
             }

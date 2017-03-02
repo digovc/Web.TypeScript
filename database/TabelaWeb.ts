@@ -267,9 +267,9 @@ module Web
          * Retorna a coluna que contém o nome passado por parâmetro ou null
          * caso nenhuma seja encontrada.
          */
-        public getClnWeb(strClnWebNome: string): ColunaWeb
+        public getClnWeb(sqlClnWebNome: string): ColunaWeb
         {
-            if (Utils.getBooStrVazia(strClnWebNome))
+            if (Utils.getBooStrVazia(sqlClnWebNome))
             {
                 return null;
             }
@@ -291,7 +291,7 @@ module Web
                     continue;
                 }
 
-                if (strClnWebNome.toLowerCase() != this.arrClnWeb[i].strNome.toLowerCase())
+                if (sqlClnWebNome.toLowerCase() != this.arrClnWeb[i].strNome.toLowerCase())
                 {
                     continue;
                 }
@@ -299,7 +299,7 @@ module Web
                 return this.arrClnWeb[i];
             }
 
-            var clnWebNew = new ColunaWeb(strClnWebNome);
+            var clnWebNew = new ColunaWeb(sqlClnWebNome);
 
             this.addClnWeb(clnWebNew);
 

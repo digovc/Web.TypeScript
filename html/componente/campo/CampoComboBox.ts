@@ -19,7 +19,7 @@ module Web
 
         private _cmb: ComboBox;
 
-        protected get cmb(): ComboBox
+        public get cmb(): ComboBox
         {
             if (this._cmb != null)
             {

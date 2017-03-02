@@ -322,9 +322,19 @@ module Web
             this.pagPrincipal.removerJs(this.srcJs);
         }
 
+        protected getCmp<T>(sqlClnNome: string): T
+        {
+            if (Utils.getBooStrVazia(sqlClnNome))
+            {
+                return null;
+            }
+
+            return this.frm.getCmpPorClnWebSqlNome<T>(sqlClnNome);
+        }
+
         private getCmpIntId(): CampoNumerico
         {
-            return this.frm.getCmpClnWebStrNome("int_id");
+            return this.getCmp<CampoNumerico>(this.tblWeb.clnWebIntId.strNome);
         }
 
         private getFrm(): FormHtml
@@ -500,9 +510,12 @@ module Web
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_SALVAR;
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); });
+
             objInterlocutor.addJsn(this.tblWeb);
 
             AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+
+            this.dispararEvtOnSalvarListener();
         }
 
         private salvarSucesso(objInterlocutor: Interlocutor): void
@@ -577,7 +590,7 @@ module Web
                 return;
             }
 
-            var cmp: CampoHtml = this.frm.getCmpClnWebStrNome(clnWeb.strNome);
+            var cmp = this.frm.getCmpPorClnWebSqlNome<CampoHtml>(clnWeb.strNome);
 
             if (cmp == null)
             {

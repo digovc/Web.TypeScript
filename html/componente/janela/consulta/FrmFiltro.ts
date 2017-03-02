@@ -72,7 +72,7 @@ module Web
                 return this._cmpIntFiltroId;
             }
 
-            this._cmpIntFiltroId = (<CampoComboBox>this.getCmp(this.strId + "_cmpIntFiltroId"));
+            this._cmpIntFiltroId = (<CampoComboBox>this.getCmpPorId(this.strId + "_cmpIntFiltroId"));
 
             return this._cmpIntFiltroId;
         }

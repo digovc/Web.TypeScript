@@ -15,6 +15,16 @@ module Web
         // #endregion Constantes
 
         // #region Atributos
+
+        private _strTexto: string;
+
+        public get strTexto(): string
+        {
+            this._strTexto = this.getStrTexto();
+
+            return this._strTexto;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
@@ -101,6 +111,11 @@ module Web
             }
 
             this.addOpcao(par);
+        }
+
+        private getStrTexto(): string
+        {
+            return this.jq.text();
         }
 
         public limparDados(): void
