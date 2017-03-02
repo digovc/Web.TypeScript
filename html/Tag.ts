@@ -207,7 +207,7 @@ module Web
             switch (enmAnimacaoTipo)
             {
                 case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
-                    this.jq.hide(0);
+                    this.jq.css("display", "none");
                     return;
 
                 case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
@@ -285,7 +285,7 @@ module Web
             switch (enmAnimacaoTipo)
             {
                 case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
-                    this.jq.show(0);
+                    this.jq.css("display", "block");
                     return;
 
                 case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
