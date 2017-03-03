@@ -16,14 +16,29 @@ module Web
     {
         // #region Constantes
 
+        private static get INT_MONITOR_TIME_OUT(): number { return 35000 };
+
         private static get STR_METODO_ERRO(): string { return "STR_METODO_ERRO" };
+        private static get STR_METODO_PING(): string { return "ping" };
+        private static get STR_METODO_PONG(): string { return "pong" };
         private static get STR_METODO_WELCOME(): string { return "STR_METODO_WELCOME" };
 
         // #endregion Constantes
 
         // #region Atributos
 
+        private _dttUltimoPong: Date;
         private _objWebSocket: WebSocket;
+
+        private get dttUltimoPong(): Date
+        {
+            return this._dttUltimoPong;
+        }
+
+        private set dttUltimoPong(dttUltimoPong: Date)
+        {
+            this._dttUltimoPong = dttUltimoPong;
+        }
 
         private get objWebSocket(): WebSocket
         {
@@ -91,17 +106,39 @@ module Web
             return objWebSocketResultado;
         }
 
-        protected processarMessage(objInterlocutor: Interlocutor): boolean
+        protected inicializar(): void
         {
-            if (objInterlocutor == null)
+            super.inicializar();
+
+            window.setTimeout(() => { this.monitorar() }, SrvWsBase.INT_MONITOR_TIME_OUT);
+        }
+
+        private monitorar(): void
+        {
+            if (this.objWebSocket == null)
             {
-                return false;
+                return;
             }
 
+            if (this.objWebSocket.readyState != WebSocket.OPEN)
+            {
+                Mensagem.mostrar("Serviço desconectado", ('O serviço "_srv_nome" está desconectado do servidor. Tente reiniciar a aplicação para resolver isso.'.replace("_srv_nome", this.strNome)), Web.Mensagem_EnmTipo.NEGATIVA);
+                return;
+            }
+
+            this.enviar(new Interlocutor(SrvWsBase.STR_METODO_PING));
+        }
+
+        protected processarMessage(objInterlocutor: Interlocutor): boolean
+        {
             switch (objInterlocutor.strMetodo)
             {
                 case SrvWsBase.STR_METODO_ERRO:
                     this.processarMensagemErro(objInterlocutor);
+                    return true;
+
+                case SrvWsBase.STR_METODO_PONG:
+                    this.processarMensagemPong();
                     return true;
 
                 case SrvWsBase.STR_METODO_WELCOME:
@@ -127,9 +164,16 @@ module Web
             new Erro('Erro no servidor "_srv_nome"'.replace("_srv_nome", this.strNome), new Error(objInterlocutor.objData.toString()));
         }
 
+        private processarMensagemPong(): void
+        {
+            this.dttUltimoPong = new Date();
+
+            window.setTimeout((() => { this.monitorar() }), SrvWsBase.INT_MONITOR_TIME_OUT);
+        }
+
         protected processarMensagemWelcome(): void
         {
-            Notificacao.notificar('O servidor "_srv_nome" enviou olá.'.replace("_srv_nome", this.strNome), Notificacao_EnmTipo.INFO);
+            Notificacao.notificar('O serviço "_srv_nome" está conectado.'.replace("_srv_nome", this.strNome), Notificacao_EnmTipo.INFO);
         }
 
         private processarOnCloseLocal(arg: CloseEvent): void

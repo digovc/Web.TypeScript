@@ -279,13 +279,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>echo "Copiando os arquivos das bibliotecas externas de javascript para a pasta de debug."
-
-xcopy "$(ProjectDir)lib\*.*" "$(SolutionDir)principal\bin\$(ConfigurationName)\res\js\lib\" /y/d/s
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-echo "Copiando os arquivos javascript para a pasta de debug."
+    <PostBuildEvent>xcopy "$(ProjectDir)lib\*.*" "$(SolutionDir)principal\bin\$(ConfigurationName)\res\js\lib\" /y/d/s
 
 xcopy "$(TargetDir)js\*.*" "$(SolutionDir)principal\bin\$(ConfigurationName)\res\js\web\" /y/d/s</PostBuildEvent>
   </PropertyGroup>
