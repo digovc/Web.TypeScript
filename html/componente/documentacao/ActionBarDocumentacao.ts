@@ -20,7 +20,7 @@ module Web
 
         constructor()
         {
-            super(ActionBarBase.name);
+            super(ActionBarDocumentacao.name);
         }
 
         // #endregion Construtores
