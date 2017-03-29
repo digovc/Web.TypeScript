@@ -36,6 +36,7 @@
     <TypeScriptCompile Include="database\dominio\DominioWebBase.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="Historico.ts" />
+    <TypeScriptCompile Include="html\activity\ActivityBase.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
     <TypeScriptCompile Include="html\componente\documentacao\ActionBarDocumentacao.ts" />
     <TypeScriptCompile Include="html\componente\markdown\EmailRegistro.ts" />
@@ -178,27 +179,10 @@
     <TypeScriptCompile Include="server\websocket\SrvWsBase.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config" />
-    <None Include="web.Debug %28local%29.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Debug %28main%29.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
