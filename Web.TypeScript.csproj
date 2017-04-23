@@ -267,10 +267,10 @@
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
-    <TypeScriptModuleKind />
+    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
     <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
     <TypeScriptOutFile />
-    <TypeScriptOutDir>..\Principal\bin\Debug (local)\res\js\Web.TypeScript</TypeScriptOutDir>
+    <TypeScriptOutDir>bin\js</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptSourceMap>False</TypeScriptSourceMap>
@@ -279,8 +279,8 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)lib\*.*" "$(SolutionDir)principal\bin\$(ConfigurationName)\res\js\lib\" /y/d/s
+    <PostBuildEvent>XCOPY "$(ProjectDir)lib\*.*" "$(SolutionDir)principal\bin\$(ConfigurationName)\res\js\lib\" /Y/D/S
 
-xcopy "$(TargetDir)js\*.*" "$(SolutionDir)principal\bin\$(ConfigurationName)\res\js\web\" /y/d/s</PostBuildEvent>
+XCOPY "$(TargetDir)js\*.*" "$(SolutionDir)principal\bin\$(ConfigurationName)\res\js\web\" /Y/D/S</PostBuildEvent>
   </PropertyGroup>
 </Project>

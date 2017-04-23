@@ -1,5 +1,7 @@
-﻿/// <reference path="../../Objeto.ts"/>
+﻿/// <reference path="../../AppWebBase.ts"/>
+/// <reference path="../../Objeto.ts"/>
 /// <reference path="../../OnKeyUpListener.ts"/>
+/// <reference path="../Div.ts"/>
 
 module Web
 {
