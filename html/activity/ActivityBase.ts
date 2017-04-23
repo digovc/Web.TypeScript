@@ -1,4 +1,4 @@
-﻿/// <reference path="../mobile/ActionBarBase.ts"/>
+﻿/// <reference path="../componente/ComponenteHtml.ts"/>
 
 module Web
 {
@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class ActionBarDocumentacao extends ActionBarBase
+    export abstract class ActivityBase extends ComponenteHtml
     {
         // #region Constantes
         // #endregion Constantes
@@ -17,12 +17,6 @@ module Web
         // #endregion Atributos
 
         // #region Construtores
-
-        constructor()
-        {
-            super(ActionBarDocumentacao.name);
-        }
-
         // #endregion Construtores
 
         // #region Métodos

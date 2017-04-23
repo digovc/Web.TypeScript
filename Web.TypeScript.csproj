@@ -7,7 +7,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <OutputPath>bin</OutputPath>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
@@ -36,6 +36,7 @@
     <TypeScriptCompile Include="database\dominio\DominioWebBase.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="Historico.ts" />
+    <TypeScriptCompile Include="html\activity\ActivityBase.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
     <TypeScriptCompile Include="html\componente\documentacao\ActionBarDocumentacao.ts" />
     <TypeScriptCompile Include="html\componente\markdown\EmailRegistro.ts" />
@@ -177,7 +178,12 @@
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="server\websocket\SrvWsBase.ts" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
@@ -246,6 +252,8 @@
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptMapRoot />
     <TypeScriptSourceRoot />
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug (main)'">
     <TypeScriptTarget>ES6</TypeScriptTarget>
