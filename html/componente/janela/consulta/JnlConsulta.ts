@@ -337,7 +337,7 @@ module Web
                 return;
             }
 
-            this.divGrid.jq.animate({ top: 50 });
+            this.divGrid.jq.animate({ top: 50 }, 350, "swing");
             this.pnlFiltro.esconderFiltro();
         }
 
@@ -423,7 +423,7 @@ module Web
                 return;
             }
 
-            this.divGrid.jq.animate({ top: 140 });
+            this.divGrid.jq.animate({ top: 140 }, 350, "swing");
             this.pnlFiltro.mostrarFiltro();
         }
 
