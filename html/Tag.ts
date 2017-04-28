@@ -5,7 +5,7 @@
 /// <reference path="../OnMouseDownListener.ts"/>
 /// <reference path="../OnMouseLeaveListener.ts"/>
 /// <reference path="../OnMouseOverListener.ts"/>
-/// <reference path="../typedefinition/jquery.d.ts" />
+/// <reference path="../typedefinition/jquery.d.ts"/>
 
 module Web
 {
