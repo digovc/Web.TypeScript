@@ -307,6 +307,10 @@ module Web
             (this.booVisivel) ? this.esconder(enmAnimacaoTipo) : this.mostrar(enmAnimacaoTipo);
         }
 
+        public perderFoco(): void
+        {
+        }
+
         public receberFoco(): void
         {
             if (this.jq == null)
