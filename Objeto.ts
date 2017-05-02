@@ -126,7 +126,7 @@ module Web
 
         private getStrClassNome(): string
         {
-            return this.constructor.toString().match(/\w+/g)[1];
+            return this.constructor.name;
         }
 
         // #endregion Métodos
