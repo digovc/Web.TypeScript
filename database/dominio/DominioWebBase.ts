@@ -1,4 +1,5 @@
-﻿/// <reference path="../../Objeto.ts"/>
+﻿/// <reference path="../../AppWebBase.ts"/>
+/// <reference path="../../Objeto.ts"/>
 /// <reference path="../../server/ajax/SrvAjaxDbeBase.ts"/>
 
 module Web

@@ -1,4 +1,5 @@
-﻿/// <reference path="design/TemaDefault.ts"/>
+﻿/// <reference path="database/TabelaWeb.ts"/>
+/// <reference path="design/TemaDefault.ts"/>
 /// <reference path="erro/Erro.ts"/>
 /// <reference path="Historico.ts"/>
 /// <reference path="html/componente/Mensagem.ts"/>

@@ -18,6 +18,7 @@ module Web
 
         private _booSelecionado: boolean;
         private _objAnexo: Object;
+        private _strConstanteLayoutFixoNome: string;
         private _strLayoutFixo: string;
 
         public get booSelecionado(): boolean
@@ -45,6 +46,18 @@ module Web
         public set objAnexo(objAnexo: Object)
         {
             this._objAnexo = objAnexo;
+        }
+
+        private get strConstanteLayoutFixoNome(): string
+        {
+            if (this._strConstanteLayoutFixoNome != null)
+            {
+                return this._strConstanteLayoutFixoNome;
+            }
+
+            this._strConstanteLayoutFixoNome = this.getStrConstanteLayoutFixoNome();
+
+            return this._strConstanteLayoutFixoNome;
         }
 
         public get strLayoutFixo(): string
@@ -89,9 +102,14 @@ module Web
             return AppWebBase.i.objTema.corSelecionado;
         }
 
+        protected getStrConstanteLayoutFixoNome(): string
+        {
+            return (this.strClassNome + "_layoutFixo");
+        }
+
         private getStrLayoutFixo(): string
         {
-            var strLayoutFixo = ConstanteManager.i.getStrConstante(this.strClassNome + "_layoutFixo");
+            var strLayoutFixo = ConstanteManager.i.getStrConstante(this.strConstanteLayoutFixoNome);
 
             if (Utils.getBooStrVazia(strLayoutFixo))
             {

@@ -1,5 +1,7 @@
-﻿/// <reference path="../../Objeto.ts"/>
+﻿/// <reference path="../../AppWebBase.ts"/>
+/// <reference path="../../Objeto.ts"/>
 /// <reference path="../../OnKeyUpListener.ts"/>
+/// <reference path="../Div.ts"/>
 
 module Web
 {
@@ -257,6 +259,77 @@ module Web
         }
 
         // #endregion Evento OnKeyDownListener
+
+        // #region Evento OnKeyPressListener
+
+        private _arrEvtOnKeyPressListener: Array<OnKeyPressListener>;
+
+        private get arrEvtOnKeyPressListener(): Array<OnKeyPressListener>
+        {
+            if (this._arrEvtOnKeyPressListener != null)
+            {
+                return this._arrEvtOnKeyPressListener;
+            }
+
+            this._arrEvtOnKeyPressListener = new Array<OnKeyPressListener>();
+
+            return this._arrEvtOnKeyPressListener;
+        }
+
+        public addEvtOnKeyPressListener(evt: OnKeyPressListener): void
+        {
+            if (evt == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyPressListener.indexOf(evt) > -1)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyPressListener.length == 0)
+            {
+                this.tagBody.jq.keypress((arg) => this.dispararEvtOnKeyPressListener(arg));
+            }
+
+            this.arrEvtOnKeyPressListener.push(evt);
+        }
+
+        private dispararEvtOnKeyPressListener(arg: JQueryKeyEventObject): void
+        {
+            if (this.arrEvtOnKeyPressListener.length == 0)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyPressListener.forEach((evt) =>
+            {
+                if (evt == null)
+                {
+                    return;
+                }
+
+                evt.onKeyPress(this, arg);
+            });
+        }
+
+        public removerEvtOnKeyPressListener(evt: OnKeyPressListener): void
+        {
+            if (evt == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnKeyPressListener.indexOf(evt) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnKeyPressListener.splice(this.arrEvtOnKeyPressListener.indexOf(evt), 1);
+        }
+
+        // #endregion Evento OnKeyPressListener
 
         // #region Evento OnKeyUpListener
 

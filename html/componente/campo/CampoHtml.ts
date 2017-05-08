@@ -386,13 +386,13 @@ module Web
         {
             if (booMostrar && !this.booMostrarTituloNunca)
             {
-                this.divTitulo.jq.animate({ opacity: 1 }, 200);
+                this.divTitulo.jq.animate({ opacity: 1 }, 200, "swing");
                 return;
             }
 
             if (!this.booMostrarTituloSempre)
             {
-                this.divTitulo.jq.animate({ opacity: 0 }, 200);
+                this.divTitulo.jq.animate({ opacity: 0 }, 200, "swing");
             }
         }
 
