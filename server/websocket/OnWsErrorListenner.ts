@@ -2,6 +2,6 @@
 {
     export interface OnWsErrorListenner
     {
-        onWsOpen(srvWs: SrvWsBase, arg: Event): void;
+        onWsError(srvWs: SrvWsBase, arg: Event): void;
     }
 }

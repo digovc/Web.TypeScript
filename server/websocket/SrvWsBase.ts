@@ -16,7 +16,7 @@ module Web
     {
         // #region Constantes
 
-        private static get INT_MONITOR_TIME_OUT(): number { return 35000 };
+        private static get INT_MONITOR_INTERVALO(): number { return 35000 };
 
         private static get STR_METODO_ERRO(): string { return "STR_METODO_ERRO" };
         private static get STR_METODO_PING(): string { return "ping" };
@@ -29,6 +29,15 @@ module Web
 
         private _dttUltimoPong: Date;
         private _objWebSocket: WebSocket;
+
+        private _booConectado: boolean;
+
+        public get booConectado(): boolean
+        {
+            this._booConectado = this.getBooConectado();
+
+            return this._booConectado;
+        }
 
         private get dttUltimoPong(): Date
         {
@@ -50,6 +59,11 @@ module Web
             this._objWebSocket = this.getObjWebSocket();
 
             return this._objWebSocket;
+        }
+
+        private set objWebSocket(objWebSocket: WebSocket)
+        {
+            this._objWebSocket = objWebSocket;
         }
 
         // #endregion Atributos
@@ -84,6 +98,16 @@ module Web
             this.objWebSocket.send(objInterlocutor.toJson());
         }
 
+        private getBooConectado(): boolean
+        {
+            if (this.objWebSocket == null)
+            {
+                return false;
+            }
+
+            return (this.objWebSocket.readyState == WebSocket.OPEN);
+        }
+
         protected getIntPorta(): number
         {
             return 443;
@@ -103,6 +127,11 @@ module Web
 
             var objWebSocketResultado = new WebSocket("ws://" + this.url);
 
+            objWebSocketResultado.onclose = ((arg: CloseEvent) => { this.processarOnCloseLocal(arg); });
+            objWebSocketResultado.onerror = ((arg: Event) => { this.processarOnErrorLocal(arg); });
+            objWebSocketResultado.onmessage = ((arg: MessageEvent) => { this.processarOnMessageLocal(arg); });
+            objWebSocketResultado.onopen = ((arg: Event) => { this.processarOnOpenLocal(arg); });
+
             return objWebSocketResultado;
         }
 
@@ -110,7 +139,12 @@ module Web
         {
             super.inicializar();
 
-            window.setTimeout(() => { this.monitorar() }, SrvWsBase.INT_MONITOR_TIME_OUT);
+            this.inicializarObjWebSocket();
+        }
+
+        private inicializarObjWebSocket(): void
+        {
+            this.objWebSocket;
         }
 
         private monitorar(): void
@@ -122,7 +156,6 @@ module Web
 
             if (this.objWebSocket.readyState != WebSocket.OPEN)
             {
-                Mensagem.mostrar("Serviço desconectado", ('O serviço "_srv_nome" está desconectado do servidor. Tente reiniciar a aplicação para resolver isso.'.replace("_srv_nome", this.strNome)), Web.Mensagem_EnmTipo.NEGATIVA);
                 return;
             }
 
@@ -168,17 +201,18 @@ module Web
         {
             this.dttUltimoPong = new Date();
 
-            window.setTimeout((() => { this.monitorar() }), SrvWsBase.INT_MONITOR_TIME_OUT);
+            window.setTimeout((() => { this.monitorar() }), SrvWsBase.INT_MONITOR_INTERVALO);
         }
 
         protected processarMensagemWelcome(): void
         {
-            Notificacao.notificar('O serviço "_srv_nome" está conectado.'.replace("_srv_nome", this.strNome), Notificacao_EnmTipo.INFO);
+            //Notificacao.notificar('O serviço "_srv_nome" está conectado.'.replace("_srv_nome", this.strNome), Notificacao_EnmTipo.INFO);
+            this.monitorar();
         }
 
         private processarOnCloseLocal(arg: CloseEvent): void
         {
-            Notificacao.notificar('O servidor "_server_name" fechou a conexão.'.replace("_server_name", this.strNome), Notificacao_EnmTipo.NEGATIVA);
+            //Notificacao.notificar('O servidor "_server_name" fechou a conexão.'.replace("_server_name", this.strNome), Notificacao_EnmTipo.NEGATIVA);
 
             this.dispararEvtOnWsCloseListenner(arg);
         }
@@ -216,24 +250,16 @@ module Web
             this.dispararEvtOnWsOpenListenner(arg);
         }
 
-        protected setEventos(): void
+        public reconectar(): void
         {
-            super.setEventos();
-
-            this.setEventosObjWebSocket();
-        }
-
-        private setEventosObjWebSocket(): void
-        {
-            if (this.objWebSocket == null)
+            if (this.objWebSocket.readyState == WebSocket.OPEN)
             {
-                return;
+                this.objWebSocket.close();
             }
 
-            this.objWebSocket.onclose = ((arg: CloseEvent) => { this.processarOnCloseLocal(arg); });
-            this.objWebSocket.onerror = ((arg: Event) => { this.processarOnErrorLocal(arg); });
-            this.objWebSocket.onmessage = ((arg: MessageEvent) => { this.processarOnMessageLocal(arg); });
-            this.objWebSocket.onopen = ((arg: Event) => { this.processarOnOpenLocal(arg); });
+            this.objWebSocket = null;
+
+            this.enviar(new Interlocutor(SrvWsBase.STR_METODO_WELCOME));
         }
 
         // #endregion Métodos
@@ -351,7 +377,7 @@ module Web
                     return;
                 }
 
-                evt.onWsOpen(this, arg);
+                evt.onWsError(this, arg);
             });
         }
 

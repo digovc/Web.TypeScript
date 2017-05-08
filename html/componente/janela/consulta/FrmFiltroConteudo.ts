@@ -1,4 +1,5 @@
-﻿/// <reference path="../../../../OnKeyDownListener.ts"/>
+﻿/// <reference path="../../../../Keys.ts"/>
+/// <reference path="../../../../OnKeyDownListener.ts"/>
 /// <reference path="../../form/FormHtml.ts"/>
 /// <reference path="PainelFiltro.ts"/>
 

@@ -1,4 +1,6 @@
-﻿/// <reference path="ComponenteHtml.ts"/>
+﻿/// <reference path="../../OnClickListener.ts"/>
+/// <reference path="botao/BotaoCircular.ts"/>
+/// <reference path="ComponenteHtml.ts"/>
 
 module Web
 {

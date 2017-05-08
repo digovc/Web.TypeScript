@@ -1,7 +1,5 @@
-﻿/// <reference path="../../database/TabelaWeb.ts"/>
-/// <reference path="../../OnDisposedListener.ts"/>
-/// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
-/// <reference path="../componente/janela/cadastro/jnltag.ts"/>
+﻿/// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
+/// <reference path="../componente/janela/cadastro/JnlTag.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
 /// <reference path="../Div.ts"/>
 /// <reference path="PaginaHtml.ts"/>
