@@ -1,8 +1,6 @@
 ﻿/// <reference path="botao/BotaoMini.ts"/>
 /// <reference path="ComponenteHtml.ts"/>
 
-declare var Notification: any;
-
 module Web
 {
     // #region Importações
@@ -193,13 +191,13 @@ module Web
                 return;
             }
 
-            if (Notification.permission == Notificacao.STR_PERMISSAO_DENIED)
+            if ((Notification as any).permission == Notificacao.STR_PERMISSAO_DENIED)
             {
                 this.atrasarNotificacao();
                 return;
             }
 
-            if (Notification.permission == Notificacao.STR_PERMISSAO_GRANTED)
+            if ((Notification as any).permission == Notificacao.STR_PERMISSAO_GRANTED)
             {
                 this.abrirNotificacaoExternaPermitido();
                 return;
