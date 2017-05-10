@@ -179,10 +179,10 @@
     <TypeScriptCompile Include="server\websocket\SrvWsBase.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

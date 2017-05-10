@@ -5,7 +5,7 @@
 /// <reference path="../OnMouseDownListener.ts"/>
 /// <reference path="../OnMouseLeaveListener.ts"/>
 /// <reference path="../OnMouseOverListener.ts"/>
-/// <reference path="../typedefinition/jquery.d.ts" />
+/// <reference path="../typedefinition/jquery.d.ts"/>
 
 module Web
 {
@@ -305,6 +305,10 @@ module Web
         public mostrarEsconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
         {
             (this.booVisivel) ? this.esconder(enmAnimacaoTipo) : this.mostrar(enmAnimacaoTipo);
+        }
+
+        public perderFoco(): void
+        {
         }
 
         public receberFoco(): void
