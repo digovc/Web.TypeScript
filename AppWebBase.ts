@@ -392,16 +392,11 @@ module Web
 
         protected inicializar(): void
         {
-            this.inicializarArrSrv2();
+            this.arrSrv.forEach((srv: ServerBase) => { srv.iniciar(); });
         }
 
         protected inicializarArrSrv(arrSrv: Array<ServerBase>): void
         {
-        }
-
-        private inicializarArrSrv2(): void
-        {
-            this.arrSrv.forEach((srv: ServerBase) => { srv.iniciar(); });
         }
 
         protected montarLayout(): void
