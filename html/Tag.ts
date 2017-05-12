@@ -699,7 +699,7 @@ module Web
             this.arrEvtOnFocusOutListener.push(evt);
         }
 
-        private dispararEvtOnFocusOutListener(arg: JQueryEventObject): void
+        public dispararEvtOnFocusOutListener(arg: JQueryEventObject): void
         {
             if (this.arrEvtOnFocusOutListener.length == 0)
             {

@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../OnClickListener.ts"/>
+/// <reference path="../../OnFocusOutListener.ts"/>
 /// <reference path="botao/BotaoCircular.ts"/>
 /// <reference path="ComponenteHtml.ts"/>
 
@@ -18,7 +19,7 @@ module Web
 
     // #endregion Enumerados
 
-    export class Mensagem extends ComponenteHtml implements OnClickListener
+    export class Mensagem extends ComponenteHtml implements OnClickListener, OnFocusOutListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -142,7 +143,6 @@ module Web
             new Mensagem(strTitulo, strMensagem, enmTipo).abrirMensagem();
         }
 
-
         // TODO: Tornar este método privado e melhorar o "static mostrar".
         public abrirMensagem(): void
         {
@@ -166,7 +166,7 @@ module Web
             this.iniciar();
             this.mostrar();
 
-            AppWebBase.i.abrirTagFocoExclusivo(this);
+            AppWebBase.i.tagFoco = this;
         }
 
         private btnCancelarOnClick(): void
@@ -196,6 +196,9 @@ module Web
             super.inicializar();
 
             this.inicializarEnmTipo();
+
+            this.btnCancelar.iniciar();
+            this.btnConfirmar.iniciar();
         }
 
         private inicializarEnmTipo(): void
@@ -247,6 +250,8 @@ module Web
         {
             super.setEventos();
 
+            this.addEvtOnFocusOutListener(this);
+
             this.btnConfirmar.addEvtOnClickListener(this);
             this.btnCancelar.addEvtOnClickListener(this);
         }
@@ -267,6 +272,23 @@ module Web
 
                     case this.btnConfirmar:
                         this.btnConfirmarOnClick();
+                        return;
+                }
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+        }
+
+        public onFocusOut(objSender: Object): void
+        {
+            try
+            {
+                switch (objSender)
+                {
+                    case this:
+                        this.dispose();
                         return;
                 }
             }

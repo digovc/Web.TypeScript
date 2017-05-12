@@ -105,6 +105,14 @@ module Web
             window.setTimeout(() => { this.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL); }, 400);
         }
 
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.btnAdicionar.iniciar();
+            this.btnAlterar.iniciar();
+        }
+
         protected setEventos(): void
         {
             super.setEventos();

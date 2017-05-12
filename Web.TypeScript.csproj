@@ -179,9 +179,6 @@
     <TypeScriptCompile Include="server\websocket\SrvWsBase.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <PropertyGroup>

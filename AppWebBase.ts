@@ -61,7 +61,7 @@ module Web
         private _srvAjaxDb: SrvAjaxDbeBase;
         private _srvHttp: SrvHttpBase;
         private _strSessaoId: string;
-        private _tagFocoExclusivo: ComponenteHtml;
+        private _tagFoco: ComponenteHtml;
 
         private get arrSrv(): Array<ServerBase>
         {
@@ -177,14 +177,24 @@ module Web
             return this._strSessaoId;
         }
 
-        private get tagFocoExclusivo(): ComponenteHtml
+        public get tagFoco(): ComponenteHtml
         {
-            return this._tagFocoExclusivo;
+            return this._tagFoco;
         }
 
-        private set tagFocoExclusivo(tagFocoExclusivo: ComponenteHtml)
+        public set tagFoco(tagFoco: ComponenteHtml)
         {
-            this._tagFocoExclusivo = tagFocoExclusivo;
+            if (this._tagFoco == tagFoco)
+            {
+                return;
+            }
+
+            if (this._tagFoco != null)
+            {
+                this._tagFoco.dispararEvtOnFocusOutListener(null);
+            }
+
+            this._tagFoco = tagFoco;
         }
 
         // #endregion Atributos
@@ -201,26 +211,6 @@ module Web
         // #endregion Construtores
 
         // #region Métodos
-
-        public abrirTagFocoExclusivo(tagFocoExclusivo: ComponenteHtml): void
-        {
-            if (tagFocoExclusivo == null)
-            {
-                return;
-            }
-
-            if (this.tagFocoExclusivo == tagFocoExclusivo)
-            {
-                return;
-            }
-
-            if (this.tagFocoExclusivo != null)
-            {
-                this.tagFocoExclusivo.dispose();
-            }
-
-            this.tagFocoExclusivo = tagFocoExclusivo;
-        }
 
         private addArrTbl(tblWeb: TabelaWeb): void
         {

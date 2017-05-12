@@ -226,6 +226,15 @@ module Web
             return this.pnlFiltro.jnlConsulta.viwAtual;
         }
 
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.btnAdicionar.iniciar();
+            this.btnAlterar.iniciar();
+            this.btnApagar.iniciar();
+        }
+
         public receberFoco(): void
         {
             super.receberFoco();

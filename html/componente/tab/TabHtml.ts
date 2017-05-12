@@ -264,6 +264,10 @@ module Web
         {
             super.inicializar();
 
+            this.btnAdicionar.iniciar();
+            this.btnAlterar.iniciar();
+            this.btnApagar.iniciar();
+
             this.inicializarArrTabItem();
 
             this.mostrarDivComando();

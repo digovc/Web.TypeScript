@@ -1,4 +1,5 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../../../OnFocusOutListener.ts"/>
+/// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="OnGridMenuClickArg.ts"/>
 
 module Web
@@ -9,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuGrid extends ComponenteHtml implements OnClickListener
+    export class MenuGrid extends ComponenteHtml implements OnClickListener, OnFocusOutListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -133,7 +134,7 @@ module Web
             mnuGrid.iniciar();
             mnuGrid.mostrar();
 
-            AppWebBase.i.abrirTagFocoExclusivo(mnuGrid);
+            AppWebBase.i.tagFoco = mnuGrid;
         }
 
         public dispose(): void
@@ -141,6 +142,16 @@ module Web
             super.dispose();
 
             AppWebBase.i.pag.removeEvtOnClickListener(this);
+        }
+
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.btnAdicionar.iniciar();
+            this.btnAlterar.iniciar();
+            this.btnApagar.iniciar();
+            this.btnMenu.iniciar();
         }
 
         protected montarLayoutFixo(strLayoutFixo: string): string
@@ -209,6 +220,8 @@ module Web
         {
             super.setEventos();
 
+            this.addEvtOnFocusOutListener(this);
+
             this.jq.bind("contextmenu", (() => { return false; }));
 
             window.setTimeout(() => { AppWebBase.i.pag.addEvtOnClickListener(this); }, 1);
@@ -236,6 +249,23 @@ module Web
                 }
 
                 this.dispose();
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+        }
+
+        public onFocusOut(objSender: Object): void
+        {
+            try
+            {
+                switch (objSender)
+                {
+                    case this:
+                        this.dispose();
+                        return;
+                }
             }
             catch (ex)
             {

@@ -268,6 +268,8 @@ module Web
         {
             super.inicializar()
 
+            this.btnFechar.iniciar();
+
             this.inicializarEnmTipo();
 
             this.inicializarTimeoutFechar();

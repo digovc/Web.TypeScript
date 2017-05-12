@@ -87,6 +87,7 @@ module Web
         {
             super.inicializar();
 
+            this.btnRegistrar.iniciar();
             this.txtEmail.iniciar();
         }
 

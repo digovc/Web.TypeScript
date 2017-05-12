@@ -67,6 +67,14 @@ module Web
 
         // #region Métodos
 
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.btnMenu.iniciar();
+            this.btnVoltar.iniciar();
+        }
+
         protected setEventos(): void
         {
             super.setEventos();

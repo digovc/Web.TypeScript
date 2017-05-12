@@ -351,11 +351,9 @@ module Web
         {
             super.inicializar();
 
-            this.inicializarBtn();
-        }
+            this.btnDownload.iniciar();
+            this.btnPesquisar.iniciar();
 
-        private inicializarBtn(): void
-        {
             this.btnDownload.booVisivel = (this.intRegistroId > 0);
             this.btnPesquisar.booVisivel = (this.intRegistroId < 1);
         }

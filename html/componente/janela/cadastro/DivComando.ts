@@ -108,6 +108,9 @@ module Web
         {
             super.inicializar();
 
+            this.btnSalvar.iniciar();
+            this.btnTag.iniciar();
+
             this.inicializarBtnTag();
 
             this.inicializarTblWeb();

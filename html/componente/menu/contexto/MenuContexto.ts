@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../../../OnClickListener.ts"/>
+/// <reference path="../../../../OnFocusOutListener.ts"/>
 /// <reference path="../../ComponenteHtml.ts"/>
 /// <reference path="MenuContextoItem.ts"/>
 
@@ -10,7 +11,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuContexto extends ComponenteHtml implements OnClickListener
+    export class MenuContexto extends ComponenteHtml implements OnClickListener, OnFocusOutListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -88,7 +89,7 @@ module Web
             this.iniciar();
             this.mostrar();
 
-            AppWebBase.i.abrirTagFocoExclusivo(this);
+            AppWebBase.i.tagFoco = this;
         }
 
         private addMci(mci: MenuContextoItem): void
@@ -212,6 +213,23 @@ module Web
             try
             {
                 this.dispose();
+            }
+            catch (ex)
+            {
+                new Erro("Erro desconhecido.", ex);
+            }
+        }
+
+        public onFocusOut(objSender: Object): void
+        {
+            try
+            {
+                switch (objSender)
+                {
+                    case this:
+                        this.dispose();
+                        return;
+                }
             }
             catch (ex)
             {

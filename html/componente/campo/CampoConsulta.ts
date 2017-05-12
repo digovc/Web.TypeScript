@@ -219,6 +219,7 @@ module Web
         {
             super.inicializar();
 
+            this.btnAcao.iniciar();
             this.txtPesquisa.iniciar();
 
             this.inicializarTblWebRef();

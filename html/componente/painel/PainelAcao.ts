@@ -35,6 +35,14 @@ module Web
         // #endregion Construtores
 
         // #region Métodos
+
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.btnAcaoPrincipal.iniciar();
+        }
+
         // #endregion Métodos
 
         // #region Eventos

@@ -20,9 +20,11 @@ module Web
         // #endregion Construtores
 
         // #region Métodos
+
         // #endregion Métodos
 
         // #region Eventos
+
         // #endregion Eventos
     }
 }
