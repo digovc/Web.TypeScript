@@ -146,21 +146,6 @@ module Web
             AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
-        private abrirFiltroCadastro(intFiltroId: number): void
-        {
-            if (this.pnlFiltro == null)
-            {
-                return;
-            }
-
-            if (this.pnlFiltro.jnlConsulta == null)
-            {
-                return;
-            }
-
-            this.pnlFiltro.jnlConsulta.abrirFiltroCadastro(intFiltroId);
-        }
-
         private abrirFiltroConteudoSucesso(objInterlocutor: Interlocutor): void
         {
             if (objInterlocutor == null)
@@ -174,6 +159,21 @@ module Web
             }
 
             this.pnlFiltro.atualizarFrmFiltroConteudo(objInterlocutor.objData.toString());
+        }
+
+        private abrirFiltroCadastro(intFiltroId: number): void
+        {
+            if (this.pnlFiltro == null)
+            {
+                return;
+            }
+
+            if (this.pnlFiltro.jnlConsulta == null)
+            {
+                return;
+            }
+
+            this.pnlFiltro.jnlConsulta.abrirFiltroCadastro(intFiltroId);
         }
 
         private apagarFiltro(): void

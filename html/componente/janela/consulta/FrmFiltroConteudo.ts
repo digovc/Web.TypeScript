@@ -156,12 +156,7 @@ module Web
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { this.setEventosArrCmp2(cmp); });
-        }
-
-        private setEventosArrCmp2(cmp: CampoHtml): void
-        {
-            cmp.addEvtOnKeyDownListener(this);
+            this.arrCmp.forEach((cmp) => { cmp.addEvtOnKeyDownListener(this); });
         }
 
         // #endregion Métodos
