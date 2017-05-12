@@ -216,7 +216,7 @@ module Web
                 return;
             }
 
-            this.divItemConteudo.esconder();
+            this.divItemConteudo.booVisivel = false;
         }
 
         private getArrMniFilhoVisivel(): Array<MenuItem>
