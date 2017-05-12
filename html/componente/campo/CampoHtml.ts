@@ -282,7 +282,7 @@ module Web
 
         private atualizarStrValorDivTitulo(): void
         {
-            this.mostrarDivTitulo(!this.tagInput.booVazio);
+            this.mostrarEsconderDivTitulo(!this.tagInput.booVazio);
         }
 
         private getBooObrigatorio(): boolean
@@ -379,10 +379,10 @@ module Web
 
             this.strPlaceholder = null;
 
-            this.mostrarDivTitulo(true);
+            this.mostrarEsconderDivTitulo(true);
         }
 
-        protected mostrarDivTitulo(booMostrar: boolean): void
+        protected mostrarEsconderDivTitulo(booMostrar: boolean): void
         {
             if (booMostrar && !this.booMostrarTituloNunca)
             {

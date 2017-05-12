@@ -27,13 +27,8 @@ module Web
         {
             AppWebBase.i.tagFoco = this;
 
-            this.jq.animate({ "border-radius": "0px" }, 150, (() => { this.processarOnFocusIn2(); }));
-        }
-
-        private processarOnFocusIn2(): void
-        {
-            this.jq.css("border", "1px solid gray");
-            this.jq.css("box-shadow", "0px 0px 5px 0px gray");
+            //this.jq.css("border", "1px solid gray");
+            this.jq.css("box-shadow", "0px 2px 5px 0px black");
         }
 
         private processarOnFocusOut(): void

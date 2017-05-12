@@ -124,6 +124,13 @@ module Web
             return strLayoutFixo;
         }
 
+        public mostrar(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE)
+        {
+            super.mostrar();
+
+            AppWebBase.i.tagFoco = this;
+        }
+
         // #endregion Métodos
 
         // #region Eventos

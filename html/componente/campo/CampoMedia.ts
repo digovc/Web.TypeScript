@@ -40,7 +40,7 @@ module Web
         {
             super.inicializar();
 
-            this.mostrarDivTitulo(true);
+            this.mostrarEsconderDivTitulo(true);
         }
 
         // #endregion Métodos

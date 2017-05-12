@@ -50,7 +50,9 @@ module Web
 
             this.ckb.iniciar();
 
-            this.mostrarDivTitulo(false);
+            this.ckb.divTitulo.strConteudo = this.strTitulo;
+
+            this.mostrarEsconderDivTitulo(false);
         }
 
         // #endregion Métodos

@@ -16,6 +16,7 @@ module Web
         // #region Atributos
 
         private _divSeletor: Div;
+        private _divTitulo: Div;
 
         private get divSeletor(): Div
         {
@@ -27,6 +28,18 @@ module Web
             this._divSeletor = new Div(this.strId + "_divSeletor");
 
             return this._divSeletor;
+        }
+
+        public get divTitulo(): Div
+        {
+            if (this._divTitulo != null)
+            {
+                return this._divTitulo;
+            }
+
+            this._divTitulo = new Div(this.strId + "_divTitulo");
+
+            return this._divTitulo;
         }
 
         // #endregion Atributos
