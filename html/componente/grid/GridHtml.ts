@@ -2,6 +2,7 @@
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="GridRow.ts"/>
+/// <reference path="OnGridMenuClickArg.ts"/>
 /// <reference path="OnGridMenuClickListener.ts"/>
 /// <reference path="OnRowClickListener.ts"/>
 

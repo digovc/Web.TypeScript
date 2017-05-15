@@ -55,7 +55,6 @@
     <TypeScriptCompile Include="html\componente\form\OnCmpEmFocoAlterado.ts" />
     <TypeScriptCompile Include="html\componente\grafico\ElementoAnimavel.ts" />
     <TypeScriptCompile Include="html\componente\grid\GridRow.ts" />
-    <TypeScriptCompile Include="html\componente\grid\MenuGrid.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnGridMenuClickArg.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnGridMenuClickListener.ts" />
     <TypeScriptCompile Include="html\componente\grid\OnRowClickListener.ts" />

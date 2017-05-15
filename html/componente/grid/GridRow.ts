@@ -1,11 +1,9 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnClickRightListener.ts"/>
-/// <reference path="../../../OnDoubleClickListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
-/// <reference path="MenuGrid.ts"/>
 
 module Web
 {
@@ -16,7 +14,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class GridRow extends ComponenteHtml implements OnClickListener, OnClickRightListener, OnDoubleClickListener, OnMouseLeaveListener, OnMouseOverListener
+    export class GridRow extends ComponenteHtml implements OnClickListener, OnClickRightListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
 
@@ -56,23 +54,19 @@ module Web
 
         // #region Métodos
 
-        protected setBooSelecionado(booSelecionado: boolean): void
+        private alterar(): void
         {
-            super.setBooSelecionado(booSelecionado);
-
-            if (this.tagGridHtml == null)
+            if (this.intId < 1)
             {
                 return;
             }
 
-            if (booSelecionado)
-            {
-                this.tagGridHtml.addRowSelecionada(this);
-            }
-            else
-            {
-                this.tagGridHtml.removerRowSelecionada(this);
-            }
+            var argOnGridMenuClick = new OnGridMenuClickArg();
+
+            argOnGridMenuClick.enmTipo = OnGridMenuClickArg_EnmAcao.ALTERAR;
+            argOnGridMenuClick.tagGridRow = this;
+
+            this.processarOnGridMenuClick(argOnGridMenuClick);
         }
 
         private getIntId(): number
@@ -104,26 +98,18 @@ module Web
 
         private processarOnClickRight(arg: JQueryMouseEventObject): void
         {
-            this.selecionar(arg.ctrlKey);
-
-            MenuGrid.abrirMenuGrid(this, arg);
-
-            arg.stopPropagation();
-        }
-
-        private processarOnDoubleClick(): void
-        {
             if (this.intId < 1)
             {
                 return;
             }
 
-            if (this.tagGridHtml == null)
-            {
-                return;
-            }
+            this.selecionar(false);
 
-            this.tagGridHtml.dispararEvtOnRowDoubleClickListener(this);
+            var objMenuContexto = new MenuContexto();
+
+            objMenuContexto.addOpcao(("Alterar registro " + this.intId), (() => { this.alterar(); }));
+
+            objMenuContexto.abrirMenu(arg);
         }
 
         public processarOnGridMenuClick(arg: OnGridMenuClickArg): void
@@ -159,6 +145,25 @@ module Web
             this.booSelecionado = !this.booSelecionado;
         }
 
+        protected setBooSelecionado(booSelecionado: boolean): void
+        {
+            super.setBooSelecionado(booSelecionado);
+
+            if (this.tagGridHtml == null)
+            {
+                return;
+            }
+
+            if (booSelecionado)
+            {
+                this.tagGridHtml.addRowSelecionada(this);
+            }
+            else
+            {
+                this.tagGridHtml.removerRowSelecionada(this);
+            }
+        }
+
         protected setEventos(): void
         {
             super.setEventos();
@@ -167,9 +172,6 @@ module Web
             this.addEvtOnClickRightListener(this);
             this.addEvtOnMouseLeaveListener(this);
             this.addEvtOnMouseOverListener(this);
-
-            // TODO: Não é possível disparar o click e double-click para um mesmo componente.
-            //this.addEvtOnDoubleClickListener(this);
         }
 
         // #endregion Métodos
@@ -203,18 +205,6 @@ module Web
                         this.processarOnClickRight(arg);
                         return;
                 }
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-        }
-
-        public onDoubleClick(objSender: Object, arg: JQueryEventObject): void
-        {
-            try
-            {
-                this.processarOnDoubleClick();
             }
             catch (ex)
             {
