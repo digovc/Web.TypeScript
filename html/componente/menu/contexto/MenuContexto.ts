@@ -20,7 +20,7 @@ module Web
 
         private _arrMci: Array<MenuContextoItem>;
 
-        private get arrMci(): Array<MenuContextoItem>
+        public get arrMci(): Array<MenuContextoItem>
         {
             if (this._arrMci != null)
             {

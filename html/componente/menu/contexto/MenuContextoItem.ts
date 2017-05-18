@@ -65,6 +65,23 @@ module Web
 
         // #region Métodos
 
+        protected montarLayout(): void
+        {
+            super.montarLayout();
+
+            this.montarLayoutBorderBottom();
+        }
+
+        private montarLayoutBorderBottom(): void
+        {
+            if (this.mnc.arrMci.indexOf(this) != (this.mnc.arrMci.length - 1))
+            {
+                return;
+            }
+
+            this.jq.css("border", "none");
+        }
+
         protected montarLayoutFixo(strLayoutFixo: string): string
         {
             strLayoutFixo = super.montarLayoutFixo(strLayoutFixo);
