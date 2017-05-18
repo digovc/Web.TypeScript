@@ -148,7 +148,7 @@ module Web
 
         constructor(pagPrincipal: PagPrincipal)
         {
-            super("jnlConsulta", pagPrincipal);
+            super(JnlConsulta.name, pagPrincipal);
 
             this.pagPrincipal = pagPrincipal;
         }
