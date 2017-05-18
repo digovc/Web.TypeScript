@@ -95,6 +95,7 @@
     <TypeScriptCompile Include="html\pagina\documentacao\PagDocumentacaoBase.ts" />
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
     <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
+    <TypeScriptCompile Include="html\Animator.ts" />
     <TypeScriptCompile Include="Keys.ts" />
     <TypeScriptCompile Include="Constante.ts" />
     <TypeScriptCompile Include="ConstanteManager.ts" />

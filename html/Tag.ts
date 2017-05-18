@@ -6,6 +6,7 @@
 /// <reference path="../OnMouseLeaveListener.ts"/>
 /// <reference path="../OnMouseOverListener.ts"/>
 /// <reference path="../typedefinition/jquery.d.ts"/>
+/// <reference path="Animator.ts"/>
 
 module Web
 {
@@ -37,6 +38,7 @@ module Web
 
         // #region Atributos
 
+        private _anim: Animator;
         private _booVisivel: boolean;
         private _intClickTimer: number = -1;
         private _jq: any;
@@ -45,6 +47,18 @@ module Web
         private _strPlaceholder: string;
         private _strSelector: string = null;
         private _strTitle: string;
+
+        public get anim(): Animator
+        {
+            if (this._anim != null)
+            {
+                return this._anim;
+            }
+
+            this._anim = new Animator(this);
+
+            return this._anim;
+        }
 
         public get booVisivel(): boolean
         {

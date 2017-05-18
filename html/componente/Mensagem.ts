@@ -1,5 +1,4 @@
 ﻿/// <reference path="../../OnClickListener.ts"/>
-/// <reference path="../../OnFocusOutListener.ts"/>
 /// <reference path="botao/BotaoCircular.ts"/>
 /// <reference path="ComponenteHtml.ts"/>
 
@@ -19,7 +18,7 @@ module Web
 
     // #endregion Enumerados
 
-    export class Mensagem extends ComponenteHtml implements OnClickListener, OnFocusOutListener
+    export class Mensagem extends ComponenteHtml implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -250,8 +249,6 @@ module Web
         {
             super.setEventos();
 
-            this.addEvtOnFocusOutListener(this);
-
             this.btnConfirmar.addEvtOnClickListener(this);
             this.btnCancelar.addEvtOnClickListener(this);
         }
@@ -272,23 +269,6 @@ module Web
 
                     case this.btnConfirmar:
                         this.btnConfirmarOnClick();
-                        return;
-                }
-            }
-            catch (ex)
-            {
-                new Erro("Erro desconhecido.", ex);
-            }
-        }
-
-        public onFocusOut(objSender: Object): void
-        {
-            try
-            {
-                switch (objSender)
-                {
-                    case this:
-                        this.dispose();
                         return;
                 }
             }

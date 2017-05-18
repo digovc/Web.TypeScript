@@ -46,13 +46,9 @@ module Web
         {
             super.inicializar();
 
-            this.booMostrarTituloNunca = true;
-
             this.ckb.iniciar();
 
             this.ckb.divTitulo.strConteudo = this.strTitulo;
-
-            this.mostrarEsconderDivTitulo(false);
         }
 
         // #endregion Métodos
