@@ -4,6 +4,7 @@
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../menu/contexto/MenuContexto.ts"/>
 
 module Web
 {
