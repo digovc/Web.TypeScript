@@ -67,9 +67,10 @@ module Web
 
             var tagScript = document.createElement("script");
 
-            tagScript.onload = (() => { fncOnLoad(); });
             tagScript.src = srcJs;
             tagScript.type = "text/javascript";
+
+            tagScript.onload = (() => { fncOnLoad(); });
 
             document.head.appendChild(tagScript);
         }
@@ -117,9 +118,9 @@ module Web
         {
         }
 
-        public validarJsCarregado(srcJq: string): boolean
+        public validarJsCarregado(srcJs: string): boolean
         {
-            return ($("script[src='" + srcJq + "']").length > 0);
+            return ($("script[src='" + srcJs + "']").length > 0);
         }
 
         // #endregion Métodos

@@ -55,10 +55,4 @@ module Web
         // #region Eventos
         // #endregion Eventos
     }
-
-    // #region Inicialização
-
-    $(document).ready(() => { new JnlFiltroCadastro().iniciar(); });
-
-    // #endregion Inicialização
 }

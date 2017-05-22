@@ -116,7 +116,7 @@ module Web
 
             this.divCadastro.jq.append(objInterlocutor.objData.toString());
 
-            this.inicializarJnlCadastro();
+            this.carregarJsCadastro();
         }
 
         public abrirConsulta(tblWeb: TabelaWeb): void
@@ -261,8 +261,9 @@ module Web
                 return;
             }
 
-            if (this.validarJsCarregado(srcJqCadastro))
+            if ((window as any)[AppWebBase.i.strNamespace][jnlCadastroJq.id] != null)
             {
+                this.inicializarJnlCadastro(jnlCadastroJq);
                 return;
             }
 
@@ -270,6 +271,8 @@ module Web
 
             tagScriptCadastro.src = srcJqCadastro;
             tagScriptCadastro.type = "text/javascript";
+
+            tagScriptCadastro.onload = (() => { this.inicializarJnlCadastro(jnlCadastroJq); });
 
             document.head.appendChild(tagScriptCadastro);
         }
@@ -297,11 +300,13 @@ module Web
             this.divConsulta.esconder();
         }
 
-        private inicializarJnlCadastro(): void
+        private inicializarJnlCadastro(jnlCadastroJq: HTMLElement): void
         {
             this.divCadastro.mostrar();
 
-            this.carregarJsCadastro();
+            var jnlCadastro: JnlCadastro = new (window as any)[AppWebBase.i.strNamespace][jnlCadastroJq.id]();
+
+            jnlCadastro.iniciar();
         }
 
         private inicializarJnlConsulta(objInterlocutor: Interlocutor): void

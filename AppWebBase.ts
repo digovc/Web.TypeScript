@@ -30,6 +30,8 @@ module Web
 
         private static get STR_COOKIE_SESSAO_ID_NOME(): string { return "sessao_id" };
 
+        public static get STR_CONSTANTE_NAMESPACE_PROJETO(): string { return "STR_CONSTANTE_NAMESPACE_PROJETO" };
+
         // #endregion Constantes
 
         // #region Atributos
@@ -60,6 +62,7 @@ module Web
         private _pag: PaginaHtml;
         private _srvAjaxDb: SrvAjaxDbeBase;
         private _srvHttp: SrvHttpBase;
+        private _strNamespace: string;
         private _strSessaoId: string;
         private _tagFoco: ComponenteHtml;
 
@@ -163,6 +166,18 @@ module Web
             this._srvHttp = this.getSrvHttp();
 
             return this._srvHttp;
+        }
+
+        public get strNamespace(): string
+        {
+            if (this._strNamespace != null)
+            {
+                return this._strNamespace;
+            }
+
+            this._strNamespace = ConstanteManager.i.getStrConstante(AppWebBase.STR_CONSTANTE_NAMESPACE_PROJETO);
+
+            return this._strNamespace;
         }
 
         public get strSessaoId(): string
