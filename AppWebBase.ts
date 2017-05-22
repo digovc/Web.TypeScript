@@ -28,9 +28,10 @@ module Web
     {
         // #region Constantes
 
-        private static get STR_COOKIE_SESSAO_ID_NOME(): string { return "sessao_id" };
+        public static get STR_COOKIE_SESSAO_ID_NOME(): string { return "sessao_id" };
 
-        public static get STR_CONSTANTE_NAMESPACE_PROJETO(): string { return "STR_CONSTANTE_NAMESPACE_PROJETO" };
+        private static get STR_CONSTANTE_DESENVOLVIMENTO(): string { return "STR_CONSTANTE_DESENVOLVIMENTO" };
+        private static get STR_CONSTANTE_NAMESPACE_PROJETO(): string { return "STR_CONSTANTE_NAMESPACE_PROJETO" };
 
         // #endregion Constantes
 
@@ -55,6 +56,7 @@ module Web
 
         private _arrSrv: Array<ServerBase>;
         private _arrTbl: Array<TabelaWeb>;
+        private _booDesenvolvimento: boolean;
         private _booEmFoco: boolean = true;
         private _dttLoad: Date = new Date();
         private _msg: Mensagem;
@@ -88,6 +90,18 @@ module Web
             this._arrTbl = new Array<TabelaWeb>();
 
             return this._arrTbl;
+        }
+
+        public get booDesenvolvimento(): boolean
+        {
+            if (this._booDesenvolvimento != null)
+            {
+                return this._booDesenvolvimento;
+            }
+
+            this._booDesenvolvimento = ConstanteManager.i.getBooConstante(AppWebBase.STR_CONSTANTE_DESENVOLVIMENTO);
+
+            return this._booDesenvolvimento;
         }
 
         public get booEmFoco(): boolean
@@ -187,9 +201,14 @@ module Web
                 return this._strSessaoId;
             }
 
-            this._strSessaoId = this.getStrSessaoId();
+            this._strSessaoId = this.getStrCookieValue(AppWebBase.STR_COOKIE_SESSAO_ID_NOME);
 
             return this._strSessaoId;
+        }
+
+        public set strSessaoId(strSessaoId: string)
+        {
+            this._strSessaoId = strSessaoId;
         }
 
         public get tagFoco(): ComponenteHtml
@@ -240,6 +259,28 @@ module Web
             }
 
             this.arrTbl.push(tblWeb);
+        }
+
+        public addCookie(strNome: string, strValor: string): void
+        {
+            if (Utils.getBooStrVazia(strNome))
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(strValor))
+            {
+                return;
+            }
+
+            // TODO: Implementar data e hora de validade.
+
+            var strCookie = "_cookie_name=_cookie_value";
+
+            strCookie = strCookie.replace("_cookie_name", strNome);
+            strCookie = strCookie.replace("_cookie_value", strValor);
+
+            document.cookie = strCookie;
         }
 
         public atualizarHistorico(objHistorico: Historico): void
@@ -345,11 +386,6 @@ module Web
             }
 
             return objRegExpExecArray[1];
-        }
-
-        private getStrSessaoId(): string
-        {
-            return this.getStrCookieValue(AppWebBase.STR_COOKIE_SESSAO_ID_NOME);
         }
 
         public getTbl(strTblNome: string): TabelaWeb

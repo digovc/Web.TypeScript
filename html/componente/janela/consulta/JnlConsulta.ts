@@ -471,9 +471,5 @@ module Web
         }
 
         // #endregion Eventos
-    }
-
-    // #region Inicialização
-
-    // #endregion Inicialização
+    }    
 }

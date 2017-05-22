@@ -70,6 +70,11 @@ module Web
             this.arrObjConstante.push(objConstante);
         }
 
+        public getBooConstante(strConstanteNome: string): boolean
+        {
+            return Utils.getBoo(this.getStrConstante(strConstanteNome));
+        }
+
         public getDecConstante(strConstanteNome: string): number
         {
             return Number(this.getStrConstante(strConstanteNome));

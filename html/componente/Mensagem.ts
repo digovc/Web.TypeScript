@@ -163,31 +163,12 @@ module Web
             $(document.body).append(this.strLayoutFixo);
 
             this.iniciar();
+
             this.mostrar();
 
+            this.btnConfirmar.receberFoco();
+
             AppWebBase.i.tagFoco = this;
-        }
-
-        private btnCancelarOnClick(): void
-        {
-            this.dispose();
-        }
-
-        private btnConfirmarOnClick(): void
-        {
-            this.dispose();
-
-            this.btnConfirmarFncOnConfirmar();
-        }
-
-        private btnConfirmarFncOnConfirmar(): void
-        {
-            if (this.fncOnConfirmar == null)
-            {
-                return;
-            }
-
-            this.fncOnConfirmar();
         }
 
         protected inicializar(): void
@@ -245,6 +226,23 @@ module Web
             return strLayoutFixo;
         }
 
+        private processarOnClickBtnCancelar(): void
+        {
+            this.dispose();
+        }
+
+        private processarOnClickBtnConfirmar(): void
+        {
+            this.dispose();
+
+            if (this.fncOnConfirmar == null)
+            {
+                return;
+            }
+
+            this.fncOnConfirmar();
+        }
+
         protected setEventos(): void
         {
             super.setEventos();
@@ -264,11 +262,11 @@ module Web
                 switch (objSender)
                 {
                     case this.btnCancelar:
-                        this.btnCancelarOnClick();
+                        this.processarOnClickBtnCancelar();
                         return;
 
                     case this.btnConfirmar:
-                        this.btnConfirmarOnClick();
+                        this.processarOnClickBtnConfirmar();
                         return;
                 }
             }
