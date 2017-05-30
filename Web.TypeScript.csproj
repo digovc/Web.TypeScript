@@ -23,6 +23,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Loop.ts" />
     <TypeScriptCompile Include="AppWebBase.ts" />
     <TypeScriptCompile Include="database\DataCell.ts" />
     <TypeScriptCompile Include="database\DataRow.ts" />
