@@ -238,7 +238,7 @@ module Web
                 return;
             }
 
-            if (this.tblWeb.clnWebIntId.intValor < 1)
+            if (this.tblWeb.clnIntId.intValor < 1)
             {
                 return;
             }
@@ -255,12 +255,12 @@ module Web
                 return;
             }
 
-            var intRegistroId = this.tblWeb.clnWebIntId.intValor;
+            var intRegistroId = this.tblWeb.clnIntId.intValor;
 
             this.tblWeb.limparDados();
 
-            this.tblWeb.clnWebIntId.intValor = intRegistroId;
-            this.tblWeb.getClnWeb(TabelaWeb.SQL_CLN_STR_TAG_NOME).strValor = strTagFormatada;
+            this.tblWeb.clnIntId.intValor = intRegistroId;
+            this.tblWeb.getCln(TabelaWeb.SQL_CLN_STR_TAG_NOME).strValor = strTagFormatada;
 
             var objInterlocutor = new Interlocutor();
 
@@ -316,7 +316,7 @@ module Web
                 return;
             }
 
-            if (tblWeb.clnWebIntId.intValor < 1)
+            if (tblWeb.clnIntId.intValor < 1)
             {
                 return;
             }
@@ -324,7 +324,7 @@ module Web
             var strId = "jnlTag__tbl_nome__int_registro_id";
 
             strId = strId.replace("_tbl_nome", tblWeb.strNome);
-            strId = strId.replace("_int_registro_id", String(tblWeb.clnWebIntId.intValor));
+            strId = strId.replace("_int_registro_id", String(tblWeb.clnIntId.intValor));
 
             this.strId = strId;
         }

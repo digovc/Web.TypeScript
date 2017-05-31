@@ -39,7 +39,7 @@ module Web
                 return this._clnStrTabelaNome;
             }
 
-            this._clnStrTabelaNome = this.getClnWeb("str_tabela_nome");
+            this._clnStrTabelaNome = this.getCln("str_tabela_nome");
 
             return this._clnStrTabelaNome;
         }

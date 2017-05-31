@@ -295,7 +295,7 @@ module Web
                 return;
             }
 
-            this.frm.tblWeb.getClnWeb(strClnWebArquivoModificacaoNome).strValor = this.elmInput.files[0].lastModifiedDate;
+            this.frm.tblWeb.getCln(strClnWebArquivoModificacaoNome).strValor = this.elmInput.files[0].lastModifiedDate;
         }
 
         private enviarArquivoNome(): void
@@ -307,7 +307,7 @@ module Web
                 return;
             }
 
-            this.frm.tblWeb.getClnWeb(strClnWebArquivoNomeNome).strValor = this.elmInput.files[0].name;
+            this.frm.tblWeb.getCln(strClnWebArquivoNomeNome).strValor = this.elmInput.files[0].name;
         }
 
         private enviarArquivoProgresso(arg: ProgressEvent): void
@@ -344,7 +344,7 @@ module Web
                 return;
             }
 
-            this.frm.tblWeb.getClnWeb(strClnWebArquivoTamanhoNome).intValor = this.elmInput.files[0].size;
+            this.frm.tblWeb.getCln(strClnWebArquivoTamanhoNome).intValor = this.elmInput.files[0].size;
         }
 
         protected inicializar(): void

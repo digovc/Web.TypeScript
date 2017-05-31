@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../AppWebBase.ts"/>
 /// <reference path="../../Objeto.ts"/>
-/// <reference path="../../server/ajax/SrvAjaxDbeBase.ts"/>
+/// <reference path="../../server/ajax/data/SrvAjaxDbeBase.ts"/>
 
 module Web
 {

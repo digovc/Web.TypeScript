@@ -1,5 +1,4 @@
-﻿/// <reference path="../../../../database/DataTable.ts"/>
-/// <reference path="../../../../database/ParValorNome.ts"/>
+﻿/// <reference path="../../../../database/ParValorNome.ts"/>
 /// <reference path="../../../../database/TblFiltro.ts"/>
 /// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../botao/BotaoCircular.ts"/>
@@ -134,7 +133,7 @@ module Web
 
             TblFiltro.i.limparFiltro();
 
-            TblFiltro.i.addFil2(TblFiltro.i.clnWebIntId, this.cmpIntFiltroId.tagInput.intValor);
+            TblFiltro.i.addFil2(TblFiltro.i.clnIntId, this.cmpIntFiltroId.tagInput.intValor);
 
             var objInterlocutor = new Interlocutor();
 

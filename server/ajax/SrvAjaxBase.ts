@@ -69,14 +69,15 @@ module Web
 
         private getObjAjaxSettings(objInterlocutor: Interlocutor): JQueryAjaxSettings
         {
-            var objAjaxSettingsResultado: JQueryAjaxSettings = {
-                crossDomain: true,
-                error: ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objInterlocutor.processarOnErro(strTextStatus, strErrorThrown); }),
-                method: "POST",
-                success: ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objInterlocutor.processarOnSucesso(anyData); }),
-                url: ("http://" + this.url),
-                xhrFields: { withCredentials: true },
-            }
+            var objAjaxSettingsResultado: JQueryAjaxSettings =
+                {
+                    crossDomain: true,
+                    error: ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objInterlocutor.processarOnErro(strTextStatus, strErrorThrown); }),
+                    method: "POST",
+                    success: ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objInterlocutor.processarOnSucesso(anyData); }),
+                    url: ("http://" + this.url),
+                    xhrFields: { withCredentials: true },
+                }
 
             return objAjaxSettingsResultado;
         }

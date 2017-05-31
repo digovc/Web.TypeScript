@@ -1,6 +1,4 @@
-﻿/// <reference path="../Objeto.ts"/>
-
-module Web
+﻿module Web
 {
     // #region Importações
     // #endregion Importações
@@ -8,12 +6,24 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DataRow extends Objeto
+    export class DataRow
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
+
+        private _arrStrValor: string[];
+
+        public get arrStrValor(): string[]
+        {
+            return this._arrStrValor;
+        }
+
+        public set arrStrValor(arrStrValor: string[])
+        {
+            this._arrStrValor = arrStrValor;
+        }
 
         // #endregion Atributos
 

@@ -168,6 +168,7 @@ module Web
             }
 
             this.objData = JSON.stringify(obj);
+
             this.strClazz = (obj.constructor as any).name;
         }
 
@@ -179,6 +180,7 @@ module Web
             }
 
             this.objData = str;
+
             this.strClazz = null;
         }
 

@@ -164,7 +164,7 @@ module Web
                 return;
             }
 
-            this.tblWeb.clnWebIntId.intValor = intRegistroId;
+            this.tblWeb.clnIntId.intValor = intRegistroId;
 
             this.pagPrincipal.abrirCadastro(this.tblWeb);
 

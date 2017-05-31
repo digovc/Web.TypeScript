@@ -208,7 +208,7 @@ module Web
                 return;
             }
 
-            this.tblWeb.clnWebIntId.intValor = this.intRegistroId;
+            this.tblWeb.clnIntId.intValor = this.intRegistroId;
 
             this.pagPrincipal.abrirJnlTag(this.tblWeb);
         }
@@ -334,7 +334,7 @@ module Web
 
         private getCmpIntId(): CampoNumerico
         {
-            return this.getCmp<CampoNumerico>(this.tblWeb.clnWebIntId.strNome);
+            return this.getCmp<CampoNumerico>(this.tblWeb.clnIntId.strNome);
         }
 
         private getFrm(): FormHtml
@@ -565,12 +565,12 @@ module Web
                 Mensagem.mostrar("Erro", tblWeb.strCritica, Mensagem_EnmTipo.NEGATIVA);
             }
 
-            if (tblWeb.arrClnWeb == null)
+            if (tblWeb.arrCln == null)
             {
                 return;
             }
 
-            tblWeb.arrClnWeb.forEach((clnWeb) => { this.salvarSucesso2CriticaClnWeb(clnWeb); });
+            tblWeb.arrCln.forEach((clnWeb) => { this.salvarSucesso2CriticaClnWeb(clnWeb); });
         }
 
         private salvarSucesso2CriticaClnWeb(clnWeb: ColunaWeb): void
@@ -626,7 +626,7 @@ module Web
                 return;
             }
 
-            this.cmpIntId.tagInput.intValor = tblWeb.getClnWeb(this.cmpIntId.clnWeb.strNome).intValor;
+            this.cmpIntId.tagInput.intValor = tblWeb.getCln(this.cmpIntId.clnWeb.strNome).intValor;
         }
 
         private salvarSucesso2SucessoTabHtml(): void

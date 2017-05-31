@@ -528,7 +528,7 @@ module Web
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { tblWeb.addClnWeb(cmp.clnWeb); });
+            this.arrCmp.forEach((cmp) => { tblWeb.addCln(cmp.clnWeb); });
         }
 
         public validarDados(): boolean

@@ -139,7 +139,7 @@ module Web
                 return;
             }
 
-            this.tblWeb.clnWebIntId.intValor = (booAlterar) ? this.tagGridHtml.getIntRowSelecionadaId() : 0;
+            this.tblWeb.clnIntId.intValor = (booAlterar) ? this.tagGridHtml.getIntRowSelecionadaId() : 0;
 
             this.tabHtml.frm.abrirCadastroFilho(this.tblWeb);
         }

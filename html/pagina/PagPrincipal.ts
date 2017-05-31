@@ -178,7 +178,7 @@ module Web
         {
             TblFiltro.i.limparFiltro();
 
-            TblFiltro.i.clnWebIntId.intValor = intFiltroId;
+            TblFiltro.i.clnIntId.intValor = intFiltroId;
 
             this.abrirCadastro(TblFiltro.i);
         }
@@ -200,7 +200,7 @@ module Web
                 return;
             }
 
-            if (tblWeb.clnWebIntId.intValor < 1)
+            if (tblWeb.clnIntId.intValor < 1)
             {
                 return;
             }

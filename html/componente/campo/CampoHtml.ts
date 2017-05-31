@@ -319,7 +319,7 @@ module Web
                 return clnWebResultado;
             }
 
-            return this.frm.jnlCadastro.tblWeb.getClnWeb(this.jq.attr("cln_web_nome"));
+            return this.frm.jnlCadastro.tblWeb.getCln(this.jq.attr("cln_web_nome"));
         }
 
         private getIntRegistroId(): number

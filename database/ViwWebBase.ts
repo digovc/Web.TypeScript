@@ -1,5 +1,4 @@
-﻿/// <reference path="../Objeto.ts"/>
-/// <reference path="ColunaWeb.ts"/>
+﻿/// <reference path="TabelaWeb.ts"/>
 
 module Web
 {
@@ -9,31 +8,20 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DataCell extends Objeto
+    export abstract class ViwWebBase extends TabelaWeb
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
-
-        private _clnWeb: ColunaWeb;
-
-        private get clnWeb(): ColunaWeb
-        {
-            return this._clnWeb;
-        }
-
-        private set clnWeb(clnWeb: ColunaWeb)
-        {
-            this._clnWeb = clnWeb;
-        }
-
         // #endregion Atributos
 
         // #region Construtores
+
         // #endregion Construtores
 
         // #region Métodos
+
         // #endregion Métodos
 
         // #region Eventos

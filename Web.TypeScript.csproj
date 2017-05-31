@@ -23,11 +23,9 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="database\ViwWebBase.ts" />
     <TypeScriptCompile Include="Loop.ts" />
     <TypeScriptCompile Include="AppWebBase.ts" />
-    <TypeScriptCompile Include="database\DataCell.ts" />
-    <TypeScriptCompile Include="database\DataRow.ts" />
-    <TypeScriptCompile Include="database\DataTable.ts" />
     <TypeScriptCompile Include="database\dominio\documentacao\DocumentacaoDominioBase.ts" />
     <TypeScriptCompile Include="database\dominio\documentacao\EmailRegistroDominio.ts" />
     <TypeScriptCompile Include="database\dominio\FavoritoDominio.ts" />
@@ -159,8 +157,11 @@
     <TypeScriptCompile Include="database\ColunaWeb.ts" />
     <TypeScriptCompile Include="database\FiltroWeb.ts" />
     <TypeScriptCompile Include="database\TabelaWeb.ts" />
+    <TypeScriptCompile Include="database\DataRow.ts" />
+    <TypeScriptCompile Include="database\DataContainer.ts" />
+    <TypeScriptCompile Include="server\ajax\data\PesquisaInterlocutor.ts" />
     <TypeScriptCompile Include="server\ajax\SrvAjaxBase.ts" />
-    <TypeScriptCompile Include="server\ajax\SrvAjaxDbeBase.ts" />
+    <TypeScriptCompile Include="server\ajax\data\SrvAjaxDbeBase.ts" />
     <TypeScriptCompile Include="server\ajax\SrvAjaxDocumentacao.ts" />
     <TypeScriptCompile Include="server\Interlocutor.ts" />
     <TypeScriptCompile Include="server\ServerBase.ts" />

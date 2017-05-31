@@ -141,7 +141,7 @@ module Web
 
             var mnc = new MenuContexto();
 
-            this.tblWebRef.arrClnWeb.forEach((clnWeb) => { this.abrirOpcaoPesquisarPorCln(mnc, clnWeb); });
+            this.tblWebRef.arrCln.forEach((cln) => { this.abrirOpcaoPesquisarPorCln(mnc, cln); });
 
             mnc.abrirMenu(arg);
         }
@@ -280,7 +280,7 @@ module Web
 
             if (this.clnWebFiltro == null)
             {
-                this.clnWebFiltro = this.tblWebRef.clnWebNome;
+                this.clnWebFiltro = this.tblWebRef.clnNome;
             }
 
             this.tblWebRef.limparFiltro();
@@ -341,7 +341,7 @@ module Web
         {
             if (clnWebFiltro == null)
             {
-                clnWebFiltro = this.tblWebRef.clnWebNome;
+                clnWebFiltro = this.tblWebRef.clnNome;
                 return;
             }
 

@@ -10,7 +10,7 @@
 /// <reference path="OnFocusChangeListener.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
-/// <reference path="server/ajax/SrvAjaxDbeBase.ts"/>
+/// <reference path="server/ajax/data/SrvAjaxDbeBase.ts"/>
 /// <reference path="server/Interlocutor.ts"/>
 /// <reference path="server/ServerBase.ts"/>
 /// <reference path="server/SrvHttpBase.ts"/>

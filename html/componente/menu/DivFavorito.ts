@@ -1,5 +1,4 @@
 ﻿/// <reference path="../../../database/dominio/FavoritoDominio.ts"/>
-/// <reference path="../../../server/ajax/SrvAjaxDbeBase.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="DivFavoritoItem.ts"/>
 

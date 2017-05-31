@@ -1,5 +1,4 @@
 ﻿/// <reference path="../Objeto.ts"/>
-/// <reference path="DataTable.ts"/>
 /// <reference path="FiltroWeb.ts"/>
 
 module Web
@@ -20,31 +19,32 @@ module Web
 
         // #region Atributos
 
-        private _arrClnWeb: Array<ColunaWeb>;
+        private _arrCln: Array<ColunaWeb>;
         private _arrFil: Array<FiltroWeb>;
         private _booPermitirAlterar: boolean = true;
-        private _clnWebIntId: ColunaWeb;
-        private _clnWebNome: ColunaWeb;
+        private _clnIntId: ColunaWeb;
+        private _clnNome: ColunaWeb;
         private _dttUpload: Date;
         private _intRegistroPaiId: number;
+        private _srvAjaxDbe: SrvAjaxDbeBase;
         private _strCritica: string;
         private _strTblPaiNome: string;
 
-        public get arrClnWeb(): Array<ColunaWeb>
+        public get arrCln(): Array<ColunaWeb>
         {
-            if (this._arrClnWeb != null)
+            if (this._arrCln != null)
             {
-                return this._arrClnWeb;
+                return this._arrCln;
             }
 
-            this._arrClnWeb = new Array<ColunaWeb>();
+            this._arrCln = new Array<ColunaWeb>();
 
-            return this._arrClnWeb;
+            return this._arrCln;
         }
 
-        public set arrClnWeb(arrClnWeb: Array<ColunaWeb>)
+        public set arrCln(arrCln: Array<ColunaWeb>)
         {
-            this._arrClnWeb = arrClnWeb;
+            this._arrCln = arrCln;
         }
 
         private get arrFil(): Array<FiltroWeb>
@@ -69,28 +69,28 @@ module Web
             this._booPermitirAlterar = booPermitirAlterar;
         }
 
-        public get clnWebIntId(): ColunaWeb
+        public get clnIntId(): ColunaWeb
         {
-            if (this._clnWebIntId != null)
+            if (this._clnIntId != null)
             {
-                return this._clnWebIntId;
+                return this._clnIntId;
             }
 
-            this._clnWebIntId = this.getClnWeb("int_id");
+            this._clnIntId = this.getCln("int_id");
 
-            return this._clnWebIntId;
+            return this._clnIntId;
         }
 
-        public get clnWebNome(): ColunaWeb
+        public get clnNome(): ColunaWeb
         {
-            if (this._clnWebNome != null)
+            if (this._clnNome != null)
             {
-                return this._clnWebNome;
+                return this._clnNome;
             }
 
-            this._clnWebNome = this.getClnWebNome();
+            this._clnNome = this.getClnNome();
 
-            return this._clnWebNome;
+            return this._clnNome;
         }
 
         public get intRegistroPaiId(): number
@@ -111,6 +111,18 @@ module Web
         public set intRegistroPaiId(intRegistroPaiId: number)
         {
             this._intRegistroPaiId = intRegistroPaiId;
+        }
+
+        private get srvAjaxDbe(): SrvAjaxDbeBase
+        {
+            if (this._srvAjaxDbe != null)
+            {
+                return this._srvAjaxDbe;
+            }
+
+            this._srvAjaxDbe = this.getSrvAjaxDbe();
+
+            return this._srvAjaxDbe;
         }
 
         public get strCritica(): string
@@ -148,19 +160,19 @@ module Web
 
         // #region Métodos
 
-        public addClnWeb(clnWeb: ColunaWeb): void
+        public addCln(cln: ColunaWeb): void
         {
-            if (clnWeb == null)
+            if (cln == null)
             {
                 return;
             }
 
-            if (this.arrClnWeb.indexOf(clnWeb) > -1)
+            if (this.arrCln.indexOf(cln) > -1)
             {
                 return;
             }
 
-            this.arrClnWeb.push(clnWeb);
+            this.arrCln.push(cln);
         }
 
         public addFil(filWeb: FiltroWeb): void
@@ -173,14 +185,14 @@ module Web
             this.arrFil.push(filWeb);
         }
 
-        public addFil2(clnWeb: ColunaWeb, objValor: Object): void
+        public addFil2(cln: ColunaWeb, objValor: Object): void
         {
-            if (clnWeb == null)
+            if (cln == null)
             {
                 return;
             }
 
-            var filWeb = new FiltroWeb(clnWeb, objValor);
+            var filWeb = new FiltroWeb(cln, objValor);
 
             this.arrFil.push(filWeb);
         }
@@ -189,35 +201,35 @@ module Web
         {
             super.copiarDados(obj);
 
-            this.copiarDadosArrClnWeb();
+            this.copiarDadosArrCln();
         }
 
-        private copiarDadosArrClnWeb(): void
+        private copiarDadosArrCln(): void
         {
-            if (this.arrClnWeb == null)
+            if (this.arrCln == null)
             {
                 return;
             }
 
-            var arrObjTemp = this.arrClnWeb;
+            var arrObjTemp = this.arrCln;
 
-            this.arrClnWeb = null;
+            this.arrCln = null;
 
-            arrObjTemp.forEach((obj) => { this.copiarDadosArrClnWeb2(obj); });
+            arrObjTemp.forEach((obj) => { this.copiarDadosArrCln2(obj); });
         }
 
-        private copiarDadosArrClnWeb2(obj: any): void
+        private copiarDadosArrCln2(obj: any): void
         {
             if (obj == null)
             {
                 return;
             }
 
-            var clnWeb = new ColunaWeb(null);
+            var cln = new ColunaWeb(null);
 
-            clnWeb.copiarDados(obj);
+            cln.copiarDados(obj);
 
-            this.addClnWeb(clnWeb);
+            this.addCln(cln);
         }
 
         /**
@@ -236,16 +248,16 @@ module Web
 
         private getBooCriticaCln(): boolean
         {
-            if (this.arrClnWeb == null)
+            if (this.arrCln == null)
             {
                 return false;
             }
 
             var booResultado: boolean;
 
-            this.arrClnWeb.some((clnWeb) =>
+            this.arrCln.some((cln) =>
             {
-                booResultado = this.getBooCriticaCln2(clnWeb);
+                booResultado = this.getBooCriticaCln2(cln);
 
                 return booResultado;
             });
@@ -253,84 +265,89 @@ module Web
             return booResultado;
         }
 
-        private getBooCriticaCln2(clnWeb: ColunaWeb): boolean
+        private getBooCriticaCln2(cln: ColunaWeb): boolean
         {
-            if (clnWeb == null)
+            if (cln == null)
             {
                 return false;
             }
 
-            return !Utils.getBooStrVazia(clnWeb.strCritica);
+            return !Utils.getBooStrVazia(cln.strCritica);
         }
 
         /**
          * Retorna a coluna que contém o nome passado por parâmetro ou null
          * caso nenhuma seja encontrada.
          */
-        public getClnWeb(sqlClnWebNome: string): ColunaWeb
+        public getCln(sqlClnNome: string): ColunaWeb
         {
-            if (Utils.getBooStrVazia(sqlClnWebNome))
+            if (Utils.getBooStrVazia(sqlClnNome))
             {
                 return null;
             }
 
-            if (this.arrClnWeb == null)
+            if (this.arrCln == null)
             {
                 return null;
             }
 
-            for (var i = 0; i < this.arrClnWeb.length; i++)
+            for (var i = 0; i < this.arrCln.length; i++)
             {
-                if (this.arrClnWeb[i] == null)
+                if (this.arrCln[i] == null)
                 {
                     continue;
                 }
 
-                if (Utils.getBooStrVazia(this.arrClnWeb[i].strNome))
+                if (Utils.getBooStrVazia(this.arrCln[i].strNome))
                 {
                     continue;
                 }
 
-                if (sqlClnWebNome.toLowerCase() != this.arrClnWeb[i].strNome.toLowerCase())
+                if (sqlClnNome.toLowerCase() != this.arrCln[i].strNome.toLowerCase())
                 {
                     continue;
                 }
 
-                return this.arrClnWeb[i];
+                return this.arrCln[i];
             }
 
-            var clnWebNew = new ColunaWeb(sqlClnWebNome);
+            var clnNova = new ColunaWeb(sqlClnNome);
 
-            this.addClnWeb(clnWebNew);
+            this.addCln(clnNova);
 
-            return clnWebNew;
+            return clnNova;
         }
 
-        private getClnWebNome(): ColunaWeb
+        private getClnNome(): ColunaWeb
         {
-            for (var i = 0; i < this.arrClnWeb.length; i++)
+            for (var i = 0; i < this.arrCln.length; i++)
             {
-                var clnWeb = this.arrClnWeb[i];
+                var cln = this.arrCln[i];
 
-                if (clnWeb == null)
+                if (cln == null)
                 {
                     continue;
                 }
 
-                if (!clnWeb.booNome)
+                if (!cln.booNome)
                 {
                     continue;
                 }
 
-                return clnWeb;
+                return cln;
             }
 
-            return this.clnWebIntId;
+            return this.clnIntId;
+        }
+
+        protected getSrvAjaxDbe(): SrvAjaxDbeBase
+        {
+            return null;
         }
 
         public limparDados(): void
         {
-            this.arrClnWeb.forEach((clnWeb) => { clnWeb.strValor = null; });
+            this.arrCln.forEach((cln) => { cln.strValor = null; });
         }
 
         public limparFiltro(): void
@@ -341,6 +358,16 @@ module Web
             }
 
             this.arrFil.splice(0);
+        }
+
+        public pesquisar(arrFil: Array<FiltroWeb>, fncSucesso: Function, fncErro: Function = null): void
+        {
+            if (this.srvAjaxDbe == null)
+            {
+                throw "O servidor de dados não foi indicado.";
+            }
+
+            this.srvAjaxDbe.pesquisar(this, arrFil, fncSucesso, fncErro);
         }
 
         // #endregion Métodos

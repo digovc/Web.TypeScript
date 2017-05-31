@@ -1,4 +1,5 @@
-﻿/// <reference path="SrvAjaxBase.ts"/>
+﻿/// <reference path="../SrvAjaxBase.ts"/>
+/// <reference path="PesquisaInterlocutor.ts"/>
 
 module Web
 {
@@ -33,6 +34,8 @@ module Web
         public static get STR_METODO_TAG_ABRIR_JANELA(): string { return "TAG_ABRIR_JANELA" };
         public static get STR_METODO_TAG_SALVAR(): string { return "TAG_SALVAR" };
 
+        private static get STR_METODO_PESQUISAR(): string { return "STR_METODO_PESQUISAR" };
+
         // #endregion Constantes
 
         // #region Atributos
@@ -40,6 +43,12 @@ module Web
         // #endregion Atributos
 
         // #region Construtores
+
+        constructor()
+        {
+            super("Servidor de dados");
+        }
+
         // #endregion Construtores
 
         // #region Métodos
@@ -47,6 +56,31 @@ module Web
         protected getIntPorta(): number
         {
             return 8081;
+        }
+
+        public pesquisar(tblWeb: TabelaWeb, arrFil: Array<FiltroWeb>, fncSucesso: Function, fncErro: Function = null): void
+        {
+            if (tblWeb == null)
+            {
+                throw 'A tabela está nula.'
+            }
+
+            if (fncSucesso == null)
+            {
+                throw 'A função de retorno está nula.'
+            }
+
+            var objPesquisa = new PesquisaInterlocutor();
+
+            objPesquisa.arrFil = arrFil;
+            objPesquisa.strTblNome = tblWeb.constructor.name;
+
+            var objInterlocutor = new Interlocutor(SrvAjaxDbeBase.STR_METODO_PESQUISAR, objPesquisa);
+
+            objInterlocutor.addFncErro(fncErro);
+            objInterlocutor.addFncSucesso(fncSucesso);
+
+            this.enviar(objInterlocutor);
         }
 
         // #endregion Métodos
