@@ -1,4 +1,4 @@
-﻿/// <reference path="TabelaWeb.ts"/>
+﻿/// <reference path="../Objeto.ts"/>
 
 module Web
 {
@@ -8,20 +8,31 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ViwWebBase extends TabelaWeb
+    export class DataRowWeb extends Objeto
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
+
+        private _arrStrValor: string[];
+
+        public get arrStrValor(): string[]
+        {
+            return this._arrStrValor;
+        }
+
+        public set arrStrValor(arrStrValor: string[])
+        {
+            this._arrStrValor = arrStrValor;
+        }
+
         // #endregion Atributos
 
         // #region Construtores
-
         // #endregion Construtores
 
         // #region Métodos
-
         // #endregion Métodos
 
         // #region Eventos

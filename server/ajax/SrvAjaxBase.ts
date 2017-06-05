@@ -36,6 +36,8 @@ module Web
                 return;
             }
 
+            objInterlocutor.intHttpPorta = !Utils.getBooStrVazia(window.location.port) ? Number(window.location.port) : 80;
+
             var objAjaxSettings = this.getObjAjaxSettings(objInterlocutor);
 
             objAjaxSettings.data = objInterlocutor.toJson();

@@ -76,7 +76,7 @@ module Web
                 return this._clnIntId;
             }
 
-            this._clnIntId = this.getCln("int_id");
+            this._clnIntId = this.getCln(this.getSqlChavePrimariaNome());
 
             return this._clnIntId;
         }
@@ -338,6 +338,11 @@ module Web
             }
 
             return this.clnIntId;
+        }
+
+        protected getSqlChavePrimariaNome(): string
+        {
+            return "int_id";
         }
 
         protected getSrvAjaxDbe(): SrvAjaxDbeBase

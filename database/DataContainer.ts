@@ -1,4 +1,5 @@
-﻿/// <reference path="DataRow.ts"/>
+﻿/// <reference path="../Objeto.ts"/>
+/// <reference path="DataRowWeb.ts"/>
 
 module Web
 {
@@ -8,34 +9,34 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DataContainer
+    export class DataContainer extends Objeto
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _arrObjRow: DataRow[];
-        private _arrStrClnNome: string[];
+        private _arrRow: Array<DataRowWeb>;
+        private _arrSqlClnNome: string[];
 
-        public get arrObjRow(): DataRow[]
+        public get arrRow(): Array<DataRowWeb>
         {
-            return this._arrObjRow;
+            return this._arrRow;
         }
 
-        public set arrObjRow(arrObjRow: DataRow[])
+        public set arrRow(arrRow: Array<DataRowWeb>)
         {
-            this._arrObjRow = arrObjRow;
+            this._arrRow = arrRow;
         }
 
-        public get arrStrClnNome(): string[]
+        public get arrSqlClnNome(): string[]
         {
-            return this._arrStrClnNome;
+            return this._arrSqlClnNome;
         }
 
-        public set arrStrClnNome(arrStrClnNome: string[])
+        public set arrSqlClnNome(arrsqlClnNome: string[])
         {
-            this._arrStrClnNome = arrStrClnNome;
+            this._arrSqlClnNome = arrsqlClnNome;
         }
 
         // #endregion Atributos
@@ -45,9 +46,33 @@ module Web
 
         // #region Métodos
 
-        private getDec(strClnNome: string, objItem: DataRow): number
+        public copiarDados(obj: any): void
         {
-            var strValor = this.getStr(strClnNome, objItem);
+            super.copiarDados(obj);
+
+            if ((obj as DataContainer)._arrRow == null)
+            {
+                return;
+            }
+
+            if ((obj as DataContainer)._arrRow.length < 1)
+            {
+                return;
+            }
+
+            this.arrRow = new Array<DataRowWeb>();
+
+            for (var i = 0; i < (obj as DataContainer)._arrRow.length; i++)
+            {
+                this.arrRow.push(new DataRowWeb());
+
+                this.arrRow[i].copiarDados((obj as DataContainer)._arrRow[i]);
+            }
+        }
+
+        private getDec(sqlClnNome: string, row: DataRowWeb): number
+        {
+            var strValor = this.getStr(sqlClnNome, row);
 
             if (Utils.getBooStrVazia(strValor))
             {
@@ -57,51 +82,51 @@ module Web
             return Number(strValor);
         }
 
-        public getInt(strClnNome: string, objRow: DataRow): number
+        public getInt(sqlClnNome: string, row: DataRowWeb): number
         {
-            return Math.round(this.getDec(strClnNome, objRow));
+            return Math.round(this.getDec(sqlClnNome, row));
         }
 
-        public getStr(strClnNome: string, objRow: DataRow): string
+        public getStr(sqlClnNome: string, row: DataRowWeb): string
         {
-            if (this.arrStrClnNome == null)
+            if (this.arrSqlClnNome == null)
             {
                 return;
             }
 
-            if (this.arrObjRow == null)
+            if (this.arrRow == null)
             {
                 return;
             }
 
-            if (this.arrObjRow.indexOf(objRow) < 0)
+            if (this.arrRow.indexOf(row) < 0)
             {
                 return null;
             }
 
-            if (Utils.getBooStrVazia(strClnNome))
+            if (Utils.getBooStrVazia(sqlClnNome))
             {
                 return null;
             }
 
-            var intClnIndex = this.arrStrClnNome.indexOf(strClnNome);
+            var intClnIndex = this.arrSqlClnNome.indexOf(sqlClnNome);
 
             if (intClnIndex < 0)
             {
                 return null;
             }
 
-            if (objRow.arrStrValor == null)
+            if (row.arrStrValor == null)
             {
                 return null;
             }
 
-            if (objRow.arrStrValor.length <= intClnIndex)
+            if (row.arrStrValor.length <= intClnIndex)
             {
                 return null;
             }
 
-            return objRow.arrStrValor[intClnIndex];
+            return row.arrStrValor[intClnIndex];
         }
 
         // #endregion Métodos

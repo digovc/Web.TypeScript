@@ -18,6 +18,7 @@ module Web
         private _arrFncErro: Array<Function>;
         private _arrFncProgresso: Array<Function>;
         private _arrFncSucesso: Array<Function>;
+        private _intHttpPorta: number;
         private _objData: Object;
         private _strClazz: string;
         private _strErro: string;
@@ -57,6 +58,16 @@ module Web
             this._arrFncSucesso = new Array<Function>();
 
             return this._arrFncSucesso;
+        }
+
+        public get intHttpPorta(): number
+        {
+            return this._intHttpPorta;
+        }
+
+        public set intHttpPorta(intHttpPorta: number)
+        {
+            this._intHttpPorta = intHttpPorta;
         }
 
         public get objData(): Object
