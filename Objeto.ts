@@ -115,7 +115,7 @@ module Web
         {
             for (var objPropriedade in obj)
             {
-                (<any>this)[objPropriedade] = obj[objPropriedade];
+                (this as any)[objPropriedade] = obj[objPropriedade];
             }
         }
 
@@ -127,6 +127,51 @@ module Web
         private getStrClassNome(): string
         {
             return this.constructor.name;
+        }
+
+        public toJson(): string
+        {
+            return JSON.stringify(this, (strPropriedade, objValor) => this.toJsonValidar(strPropriedade, objValor));
+        }
+
+        private toJsonValidar(strPropriedade: string, objValor: any): any
+        {
+            if (objValor == null)
+            {
+                return null;
+            }
+
+            if (this == objValor)
+            {
+                return objValor;
+            }
+
+            if (Utils.getBooStrVazia(strPropriedade))
+            {
+                return null;
+            }
+
+            if (strPropriedade.toLocaleLowerCase().startsWith("_arrevt"))
+            {
+                return null;
+            }
+
+            if (strPropriedade.toLocaleLowerCase().startsWith("_arrfnc"))
+            {
+                return null;
+            }
+
+            if (strPropriedade.toLocaleLowerCase().startsWith("_fnc"))
+            {
+                return null;
+            }
+
+            return this.validarJson(strPropriedade) ? objValor : null;
+        }
+
+        protected validarJson(strPropriedade: string): boolean
+        {
+            return true;
         }
 
         // #endregion Métodos

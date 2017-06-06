@@ -263,11 +263,6 @@ module Web
             this.dispararArrFncSucesso(anyData);
         }
 
-        public toJson(): string
-        {
-            return JSON.stringify(this, (strKey, anyValue) => this.validarJson(strKey, anyValue));
-        }
-
         public validarDados(): boolean
         {
             if (Utils.getBooStrVazia(this.strMetodo))
@@ -278,24 +273,19 @@ module Web
             return true;
         }
 
-        private validarJson(strKey: string, anyValue: any): any
+        protected validarJson(strPropriedade: string): boolean
         {
-            if (strKey == "_arrEvtOnAjaxListener")
+            if (!super.validarJson(strPropriedade))
             {
-                return null;
+                return false;
             }
 
-            if (strKey == "_arrFncSucesso")
+            if (strPropriedade == "_objJson")
             {
-                return null;
+                return false;
             }
 
-            if (strKey == "_objJson")
-            {
-                return null;
-            }
-
-            return anyValue;
+            return true;
         }
 
         // #endregion Métodos

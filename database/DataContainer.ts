@@ -1,5 +1,5 @@
 ﻿/// <reference path="../Objeto.ts"/>
-/// <reference path="DataRowWeb.ts"/>
+/// <reference path="RowWeb.ts"/>
 
 module Web
 {
@@ -16,15 +16,15 @@ module Web
 
         // #region Atributos
 
-        private _arrRow: Array<DataRowWeb>;
+        private _arrRow: Array<RowWeb>;
         private _arrSqlClnNome: string[];
 
-        public get arrRow(): Array<DataRowWeb>
+        public get arrRow(): Array<RowWeb>
         {
             return this._arrRow;
         }
 
-        public set arrRow(arrRow: Array<DataRowWeb>)
+        public set arrRow(arrRow: Array<RowWeb>)
         {
             this._arrRow = arrRow;
         }
@@ -60,34 +60,27 @@ module Web
                 return;
             }
 
-            this.arrRow = new Array<DataRowWeb>();
+            this.arrRow = new Array<RowWeb>();
 
             for (var i = 0; i < (obj as DataContainer)._arrRow.length; i++)
             {
-                this.arrRow.push(new DataRowWeb());
+                this.arrRow.push(new RowWeb(this));
 
                 this.arrRow[i].copiarDados((obj as DataContainer)._arrRow[i]);
             }
         }
 
-        private getDec(sqlClnNome: string, row: DataRowWeb): number
+        public getDec(sqlClnNome: string, row: RowWeb): number
         {
-            var strValor = this.getStr(sqlClnNome, row);
-
-            if (Utils.getBooStrVazia(strValor))
-            {
-                return 0;
-            }
-
-            return Number(strValor);
+            return Number(this.getStr(sqlClnNome, row));
         }
 
-        public getInt(sqlClnNome: string, row: DataRowWeb): number
+        public getInt(sqlClnNome: string, row: RowWeb): number
         {
             return Math.round(this.getDec(sqlClnNome, row));
         }
 
-        public getStr(sqlClnNome: string, row: DataRowWeb): string
+        public getStr(sqlClnNome: string, row: RowWeb): string
         {
             if (this.arrSqlClnNome == null)
             {

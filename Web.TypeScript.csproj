@@ -157,7 +157,7 @@
     <TypeScriptCompile Include="database\ColunaWeb.ts" />
     <TypeScriptCompile Include="database\FiltroWeb.ts" />
     <TypeScriptCompile Include="database\TabelaWeb.ts" />
-    <TypeScriptCompile Include="database\DataRowWeb.ts" />
+    <TypeScriptCompile Include="database\RowWeb.ts" />
     <TypeScriptCompile Include="database\DataContainer.ts" />
     <TypeScriptCompile Include="server\ajax\data\PesquisaInterlocutor.ts" />
     <TypeScriptCompile Include="server\ajax\SrvAjaxBase.ts" />
