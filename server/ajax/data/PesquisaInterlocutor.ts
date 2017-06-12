@@ -16,7 +16,7 @@ module Web
         // #region Atributos
 
         private _arrFil: Array<FiltroWeb>;
-        private _strTblNome: string;
+        private _sqlTabelaNome: string;
 
         public get arrFil(): Array<FiltroWeb>
         {
@@ -28,14 +28,14 @@ module Web
             this._arrFil = arrFil;
         }
 
-        public get strTblNome(): string
+        public get sqlTabelaNome(): string
         {
-            return this._strTblNome;
+            return this._sqlTabelaNome;
         }
 
-        public set strTblNome(strTblNome: string)
+        public set sqlTabelaNome(sqlTabelaNome: string)
         {
-            this._strTblNome = strTblNome;
+            this._sqlTabelaNome = sqlTabelaNome;
         }
 
         // #endregion Atributos

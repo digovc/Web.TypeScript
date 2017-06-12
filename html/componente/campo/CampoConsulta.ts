@@ -24,24 +24,11 @@ module Web
 
         // #region Atributos
 
-        private _btnAcao: BotaoMini;
         private _clnWebFiltro: ColunaWeb;
         private _strTblWebRefNome: string;
         private _tblWebRef: TabelaWeb;
         private _txtIntId: Input;
         private _txtPesquisa: Input;
-
-        private get btnAcao(): BotaoMini
-        {
-            if (this._btnAcao != null)
-            {
-                return this._btnAcao;
-            }
-
-            this._btnAcao = new BotaoMini(this.strId + "_btnAcao");
-
-            return this._btnAcao;
-        }
 
         private get clnWebFiltro(): ColunaWeb
         {

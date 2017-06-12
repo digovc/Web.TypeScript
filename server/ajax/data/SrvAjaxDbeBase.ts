@@ -73,7 +73,7 @@ module Web
             var objPesquisa = new PesquisaInterlocutor();
 
             objPesquisa.arrFil = arrFil;
-            objPesquisa.strTblNome = tblWeb.constructor.name;
+            objPesquisa.sqlTabelaNome = tblWeb.constructor.name;
 
             var objInterlocutor = new Interlocutor(SrvAjaxDbeBase.STR_METODO_PESQUISAR, objPesquisa);
 
