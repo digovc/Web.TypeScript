@@ -28,7 +28,7 @@ module Web
     {
         // #region Constantes
 
-        public static get STR_COOKIE_SESSAO_ID_NOME(): string { return "sessao_id" };
+        public static get STR_COOKIE_SESSAO_NOME(): string { return "sessao" };
 
         private static get STR_CONSTANTE_DESENVOLVIMENTO(): string { return "STR_CONSTANTE_DESENVOLVIMENTO" };
         private static get STR_CONSTANTE_NAMESPACE_PROJETO(): string { return "STR_CONSTANTE_NAMESPACE_PROJETO" };
@@ -65,7 +65,7 @@ module Web
         private _srvAjaxDb: SrvAjaxDbeBase;
         private _srvHttp: SrvHttpBase;
         private _strNamespace: string;
-        private _strSessaoId: string;
+        private _strSessao: string;
         private _tagFoco: ComponenteHtml;
 
         private get arrSrv(): Array<ServerBase>
@@ -194,21 +194,21 @@ module Web
             return this._strNamespace;
         }
 
-        public get strSessaoId(): string
+        public get strSessao(): string
         {
-            if (this._strSessaoId != null)
+            if (this._strSessao != null)
             {
-                return this._strSessaoId;
+                return this._strSessao;
             }
 
-            this._strSessaoId = this.getStrCookieValue(AppWebBase.STR_COOKIE_SESSAO_ID_NOME);
+            this._strSessao = this.getStrCookieValue(AppWebBase.STR_COOKIE_SESSAO_NOME);
 
-            return this._strSessaoId;
+            return this._strSessao;
         }
 
-        public set strSessaoId(strSessaoId: string)
+        public set strSessao(strSessao: string)
         {
-            this._strSessaoId = strSessaoId;
+            this._strSessao = strSessao;
         }
 
         public get tagFoco(): ComponenteHtml
@@ -275,10 +275,12 @@ module Web
 
             // TODO: Implementar data e hora de validade.
 
-            var strCookie = "_cookie_name=_cookie_value";
+            var strCookie = "_cookie_name=_cookie_value; domain=_cookie_domain; path=_cookie_path";
 
             strCookie = strCookie.replace("_cookie_name", strNome);
             strCookie = strCookie.replace("_cookie_value", strValor);
+            strCookie = strCookie.replace("_cookie_domain", window.location.host);
+            strCookie = strCookie.replace("_cookie_path", "/");
 
             document.cookie = strCookie;
         }
