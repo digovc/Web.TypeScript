@@ -197,7 +197,7 @@ module Web
 
         // #region Métodos
 
-        public addStrConteudo(strConteudo: string): void
+        public addHtml(strConteudo: string): void
         {
             this.jq.append(strConteudo);
         }
