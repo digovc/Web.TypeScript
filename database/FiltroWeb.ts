@@ -68,7 +68,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(clnWeb: ColunaWeb, objValor: Object)
         {
@@ -78,7 +78,7 @@ module Web
             this.objValor = objValor;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
         // #endregion Métodos

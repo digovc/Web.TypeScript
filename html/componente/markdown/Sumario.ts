@@ -94,7 +94,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(pagMarkdown: PagDocumentacaoBase)
         {
@@ -103,7 +103,7 @@ module Web
             this.pagDoc = pagMarkdown;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

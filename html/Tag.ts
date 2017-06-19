@@ -184,7 +184,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strId: string)
         {
@@ -193,7 +193,7 @@ module Web
             this.strId = strId;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

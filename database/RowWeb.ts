@@ -40,7 +40,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(objData: DataContainer)
         {
@@ -49,7 +49,7 @@ module Web
             this.objData = objData;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

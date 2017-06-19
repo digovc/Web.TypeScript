@@ -30,7 +30,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(jnlConsulta: JnlConsulta)
         {
@@ -39,7 +39,7 @@ module Web
             this.jnlConsulta = jnlConsulta;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

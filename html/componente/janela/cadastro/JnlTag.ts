@@ -64,7 +64,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(pag: PaginaHtml, tblWeb: TabelaWeb)
         {
@@ -73,7 +73,7 @@ module Web
             this.tblWeb = tblWeb;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

@@ -91,7 +91,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strId: string, divFavorito: DivFavorito)
         {
@@ -100,7 +100,7 @@ module Web
             this.divFavorito = divFavorito;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

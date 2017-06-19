@@ -111,7 +111,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA)
         {
@@ -123,7 +123,7 @@ module Web
             this.strTitulo = strTitulo;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

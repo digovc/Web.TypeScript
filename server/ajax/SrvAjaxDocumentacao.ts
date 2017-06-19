@@ -38,8 +38,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 

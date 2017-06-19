@@ -35,14 +35,14 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
             super("Servidor HTTP");
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

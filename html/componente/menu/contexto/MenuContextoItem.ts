@@ -51,7 +51,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strId: string, mnc: MenuContexto, fncOnClick: Function)
         {
@@ -61,7 +61,7 @@ module Web
             this.mnc = mnc;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

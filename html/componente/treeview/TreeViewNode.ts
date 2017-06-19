@@ -114,14 +114,14 @@
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
             super(null);
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

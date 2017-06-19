@@ -73,7 +73,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(fncTick: Function, fltDuracao: number = 250, fncComplete: Function = null)
         {
@@ -84,7 +84,7 @@ module Web
             this.fncTick = fncTick;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

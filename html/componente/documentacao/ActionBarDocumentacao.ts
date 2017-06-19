@@ -16,14 +16,14 @@ module Web
         // #region Atributos
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
             super(ActionBarDocumentacao.name);
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
         // #endregion Métodos

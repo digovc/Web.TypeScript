@@ -49,7 +49,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(jnlTag: JnlTag)
         {
@@ -58,7 +58,7 @@ module Web
             this.jnlTag = jnlTag;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

@@ -89,7 +89,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(sqlNome: string)
         {
@@ -99,7 +99,7 @@ module Web
             this.sqlNome = sqlNome;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

@@ -233,7 +233,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
@@ -242,7 +242,7 @@ module Web
             AppWebBase.i = this;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

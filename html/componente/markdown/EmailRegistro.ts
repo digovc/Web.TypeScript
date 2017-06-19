@@ -70,7 +70,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(divSumario: Sumario)
         {
@@ -79,7 +79,7 @@ module Web
             this.divSumario = divSumario;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

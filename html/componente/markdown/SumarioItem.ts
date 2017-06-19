@@ -154,9 +154,9 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

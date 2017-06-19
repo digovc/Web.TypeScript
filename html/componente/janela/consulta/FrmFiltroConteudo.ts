@@ -32,7 +32,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(pnlFiltro: PainelFiltro)
         {
@@ -41,7 +41,7 @@ module Web
             this.pnlFiltro = pnlFiltro;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

@@ -27,7 +27,7 @@
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(tag: Tag)
         {
@@ -36,7 +36,7 @@
             this.tag = tag;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

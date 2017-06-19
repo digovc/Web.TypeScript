@@ -126,7 +126,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strNotificacao: string, enmTipo: Notificacao_EnmTipo = Notificacao_EnmTipo.POSITIVA)
         {
@@ -137,7 +137,7 @@ module Web
             this.strNotificacao = strNotificacao;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

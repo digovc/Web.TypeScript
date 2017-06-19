@@ -155,7 +155,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strId: string, pag: PaginaHtml)
         {
@@ -164,7 +164,7 @@ module Web
             this.pag = pag;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

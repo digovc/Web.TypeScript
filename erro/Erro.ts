@@ -66,7 +66,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strMensagem: string, exp: Error = null)
         {
@@ -78,7 +78,7 @@ module Web
             this.mostrarMensagem();
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

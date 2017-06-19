@@ -112,7 +112,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strMetodo: string = "<desconhecido>", objJson: Object = null)
         {
@@ -122,7 +122,7 @@ module Web
             this.addJsn(objJson);
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

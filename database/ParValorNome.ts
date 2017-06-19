@@ -38,7 +38,7 @@
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(objValor: Object, strNome: string)
         {
@@ -46,7 +46,7 @@
             this.strNome = strNome;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
         // #endregion Métodos

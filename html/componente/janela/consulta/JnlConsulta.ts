@@ -144,7 +144,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(pagPrincipal: PagPrincipal)
         {
@@ -153,7 +153,7 @@ module Web
             this.pagPrincipal = pagPrincipal;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

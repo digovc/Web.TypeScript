@@ -34,7 +34,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
@@ -43,7 +43,7 @@ module Web
             this.strId = ("tagMenuContexto_" + this.intObjetoId);
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

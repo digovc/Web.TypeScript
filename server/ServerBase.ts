@@ -45,7 +45,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strNome: string)
         {
@@ -54,7 +54,7 @@ module Web
             this.strNome = strNome;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
