@@ -214,26 +214,32 @@ module Web
             this.jq.remove();
         }
 
-        public esconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
+        public esconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null): void
         {
             this.jq.stop();
 
             switch (enmAnimacaoTipo)
             {
                 case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
+
                     this.jq.css("display", "none");
+
+                    if (fncComplete != null)
+                    {
+                        fncComplete();
+                    }
                     return;
 
                 case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
-                    this.jq.slideUp();
+                    this.jq.slideUp(250, fncComplete);
                     return;
 
                 case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
-                    this.jq.hide(); // TODO: Implementar.
+                    this.jq.hide(250, fncComplete); // TODO: Implementar.
                     return;
 
                 default:
-                    this.jq.fadeOut();
+                    this.jq.fadeOut(250, fncComplete);
                     return;
             }
         }
@@ -292,7 +298,7 @@ module Web
         {
         }
 
-        public mostrar(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE)
+        public mostrar(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null)
         {
             this.jq.stop();
 
@@ -300,25 +306,30 @@ module Web
             {
                 case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
                     this.jq.css("display", "block");
+
+                    if (fncComplete != null)
+                    {
+                        fncComplete();
+                    }
                     return;
 
                 case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
-                    this.jq.slideDown();
+                    this.jq.slideDown(250, fncComplete);
                     return;
 
                 case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
-                    this.jq.show(); // TODO: Implementar.
+                    this.jq.show(250, fncComplete); // TODO: Implementar.
                     return;
 
                 default:
-                    this.jq.fadeIn();
+                    this.jq.fadeIn(250, fncComplete);
                     return;
             }
         }
 
-        public mostrarEsconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE): void
+        public mostrarEsconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null): void
         {
-            (this.booVisivel) ? this.esconder(enmAnimacaoTipo) : this.mostrar(enmAnimacaoTipo);
+            (this.booVisivel) ? this.esconder(enmAnimacaoTipo, fncComplete) : this.mostrar(enmAnimacaoTipo, fncComplete);
         }
 
         public perderFoco(): void

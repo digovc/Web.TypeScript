@@ -125,9 +125,9 @@ module Web
                 return;
             }
 
-            var fltLoop = (this.fltTempoDecorrido / this.fltDuracao);
+            var f = (this.fltTempoDecorrido / this.fltDuracao);
 
-            this.fncTick(fltLoop);
+            this.fncTick(f);
 
             window.requestAnimationFrame(() => this.loop());
         }
