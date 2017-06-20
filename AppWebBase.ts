@@ -62,7 +62,7 @@ module Web
         private _msg: Mensagem;
         private _objTema: TemaDefault;
         private _pag: PaginaHtml;
-        private _srvAjaxDb: SrvAjaxDbeBase;
+        private _srvAjaxDbe: SrvAjaxDbeBase;
         private _srvHttp: SrvHttpBase;
         private _strNamespace: string;
         private _strSessao: string;
@@ -158,16 +158,16 @@ module Web
             this._pag = pag;
         }
 
-        public get srvAjaxDb(): SrvAjaxDbeBase
+        public get srvAjaxDbe(): SrvAjaxDbeBase
         {
-            if (this._srvAjaxDb != null)
+            if (this._srvAjaxDbe != null)
             {
-                return this._srvAjaxDb;
+                return this._srvAjaxDbe;
             }
 
-            this._srvAjaxDb = this.getSrvAjaxDbe();
+            this._srvAjaxDbe = this.getSrvAjaxDbe();
 
-            return this._srvAjaxDb;
+            return this._srvAjaxDbe;
         }
 
         public get srvHttp(): SrvHttpBase
@@ -298,7 +298,7 @@ module Web
 
         public carregarTbl(strTblNome: string): void
         {
-            if (this.srvAjaxDb == null)
+            if (this.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -320,7 +320,7 @@ module Web
             objInterlocutor.addStr(strTblNome);
             objInterlocutor.addFncSucesso((objSolicitacaoAjax: Interlocutor) => { this.carregarTblSucesso(objSolicitacaoAjax); });
 
-            this.srvAjaxDb.enviar(objInterlocutor);
+            this.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private carregarTblSucesso(objSolicitacaoAjax: Interlocutor): void

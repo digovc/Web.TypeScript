@@ -56,7 +56,7 @@ module Web
         {
             this.limparDados();
 
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -78,7 +78,7 @@ module Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.carregarDadosSucesso(objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private carregarDadosSucesso(objInterlocutor: Interlocutor): void

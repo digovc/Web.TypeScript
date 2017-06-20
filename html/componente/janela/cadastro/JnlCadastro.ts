@@ -493,7 +493,7 @@ module Web
 
         public salvar(): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -513,7 +513,7 @@ module Web
 
             objInterlocutor.addJsn(this.tblWeb);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
 
             this.dispararEvtOnSalvarListener();
         }

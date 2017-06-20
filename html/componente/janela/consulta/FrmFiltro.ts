@@ -115,7 +115,7 @@ module Web
 
         private abrirFiltroConteudo(): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -142,7 +142,7 @@ module Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirFiltroConteudoSucesso(objInterlocutor); });
             objInterlocutor.addJsn(TblFiltro.i);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private abrirFiltroConteudoSucesso(objInterlocutor: Interlocutor): void

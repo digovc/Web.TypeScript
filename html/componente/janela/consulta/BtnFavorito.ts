@@ -60,7 +60,7 @@ module Web
                 return;
             }
 
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 return;
             }
@@ -72,7 +72,7 @@ module Web
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.favoritarSucesso(objInterlocutor); });
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private favoritarSucesso(objInterlocutor: Interlocutor): void
@@ -104,7 +104,7 @@ module Web
 
         private verificarFavorito(): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 return;
             }
@@ -131,7 +131,7 @@ module Web
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.verificarFavoritoSucesso(objInterlocutor); });
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private verificarFavoritoSucesso(objInterlocutor: Interlocutor): void

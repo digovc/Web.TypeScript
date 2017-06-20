@@ -77,7 +77,7 @@ module Web
 
         public abrirCadastro(tblWeb: TabelaWeb): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -99,7 +99,7 @@ module Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirCadastroSucesso(objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private abrirCadastroSucesso(objInterlocutor: Interlocutor): void
@@ -121,7 +121,7 @@ module Web
 
         public abrirConsulta(tblWeb: TabelaWeb): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -152,7 +152,7 @@ module Web
 
             objInterlocutor.addJsn(tblWeb);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private abrirConsultaSucesso(objInterlocutor: Interlocutor): void
@@ -185,7 +185,7 @@ module Web
 
         public abrirJnlTag(tblWeb: TabelaWeb): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -212,7 +212,7 @@ module Web
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirJnlTagSucesso(tblWeb, objInterlocutor); });
             objInterlocutor.addJsn(tblWeb);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private abrirJnlTagSucesso(tblWeb: TabelaWeb, objInterlocutor: Interlocutor): void

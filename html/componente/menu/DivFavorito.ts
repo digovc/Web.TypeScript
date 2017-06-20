@@ -121,7 +121,7 @@ module Web
 
         private pesquisarFavorito(): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 return;
             }
@@ -132,7 +132,7 @@ module Web
 
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarFavoritoSucesso(objInterlocutor); });
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private pesquisarFavoritoSucesso(objInterlocutor: Interlocutor): void

@@ -95,7 +95,7 @@ module Web
 
         public salvar(fncSucesso: Function): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 return;
             }
@@ -107,7 +107,7 @@ module Web
             objInterlocutor.addJsn(this);
             objInterlocutor.addFncSucesso(fncSucesso);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         // #endregion Métodos

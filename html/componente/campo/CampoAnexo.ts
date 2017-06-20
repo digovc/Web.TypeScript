@@ -254,7 +254,7 @@ module Web
                 return;
             }
 
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 return;
             }
@@ -283,7 +283,7 @@ module Web
             objInterlocutor.addFncProgresso((arg: ProgressEvent) => { this.enviarArquivoProgresso(arg); });
             objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.enviarArquivoSucesso(objInterlocutor); });
 
-            AppWebBase.i.srvAjaxDb.enviarArquivo(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviarArquivo(objInterlocutor);
         }
 
         private enviarArquivoModificacao(): void
