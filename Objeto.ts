@@ -36,14 +36,12 @@ module Web
 
         public get intObjetoId(): number
         {
-            if (this._intObjetoId > 0)
+            if (this._intObjetoId != null)
             {
                 return this._intObjetoId;
             }
 
-            this._intObjetoId = Objeto.intObjetoIdStatic;
-
-            Objeto.intObjetoIdStatic++;
+            this._intObjetoId = Objeto.intObjetoIdStatic++;
 
             return this._intObjetoId;
         }
