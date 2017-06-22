@@ -62,12 +62,12 @@ module Web
         {
             if (tblWeb == null)
             {
-                throw 'A tabela está nula.'
+                throw 'A tabela está nula.';
             }
 
             if (fncSucesso == null)
             {
-                throw 'A função de retorno está nula.'
+                throw 'A função de retorno está nula.';
             }
 
             var objPesquisa = new PesquisaInterlocutor();
