@@ -70,7 +70,10 @@ module Web
             tagScript.src = srcJs;
             tagScript.type = "text/javascript";
 
-            tagScript.onload = (() => { fncOnLoad(); });
+            if (fncOnLoad != null)
+            {
+                tagScript.onload = (() => { fncOnLoad(); });
+            }
 
             document.head.appendChild(tagScript);
         }
