@@ -22,7 +22,15 @@ module Web
         private _arrCln: Array<ColunaWeb>;
         private _arrFil: Array<FiltroWeb>;
         private _booPermitirAlterar: boolean = true;
+        private _clnBooAtivo: ColunaWeb;
+        private _clnBooExcluido: ColunaWeb;
+        private _clnDttAlteracao: ColunaWeb;
+        private _clnDttCadastro: ColunaWeb;
+        private _clnDttExclusao: ColunaWeb;
         private _clnIntId: ColunaWeb;
+        private _clnIntUsuarioAlteracaoId: ColunaWeb;
+        private _clnIntUsuarioCadastroId: ColunaWeb;
+        private _clnIntUsuarioExclusaoId: ColunaWeb;
         private _clnNome: ColunaWeb;
         private _dttUpload: Date;
         private _intRegistroPaiId: number;
@@ -69,6 +77,66 @@ module Web
             this._booPermitirAlterar = booPermitirAlterar;
         }
 
+        public get clnBooAtivo(): ColunaWeb
+        {
+            if (this._clnBooAtivo != null)
+            {
+                return this._clnBooAtivo;
+            }
+
+            this._clnBooAtivo = this.getCln("boo_ativo");
+
+            return this._clnBooAtivo;
+        }
+
+        public get clnBooExcluido(): ColunaWeb
+        {
+            if (this._clnBooExcluido != null)
+            {
+                return this._clnBooExcluido;
+            }
+
+            this._clnBooExcluido = this.getCln("boo_excluido");
+
+            return this._clnBooExcluido;
+        }
+
+        public get clnDttAlteracao(): ColunaWeb
+        {
+            if (this._clnDttAlteracao != null)
+            {
+                return this._clnDttAlteracao;
+            }
+
+            this._clnDttAlteracao = this.getCln("dtt_alteracao");
+
+            return this._clnDttAlteracao;
+        }
+
+        public get clnDttCadastro(): ColunaWeb
+        {
+            if (this._clnDttCadastro != null)
+            {
+                return this._clnDttCadastro;
+            }
+
+            this._clnDttCadastro = this.getCln("dtt_cadastro");
+
+            return this._clnDttCadastro;
+        }
+
+        public get clnDttExclusao(): ColunaWeb
+        {
+            if (this._clnDttExclusao != null)
+            {
+                return this._clnDttExclusao;
+            }
+
+            this._clnDttExclusao = this.getCln("dtt_exclusao");
+
+            return this._clnDttExclusao;
+        }
+
         public get clnIntId(): ColunaWeb
         {
             if (this._clnIntId != null)
@@ -79,6 +147,42 @@ module Web
             this._clnIntId = this.getCln(this.getSqlChavePrimariaNome());
 
             return this._clnIntId;
+        }
+
+        public get clnIntUsuarioAlteracaoId(): ColunaWeb
+        {
+            if (this._clnIntUsuarioAlteracaoId != null)
+            {
+                return this._clnIntUsuarioAlteracaoId;
+            }
+
+            this._clnIntUsuarioAlteracaoId = this.getCln("int_usuario_alteracao_id");
+
+            return this._clnIntUsuarioAlteracaoId;
+        }
+
+        public get clnIntUsuarioCadastroId(): ColunaWeb
+        {
+            if (this._clnIntUsuarioCadastroId != null)
+            {
+                return this._clnIntUsuarioCadastroId;
+            }
+
+            this._clnIntUsuarioCadastroId = this.getCln("int_usuario_cadastro_id");
+
+            return this._clnIntUsuarioCadastroId;
+        }
+
+        public get clnIntUsuarioExclusaoId(): ColunaWeb
+        {
+            if (this._clnIntUsuarioExclusaoId != null)
+            {
+                return this._clnIntUsuarioExclusaoId;
+            }
+
+            this._clnIntUsuarioExclusaoId = this.getCln("int_usuario_exclusao_id");
+
+            return this._clnIntUsuarioExclusaoId;
         }
 
         public get clnNome(): ColunaWeb
@@ -149,11 +253,18 @@ module Web
 
         // #region Construtor
 
-        constructor(strNome: string)
+        constructor(strNome: string = null)
         {
             super();
 
-            this.strNome = strNome;
+            if (!Utils.getBooStrVazia(strNome))
+            {
+                this.strNome = strNome;
+            }
+            else
+            {
+                this.strNome = this.getSqlNome();
+            }
         }
 
         // #endregion Construtor
@@ -343,6 +454,26 @@ module Web
         protected getSqlChavePrimariaNome(): string
         {
             return "int_id";
+        }
+
+        private getSqlNome(): string
+        {
+            var sqlNomeResultado = Utils.STR_VAZIA;
+            var strTipoNome = this.constructor.name;
+
+            for (var i = 1; i < sqlNomeResultado.length; i++)
+            {
+                if (strTipoNome[i] != strTipoNome[i].toUpperCase())
+                {
+                    sqlNomeResultado += strTipoNome[i];
+                }
+                else
+                {
+                    sqlNomeResultado += ("_" + strTipoNome[i].toLowerCase());
+                }
+            }
+
+            return sqlNomeResultado;
         }
 
         protected getSrvAjaxDbe(): SrvAjaxDbeBase

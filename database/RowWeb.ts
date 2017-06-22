@@ -53,19 +53,19 @@ module Web
 
         // #region Métodos
 
-        public getDec(sqlClnNome: string): number
+        public getDec(sqlColunaNome: string): number
         {
-            return Number(this.objData.getStr(sqlClnNome, this));
+            return Number(this.objData.getStr(sqlColunaNome, this));
         }
 
-        public getInt(sqlClnNome: string): number
+        public getInt(sqlColunaNome: string): number
         {
-            return Math.round(this.objData.getDec(sqlClnNome, this));
+            return Math.round(this.objData.getDec(sqlColunaNome, this));
         }
 
-        public getStr(sqlClnNome: string): string
+        public getStr(sqlColunaNome: string): string
         {
-            return this.objData.getStr(sqlClnNome, this);
+            return this.objData.getStr(sqlColunaNome, this);
         }
 
         protected validarJson(strPropriedade: string): boolean

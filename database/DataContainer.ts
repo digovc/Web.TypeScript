@@ -17,7 +17,7 @@ module Web
         // #region Atributos
 
         private _arrRow: Array<RowWeb>;
-        private _arrSqlClnNome: string[];
+        private _arrsqlColunaNome: string[];
 
         public get arrRow(): Array<RowWeb>
         {
@@ -29,14 +29,14 @@ module Web
             this._arrRow = arrRow;
         }
 
-        public get arrSqlClnNome(): string[]
+        public get arrsqlColunaNome(): string[]
         {
-            return this._arrSqlClnNome;
+            return this._arrsqlColunaNome;
         }
 
-        public set arrSqlClnNome(arrsqlClnNome: string[])
+        public set arrsqlColunaNome(arrsqlColunaNome: string[])
         {
-            this._arrSqlClnNome = arrsqlClnNome;
+            this._arrsqlColunaNome = arrsqlColunaNome;
         }
 
         // #endregion Atributos
@@ -70,19 +70,24 @@ module Web
             }
         }
 
-        public getDec(sqlClnNome: string, row: RowWeb): number
+        public getBooVazio(): boolean
         {
-            return Number(this.getStr(sqlClnNome, row));
+            return (this.arrRow == null) || (this.arrRow.length == 0);
         }
 
-        public getInt(sqlClnNome: string, row: RowWeb): number
+        public getDec(sqlColunaNome: string, row: RowWeb): number
         {
-            return Math.round(this.getDec(sqlClnNome, row));
+            return Number(this.getStr(sqlColunaNome, row));
         }
 
-        public getStr(sqlClnNome: string, row: RowWeb): string
+        public getInt(sqlColunaNome: string, row: RowWeb): number
         {
-            if (this.arrSqlClnNome == null)
+            return Math.round(this.getDec(sqlColunaNome, row));
+        }
+
+        public getStr(sqlColunaNome: string, row: RowWeb): string
+        {
+            if (this.arrsqlColunaNome == null)
             {
                 return;
             }
@@ -97,12 +102,12 @@ module Web
                 return null;
             }
 
-            if (Utils.getBooStrVazia(sqlClnNome))
+            if (Utils.getBooStrVazia(sqlColunaNome))
             {
                 return null;
             }
 
-            var intClnIndex = this.arrSqlClnNome.indexOf(sqlClnNome);
+            var intClnIndex = this.arrsqlColunaNome.indexOf(sqlColunaNome);
 
             if (intClnIndex < 0)
             {

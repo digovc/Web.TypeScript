@@ -32,22 +32,12 @@ module Web
 
         // #region Métodos
 
-        public addOpcao(par: ParValorNome): void
+        public addOpcao(objValor: any, strNome: string): void
         {
-            if (par == null)
-            {
-                return;
-            }
-
-            if (par.objValor == null)
-            {
-                return;
-            }
-
             var tagOption: any = document.createElement('option');
 
-            tagOption.value = par.objValor;
-            tagOption.innerHTML = par.strNome;
+            tagOption.value = objValor;
+            tagOption.innerHTML = strNome;
 
             this.jq.append(tagOption);
         }
@@ -110,7 +100,7 @@ module Web
                 return;
             }
 
-            this.addOpcao(par);
+            this.addOpcao(par.objValor, par.strNome);
         }
 
         private getStrTexto(): string
@@ -124,7 +114,7 @@ module Web
 
             this.strValor = null;
 
-            this.addOpcao(new ParValorNome(0, Utils.STR_VAZIA));
+            this.addOpcao(0, Utils.STR_VAZIA);
         }
 
         // #endregion Métodos

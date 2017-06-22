@@ -25,7 +25,7 @@ module Web
                 return TblFiltro._i;
             }
 
-            TblFiltro._i = new TblFiltro("tbl_filtro");
+            TblFiltro._i = new TblFiltro();
 
             return TblFiltro._i;
         }

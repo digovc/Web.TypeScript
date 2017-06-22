@@ -38,11 +38,6 @@ module Web
 
         // #region Métodos
 
-        public addOpcao(par: ParValorNome): void
-        {
-            this.cmb.addOpcao(par);
-        }
-
         public carregarDados(tblWeb: TabelaWeb): void
         {
             this.cmb.carregarDados(tblWeb);

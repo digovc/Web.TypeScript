@@ -335,7 +335,7 @@ module Web
                 return;
             }
 
-            var tblWeb = new TabelaWeb(null);
+            var tblWeb = new TabelaWeb();
 
             tblWeb.copiarDados(JSON.parse(objSolicitacaoAjax.objData.toString()));
 
