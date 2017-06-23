@@ -503,7 +503,7 @@ module Web
                 throw "O servidor de dados não foi indicado.";
             }
 
-            this.srvAjaxDbe.pesquisar(this, arrFil, fncSucesso, fncErro);
+            this.srvAjaxDbe.pesquisar(this.strNome, arrFil, fncSucesso, fncErro);
         }
 
         // #endregion Métodos

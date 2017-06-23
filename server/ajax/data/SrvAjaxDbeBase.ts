@@ -58,22 +58,22 @@ module Web
             return 8081;
         }
 
-        public pesquisar(tblWeb: TabelaWeb, arrFil: Array<FiltroWeb>, fncSucesso: Function, fncErro: Function = null): void
+        public pesquisar(strTabelaNome: string, arrFil: Array<FiltroWeb>, fncSucesso: Function, fncErro: Function = null): void
         {
-            if (tblWeb == null)
+            if (Utils.getBooStrVazia(strTabelaNome))
             {
-                throw 'A tabela está nula.';
+                return;
             }
 
             if (fncSucesso == null)
             {
-                throw 'A função de retorno está nula.';
+                return;
             }
 
             var objPesquisa = new PesquisaInterlocutor();
 
             objPesquisa.arrFil = arrFil;
-            objPesquisa.sqlTabelaNome = tblWeb.constructor.name;
+            objPesquisa.sqlTabelaNome = strTabelaNome;
 
             var objInterlocutor = new Interlocutor(SrvAjaxDbeBase.STR_METODO_PESQUISAR, objPesquisa);
 
