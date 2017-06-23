@@ -18,6 +18,7 @@ module Web
 
         private _arrRow: Array<RowWeb>;
         private _arrsqlColunaNome: string[];
+        private _strTabelaNome: string;
 
         public get arrRow(): Array<RowWeb>
         {
@@ -37,6 +38,16 @@ module Web
         public set arrsqlColunaNome(arrsqlColunaNome: string[])
         {
             this._arrsqlColunaNome = arrsqlColunaNome;
+        }
+
+        public get strTabelaNome(): string
+        {
+            return this._strTabelaNome;
+        }
+
+        public set strTabelaNome(strTabelaNome: string)
+        {
+            this._strTabelaNome = strTabelaNome;
         }
 
         // #endregion Atributos

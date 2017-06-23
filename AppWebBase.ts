@@ -246,19 +246,27 @@ module Web
 
         // #region Métodos
 
-        private addArrTbl(tblWeb: TabelaWeb): void
+        private addTbl(tbl: TabelaWeb): void
         {
-            if (tblWeb == null)
+            if (tbl == null)
             {
                 return null;
             }
 
-            if (this.arrTbl.indexOf(tblWeb) > -1)
+            if (this.arrTbl.indexOf(tbl) > -1)
             {
                 return;
             }
 
-            this.arrTbl.push(tblWeb);
+            for (var i = 0; i < this.arrTbl.length; i++)
+            {
+                if (tbl.strNome == this.arrTbl[i].strNome)
+                {
+                    return;
+                }
+            }
+
+            this.arrTbl.push(tbl);
         }
 
         public addCookie(strNome: string, strValor: string): void
@@ -296,19 +304,19 @@ module Web
             window.history.pushState(null, objHistorico.strTitulo, objHistorico.strParametro);
         }
 
-        public carregarTbl(strTblNome: string): void
+        public carregarTbl(strTabelaNome: string, fncSucesso: Function = null): void
         {
             if (this.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
-            if (Utils.getBooStrVazia(strTblNome))
+            if (Utils.getBooStrVazia(strTabelaNome))
             {
                 return;
             }
 
-            if (AppWebBase.i.getTbl(strTblNome) != null)
+            if (this.getTbl(strTabelaNome) != null)
             {
                 return;
             }
@@ -317,29 +325,34 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_CARREGAR_TBL_WEB;
 
-            objInterlocutor.addStr(strTblNome);
-            objInterlocutor.addFncSucesso((objSolicitacaoAjax: Interlocutor) => { this.carregarTblSucesso(objSolicitacaoAjax); });
+            objInterlocutor.addStr(strTabelaNome);
+            objInterlocutor.addFncSucesso((objSolicitacaoAjax: Interlocutor) => this.carregarTblSucesso(objSolicitacaoAjax, fncSucesso));
 
             this.srvAjaxDbe.enviar(objInterlocutor);
         }
 
-        private carregarTblSucesso(objSolicitacaoAjax: Interlocutor): void
+        private carregarTblSucesso(objInterlocutor: Interlocutor, fncSucesso: Function): void
         {
-            if (objSolicitacaoAjax == null)
+            if (objInterlocutor == null)
             {
                 return;
             }
 
-            if (objSolicitacaoAjax.objData == null)
+            if (objInterlocutor.objData == null)
             {
                 return;
             }
 
             var tblWeb = new TabelaWeb();
 
-            tblWeb.copiarDados(JSON.parse(objSolicitacaoAjax.objData.toString()));
+            tblWeb.copiarDados(objInterlocutor.getObjJson<TabelaWeb>());
 
-            this.addArrTbl(tblWeb);
+            this.addTbl(tblWeb);
+
+            if (fncSucesso != null)
+            {
+                fncSucesso();
+            }
         }
 
         private getArrSrv(): Array<ServerBase>
@@ -390,28 +403,19 @@ module Web
             return objRegExpExecArray[1];
         }
 
-        public getTbl(strTblNome: string): TabelaWeb
+        public getTbl(strTabelaNome: string): TabelaWeb
         {
-            if (Utils.getBooStrVazia(strTblNome))
+            if (Utils.getBooStrVazia(strTabelaNome))
             {
                 return null;
             }
 
             for (var i = 0; i < this.arrTbl.length; i++)
             {
-                var tblWeb = this.arrTbl[i];
-
-                if (tblWeb == null)
+                if (strTabelaNome.toLowerCase() == this.arrTbl[i].strNome.toLowerCase())
                 {
-                    continue;
+                    return this.arrTbl[i];
                 }
-
-                if (strTblNome.toLowerCase() != tblWeb.strNome.toLowerCase())
-                {
-                    continue;
-                }
-
-                return tblWeb;
             }
 
             return null;
