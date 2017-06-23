@@ -59,7 +59,6 @@ module Web
         private _booDesenvolvimento: boolean;
         private _booEmFoco: boolean = true;
         private _dttLoad: Date = new Date();
-        private _msg: Mensagem;
         private _objTema: TemaDefault;
         private _pag: PaginaHtml;
         private _srvAjaxDbe: SrvAjaxDbeBase;
@@ -124,16 +123,6 @@ module Web
         public get dttLoad(): Date
         {
             return this._dttLoad;
-        }
-
-        private get msg(): Mensagem
-        {
-            return this._msg;
-        }
-
-        private set msg(msg: Mensagem)
-        {
-            this._msg = msg;
         }
 
         public get objTema(): TemaDefault
@@ -355,6 +344,10 @@ module Web
             }
         }
 
+        protected finalizar(): void
+        {
+        }
+
         private getArrSrv(): Array<ServerBase>
         {
             var arrSrvResultado = new Array<ServerBase>();
@@ -423,23 +416,29 @@ module Web
 
         public imprimir(pag: string): void
         {
-            var objWindow = window.open('', 'my div', 'height=400,width=600');
+            var objWindow = window.open("", "my div", "height=400,width=600");
 
             objWindow.document.write(pag);
+
             objWindow.print();
+
             objWindow.close();
         }
 
         public iniciar(): void
         {
             this.inicializar();
+
             this.montarLayout();
+
             this.setEventos();
+
+            this.finalizar();
         }
 
         protected inicializar(): void
         {
-            this.arrSrv.forEach((srv: ServerBase) => { srv.iniciar(); });
+            this.arrSrv.forEach(srv => srv.iniciar());
         }
 
         protected inicializarArrSrv(arrSrv: Array<ServerBase>): void
@@ -464,8 +463,8 @@ module Web
 
         protected setEventos(): void
         {
-            window.onblur = ((arg: FocusEvent) => { this.booEmFoco = false; });
-            window.onfocus = ((arg: FocusEvent) => { this.booEmFoco = true; });
+            window.onblur = (() => this.booEmFoco = false);
+            window.onfocus = (() => this.booEmFoco = true);
         }
 
         // #endregion Métodos
