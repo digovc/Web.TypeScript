@@ -24,6 +24,15 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="database\view\ViwWebBase.ts" />
+    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaBase.ts" />
+    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaCabecalho.ts" />
+    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaSumario.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridBase.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridCabecalho.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridConsulta.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridConteudo.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridLinha.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridRodape.ts" />
     <TypeScriptCompile Include="html\componente\table\OnTableMenuClickArg.ts" />
     <TypeScriptCompile Include="html\componente\table\OnTableMenuClickListener.ts" />
     <TypeScriptCompile Include="html\componente\table\OnTableRowClickListener.ts" />
