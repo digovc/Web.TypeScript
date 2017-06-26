@@ -3,7 +3,7 @@
 /// <reference path="../../../OnKeyDownListener.ts"/>
 /// <reference path="../../../OnKeyUpListener.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
-/// <reference path="../../pagina/PaginaHtml.ts"/>
+/// <reference path="../../pagina/PaginaHtmlBase.ts"/>
 /// <reference path="../../pagina/PagPrincipal.ts"/>
 /// <reference path="../../pagina/PagPrincipal.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>

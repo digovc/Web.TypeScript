@@ -158,7 +158,7 @@
     <TypeScriptCompile Include="html\Div.ts" />
     <TypeScriptCompile Include="html\Imagem.ts" />
     <TypeScriptCompile Include="html\Input.ts" />
-    <TypeScriptCompile Include="html\pagina\PaginaHtml.ts" />
+    <TypeScriptCompile Include="html\pagina\PaginaHtmlBase.ts" />
     <TypeScriptCompile Include="html\Tag.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
     <TypeScriptCompile Include="OnClickListener.ts" />

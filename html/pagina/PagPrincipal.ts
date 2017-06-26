@@ -2,7 +2,7 @@
 /// <reference path="../componente/janela/cadastro/JnlTag.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
 /// <reference path="../Div.ts"/>
-/// <reference path="PaginaHtml.ts"/>
+/// <reference path="PaginaHtmlBase.ts"/>
 
 module Web
 {
@@ -12,7 +12,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class PagPrincipal extends PaginaHtml implements OnDisposedListener
+    export abstract class PagPrincipal extends PaginaHtmlBase implements OnDisposedListener
     {
         // #region Constantes
         // #endregion Constantes

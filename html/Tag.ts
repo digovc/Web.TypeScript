@@ -2,6 +2,7 @@
 /// <reference path="../OnDoubleClickListener.ts"/>
 /// <reference path="../OnKeyDownListener.ts"/>
 /// <reference path="../OnKeyPressListener.ts"/>
+/// <reference path="../OnKeyUpListener.ts"/>
 /// <reference path="../OnMouseDownListener.ts"/>
 /// <reference path="../OnMouseLeaveListener.ts"/>
 /// <reference path="../OnMouseOverListener.ts"/>

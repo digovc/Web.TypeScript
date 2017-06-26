@@ -11,7 +11,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class PaginaHtml extends Objeto
+    export abstract class PaginaHtmlBase extends Objeto
     {
         // #region Constantes
         // #endregion Constantes

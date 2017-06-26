@@ -4,7 +4,7 @@
 /// <reference path="Historico.ts"/>
 /// <reference path="html/componente/Mensagem.ts"/>
 /// <reference path="html/componente/Notificacao.ts"/>
-/// <reference path="html/pagina/PaginaHtml.ts"/>
+/// <reference path="html/pagina/PaginaHtmlBase.ts"/>
 /// <reference path="html/pagina/PagPrincipal.ts"/>
 /// <reference path="Objeto.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
@@ -59,7 +59,7 @@ module Web
         private _booEmFoco: boolean = true;
         private _dttLoad: Date = new Date();
         private _objTema: TemaDefault;
-        private _pag: PaginaHtml;
+        private _pag: PaginaHtmlBase;
         private _srvAjaxDbe: SrvAjaxDbeBase;
         private _srvHttp: SrvHttpBase;
         private _strNamespace: string;
@@ -136,12 +136,12 @@ module Web
             return this._objTema;
         }
 
-        public get pag(): PaginaHtml
+        public get pag(): PaginaHtmlBase
         {
             return this._pag;
         }
 
-        public set pag(pag: PaginaHtml)
+        public set pag(pag: PaginaHtmlBase)
         {
             this._pag = pag;
         }

@@ -66,7 +66,7 @@ module Web
 
         // #region Construtor
 
-        constructor(pag: PaginaHtml, tblWeb: TabelaWeb)
+        constructor(pag: PaginaHtmlBase, tblWeb: TabelaWeb)
         {
             super(null, pag);
 

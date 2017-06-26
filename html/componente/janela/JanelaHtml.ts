@@ -3,7 +3,7 @@
 /// <reference path="../../../OnMouseLeaveListener.ts"/>
 /// <reference path="../../../OnMouseMoveListener.ts"/>
 /// <reference path="../../../OnMouseUpListener.ts"/>
-/// <reference path="../../pagina/PaginaHtml.ts"/>
+/// <reference path="../../pagina/PaginaHtmlBase.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 
 module Web
@@ -31,7 +31,7 @@ module Web
         private _intCabecalhoTop: number;
         private _intCabecalhoX: number;
         private _intCabecalhoY: number;
-        private _pag: PaginaHtml;
+        private _pag: PaginaHtmlBase;
 
         public get booAtivo(): boolean
         {
@@ -143,12 +143,12 @@ module Web
             this._intCabecalhoY = intCabecalhoPageY;
         }
 
-        protected get pag(): PaginaHtml
+        protected get pag(): PaginaHtmlBase
         {
             return this._pag;
         }
 
-        protected set pag(pag: PaginaHtml)
+        protected set pag(pag: PaginaHtmlBase)
         {
             this._pag = pag;
         }
@@ -157,7 +157,7 @@ module Web
 
         // #region Construtor
 
-        constructor(strId: string, pag: PaginaHtml)
+        constructor(strId: string, pag: PaginaHtmlBase)
         {
             super(strId);
 

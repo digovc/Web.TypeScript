@@ -1,4 +1,4 @@
-﻿/// <reference path="PaginaHtml.ts"/>
+﻿/// <reference path="PaginaHtmlBase.ts"/>
 
 module Web
 {
@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class PagMobile extends PaginaHtml
+    export class PagMobile extends PaginaHtmlBase
     {
         // #region Constantes
         // #endregion Constantes
