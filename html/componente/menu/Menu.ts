@@ -2,7 +2,6 @@
 /// <reference path="../../../OnEnterListener.ts"/>
 /// <reference path="../../../OnKeyDownListener.ts"/>
 /// <reference path="../../../OnKeyUpListener.ts"/>
-/// <reference path="../../../OnLeaveListener.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
 /// <reference path="../../pagina/PaginaHtml.ts"/>
 /// <reference path="../../pagina/PagPrincipal.ts"/>
@@ -464,7 +463,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -489,7 +488,7 @@ module Web
             }
         }
 
-        public onEnter(objSender: Object): void
+        public onEnter(tagSender: Tag): void
         {
             try
             {
@@ -501,7 +500,7 @@ module Web
             }
         }
 
-        public onKeyUp(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyUp(objSender: Objeto, arg: JQueryKeyEventObject): void
         {
             try
             {
@@ -522,7 +521,7 @@ module Web
             }
         }
 
-        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
+        public onValorAlterado(objSender: Objeto, arg: OnValorAlteradoArg): void
         {
             try
             {

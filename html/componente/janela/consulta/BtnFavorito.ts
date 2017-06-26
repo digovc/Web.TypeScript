@@ -70,7 +70,7 @@ module Web
             objInterlocutor.objData = this.jnlConsulta.tblWeb.strNome;
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TABELA_FAVORITO_ADD;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.favoritarSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.favoritarSucesso(o));
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
@@ -129,7 +129,7 @@ module Web
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TABELA_FAVORITO_VERIFICAR;
             objInterlocutor.objData = this.jnlConsulta.tblWeb.strNome;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.verificarFavoritoSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.verificarFavoritoSucesso(o));
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
@@ -153,7 +153,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {

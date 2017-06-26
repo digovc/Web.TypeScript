@@ -291,7 +291,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -308,11 +308,11 @@ module Web
             }
         }
 
-        public onMouseDown(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseDown(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
-                switch (objSender)
+                switch (tagSender)
                 {
                     case this.divCabecalho:
                         this.divCabecalhoOnMouseDown(arg);
@@ -325,11 +325,11 @@ module Web
             }
         }
 
-        public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseLeave(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
-                switch (objSender)
+                switch (tagSender)
                 {
                     case this.divCabecalho:
                         this.booDragging = false;
@@ -342,11 +342,11 @@ module Web
             }
         }
 
-        public onMouseMove(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseMove(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
-                switch (objSender)
+                switch (tagSender)
                 {
                     case this.divCabecalho:
                         this.divCabecalhoOnMouseMove(arg);
@@ -359,11 +359,11 @@ module Web
             }
         }
 
-        public onMouseUp(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseUp(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
-                switch (objSender)
+                switch (tagSender)
                 {
                     case this.divCabecalho:
                         this.divCabecalhoOnMouseUp(arg);

@@ -214,7 +214,7 @@
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {

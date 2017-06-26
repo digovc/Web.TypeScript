@@ -65,7 +65,7 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_COMBO_BOX;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.carregarDadosSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.carregarDadosSucesso(o));
             objInterlocutor.addJsn(tblWeb);
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);

@@ -280,8 +280,8 @@ module Web
 
             objInterlocutor.objData = frmData;
 
-            objInterlocutor.addFncProgresso((arg: ProgressEvent) => { this.enviarArquivoProgresso(arg); });
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.enviarArquivoSucesso(objInterlocutor); });
+            objInterlocutor.addFncProgresso((o: ProgressEvent) => this.enviarArquivoProgresso(o));
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.enviarArquivoSucesso(o));
 
             AppWebBase.i.srvAjaxDbe.enviarArquivo(objInterlocutor);
         }
@@ -391,7 +391,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {

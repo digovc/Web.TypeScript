@@ -58,7 +58,7 @@ module Web
             return 8081;
         }
 
-        public pesquisar(strTabelaNome: string, arrFil: Array<FiltroWeb>, fncSucesso: Function, fncErro: Function = null): void
+        public pesquisar(strTabelaNome: string, arrFil: Array<FiltroWeb>, fncSucesso: ((o: Interlocutor) => void), fncErro: ((strStatus: string, strThrown: string) => void) = null): void
         {
             if (Utils.getBooStrVazia(strTabelaNome))
             {

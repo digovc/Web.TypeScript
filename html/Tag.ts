@@ -228,6 +228,7 @@ module Web
                     {
                         fncComplete();
                     }
+
                     return;
 
                 case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:

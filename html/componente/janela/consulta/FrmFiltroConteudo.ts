@@ -163,7 +163,7 @@ module Web
 
         // #region Eventos
 
-        public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyDown(objSender: Objeto, arg: JQueryKeyEventObject): void
         {
             try
             {

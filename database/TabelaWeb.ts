@@ -496,7 +496,7 @@ module Web
             this.arrFil.splice(0);
         }
 
-        public pesquisar(arrFil: Array<FiltroWeb>, fncSucesso: Function, fncErro: Function = null): void
+        public pesquisar(arrFil: Array<FiltroWeb>, fncSucesso: ((o: Interlocutor) => void), fncErro: ((strStatus: string, strThrown: string) => void) = null): void
         {
             if (this.srvAjaxDbe == null)
             {

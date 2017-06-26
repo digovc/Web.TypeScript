@@ -49,7 +49,7 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDocumentacao.STR_METODO_EMAIL_DESINSCREVER;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.cancelarInscricaoSucesso(objInterlocutor) });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.cancelarInscricaoSucesso(o));
             objInterlocutor.addJsn(objEmailRegistro);
 
             this.enviar(objInterlocutor);
@@ -109,7 +109,7 @@ module Web
             objInterlocutor.strMetodo = SrvAjaxDocumentacao.STR_METODO_EMAIL_REGISTRAR;
 
             objInterlocutor.addJsn(objEmailRegistro);
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.registrarEmailSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.registrarEmailSucesso(o));
 
             this.enviar(objInterlocutor);
         }

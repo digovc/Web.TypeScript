@@ -223,7 +223,7 @@ module Web
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_GRID;
             objInterlocutor.objData = JSON.stringify(this.tblWeb);
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.pesquisarSucesso(o));
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }

@@ -18,8 +18,8 @@ module Web
         private _fltDuracao: number;
         private _fltTempoDecorrido: number;
         private _fltUltimoFrame: number;
-        private _fncComplete: Function;
-        private _fncTick: Function;
+        private _fncComplete: ((o: Loop) => void);
+        private _fncTick: ((f: number) => void);
 
         private get fltDuracao(): number
         {
@@ -51,22 +51,22 @@ module Web
             this._fltUltimoFrame = fltUltimoFrame;
         }
 
-        private get fncComplete(): Function
+        private get fncComplete(): ((o: Loop) => void)
         {
             return this._fncComplete;
         }
 
-        private set fncComplete(fncComplete: Function)
+        private set fncComplete(fncComplete: ((o: Loop) => void))
         {
             this._fncComplete = fncComplete;
         }
 
-        private get fncTick(): Function
+        private get fncTick(): ((f: number) => void)
         {
             return this._fncTick;
         }
 
-        private set fncTick(fncTick: Function)
+        private set fncTick(fncTick: ((f: number) => void))
         {
             this._fncTick = fncTick;
         }
@@ -75,7 +75,7 @@ module Web
 
         // #region Construtor
 
-        constructor(fncTick: Function, fltDuracao: number = 250, fncComplete: Function = null)
+        constructor(fncTick: ((f: number) => void), fltDuracao: number = 250, fncComplete: ((o: Loop) => void) = null)
         {
             super();
 

@@ -334,7 +334,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -351,11 +351,11 @@ module Web
             }
         }
 
-        public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseLeave(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
-                switch (objSender)
+                switch (tagSender)
                 {
                     case this:
                         this.inicializarTimeoutFechar();
@@ -368,11 +368,11 @@ module Web
             }
         }
 
-        public onMouseOver(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseOver(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
-                switch (objSender)
+                switch (tagSender)
                 {
                     case this:
                         window.clearTimeout(this.intFecharTimeout);

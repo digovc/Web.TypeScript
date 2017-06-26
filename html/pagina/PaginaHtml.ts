@@ -53,7 +53,7 @@ module Web
 
         // #region Métodos
 
-        public addJs(srcJs: string, fncOnLoad: Function = null): void
+        public addJs(srcJs: string, fncOnLoad: ((o: HTMLScriptElement) => void) = null): void
         {
             if (Utils.getBooStrVazia(srcJs))
             {
@@ -72,7 +72,7 @@ module Web
 
             if (fncOnLoad != null)
             {
-                tagScript.onload = (() => { fncOnLoad(); });
+                tagScript.onload = (() => fncOnLoad(tagScript));
             }
 
             document.head.appendChild(tagScript);

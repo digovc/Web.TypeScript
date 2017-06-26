@@ -2,6 +2,6 @@
 {
     export interface OnMouseOverListener
     {
-        onMouseOver(objSender: Object, arg: JQueryMouseEventObject): void;
+        onMouseOver(tagSender: Tag, arg: JQueryMouseEventObject): void;
     }
 }

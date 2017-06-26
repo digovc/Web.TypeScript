@@ -15,47 +15,47 @@ module Web
 
         // #region Atributos
 
-        private _arrFncErro: Array<Function>;
-        private _arrFncProgresso: Array<Function>;
-        private _arrFncSucesso: Array<Function>;
+        private _arrFncErro: Array<((strStatus: string, strThrown: string) => void)>;
+        private _arrFncProgresso: Array<((a: ProgressEvent) => void)>;
+        private _arrFncSucesso: Array<((o: Interlocutor) => void)>;
         private _intHttpPorta: number;
         private _objData: Object;
         private _strClazz: string;
         private _strErro: string;
         private _strMetodo: string;
 
-        private get arrFncErro(): Array<Function>
+        private get arrFncErro(): Array<((strStatus: string, strThrown: string) => void)>
         {
             if (this._arrFncErro != null)
             {
                 return this._arrFncErro;
             }
 
-            this._arrFncErro = new Array<Function>();
+            this._arrFncErro = new Array<((strStatus: string, strThrown: string) => void)>();
 
             return this._arrFncErro;
         }
 
-        private get arrFncProgresso(): Array<Function>
+        private get arrFncProgresso(): Array<((a: ProgressEvent) => void)>
         {
             if (this._arrFncProgresso != null)
             {
                 return this._arrFncProgresso;
             }
 
-            this._arrFncProgresso = new Array<Function>();
+            this._arrFncProgresso = new Array<((a: ProgressEvent) => void)>();
 
             return this._arrFncProgresso;
         }
 
-        private get arrFncSucesso(): Array<Function>
+        private get arrFncSucesso(): Array<((o: Interlocutor) => void)>
         {
             if (this._arrFncSucesso != null)
             {
                 return this._arrFncSucesso;
             }
 
-            this._arrFncSucesso = new Array<Function>();
+            this._arrFncSucesso = new Array<((o: Interlocutor) => void)>();
 
             return this._arrFncSucesso;
         }
@@ -126,7 +126,7 @@ module Web
 
         // #region Métodos
 
-        public addFncErro(fncErro: Function): void
+        public addFncErro(fncErro: ((strStatus: string, strThrown: string) => void)): void
         {
             if (fncErro == null)
             {
@@ -141,7 +141,7 @@ module Web
             this.arrFncErro.push(fncErro);
         }
 
-        public addFncProgresso(fncProgresso: Function): void
+        public addFncProgresso(fncProgresso: ((a: ProgressEvent) => void)): void
         {
             if (fncProgresso == null)
             {
@@ -156,7 +156,7 @@ module Web
             this.arrFncProgresso.push(fncProgresso);
         }
 
-        public addFncSucesso(fncSucesso: Function): void
+        public addFncSucesso(fncSucesso: ((o: Interlocutor) => void)): void
         {
             if (fncSucesso == null)
             {
@@ -246,11 +246,11 @@ module Web
             Mensagem.mostrar(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA);
         }
 
-        public processarOnErro(strTextStatus: string, strErrorThrown: string): void
+        public processarOnErro(strStatus: string, strThrown: string): void
         {
-            this.mostrarMsgErro(strTextStatus, strErrorThrown);
+            this.mostrarMsgErro(strStatus, strThrown);
 
-            this.arrFncErro.forEach((fnc) => { fnc(strTextStatus, strErrorThrown); });
+            this.arrFncErro.forEach((fnc) => { fnc(strStatus, strThrown); });
         }
 
         public processarOnProgresso(arg: ProgressEvent): void

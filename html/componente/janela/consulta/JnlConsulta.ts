@@ -356,7 +356,7 @@ module Web
 
             objInterlocutor.addJsn(this.tblWeb);
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.pesquisarSucesso(o));
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
@@ -471,5 +471,5 @@ module Web
         }
 
         // #endregion Eventos
-    }    
+    }
 }

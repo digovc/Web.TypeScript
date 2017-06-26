@@ -139,7 +139,7 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirFiltroConteudoSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirFiltroConteudoSucesso(o));
             objInterlocutor.addJsn(TblFiltro.i);
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
@@ -256,7 +256,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             switch (objSender)
             {
@@ -274,7 +274,7 @@ module Web
             }
         }
 
-        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
+        public onValorAlterado(objSender: Objeto, arg: OnValorAlteradoArg): void
         {
             try
             {

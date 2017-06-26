@@ -509,7 +509,7 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_SALVAR;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.salvarSucesso(o));
 
             objInterlocutor.addJsn(this.tblWeb);
 
@@ -671,7 +671,7 @@ module Web
 
         // #region Eventos
 
-        public onDisposed(objSender: Object): void
+        public onDisposed(objSender: Objeto): void
         {
             try
             {

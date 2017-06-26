@@ -373,7 +373,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -390,7 +390,7 @@ module Web
             }
         }
 
-        public onFocusIn(objSender: Object): void
+        public onFocusIn(objSender: Objeto): void
         {
             super.onFocusIn(objSender);
 
@@ -409,7 +409,7 @@ module Web
             }
         }
 
-        public onFocusOut(objSender: Object): void
+        public onFocusOut(objSender: Objeto): void
         {
             super.onFocusOut(objSender);
 
@@ -428,7 +428,7 @@ module Web
             }
         }
 
-        public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyDown(objSender: Objeto, arg: JQueryKeyEventObject): void
         {
             try
             {

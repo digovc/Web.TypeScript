@@ -1,6 +1,6 @@
 ﻿/// <reference path="../OnEnterListener.ts"/>
-/// <reference path="../OnLeaveListener.ts"/>
 /// <reference path="../OnValorAlteradoListener.ts"/>
+/// <reference path="OnLeaveListener.ts"/>
 /// <reference path="Tag.ts"/>
 
 module Web
@@ -240,7 +240,7 @@ module Web
 
         // #region Eventos
 
-        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
+        public onValorAlterado(objSender: Objeto, arg: OnValorAlteradoArg): void
         {
             try
             {

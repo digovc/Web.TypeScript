@@ -130,7 +130,7 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TABELA_FAVORITO_PESQUISAR;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarFavoritoSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.pesquisarFavoritoSucesso(o));
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }

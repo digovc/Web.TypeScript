@@ -46,7 +46,7 @@ module Web
             this.addEvtOnFocusOutListener(this);
         }
 
-        public onFocusIn(objSender: Object): void
+        public onFocusIn(objSender: Objeto): void
         {
             try
             {
@@ -63,7 +63,7 @@ module Web
             }
         }
 
-        public onFocusOut(objSender: Object): void
+        public onFocusOut(objSender: Objeto): void
         {
             try
             {

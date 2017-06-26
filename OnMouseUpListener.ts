@@ -2,6 +2,6 @@
 {
     export interface OnMouseUpListener
     {
-        onMouseUp(objSender: Object, arg: JQueryMouseEventObject): void;
+        onMouseUp(tagSender: Tag, arg: JQueryMouseEventObject): void;
     }
 }

@@ -75,11 +75,16 @@
          * @param evtOnLoad Evento que será disparado assim que a imagem
          * terminar de ser carregada.
          */
-        public static carregarImagem(strSrc: string, evtOnLoad: any = null): HTMLImageElement
+        public static carregarImagem(strSrc: string, fncOnLoad: ((o: HTMLImageElement) => void) = null): HTMLImageElement
         {
             var img = new Image();
+
             img.src = strSrc;
-            img.onload = evtOnLoad;
+
+            if (fncOnLoad != null)
+            {
+                img.onload = (() => fncOnLoad(img));
+            }
 
             return img;
         }

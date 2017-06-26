@@ -2,6 +2,6 @@
 {
     export interface OnValorAlteradoListener
     {
-        onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void;
+        onValorAlterado(objSender: Objeto, arg: OnValorAlteradoArg): void;
     }
 }

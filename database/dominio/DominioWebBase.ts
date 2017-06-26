@@ -93,7 +93,7 @@ module Web
             return this;
         }
 
-        public salvar(fncSucesso: Function): void
+        public salvar(fncSucesso: ((o: Interlocutor) => void)): void
         {
             if (AppWebBase.i.srvAjaxDbe == null)
             {

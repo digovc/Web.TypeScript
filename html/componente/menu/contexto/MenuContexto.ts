@@ -115,7 +115,7 @@ module Web
          * opção clicada e outro do tipo @see JQueryEventObject contendo informações do evento
          * click.
          */
-        public addOpcao(strOpcaoTitulo: string, fncOnClick: Function = null): string
+        public addOpcao(strOpcaoTitulo: string, fncOnClick: ((o: MenuContextoItem, a: JQueryEventObject) => void) = null): string
         {
             if (Utils.getBooStrVazia(strOpcaoTitulo))
             {
@@ -208,7 +208,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -220,7 +220,7 @@ module Web
             }
         }
 
-        public onFocusOut(objSender: Object): void
+        public onFocusOut(objSender: Objeto): void
         {
             try
             {

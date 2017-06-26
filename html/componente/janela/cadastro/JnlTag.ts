@@ -264,7 +264,7 @@ module Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); }); // TODO: Informar ao usuário.
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.salvarSucesso(o)); // TODO: Informar ao usuário.
             objInterlocutor.addJsn(this.tblWeb);
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TAG_SALVAR;
@@ -421,7 +421,7 @@ module Web
 
         // #region Eventos
 
-        public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyDown(objSender: Objeto, arg: JQueryKeyEventObject): void
         {
             try
             {

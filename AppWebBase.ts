@@ -7,7 +7,6 @@
 /// <reference path="html/pagina/PaginaHtml.ts"/>
 /// <reference path="html/pagina/PagPrincipal.ts"/>
 /// <reference path="Objeto.ts"/>
-/// <reference path="OnFocusChangeListener.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
 /// <reference path="server/ajax/data/SrvAjaxDbeBase.ts"/>
@@ -293,7 +292,7 @@ module Web
             window.history.pushState(null, objHistorico.strTitulo, objHistorico.strParametro);
         }
 
-        public carregarTbl(strTabelaNome: string, fncSucesso: Function = null): void
+        public carregarTbl(strTabelaNome: string, fncSucesso: ((o: TabelaWeb) => void) = null): void
         {
             if (this.srvAjaxDbe == null)
             {
@@ -315,12 +314,12 @@ module Web
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_CARREGAR_TBL_WEB;
 
             objInterlocutor.addStr(strTabelaNome);
-            objInterlocutor.addFncSucesso((objSolicitacaoAjax: Interlocutor) => this.carregarTblSucesso(objSolicitacaoAjax, fncSucesso));
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.carregarTblSucesso(o, fncSucesso));
 
             this.srvAjaxDbe.enviar(objInterlocutor);
         }
 
-        private carregarTblSucesso(objInterlocutor: Interlocutor, fncSucesso: Function): void
+        private carregarTblSucesso(objInterlocutor: Interlocutor, fncSucesso: ((tbl: TabelaWeb) => void)): void
         {
             if (objInterlocutor == null)
             {
@@ -332,15 +331,15 @@ module Web
                 return;
             }
 
-            var tblWeb = new TabelaWeb();
+            var tbl = new TabelaWeb();
 
-            tblWeb.copiarDados(objInterlocutor.getObjJson<TabelaWeb>());
+            tbl.copiarDados(objInterlocutor.getObjJson<TabelaWeb>());
 
-            this.addTbl(tblWeb);
+            this.addTbl(tbl);
 
             if (fncSucesso != null)
             {
-                fncSucesso();
+                fncSucesso(tbl);
             }
         }
 

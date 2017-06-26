@@ -2,6 +2,6 @@
 {
     export interface OnKeyPressListener
     {
-        onKeyPress(objSender: Object, arg: JQueryKeyEventObject): void;
+        onKeyPress(objSender: Objeto, arg: JQueryKeyEventObject): void;
     }
 }

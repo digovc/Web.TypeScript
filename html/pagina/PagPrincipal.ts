@@ -96,7 +96,7 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CADASTRO;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirCadastroSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirCadastroSucesso(o));
             objInterlocutor.addJsn(tblWeb);
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
@@ -146,7 +146,7 @@ module Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirConsultaSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirConsultaSucesso(o));
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CONSULTA;
 
@@ -183,24 +183,24 @@ module Web
             this.abrirCadastro(TblFiltro.i);
         }
 
-        public abrirJnlTag(tblWeb: TabelaWeb): void
+        public abrirJnlTag(tbl: TabelaWeb): void
         {
             if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
-            if (tblWeb == null)
+            if (tbl == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(tblWeb.strNome))
+            if (Utils.getBooStrVazia(tbl.strNome))
             {
                 return;
             }
 
-            if (tblWeb.clnIntId.intValor < 1)
+            if (tbl.clnIntId.intValor < 1)
             {
                 return;
             }
@@ -209,8 +209,8 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TAG_ABRIR_JANELA;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirJnlTagSucesso(tblWeb, objInterlocutor); });
-            objInterlocutor.addJsn(tblWeb);
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirJnlTagSucesso(tbl, o));
+            objInterlocutor.addJsn(tbl);
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
@@ -357,7 +357,7 @@ module Web
 
         // #region Eventos
 
-        public onDisposed(objSender: Object): void
+        public onDisposed(objSender: Objeto): void
         {
             try
             {

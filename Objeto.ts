@@ -58,7 +58,7 @@ module Web
 
         public get strNomeExibicao(): string
         {
-            if (!Utils.getBooStrVazia(this._strNomeExibicao))
+            if (this._strNomeExibicao != null)
             {
                 return this._strNomeExibicao;
             }
@@ -75,7 +75,7 @@ module Web
 
         public get strNomeSimplificado(): string
         {
-            if (!Utils.getBooStrVazia(this._strNomeSimplificado))
+            if (this._strNomeSimplificado != null)
             {
                 return this._strNomeSimplificado;
             }
@@ -85,14 +85,14 @@ module Web
             return this._strNomeSimplificado;
         }
 
-        protected get strClassNome(): string
+        public get strClassNome(): string
         {
             if (this._strClassNome != null)
             {
                 return this._strClassNome;
             }
 
-            this._strClassNome = this.getStrClassNome();
+            this._strClassNome = this.constructor.name;
 
             return this._strClassNome;
         }
@@ -122,14 +122,9 @@ module Web
             this.dispararEvtOnDisposedListener();
         }
 
-        private getStrClassNome(): string
-        {
-            return this.constructor.name;
-        }
-
         public toJson(): string
         {
-            return JSON.stringify(this, (strPropriedade, objValor) => this.toJsonValidar(strPropriedade, objValor));
+            return JSON.stringify(this, ((s, o) => this.toJsonValidar(s, o)));
         }
 
         private toJsonValidar(strPropriedade: string, objValor: any): any

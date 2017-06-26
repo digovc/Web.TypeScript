@@ -2,6 +2,6 @@
 {
     export interface OnLeaveListener
     {
-        onLeave(objSender: Object): void;
+        onLeave(tagInput: Input): void;
     }
 }
