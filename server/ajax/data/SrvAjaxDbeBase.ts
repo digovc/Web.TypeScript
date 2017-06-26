@@ -24,7 +24,7 @@ module Web
         public static get STR_METODO_CARREGAR_TBL_WEB(): string { return "CARREGAR_TBL_WEB" };
         public static get STR_METODO_FILTRO(): string { return "FILTRO" };
         public static get STR_METODO_PESQUISAR_COMBO_BOX(): string { return "PESQUISAR_COMBO_BOX" };
-        public static get STR_METODO_PESQUISAR_GRID(): string { return "PESQUISAR_GRID" };
+        public static get STR_METODO_PESQUISAR_TABLE(): string { return "PESQUISAR_TABLE" };
         public static get STR_METODO_RECUPERAR(): string { return "RECUPERAR" };
         public static get STR_METODO_SALVAR(): string { return "SALVAR" };
         public static get STR_METODO_SALVAR_DOMINIO(): string { return "SALVAR_DOMINIO" };

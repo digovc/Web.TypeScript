@@ -169,7 +169,7 @@ module Web
 
             var tagTableRow = new TableRow(jqTableRow.id);
 
-            tagTableRow.tagGridHtml = this;
+            tagTableRow.tagTable = this;
 
             arrTagTableRow.push(tagTableRow);
         }
@@ -211,23 +211,7 @@ module Web
 
         protected inicializar(): void
         {
-            this.inicializarCabecalhoFixo();
             this.inicializarArrTagRow();
-        }
-
-        private inicializarCabecalhoFixo(): void
-        {
-            if (this.tagTable.jq == null)
-            {
-                return;
-            }
-
-            //this.tagTable.jq.floatThead({
-            //    scrollContainer: function ()
-            //    {
-            //        return this.tagTable.jq.closest('#divGrid');
-            //    }
-            //});
         }
 
         private inicializarArrTagRow(): void
@@ -248,9 +232,9 @@ module Web
             }
         }
 
-        public processarOnGridMenuClick(arg: OnTableMenuClickArg): void
+        public processarOnTableMenuClick(arg: OnTableMenuClickArg): void
         {
-            this.dispararEvtOnGridMenuClickListener(arg);
+            this.dispararEvtOnTableMenuClickListener(arg);
         }
 
         public removerRowSelecionada(rowSelecionada: TableRow): void
@@ -308,50 +292,50 @@ module Web
 
         // #region Eventos
 
-        // #region Evento OnGridMenuClickListener
+        // #region Evento OnTableMenuClickListener
 
-        private _arrEvtOnGridMenuClickListener: Array<OnTableMenuClickListener>;
+        private _arrEvtOnTableMenuClickListener: Array<OnTableMenuClickListener>;
 
-        private get arrEvtOnGridMenuClickListener(): Array<OnTableMenuClickListener>
+        private get arrEvtOnTableMenuClickListener(): Array<OnTableMenuClickListener>
         {
-            if (this._arrEvtOnGridMenuClickListener != null)
+            if (this._arrEvtOnTableMenuClickListener != null)
             {
-                return this._arrEvtOnGridMenuClickListener;
+                return this._arrEvtOnTableMenuClickListener;
             }
 
-            this._arrEvtOnGridMenuClickListener = new Array<OnTableMenuClickListener>();
+            this._arrEvtOnTableMenuClickListener = new Array<OnTableMenuClickListener>();
 
-            return this._arrEvtOnGridMenuClickListener;
+            return this._arrEvtOnTableMenuClickListener;
         }
 
-        public addEvtOnGridMenuClickListener(evt: OnTableMenuClickListener): void
+        public addEvtOnTableMenuClickListener(evt: OnTableMenuClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnGridMenuClickListener.indexOf(evt) > -1)
+            if (this.arrEvtOnTableMenuClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnGridMenuClickListener.push(evt);
+            this.arrEvtOnTableMenuClickListener.push(evt);
         }
 
-        private dispararEvtOnGridMenuClickListener(arg: OnTableMenuClickArg): void
+        private dispararEvtOnTableMenuClickListener(arg: OnTableMenuClickArg): void
         {
             if (arg == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnGridMenuClickListener.length == 0)
+            if (this.arrEvtOnTableMenuClickListener.length == 0)
             {
                 return;
             }
 
-            this.arrEvtOnGridMenuClickListener.forEach((evt) =>
+            this.arrEvtOnTableMenuClickListener.forEach((evt) =>
             {
                 if (evt == null)
                 {
@@ -362,57 +346,57 @@ module Web
             });
         }
 
-        public removerEvtOnGridMenuClickListener(evt: OnTableMenuClickListener): void
+        public removerEvtOnTableMenuClickListener(evt: OnTableMenuClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnGridMenuClickListener.indexOf(evt) == -1)
+            if (this.arrEvtOnTableMenuClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnGridMenuClickListener.splice(this.arrEvtOnGridMenuClickListener.indexOf(evt), 1);
+            this.arrEvtOnTableMenuClickListener.splice(this.arrEvtOnTableMenuClickListener.indexOf(evt), 1);
         }
 
-        // #endregion Evento OnGridMenuClickListener
+        // #endregion Evento OnTableMenuClickListener
 
-        // #region Evento OnRowClickListener
+        // #region Evento OnTableRowClickListener
 
-        private _arrEvtOnRowClickListener: Array<OnTableRowClickListener>;
+        private _arrEvtOnTableRowClickListener: Array<OnTableRowClickListener>;
 
-        private get arrEvtOnRowClickListener(): Array<OnTableRowClickListener>
+        private get arrEvtOnTableRowClickListener(): Array<OnTableRowClickListener>
         {
-            if (this._arrEvtOnRowClickListener != null)
+            if (this._arrEvtOnTableRowClickListener != null)
             {
-                return this._arrEvtOnRowClickListener;
+                return this._arrEvtOnTableRowClickListener;
             }
 
-            this._arrEvtOnRowClickListener = new Array<OnTableRowClickListener>();
+            this._arrEvtOnTableRowClickListener = new Array<OnTableRowClickListener>();
 
-            return this._arrEvtOnRowClickListener;
+            return this._arrEvtOnTableRowClickListener;
         }
 
-        public addEvtOnRowClickListener(evt: OnTableRowClickListener): void
+        public addEvtOnTableRowClickListener(evt: OnTableRowClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowClickListener.indexOf(evt) > -1)
+            if (this.arrEvtOnTableRowClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowClickListener.push(evt);
+            this.arrEvtOnTableRowClickListener.push(evt);
         }
 
-        public dispararEvtOnRowClickListener(tagTableRow: TableRow): void
+        public dispararEvtOnTableRowClickListener(tagTableRow: TableRow): void
         {
-            if (this.arrEvtOnRowClickListener.length == 0)
+            if (this.arrEvtOnTableRowClickListener.length == 0)
             {
                 return;
             }
@@ -422,60 +406,60 @@ module Web
                 return;
             }
 
-            this.arrEvtOnRowClickListener.forEach((evt) => { evt.onTableRowClick(this, tagTableRow); });
+            this.arrEvtOnTableRowClickListener.forEach((evt) => { evt.onTableRowClick(this, tagTableRow); });
         }
 
-        public removerEvtOnRowClickListener(evt: OnTableRowClickListener): void
+        public removerEvtOnTableRowClickListener(evt: OnTableRowClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowClickListener.indexOf(evt) == -1)
+            if (this.arrEvtOnTableRowClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowClickListener.splice(this.arrEvtOnRowClickListener.indexOf(evt), 1);
+            this.arrEvtOnTableRowClickListener.splice(this.arrEvtOnTableRowClickListener.indexOf(evt), 1);
         }
 
-        // #endregion Evento OnRowClickListener
+        // #endregion Evento OnTableRowClickListener
 
-        // #region Evento OnRowDoubleClickListener
+        // #region Evento OnTableRowDoubleClickListener
 
-        private _arrEvtOnRowDoubleClickListener: Array<OnTableRowDoubleClickListener>;
+        private _arrEvtOnTableRowDoubleClickListener: Array<OnTableRowDoubleClickListener>;
 
-        private get arrEvtOnRowDoubleClickListener(): Array<OnTableRowDoubleClickListener>
+        private get arrEvtOnTableRowDoubleClickListener(): Array<OnTableRowDoubleClickListener>
         {
-            if (this._arrEvtOnRowDoubleClickListener != null)
+            if (this._arrEvtOnTableRowDoubleClickListener != null)
             {
-                return this._arrEvtOnRowDoubleClickListener;
+                return this._arrEvtOnTableRowDoubleClickListener;
             }
 
-            this._arrEvtOnRowDoubleClickListener = new Array<OnTableRowDoubleClickListener>();
+            this._arrEvtOnTableRowDoubleClickListener = new Array<OnTableRowDoubleClickListener>();
 
-            return this._arrEvtOnRowDoubleClickListener;
+            return this._arrEvtOnTableRowDoubleClickListener;
         }
 
-        public addEvtOnRowDoubleClickListener(evt: OnTableRowDoubleClickListener): void
+        public addEvtOnTableRowDoubleClickListener(evt: OnTableRowDoubleClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowDoubleClickListener.indexOf(evt) > -1)
+            if (this.arrEvtOnTableRowDoubleClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowDoubleClickListener.push(evt);
+            this.arrEvtOnTableRowDoubleClickListener.push(evt);
         }
 
-        public dispararEvtOnRowDoubleClickListener(tagTableRow: TableRow): void
+        public dispararEvtOnTableRowDoubleClickListener(tagTableRow: TableRow): void
         {
-            if (this.arrEvtOnRowDoubleClickListener.length == 0)
+            if (this.arrEvtOnTableRowDoubleClickListener.length == 0)
             {
                 return;
             }
@@ -485,25 +469,25 @@ module Web
                 return;
             }
 
-            this.arrEvtOnRowDoubleClickListener.forEach((evt) => { evt.onTableRowDoubleClick(this, tagTableRow); });
+            this.arrEvtOnTableRowDoubleClickListener.forEach((evt) => { evt.onTableRowDoubleClick(this, tagTableRow); });
         }
 
-        public removerEvtOnRowDoubleClickListener(evt: OnTableRowDoubleClickListener): void
+        public removerEvtOnTableRowDoubleClickListener(evt: OnTableRowDoubleClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowDoubleClickListener.indexOf(evt) == -1)
+            if (this.arrEvtOnTableRowDoubleClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowDoubleClickListener.splice(this.arrEvtOnRowDoubleClickListener.indexOf(evt), 1);
+            this.arrEvtOnTableRowDoubleClickListener.splice(this.arrEvtOnTableRowDoubleClickListener.indexOf(evt), 1);
         }
 
-        // #endregion Evento OnRowDoubleClickListener
+        // #endregion Evento OnTableRowDoubleClickListener
 
         // #endregion Eventos
     }

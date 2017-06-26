@@ -142,11 +142,11 @@ module Web
 
             if (this.pnlCondicao.booVisivel)
             {
-                this.jnlConsulta.maximinizarGrid();
+                this.jnlConsulta.maximinizarTable();
                 return;
             }
 
-            this.jnlConsulta.restaurarGrid();
+            this.jnlConsulta.restaurarTable();
         }
 
         public esconderFiltro(): void
@@ -201,7 +201,7 @@ module Web
 
             if (arg.keyCode == Keys.DOWN_ARROW && arg.ctrlKey)
             {
-                this.jnlConsulta.restaurarGrid();
+                this.jnlConsulta.restaurarTable();
 
                 arg.preventDefault()
 
@@ -210,7 +210,7 @@ module Web
 
             if (arg.keyCode == Keys.UP_ARROW && arg.ctrlKey)
             {
-                this.jnlConsulta.maximinizarGrid();
+                this.jnlConsulta.maximinizarTable();
 
                 arg.preventDefault()
 

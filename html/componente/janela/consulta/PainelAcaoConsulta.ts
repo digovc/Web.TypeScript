@@ -20,7 +20,7 @@ module Web
         private _btnAdicionar: BotaoCircular;
         private _btnAlterar: BotaoCircular;
         private _jnlConsulta: JnlConsulta;
-        private _tagGridHtml: TableHtml = null;
+        private _tagTable: TableHtml = null;
 
         private get btnAdicionar(): BotaoCircular
         {
@@ -56,21 +56,21 @@ module Web
             this._jnlConsulta = jnlConsulta;
         }
 
-        public get tagGridHtml(): TableHtml
+        public get tagTable(): TableHtml
         {
-            return this._tagGridHtml;
+            return this._tagTable;
         }
 
-        public set tagGridHtml(tagGridHtml: TableHtml)
+        public set tagTable(tagTable: TableHtml)
         {
-            if (this._tagGridHtml == tagGridHtml)
+            if (this._tagTable == tagTable)
             {
                 return;
             }
 
-            this._tagGridHtml = tagGridHtml;
+            this._tagTable = tagTable;
 
-            this.setTagGridHtml(this._tagGridHtml);
+            this.setTagTable(this._tagTable);
         }
 
         // #endregion Atributos
@@ -90,12 +90,12 @@ module Web
 
         private atualizarBtnAlterarBooVisivel(): void
         {
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            this.btnAlterar.booVisivel = (this.tagGridHtml.intRowSelecionadaQtd < 2);
+            this.btnAlterar.booVisivel = (this.tagTable.intRowSelecionadaQtd < 2);
         }
 
         protected finalizar(): void
@@ -122,14 +122,14 @@ module Web
             this.btnAlterar.addEvtOnClickListener(this);
         }
 
-        private setTagGridHtml(tagGridHtml: TableHtml): void
+        private setTagTable(tagTable: TableHtml): void
         {
-            if (tagGridHtml == null)
+            if (tagTable == null)
             {
                 return;
             }
 
-            tagGridHtml.addEvtOnRowClickListener(this);
+            tagTable.addEvtOnTableRowClickListener(this);
         }
 
         // #endregion Métodos

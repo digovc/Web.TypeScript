@@ -24,7 +24,7 @@ module Web
         // #region Atributos
 
         private _intId: number;
-        private _tagGridHtml: TableHtml = null;
+        private _tagTable: TableHtml = null;
 
         public get intId(): number
         {
@@ -38,14 +38,14 @@ module Web
             return this._intId;
         }
 
-        public get tagGridHtml(): TableHtml
+        public get tagTable(): TableHtml
         {
-            return this._tagGridHtml;
+            return this._tagTable;
         }
 
-        public set tagGridHtml(tagGridHtml: TableHtml)
+        public set tagTable(tagTable: TableHtml)
         {
-            this._tagGridHtml = tagGridHtml;
+            this._tagTable = tagTable;
         }
 
         // #endregion Atributos
@@ -62,12 +62,12 @@ module Web
                 return;
             }
 
-            var argOnGridMenuClick = new OnTableMenuClickArg();
+            var arg = new OnTableMenuClickArg();
 
-            argOnGridMenuClick.enmTipo = OnTableMenuClickArg_EnmAcao.ALTERAR;
-            argOnGridMenuClick.tagTableRow = this;
+            arg.enmTipo = OnTableMenuClickArg_EnmAcao.ALTERAR;
+            arg.tagTableRow = this;
 
-            this.processarOnGridMenuClick(argOnGridMenuClick);
+            this.processarOnTableMenuClick(arg);
         }
 
         private getIntId(): number
@@ -89,12 +89,12 @@ module Web
 
             this.selecionar(arg.ctrlKey);
 
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            this.tagGridHtml.dispararEvtOnRowClickListener(this);
+            this.tagTable.dispararEvtOnTableRowClickListener(this);
         }
 
         private processarOnClickRight(arg: JQueryMouseEventObject): void
@@ -113,24 +113,24 @@ module Web
             objMenuContexto.abrirMenu(arg);
         }
 
-        public processarOnGridMenuClick(arg: OnTableMenuClickArg): void
+        public processarOnTableMenuClick(arg: OnTableMenuClickArg): void
         {
             if (arg == null)
             {
                 return;
             }
 
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            this.tagGridHtml.processarOnGridMenuClick(arg);
+            this.tagTable.processarOnTableMenuClick(arg);
         }
 
         private selecionar(booControl: boolean): void
         {
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
@@ -141,7 +141,7 @@ module Web
                 return;
             }
 
-            this.tagGridHtml.selecinarTudo(false);
+            this.tagTable.selecinarTudo(false);
 
             this.booSelecionado = !this.booSelecionado;
         }
@@ -150,18 +150,18 @@ module Web
         {
             super.setBooSelecionado(booSelecionado);
 
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
             if (booSelecionado)
             {
-                this.tagGridHtml.addRowSelecionada(this);
+                this.tagTable.addRowSelecionada(this);
             }
             else
             {
-                this.tagGridHtml.removerRowSelecionada(this);
+                this.tagTable.removerRowSelecionada(this);
             }
         }
 

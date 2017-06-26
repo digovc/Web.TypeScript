@@ -24,12 +24,12 @@ module Web
         // #region Atributos
 
         private _btnFavorito: BtnFavorito;
-        private _divGrid: Div;
+        private _divTableConteudo: Div;
         private _jnlCadastro: JnlCadastro;
         private _pagPrincipal: PagPrincipal;
         private _pnlAcaoConsulta: PainelAcaoConsulta;
         private _pnlFiltro: PainelFiltro;
-        private _tagGridHtml: TableHtml;
+        private _tagTable: TableHtml;
         private _tblWeb: TabelaWeb;
         private _viwAtual: TabelaWeb;
 
@@ -45,16 +45,16 @@ module Web
             return this._btnFavorito;
         }
 
-        private get divGrid(): Div
+        private get divTableConteudo(): Div
         {
-            if (this._divGrid != null)
+            if (this._divTableConteudo != null)
             {
-                return this._divGrid;
+                return this._divTableConteudo;
             }
 
-            this._divGrid = new Div(this.strId + "_divGrid");
+            this._divTableConteudo = new Div(this.strId + "__divTableConteudo");
 
-            return this._divGrid;
+            return this._divTableConteudo;
         }
 
         private get jnlCadastro(): JnlCadastro
@@ -101,21 +101,21 @@ module Web
             return this._pnlFiltro;
         }
 
-        private get tagGridHtml(): TableHtml
+        private get tagTable(): TableHtml
         {
-            return this._tagGridHtml;
+            return this._tagTable;
         }
 
-        private set tagGridHtml(tagGridHtml: TableHtml)
+        private set tagTable(tagTable: TableHtml)
         {
-            if (this._tagGridHtml == tagGridHtml)
+            if (this._tagTable == tagTable)
             {
                 return;
             }
 
-            this._tagGridHtml = tagGridHtml;
+            this._tagTable = tagTable;
 
-            this.setTagGridHtml(tagGridHtml);
+            this.setTagTable(tagTable);
         }
 
         public get tblWeb(): TabelaWeb
@@ -168,34 +168,34 @@ module Web
 
             this.pagPrincipal.abrirCadastro(this.tblWeb);
 
-            this.abrirCadastroTagGridHtml(intRegistroId);
+            this.abrirCadastroTagTable(intRegistroId);
         }
 
         public abrirCadastroSelecionado(): void
         {
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            if (this.tagGridHtml.rowSelecionada == null)
+            if (this.tagTable.rowSelecionada == null)
             {
                 Notificacao.notificar("Selecione um registro primeiro.", Notificacao_EnmTipo.NEGATIVA);
                 return;
             }
 
-            this.abrirCadastro(this.tagGridHtml.rowSelecionada.intId);
+            this.abrirCadastro(this.tagTable.rowSelecionada.intId);
         }
 
-        private abrirCadastroTagGridHtml(intRegistroId: number): void
+        private abrirCadastroTagTable(intRegistroId: number): void
         {
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            this.tagGridHtml.selecinarTudo(false);
-            this.tagGridHtml.selecinar(intRegistroId, true);
+            this.tagTable.selecinarTudo(false);
+            this.tagTable.selecinar(intRegistroId, true);
         }
 
         public abrirFiltroCadastro(intFiltroId: number): void
@@ -315,29 +315,30 @@ module Web
             //super.inicializarPosicao();
         }
 
-        private inicializartagGridHtml(): void
+        private inicializarTagTable(): void
         {
             if (this.jq == null)
             {
                 return;
             }
 
-            this.tagGridHtml = new TableHtml(this.jq.find("[clazz=GridHtml]")[0].id);
+            this.tagTable = new TableHtml(this.jq.find("[clazz=" + TableHtml.name + "]")[0].id);
 
-            this.tagGridHtml.iniciar();
+            this.tagTable.iniciar();
 
-            this.tagGridHtml.addEvtOnGridMenuClickListener(this);
-            this.tagGridHtml.addEvtOnRowDoubleClickListener(this);
+            this.tagTable.addEvtOnTableMenuClickListener(this);
+            this.tagTable.addEvtOnTableRowDoubleClickListener(this);
         }
 
-        public maximinizarGrid(): void
+        public maximinizarTable(): void
         {
-            if (this.divGrid.jq.css("top") == "50")
+            if (this.divTableConteudo.jq.css("top") == "50")
             {
                 return;
             }
 
-            this.divGrid.jq.animate({ top: 50 }, 350, "swing");
+            this.divTableConteudo.jq.animate({ top: 50 }, 350, "swing");
+
             this.pnlFiltro.esconderFiltro();
         }
 
@@ -352,7 +353,7 @@ module Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_GRID;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_TABLE;
 
             objInterlocutor.addJsn(this.tblWeb);
 
@@ -381,11 +382,11 @@ module Web
 
             this.pesquisarSucessoCssMain();
 
-            this.divGrid.jq.html(objInterlocutor.objData.toString());
+            this.divTableConteudo.jq.html(objInterlocutor.objData.toString());
 
-            this.inicializartagGridHtml();
+            this.inicializarTagTable();
 
-            this.maximinizarGrid();
+            this.maximinizarTable();
         }
 
         private pesquisarSucessoCssMain(): void
@@ -398,7 +399,7 @@ module Web
             AppWebBase.i.srvHttp.atualizarCssMain();
         }
 
-        private processarOnGridMenuClick(arg: OnTableMenuClickArg): void
+        private processarOnTableMenuClick(arg: OnTableMenuClickArg): void
         {
             switch (arg.enmTipo)
             {
@@ -416,20 +417,21 @@ module Web
             }
         }
 
-        public restaurarGrid(): void
+        public restaurarTable(): void
         {
-            if (Utils.getBooStrVazia(this.divGrid.jq.css("top")))
+            if (Utils.getBooStrVazia(this.divTableConteudo.jq.css("top")))
             {
                 return;
             }
 
-            this.divGrid.jq.animate({ top: 140 }, 350, "swing");
+            this.divTableConteudo.jq.animate({ top: 140 }, 350, "swing");
+
             this.pnlFiltro.mostrarFiltro();
         }
 
-        private setTagGridHtml(tagGridHtml: TableHtml): void
+        private setTagTable(tagTable: TableHtml): void
         {
-            this.pnlAcaoConsulta.tagGridHtml = tagGridHtml;
+            this.pnlAcaoConsulta.tagTable = tagTable;
         }
 
         // #endregion Métodos
@@ -440,7 +442,7 @@ module Web
         {
             try
             {
-                if (objSender != this.tagGridHtml)
+                if (objSender != this.tagTable)
                 {
                     return;
                 }
@@ -450,7 +452,7 @@ module Web
                     return;
                 }
 
-                this.processarOnGridMenuClick(arg);
+                this.processarOnTableMenuClick(arg);
             }
             catch (ex)
             {
