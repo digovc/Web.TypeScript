@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TabItem extends ComponenteHtml implements OnGridMenuClickListener, OnRowClickListener
+    export class TabItem extends ComponenteHtml implements OnTableMenuClickListener, OnTableRowClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -20,7 +20,7 @@ module Web
         private _booAtiva: boolean;
         private _tabHtml: TabHtml;
         private _tabItemHead: TabItemHead;
-        private _tagGridHtml: GridHtml;
+        private _tagGridHtml: TableHtml;
         private _tblWeb: TabelaWeb;
         private _tblWebPrincipal: TabelaWeb;
 
@@ -63,12 +63,12 @@ module Web
             return this._tabItemHead;
         }
 
-        private get tagGridHtml(): GridHtml
+        private get tagGridHtml(): TableHtml
         {
             return this._tagGridHtml;
         }
 
-        private set tagGridHtml(tagGridHtml: GridHtml)
+        private set tagGridHtml(tagGridHtml: TableHtml)
         {
             this._tagGridHtml = tagGridHtml;
         }
@@ -269,7 +269,7 @@ module Web
                 return;
             }
 
-            this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
+            this.tagGridHtml = new TableHtml("tagGridHtml_" + this.tblWeb.strNome);
 
             this.tagGridHtml.iniciar();
 
@@ -364,19 +364,19 @@ module Web
             this.tabItemHead.iniciar();
         }
 
-        private processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        private processarOnGridMenuClick(arg: OnTableMenuClickArg): void
         {
             switch (arg.enmTipo)
             {
-                case OnGridMenuClickArg_EnmAcao.ADICIONAR:
+                case OnTableMenuClickArg_EnmAcao.ADICIONAR:
                     this.abrirCadastro(false);
                     return;
 
-                case OnGridMenuClickArg_EnmAcao.ALTERAR:
+                case OnTableMenuClickArg_EnmAcao.ALTERAR:
                     this.abrirCadastro(true);
                     return;
 
-                case OnGridMenuClickArg_EnmAcao.MENU:
+                case OnTableMenuClickArg_EnmAcao.MENU:
                     this.abrirMenu(arg.argOrigem);
                     return;
             }
@@ -422,7 +422,7 @@ module Web
 
         // #region Eventos
 
-        public onGridMenuClick(objSender: Object, arg: OnGridMenuClickArg): void
+        public onTableMenuClick(objSender: Object, arg: OnTableMenuClickArg): void
         {
             try
             {
@@ -444,7 +444,7 @@ module Web
             }
         }
 
-        public onRowClick(objSender: Object, tagGridRow: GridRow): void
+        public onTableRowClick(objSender: Object, tagTableRow: TableRow): void
         {
             try
             {

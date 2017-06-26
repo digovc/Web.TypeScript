@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
-/// <reference path="GridRow.ts"/>
-/// <reference path="OnGridMenuClickArg.ts"/>
-/// <reference path="OnGridMenuClickListener.ts"/>
-/// <reference path="OnRowClickListener.ts"/>
+/// <reference path="TableRow.ts"/>
+/// <reference path="OnTableMenuClickArg.ts"/>
+/// <reference path="OnTableMenuClickListener.ts"/>
+/// <reference path="OnTableRowClickListener.ts"/>
 
 module Web
 {
@@ -14,22 +14,22 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class GridHtml extends ComponenteHtml
+    export class TableHtml extends ComponenteHtml
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _arrRow: Array<GridRow>;
-        private _arrRowSelecionada: Array<GridRow>;
+        private _arrRow: Array<TableRow>;
+        private _arrRowSelecionada: Array<TableRow>;
         private _intRowSelecionadaQtd: number;
-        private _rowSelecionada: GridRow;
+        private _rowSelecionada: TableRow;
         private _tagTable: Tag;
         private _tagTbody: Tag;
         private _tblWeb: TabelaWeb;
 
-        private get arrRow(): Array<GridRow>
+        private get arrRow(): Array<TableRow>
         {
             if (this._arrRow != null)
             {
@@ -41,14 +41,14 @@ module Web
             return this._arrRow;
         }
 
-        private get arrRowSelecionada(): Array<GridRow>
+        private get arrRowSelecionada(): Array<TableRow>
         {
             if (this._arrRowSelecionada != null)
             {
                 return this._arrRowSelecionada;
             }
 
-            this._arrRowSelecionada = new Array<GridRow>();
+            this._arrRowSelecionada = new Array<TableRow>();
 
             return this._arrRowSelecionada;
         }
@@ -60,7 +60,7 @@ module Web
             return this._intRowSelecionadaQtd;
         }
 
-        public get rowSelecionada(): GridRow
+        public get rowSelecionada(): TableRow
         {
             this._rowSelecionada = this.getRowSelecionada();
 
@@ -111,7 +111,7 @@ module Web
 
         // #region Métodos
 
-        public addRowSelecionada(rowSelecionada: GridRow): void
+        public addRowSelecionada(rowSelecionada: TableRow): void
         {
             if (rowSelecionada == null)
             {
@@ -126,7 +126,7 @@ module Web
             this.arrRowSelecionada.push(rowSelecionada);
         }
 
-        private getArrRow(): Array<GridRow>
+        private getArrRow(): Array<TableRow>
         {
             if (this.tagTbody == null)
             {
@@ -138,40 +138,40 @@ module Web
                 return;
             }
 
-            var arrJqGridRow = this.tagTbody.jq.find('[clazz=GridRow]');
+            var arrJqTableRow = this.tagTbody.jq.find('[clazz=TableRow]');
 
-            if (arrJqGridRow == null)
+            if (arrJqTableRow == null)
             {
                 return;
             }
 
-            var arrTagGridRowResultado = new Array<GridRow>();
+            var arrTagTableRowResultado = new Array<TableRow>();
 
-            for (var i = 0; i < arrJqGridRow.length; i++)
+            for (var i = 0; i < arrJqTableRow.length; i++)
             {
-                this.getArrRow2(arrTagGridRowResultado, arrJqGridRow[i]);
+                this.getArrRow2(arrTagTableRowResultado, arrJqTableRow[i]);
             }
 
-            return arrTagGridRowResultado;
+            return arrTagTableRowResultado;
         }
 
-        private getArrRow2(arrTagGridRow: Array<GridRow>, jqGridRow: any): void
+        private getArrRow2(arrTagTableRow: Array<TableRow>, jqTableRow: any): void
         {
-            if (jqGridRow == null)
+            if (jqTableRow == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(jqGridRow.id))
+            if (Utils.getBooStrVazia(jqTableRow.id))
             {
                 return;
             }
 
-            var tagGridRow = new GridRow(jqGridRow.id);
+            var tagTableRow = new TableRow(jqTableRow.id);
 
-            tagGridRow.tagGridHtml = this;
+            tagTableRow.tagGridHtml = this;
 
-            arrTagGridRow.push(tagGridRow);
+            arrTagTableRow.push(tagTableRow);
         }
 
         public getIntRowSelecionadaId(): number
@@ -184,7 +184,7 @@ module Web
             return this.rowSelecionada.intId;
         }
 
-        private getRowSelecionada(): GridRow
+        private getRowSelecionada(): TableRow
         {
             if (this.arrRowSelecionada.length < 1)
             {
@@ -248,12 +248,12 @@ module Web
             }
         }
 
-        public processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        public processarOnGridMenuClick(arg: OnTableMenuClickArg): void
         {
             this.dispararEvtOnGridMenuClickListener(arg);
         }
 
-        public removerRowSelecionada(rowSelecionada: GridRow): void
+        public removerRowSelecionada(rowSelecionada: TableRow): void
         {
             if (rowSelecionada == null)
             {
@@ -310,21 +310,21 @@ module Web
 
         // #region Evento OnGridMenuClickListener
 
-        private _arrEvtOnGridMenuClickListener: Array<OnGridMenuClickListener>;
+        private _arrEvtOnGridMenuClickListener: Array<OnTableMenuClickListener>;
 
-        private get arrEvtOnGridMenuClickListener(): Array<OnGridMenuClickListener>
+        private get arrEvtOnGridMenuClickListener(): Array<OnTableMenuClickListener>
         {
             if (this._arrEvtOnGridMenuClickListener != null)
             {
                 return this._arrEvtOnGridMenuClickListener;
             }
 
-            this._arrEvtOnGridMenuClickListener = new Array<OnGridMenuClickListener>();
+            this._arrEvtOnGridMenuClickListener = new Array<OnTableMenuClickListener>();
 
             return this._arrEvtOnGridMenuClickListener;
         }
 
-        public addEvtOnGridMenuClickListener(evt: OnGridMenuClickListener): void
+        public addEvtOnGridMenuClickListener(evt: OnTableMenuClickListener): void
         {
             if (evt == null)
             {
@@ -339,7 +339,7 @@ module Web
             this.arrEvtOnGridMenuClickListener.push(evt);
         }
 
-        private dispararEvtOnGridMenuClickListener(arg: OnGridMenuClickArg): void
+        private dispararEvtOnGridMenuClickListener(arg: OnTableMenuClickArg): void
         {
             if (arg == null)
             {
@@ -358,11 +358,11 @@ module Web
                     return;
                 }
 
-                evt.onGridMenuClick(this, arg);
+                evt.onTableMenuClick(this, arg);
             });
         }
 
-        public removerEvtOnGridMenuClickListener(evt: OnGridMenuClickListener): void
+        public removerEvtOnGridMenuClickListener(evt: OnTableMenuClickListener): void
         {
             if (evt == null)
             {
@@ -381,21 +381,21 @@ module Web
 
         // #region Evento OnRowClickListener
 
-        private _arrEvtOnRowClickListener: Array<OnRowClickListener>;
+        private _arrEvtOnRowClickListener: Array<OnTableRowClickListener>;
 
-        private get arrEvtOnRowClickListener(): Array<OnRowClickListener>
+        private get arrEvtOnRowClickListener(): Array<OnTableRowClickListener>
         {
             if (this._arrEvtOnRowClickListener != null)
             {
                 return this._arrEvtOnRowClickListener;
             }
 
-            this._arrEvtOnRowClickListener = new Array<OnRowClickListener>();
+            this._arrEvtOnRowClickListener = new Array<OnTableRowClickListener>();
 
             return this._arrEvtOnRowClickListener;
         }
 
-        public addEvtOnRowClickListener(evt: OnRowClickListener): void
+        public addEvtOnRowClickListener(evt: OnTableRowClickListener): void
         {
             if (evt == null)
             {
@@ -410,22 +410,22 @@ module Web
             this.arrEvtOnRowClickListener.push(evt);
         }
 
-        public dispararEvtOnRowClickListener(tagGridRow: GridRow): void
+        public dispararEvtOnRowClickListener(tagTableRow: TableRow): void
         {
             if (this.arrEvtOnRowClickListener.length == 0)
             {
                 return;
             }
 
-            if (tagGridRow == null)
+            if (tagTableRow == null)
             {
                 return;
             }
 
-            this.arrEvtOnRowClickListener.forEach((evt) => { evt.onRowClick(this, tagGridRow); });
+            this.arrEvtOnRowClickListener.forEach((evt) => { evt.onTableRowClick(this, tagTableRow); });
         }
 
-        public removerEvtOnRowClickListener(evt: OnRowClickListener): void
+        public removerEvtOnRowClickListener(evt: OnTableRowClickListener): void
         {
             if (evt == null)
             {
@@ -444,21 +444,21 @@ module Web
 
         // #region Evento OnRowDoubleClickListener
 
-        private _arrEvtOnRowDoubleClickListener: Array<OnRowDoubleClickListener>;
+        private _arrEvtOnRowDoubleClickListener: Array<OnTableRowDoubleClickListener>;
 
-        private get arrEvtOnRowDoubleClickListener(): Array<OnRowDoubleClickListener>
+        private get arrEvtOnRowDoubleClickListener(): Array<OnTableRowDoubleClickListener>
         {
             if (this._arrEvtOnRowDoubleClickListener != null)
             {
                 return this._arrEvtOnRowDoubleClickListener;
             }
 
-            this._arrEvtOnRowDoubleClickListener = new Array<OnRowDoubleClickListener>();
+            this._arrEvtOnRowDoubleClickListener = new Array<OnTableRowDoubleClickListener>();
 
             return this._arrEvtOnRowDoubleClickListener;
         }
 
-        public addEvtOnRowDoubleClickListener(evt: OnRowDoubleClickListener): void
+        public addEvtOnRowDoubleClickListener(evt: OnTableRowDoubleClickListener): void
         {
             if (evt == null)
             {
@@ -473,22 +473,22 @@ module Web
             this.arrEvtOnRowDoubleClickListener.push(evt);
         }
 
-        public dispararEvtOnRowDoubleClickListener(tagGridRow: GridRow): void
+        public dispararEvtOnRowDoubleClickListener(tagTableRow: TableRow): void
         {
             if (this.arrEvtOnRowDoubleClickListener.length == 0)
             {
                 return;
             }
 
-            if (tagGridRow == null)
+            if (tagTableRow == null)
             {
                 return;
             }
 
-            this.arrEvtOnRowDoubleClickListener.forEach((evt) => { evt.onRowDoubleClick(this, tagGridRow); });
+            this.arrEvtOnRowDoubleClickListener.forEach((evt) => { evt.onTableRowDoubleClick(this, tagTableRow); });
         }
 
-        public removerEvtOnRowDoubleClickListener(evt: OnRowDoubleClickListener): void
+        public removerEvtOnRowDoubleClickListener(evt: OnTableRowDoubleClickListener): void
         {
             if (evt == null)
             {

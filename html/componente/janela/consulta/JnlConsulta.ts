@@ -1,8 +1,8 @@
 ﻿/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../../Div.ts"/>
 /// <reference path="../../../pagina/PagPrincipal.ts"/>
-/// <reference path="../../grid/GridHtml.ts"/>
-/// <reference path="../../grid/OnRowDoubleClickListener.ts"/>
+/// <reference path="../../table/TableHtml.ts"/>
+/// <reference path="../../table/OnTableRowDoubleClickListener.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
 /// <reference path="BtnFavorito.ts"/>
 /// <reference path="PainelAcaoConsulta.ts"/>
@@ -16,7 +16,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JnlConsulta extends JanelaHtml implements OnGridMenuClickListener, OnRowDoubleClickListener
+    export class JnlConsulta extends JanelaHtml implements OnTableMenuClickListener, OnTableRowDoubleClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -29,7 +29,7 @@ module Web
         private _pagPrincipal: PagPrincipal;
         private _pnlAcaoConsulta: PainelAcaoConsulta;
         private _pnlFiltro: PainelFiltro;
-        private _tagGridHtml: GridHtml;
+        private _tagGridHtml: TableHtml;
         private _tblWeb: TabelaWeb;
         private _viwAtual: TabelaWeb;
 
@@ -101,12 +101,12 @@ module Web
             return this._pnlFiltro;
         }
 
-        private get tagGridHtml(): GridHtml
+        private get tagGridHtml(): TableHtml
         {
             return this._tagGridHtml;
         }
 
-        private set tagGridHtml(tagGridHtml: GridHtml)
+        private set tagGridHtml(tagGridHtml: TableHtml)
         {
             if (this._tagGridHtml == tagGridHtml)
             {
@@ -213,19 +213,19 @@ module Web
             // TODO: Implementar.
         }
 
-        private alterar(tagGridRow: GridRow): void
+        private alterar(row: TableRow): void
         {
-            if (tagGridRow == null)
+            if (row == null)
             {
                 return;
             }
 
-            if (tagGridRow.intId < 1)
+            if (row.intId < 1)
             {
                 return;
             }
 
-            this.abrirCadastro(tagGridRow.intId);
+            this.abrirCadastro(row.intId);
         }
 
         protected fechar(): void
@@ -322,7 +322,7 @@ module Web
                 return;
             }
 
-            this.tagGridHtml = new GridHtml(this.jq.find("[clazz=GridHtml]")[0].id);
+            this.tagGridHtml = new TableHtml(this.jq.find("[clazz=GridHtml]")[0].id);
 
             this.tagGridHtml.iniciar();
 
@@ -398,19 +398,19 @@ module Web
             AppWebBase.i.srvHttp.atualizarCssMain();
         }
 
-        private processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        private processarOnGridMenuClick(arg: OnTableMenuClickArg): void
         {
             switch (arg.enmTipo)
             {
-                case OnGridMenuClickArg_EnmAcao.ADICIONAR:
+                case OnTableMenuClickArg_EnmAcao.ADICIONAR:
                     this.abrirCadastro(0);
                     return;
 
-                case OnGridMenuClickArg_EnmAcao.ALTERAR:
-                    this.alterar(arg.tagGridRow);
+                case OnTableMenuClickArg_EnmAcao.ALTERAR:
+                    this.alterar(arg.tagTableRow);
                     return;
 
-                case OnGridMenuClickArg_EnmAcao.MENU:
+                case OnTableMenuClickArg_EnmAcao.MENU:
                     this.abrirMenu(arg.argOrigem);
                     return;
             }
@@ -427,7 +427,7 @@ module Web
             this.pnlFiltro.mostrarFiltro();
         }
 
-        private setTagGridHtml(tagGridHtml: GridHtml): void
+        private setTagGridHtml(tagGridHtml: TableHtml): void
         {
             this.pnlAcaoConsulta.tagGridHtml = tagGridHtml;
         }
@@ -436,7 +436,7 @@ module Web
 
         // #region Eventos
 
-        public onGridMenuClick(objSender: Object, arg: OnGridMenuClickArg): void
+        public onTableMenuClick(objSender: Object, arg: OnTableMenuClickArg): void
         {
             try
             {
@@ -458,11 +458,11 @@ module Web
             }
         }
 
-        public onRowDoubleClick(objSender: Object, tagGridRow: GridRow): void
+        public onTableRowDoubleClick(objSender: Object, tagTableRow: TableRow): void
         {
             try
             {
-                this.alterar(tagGridRow);
+                this.alterar(tagTableRow);
             }
             catch (ex)
             {

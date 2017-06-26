@@ -5,7 +5,7 @@
 
     // #region Enumerados
 
-    export enum OnGridMenuClickArg_EnmAcao
+    export enum OnTableMenuClickArg_EnmAcao
     {
         ADICIONAR,
         ALTERAR,
@@ -16,7 +16,7 @@
 
     // #endregion Enumerados
 
-    export class OnGridMenuClickArg
+    export class OnTableMenuClickArg
     {
         // #region Constantes
         // #endregion Constantes
@@ -24,8 +24,8 @@
         // #region Atributos
 
         private _argOrigem: JQueryEventObject;
-        private _enmTipo: OnGridMenuClickArg_EnmAcao = OnGridMenuClickArg_EnmAcao.NONE;
-        private _tagGridRow: GridRow;
+        private _enmTipo: OnTableMenuClickArg_EnmAcao = OnTableMenuClickArg_EnmAcao.NONE;
+        private _tagTableRow: TableRow;
 
         public get argOrigem(): JQueryEventObject
         {
@@ -37,24 +37,24 @@
             this._argOrigem = argOrigem;
         }
 
-        public get enmTipo(): OnGridMenuClickArg_EnmAcao
+        public get enmTipo(): OnTableMenuClickArg_EnmAcao
         {
             return this._enmTipo;
         }
 
-        public set enmTipo(enmTipo: OnGridMenuClickArg_EnmAcao)
+        public set enmTipo(enmTipo: OnTableMenuClickArg_EnmAcao)
         {
             this._enmTipo = enmTipo;
         }
 
-        public get tagGridRow(): GridRow
+        public get tagTableRow(): TableRow
         {
-            return this._tagGridRow;
+            return this._tagTableRow;
         }
 
-        public set tagGridRow(tagGridRow: GridRow)
+        public set tagTableRow(tagTableRow: TableRow)
         {
-            this._tagGridRow = tagGridRow;
+            this._tagTableRow = tagTableRow;
         }
 
         // #endregion Atributos

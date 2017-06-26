@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../../OnClickListener.ts"/>
-/// <reference path="../../grid/OnRowClickListener.ts"/>
 /// <reference path="../../painel/PainelAcao.ts"/>
+/// <reference path="../../table/OnTableRowClickListener.ts"/>
 
 module Web
 {
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class PainelAcaoConsulta extends PainelAcao implements OnClickListener, OnRowClickListener
+    export class PainelAcaoConsulta extends PainelAcao implements OnClickListener, OnTableRowClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -20,7 +20,7 @@ module Web
         private _btnAdicionar: BotaoCircular;
         private _btnAlterar: BotaoCircular;
         private _jnlConsulta: JnlConsulta;
-        private _tagGridHtml: GridHtml = null;
+        private _tagGridHtml: TableHtml = null;
 
         private get btnAdicionar(): BotaoCircular
         {
@@ -56,12 +56,12 @@ module Web
             this._jnlConsulta = jnlConsulta;
         }
 
-        public get tagGridHtml(): GridHtml
+        public get tagGridHtml(): TableHtml
         {
             return this._tagGridHtml;
         }
 
-        public set tagGridHtml(tagGridHtml: GridHtml)
+        public set tagGridHtml(tagGridHtml: TableHtml)
         {
             if (this._tagGridHtml == tagGridHtml)
             {
@@ -122,7 +122,7 @@ module Web
             this.btnAlterar.addEvtOnClickListener(this);
         }
 
-        private setTagGridHtml(tagGridHtml: GridHtml): void
+        private setTagGridHtml(tagGridHtml: TableHtml): void
         {
             if (tagGridHtml == null)
             {
@@ -161,7 +161,7 @@ module Web
             }
         }
 
-        public onRowClick(objSender: Object, tagGridRow: GridRow): void
+        public onTableRowClick(objSender: Object, row: TableRow): void
         {
             try
             {

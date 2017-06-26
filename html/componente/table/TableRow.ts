@@ -15,7 +15,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class GridRow extends ComponenteHtml implements OnClickListener, OnClickRightListener, OnMouseLeaveListener, OnMouseOverListener
+    export class TableRow extends ComponenteHtml implements OnClickListener, OnClickRightListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
 
@@ -24,7 +24,7 @@ module Web
         // #region Atributos
 
         private _intId: number;
-        private _tagGridHtml: GridHtml = null;
+        private _tagGridHtml: TableHtml = null;
 
         public get intId(): number
         {
@@ -38,12 +38,12 @@ module Web
             return this._intId;
         }
 
-        public get tagGridHtml(): GridHtml
+        public get tagGridHtml(): TableHtml
         {
             return this._tagGridHtml;
         }
 
-        public set tagGridHtml(tagGridHtml: GridHtml)
+        public set tagGridHtml(tagGridHtml: TableHtml)
         {
             this._tagGridHtml = tagGridHtml;
         }
@@ -62,10 +62,10 @@ module Web
                 return;
             }
 
-            var argOnGridMenuClick = new OnGridMenuClickArg();
+            var argOnGridMenuClick = new OnTableMenuClickArg();
 
-            argOnGridMenuClick.enmTipo = OnGridMenuClickArg_EnmAcao.ALTERAR;
-            argOnGridMenuClick.tagGridRow = this;
+            argOnGridMenuClick.enmTipo = OnTableMenuClickArg_EnmAcao.ALTERAR;
+            argOnGridMenuClick.tagTableRow = this;
 
             this.processarOnGridMenuClick(argOnGridMenuClick);
         }
@@ -113,7 +113,7 @@ module Web
             objMenuContexto.abrirMenu(arg);
         }
 
-        public processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        public processarOnGridMenuClick(arg: OnTableMenuClickArg): void
         {
             if (arg == null)
             {
