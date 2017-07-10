@@ -4,8 +4,7 @@
 /// <reference path="../../../OnKeyUpListener.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
 /// <reference path="../../pagina/PaginaHtmlBase.ts"/>
-/// <reference path="../../pagina/PagPrincipal.ts"/>
-/// <reference path="../../pagina/PagPrincipal.ts"/>
+/// <reference path="../../pagina/PagPrincipalBase.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="MenuItem.ts"/>
 
@@ -28,7 +27,7 @@ module Web
         private _arrMniFilhoVisivel: Array<MenuItem>;
         private _divGaveta: Div;
         private _mniSelecionado: MenuItem;
-        private _pagPrincipal: PagPrincipal;
+        private _pagPrincipal: PagPrincipalBase;
         private _txtPesquisa: Input;
 
         protected get arrMni(): Array<MenuItem>
@@ -94,12 +93,12 @@ module Web
             this.setMniSelecionado(this._mniSelecionado);
         }
 
-        public get pagPrincipal(): PagPrincipal
+        public get pagPrincipal(): PagPrincipalBase
         {
             return this._pagPrincipal;
         }
 
-        public set pagPrincipal(pagPrincipal: PagPrincipal)
+        public set pagPrincipal(pagPrincipal: PagPrincipalBase)
         {
             this._pagPrincipal = pagPrincipal;
         }

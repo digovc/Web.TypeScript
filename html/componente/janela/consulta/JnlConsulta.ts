@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../../Div.ts"/>
-/// <reference path="../../../pagina/PagPrincipal.ts"/>
+/// <reference path="../../../pagina/PagPrincipalBase.ts"/>
 /// <reference path="../../table/TableHtml.ts"/>
 /// <reference path="../../table/OnTableRowDoubleClickListener.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
@@ -26,7 +26,7 @@ module Web
         private _btnFavorito: BtnFavorito;
         private _divTableConteudo: Div;
         private _jnlCadastro: JnlCadastro;
-        private _pagPrincipal: PagPrincipal;
+        private _pagPrincipal: PagPrincipalBase;
         private _pnlAcaoConsulta: PainelAcaoConsulta;
         private _pnlFiltro: PainelFiltro;
         private _tagTable: TableHtml;
@@ -62,12 +62,12 @@ module Web
             return this._jnlCadastro;
         }
 
-        private get pagPrincipal(): PagPrincipal
+        private get pagPrincipal(): PagPrincipalBase
         {
             return this._pagPrincipal;
         }
 
-        private set pagPrincipal(pagPrincipal: PagPrincipal)
+        private set pagPrincipal(pagPrincipal: PagPrincipalBase)
         {
             this._pagPrincipal = pagPrincipal;
         }
@@ -146,7 +146,7 @@ module Web
 
         // #region Construtor
 
-        constructor(pagPrincipal: PagPrincipal)
+        constructor(pagPrincipal: PagPrincipalBase)
         {
             super(JnlConsulta.name, pagPrincipal);
 

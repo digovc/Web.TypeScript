@@ -29,7 +29,7 @@ module Web
         private _frm: FormHtml;
         private _intRegistroId: number;
         private _jnlCadastroPai: JnlCadastro;
-        private _pagPrincipal: PagPrincipal;
+        private _pagPrincipal: PagPrincipalBase;
         private _srcJs: string;
         private _strTblNome: string;
         private _tabItem: TabItem;
@@ -95,7 +95,7 @@ module Web
             this.setJnlCadastroPai(this._jnlCadastroPai);
         }
 
-        protected get pagPrincipal(): PagPrincipal
+        protected get pagPrincipal(): PagPrincipalBase
         {
             if (this._pagPrincipal != null)
             {
@@ -361,19 +361,19 @@ module Web
             return this.cmpIntId.tagInput.intValor;
         }
 
-        private getPagPrincipal(): PagPrincipal
+        private getPagPrincipal(): PagPrincipalBase
         {
             if (AppWebBase.i.pag == null)
             {
                 return null;
             }
 
-            if (!(AppWebBase.i.pag instanceof PagPrincipal))
+            if (!(AppWebBase.i.pag instanceof PagPrincipalBase))
             {
                 return null;
             }
 
-            return (<PagPrincipal>AppWebBase.i.pag);
+            return (<PagPrincipalBase>AppWebBase.i.pag);
         }
 
         private getSrcJs(): string

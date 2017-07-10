@@ -116,7 +116,7 @@ module Web
                 return;
             }
 
-            if (!(AppWebBase.i.pag instanceof PagPrincipal))
+            if (!(AppWebBase.i.pag instanceof PagPrincipalBase))
             {
                 return;
             }
@@ -126,7 +126,7 @@ module Web
                 return;
             }
 
-            (AppWebBase.i.pag as PagPrincipal).abrirConsulta(this.tblWeb);
+            (AppWebBase.i.pag as PagPrincipalBase).abrirConsulta(this.tblWeb);
 
             this.imgIcone.anim.girar();
         }

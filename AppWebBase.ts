@@ -5,7 +5,7 @@
 /// <reference path="html/componente/Mensagem.ts"/>
 /// <reference path="html/componente/Notificacao.ts"/>
 /// <reference path="html/pagina/PaginaHtmlBase.ts"/>
-/// <reference path="html/pagina/PagPrincipal.ts"/>
+/// <reference path="html/pagina/PagPrincipalBase.ts"/>
 /// <reference path="Objeto.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>

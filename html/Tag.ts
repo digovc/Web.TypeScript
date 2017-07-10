@@ -1,11 +1,14 @@
 ﻿/// <reference path="../Objeto.ts"/>
+/// <reference path="../OnClickRightListener.ts"/>
 /// <reference path="../OnDoubleClickListener.ts"/>
 /// <reference path="../OnKeyDownListener.ts"/>
 /// <reference path="../OnKeyPressListener.ts"/>
 /// <reference path="../OnKeyUpListener.ts"/>
 /// <reference path="../OnMouseDownListener.ts"/>
 /// <reference path="../OnMouseLeaveListener.ts"/>
+/// <reference path="../OnMouseMoveListener.ts"/>
 /// <reference path="../OnMouseOverListener.ts"/>
+/// <reference path="../OnMouseUpListener.ts"/>
 /// <reference path="../typedefinition/jquery.d.ts"/>
 /// <reference path="Animator.ts"/>
 

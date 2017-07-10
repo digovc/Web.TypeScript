@@ -12,7 +12,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class PagPrincipal extends PaginaHtmlBase implements OnDisposedListener
+    export abstract class PagPrincipalBase extends PaginaHtmlBase implements OnDisposedListener
     {
         // #region Constantes
         // #endregion Constantes
