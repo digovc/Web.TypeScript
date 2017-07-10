@@ -22,6 +22,7 @@ module Web
         private _booValor: boolean;
         private _booVazio: boolean;
         private _decValor: number;
+        private _fltValor: number;
         private _dttValor: Date;
         private _intValor: number;
         private _strValor: string;
@@ -79,12 +80,7 @@ module Web
 
         public get decValor(): number
         {
-            if (Utils.getBooStrVazia(this.strValor))
-            {
-                return 0;
-            }
-
-            this._decValor = parseFloat(this.strValor);
+            this._decValor = this.decValor;
 
             return this._decValor;
         }
@@ -93,9 +89,28 @@ module Web
         {
             this._decValor = decValor;
 
+            this.fltValor = this._decValor;
+        }
+
+        public get fltValor(): number
+        {
+            if (Utils.getBooStrVazia(this.strValor))
+            {
+                return 0;
+            }
+
+            this._fltValor = parseFloat(this.strValor);
+
+            return this._fltValor;
+        }
+
+        public set fltValor(fltValor: number)
+        {
+            this._fltValor = fltValor;
+
             try
             {
-                this.strValor = this._decValor.toString();
+                this.strValor = this._fltValor.toString();
             }
             catch (ex)
             {
@@ -105,7 +120,7 @@ module Web
 
         public get intValor(): number
         {
-            this._intValor = Math.round(this.decValor);
+            this._intValor = Math.round(this.fltValor);
 
             return this._intValor;
         }
@@ -114,7 +129,7 @@ module Web
         {
             this._intValor = intValor;
 
-            this.decValor = this._intValor;
+            this.fltValor = Math.round(this._intValor);
         }
 
         public get strValor(): string

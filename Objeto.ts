@@ -30,6 +30,7 @@ module Web
 
         private _intObjetoId: number;
         private _strClassNome: string;
+        private _strDescricao: string;
         private _strNome: string;
         private _strNomeExibicao: string;
         private _strNomeSimplificado: string;
@@ -44,6 +45,16 @@ module Web
             this._intObjetoId = Objeto.intObjetoIdStatic++;
 
             return this._intObjetoId;
+        }
+
+        public get strDescricao(): string
+        {
+            return this._strDescricao;
+        }
+
+        public set strDescricao(strDescricao: string)
+        {
+            this._strDescricao = strDescricao;
         }
 
         public get strNome(): string
