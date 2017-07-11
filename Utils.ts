@@ -221,6 +221,23 @@
             }
         }
 
+        public static getStrValorMonetario(fltValor: number): string
+        {
+            var strResultado = "R$ 0,00";
+
+            if (fltValor == null)
+            {
+                return strResultado;
+            }
+
+            if (!$.isNumeric(fltValor))
+            {
+                return strResultado;
+            }
+
+            return ("R$ " + fltValor.toString().replace(".", ","));
+        }
+
         public static replaceAll(str: string, strAntigo: string, strNovo: string): string
         {
             if (Utils.getBooStrVazia(str))
