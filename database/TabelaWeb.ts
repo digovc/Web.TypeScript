@@ -500,7 +500,7 @@ module Web
         {
             if (this.srvAjaxDbe == null)
             {
-                throw "O servidor de dados não foi indicado.";
+                throw new Error("O servidor de dados não foi indicado.");
             }
 
             this.srvAjaxDbe.pesquisar(this.strNome, arrFil, fncSucesso, fncErro);

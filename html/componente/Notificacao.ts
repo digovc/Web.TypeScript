@@ -347,7 +347,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
@@ -364,7 +364,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
@@ -381,7 +381,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
