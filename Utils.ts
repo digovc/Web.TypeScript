@@ -245,7 +245,7 @@
                 return null;
             }
 
-            while (str.indexOf(strAntigo) != -1)
+            while (str.indexOf(strAntigo) > -1)
             {
                 str = str.replace(strAntigo, strNovo);
             }
