@@ -228,8 +228,7 @@
     <TypeScriptTarget>ES6</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
-    <TypeScriptModuleKind>
-    </TypeScriptModuleKind>
+    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
     <TypeScriptOutDir>bin\js</TypeScriptOutDir>

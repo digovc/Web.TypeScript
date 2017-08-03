@@ -115,9 +115,9 @@ module Web
          * opção clicada e outro do tipo @see JQueryEventObject contendo informações do evento
          * click.
          */
-        public addOpcao(strOpcaoTitulo: string, fncOnClick: ((o: MenuContextoItem, a: JQueryEventObject) => void) = null): string
+        public addOpcao(strTitulo: string, fncOnClick: ((o: MenuContextoItem, a: JQueryEventObject) => void) = null): string
         {
-            if (Utils.getBooStrVazia(strOpcaoTitulo))
+            if (Utils.getBooStrVazia(strTitulo))
             {
                 return;
             }
@@ -126,7 +126,7 @@ module Web
 
             var mci = new MenuContextoItem(strMciId, this, fncOnClick);
 
-            mci.strTitulo = strOpcaoTitulo;
+            mci.strTitulo = strTitulo;
 
             this.addMci(mci);
 

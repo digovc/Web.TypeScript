@@ -20,11 +20,22 @@ module Web
 
         // #region Atributos
 
+        private _booAtivo: boolean;
         private _dttAlteracao: Date;
         private _dttCadastro: Date;
         private _intId: number;
         private _intUsuarioAlteracaoId: number;
         private _intUsuarioCadastroId: number;
+
+        public get booAtivo(): boolean
+        {
+            return this._booAtivo;
+        }
+
+        public set booAtivo(booAtivo: boolean)
+        {
+            this._booAtivo = booAtivo;
+        }
 
         public get dttAlteracao(): Date
         {
