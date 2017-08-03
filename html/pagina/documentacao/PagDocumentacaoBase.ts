@@ -150,7 +150,7 @@ module Web
         {
             super.setEventos();
 
-            window.onpopstate = (() => { this.inicializarUrl() });
+            window.onpopstate = (() => this.inicializarUrl());
 
             this.divActionBarDocumentacao.addEvtOnMenuClickListener(this);
         }

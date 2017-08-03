@@ -203,7 +203,7 @@ module Web
                 return;
             }
 
-            Notification.requestPermission(() => { this.abrirNotificacaoExterna() });
+            Notification.requestPermission(() => this.abrirNotificacaoExterna());
             return;
         }
 
@@ -213,19 +213,19 @@ module Web
                 {
                     body: this.strNotificacao,
                     icon: this.getUrlIcon(),
-                    onclose: (() => { this.fecharNotificacao(); }),
+                    onclose: (() => this.fecharNotificacao()),
                 }
 
             this.objNotificacao = new Notification((!Utils.getBooStrVazia(AppWebBase.i.strNome) ? AppWebBase.i.strNome : "Notificação"), objOptions);
 
             Notificacao.intNotificacaoAberta++;
 
-            this.intFecharTimeout = window.setTimeout((() => { this.fecharNotificacao() }), this.intTempo)
+            this.intFecharTimeout = window.setTimeout((() => this.fecharNotificacao()), this.intTempo)
         }
 
         private atrasarNotificacao(): void
         {
-            window.setTimeout(() => { this.abrirNotificacao() }, 1000);
+            window.setTimeout((() => this.abrirNotificacao()), 1000);
         }
 
         private fecharNotificacao(): void
@@ -295,7 +295,7 @@ module Web
 
         private inicializarTimeoutFechar()
         {
-            this.intFecharTimeout = window.setTimeout(() => { this.fecharNotificacao() }, this.intTempo);
+            this.intFecharTimeout = window.setTimeout((() => this.fecharNotificacao()), this.intTempo);
         }
 
         protected montarLayoutFixo(strLayoutFixo: string): string

@@ -326,7 +326,7 @@ module Web
 
             this.arrCln = null;
 
-            arrObjTemp.forEach((obj) => { this.copiarDadosArrCln2(obj); });
+            arrObjTemp.forEach(o => this.copiarDadosArrCln2(o));
         }
 
         private copiarDadosArrCln2(obj: any): void
@@ -461,7 +461,7 @@ module Web
             var sqlNomeResultado = Utils.STR_VAZIA;
             var strTipoNome = this.constructor.name;
 
-            for (var i = 1; i < sqlNomeResultado.length; i++)
+            for (var i = 0; i < strTipoNome.length; i++)
             {
                 if (strTipoNome[i] != strTipoNome[i].toUpperCase())
                 {
@@ -483,7 +483,7 @@ module Web
 
         public limparDados(): void
         {
-            this.arrCln.forEach((cln) => { cln.strValor = null; });
+            this.arrCln.forEach(c => c.limparDados());
         }
 
         public limparFiltro(): void

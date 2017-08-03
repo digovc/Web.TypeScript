@@ -64,7 +64,7 @@ module Web
             objAjaxSettings.contentType = false;
             objAjaxSettings.data = objInterlocutor.objData;
             objAjaxSettings.processData = false;
-            objAjaxSettings.xhr = (() => { return this.getXhrEnviarArquivo(objInterlocutor); });
+            objAjaxSettings.xhr = (() => { return this.getXhrEnviarArquivo(objInterlocutor) });
 
             $.ajax(objAjaxSettings);
         }
@@ -74,9 +74,9 @@ module Web
             var objAjaxSettingsResultado: JQueryAjaxSettings =
                 {
                     crossDomain: true,
-                    error: ((objJqXhr: JQueryXHR, strTextStatus: string, strErrorThrown: string) => { objInterlocutor.processarOnErro(strTextStatus, strErrorThrown); }),
+                    error: ((o, s, s2) => objInterlocutor.processarOnErro(s, s2)),
                     method: "POST",
-                    success: ((anyData: any, strTextStatus: string, objJqXhr: JQueryXHR) => { objInterlocutor.processarOnSucesso(anyData); }),
+                    success: ((o) => objInterlocutor.processarOnSucesso(o)),
                     url: ("http://" + this.url),
                     xhrFields: { withCredentials: true },
                 }
@@ -88,8 +88,8 @@ module Web
         {
             var xhrResultado = <XMLHttpRequest>$.ajaxSettings.xhr();
 
-            xhrResultado.upload.onerror = ((arg: Event) => { objInterlocutor.processarOnErro("Erro no upload", arg.toString()); });
-            xhrResultado.upload.onprogress = ((arg: ProgressEvent) => { objInterlocutor.processarOnProgresso(arg); });
+            xhrResultado.upload.onerror = (a => objInterlocutor.processarOnErro("Erro no upload", a.toString()));
+            xhrResultado.upload.onprogress = (a => objInterlocutor.processarOnProgresso(a));
 
             return xhrResultado;
         }

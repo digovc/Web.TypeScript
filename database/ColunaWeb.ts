@@ -103,6 +103,11 @@ module Web
 
         // #region Métodos
 
+        public limparDados(): void
+        {
+            this.strValor = null;
+        }
+
         // #endregion Métodos
 
         // #region Eventos

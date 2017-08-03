@@ -220,7 +220,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnDisposedListener.forEach((evt) => { evt.onDisposed(this); });
+            this.arrEvtOnDisposedListener.forEach(e => e.onDisposed(this));
         }
 
         public removerEvtOnDisposedListener(evt: OnDisposedListener): void

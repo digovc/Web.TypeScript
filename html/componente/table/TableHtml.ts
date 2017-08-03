@@ -285,7 +285,7 @@ module Web
                 return;
             }
 
-            this.arrRow.forEach((row) => { row.booSelecionado = booSelecionar; });
+            this.arrRow.forEach(r => r.booSelecionado = booSelecionar);
         }
 
         // #endregion Métodos
@@ -406,7 +406,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnTableRowClickListener.forEach((evt) => { evt.onTableRowClick(this, tagTableRow); });
+            this.arrEvtOnTableRowClickListener.forEach(e => e.onTableRowClick(this, tagTableRow));
         }
 
         public removerEvtOnTableRowClickListener(evt: OnTableRowClickListener): void
@@ -469,7 +469,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnTableRowDoubleClickListener.forEach((evt) => { evt.onTableRowDoubleClick(this, tagTableRow); });
+            this.arrEvtOnTableRowDoubleClickListener.forEach(e => e.onTableRowDoubleClick(this, tagTableRow));
         }
 
         public removerEvtOnTableRowDoubleClickListener(evt: OnTableRowDoubleClickListener): void

@@ -280,7 +280,7 @@ module Web
                 return;
             }
 
-            this.arrTabItem.forEach((tabItem) => { tabItem.iniciar(); });
+            this.arrTabItem.forEach(t => t.iniciar());
         }
 
         public mostrarDivComando(): void

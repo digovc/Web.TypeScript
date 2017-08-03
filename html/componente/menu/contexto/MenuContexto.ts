@@ -161,7 +161,7 @@ module Web
 
         private inicializarArrMci(): void
         {
-            this.arrMci.forEach((mci) => { mci.iniciar(); });
+            this.arrMci.forEach(m => m.iniciar());
         }
 
         protected montarLayoutFixo(strLayoutFixo: string): string
@@ -177,7 +177,7 @@ module Web
 
             var strConteudo = Utils.STR_VAZIA;
 
-            this.arrMci.forEach((mci) => { strConteudo += mci.strLayoutFixo; });
+            this.arrMci.forEach(m => strConteudo += m.strLayoutFixo);
 
             return strLayoutFixo.replace("_conteudo", strConteudo);
         }
@@ -201,7 +201,7 @@ module Web
         {
             super.setEventos();
 
-            window.setTimeout(() => { AppWebBase.i.pag.addEvtOnClickListener(this); }, 1);
+            window.setTimeout((() => AppWebBase.i.pag.addEvtOnClickListener(this)), 1);
         }
 
         // #endregion Métodos

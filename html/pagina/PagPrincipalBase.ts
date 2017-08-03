@@ -167,7 +167,7 @@ module Web
                 return;
             }
 
-            this.divConsulta.jq.slideUp(200, (() => { this.inicializarJnlConsulta(objInterlocutor); }));
+            this.divConsulta.jq.slideUp(200, (() => this.inicializarJnlConsulta(objInterlocutor)));
         }
 
         private abrirConsultaSucessoHistorico(): void
@@ -272,7 +272,7 @@ module Web
             tagScriptCadastro.src = srcJqCadastro;
             tagScriptCadastro.type = "text/javascript";
 
-            tagScriptCadastro.onload = (() => { this.inicializarJnlCadastro(jnlCadastroJq); });
+            tagScriptCadastro.onload = (() => this.inicializarJnlCadastro(jnlCadastroJq));
 
             document.head.appendChild(tagScriptCadastro);
         }

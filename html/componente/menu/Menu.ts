@@ -139,8 +139,8 @@ module Web
 
             this.divGaveta.esconder();
 
-            window.setTimeout(() => { this.fecharGrupos(); }, 200);
-            window.setTimeout(() => { this.txtPesquisa.strValor = null; }, 200);
+            window.setTimeout((() => this.fecharGrupos()), 200);
+            window.setTimeout((() => this.txtPesquisa.strValor = null), 200);
         }
 
         private abrirConsultaPrimeira(): void
@@ -185,7 +185,7 @@ module Web
                 return;
             }
 
-            this.arrMni.forEach((mni) => { mni.esconderDivItemConteudo(); });
+            this.arrMni.forEach(m => m.esconderDivItemConteudo());
         }
 
         protected finalizar(): void
@@ -263,7 +263,7 @@ module Web
                 return;
             }
 
-            this.arrMni.forEach((mni) => { mni.arrMniFilhoVisivel = null; });
+            this.arrMni.forEach(m => m.arrMniFilhoVisivel = null);
         }
 
         protected pesquisar(strPesquisa: string): void
@@ -277,11 +277,11 @@ module Web
 
             if (Utils.getBooStrVazia(strPesquisa))
             {
-                this.arrMni.forEach((mni) => { mni.limparPesquisa(); });
+                this.arrMni.forEach(m => m.limparPesquisa());
                 return;
             }
 
-            this.arrMni.forEach((mni) => { mni.pesquisar(strPesquisa) });
+            this.arrMni.forEach(m => m.pesquisar(strPesquisa));
         }
 
         public processarPagPrincipalOnClick(arg: JQueryEventObject): void

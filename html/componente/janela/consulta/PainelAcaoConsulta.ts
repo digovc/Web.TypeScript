@@ -102,7 +102,7 @@ module Web
         {
             super.finalizar();
 
-            window.setTimeout(() => { this.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL); }, 400);
+            window.setTimeout((() => this.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL)), 400);
         }
 
         protected inicializar(): void

@@ -127,10 +127,10 @@ module Web
 
             var objWebSocketResultado = new WebSocket("ws://" + this.url);
 
-            objWebSocketResultado.onclose = ((arg: CloseEvent) => { this.processarOnCloseLocal(arg); });
-            objWebSocketResultado.onerror = ((arg: Event) => { this.processarOnErrorLocal(arg); });
-            objWebSocketResultado.onmessage = ((arg: MessageEvent) => { this.processarOnMessageLocal(arg); });
-            objWebSocketResultado.onopen = ((arg: Event) => { this.processarOnOpenLocal(arg); });
+            objWebSocketResultado.onclose = (a => this.processarOnCloseLocal(a));
+            objWebSocketResultado.onerror = (a => this.processarOnErrorLocal(a));
+            objWebSocketResultado.onmessage = (a => this.processarOnMessageLocal(a));
+            objWebSocketResultado.onopen = (a => this.processarOnOpenLocal(a));
 
             return objWebSocketResultado;
         }
@@ -201,7 +201,7 @@ module Web
         {
             this.dttUltimoPong = new Date();
 
-            window.setTimeout((() => { this.monitorar() }), SrvWsBase.INT_MONITOR_INTERVALO);
+            window.setTimeout((() => this.monitorar()), SrvWsBase.INT_MONITOR_INTERVALO);
         }
 
         protected processarMensagemWelcome(): void

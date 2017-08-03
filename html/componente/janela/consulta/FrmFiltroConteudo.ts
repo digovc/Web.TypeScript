@@ -59,7 +59,7 @@ module Web
 
             tblWeb.limparFiltro();
 
-            this.arrCmp.forEach((cmpFiltro) => { this.atualizarArrFiltro2(tblWeb, cmpFiltro); });
+            this.arrCmp.forEach(c => this.atualizarArrFiltro2(tblWeb, c));
         }
 
         private atualizarArrFiltro2(tblWeb: TabelaWeb, cmpFiltro: CampoHtml): void
@@ -119,7 +119,7 @@ module Web
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { cmp.tagInput.booDisabled = false; });
+            this.arrCmp.forEach(c => c.tagInput.booDisabled = false);
         }
 
         private inicializarCssMain(): void
@@ -156,7 +156,7 @@ module Web
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { cmp.addEvtOnKeyDownListener(this); });
+            this.arrCmp.forEach(c => c.addEvtOnKeyDownListener(this));
         }
 
         // #endregion Métodos

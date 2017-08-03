@@ -330,7 +330,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnEnterListener.forEach((evt) => { evt.onEnter(this); });
+            this.arrEvtOnEnterListener.forEach(e => e.onEnter(this));
         }
 
         // #endregion Evento OnEnterListener
@@ -393,7 +393,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnLeaveListener.forEach((evt) => { evt.onLeave(this); });
+            this.arrEvtOnLeaveListener.forEach(e => e.onLeave(this));
         }
 
         // #endregion Evento OnLeaveListener
@@ -428,11 +428,8 @@ module Web
 
             if (this.arrEvtOnValorAlteradoListener.length == 0)
             {
-                this.jq.change((arg) => { this.strValor = this.jq.val(); });
-                this.jq.keyup((arg) =>
-                {
-                    this.strValor = this.jq.val();
-                });
+                this.jq.change(a => this.strValor = this.jq.val());
+                this.jq.keyup(a => this.strValor = this.jq.val());
             }
 
             this.arrEvtOnValorAlteradoListener.push(evt);
@@ -470,7 +467,7 @@ module Web
             arg.strValor = strValor;
             arg.strValorAnterior = this.strValorAnterior;
 
-            this.arrEvtOnValorAlteradoListener.forEach((evt) => { evt.onValorAlterado(this, arg); });
+            this.arrEvtOnValorAlteradoListener.forEach(e => e.onValorAlterado(this, arg));
         }
 
         // #endregion Evento OnValorAlteradoListener

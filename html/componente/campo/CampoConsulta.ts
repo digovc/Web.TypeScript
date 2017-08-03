@@ -108,12 +108,12 @@ module Web
 
             if (this.txtPesquisa.booVisivel)
             {
-                mnc.addOpcao("Pesquisar", ((mci: MenuContextoItem, arg2: JQueryEventObject) => { this.pesquisar(); }));
-                mnc.addOpcao("Pesquisar por", ((mci: MenuContextoItem, arg2: JQueryEventObject) => { this.abrirOpcaoPesquisarPor(mci, arg); }));
+                mnc.addOpcao("Pesquisar", (() => this.pesquisar()));
+                mnc.addOpcao("Pesquisar por", ((m) => this.abrirOpcaoPesquisarPor(m, arg)));
             }
             else
             {
-                mnc.addOpcao("Limpar", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.limparDados(); }));
+                mnc.addOpcao("Limpar", (() => this.limparDados()));
             }
 
             mnc.abrirMenu(arg);
@@ -128,7 +128,7 @@ module Web
 
             var mnc = new MenuContexto();
 
-            this.tblWebRef.arrCln.forEach((cln) => { this.abrirOpcaoPesquisarPorCln(mnc, cln); });
+            this.tblWebRef.arrCln.forEach(c => this.abrirOpcaoPesquisarPorCln(mnc, c));
 
             mnc.abrirMenu(arg);
         }
@@ -145,7 +145,7 @@ module Web
                 return;
             }
 
-            mnc.addOpcao(clnWeb.strNomeExibicao, (() => { this.selecionarColunaPesquisa(clnWeb); }));
+            mnc.addOpcao(clnWeb.strNomeExibicao, (() => this.selecionarColunaPesquisa(clnWeb)));
         }
 
         protected setBooEmFoco(booEmFoco: boolean): void
@@ -287,7 +287,7 @@ module Web
 
             this.cmb.mostrar();
 
-            window.setTimeout((() => { this.cmb.receberFoco(); }), 10);
+            window.setTimeout((() => this.cmb.receberFoco()), 10);
         }
 
         private processarBtnAcaoClick(): void

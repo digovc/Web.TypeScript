@@ -144,9 +144,9 @@ module Web
 
             var arrObjFavorito = new Array<FavoritoDominio>();
 
-            (objInterlocutor.objData as Array<FavoritoDominio>).forEach((obj) => { arrObjFavorito.push(<FavoritoDominio>new FavoritoDominio().copiarDados(obj)); });
+            (objInterlocutor.objData as Array<FavoritoDominio>).forEach(o => arrObjFavorito.push(new FavoritoDominio().copiarDados(o) as FavoritoDominio));
 
-            arrObjFavorito.forEach((objFavorito) => { this.addFavorito(objFavorito); });
+            arrObjFavorito.forEach(o => this.addFavorito(o));
         }
 
         // #endregion Métodos

@@ -108,7 +108,7 @@ module Web
 
             var objMenuContexto = new MenuContexto();
 
-            objMenuContexto.addOpcao(("Alterar registro " + this.intId), (() => { this.alterar(); }));
+            objMenuContexto.addOpcao(("Alterar registro " + this.intId), (() => this.alterar()));
 
             objMenuContexto.abrirMenu(arg);
         }

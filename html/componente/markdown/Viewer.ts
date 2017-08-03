@@ -88,7 +88,7 @@ module Web
 
             this.divConteudo.booVisivel = false;
 
-            $.get(this.divSumarioItem.urlMarkdown, ((objData) => { this.abrirConteudoSucesso(objData) }));
+            $.get(this.divSumarioItem.urlMarkdown, (o => this.abrirConteudoSucesso(o)));
         }
 
         private abrirConteudoSucesso(strMarkdownConteudo: string): void

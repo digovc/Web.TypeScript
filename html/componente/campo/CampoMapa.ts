@@ -88,7 +88,7 @@ module Web
 
             if (!AppWebBase.i.pag.validarJsCarregado(CampoMapa.SRC_GOOGLE_MAPS_API))
             {
-                AppWebBase.i.pag.addJs(CampoMapa.SRC_GOOGLE_MAPS_API, (() => { this.inicializarMap(); }));
+                AppWebBase.i.pag.addJs(CampoMapa.SRC_GOOGLE_MAPS_API, (() => this.inicializarMap()));
             }
             else
             {
@@ -148,7 +148,7 @@ module Web
 
             this.mrk = new google.maps.Marker(this.mrkOption);
 
-            this.mrk.addListener("dragend", (() => { this.processarMrkDragend(); }))
+            this.mrk.addListener("dragend", (() => this.processarMrkDragend()))
 
             this.inicializarMrkPosition();
         }

@@ -131,7 +131,7 @@ module Web
         {
             var strTagFormatada = Utils.STR_VAZIA;
 
-            this.arrTagCard.forEach((tagCard) => { strTagFormatada = this.getStrTagFormatadaItem(strTagFormatada, tagCard); });
+            this.arrTagCard.forEach(t => strTagFormatada = this.getStrTagFormatadaItem(strTagFormatada, t));
 
             return strTagFormatada;
         }
@@ -185,7 +185,7 @@ module Web
 
             var arrStrTag = strTag.split(";");
 
-            arrStrTag.forEach((strTagItem) => { this.addStrTag(strTagItem); });
+            arrStrTag.forEach(s => this.addStrTag(s));
         }
 
         private inicializarTagInputTag(): void

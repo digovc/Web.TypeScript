@@ -244,7 +244,7 @@ module Web
         {
             super.inicializar();
 
-            this.arrDivItem.forEach((divItem) => { divItem.iniciar() });
+            this.arrDivItem.forEach(d => d.iniciar());
         }
 
         public inicializarUrl(urlMarkdown: string): boolean

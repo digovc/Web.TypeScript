@@ -90,7 +90,7 @@ module Web
 
             var arrData: Array<any> = JSON.parse(objInterlocutor.objData.toString());
 
-            arrData.forEach((par) => { this.carregarDadosSucesso2(par); });
+            arrData.forEach(o => this.carregarDadosSucesso2(o));
         }
 
         private carregarDadosSucesso2(par: ParValorNome): void

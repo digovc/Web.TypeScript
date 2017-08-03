@@ -195,14 +195,14 @@ module Web
             this.strClazz = null;
         }
 
-        private dispararArrFncSucesso(anyData: any): void
+        private dispararArrFncSucesso(objData: any): void
         {
-            if (anyData == null)
+            if (objData == null)
             {
                 return;
             }
 
-            this.copiarDados(anyData);
+            this.copiarDados(objData);
 
             if (!Utils.getBooStrVazia(this.strErro))
             {
@@ -210,7 +210,7 @@ module Web
                 return;
             }
 
-            this.arrFncSucesso.forEach((fnc) => { fnc(this); });
+            this.arrFncSucesso.forEach(fnc => fnc(this));
         }
 
         public getObjJson<T>(): T
@@ -250,17 +250,17 @@ module Web
         {
             this.mostrarMsgErro(strStatus, strThrown);
 
-            this.arrFncErro.forEach((fnc) => { fnc(strStatus, strThrown); });
+            this.arrFncErro.forEach(f => f(strStatus, strThrown));
         }
 
         public processarOnProgresso(arg: ProgressEvent): void
         {
-            this.arrFncProgresso.forEach((fnc) => { fnc(arg); });
+            this.arrFncProgresso.forEach(f => f(arg));
         }
 
-        public processarOnSucesso(anyData: any): void
+        public processarOnSucesso(objData: any): void
         {
-            this.dispararArrFncSucesso(anyData);
+            this.dispararArrFncSucesso(objData);
         }
 
         public validarDados(): boolean

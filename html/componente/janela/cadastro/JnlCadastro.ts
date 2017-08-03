@@ -570,7 +570,7 @@ module Web
                 return;
             }
 
-            tblWeb.arrCln.forEach((clnWeb) => { this.salvarSucesso2CriticaClnWeb(clnWeb); });
+            tblWeb.arrCln.forEach(c => this.salvarSucesso2CriticaClnWeb(c));
         }
 
         private salvarSucesso2CriticaClnWeb(clnWeb: ColunaWeb): void

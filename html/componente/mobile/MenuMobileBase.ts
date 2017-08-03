@@ -53,7 +53,7 @@ module Web
         {
             super.inicializar();
 
-            this.arrMmi.forEach((mmi) => { mmi.iniciar(); });
+            this.arrMmi.forEach(m => m.iniciar());
         }
 
         protected abstract inicializarItem(arrMmi: Array<MenuMobileItem>): void;

@@ -111,7 +111,7 @@ module Web
                 return;
             }
 
-            window.requestAnimationFrame(() => { this.loop(); });
+            window.requestAnimationFrame(() => this.loop());
         }
 
         private calcularDecDelta(): void

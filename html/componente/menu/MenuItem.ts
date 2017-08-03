@@ -291,7 +291,7 @@ module Web
 
             this.divItemConteudo.esconder();
 
-            this.arrMniFilho.forEach((mni) => { mni.limparPesquisa() });
+            this.arrMniFilho.forEach(m => m.limparPesquisa());
         }
 
         public mostrarEsconderDivItemConteudo(): void
@@ -318,9 +318,9 @@ module Web
                 this.divItemConteudo.esconder();
             }
 
-            this.arrMniFilho.forEach((mni) => { mni.pesquisar(strPesquisa); });
+            this.arrMniFilho.forEach(m => m.pesquisar(strPesquisa));
 
-            this.arrStrTag.forEach((strTag) => { this.pesquisarItem(strPesquisa, strTag); });
+            this.arrStrTag.forEach(s => this.pesquisarItem(strPesquisa, s));
         }
 
         private pesquisarItem(strPesquisa: string, strTag: string): void

@@ -197,7 +197,7 @@ module Web
 
             this.divEmailRegistro.iniciar();
 
-            this.arrDivItem.forEach((divItem) => { divItem.iniciar() });
+            this.arrDivItem.forEach(d => d.iniciar());
         }
 
         public inicializarUrl(urlMarkdown: string): void

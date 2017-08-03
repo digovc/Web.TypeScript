@@ -188,7 +188,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnClickListener.forEach((evt) => { evt.onClick(this, arg); });
+            this.arrEvtOnClickListener.forEach(e => e.onClick(this, arg));
         }
 
         // #endregion Evento OnClickListener

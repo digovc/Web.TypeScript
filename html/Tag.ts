@@ -433,7 +433,7 @@ module Web
 
             if (this.arrEvtOnClickListener.length == 0)
             {
-                this.jq.click((arg) => { this.dispararEvtOnClickListener(arg) });
+                this.jq.click(a => this.dispararEvtOnClickListener(a));
             }
 
             this.arrEvtOnClickListener.push(evt);
@@ -463,7 +463,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnClickListener.forEach((evt) => { evt.onClick(this, arg); });
+            this.arrEvtOnClickListener.forEach(e => e.onClick(this, arg));
         }
 
         // #endregion Evento OnClickListener
@@ -498,14 +498,14 @@ module Web
 
             if (this.arrEvtOnClickRightListener.length == 0)
             {
-                this.jq.bind("contextmenu", ((arg: JQueryMouseEventObject) => { return false; }));
+                this.jq.bind("contextmenu", (a => { return false }));
 
-                this.jq.mousedown((arg) =>
+                this.jq.mousedown((a) =>
                 {
-                    arg.stopPropagation();
-                    arg.preventDefault();
+                    a.stopPropagation();
+                    a.preventDefault();
 
-                    this.dispararEvtOnClickRightListener(arg);
+                    this.dispararEvtOnClickRightListener(a);
 
                     return false;
                 });
@@ -602,7 +602,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnDoubleClickListener.forEach((evt) => { evt.onDoubleClick(this, arg); });
+            this.arrEvtOnDoubleClickListener.forEach(e => e.onDoubleClick(this, arg));
         }
 
         public removerEvtOnDoubleClickListener(evt: OnDoubleClickListener): void
@@ -1007,7 +1007,7 @@ module Web
 
             if (this.arrEvtOnMouseDownListener.length == 0)
             {
-                this.jq.mousedown((arg) => { this.dispararEvtOnMouseDownListener(arg); });
+                this.jq.mousedown(a => this.dispararEvtOnMouseDownListener(a));
             }
 
             this.arrEvtOnMouseDownListener.push(evt);
@@ -1091,7 +1091,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnMouseLeaveListener.forEach((evt) => { evt.onMouseLeave(this, arg); });
+            this.arrEvtOnMouseLeaveListener.forEach(e => e.onMouseLeave(this, arg));
         }
 
         public removerEvtOnMouseLeaveListener(evt: OnMouseLeaveListener): void
@@ -1141,7 +1141,7 @@ module Web
 
             if (this.arrEvtOnMouseMoveListener.length == 0)
             {
-                this.jq.mousemove((arg) => { this.dispararEvtOnMouseMoveListener(arg); });
+                this.jq.mousemove(a => this.dispararEvtOnMouseMoveListener(a));
             }
 
             this.arrEvtOnMouseMoveListener.push(evt);
@@ -1225,7 +1225,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnMouseOverListener.forEach((evt) => { evt.onMouseOver(this, arg); });
+            this.arrEvtOnMouseOverListener.forEach(e => e.onMouseOver(this, arg));
         }
 
         public removerEvtOnMouseOverListener(evt: OnMouseOverListener): void
@@ -1275,7 +1275,7 @@ module Web
 
             if (this.arrEvtOnMouseUpListener.length == 0)
             {
-                this.jq.mouseup((arg) => { this.dispararEvtOnMouseUpListener(arg); });
+                this.jq.mouseup(a => this.dispararEvtOnMouseUpListener(a));
             }
 
             this.arrEvtOnMouseUpListener.push(evt);
