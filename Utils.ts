@@ -121,7 +121,7 @@
          */
         public static getBooStrVazia(str: string): boolean
         {
-            return ((str == null) || (str == Utils.STR_VAZIA));
+            return ((str == null) || (str == Utils.STR_VAZIA) || (str.trim() == Utils.STR_VAZIA));
         }
 
         public static getIntRandom(intMinimo: number, intMaximo: number): number
