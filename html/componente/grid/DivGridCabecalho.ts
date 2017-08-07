@@ -16,34 +16,56 @@ module Web
 
         // #region Atributos
 
-        private _divGridConsulta: DivGridBase;
+        private _divGrid: DivGridBase;
 
-        private get divGridConsulta(): DivGridBase
+        private get divGrid(): DivGridBase
         {
-            return this._divGridConsulta;
+            return this._divGrid;
         }
 
-        private set divGridConsulta(divGridConsulta: DivGridBase)
+        private set divGrid(divGridConsulta: DivGridBase)
         {
-            this._divGridConsulta = divGridConsulta;
+            this._divGrid = divGridConsulta;
         }
 
         // #endregion Atributos
 
         // #region Construtor
 
-        constructor(divGridConsulta: DivGridBase)
+        constructor(divGrid: DivGridBase)
         {
             super(null);
 
-            this.strId = (divGridConsulta.strId + "_" + DivGridCabecalho.name);
+            this.strId = (divGrid.strId + "_" + DivGridCabecalho.name);
 
-            this.divGridConsulta = divGridConsulta;
+            this.divGrid = divGrid;
         }
 
         // #endregion Construtor
 
         // #region Métodos
+
+        protected montarLayout(): void
+        {
+            super.montarLayout();
+
+            if (this.divGrid == null)
+            {
+                return;
+            }
+
+            if (this.divGrid.objDataContainer == null)
+            {
+                return;
+            }
+
+            if (this.divGrid.objDataContainer.arrSqlColunaNome == null)
+            {
+                return;
+            }
+
+            this.divGrid.objDataContainer.arrSqlColunaNome.forEach((s) => { this.montarLayoutItem(s) });
+        }
 
         protected montarLayoutFixo(strLayoutFixo: string): string
         {
@@ -52,6 +74,10 @@ module Web
             strLayoutFixo = strLayoutFixo.replace("_div_grid_cabecalho_id", this.strId);
 
             return strLayoutFixo;
+        }
+
+        private montarLayoutItem(sqlColunaNome: string): void
+        {
         }
 
         // #endregion Métodos

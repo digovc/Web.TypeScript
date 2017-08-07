@@ -253,17 +253,22 @@ module Web
 
         // #region Construtor
 
-        constructor(strNome: string = null)
+        constructor(sqlNome: string = null)
         {
             super();
 
-            if (!Utils.getBooStrVazia(strNome))
+            if (!Utils.getBooStrVazia(sqlNome))
             {
-                this.strNome = strNome;
+                this.strNome = sqlNome;
             }
             else
             {
                 this.strNome = this.getSqlNome();
+            }
+
+            if (AppWebBase.i.srvAjaxDbe != null)
+            {
+                AppWebBase.i.srvAjaxDbe.addTbl(this);
             }
         }
 

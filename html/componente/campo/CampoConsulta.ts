@@ -199,7 +199,7 @@ module Web
                 return null;
             }
 
-            return AppWebBase.i.getTbl(this.strTblWebRefNome);
+            return AppWebBase.i.srvAjaxDbe.getTbl(this.strTblWebRefNome);
         }
 
         protected inicializar(): void
@@ -230,7 +230,7 @@ module Web
 
         private inicializarTblWebRef(): void
         {
-            AppWebBase.i.carregarTbl(this.strTblWebRefNome);
+            AppWebBase.i.srvAjaxDbe.carregarTbl(this.strTblWebRefNome);
         }
 
         public limparDados(): void

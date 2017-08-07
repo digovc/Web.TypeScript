@@ -54,7 +54,6 @@ module Web
         }
 
         private _arrSrv: Array<ServerBase>;
-        private _arrTbl: Array<TabelaWeb>;
         private _booDesenvolvimento: boolean;
         private _booEmFoco: boolean = true;
         private _dttLoad: Date = new Date();
@@ -76,18 +75,6 @@ module Web
             this._arrSrv = this.getArrSrv();
 
             return this._arrSrv;
-        }
-
-        private get arrTbl(): Array<TabelaWeb>
-        {
-            if (this._arrTbl != null)
-            {
-                return this._arrTbl;
-            }
-
-            this._arrTbl = new Array<TabelaWeb>();
-
-            return this._arrTbl;
         }
 
         public get booDesenvolvimento(): boolean
@@ -234,29 +221,6 @@ module Web
 
         // #region Métodos
 
-        private addTbl(tbl: TabelaWeb): void
-        {
-            if (tbl == null)
-            {
-                return null;
-            }
-
-            if (this.arrTbl.indexOf(tbl) > -1)
-            {
-                return;
-            }
-
-            for (var i = 0; i < this.arrTbl.length; i++)
-            {
-                if (tbl.strNome == this.arrTbl[i].strNome)
-                {
-                    return;
-                }
-            }
-
-            this.arrTbl.push(tbl);
-        }
-
         public addCookie(strNome: string, strValor: string): void
         {
             if (Utils.getBooStrVazia(strNome))
@@ -290,57 +254,6 @@ module Web
 
             // TODO: Dar seguimento na implementação da navegação através do histórico.
             window.history.pushState(null, objHistorico.strTitulo, objHistorico.strParametro);
-        }
-
-        public carregarTbl(strTabelaNome: string, fncSucesso: ((o: TabelaWeb) => void) = null): void
-        {
-            if (this.srvAjaxDbe == null)
-            {
-                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
-            }
-
-            if (Utils.getBooStrVazia(strTabelaNome))
-            {
-                return;
-            }
-
-            if (this.getTbl(strTabelaNome) != null)
-            {
-                return;
-            }
-
-            var objInterlocutor = new Interlocutor();
-
-            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_CARREGAR_TBL_WEB;
-
-            objInterlocutor.addStr(strTabelaNome);
-            objInterlocutor.addFncSucesso(o => this.carregarTblSucesso(o, fncSucesso));
-
-            this.srvAjaxDbe.enviar(objInterlocutor);
-        }
-
-        private carregarTblSucesso(objInterlocutor: Interlocutor, fncSucesso: ((tbl: TabelaWeb) => void)): void
-        {
-            if (objInterlocutor == null)
-            {
-                return;
-            }
-
-            if (objInterlocutor.objData == null)
-            {
-                return;
-            }
-
-            var tbl = new TabelaWeb();
-
-            tbl.copiarDados(objInterlocutor.getObjJson<TabelaWeb>());
-
-            this.addTbl(tbl);
-
-            if (fncSucesso != null)
-            {
-                fncSucesso(tbl);
-            }
         }
 
         protected finalizar(): void
@@ -393,24 +306,6 @@ module Web
             }
 
             return objRegExpExecArray[1];
-        }
-
-        public getTbl(strTabelaNome: string): TabelaWeb
-        {
-            if (Utils.getBooStrVazia(strTabelaNome))
-            {
-                return null;
-            }
-
-            for (var i = 0; i < this.arrTbl.length; i++)
-            {
-                if (strTabelaNome.toLowerCase() == this.arrTbl[i].strNome.toLowerCase())
-                {
-                    return this.arrTbl[i];
-                }
-            }
-
-            return null;
         }
 
         public imprimir(pag: string): void

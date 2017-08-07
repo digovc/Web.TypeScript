@@ -40,6 +40,20 @@ module Web
 
         // #region Atributos
 
+        private _arrTbl: Array<TabelaWeb>;
+
+        private get arrTbl(): Array<TabelaWeb>
+        {
+            if (this._arrTbl != null)
+            {
+                return this._arrTbl;
+            }
+
+            this._arrTbl = new Array<TabelaWeb>();
+
+            return this._arrTbl;
+        }
+
         // #endregion Atributos
 
         // #region Construtor
@@ -53,9 +67,96 @@ module Web
 
         // #region Métodos
 
+        public addTbl(tbl: TabelaWeb): void
+        {
+            if (tbl == null)
+            {
+                return null;
+            }
+
+            if (this.arrTbl.indexOf(tbl) > -1)
+            {
+                return;
+            }
+
+            for (var i = 0; i < this.arrTbl.length; i++)
+            {
+                if (tbl.strNome == this.arrTbl[i].strNome)
+                {
+                    return;
+                }
+            }
+
+            this.arrTbl.push(tbl);
+        }
+
+        public carregarTbl(strTabelaNome: string, fncSucesso: ((t: TabelaWeb) => void) = null): void
+        {
+            if (Utils.getBooStrVazia(strTabelaNome))
+            {
+                return;
+            }
+
+            if (this.getTbl(strTabelaNome) != null)
+            {
+                return;
+            }
+
+            var objInterlocutor = new Interlocutor();
+
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_CARREGAR_TBL_WEB;
+
+            objInterlocutor.addStr(strTabelaNome);
+            objInterlocutor.addFncSucesso(o => this.carregarTblSucesso(o, fncSucesso));
+
+            this.enviar(objInterlocutor);
+        }
+
+        private carregarTblSucesso(objInterlocutor: Interlocutor, fncSucesso: ((t: TabelaWeb) => void)): void
+        {
+            if (objInterlocutor == null)
+            {
+                return;
+            }
+
+            if (objInterlocutor.objData == null)
+            {
+                return;
+            }
+
+            var tbl = new TabelaWeb();
+
+            tbl.copiarDados(objInterlocutor.getObjJson<TabelaWeb>());
+
+            this.addTbl(tbl);
+
+            if (fncSucesso != null)
+            {
+                fncSucesso(tbl);
+            }
+        }
+
         protected getIntPorta(): number
         {
             return 8081;
+        }
+
+        public getTbl(sqlTabelaNome: string): TabelaWeb
+        {
+            if (Utils.getBooStrVazia(sqlTabelaNome))
+            {
+                return null;
+            }
+
+            for (var i = 0; i < this.arrTbl.length; i++)
+            {
+                if (sqlTabelaNome.toLowerCase() == this.arrTbl[i].strNome.toLowerCase())
+                {
+                    return this.arrTbl[i];
+                }
+            }
+
+            return null;
         }
 
         public pesquisar(strTabelaNome: string, arrFil: Array<FiltroWeb>, fncSucesso: ((o: Interlocutor) => void), fncErro: ((strStatus: string, strThrown: string) => void) = null): void
