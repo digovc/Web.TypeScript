@@ -314,7 +314,7 @@ module Web
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_CARREGAR_TBL_WEB;
 
             objInterlocutor.addStr(strTabelaNome);
-            objInterlocutor.addFncSucesso((o: Interlocutor) => this.carregarTblSucesso(o, fncSucesso));
+            objInterlocutor.addFncSucesso(o => this.carregarTblSucesso(o, fncSucesso));
 
             this.srvAjaxDbe.enviar(objInterlocutor);
         }

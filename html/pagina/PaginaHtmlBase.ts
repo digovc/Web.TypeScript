@@ -57,11 +57,13 @@ module Web
         {
             if (Utils.getBooStrVazia(srcJs))
             {
+                fncOnLoad(null);
                 return;
             }
 
             if (this.validarJsCarregado(srcJs))
             {
+                fncOnLoad(null);
                 return;
             }
 
@@ -123,7 +125,7 @@ module Web
 
         public validarJsCarregado(srcJs: string): boolean
         {
-            return ($("script[src='" + srcJs + "']").length > 0);
+            return ($("script[src^='" + srcJs + "']").length > 0);
         }
 
         // #endregion Métodos

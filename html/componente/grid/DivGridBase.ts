@@ -97,8 +97,6 @@ module Web
                 return;
             }
 
-            // TODO: Parei aqui.
-
             this.jq.append(this.divGridCabecalho.strLayoutFixo);
             this.jq.append(this.divGridConteudo.strLayoutFixo);
             this.jq.append(this.divGridRodape.strLayoutFixo);
