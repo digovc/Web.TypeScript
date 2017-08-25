@@ -258,13 +258,13 @@ module Web
 
         private setBooAtivo(booAtivo: boolean): void
         {
-            if (booAtivo)
-            {
-                this.divInativa.esconder();
-                return;
-            }
+            //if (booAtivo)
+            //{
+            //    this.divInativa.esconder();
+            //    return;
+            //}
 
-            this.divInativa.mostrar();
+            //this.divInativa.mostrar();
         }
 
         protected setEventos(): void

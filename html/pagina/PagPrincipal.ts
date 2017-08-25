@@ -96,13 +96,13 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CADASTRO;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirCadastroSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirCadastroSucesso(objInterlocutor, tblWeb); });
             objInterlocutor.addJsn(tblWeb);
 
             AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
         }
 
-        private abrirCadastroSucesso(objInterlocutor: Interlocutor): void
+        private abrirCadastroSucesso(objInterlocutor: Interlocutor, tblWeb: TabelaWeb): void
         {
             if (objInterlocutor == null)
             {
@@ -116,7 +116,7 @@ module Web
 
             this.divCadastro.jq.append(objInterlocutor.objData.toString());
 
-            this.carregarJsCadastro();
+            this.carregarJsCadastro(tblWeb);
         }
 
         public abrirConsulta(tblWeb: TabelaWeb): void
@@ -232,29 +232,16 @@ module Web
             this.inicializarJnlTag(tblWeb);
         }
 
-        private carregarJsCadastro(): void
+        private carregarJsCadastro(tblWeb: TabelaWeb): void
         {
-            var arrJnlCadastroJq = this.divCadastro.jq.children();
+            var jnlCadastroJq = this.divCadastro.jq.children().last();
 
-            if (arrJnlCadastroJq == null)
-            {
-                return;
-            }
-
-            for (var i = 0; i < arrJnlCadastroJq.length; i++)
-            {
-                this.carregarJsCadastroItem(arrJnlCadastroJq[i]);
-            }
-        }
-
-        private carregarJsCadastroItem(jnlCadastroJq: HTMLElement): void
-        {
             if (jnlCadastroJq == null)
             {
                 return;
             }
 
-            var srcJqCadastro = $(jnlCadastroJq).attr("src_js"); // TODO: Permitir que sejam carregados N arquivos.
+            var srcJqCadastro = $(jnlCadastroJq).attr("src_js");
 
             if (Utils.getBooStrVazia(srcJqCadastro))
             {
@@ -263,7 +250,6 @@ module Web
 
             if ((window as any)[AppWebBase.i.strNamespace][jnlCadastroJq.id] != null)
             {
-                this.inicializarJnlCadastro(jnlCadastroJq);
                 return;
             }
 
@@ -300,11 +286,11 @@ module Web
             this.divConsulta.esconder();
         }
 
-        private inicializarJnlCadastro(jnlCadastroJq: HTMLElement): void
+        private inicializarJnlCadastro(jnlCadastroJq: JQuery): void
         {
             this.divCadastro.mostrar();
 
-            var jnlCadastro: JnlCadastro = new (window as any)[AppWebBase.i.strNamespace][jnlCadastroJq.id]();
+            var jnlCadastro: JnlCadastro = new (window as any)[AppWebBase.i.strNamespace][jnlCadastroJq[0].id]();
 
             jnlCadastro.iniciar();
         }
