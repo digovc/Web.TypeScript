@@ -1,4 +1,5 @@
 ﻿/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="coluna/DivGridColunaCabecalho.ts"/>
 
 module Web
 {
@@ -16,7 +17,20 @@ module Web
 
         // #region Atributos
 
+        private _arrDivGridColunaCabecalho: Array<DivGridColunaCabecalho>;
         private _divGrid: DivGridBase;
+
+        private get arrDivGridColunaCabecalho(): Array<DivGridColunaCabecalho>
+        {
+            if (this._arrDivGridColunaCabecalho != null)
+            {
+                return this._arrDivGridColunaCabecalho;
+            }
+
+            this._arrDivGridColunaCabecalho = new Array<DivGridColunaCabecalho>();
+
+            return this._arrDivGridColunaCabecalho;
+        }
 
         private get divGrid(): DivGridBase
         {
@@ -45,39 +59,53 @@ module Web
 
         // #region Métodos
 
-        protected montarLayout(): void
+        private limparLayout(): void
         {
-            super.montarLayout();
+            this.arrDivGridColunaCabecalho.forEach(d => d.dispose());
 
-            if (this.divGrid == null)
-            {
-                return;
-            }
+            this.arrDivGridColunaCabecalho.splice(0, this.arrDivGridColunaCabecalho.length);
 
-            if (this.divGrid.objDataContainer == null)
-            {
-                return;
-            }
-
-            if (this.divGrid.objDataContainer.arrSqlColunaNome == null)
-            {
-                return;
-            }
-
-            this.divGrid.objDataContainer.arrSqlColunaNome.forEach((s) => { this.montarLayoutItem(s) });
+            this.strConteudo = null;
         }
 
-        protected montarLayoutFixo(strLayoutFixo: string): string
+        public montarLayoutTabela(tbl: TabelaWeb): void
         {
-            strLayoutFixo = super.montarLayoutFixo(strLayoutFixo);
+            this.limparLayout();
 
-            strLayoutFixo = strLayoutFixo.replace("_div_grid_cabecalho_id", this.strId);
+            if (tbl == null)
+            {
+                return;
+            }
 
-            return strLayoutFixo;
+            if (tbl.arrCln == null)
+            {
+                return;
+            }
+
+            tbl.arrCln.forEach(c => this.montarLayoutTabelaColuna(c));
         }
 
-        private montarLayoutItem(sqlColunaNome: string): void
+        private montarLayoutTabelaColuna(cln: ColunaWeb): void
         {
+            if (cln == null)
+            {
+                return;
+            }
+
+            if (Utils.getBooStrVazia(cln.strNomeExibicao))
+            {
+                return;
+            }
+
+            var divGridColunaCabecalho = new DivGridColunaCabecalho();
+
+            this.addHtml(divGridColunaCabecalho.strLayoutFixo);
+
+            divGridColunaCabecalho.iniciar();
+
+            divGridColunaCabecalho.montarLayoutColuna(cln);
+
+            this.arrDivGridColunaCabecalho.push(divGridColunaCabecalho);
         }
 
         // #endregion Métodos

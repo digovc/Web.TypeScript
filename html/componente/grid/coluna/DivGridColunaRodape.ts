@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DivGridColunaSumario extends DivGridColunaBase
+    export class DivGridColunaRodape extends DivGridColunaBase
     {
         // #region Constantes
         // #endregion Constantes

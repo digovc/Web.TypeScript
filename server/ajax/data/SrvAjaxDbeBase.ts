@@ -90,14 +90,14 @@ module Web
             this.arrTbl.push(tbl);
         }
 
-        public carregarTbl(strTabelaNome: string, fncSucesso: ((t: TabelaWeb) => void) = null): void
+        public carregarTabela(sqlTabelaNome: string, fncSucesso: ((t: TabelaWeb) => void) = null): void
         {
-            if (Utils.getBooStrVazia(strTabelaNome))
+            if (Utils.getBooStrVazia(sqlTabelaNome))
             {
                 return;
             }
 
-            if (this.getTbl(strTabelaNome) != null)
+            if (this.getTbl(sqlTabelaNome) != null)
             {
                 return;
             }
@@ -106,13 +106,13 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_CARREGAR_TBL_WEB;
 
-            objInterlocutor.addStr(strTabelaNome);
-            objInterlocutor.addFncSucesso(o => this.carregarTblSucesso(o, fncSucesso));
+            objInterlocutor.addStr(sqlTabelaNome);
+            objInterlocutor.addFncSucesso(o => this.carregarTabelaSucesso(o, fncSucesso));
 
             this.enviar(objInterlocutor);
         }
 
-        private carregarTblSucesso(objInterlocutor: Interlocutor, fncSucesso: ((t: TabelaWeb) => void)): void
+        private carregarTabelaSucesso(objInterlocutor: Interlocutor, fncSucesso: ((t: TabelaWeb) => void)): void
         {
             if (objInterlocutor == null)
             {
