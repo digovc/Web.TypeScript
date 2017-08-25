@@ -54,7 +54,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(pagMarkdown: PagDocumentacaoBase)
         {
@@ -63,7 +63,7 @@ module Web
             this.pagMarkdown = pagMarkdown;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -88,7 +88,7 @@ module Web
 
             this.divConteudo.booVisivel = false;
 
-            $.get(this.divSumarioItem.urlMarkdown, ((objData) => { this.abrirConteudoSucesso(objData) }));
+            $.get(this.divSumarioItem.urlMarkdown, (o => this.abrirConteudoSucesso(o)));
         }
 
         private abrirConteudoSucesso(strMarkdownConteudo: string): void
@@ -143,7 +143,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -156,7 +156,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

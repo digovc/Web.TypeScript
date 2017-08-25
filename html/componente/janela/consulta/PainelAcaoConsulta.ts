@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../../OnClickListener.ts"/>
-/// <reference path="../../grid/OnRowClickListener.ts"/>
 /// <reference path="../../painel/PainelAcao.ts"/>
+/// <reference path="../../table/OnTableRowClickListener.ts"/>
 
 module Web
 {
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class PainelAcaoConsulta extends PainelAcao implements OnClickListener, OnRowClickListener
+    export class PainelAcaoConsulta extends PainelAcao implements OnClickListener, OnTableRowClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -20,7 +20,7 @@ module Web
         private _btnAdicionar: BotaoCircular;
         private _btnAlterar: BotaoCircular;
         private _jnlConsulta: JnlConsulta;
-        private _tagGridHtml: GridHtml = null;
+        private _tagTable: TableHtml = null;
 
         private get btnAdicionar(): BotaoCircular
         {
@@ -56,26 +56,26 @@ module Web
             this._jnlConsulta = jnlConsulta;
         }
 
-        public get tagGridHtml(): GridHtml
+        public get tagTable(): TableHtml
         {
-            return this._tagGridHtml;
+            return this._tagTable;
         }
 
-        public set tagGridHtml(tagGridHtml: GridHtml)
+        public set tagTable(tagTable: TableHtml)
         {
-            if (this._tagGridHtml == tagGridHtml)
+            if (this._tagTable == tagTable)
             {
                 return;
             }
 
-            this._tagGridHtml = tagGridHtml;
+            this._tagTable = tagTable;
 
-            this.setTagGridHtml(this._tagGridHtml);
+            this.setTagTable(this._tagTable);
         }
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(jnlConsulta: JnlConsulta)
         {
@@ -84,25 +84,25 @@ module Web
             this.jnlConsulta = jnlConsulta;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
         private atualizarBtnAlterarBooVisivel(): void
         {
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            this.btnAlterar.booVisivel = (this.tagGridHtml.intRowSelecionadaQtd < 2);
+            this.btnAlterar.booVisivel = (this.tagTable.intRowSelecionadaQtd < 2);
         }
 
         protected finalizar(): void
         {
             super.finalizar();
 
-            window.setTimeout(() => { this.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL); }, 400);
+            window.setTimeout((() => this.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL)), 400);
         }
 
         protected inicializar(): void
@@ -122,21 +122,21 @@ module Web
             this.btnAlterar.addEvtOnClickListener(this);
         }
 
-        private setTagGridHtml(tagGridHtml: GridHtml): void
+        private setTagTable(tagTable: TableHtml): void
         {
-            if (tagGridHtml == null)
+            if (tagTable == null)
             {
                 return;
             }
 
-            tagGridHtml.addEvtOnRowClickListener(this);
+            tagTable.addEvtOnTableRowClickListener(this);
         }
 
         // #endregion Métodos
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -157,11 +157,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onRowClick(objSender: Object, tagGridRow: GridRow): void
+        public onTableRowClick(objSender: Object, row: TableRow): void
         {
             try
             {
@@ -169,7 +169,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

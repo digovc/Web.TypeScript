@@ -49,7 +49,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(jnlTag: JnlTag)
         {
@@ -58,7 +58,7 @@ module Web
             this.jnlTag = jnlTag;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -128,7 +128,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -141,7 +141,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

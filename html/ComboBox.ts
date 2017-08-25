@@ -27,27 +27,17 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
-        public addOpcao(par: ParValorNome): void
+        public addOpcao(objValor: any, strNome: string): void
         {
-            if (par == null)
-            {
-                return;
-            }
-
-            if (par.objValor == null)
-            {
-                return;
-            }
-
             var tagOption: any = document.createElement('option');
 
-            tagOption.value = par.objValor;
-            tagOption.innerHTML = par.strNome;
+            tagOption.value = objValor;
+            tagOption.innerHTML = strNome;
 
             this.jq.append(tagOption);
         }
@@ -56,7 +46,7 @@ module Web
         {
             this.limparDados();
 
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -75,10 +65,10 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_COMBO_BOX;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.carregarDadosSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.carregarDadosSucesso(o));
             objInterlocutor.addJsn(tblWeb);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private carregarDadosSucesso(objInterlocutor: Interlocutor): void
@@ -100,7 +90,7 @@ module Web
 
             var arrData: Array<any> = JSON.parse(objInterlocutor.objData.toString());
 
-            arrData.forEach((par) => { this.carregarDadosSucesso2(par); });
+            arrData.forEach(o => this.carregarDadosSucesso2(o));
         }
 
         private carregarDadosSucesso2(par: ParValorNome): void
@@ -110,7 +100,7 @@ module Web
                 return;
             }
 
-            this.addOpcao(par);
+            this.addOpcao(par.objValor, par.strNome);
         }
 
         private getStrTexto(): string
@@ -124,7 +114,7 @@ module Web
 
             this.strValor = null;
 
-            this.addOpcao(new ParValorNome(0, Utils.STR_VAZIA));
+            this.addOpcao(0, Utils.STR_VAZIA);
         }
 
         // #endregion Métodos

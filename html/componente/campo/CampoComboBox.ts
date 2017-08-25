@@ -33,15 +33,10 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
-
-        public addOpcao(par: ParValorNome): void
-        {
-            this.cmb.addOpcao(par);
-        }
 
         public carregarDados(tblWeb: TabelaWeb): void
         {

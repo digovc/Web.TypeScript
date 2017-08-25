@@ -2,6 +2,6 @@
 {
     export interface OnMouseMoveListener
     {
-        onMouseMove(objSender: Object, arg: JQueryMouseEventObject): void;
+        onMouseMove(tagSender: Tag, arg: JQueryMouseEventObject): void;
     }
 }

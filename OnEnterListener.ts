@@ -2,6 +2,6 @@
 {
     export interface OnEnterListener
     {
-        onEnter(objSender: Object): void;
+        onEnter(tagSender: Tag): void;
     }
 }

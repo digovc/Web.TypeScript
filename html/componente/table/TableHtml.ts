@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
-/// <reference path="GridRow.ts"/>
-/// <reference path="OnGridMenuClickArg.ts"/>
-/// <reference path="OnGridMenuClickListener.ts"/>
-/// <reference path="OnRowClickListener.ts"/>
+/// <reference path="TableRow.ts"/>
+/// <reference path="OnTableMenuClickArg.ts"/>
+/// <reference path="OnTableMenuClickListener.ts"/>
+/// <reference path="OnTableRowClickListener.ts"/>
 
 module Web
 {
@@ -14,22 +14,22 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class GridHtml extends ComponenteHtml
+    export class TableHtml extends ComponenteHtml
     {
         // #region Constantes
         // #endregion Constantes
 
         // #region Atributos
 
-        private _arrRow: Array<GridRow>;
-        private _arrRowSelecionada: Array<GridRow>;
+        private _arrRow: Array<TableRow>;
+        private _arrRowSelecionada: Array<TableRow>;
         private _intRowSelecionadaQtd: number;
-        private _rowSelecionada: GridRow;
+        private _rowSelecionada: TableRow;
         private _tagTable: Tag;
         private _tagTbody: Tag;
         private _tblWeb: TabelaWeb;
 
-        private get arrRow(): Array<GridRow>
+        private get arrRow(): Array<TableRow>
         {
             if (this._arrRow != null)
             {
@@ -41,14 +41,14 @@ module Web
             return this._arrRow;
         }
 
-        private get arrRowSelecionada(): Array<GridRow>
+        private get arrRowSelecionada(): Array<TableRow>
         {
             if (this._arrRowSelecionada != null)
             {
                 return this._arrRowSelecionada;
             }
 
-            this._arrRowSelecionada = new Array<GridRow>();
+            this._arrRowSelecionada = new Array<TableRow>();
 
             return this._arrRowSelecionada;
         }
@@ -60,7 +60,7 @@ module Web
             return this._intRowSelecionadaQtd;
         }
 
-        public get rowSelecionada(): GridRow
+        public get rowSelecionada(): TableRow
         {
             this._rowSelecionada = this.getRowSelecionada();
 
@@ -105,13 +105,13 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
-        public addRowSelecionada(rowSelecionada: GridRow): void
+        public addRowSelecionada(rowSelecionada: TableRow): void
         {
             if (rowSelecionada == null)
             {
@@ -126,7 +126,7 @@ module Web
             this.arrRowSelecionada.push(rowSelecionada);
         }
 
-        private getArrRow(): Array<GridRow>
+        private getArrRow(): Array<TableRow>
         {
             if (this.tagTbody == null)
             {
@@ -138,40 +138,40 @@ module Web
                 return;
             }
 
-            var arrJqGridRow = this.tagTbody.jq.find('[clazz=GridRow]');
+            var arrJqTableRow = this.tagTbody.jq.find('[clazz=TableRow]');
 
-            if (arrJqGridRow == null)
+            if (arrJqTableRow == null)
             {
                 return;
             }
 
-            var arrTagGridRowResultado = new Array<GridRow>();
+            var arrTagTableRowResultado = new Array<TableRow>();
 
-            for (var i = 0; i < arrJqGridRow.length; i++)
+            for (var i = 0; i < arrJqTableRow.length; i++)
             {
-                this.getArrRow2(arrTagGridRowResultado, arrJqGridRow[i]);
+                this.getArrRow2(arrTagTableRowResultado, arrJqTableRow[i]);
             }
 
-            return arrTagGridRowResultado;
+            return arrTagTableRowResultado;
         }
 
-        private getArrRow2(arrTagGridRow: Array<GridRow>, jqGridRow: any): void
+        private getArrRow2(arrTagTableRow: Array<TableRow>, jqTableRow: any): void
         {
-            if (jqGridRow == null)
+            if (jqTableRow == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(jqGridRow.id))
+            if (Utils.getBooStrVazia(jqTableRow.id))
             {
                 return;
             }
 
-            var tagGridRow = new GridRow(jqGridRow.id);
+            var tagTableRow = new TableRow(jqTableRow.id);
 
-            tagGridRow.tagGridHtml = this;
+            tagTableRow.tagTable = this;
 
-            arrTagGridRow.push(tagGridRow);
+            arrTagTableRow.push(tagTableRow);
         }
 
         public getIntRowSelecionadaId(): number
@@ -184,7 +184,7 @@ module Web
             return this.rowSelecionada.intId;
         }
 
-        private getRowSelecionada(): GridRow
+        private getRowSelecionada(): TableRow
         {
             if (this.arrRowSelecionada.length < 1)
             {
@@ -211,23 +211,7 @@ module Web
 
         protected inicializar(): void
         {
-            this.inicializarCabecalhoFixo();
             this.inicializarArrTagRow();
-        }
-
-        private inicializarCabecalhoFixo(): void
-        {
-            if (this.tagTable.jq == null)
-            {
-                return;
-            }
-
-            //this.tagTable.jq.floatThead({
-            //    scrollContainer: function ()
-            //    {
-            //        return this.tagTable.jq.closest('#divGrid');
-            //    }
-            //});
         }
 
         private inicializarArrTagRow(): void
@@ -248,12 +232,12 @@ module Web
             }
         }
 
-        public processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        public processarOnTableMenuClick(arg: OnTableMenuClickArg): void
         {
-            this.dispararEvtOnGridMenuClickListener(arg);
+            this.dispararEvtOnTableMenuClickListener(arg);
         }
 
-        public removerRowSelecionada(rowSelecionada: GridRow): void
+        public removerRowSelecionada(rowSelecionada: TableRow): void
         {
             if (rowSelecionada == null)
             {
@@ -301,209 +285,209 @@ module Web
                 return;
             }
 
-            this.arrRow.forEach((row) => { row.booSelecionado = booSelecionar; });
+            this.arrRow.forEach(r => r.booSelecionado = booSelecionar);
         }
 
         // #endregion Métodos
 
         // #region Eventos
 
-        // #region Evento OnGridMenuClickListener
+        // #region Evento OnTableMenuClickListener
 
-        private _arrEvtOnGridMenuClickListener: Array<OnGridMenuClickListener>;
+        private _arrEvtOnTableMenuClickListener: Array<OnTableMenuClickListener>;
 
-        private get arrEvtOnGridMenuClickListener(): Array<OnGridMenuClickListener>
+        private get arrEvtOnTableMenuClickListener(): Array<OnTableMenuClickListener>
         {
-            if (this._arrEvtOnGridMenuClickListener != null)
+            if (this._arrEvtOnTableMenuClickListener != null)
             {
-                return this._arrEvtOnGridMenuClickListener;
+                return this._arrEvtOnTableMenuClickListener;
             }
 
-            this._arrEvtOnGridMenuClickListener = new Array<OnGridMenuClickListener>();
+            this._arrEvtOnTableMenuClickListener = new Array<OnTableMenuClickListener>();
 
-            return this._arrEvtOnGridMenuClickListener;
+            return this._arrEvtOnTableMenuClickListener;
         }
 
-        public addEvtOnGridMenuClickListener(evt: OnGridMenuClickListener): void
+        public addEvtOnTableMenuClickListener(evt: OnTableMenuClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnGridMenuClickListener.indexOf(evt) > -1)
+            if (this.arrEvtOnTableMenuClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnGridMenuClickListener.push(evt);
+            this.arrEvtOnTableMenuClickListener.push(evt);
         }
 
-        private dispararEvtOnGridMenuClickListener(arg: OnGridMenuClickArg): void
+        private dispararEvtOnTableMenuClickListener(arg: OnTableMenuClickArg): void
         {
             if (arg == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnGridMenuClickListener.length == 0)
+            if (this.arrEvtOnTableMenuClickListener.length == 0)
             {
                 return;
             }
 
-            this.arrEvtOnGridMenuClickListener.forEach((evt) =>
+            this.arrEvtOnTableMenuClickListener.forEach((evt) =>
             {
                 if (evt == null)
                 {
                     return;
                 }
 
-                evt.onGridMenuClick(this, arg);
+                evt.onTableMenuClick(this, arg);
             });
         }
 
-        public removerEvtOnGridMenuClickListener(evt: OnGridMenuClickListener): void
+        public removerEvtOnTableMenuClickListener(evt: OnTableMenuClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnGridMenuClickListener.indexOf(evt) == -1)
+            if (this.arrEvtOnTableMenuClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnGridMenuClickListener.splice(this.arrEvtOnGridMenuClickListener.indexOf(evt), 1);
+            this.arrEvtOnTableMenuClickListener.splice(this.arrEvtOnTableMenuClickListener.indexOf(evt), 1);
         }
 
-        // #endregion Evento OnGridMenuClickListener
+        // #endregion Evento OnTableMenuClickListener
 
-        // #region Evento OnRowClickListener
+        // #region Evento OnTableRowClickListener
 
-        private _arrEvtOnRowClickListener: Array<OnRowClickListener>;
+        private _arrEvtOnTableRowClickListener: Array<OnTableRowClickListener>;
 
-        private get arrEvtOnRowClickListener(): Array<OnRowClickListener>
+        private get arrEvtOnTableRowClickListener(): Array<OnTableRowClickListener>
         {
-            if (this._arrEvtOnRowClickListener != null)
+            if (this._arrEvtOnTableRowClickListener != null)
             {
-                return this._arrEvtOnRowClickListener;
+                return this._arrEvtOnTableRowClickListener;
             }
 
-            this._arrEvtOnRowClickListener = new Array<OnRowClickListener>();
+            this._arrEvtOnTableRowClickListener = new Array<OnTableRowClickListener>();
 
-            return this._arrEvtOnRowClickListener;
+            return this._arrEvtOnTableRowClickListener;
         }
 
-        public addEvtOnRowClickListener(evt: OnRowClickListener): void
-        {
-            if (evt == null)
-            {
-                return;
-            }
-
-            if (this.arrEvtOnRowClickListener.indexOf(evt) > -1)
-            {
-                return;
-            }
-
-            this.arrEvtOnRowClickListener.push(evt);
-        }
-
-        public dispararEvtOnRowClickListener(tagGridRow: GridRow): void
-        {
-            if (this.arrEvtOnRowClickListener.length == 0)
-            {
-                return;
-            }
-
-            if (tagGridRow == null)
-            {
-                return;
-            }
-
-            this.arrEvtOnRowClickListener.forEach((evt) => { evt.onRowClick(this, tagGridRow); });
-        }
-
-        public removerEvtOnRowClickListener(evt: OnRowClickListener): void
+        public addEvtOnTableRowClickListener(evt: OnTableRowClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowClickListener.indexOf(evt) == -1)
+            if (this.arrEvtOnTableRowClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowClickListener.splice(this.arrEvtOnRowClickListener.indexOf(evt), 1);
+            this.arrEvtOnTableRowClickListener.push(evt);
         }
 
-        // #endregion Evento OnRowClickListener
-
-        // #region Evento OnRowDoubleClickListener
-
-        private _arrEvtOnRowDoubleClickListener: Array<OnRowDoubleClickListener>;
-
-        private get arrEvtOnRowDoubleClickListener(): Array<OnRowDoubleClickListener>
+        public dispararEvtOnTableRowClickListener(tagTableRow: TableRow): void
         {
-            if (this._arrEvtOnRowDoubleClickListener != null)
+            if (this.arrEvtOnTableRowClickListener.length == 0)
             {
-                return this._arrEvtOnRowDoubleClickListener;
+                return;
             }
 
-            this._arrEvtOnRowDoubleClickListener = new Array<OnRowDoubleClickListener>();
+            if (tagTableRow == null)
+            {
+                return;
+            }
 
-            return this._arrEvtOnRowDoubleClickListener;
+            this.arrEvtOnTableRowClickListener.forEach(e => e.onTableRowClick(this, tagTableRow));
         }
 
-        public addEvtOnRowDoubleClickListener(evt: OnRowDoubleClickListener): void
+        public removerEvtOnTableRowClickListener(evt: OnTableRowClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowDoubleClickListener.indexOf(evt) > -1)
+            if (this.arrEvtOnTableRowClickListener.indexOf(evt) == -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowDoubleClickListener.push(evt);
+            this.arrEvtOnTableRowClickListener.splice(this.arrEvtOnTableRowClickListener.indexOf(evt), 1);
         }
 
-        public dispararEvtOnRowDoubleClickListener(tagGridRow: GridRow): void
+        // #endregion Evento OnTableRowClickListener
+
+        // #region Evento OnTableRowDoubleClickListener
+
+        private _arrEvtOnTableRowDoubleClickListener: Array<OnTableRowDoubleClickListener>;
+
+        private get arrEvtOnTableRowDoubleClickListener(): Array<OnTableRowDoubleClickListener>
         {
-            if (this.arrEvtOnRowDoubleClickListener.length == 0)
+            if (this._arrEvtOnTableRowDoubleClickListener != null)
             {
-                return;
+                return this._arrEvtOnTableRowDoubleClickListener;
             }
 
-            if (tagGridRow == null)
-            {
-                return;
-            }
+            this._arrEvtOnTableRowDoubleClickListener = new Array<OnTableRowDoubleClickListener>();
 
-            this.arrEvtOnRowDoubleClickListener.forEach((evt) => { evt.onRowDoubleClick(this, tagGridRow); });
+            return this._arrEvtOnTableRowDoubleClickListener;
         }
 
-        public removerEvtOnRowDoubleClickListener(evt: OnRowDoubleClickListener): void
+        public addEvtOnTableRowDoubleClickListener(evt: OnTableRowDoubleClickListener): void
         {
             if (evt == null)
             {
                 return;
             }
 
-            if (this.arrEvtOnRowDoubleClickListener.indexOf(evt) == -1)
+            if (this.arrEvtOnTableRowDoubleClickListener.indexOf(evt) > -1)
             {
                 return;
             }
 
-            this.arrEvtOnRowDoubleClickListener.splice(this.arrEvtOnRowDoubleClickListener.indexOf(evt), 1);
+            this.arrEvtOnTableRowDoubleClickListener.push(evt);
         }
 
-        // #endregion Evento OnRowDoubleClickListener
+        public dispararEvtOnTableRowDoubleClickListener(tagTableRow: TableRow): void
+        {
+            if (this.arrEvtOnTableRowDoubleClickListener.length == 0)
+            {
+                return;
+            }
+
+            if (tagTableRow == null)
+            {
+                return;
+            }
+
+            this.arrEvtOnTableRowDoubleClickListener.forEach(e => e.onTableRowDoubleClick(this, tagTableRow));
+        }
+
+        public removerEvtOnTableRowDoubleClickListener(evt: OnTableRowDoubleClickListener): void
+        {
+            if (evt == null)
+            {
+                return;
+            }
+
+            if (this.arrEvtOnTableRowDoubleClickListener.indexOf(evt) == -1)
+            {
+                return;
+            }
+
+            this.arrEvtOnTableRowDoubleClickListener.splice(this.arrEvtOnTableRowDoubleClickListener.indexOf(evt), 1);
+        }
+
+        // #endregion Evento OnTableRowDoubleClickListener
 
         // #endregion Eventos
     }

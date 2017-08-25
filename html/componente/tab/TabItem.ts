@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TabItem extends ComponenteHtml implements OnGridMenuClickListener, OnRowClickListener
+    export class TabItem extends ComponenteHtml implements OnTableMenuClickListener, OnTableRowClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -20,7 +20,7 @@ module Web
         private _booAtiva: boolean;
         private _tabHtml: TabHtml;
         private _tabItemHead: TabItemHead;
-        private _tagGridHtml: GridHtml;
+        private _tagTable: TableHtml;
         private _tblWeb: TabelaWeb;
         private _tblWebPrincipal: TabelaWeb;
 
@@ -63,14 +63,14 @@ module Web
             return this._tabItemHead;
         }
 
-        private get tagGridHtml(): GridHtml
+        private get tagTable(): TableHtml
         {
-            return this._tagGridHtml;
+            return this._tagTable;
         }
 
-        private set tagGridHtml(tagGridHtml: GridHtml)
+        private set tagTable(tagTable: TableHtml)
         {
-            this._tagGridHtml = tagGridHtml;
+            this._tagTable = tagTable;
         }
 
         public get tblWeb(): TabelaWeb
@@ -99,8 +99,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -133,13 +133,13 @@ module Web
 
             this.tblWeb.intRegistroPaiId = this.tabHtml.frm.jnlCadastro.intRegistroId;
 
-            if (booAlterar && (this.tagGridHtml.getIntRowSelecionadaId() < 1))
+            if (booAlterar && (this.tagTable.getIntRowSelecionadaId() < 1))
             {
                 Notificacao.notificar("Selecione um registro primeiro.", Notificacao_EnmTipo.NEGATIVA);
                 return;
             }
 
-            this.tblWeb.clnWebIntId.intValor = (booAlterar) ? this.tagGridHtml.getIntRowSelecionadaId() : 0;
+            this.tblWeb.clnIntId.intValor = (booAlterar) ? this.tagTable.getIntRowSelecionadaId() : 0;
 
             this.tabHtml.frm.abrirCadastroFilho(this.tblWeb);
         }
@@ -150,7 +150,7 @@ module Web
 
         public apagar(): void
         {
-            var intRegistroId = this.tagGridHtml.getIntRowSelecionadaId();
+            var intRegistroId = this.tagTable.getIntRowSelecionadaId();
 
             // TODO: Validar se esta tabela permite a exclusão de registros.
             if (intRegistroId < 1)
@@ -183,12 +183,12 @@ module Web
         {
             this.tabHtml.btnAlterar.esconder();
 
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            if (this.tagGridHtml.intRowSelecionadaQtd < 1)
+            if (this.tagTable.intRowSelecionadaQtd < 1)
             {
                 return;
             }
@@ -198,7 +198,7 @@ module Web
 
         public pesquisar(): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -220,12 +220,12 @@ module Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_GRID;
+            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_TABLE;
             objInterlocutor.objData = JSON.stringify(this.tblWeb);
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.pesquisarSucesso(o));
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private pesquisarSucesso(objInterlocutor: Interlocutor): void
@@ -249,7 +249,7 @@ module Web
 
             this.jq.html(objInterlocutor.objData.toString());
 
-            this.pesquisarSucessoGridHtml();
+            this.pesquisarSucessoTable();
         }
 
         private pesquisarSucessoCssMain(): void
@@ -262,19 +262,19 @@ module Web
             AppWebBase.i.srvHttp.atualizarCssMain();
         }
 
-        private pesquisarSucessoGridHtml(): void
+        private pesquisarSucessoTable(): void
         {
             if (this.tblWeb == null)
             {
                 return;
             }
 
-            this.tagGridHtml = new GridHtml("tagGridHtml_" + this.tblWeb.strNome);
+            this.tagTable = new TableHtml("tagTableHtml_" + this.tblWeb.strNome);
 
-            this.tagGridHtml.iniciar();
+            this.tagTable.iniciar();
 
-            this.tagGridHtml.addEvtOnGridMenuClickListener(this);
-            this.tagGridHtml.addEvtOnRowClickListener(this);
+            this.tagTable.addEvtOnTableMenuClickListener(this);
+            this.tagTable.addEvtOnTableRowClickListener(this);
         }
 
         private getTabItemHead(): TabItemHead
@@ -364,19 +364,19 @@ module Web
             this.tabItemHead.iniciar();
         }
 
-        private processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        private processarOnTableMenuClick(arg: OnTableMenuClickArg): void
         {
             switch (arg.enmTipo)
             {
-                case OnGridMenuClickArg_EnmAcao.ADICIONAR:
+                case OnTableMenuClickArg_EnmAcao.ADICIONAR:
                     this.abrirCadastro(false);
                     return;
 
-                case OnGridMenuClickArg_EnmAcao.ALTERAR:
+                case OnTableMenuClickArg_EnmAcao.ALTERAR:
                     this.abrirCadastro(true);
                     return;
 
-                case OnGridMenuClickArg_EnmAcao.MENU:
+                case OnTableMenuClickArg_EnmAcao.MENU:
                     this.abrirMenu(arg.argOrigem);
                     return;
             }
@@ -389,12 +389,12 @@ module Web
                 return;
             }
 
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            if (this.tagGridHtml.intRowSelecionadaQtd < 1)
+            if (this.tagTable.intRowSelecionadaQtd < 1)
             {
                 return;
             }
@@ -422,11 +422,11 @@ module Web
 
         // #region Eventos
 
-        public onGridMenuClick(objSender: Object, arg: OnGridMenuClickArg): void
+        public onTableMenuClick(objSender: Object, arg: OnTableMenuClickArg): void
         {
             try
             {
-                if (objSender != this.tagGridHtml)
+                if (objSender != this.tagTable)
                 {
                     return;
                 }
@@ -436,28 +436,28 @@ module Web
                     return;
                 }
 
-                this.processarOnGridMenuClick(arg);
+                this.processarOnTableMenuClick(arg);
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onRowClick(objSender: Object, tagGridRow: GridRow): void
+        public onTableRowClick(objSender: Object, tagTableRow: TableRow): void
         {
             try
             {
                 switch (objSender)
                 {
-                    case this.tagGridHtml:
+                    case this.tagTable:
                         this.processarOnRowClick();
                         return;
                 }
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

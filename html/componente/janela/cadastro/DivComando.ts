@@ -71,7 +71,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strId: string, frm: FormHtml)
         {
@@ -80,7 +80,7 @@ module Web
             this.frm = frm;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -210,7 +210,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

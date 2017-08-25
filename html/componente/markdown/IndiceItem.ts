@@ -29,7 +29,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(elmHead: HTMLHeadingElement)
         {
@@ -38,7 +38,7 @@ module Web
             this.elmHead = elmHead;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

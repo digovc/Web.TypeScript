@@ -16,9 +16,9 @@ module Web
         // #region Atributos
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
         // #endregion Métodos

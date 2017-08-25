@@ -111,8 +111,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -254,7 +254,7 @@ module Web
                 return;
             }
 
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 return;
             }
@@ -280,10 +280,10 @@ module Web
 
             objInterlocutor.objData = frmData;
 
-            objInterlocutor.addFncProgresso((arg: ProgressEvent) => { this.enviarArquivoProgresso(arg); });
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.enviarArquivoSucesso(objInterlocutor); });
+            objInterlocutor.addFncProgresso((o: ProgressEvent) => this.enviarArquivoProgresso(o));
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.enviarArquivoSucesso(o));
 
-            AppWebBase.i.srvAjaxDb.enviarArquivo(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviarArquivo(objInterlocutor);
         }
 
         private enviarArquivoModificacao(): void
@@ -295,7 +295,7 @@ module Web
                 return;
             }
 
-            this.frm.tblWeb.getClnWeb(strClnWebArquivoModificacaoNome).strValor = this.elmInput.files[0].lastModifiedDate;
+            this.frm.tblWeb.getCln(strClnWebArquivoModificacaoNome).strValor = this.elmInput.files[0].lastModifiedDate;
         }
 
         private enviarArquivoNome(): void
@@ -307,7 +307,7 @@ module Web
                 return;
             }
 
-            this.frm.tblWeb.getClnWeb(strClnWebArquivoNomeNome).strValor = this.elmInput.files[0].name;
+            this.frm.tblWeb.getCln(strClnWebArquivoNomeNome).strValor = this.elmInput.files[0].name;
         }
 
         private enviarArquivoProgresso(arg: ProgressEvent): void
@@ -344,7 +344,7 @@ module Web
                 return;
             }
 
-            this.frm.tblWeb.getClnWeb(strClnWebArquivoTamanhoNome).intValor = this.elmInput.files[0].size;
+            this.frm.tblWeb.getCln(strClnWebArquivoTamanhoNome).intValor = this.elmInput.files[0].size;
         }
 
         protected inicializar(): void
@@ -391,7 +391,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -408,7 +408,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

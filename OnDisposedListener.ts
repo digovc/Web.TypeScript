@@ -2,6 +2,6 @@
 {
     export interface OnDisposedListener
     {
-        onDisposed(objSender: Object): void;
+        onDisposed(objSender: Objeto): void;
     }
 }

@@ -114,14 +114,14 @@
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
             super(null);
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -214,7 +214,7 @@
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -227,7 +227,7 @@
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

@@ -18,8 +18,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -37,7 +37,7 @@ module Web
                 return;
             }
 
-            this.tblWeb.getClnWeb("int_filtro_id").intValor = this.jnlCadastroPai.intRegistroId;
+            this.tblWeb.getCln("int_filtro_id").intValor = this.jnlCadastroPai.intRegistroId;
         }
 
         // #endregion Métodos

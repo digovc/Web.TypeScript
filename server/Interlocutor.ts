@@ -15,48 +15,59 @@ module Web
 
         // #region Atributos
 
-        private _arrFncErro: Array<Function>;
-        private _arrFncProgresso: Array<Function>;
-        private _arrFncSucesso: Array<Function>;
+        private _arrFncErro: Array<((strStatus: string, strThrown: string) => void)>;
+        private _arrFncProgresso: Array<((a: ProgressEvent) => void)>;
+        private _arrFncSucesso: Array<((o: Interlocutor) => void)>;
+        private _intHttpPorta: number;
         private _objData: Object;
         private _strClazz: string;
         private _strErro: string;
         private _strMetodo: string;
 
-        private get arrFncErro(): Array<Function>
+        private get arrFncErro(): Array<((strStatus: string, strThrown: string) => void)>
         {
             if (this._arrFncErro != null)
             {
                 return this._arrFncErro;
             }
 
-            this._arrFncErro = new Array<Function>();
+            this._arrFncErro = new Array<((strStatus: string, strThrown: string) => void)>();
 
             return this._arrFncErro;
         }
 
-        private get arrFncProgresso(): Array<Function>
+        private get arrFncProgresso(): Array<((a: ProgressEvent) => void)>
         {
             if (this._arrFncProgresso != null)
             {
                 return this._arrFncProgresso;
             }
 
-            this._arrFncProgresso = new Array<Function>();
+            this._arrFncProgresso = new Array<((a: ProgressEvent) => void)>();
 
             return this._arrFncProgresso;
         }
 
-        private get arrFncSucesso(): Array<Function>
+        private get arrFncSucesso(): Array<((o: Interlocutor) => void)>
         {
             if (this._arrFncSucesso != null)
             {
                 return this._arrFncSucesso;
             }
 
-            this._arrFncSucesso = new Array<Function>();
+            this._arrFncSucesso = new Array<((o: Interlocutor) => void)>();
 
             return this._arrFncSucesso;
+        }
+
+        public get intHttpPorta(): number
+        {
+            return this._intHttpPorta;
+        }
+
+        public set intHttpPorta(intHttpPorta: number)
+        {
+            this._intHttpPorta = intHttpPorta;
         }
 
         public get objData(): Object
@@ -101,7 +112,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strMetodo: string = "<desconhecido>", objJson: Object = null)
         {
@@ -111,11 +122,11 @@ module Web
             this.addJsn(objJson);
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
-        public addFncErro(fncErro: Function): void
+        public addFncErro(fncErro: ((strStatus: string, strThrown: string) => void)): void
         {
             if (fncErro == null)
             {
@@ -130,7 +141,7 @@ module Web
             this.arrFncErro.push(fncErro);
         }
 
-        public addFncProgresso(fncProgresso: Function): void
+        public addFncProgresso(fncProgresso: ((a: ProgressEvent) => void)): void
         {
             if (fncProgresso == null)
             {
@@ -145,7 +156,7 @@ module Web
             this.arrFncProgresso.push(fncProgresso);
         }
 
-        public addFncSucesso(fncSucesso: Function): void
+        public addFncSucesso(fncSucesso: ((o: Interlocutor) => void)): void
         {
             if (fncSucesso == null)
             {
@@ -168,6 +179,7 @@ module Web
             }
 
             this.objData = JSON.stringify(obj);
+
             this.strClazz = (obj.constructor as any).name;
         }
 
@@ -179,17 +191,18 @@ module Web
             }
 
             this.objData = str;
+
             this.strClazz = null;
         }
 
-        private dispararArrFncSucesso(anyData: any): void
+        private dispararArrFncSucesso(objData: any): void
         {
-            if (anyData == null)
+            if (objData == null)
             {
                 return;
             }
 
-            this.copiarDados(anyData);
+            this.copiarDados(objData);
 
             if (!Utils.getBooStrVazia(this.strErro))
             {
@@ -197,7 +210,7 @@ module Web
                 return;
             }
 
-            this.arrFncSucesso.forEach((fnc) => { fnc(this); });
+            this.arrFncSucesso.forEach(fnc => fnc(this));
         }
 
         public getObjJson<T>(): T
@@ -233,26 +246,21 @@ module Web
             Mensagem.mostrar(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA);
         }
 
-        public processarOnErro(strTextStatus: string, strErrorThrown: string): void
+        public processarOnErro(strStatus: string, strThrown: string): void
         {
-            this.mostrarMsgErro(strTextStatus, strErrorThrown);
+            this.mostrarMsgErro(strStatus, strThrown);
 
-            this.arrFncErro.forEach((fnc) => { fnc(strTextStatus, strErrorThrown); });
+            this.arrFncErro.forEach(f => f(strStatus, strThrown));
         }
 
         public processarOnProgresso(arg: ProgressEvent): void
         {
-            this.arrFncProgresso.forEach((fnc) => { fnc(arg); });
+            this.arrFncProgresso.forEach(f => f(arg));
         }
 
-        public processarOnSucesso(anyData: any): void
+        public processarOnSucesso(objData: any): void
         {
-            this.dispararArrFncSucesso(anyData);
-        }
-
-        public toJson(): string
-        {
-            return JSON.stringify(this, (strKey, anyValue) => this.validarJson(strKey, anyValue));
+            this.dispararArrFncSucesso(objData);
         }
 
         public validarDados(): boolean
@@ -265,24 +273,19 @@ module Web
             return true;
         }
 
-        private validarJson(strKey: string, anyValue: any): any
+        protected validarJson(strPropriedade: string): boolean
         {
-            if (strKey == "_arrEvtOnAjaxListener")
+            if (!super.validarJson(strPropriedade))
             {
-                return null;
+                return false;
             }
 
-            if (strKey == "_arrFncSucesso")
+            if (strPropriedade == "_objJson")
             {
-                return null;
+                return false;
             }
 
-            if (strKey == "_objJson")
-            {
-                return null;
-            }
-
-            return anyValue;
+            return true;
         }
 
         // #endregion Métodos

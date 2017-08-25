@@ -2,6 +2,6 @@
 {
     export interface OnMouseLeaveListener
     {
-        onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void;
+        onMouseLeave(tagSender: Tag, arg: JQueryMouseEventObject): void;
     }
 }

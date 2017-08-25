@@ -29,7 +29,7 @@ module Web
         private _btnConfirmar: BotaoCircular;
         private _divContainerFaixa: Div;
         private _enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA;
-        private _fncOnConfirmar: Function;
+        private _fncOnConfirmar: ((o: Mensagem) => void);
         private _strMensagem: string;
         private _strTitulo: string;
 
@@ -79,12 +79,12 @@ module Web
             this._enmTipo = enmTipo;
         }
 
-        public get fncOnConfirmar(): Function
+        public get fncOnConfirmar(): ((o: Mensagem) => void)
         {
             return this._fncOnConfirmar;
         }
 
-        public set fncOnConfirmar(fncOnConfirmar: Function)
+        public set fncOnConfirmar(fncOnConfirmar: ((o: Mensagem) => void))
         {
             this._fncOnConfirmar = fncOnConfirmar;
         }
@@ -111,7 +111,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA)
         {
@@ -123,7 +123,7 @@ module Web
             this.strTitulo = strTitulo;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -240,7 +240,7 @@ module Web
                 return;
             }
 
-            this.fncOnConfirmar();
+            this.fncOnConfirmar(this);
         }
 
         protected setEventos(): void
@@ -255,7 +255,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -272,7 +272,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

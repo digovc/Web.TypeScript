@@ -32,7 +32,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(pnlFiltro: PainelFiltro)
         {
@@ -41,7 +41,7 @@ module Web
             this.pnlFiltro = pnlFiltro;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -59,7 +59,7 @@ module Web
 
             tblWeb.limparFiltro();
 
-            this.arrCmp.forEach((cmpFiltro) => { this.atualizarArrFiltro2(tblWeb, cmpFiltro); });
+            this.arrCmp.forEach(c => this.atualizarArrFiltro2(tblWeb, c));
         }
 
         private atualizarArrFiltro2(tblWeb: TabelaWeb, cmpFiltro: CampoHtml): void
@@ -119,7 +119,7 @@ module Web
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { cmp.tagInput.booDisabled = false; });
+            this.arrCmp.forEach(c => c.tagInput.booDisabled = false);
         }
 
         private inicializarCssMain(): void
@@ -156,14 +156,14 @@ module Web
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { cmp.addEvtOnKeyDownListener(this); });
+            this.arrCmp.forEach(c => c.addEvtOnKeyDownListener(this));
         }
 
         // #endregion Métodos
 
         // #region Eventos
 
-        public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyDown(objSender: Objeto, arg: JQueryKeyEventObject): void
         {
             try
             {
@@ -174,7 +174,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

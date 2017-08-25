@@ -98,7 +98,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(jnlConsulta: JnlConsulta)
         {
@@ -107,7 +107,7 @@ module Web
             this.jnlConsulta = jnlConsulta;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -142,11 +142,11 @@ module Web
 
             if (this.pnlCondicao.booVisivel)
             {
-                this.jnlConsulta.maximinizarGrid();
+                this.jnlConsulta.maximinizarTable();
                 return;
             }
 
-            this.jnlConsulta.restaurarGrid();
+            this.jnlConsulta.restaurarTable();
         }
 
         public esconderFiltro(): void
@@ -201,7 +201,7 @@ module Web
 
             if (arg.keyCode == Keys.DOWN_ARROW && arg.ctrlKey)
             {
-                this.jnlConsulta.restaurarGrid();
+                this.jnlConsulta.restaurarTable();
 
                 arg.preventDefault()
 
@@ -210,7 +210,7 @@ module Web
 
             if (arg.keyCode == Keys.UP_ARROW && arg.ctrlKey)
             {
-                this.jnlConsulta.maximinizarGrid();
+                this.jnlConsulta.maximinizarTable();
 
                 arg.preventDefault()
 
@@ -240,7 +240,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -253,11 +253,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyDown(objSender: Objeto, arg: JQueryKeyEventObject): void
         {
             try
             {
@@ -270,7 +270,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

@@ -11,7 +11,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class PaginaHtml extends Objeto
+    export abstract class PaginaHtmlBase extends Objeto
     {
         // #region Constantes
         // #endregion Constantes
@@ -47,21 +47,23 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
-        public addJs(srcJs: string, fncOnLoad: Function = null): void
+        public addJs(srcJs: string, fncOnLoad: ((o: HTMLScriptElement) => void) = null): void
         {
             if (Utils.getBooStrVazia(srcJs))
             {
+                fncOnLoad(null);
                 return;
             }
 
             if (this.validarJsCarregado(srcJs))
             {
+                fncOnLoad(null);
                 return;
             }
 
@@ -70,7 +72,10 @@ module Web
             tagScript.src = srcJs;
             tagScript.type = "text/javascript";
 
-            tagScript.onload = (() => { fncOnLoad(); });
+            if (fncOnLoad != null)
+            {
+                tagScript.onload = (() => fncOnLoad(tagScript));
+            }
 
             document.head.appendChild(tagScript);
         }
@@ -120,7 +125,7 @@ module Web
 
         public validarJsCarregado(srcJs: string): boolean
         {
-            return ($("script[src='" + srcJs + "']").length > 0);
+            return ($("script[src^='" + srcJs + "']").length > 0);
         }
 
         // #endregion Métodos
@@ -185,7 +190,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnClickListener.forEach((evt) => { evt.onClick(this, arg); });
+            this.arrEvtOnClickListener.forEach(e => e.onClick(this, arg));
         }
 
         // #endregion Evento OnClickListener

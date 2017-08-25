@@ -140,8 +140,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -379,7 +379,7 @@ module Web
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { cmp.iniciar(); });
+            this.arrCmp.forEach((c) => c.iniciar());
         }
 
         private inicializarDivDica(): void
@@ -528,7 +528,7 @@ module Web
                 return;
             }
 
-            this.arrCmp.forEach((cmp) => { tblWeb.addClnWeb(cmp.clnWeb); });
+            this.arrCmp.forEach(c => tblWeb.addCln(c.clnWeb));
         }
 
         public validarDados(): boolean

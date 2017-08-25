@@ -154,9 +154,9 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -244,7 +244,7 @@ module Web
         {
             super.inicializar();
 
-            this.arrDivItem.forEach((divItem) => { divItem.iniciar() });
+            this.arrDivItem.forEach(d => d.iniciar());
         }
 
         public inicializarUrl(urlMarkdown: string): boolean
@@ -372,7 +372,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -385,7 +385,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

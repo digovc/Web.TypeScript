@@ -15,16 +15,16 @@ module Web
 
         // #region Atributos
 
-        private _fncOnClick: Function;
+        private _fncOnClick: ((o: MenuContextoItem, a: JQueryEventObject) => void);
         private _mnc: MenuContexto;
         private _strTitulo: string;
 
-        private get fncOnClick(): Function
+        private get fncOnClick(): ((o: MenuContextoItem, a: JQueryEventObject) => void)
         {
             return this._fncOnClick;
         }
 
-        private set fncOnClick(fncOnClick: Function)
+        private set fncOnClick(fncOnClick: ((o: MenuContextoItem, a: JQueryEventObject) => void))
         {
             this._fncOnClick = fncOnClick;
         }
@@ -51,9 +51,9 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
-        constructor(strId: string, mnc: MenuContexto, fncOnClick: Function)
+        constructor(strId: string, mnc: MenuContexto, fncOnClick: ((o: MenuContextoItem, a: JQueryEventObject) => void))
         {
             super(strId)
 
@@ -61,7 +61,7 @@ module Web
             this.mnc = mnc;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -135,7 +135,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -143,11 +143,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseLeave(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
@@ -156,11 +156,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onMouseOver(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseOver(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
@@ -169,7 +169,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

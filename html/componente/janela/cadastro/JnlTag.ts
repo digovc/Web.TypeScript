@@ -64,16 +64,16 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
-        constructor(pag: PaginaHtml, tblWeb: TabelaWeb)
+        constructor(pag: PaginaHtmlBase, tblWeb: TabelaWeb)
         {
             super(null, pag);
 
             this.tblWeb = tblWeb;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -131,7 +131,7 @@ module Web
         {
             var strTagFormatada = Utils.STR_VAZIA;
 
-            this.arrTagCard.forEach((tagCard) => { strTagFormatada = this.getStrTagFormatadaItem(strTagFormatada, tagCard); });
+            this.arrTagCard.forEach(t => strTagFormatada = this.getStrTagFormatadaItem(strTagFormatada, t));
 
             return strTagFormatada;
         }
@@ -185,7 +185,7 @@ module Web
 
             var arrStrTag = strTag.split(";");
 
-            arrStrTag.forEach((strTagItem) => { this.addStrTag(strTagItem); });
+            arrStrTag.forEach(s => this.addStrTag(s));
         }
 
         private inicializarTagInputTag(): void
@@ -228,7 +228,7 @@ module Web
 
         private salvar(): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -238,7 +238,7 @@ module Web
                 return;
             }
 
-            if (this.tblWeb.clnWebIntId.intValor < 1)
+            if (this.tblWeb.clnIntId.intValor < 1)
             {
                 return;
             }
@@ -255,21 +255,21 @@ module Web
                 return;
             }
 
-            var intRegistroId = this.tblWeb.clnWebIntId.intValor;
+            var intRegistroId = this.tblWeb.clnIntId.intValor;
 
             this.tblWeb.limparDados();
 
-            this.tblWeb.clnWebIntId.intValor = intRegistroId;
-            this.tblWeb.getClnWeb(TabelaWeb.SQL_CLN_STR_TAG_NOME).strValor = strTagFormatada;
+            this.tblWeb.clnIntId.intValor = intRegistroId;
+            this.tblWeb.getCln(TabelaWeb.SQL_CLN_STR_TAG_NOME).strValor = strTagFormatada;
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); }); // TODO: Informar ao usuário.
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.salvarSucesso(o)); // TODO: Informar ao usuário.
             objInterlocutor.addJsn(this.tblWeb);
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TAG_SALVAR;
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private salvarSucesso(objInterlocutor: Interlocutor): void
@@ -316,7 +316,7 @@ module Web
                 return;
             }
 
-            if (tblWeb.clnWebIntId.intValor < 1)
+            if (tblWeb.clnIntId.intValor < 1)
             {
                 return;
             }
@@ -324,7 +324,7 @@ module Web
             var strId = "jnlTag__tbl_nome__int_registro_id";
 
             strId = strId.replace("_tbl_nome", tblWeb.strNome);
-            strId = strId.replace("_int_registro_id", String(tblWeb.clnWebIntId.intValor));
+            strId = strId.replace("_int_registro_id", String(tblWeb.clnIntId.intValor));
 
             this.strId = strId;
         }
@@ -421,7 +421,7 @@ module Web
 
         // #region Eventos
 
-        public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyDown(objSender: Objeto, arg: JQueryKeyEventObject): void
         {
             try
             {
@@ -434,7 +434,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

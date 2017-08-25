@@ -18,8 +18,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -47,7 +47,7 @@ module Web
                 return;
             }
 
-            this.tblWeb.getClnWeb("str_tabela_nome").strValor = (<PagPrincipal>this.pag).jnlConsulta.viwAtual.strNome;
+            this.tblWeb.getCln("str_tabela_nome").strValor = (<PagPrincipalBase>this.pag).jnlConsulta.viwAtual.strNome;
         }
 
         // #endregion Métodos

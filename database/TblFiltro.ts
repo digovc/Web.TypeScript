@@ -25,7 +25,7 @@ module Web
                 return TblFiltro._i;
             }
 
-            TblFiltro._i = new TblFiltro("tbl_filtro");
+            TblFiltro._i = new TblFiltro();
 
             return TblFiltro._i;
         }
@@ -39,15 +39,15 @@ module Web
                 return this._clnStrTabelaNome;
             }
 
-            this._clnStrTabelaNome = this.getClnWeb("str_tabela_nome");
+            this._clnStrTabelaNome = this.getCln("str_tabela_nome");
 
             return this._clnStrTabelaNome;
         }
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 

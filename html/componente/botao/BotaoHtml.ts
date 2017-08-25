@@ -18,8 +18,8 @@ module Web
         // #region Atributos
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -46,7 +46,7 @@ module Web
             this.addEvtOnFocusOutListener(this);
         }
 
-        public onFocusIn(objSender: Object): void
+        public onFocusIn(objSender: Objeto): void
         {
             try
             {
@@ -59,11 +59,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onFocusOut(objSender: Object): void
+        public onFocusOut(objSender: Objeto): void
         {
             try
             {
@@ -76,7 +76,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

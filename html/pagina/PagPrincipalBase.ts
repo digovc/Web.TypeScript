@@ -2,7 +2,7 @@
 /// <reference path="../componente/janela/cadastro/JnlTag.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
 /// <reference path="../Div.ts"/>
-/// <reference path="PaginaHtml.ts"/>
+/// <reference path="PaginaHtmlBase.ts"/>
 
 module Web
 {
@@ -12,7 +12,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class PagPrincipal extends PaginaHtml implements OnDisposedListener
+    export abstract class PagPrincipalBase extends PaginaHtmlBase implements OnDisposedListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -70,14 +70,14 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
         public abrirCadastro(tblWeb: TabelaWeb): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -96,10 +96,10 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CADASTRO;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirCadastroSucesso(objInterlocutor, tblWeb); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirCadastroSucesso(o));
             objInterlocutor.addJsn(tblWeb);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private abrirCadastroSucesso(objInterlocutor: Interlocutor, tblWeb: TabelaWeb): void
@@ -121,7 +121,7 @@ module Web
 
         public abrirConsulta(tblWeb: TabelaWeb): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -146,13 +146,13 @@ module Web
 
             var objInterlocutor = new Interlocutor();
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirConsultaSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirConsultaSucesso(o));
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CONSULTA;
 
             objInterlocutor.addJsn(tblWeb);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private abrirConsultaSucesso(objInterlocutor: Interlocutor): void
@@ -167,7 +167,7 @@ module Web
                 return;
             }
 
-            this.divConsulta.jq.slideUp(200, (() => { this.inicializarJnlConsulta(objInterlocutor); }));
+            this.divConsulta.jq.slideUp(200, (() => this.inicializarJnlConsulta(objInterlocutor)));
         }
 
         private abrirConsultaSucessoHistorico(): void
@@ -178,29 +178,29 @@ module Web
         {
             TblFiltro.i.limparFiltro();
 
-            TblFiltro.i.clnWebIntId.intValor = intFiltroId;
+            TblFiltro.i.clnIntId.intValor = intFiltroId;
 
             this.abrirCadastro(TblFiltro.i);
         }
 
-        public abrirJnlTag(tblWeb: TabelaWeb): void
+        public abrirJnlTag(tbl: TabelaWeb): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
 
-            if (tblWeb == null)
+            if (tbl == null)
             {
                 return;
             }
 
-            if (Utils.getBooStrVazia(tblWeb.strNome))
+            if (Utils.getBooStrVazia(tbl.strNome))
             {
                 return;
             }
 
-            if (tblWeb.clnWebIntId.intValor < 1)
+            if (tbl.clnIntId.intValor < 1)
             {
                 return;
             }
@@ -209,10 +209,10 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TAG_ABRIR_JANELA;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirJnlTagSucesso(tblWeb, objInterlocutor); });
-            objInterlocutor.addJsn(tblWeb);
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirJnlTagSucesso(tbl, o));
+            objInterlocutor.addJsn(tbl);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private abrirJnlTagSucesso(tblWeb: TabelaWeb, objInterlocutor: Interlocutor): void
@@ -258,7 +258,7 @@ module Web
             tagScriptCadastro.src = srcJqCadastro;
             tagScriptCadastro.type = "text/javascript";
 
-            tagScriptCadastro.onload = (() => { this.inicializarJnlCadastro(jnlCadastroJq); });
+            tagScriptCadastro.onload = (() => this.inicializarJnlCadastro(jnlCadastroJq));
 
             document.head.appendChild(tagScriptCadastro);
         }
@@ -343,7 +343,7 @@ module Web
 
         // #region Eventos
 
-        public onDisposed(objSender: Object): void
+        public onDisposed(objSender: Objeto): void
         {
             try
             {
@@ -355,7 +355,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

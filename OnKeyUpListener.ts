@@ -2,6 +2,6 @@
 {
     export interface OnKeyUpListener
     {
-        onKeyUp(objSender: Object, arg: JQueryKeyEventObject): void;
+        onKeyUp(objSender: Objeto, arg: JQueryKeyEventObject): void;
     }
 }

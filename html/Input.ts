@@ -1,6 +1,6 @@
 ﻿/// <reference path="../OnEnterListener.ts"/>
-/// <reference path="../OnLeaveListener.ts"/>
 /// <reference path="../OnValorAlteradoListener.ts"/>
+/// <reference path="OnLeaveListener.ts"/>
 /// <reference path="Tag.ts"/>
 
 module Web
@@ -22,6 +22,7 @@ module Web
         private _booValor: boolean;
         private _booVazio: boolean;
         private _decValor: number;
+        private _fltValor: number;
         private _dttValor: Date;
         private _intValor: number;
         private _strValor: string;
@@ -79,12 +80,7 @@ module Web
 
         public get decValor(): number
         {
-            if (Utils.getBooStrVazia(this.strValor))
-            {
-                return 0;
-            }
-
-            this._decValor = parseFloat(this.strValor);
+            this._decValor = this.decValor;
 
             return this._decValor;
         }
@@ -93,9 +89,28 @@ module Web
         {
             this._decValor = decValor;
 
+            this.fltValor = this._decValor;
+        }
+
+        public get fltValor(): number
+        {
+            if (Utils.getBooStrVazia(this.strValor))
+            {
+                return 0;
+            }
+
+            this._fltValor = parseFloat(this.strValor);
+
+            return this._fltValor;
+        }
+
+        public set fltValor(fltValor: number)
+        {
+            this._fltValor = fltValor;
+
             try
             {
-                this.strValor = this._decValor.toString();
+                this.strValor = this._fltValor.toString();
             }
             catch (ex)
             {
@@ -105,7 +120,7 @@ module Web
 
         public get intValor(): number
         {
-            this._intValor = Math.round(this.decValor);
+            this._intValor = Math.round(this.fltValor);
 
             return this._intValor;
         }
@@ -114,7 +129,7 @@ module Web
         {
             this._intValor = intValor;
 
-            this.decValor = this._intValor;
+            this.fltValor = Math.round(this._intValor);
         }
 
         public get strValor(): string
@@ -158,8 +173,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -240,7 +255,7 @@ module Web
 
         // #region Eventos
 
-        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
+        public onValorAlterado(objSender: Objeto, arg: OnValorAlteradoArg): void
         {
             try
             {
@@ -253,7 +268,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
@@ -315,7 +330,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnEnterListener.forEach((evt) => { evt.onEnter(this); });
+            this.arrEvtOnEnterListener.forEach(e => e.onEnter(this));
         }
 
         // #endregion Evento OnEnterListener
@@ -378,7 +393,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnLeaveListener.forEach((evt) => { evt.onLeave(this); });
+            this.arrEvtOnLeaveListener.forEach(e => e.onLeave(this));
         }
 
         // #endregion Evento OnLeaveListener
@@ -413,11 +428,8 @@ module Web
 
             if (this.arrEvtOnValorAlteradoListener.length == 0)
             {
-                this.jq.change((arg) => { this.strValor = this.jq.val(); });
-                this.jq.keyup((arg) =>
-                {
-                    this.strValor = this.jq.val();
-                });
+                this.jq.change(a => this.strValor = this.jq.val());
+                this.jq.keyup(a => this.strValor = this.jq.val());
             }
 
             this.arrEvtOnValorAlteradoListener.push(evt);
@@ -455,7 +467,7 @@ module Web
             arg.strValor = strValor;
             arg.strValorAnterior = this.strValorAnterior;
 
-            this.arrEvtOnValorAlteradoListener.forEach((evt) => { evt.onValorAlterado(this, arg); });
+            this.arrEvtOnValorAlteradoListener.forEach(e => e.onValorAlterado(this, arg));
         }
 
         // #endregion Evento OnValorAlteradoListener

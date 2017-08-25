@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../AppWebBase.ts"/>
 /// <reference path="../../Objeto.ts"/>
-/// <reference path="../../server/ajax/SrvAjaxDbeBase.ts"/>
+/// <reference path="../../server/ajax/data/SrvAjaxDbeBase.ts"/>
 
 module Web
 {
@@ -20,11 +20,22 @@ module Web
 
         // #region Atributos
 
+        private _booAtivo: boolean;
         private _dttAlteracao: Date;
         private _dttCadastro: Date;
         private _intId: number;
         private _intUsuarioAlteracaoId: number;
         private _intUsuarioCadastroId: number;
+
+        public get booAtivo(): boolean
+        {
+            return this._booAtivo;
+        }
+
+        public set booAtivo(booAtivo: boolean)
+        {
+            this._booAtivo = booAtivo;
+        }
 
         public get dttAlteracao(): Date
         {
@@ -78,8 +89,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -93,9 +104,9 @@ module Web
             return this;
         }
 
-        public salvar(fncSucesso: Function): void
+        public salvar(fncSucesso: ((o: Interlocutor) => void)): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 return;
             }
@@ -107,7 +118,7 @@ module Web
             objInterlocutor.addJsn(this);
             objInterlocutor.addFncSucesso(fncSucesso);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         // #endregion Métodos

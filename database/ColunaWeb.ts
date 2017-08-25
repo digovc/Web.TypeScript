@@ -22,6 +22,7 @@ module Web
 
         private _booNome: boolean;
         private _intValor: number;
+        private _sqlNome: string;
         private _strCritica: string;
         private _strValor: string;
 
@@ -56,6 +57,16 @@ module Web
             this.strValor = this._intValor.toString();
         }
 
+        public get sqlNome(): string
+        {
+            return this._sqlNome;
+        }
+
+        public set sqlNome(sqlNome: string)
+        {
+            this._sqlNome = sqlNome;
+        }
+
         public get strCritica(): string
         {
             return this._strCritica;
@@ -78,18 +89,24 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
-        constructor(strNome: string)
+        constructor(sqlNome: string)
         {
             super();
 
-            this.strNome = strNome;
+            this.strNome = sqlNome;
+            this.sqlNome = sqlNome;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
+
+        public limparDados(): void
+        {
+            this.strValor = null;
+        }
 
         // #endregion Métodos
 

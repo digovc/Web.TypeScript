@@ -91,7 +91,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strId: string, divFavorito: DivFavorito)
         {
@@ -100,7 +100,7 @@ module Web
             this.divFavorito = divFavorito;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -116,7 +116,7 @@ module Web
                 return;
             }
 
-            if (!(AppWebBase.i.pag instanceof PagPrincipal))
+            if (!(AppWebBase.i.pag instanceof PagPrincipalBase))
             {
                 return;
             }
@@ -126,7 +126,7 @@ module Web
                 return;
             }
 
-            (AppWebBase.i.pag as PagPrincipal).abrirConsulta(this.tblWeb);
+            (AppWebBase.i.pag as PagPrincipalBase).abrirConsulta(this.tblWeb);
 
             this.imgIcone.anim.girar();
         }
@@ -170,7 +170,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -183,7 +183,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

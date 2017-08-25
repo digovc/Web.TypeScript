@@ -27,7 +27,7 @@
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(tag: Tag)
         {
@@ -36,7 +36,7 @@
             this.tag = tag;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -47,7 +47,7 @@
                     duration: 250,
 
                     complete: fncComplete,
-                    step: ((fltNow: number) => { this.tag.jq.css("transform", "rotate(" + fltNow + "deg)"); }),
+                    step: (f => this.tag.jq.css("transform", "rotate(" + f + "deg)")),
                 };
 
             $({ i: 0 }).animate({ fltDegrees }, cfg);

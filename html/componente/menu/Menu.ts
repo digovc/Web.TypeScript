@@ -2,11 +2,9 @@
 /// <reference path="../../../OnEnterListener.ts"/>
 /// <reference path="../../../OnKeyDownListener.ts"/>
 /// <reference path="../../../OnKeyUpListener.ts"/>
-/// <reference path="../../../OnLeaveListener.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
-/// <reference path="../../pagina/PaginaHtml.ts"/>
-/// <reference path="../../pagina/PagPrincipal.ts"/>
-/// <reference path="../../pagina/PagPrincipal.ts"/>
+/// <reference path="../../pagina/PaginaHtmlBase.ts"/>
+/// <reference path="../../pagina/PagPrincipalBase.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="MenuItem.ts"/>
 
@@ -29,7 +27,7 @@ module Web
         private _arrMniFilhoVisivel: Array<MenuItem>;
         private _divGaveta: Div;
         private _mniSelecionado: MenuItem;
-        private _pagPrincipal: PagPrincipal;
+        private _pagPrincipal: PagPrincipalBase;
         private _txtPesquisa: Input;
 
         protected get arrMni(): Array<MenuItem>
@@ -95,12 +93,12 @@ module Web
             this.setMniSelecionado(this._mniSelecionado);
         }
 
-        public get pagPrincipal(): PagPrincipal
+        public get pagPrincipal(): PagPrincipalBase
         {
             return this._pagPrincipal;
         }
 
-        public set pagPrincipal(pagPrincipal: PagPrincipal)
+        public set pagPrincipal(pagPrincipal: PagPrincipalBase)
         {
             this._pagPrincipal = pagPrincipal;
         }
@@ -119,9 +117,9 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -141,8 +139,8 @@ module Web
 
             this.divGaveta.esconder();
 
-            window.setTimeout(() => { this.fecharGrupos(); }, 200);
-            window.setTimeout(() => { this.txtPesquisa.strValor = null; }, 200);
+            window.setTimeout((() => this.fecharGrupos()), 200);
+            window.setTimeout((() => this.txtPesquisa.strValor = null), 200);
         }
 
         private abrirConsultaPrimeira(): void
@@ -187,7 +185,7 @@ module Web
                 return;
             }
 
-            this.arrMni.forEach((mni) => { mni.esconderDivItemConteudo(); });
+            this.arrMni.forEach(m => m.esconderDivItemConteudo());
         }
 
         protected finalizar(): void
@@ -265,7 +263,7 @@ module Web
                 return;
             }
 
-            this.arrMni.forEach((mni) => { mni.arrMniFilhoVisivel = null; });
+            this.arrMni.forEach(m => m.arrMniFilhoVisivel = null);
         }
 
         protected pesquisar(strPesquisa: string): void
@@ -279,11 +277,11 @@ module Web
 
             if (Utils.getBooStrVazia(strPesquisa))
             {
-                this.arrMni.forEach((mni) => { mni.limparPesquisa(); });
+                this.arrMni.forEach(m => m.limparPesquisa());
                 return;
             }
 
-            this.arrMni.forEach((mni) => { mni.pesquisar(strPesquisa) });
+            this.arrMni.forEach(m => m.pesquisar(strPesquisa));
         }
 
         public processarPagPrincipalOnClick(arg: JQueryEventObject): void
@@ -464,7 +462,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -485,11 +483,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onEnter(objSender: Object): void
+        public onEnter(tagSender: Tag): void
         {
             try
             {
@@ -497,11 +495,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onKeyUp(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyUp(objSender: Objeto, arg: JQueryKeyEventObject): void
         {
             try
             {
@@ -518,11 +516,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
+        public onValorAlterado(objSender: Objeto, arg: OnValorAlteradoArg): void
         {
             try
             {
@@ -535,7 +533,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

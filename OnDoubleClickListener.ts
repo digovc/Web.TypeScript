@@ -2,6 +2,6 @@
 {
     export interface OnDoubleClickListener
     {
-        onDoubleClick(objSender: Object, arg: JQueryEventObject): void;
+        onDoubleClick(tagSender: Tag, arg: JQueryEventObject): void;
     }
 }

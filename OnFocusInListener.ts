@@ -2,6 +2,6 @@
 {
     export interface OnFocusInListener
     {
-        onFocusIn(objSender: Object): void;
+        onFocusIn(objSender: Objeto): void;
     }
 }

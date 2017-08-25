@@ -30,22 +30,31 @@ module Web
 
         private _intObjetoId: number;
         private _strClassNome: string;
+        private _strDescricao: string;
         private _strNome: string;
         private _strNomeExibicao: string;
         private _strNomeSimplificado: string;
 
         public get intObjetoId(): number
         {
-            if (this._intObjetoId > 0)
+            if (this._intObjetoId != null)
             {
                 return this._intObjetoId;
             }
 
-            this._intObjetoId = Objeto.intObjetoIdStatic;
-
-            Objeto.intObjetoIdStatic++;
+            this._intObjetoId = Objeto.intObjetoIdStatic++;
 
             return this._intObjetoId;
+        }
+
+        public get strDescricao(): string
+        {
+            return this._strDescricao;
+        }
+
+        public set strDescricao(strDescricao: string)
+        {
+            this._strDescricao = strDescricao;
         }
 
         public get strNome(): string
@@ -60,7 +69,7 @@ module Web
 
         public get strNomeExibicao(): string
         {
-            if (!Utils.getBooStrVazia(this._strNomeExibicao))
+            if (this._strNomeExibicao != null)
             {
                 return this._strNomeExibicao;
             }
@@ -77,7 +86,7 @@ module Web
 
         public get strNomeSimplificado(): string
         {
-            if (!Utils.getBooStrVazia(this._strNomeSimplificado))
+            if (this._strNomeSimplificado != null)
             {
                 return this._strNomeSimplificado;
             }
@@ -87,22 +96,22 @@ module Web
             return this._strNomeSimplificado;
         }
 
-        protected get strClassNome(): string
+        public get strClassNome(): string
         {
             if (this._strClassNome != null)
             {
                 return this._strClassNome;
             }
 
-            this._strClassNome = this.getStrClassNome();
+            this._strClassNome = this.constructor.name;
 
             return this._strClassNome;
         }
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -115,7 +124,7 @@ module Web
         {
             for (var objPropriedade in obj)
             {
-                (<any>this)[objPropriedade] = obj[objPropriedade];
+                (this as any)[objPropriedade] = obj[objPropriedade];
             }
         }
 
@@ -124,9 +133,49 @@ module Web
             this.dispararEvtOnDisposedListener();
         }
 
-        private getStrClassNome(): string
+        public toJson(): string
         {
-            return this.constructor.name;
+            return JSON.stringify(this, ((s, o) => this.toJsonValidar(s, o)));
+        }
+
+        private toJsonValidar(strPropriedade: string, objValor: any): any
+        {
+            if (objValor == null)
+            {
+                return null;
+            }
+
+            if (this == objValor)
+            {
+                return objValor;
+            }
+
+            if (Utils.getBooStrVazia(strPropriedade))
+            {
+                return null;
+            }
+
+            if (strPropriedade.toLocaleLowerCase().startsWith("_arrevt"))
+            {
+                return null;
+            }
+
+            if (strPropriedade.toLocaleLowerCase().startsWith("_arrfnc"))
+            {
+                return null;
+            }
+
+            if (strPropriedade.toLocaleLowerCase().startsWith("_fnc"))
+            {
+                return null;
+            }
+
+            return this.validarJson(strPropriedade) ? objValor : null;
+        }
+
+        protected validarJson(strPropriedade: string): boolean
+        {
+            return true;
         }
 
         // #endregion Métodos
@@ -171,7 +220,7 @@ module Web
                 return;
             }
 
-            this.arrEvtOnDisposedListener.forEach((evt) => { evt.onDisposed(this); });
+            this.arrEvtOnDisposedListener.forEach(e => e.onDisposed(this));
         }
 
         public removerEvtOnDisposedListener(evt: OnDisposedListener): void

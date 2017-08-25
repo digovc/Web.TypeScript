@@ -23,10 +23,25 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="database\view\ViwWebBase.ts" />
+    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaBase.ts" />
+    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaCabecalho.ts" />
+    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaLinha.ts" />
+    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaRodape.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridBase.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridCabecalho.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridConsulta.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridConteudo.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridLinha.ts" />
+    <TypeScriptCompile Include="html\componente\grid\DivGridRodape.ts" />
+    <TypeScriptCompile Include="html\componente\table\OnTableMenuClickArg.ts" />
+    <TypeScriptCompile Include="html\componente\table\OnTableMenuClickListener.ts" />
+    <TypeScriptCompile Include="html\componente\table\OnTableRowClickListener.ts" />
+    <TypeScriptCompile Include="html\componente\table\OnTableRowDoubleClickListener.ts" />
+    <TypeScriptCompile Include="html\componente\table\TableHtml.ts" />
+    <TypeScriptCompile Include="html\componente\table\TableRow.ts" />
+    <TypeScriptCompile Include="Loop.ts" />
     <TypeScriptCompile Include="AppWebBase.ts" />
-    <TypeScriptCompile Include="database\DataCell.ts" />
-    <TypeScriptCompile Include="database\DataRow.ts" />
-    <TypeScriptCompile Include="database\DataTable.ts" />
     <TypeScriptCompile Include="database\dominio\documentacao\DocumentacaoDominioBase.ts" />
     <TypeScriptCompile Include="database\dominio\documentacao\EmailRegistroDominio.ts" />
     <TypeScriptCompile Include="database\dominio\FavoritoDominio.ts" />
@@ -54,11 +69,6 @@
     <TypeScriptCompile Include="html\componente\grafico\Canvas.ts" />
     <TypeScriptCompile Include="html\componente\form\OnCmpEmFocoAlterado.ts" />
     <TypeScriptCompile Include="html\componente\grafico\ElementoAnimavel.ts" />
-    <TypeScriptCompile Include="html\componente\grid\GridRow.ts" />
-    <TypeScriptCompile Include="html\componente\grid\OnGridMenuClickArg.ts" />
-    <TypeScriptCompile Include="html\componente\grid\OnGridMenuClickListener.ts" />
-    <TypeScriptCompile Include="html\componente\grid\OnRowClickListener.ts" />
-    <TypeScriptCompile Include="html\componente\grid\OnRowDoubleClickListener.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroItemCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlFiltroCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlTag.ts" />
@@ -94,7 +104,7 @@
     <TypeScriptCompile Include="html\componente\treeview\TreeViewNode.ts" />
     <TypeScriptCompile Include="html\pagina\documentacao\PagDocumentacaoBase.ts" />
     <TypeScriptCompile Include="html\pagina\PagMobile.ts" />
-    <TypeScriptCompile Include="html\pagina\PagPrincipal.ts" />
+    <TypeScriptCompile Include="html\pagina\PagPrincipalBase.ts" />
     <TypeScriptCompile Include="html\Animator.ts" />
     <TypeScriptCompile Include="Keys.ts" />
     <TypeScriptCompile Include="Constante.ts" />
@@ -104,11 +114,10 @@
     <TypeScriptCompile Include="OnFocusInListener.ts" />
     <TypeScriptCompile Include="OnDisposedListener.ts" />
     <TypeScriptCompile Include="OnDoubleClickListener.ts" />
-    <TypeScriptCompile Include="OnFocusChangeListener.ts" />
     <TypeScriptCompile Include="OnKeyUpListener.ts" />
     <TypeScriptCompile Include="OnKeyDownListener.ts" />
     <TypeScriptCompile Include="OnKeyPressListener.ts" />
-    <TypeScriptCompile Include="OnLeaveListener.ts" />
+    <TypeScriptCompile Include="html\OnLeaveListener.ts" />
     <TypeScriptCompile Include="OnEnterListener.ts" />
     <TypeScriptCompile Include="OnMouseMoveListener.ts" />
     <TypeScriptCompile Include="OnMouseUpListener.ts" />
@@ -136,7 +145,6 @@
     <TypeScriptCompile Include="html\componente\ComponenteHtml.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\DivComando.ts" />
     <TypeScriptCompile Include="html\componente\form\FormHtml.ts" />
-    <TypeScriptCompile Include="html\componente\grid\GridHtml.ts" />
     <TypeScriptCompile Include="html\componente\janela\JanelaHtml.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\JnlCadastro.ts" />
     <TypeScriptCompile Include="html\componente\janela\JnlLogin.ts" />
@@ -151,15 +159,18 @@
     <TypeScriptCompile Include="html\Div.ts" />
     <TypeScriptCompile Include="html\Imagem.ts" />
     <TypeScriptCompile Include="html\Input.ts" />
-    <TypeScriptCompile Include="html\pagina\PaginaHtml.ts" />
+    <TypeScriptCompile Include="html\pagina\PaginaHtmlBase.ts" />
     <TypeScriptCompile Include="html\Tag.ts" />
     <TypeScriptCompile Include="Objeto.ts" />
     <TypeScriptCompile Include="OnClickListener.ts" />
     <TypeScriptCompile Include="database\ColunaWeb.ts" />
     <TypeScriptCompile Include="database\FiltroWeb.ts" />
     <TypeScriptCompile Include="database\TabelaWeb.ts" />
+    <TypeScriptCompile Include="database\RowWeb.ts" />
+    <TypeScriptCompile Include="database\DataContainer.ts" />
+    <TypeScriptCompile Include="server\ajax\data\PesquisaInterlocutor.ts" />
     <TypeScriptCompile Include="server\ajax\SrvAjaxBase.ts" />
-    <TypeScriptCompile Include="server\ajax\SrvAjaxDbeBase.ts" />
+    <TypeScriptCompile Include="server\ajax\data\SrvAjaxDbeBase.ts" />
     <TypeScriptCompile Include="server\ajax\SrvAjaxDocumentacao.ts" />
     <TypeScriptCompile Include="server\Interlocutor.ts" />
     <TypeScriptCompile Include="server\ServerBase.ts" />
@@ -218,7 +229,7 @@
     <TypeScriptTarget>ES6</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
-    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
     <TypeScriptOutDir>bin\js</TypeScriptOutDir>

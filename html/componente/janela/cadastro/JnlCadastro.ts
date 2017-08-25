@@ -29,7 +29,7 @@ module Web
         private _frm: FormHtml;
         private _intRegistroId: number;
         private _jnlCadastroPai: JnlCadastro;
-        private _pagPrincipal: PagPrincipal;
+        private _pagPrincipal: PagPrincipalBase;
         private _srcJs: string;
         private _strTblNome: string;
         private _tabItem: TabItem;
@@ -95,7 +95,7 @@ module Web
             this.setJnlCadastroPai(this._jnlCadastroPai);
         }
 
-        protected get pagPrincipal(): PagPrincipal
+        protected get pagPrincipal(): PagPrincipalBase
         {
             if (this._pagPrincipal != null)
             {
@@ -157,7 +157,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
@@ -166,7 +166,7 @@ module Web
             this.strId = this.strClassNome;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -208,7 +208,7 @@ module Web
                 return;
             }
 
-            this.tblWeb.clnWebIntId.intValor = this.intRegistroId;
+            this.tblWeb.clnIntId.intValor = this.intRegistroId;
 
             this.pagPrincipal.abrirJnlTag(this.tblWeb);
         }
@@ -323,7 +323,7 @@ module Web
 
         private getCmpIntId(): CampoNumerico
         {
-            return this.getCmp<CampoNumerico>(this.tblWeb.clnWebIntId.strNome);
+            return this.getCmp<CampoNumerico>(this.tblWeb.clnIntId.strNome);
         }
 
         private getFrm(): FormHtml
@@ -350,19 +350,19 @@ module Web
             return this.cmpIntId.tagInput.intValor;
         }
 
-        private getPagPrincipal(): PagPrincipal
+        private getPagPrincipal(): PagPrincipalBase
         {
             if (AppWebBase.i.pag == null)
             {
                 return null;
             }
 
-            if (!(AppWebBase.i.pag instanceof PagPrincipal))
+            if (!(AppWebBase.i.pag instanceof PagPrincipalBase))
             {
                 return null;
             }
 
-            return (<PagPrincipal>AppWebBase.i.pag);
+            return (<PagPrincipalBase>AppWebBase.i.pag);
         }
 
         private getSrcJs(): string
@@ -482,7 +482,7 @@ module Web
 
         public salvar(): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -498,11 +498,11 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_SALVAR;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.salvarSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.salvarSucesso(o));
 
             objInterlocutor.addJsn(this.tblWeb);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
 
             this.dispararEvtOnSalvarListener();
         }
@@ -554,12 +554,12 @@ module Web
                 Mensagem.mostrar("Erro", tblWeb.strCritica, Mensagem_EnmTipo.NEGATIVA);
             }
 
-            if (tblWeb.arrClnWeb == null)
+            if (tblWeb.arrCln == null)
             {
                 return;
             }
 
-            tblWeb.arrClnWeb.forEach((clnWeb) => { this.salvarSucesso2CriticaClnWeb(clnWeb); });
+            tblWeb.arrCln.forEach(c => this.salvarSucesso2CriticaClnWeb(c));
         }
 
         private salvarSucesso2CriticaClnWeb(clnWeb: ColunaWeb): void
@@ -615,7 +615,7 @@ module Web
                 return;
             }
 
-            this.cmpIntId.tagInput.intValor = tblWeb.getClnWeb(this.cmpIntId.clnWeb.strNome).intValor;
+            this.cmpIntId.tagInput.intValor = tblWeb.getCln(this.cmpIntId.clnWeb.strNome).intValor;
         }
 
         private salvarSucesso2SucessoTabHtml(): void
@@ -660,7 +660,7 @@ module Web
 
         // #region Eventos
 
-        public onDisposed(objSender: Object): void
+        public onDisposed(objSender: Objeto): void
         {
             try
             {
@@ -671,7 +671,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

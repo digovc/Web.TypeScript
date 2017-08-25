@@ -45,8 +45,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -67,6 +67,14 @@ module Web
                 return;
             }
 
+            for (var i = 0; i < this.arrObjConstante.length; i++)
+            {
+                if (objConstante.strNome == this.arrObjConstante[i].strNome)
+                {
+                    return;
+                }
+            }
+
             this.arrObjConstante.push(objConstante);
         }
 
@@ -77,12 +85,17 @@ module Web
 
         public getDecConstante(strConstanteNome: string): number
         {
+            return this.getFltConstante(strConstanteNome);
+        }
+
+        public getFltConstante(strConstanteNome: string): number
+        {
             return Number(this.getStrConstante(strConstanteNome));
         }
 
         public getIntConstante(strConstanteNome: string): number
         {
-            return Number(this.getStrConstante(strConstanteNome));
+            return Math.round(this.getFltConstante(strConstanteNome));
         }
 
         public getStrConstante(strConstanteNome: string): string
@@ -94,11 +107,9 @@ module Web
 
             for (var i = 0; i < this.arrObjConstante.length; i++)
             {
-                var objConstante = this.arrObjConstante[i];
-
-                if (strConstanteNome == objConstante.strNome)
+                if (strConstanteNome == this.arrObjConstante[i].strNome)
                 {
-                    return objConstante.strValor;
+                    return this.arrObjConstante[i].strValor;
                 }
             }
 

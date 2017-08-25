@@ -35,20 +35,20 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
             super("Servidor HTTP");
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
-        public atualizarCssMain(): void
+        public atualizarCssMain(fncComplete: Function = null): void
         {
-            var tagLink = <HTMLLinkElement>document.getElementById("cssMain");
+            var tagLink = (document.getElementById("cssMain") as HTMLLinkElement);
 
             if (tagLink == null)
             {
@@ -60,29 +60,36 @@ module Web
                 return;
             }
 
+            if (fncComplete != null)
+            {
+                tagLink.onload = (() => fncComplete());
+            }
+
             var strHref = (tagLink.href.indexOf("?") > -1) ? tagLink.href.split("?")[0] : tagLink.href;
 
-            tagLink.href = (strHref + "?" + Date.now());
+            strHref = (strHref + "?" + Date.now());
+
+            tagLink.href = strHref;
         }
 
-        public carregarHtml(urlImport: string, tabContainer: Tag, fncComplete: any): void
+        public carregarHtml(urlImport: string, tagPai: Tag, fncComplete: any): void
         {
             if (Utils.getBooStrVazia(urlImport))
             {
                 return;
             }
 
-            if (tabContainer == null)
+            if (tagPai == null)
             {
                 return;
             }
 
-            if (tabContainer.jq == null)
+            if (tagPai.jq == null)
             {
                 return;
             }
 
-            tabContainer.jq.load(urlImport, null, (() => { this.atualizarCssMain(); }));
+            tagPai.jq.load(urlImport, undefined, (() => this.atualizarCssMain(fncComplete)));
         }
 
         public carregarJq(strJqClass: string): void

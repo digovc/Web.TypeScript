@@ -2,6 +2,6 @@
 {
     export interface OnClickListener
     {
-        onClick(objSender: Object, arg: JQueryEventObject): void;
+        onClick(objSender: Objeto, arg: JQueryEventObject): void;
     }
 }

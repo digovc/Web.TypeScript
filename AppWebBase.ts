@@ -4,13 +4,12 @@
 /// <reference path="Historico.ts"/>
 /// <reference path="html/componente/Mensagem.ts"/>
 /// <reference path="html/componente/Notificacao.ts"/>
-/// <reference path="html/pagina/PaginaHtml.ts"/>
-/// <reference path="html/pagina/PagPrincipal.ts"/>
+/// <reference path="html/pagina/PaginaHtmlBase.ts"/>
+/// <reference path="html/pagina/PagPrincipalBase.ts"/>
 /// <reference path="Objeto.ts"/>
-/// <reference path="OnFocusChangeListener.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
-/// <reference path="server/ajax/SrvAjaxDbeBase.ts"/>
+/// <reference path="server/ajax/data/SrvAjaxDbeBase.ts"/>
 /// <reference path="server/Interlocutor.ts"/>
 /// <reference path="server/ServerBase.ts"/>
 /// <reference path="server/SrvHttpBase.ts"/>
@@ -28,7 +27,7 @@ module Web
     {
         // #region Constantes
 
-        public static get STR_COOKIE_SESSAO_ID_NOME(): string { return "sessao_id" };
+        public static get STR_COOKIE_SESSAO_NOME(): string { return "sessao" };
 
         private static get STR_CONSTANTE_DESENVOLVIMENTO(): string { return "STR_CONSTANTE_DESENVOLVIMENTO" };
         private static get STR_CONSTANTE_NAMESPACE_PROJETO(): string { return "STR_CONSTANTE_NAMESPACE_PROJETO" };
@@ -55,17 +54,15 @@ module Web
         }
 
         private _arrSrv: Array<ServerBase>;
-        private _arrTbl: Array<TabelaWeb>;
         private _booDesenvolvimento: boolean;
         private _booEmFoco: boolean = true;
         private _dttLoad: Date = new Date();
-        private _msg: Mensagem;
         private _objTema: TemaDefault;
-        private _pag: PaginaHtml;
-        private _srvAjaxDb: SrvAjaxDbeBase;
+        private _pag: PaginaHtmlBase;
+        private _srvAjaxDbe: SrvAjaxDbeBase;
         private _srvHttp: SrvHttpBase;
         private _strNamespace: string;
-        private _strSessaoId: string;
+        private _strSessao: string;
         private _tagFoco: ComponenteHtml;
 
         private get arrSrv(): Array<ServerBase>
@@ -78,18 +75,6 @@ module Web
             this._arrSrv = this.getArrSrv();
 
             return this._arrSrv;
-        }
-
-        private get arrTbl(): Array<TabelaWeb>
-        {
-            if (this._arrTbl != null)
-            {
-                return this._arrTbl;
-            }
-
-            this._arrTbl = new Array<TabelaWeb>();
-
-            return this._arrTbl;
         }
 
         public get booDesenvolvimento(): boolean
@@ -126,16 +111,6 @@ module Web
             return this._dttLoad;
         }
 
-        private get msg(): Mensagem
-        {
-            return this._msg;
-        }
-
-        private set msg(msg: Mensagem)
-        {
-            this._msg = msg;
-        }
-
         public get objTema(): TemaDefault
         {
             if (this._objTema != null)
@@ -148,26 +123,26 @@ module Web
             return this._objTema;
         }
 
-        public get pag(): PaginaHtml
+        public get pag(): PaginaHtmlBase
         {
             return this._pag;
         }
 
-        public set pag(pag: PaginaHtml)
+        public set pag(pag: PaginaHtmlBase)
         {
             this._pag = pag;
         }
 
-        public get srvAjaxDb(): SrvAjaxDbeBase
+        public get srvAjaxDbe(): SrvAjaxDbeBase
         {
-            if (this._srvAjaxDb != null)
+            if (this._srvAjaxDbe != null)
             {
-                return this._srvAjaxDb;
+                return this._srvAjaxDbe;
             }
 
-            this._srvAjaxDb = this.getSrvAjaxDbe();
+            this._srvAjaxDbe = this.getSrvAjaxDbe();
 
-            return this._srvAjaxDb;
+            return this._srvAjaxDbe;
         }
 
         public get srvHttp(): SrvHttpBase
@@ -194,21 +169,21 @@ module Web
             return this._strNamespace;
         }
 
-        public get strSessaoId(): string
+        public get strSessao(): string
         {
-            if (this._strSessaoId != null)
+            if (this._strSessao != null)
             {
-                return this._strSessaoId;
+                return this._strSessao;
             }
 
-            this._strSessaoId = this.getStrCookieValue(AppWebBase.STR_COOKIE_SESSAO_ID_NOME);
+            this._strSessao = this.getStrCookieValue(AppWebBase.STR_COOKIE_SESSAO_NOME);
 
-            return this._strSessaoId;
+            return this._strSessao;
         }
 
-        public set strSessaoId(strSessaoId: string)
+        public set strSessao(strSessao: string)
         {
-            this._strSessaoId = strSessaoId;
+            this._strSessao = strSessao;
         }
 
         public get tagFoco(): ComponenteHtml
@@ -233,7 +208,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
@@ -242,24 +217,9 @@ module Web
             AppWebBase.i = this;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
-
-        private addArrTbl(tblWeb: TabelaWeb): void
-        {
-            if (tblWeb == null)
-            {
-                return null;
-            }
-
-            if (this.arrTbl.indexOf(tblWeb) > -1)
-            {
-                return;
-            }
-
-            this.arrTbl.push(tblWeb);
-        }
 
         public addCookie(strNome: string, strValor: string): void
         {
@@ -275,10 +235,12 @@ module Web
 
             // TODO: Implementar data e hora de validade.
 
-            var strCookie = "_cookie_name=_cookie_value";
+            var strCookie = "_cookie_name=_cookie_value; domain=_cookie_domain; path=_cookie_path";
 
             strCookie = strCookie.replace("_cookie_name", strNome);
             strCookie = strCookie.replace("_cookie_value", strValor);
+            strCookie = strCookie.replace("_cookie_domain", window.location.host);
+            strCookie = strCookie.replace("_cookie_path", "/");
 
             document.cookie = strCookie;
         }
@@ -294,50 +256,8 @@ module Web
             window.history.pushState(null, objHistorico.strTitulo, objHistorico.strParametro);
         }
 
-        public carregarTbl(strTblNome: string): void
+        protected finalizar(): void
         {
-            if (this.srvAjaxDb == null)
-            {
-                throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
-            }
-
-            if (Utils.getBooStrVazia(strTblNome))
-            {
-                return;
-            }
-
-            if (AppWebBase.i.getTbl(strTblNome) != null)
-            {
-                return;
-            }
-
-            var objInterlocutor = new Interlocutor();
-
-            objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_CARREGAR_TBL_WEB;
-
-            objInterlocutor.addStr(strTblNome);
-            objInterlocutor.addFncSucesso((objSolicitacaoAjax: Interlocutor) => { this.carregarTblSucesso(objSolicitacaoAjax); });
-
-            this.srvAjaxDb.enviar(objInterlocutor);
-        }
-
-        private carregarTblSucesso(objSolicitacaoAjax: Interlocutor): void
-        {
-            if (objSolicitacaoAjax == null)
-            {
-                return;
-            }
-
-            if (objSolicitacaoAjax.objData == null)
-            {
-                return;
-            }
-
-            var tblWeb = new TabelaWeb(null);
-
-            tblWeb.copiarDados(JSON.parse(objSolicitacaoAjax.objData.toString()));
-
-            this.addArrTbl(tblWeb);
         }
 
         private getArrSrv(): Array<ServerBase>
@@ -388,52 +308,31 @@ module Web
             return objRegExpExecArray[1];
         }
 
-        public getTbl(strTblNome: string): TabelaWeb
-        {
-            if (Utils.getBooStrVazia(strTblNome))
-            {
-                return null;
-            }
-
-            for (var i = 0; i < this.arrTbl.length; i++)
-            {
-                var tblWeb = this.arrTbl[i];
-
-                if (tblWeb == null)
-                {
-                    continue;
-                }
-
-                if (strTblNome.toLowerCase() != tblWeb.strNome.toLowerCase())
-                {
-                    continue;
-                }
-
-                return tblWeb;
-            }
-
-            return null;
-        }
-
         public imprimir(pag: string): void
         {
-            var objWindow = window.open('', 'my div', 'height=400,width=600');
+            var objWindow = window.open("", "my div", "height=400,width=600");
 
             objWindow.document.write(pag);
+
             objWindow.print();
+
             objWindow.close();
         }
 
         public iniciar(): void
         {
             this.inicializar();
+
             this.montarLayout();
+
             this.setEventos();
+
+            this.finalizar();
         }
 
         protected inicializar(): void
         {
-            this.arrSrv.forEach((srv: ServerBase) => { srv.iniciar(); });
+            this.arrSrv.forEach(srv => srv.iniciar());
         }
 
         protected inicializarArrSrv(arrSrv: Array<ServerBase>): void
@@ -458,8 +357,8 @@ module Web
 
         protected setEventos(): void
         {
-            window.onblur = ((arg: FocusEvent) => { this.booEmFoco = false; });
-            window.onfocus = ((arg: FocusEvent) => { this.booEmFoco = true; });
+            window.onblur = (() => this.booEmFoco = false);
+            window.onfocus = (() => this.booEmFoco = true);
         }
 
         // #endregion Métodos

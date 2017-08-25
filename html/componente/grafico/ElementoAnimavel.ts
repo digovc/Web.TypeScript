@@ -27,14 +27,14 @@
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(cnvPai: Canvas)
         {
             this.cnvPai = cnvPai;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 

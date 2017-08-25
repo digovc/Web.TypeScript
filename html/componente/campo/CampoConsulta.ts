@@ -24,24 +24,11 @@ module Web
 
         // #region Atributos
 
-        private _btnAcao: BotaoMini;
         private _clnWebFiltro: ColunaWeb;
         private _strTblWebRefNome: string;
         private _tblWebRef: TabelaWeb;
         private _txtIntId: Input;
         private _txtPesquisa: Input;
-
-        private get btnAcao(): BotaoMini
-        {
-            if (this._btnAcao != null)
-            {
-                return this._btnAcao;
-            }
-
-            this._btnAcao = new BotaoMini(this.strId + "_btnAcao");
-
-            return this._btnAcao;
-        }
 
         private get clnWebFiltro(): ColunaWeb
         {
@@ -110,8 +97,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -121,12 +108,12 @@ module Web
 
             if (this.txtPesquisa.booVisivel)
             {
-                mnc.addOpcao("Pesquisar", ((mci: MenuContextoItem, arg2: JQueryEventObject) => { this.pesquisar(); }));
-                mnc.addOpcao("Pesquisar por", ((mci: MenuContextoItem, arg2: JQueryEventObject) => { this.abrirOpcaoPesquisarPor(mci, arg); }));
+                mnc.addOpcao("Pesquisar", (() => this.pesquisar()));
+                mnc.addOpcao("Pesquisar por", ((m) => this.abrirOpcaoPesquisarPor(m, arg)));
             }
             else
             {
-                mnc.addOpcao("Limpar", ((mci: MenuContextoItem, arg: JQueryEventObject) => { this.limparDados(); }));
+                mnc.addOpcao("Limpar", (() => this.limparDados()));
             }
 
             mnc.abrirMenu(arg);
@@ -141,7 +128,7 @@ module Web
 
             var mnc = new MenuContexto();
 
-            this.tblWebRef.arrClnWeb.forEach((clnWeb) => { this.abrirOpcaoPesquisarPorCln(mnc, clnWeb); });
+            this.tblWebRef.arrCln.forEach(c => this.abrirOpcaoPesquisarPorCln(mnc, c));
 
             mnc.abrirMenu(arg);
         }
@@ -158,7 +145,7 @@ module Web
                 return;
             }
 
-            mnc.addOpcao(clnWeb.strNomeExibicao, (() => { this.selecionarColunaPesquisa(clnWeb); }));
+            mnc.addOpcao(clnWeb.strNomeExibicao, (() => this.selecionarColunaPesquisa(clnWeb)));
         }
 
         protected setBooEmFoco(booEmFoco: boolean): void
@@ -212,7 +199,7 @@ module Web
                 return null;
             }
 
-            return AppWebBase.i.getTbl(this.strTblWebRefNome);
+            return AppWebBase.i.srvAjaxDbe.getTbl(this.strTblWebRefNome);
         }
 
         protected inicializar(): void
@@ -243,7 +230,7 @@ module Web
 
         private inicializarTblWebRef(): void
         {
-            AppWebBase.i.carregarTbl(this.strTblWebRefNome);
+            AppWebBase.i.srvAjaxDbe.carregarTabela(this.strTblWebRefNome);
         }
 
         public limparDados(): void
@@ -280,7 +267,7 @@ module Web
 
             if (this.clnWebFiltro == null)
             {
-                this.clnWebFiltro = this.tblWebRef.clnWebNome;
+                this.clnWebFiltro = this.tblWebRef.clnNome;
             }
 
             this.tblWebRef.limparFiltro();
@@ -300,7 +287,7 @@ module Web
 
             this.cmb.mostrar();
 
-            window.setTimeout((() => { this.cmb.receberFoco(); }), 10);
+            window.setTimeout((() => this.cmb.receberFoco()), 10);
         }
 
         private processarBtnAcaoClick(): void
@@ -341,7 +328,7 @@ module Web
         {
             if (clnWebFiltro == null)
             {
-                clnWebFiltro = this.tblWebRef.clnWebNome;
+                clnWebFiltro = this.tblWebRef.clnNome;
                 return;
             }
 
@@ -386,7 +373,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -399,11 +386,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onFocusIn(objSender: Object): void
+        public onFocusIn(objSender: Objeto): void
         {
             super.onFocusIn(objSender);
 
@@ -418,11 +405,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onFocusOut(objSender: Object): void
+        public onFocusOut(objSender: Objeto): void
         {
             super.onFocusOut(objSender);
 
@@ -437,11 +424,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onKeyDown(objSender: Object, arg: JQueryKeyEventObject): void
+        public onKeyDown(objSender: Objeto, arg: JQueryKeyEventObject): void
         {
             try
             {
@@ -459,7 +446,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

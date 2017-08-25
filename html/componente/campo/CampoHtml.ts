@@ -28,8 +28,9 @@ module Web
         private _booObrigatorio: boolean;
         private _booPermitirAlterar: boolean;
         private _booSomenteLeitura: boolean;
+        private _btnAcao: BotaoHtml;
         private _clnWeb: ColunaWeb;
-        private _divInputContainer: Div;
+        private _divContainer: Div;
         private _divTitulo: Div;
         private _frm: FormHtml;
         private _intRegistroId: number;
@@ -125,16 +126,28 @@ module Web
             this._booSomenteLeitura = booSomenteLeitura;
         }
 
-        protected get divInputContainer(): Div
+        public get btnAcao(): BotaoHtml
         {
-            if (this._divInputContainer != null)
+            if (this._btnAcao != null)
             {
-                return this._divInputContainer;
+                return this._btnAcao;
             }
 
-            this._divInputContainer = new Div(this.strId + "_divInputContainer");
+            this._btnAcao = new BotaoHtml(this.strId + "_btnAcao");
 
-            return this._divInputContainer;
+            return this._btnAcao;
+        }
+
+        protected get divContainer(): Div
+        {
+            if (this._divContainer != null)
+            {
+                return this._divContainer;
+            }
+
+            this._divContainer = new Div(this.strId + "_divContainer");
+
+            return this._divContainer;
         }
 
         public get clnWeb(): ColunaWeb
@@ -245,8 +258,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -319,7 +332,7 @@ module Web
                 return clnWebResultado;
             }
 
-            return this.frm.jnlCadastro.tblWeb.getClnWeb(this.jq.attr("cln_web_nome"));
+            return this.frm.jnlCadastro.tblWeb.getCln(this.jq.attr("cln_web_nome"));
         }
 
         private getIntRegistroId(): number
@@ -345,6 +358,8 @@ module Web
         protected inicializar(): void
         {
             super.inicializar();
+
+            this.btnAcao.iniciar();
 
             this.tagInput.iniciar();
 
@@ -555,7 +570,7 @@ module Web
 
         // #region Eventos
 
-        public onFocusIn(objSender: Object): void
+        public onFocusIn(objSender: Objeto): void
         {
             try
             {
@@ -568,11 +583,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onFocusOut(objSender: Object): void
+        public onFocusOut(objSender: Objeto): void
         {
             try
             {
@@ -585,11 +600,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
+        public onValorAlterado(objSender: Objeto, arg: OnValorAlteradoArg): void
         {
             try
             {
@@ -602,7 +617,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

@@ -97,8 +97,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -111,7 +111,7 @@ module Web
                 return;
             }
 
-            window.requestAnimationFrame(() => { this.loop(); });
+            window.requestAnimationFrame(() => this.loop());
         }
 
         private calcularDecDelta(): void

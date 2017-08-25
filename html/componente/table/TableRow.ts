@@ -15,7 +15,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class GridRow extends ComponenteHtml implements OnClickListener, OnClickRightListener, OnMouseLeaveListener, OnMouseOverListener
+    export class TableRow extends ComponenteHtml implements OnClickListener, OnClickRightListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
 
@@ -24,7 +24,7 @@ module Web
         // #region Atributos
 
         private _intId: number;
-        private _tagGridHtml: GridHtml = null;
+        private _tagTable: TableHtml = null;
 
         public get intId(): number
         {
@@ -38,20 +38,20 @@ module Web
             return this._intId;
         }
 
-        public get tagGridHtml(): GridHtml
+        public get tagTable(): TableHtml
         {
-            return this._tagGridHtml;
+            return this._tagTable;
         }
 
-        public set tagGridHtml(tagGridHtml: GridHtml)
+        public set tagTable(tagTable: TableHtml)
         {
-            this._tagGridHtml = tagGridHtml;
+            this._tagTable = tagTable;
         }
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -62,12 +62,12 @@ module Web
                 return;
             }
 
-            var argOnGridMenuClick = new OnGridMenuClickArg();
+            var arg = new OnTableMenuClickArg();
 
-            argOnGridMenuClick.enmTipo = OnGridMenuClickArg_EnmAcao.ALTERAR;
-            argOnGridMenuClick.tagGridRow = this;
+            arg.enmTipo = OnTableMenuClickArg_EnmAcao.ALTERAR;
+            arg.tagTableRow = this;
 
-            this.processarOnGridMenuClick(argOnGridMenuClick);
+            this.processarOnTableMenuClick(arg);
         }
 
         private getIntId(): number
@@ -89,12 +89,12 @@ module Web
 
             this.selecionar(arg.ctrlKey);
 
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            this.tagGridHtml.dispararEvtOnRowClickListener(this);
+            this.tagTable.dispararEvtOnTableRowClickListener(this);
         }
 
         private processarOnClickRight(arg: JQueryMouseEventObject): void
@@ -108,29 +108,29 @@ module Web
 
             var objMenuContexto = new MenuContexto();
 
-            objMenuContexto.addOpcao(("Alterar registro " + this.intId), (() => { this.alterar(); }));
+            objMenuContexto.addOpcao(("Alterar registro " + this.intId), (() => this.alterar()));
 
             objMenuContexto.abrirMenu(arg);
         }
 
-        public processarOnGridMenuClick(arg: OnGridMenuClickArg): void
+        public processarOnTableMenuClick(arg: OnTableMenuClickArg): void
         {
             if (arg == null)
             {
                 return;
             }
 
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
-            this.tagGridHtml.processarOnGridMenuClick(arg);
+            this.tagTable.processarOnTableMenuClick(arg);
         }
 
         private selecionar(booControl: boolean): void
         {
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
@@ -141,7 +141,7 @@ module Web
                 return;
             }
 
-            this.tagGridHtml.selecinarTudo(false);
+            this.tagTable.selecinarTudo(false);
 
             this.booSelecionado = !this.booSelecionado;
         }
@@ -150,18 +150,18 @@ module Web
         {
             super.setBooSelecionado(booSelecionado);
 
-            if (this.tagGridHtml == null)
+            if (this.tagTable == null)
             {
                 return;
             }
 
             if (booSelecionado)
             {
-                this.tagGridHtml.addRowSelecionada(this);
+                this.tagTable.addRowSelecionada(this);
             }
             else
             {
-                this.tagGridHtml.removerRowSelecionada(this);
+                this.tagTable.removerRowSelecionada(this);
             }
         }
 
@@ -179,7 +179,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -192,15 +192,15 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onClickRight(objSender: Object, arg: JQueryMouseEventObject): void
+        public onClickRight(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
-                switch (objSender)
+                switch (tagSender)
                 {
                     case this:
                         this.processarOnClickRight(arg);
@@ -209,11 +209,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseLeave(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
@@ -221,11 +221,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onMouseOver(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseOver(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
@@ -233,7 +233,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

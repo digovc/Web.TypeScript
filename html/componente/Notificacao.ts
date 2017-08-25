@@ -126,7 +126,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strNotificacao: string, enmTipo: Notificacao_EnmTipo = Notificacao_EnmTipo.POSITIVA)
         {
@@ -137,7 +137,7 @@ module Web
             this.strNotificacao = strNotificacao;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -203,7 +203,7 @@ module Web
                 return;
             }
 
-            Notification.requestPermission(() => { this.abrirNotificacaoExterna() });
+            Notification.requestPermission(() => this.abrirNotificacaoExterna());
             return;
         }
 
@@ -213,19 +213,19 @@ module Web
                 {
                     body: this.strNotificacao,
                     icon: this.getUrlIcon(),
-                    onclose: (() => { this.fecharNotificacao(); }),
+                    onclose: (() => this.fecharNotificacao()),
                 }
 
             this.objNotificacao = new Notification((!Utils.getBooStrVazia(AppWebBase.i.strNome) ? AppWebBase.i.strNome : "Notificação"), objOptions);
 
             Notificacao.intNotificacaoAberta++;
 
-            this.intFecharTimeout = window.setTimeout((() => { this.fecharNotificacao() }), this.intTempo)
+            this.intFecharTimeout = window.setTimeout((() => this.fecharNotificacao()), this.intTempo)
         }
 
         private atrasarNotificacao(): void
         {
-            window.setTimeout(() => { this.abrirNotificacao() }, 1000);
+            window.setTimeout((() => this.abrirNotificacao()), 1000);
         }
 
         private fecharNotificacao(): void
@@ -295,7 +295,7 @@ module Web
 
         private inicializarTimeoutFechar()
         {
-            this.intFecharTimeout = window.setTimeout(() => { this.fecharNotificacao() }, this.intTempo);
+            this.intFecharTimeout = window.setTimeout((() => this.fecharNotificacao()), this.intTempo);
         }
 
         protected montarLayoutFixo(strLayoutFixo: string): string
@@ -334,7 +334,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -347,15 +347,15 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onMouseLeave(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseLeave(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
-                switch (objSender)
+                switch (tagSender)
                 {
                     case this:
                         this.inicializarTimeoutFechar();
@@ -364,15 +364,15 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onMouseOver(objSender: Object, arg: JQueryMouseEventObject): void
+        public onMouseOver(tagSender: Tag, arg: JQueryMouseEventObject): void
         {
             try
             {
-                switch (objSender)
+                switch (tagSender)
                 {
                     case this:
                         window.clearTimeout(this.intFecharTimeout);
@@ -381,7 +381,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

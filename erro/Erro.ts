@@ -66,7 +66,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strMensagem: string, exp: Error = null)
         {
@@ -78,41 +78,30 @@ module Web
             this.mostrarMensagem();
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
         private getStrMensagemFormatada(): string
         {
-            var strResultado = this.strMensagem;
-
             if (Utils.getBooStrVazia(this.strMensagemTecnica))
             {
-                return strResultado;
+                return this.strMensagem;
             }
 
-            strResultado += "<br/>"
-            strResultado += "<br/>"
-            strResultado += "Detalhes:"
-            strResultado += "<br/>"
-            strResultado += "<br/>"
-            strResultado += this.strMensagemTecnica;
-
-            return strResultado;
+            return (this.strMensagem + "<br/><br/>Detalhes:<br/><br/>" + this.strMensagemTecnica);
         }
 
         private getStrMensagemTecnica(): string
         {
-            var strResultado = "Sem maiores informações.";
-
             if (this.exp == null)
             {
-                return strResultado;
+                return null;
             }
 
             if (Utils.getBooStrVazia(this.exp.message))
             {
-                return strResultado;
+                return null;
             }
 
             return this.exp.message;

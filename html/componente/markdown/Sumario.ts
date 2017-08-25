@@ -94,7 +94,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(pagMarkdown: PagDocumentacaoBase)
         {
@@ -103,7 +103,7 @@ module Web
             this.pagDoc = pagMarkdown;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -197,7 +197,7 @@ module Web
 
             this.divEmailRegistro.iniciar();
 
-            this.arrDivItem.forEach((divItem) => { divItem.iniciar() });
+            this.arrDivItem.forEach(d => d.iniciar());
         }
 
         public inicializarUrl(urlMarkdown: string): void

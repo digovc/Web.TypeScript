@@ -1,5 +1,4 @@
-﻿/// <reference path="../../../../database/DataTable.ts"/>
-/// <reference path="../../../../database/ParValorNome.ts"/>
+﻿/// <reference path="../../../../database/ParValorNome.ts"/>
 /// <reference path="../../../../database/TblFiltro.ts"/>
 /// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../botao/BotaoCircular.ts"/>
@@ -101,7 +100,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(pnlFiltro: PainelFiltro)
         {
@@ -110,13 +109,13 @@ module Web
             this.pnlFiltro = pnlFiltro;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
         private abrirFiltroConteudo(): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 throw SrvAjaxDbeBase.STR_EXCEPTION_NULL;
             }
@@ -134,16 +133,16 @@ module Web
 
             TblFiltro.i.limparFiltro();
 
-            TblFiltro.i.addFil2(TblFiltro.i.clnWebIntId, this.cmpIntFiltroId.tagInput.intValor);
+            TblFiltro.i.addFil2(TblFiltro.i.clnIntId, this.cmpIntFiltroId.tagInput.intValor);
 
             var objInterlocutor = new Interlocutor();
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CADASTRO_FILTRO_CONTEUDO;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.abrirFiltroConteudoSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirFiltroConteudoSucesso(o));
             objInterlocutor.addJsn(TblFiltro.i);
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private abrirFiltroConteudoSucesso(objInterlocutor: Interlocutor): void
@@ -257,7 +256,7 @@ module Web
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             switch (objSender)
             {
@@ -275,7 +274,7 @@ module Web
             }
         }
 
-        public onValorAlterado(objSender: Object, arg: OnValorAlteradoArg): void
+        public onValorAlterado(objSender: Objeto, arg: OnValorAlteradoArg): void
         {
             try
             {
@@ -288,7 +287,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

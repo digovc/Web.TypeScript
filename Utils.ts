@@ -22,8 +22,8 @@
         // #region Atributos
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -75,11 +75,16 @@
          * @param evtOnLoad Evento que será disparado assim que a imagem
          * terminar de ser carregada.
          */
-        public static carregarImagem(strSrc: string, evtOnLoad: any = null): HTMLImageElement
+        public static carregarImagem(strSrc: string, fncOnLoad: ((o: HTMLImageElement) => void) = null): HTMLImageElement
         {
             var img = new Image();
+
             img.src = strSrc;
-            img.onload = evtOnLoad;
+
+            if (fncOnLoad != null)
+            {
+                img.onload = (() => fncOnLoad(img));
+            }
 
             return img;
         }
@@ -116,7 +121,7 @@
          */
         public static getBooStrVazia(str: string): boolean
         {
-            return ((str == null) || (str == Utils.STR_VAZIA));
+            return ((str == null) || (str == Utils.STR_VAZIA) || (str.trim() == Utils.STR_VAZIA));
         }
 
         public static getIntRandom(intMinimo: number, intMaximo: number): number
@@ -216,6 +221,23 @@
             }
         }
 
+        public static getStrValorMonetario(fltValor: number): string
+        {
+            var strResultado = "R$ 0,00";
+
+            if (fltValor == null)
+            {
+                return strResultado;
+            }
+
+            if (!$.isNumeric(fltValor))
+            {
+                return strResultado;
+            }
+
+            return ("R$ " + fltValor.toString().replace(".", ","));
+        }
+
         public static replaceAll(str: string, strAntigo: string, strNovo: string): string
         {
             if (Utils.getBooStrVazia(str))
@@ -223,7 +245,7 @@
                 return null;
             }
 
-            while (str.indexOf(strAntigo) != -1)
+            while (str.indexOf(strAntigo) > -1)
             {
                 str = str.replace(strAntigo, strNovo);
             }

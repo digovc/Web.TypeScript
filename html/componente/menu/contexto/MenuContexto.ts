@@ -34,7 +34,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor()
         {
@@ -43,7 +43,7 @@ module Web
             this.strId = ("tagMenuContexto_" + this.intObjetoId);
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -115,9 +115,9 @@ module Web
          * opção clicada e outro do tipo @see JQueryEventObject contendo informações do evento
          * click.
          */
-        public addOpcao(strOpcaoTitulo: string, fncOnClick: Function = null): string
+        public addOpcao(strTitulo: string, fncOnClick: ((o: MenuContextoItem, a: JQueryEventObject) => void) = null): string
         {
-            if (Utils.getBooStrVazia(strOpcaoTitulo))
+            if (Utils.getBooStrVazia(strTitulo))
             {
                 return;
             }
@@ -126,7 +126,7 @@ module Web
 
             var mci = new MenuContextoItem(strMciId, this, fncOnClick);
 
-            mci.strTitulo = strOpcaoTitulo;
+            mci.strTitulo = strTitulo;
 
             this.addMci(mci);
 
@@ -161,7 +161,7 @@ module Web
 
         private inicializarArrMci(): void
         {
-            this.arrMci.forEach((mci) => { mci.iniciar(); });
+            this.arrMci.forEach(m => m.iniciar());
         }
 
         protected montarLayoutFixo(strLayoutFixo: string): string
@@ -177,7 +177,7 @@ module Web
 
             var strConteudo = Utils.STR_VAZIA;
 
-            this.arrMci.forEach((mci) => { strConteudo += mci.strLayoutFixo; });
+            this.arrMci.forEach(m => strConteudo += m.strLayoutFixo);
 
             return strLayoutFixo.replace("_conteudo", strConteudo);
         }
@@ -201,14 +201,14 @@ module Web
         {
             super.setEventos();
 
-            window.setTimeout(() => { AppWebBase.i.pag.addEvtOnClickListener(this); }, 1);
+            window.setTimeout((() => AppWebBase.i.pag.addEvtOnClickListener(this)), 1);
         }
 
         // #endregion Métodos
 
         // #region Eventos
 
-        public onClick(objSender: Object, arg: JQueryEventObject): void
+        public onClick(objSender: Objeto, arg: JQueryEventObject): void
         {
             try
             {
@@ -216,11 +216,11 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 
-        public onFocusOut(objSender: Object): void
+        public onFocusOut(objSender: Objeto): void
         {
             try
             {
@@ -233,7 +233,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

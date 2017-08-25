@@ -1,5 +1,4 @@
 ﻿/// <reference path="../../../database/dominio/FavoritoDominio.ts"/>
-/// <reference path="../../../server/ajax/SrvAjaxDbeBase.ts"/>
 /// <reference path="../ComponenteHtml.ts"/>
 /// <reference path="DivFavoritoItem.ts"/>
 
@@ -34,8 +33,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -122,7 +121,7 @@ module Web
 
         private pesquisarFavorito(): void
         {
-            if (AppWebBase.i.srvAjaxDb == null)
+            if (AppWebBase.i.srvAjaxDbe == null)
             {
                 return;
             }
@@ -131,9 +130,9 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_TABELA_FAVORITO_PESQUISAR;
 
-            objInterlocutor.addFncSucesso((objInterlocutor: Interlocutor) => { this.pesquisarFavoritoSucesso(objInterlocutor); });
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.pesquisarFavoritoSucesso(o));
 
-            AppWebBase.i.srvAjaxDb.enviar(objInterlocutor);
+            AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
         private pesquisarFavoritoSucesso(objInterlocutor: Interlocutor): void
@@ -145,9 +144,9 @@ module Web
 
             var arrObjFavorito = new Array<FavoritoDominio>();
 
-            (objInterlocutor.objData as Array<FavoritoDominio>).forEach((obj) => { arrObjFavorito.push(<FavoritoDominio>new FavoritoDominio().copiarDados(obj)); });
+            (objInterlocutor.objData as Array<FavoritoDominio>).forEach(o => arrObjFavorito.push(new FavoritoDominio().copiarDados(o) as FavoritoDominio));
 
-            arrObjFavorito.forEach((objFavorito) => { this.addFavorito(objFavorito); });
+            arrObjFavorito.forEach(o => this.addFavorito(o));
         }
 
         // #endregion Métodos

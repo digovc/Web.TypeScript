@@ -30,7 +30,7 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
+        // #region Construtor
 
         constructor(strId: string, mnm: MenuMobileBase)
         {
@@ -39,7 +39,7 @@ module Web
             this.mnm = mnm;
         }
 
-        // #endregion Construtores
+        // #endregion Construtor
 
         // #region Métodos
         // #endregion Métodos

@@ -61,8 +61,8 @@ module Web
 
         // #endregion Atributos
 
-        // #region Construtores
-        // #endregion Construtores
+        // #region Construtor
+        // #endregion Construtor
 
         // #region Métodos
 
@@ -150,7 +150,7 @@ module Web
         {
             super.setEventos();
 
-            window.onpopstate = (() => { this.inicializarUrl() });
+            window.onpopstate = (() => this.inicializarUrl());
 
             this.divActionBarDocumentacao.addEvtOnMenuClickListener(this);
         }
@@ -172,7 +172,7 @@ module Web
             }
             catch (ex)
             {
-                new Erro("Erro desconhecido.", ex);
+                new Erro("Algo deu errado.", ex);
             }
         }
 

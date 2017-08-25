@@ -2,6 +2,6 @@
 {
     export interface OnFocusOutListener
     {
-        onFocusOut(objSender: Object): void;
+        onFocusOut(objSender: Objeto): void;
     }
 }
