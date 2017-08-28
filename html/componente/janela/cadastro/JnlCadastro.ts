@@ -272,7 +272,6 @@ module Web
 
             this.fecharJnlCadastroPai();
             this.fecharPagPrincipal();
-            this.fecharScriptJs();
         }
 
         private fecharCadastroFilho(jnlCadastroFilho: JnlCadastro): void
@@ -310,16 +309,6 @@ module Web
             }
 
             this.jnlCadastroPai.fecharCadastroFilho(this);
-        }
-
-        private fecharScriptJs(): void
-        {
-            if (this.pagPrincipal == null)
-            {
-                return;
-            }
-
-            this.pagPrincipal.removerJs(this.srcJs);
         }
 
         protected getCmp<T>(sqlClnNome: string): T

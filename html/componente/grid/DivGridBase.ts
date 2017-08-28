@@ -23,9 +23,11 @@ module Web
         private _divGridCabecalho: DivGridCabecalho;
         private _divGridConteudo: DivGridConteudo;
         private _divGridRodape: DivGridRodape;
+        private _intIndex: number = 0;
+        private _intRegistroQuantidadeMaxima: number = 25;
         private _objDataContainer: DataContainer;
 
-        private get divGridCabecalho(): DivGridCabecalho
+        protected get divGridCabecalho(): DivGridCabecalho
         {
             if (this._divGridCabecalho != null)
             {
@@ -37,7 +39,7 @@ module Web
             return this._divGridCabecalho;
         }
 
-        private get divGridConteudo(): DivGridConteudo
+        protected get divGridConteudo(): DivGridConteudo
         {
             if (this._divGridConteudo != null)
             {
@@ -49,7 +51,7 @@ module Web
             return this._divGridConteudo;
         }
 
-        private get divGridRodape(): DivGridRodape
+        protected get divGridRodape(): DivGridRodape
         {
             if (this._divGridRodape != null)
             {
@@ -59,6 +61,26 @@ module Web
             this._divGridRodape = new DivGridRodape(this);
 
             return this._divGridRodape;
+        }
+
+        public get intIndex(): number
+        {
+            return this._intIndex;
+        }
+
+        public set intIndex(intIndex: number)
+        {
+            this._intIndex = intIndex;
+        }
+
+        public get intRegistroQuantidadeMaxima(): number
+        {
+            return this._intRegistroQuantidadeMaxima;
+        }
+
+        public set intRegistroQuantidadeMaxima(intRegistroQuantidadeMaxima: number)
+        {
+            this._intRegistroQuantidadeMaxima = intRegistroQuantidadeMaxima;
         }
 
         public get objDataContainer(): DataContainer
@@ -78,41 +100,11 @@ module Web
 
         // #region Métodos
 
-        protected montarLayout(): void
-        {
-            super.montarLayout();
-
-            if (this.objDataContainer == null)
-            {
-                return;
-            }
-
-            if (this.objDataContainer.arrRow == null)
-            {
-                return;
-            }
-
-            if (this.objDataContainer.arrRow.length < 1)
-            {
-                return;
-            }
-
-            this.jq.append(this.divGridCabecalho.strLayoutFixo);
-            this.jq.append(this.divGridConteudo.strLayoutFixo);
-            this.jq.append(this.divGridRodape.strLayoutFixo);
-
-            this.divGridCabecalho.iniciar();
-            this.divGridConteudo.iniciar();
-            this.divGridRodape.iniciar();
-
-            this.mostrar();
-        }
-
         protected montarLayoutFixo(strLayoutFixo: string): string
         {
             strLayoutFixo = super.montarLayoutFixo(strLayoutFixo);
 
-            strLayoutFixo = strLayoutFixo.replace("_div_grid_consulta_id", this.strId);
+            strLayoutFixo = Utils.replaceAll(strLayoutFixo, "_div_grid_id", this.strId);
 
             return strLayoutFixo;
         }

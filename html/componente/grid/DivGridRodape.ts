@@ -45,13 +45,34 @@ module Web
 
         // #region Métodos
 
-        protected montarLayoutFixo(strLayoutFixo: string): string
+        public montarLayoutTabela(tbl: TabelaWeb): void
         {
-            strLayoutFixo = super.montarLayoutFixo(strLayoutFixo);
+            if (tbl == null)
+            {
+                return;
+            }
 
-            strLayoutFixo = strLayoutFixo.replace("_div_grid_rodape_id", this.strId);
+            if (tbl.arrCln == null)
+            {
+                return;
+            }
 
-            return strLayoutFixo;
+            if (tbl.arrCln.length < 1)
+            {
+                return;
+            }
+
+            tbl.arrCln.forEach(c => this.montarLayoutTabelaColuna(c));
+        }
+
+        private montarLayoutTabelaColuna(cln: ColunaWeb): void
+        {
+            if (cln == null)
+            {
+                return;
+            }
+
+
         }
 
         // #endregion Métodos

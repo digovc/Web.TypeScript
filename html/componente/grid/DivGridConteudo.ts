@@ -1,4 +1,5 @@
 ﻿/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="DivGridLinha.ts"/>
 
 module Web
 {
@@ -16,16 +17,29 @@ module Web
 
         // #region Atributos
 
+        private _arrDivGridLinha: Array<DivGridLinha>;
         private _divGridConsulta: DivGridBase;
 
-        private get divGridConsulta(): DivGridBase
+        private get arrDivGridLinha(): Array<DivGridLinha>
+        {
+            if (this._arrDivGridLinha != null)
+            {
+                return this._arrDivGridLinha;
+            }
+
+            this._arrDivGridLinha = new Array<DivGridLinha>();
+
+            return this._arrDivGridLinha;
+        }
+
+        public get divGrid(): DivGridBase
         {
             return this._divGridConsulta;
         }
 
-        private set divGridConsulta(divGridConsulta: DivGridBase)
+        public set divGrid(divGrid: DivGridBase)
         {
-            this._divGridConsulta = divGridConsulta;
+            this._divGridConsulta = divGrid;
         }
 
         // #endregion Atributos
@@ -36,22 +50,82 @@ module Web
         {
             super(null);
 
-            this.strId = (divGridConsulta.strId + "_" + DivGridRodape.name);
+            this.strId = (divGridConsulta.strId + "_" + DivGridConteudo.name);
 
-            this.divGridConsulta = divGridConsulta;
+            this.divGrid = divGridConsulta;
         }
 
         // #endregion Construtor
 
         // #region Métodos
 
-        protected montarLayoutFixo(strLayoutFixo: string): string
+        private limparLayout(): void
         {
-            strLayoutFixo = super.montarLayoutFixo(strLayoutFixo);
+            this.arrDivGridLinha.forEach(d => d.dispose());
 
-            strLayoutFixo = strLayoutFixo.replace("_div_grid_conteudo_id", this.strId);
+            this.arrDivGridLinha.splice(0, this.arrDivGridLinha.length);
 
-            return strLayoutFixo;
+            this.strConteudo = null;
+        }
+
+        public montarLayoutTabela(tbl: TabelaWeb): void
+        {
+            this.limparLayout();
+
+            if (tbl == null)
+            {
+                return;
+            }
+
+            if (tbl.arrCln == null)
+            {
+                return;
+            }
+
+            if (tbl.arrCln.length < 1)
+            {
+                return;
+            }
+
+            if (this.divGrid.objDataContainer == null)
+            {
+                return;
+            }
+
+            if (this.divGrid.objDataContainer.arrRow == null)
+            {
+                return;
+            }
+
+            if (this.divGrid.objDataContainer.arrRow.length < 1)
+            {
+                return;
+            }
+
+            var intRegistroIndex = (this.divGrid.intIndex * this.divGrid.intRegistroQuantidadeMaxima);
+
+            if (this.divGrid.objDataContainer.arrRow.length < intRegistroIndex)
+            {
+                return;
+            }
+
+            for (var i = 0; (i < this.divGrid.intRegistroQuantidadeMaxima) && (this.divGrid.objDataContainer.arrRow.length > intRegistroIndex); i++ , intRegistroIndex++)
+            {
+                this.montarLayoutTabelaItem(tbl, intRegistroIndex);
+            }
+        }
+
+        private montarLayoutTabelaItem(tbl: TabelaWeb, intRegistroIndex: number): void
+        {
+            var divGridLinha = new DivGridLinha(this);
+
+            this.addHtml(divGridLinha.strLayoutFixo);
+
+            divGridLinha.iniciar();
+
+            divGridLinha.montarLayoutTabela(tbl, intRegistroIndex);
+
+            this.arrDivGridLinha.push(divGridLinha);
         }
 
         // #endregion Métodos

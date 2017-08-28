@@ -230,7 +230,7 @@ module Web
 
         private inicializarTblWebRef(): void
         {
-            AppWebBase.i.srvAjaxDbe.carregarTbl(this.strTblWebRefNome);
+            AppWebBase.i.srvAjaxDbe.carregarTabela(this.strTblWebRefNome);
         }
 
         public limparDados(): void

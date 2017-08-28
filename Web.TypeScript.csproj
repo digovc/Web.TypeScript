@@ -27,7 +27,8 @@
     <TypeScriptCompile Include="database\view\ViwWebBase.ts" />
     <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaBase.ts" />
     <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaCabecalho.ts" />
-    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaSumario.ts" />
+    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaLinha.ts" />
+    <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaRodape.ts" />
     <TypeScriptCompile Include="html\componente\grid\DivGridBase.ts" />
     <TypeScriptCompile Include="html\componente\grid\DivGridCabecalho.ts" />
     <TypeScriptCompile Include="html\componente\grid\DivGridConsulta.ts" />
