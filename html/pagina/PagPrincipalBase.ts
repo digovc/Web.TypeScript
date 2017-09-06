@@ -96,7 +96,7 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_ABRIR_CADASTRO;
 
-            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirCadastroSucesso(o));
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.abrirCadastroSucesso(o, tblWeb));
             objInterlocutor.addJsn(tblWeb);
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
