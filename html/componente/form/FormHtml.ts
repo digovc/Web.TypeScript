@@ -18,8 +18,8 @@ module Web
 
         // #region Atributos
 
-        private _arrCmp: Array<CampoHtml>;
-        private _cmpEmFoco: CampoHtml;
+        private _arrCmp: Array<CampoHtmlBase>;
+        private _cmpEmFoco: CampoHtmlBase;
         private _divComando: DivComando;
         private _jnlCadastro: JnlCadastro;
         private _divCritica: DivDica;
@@ -27,7 +27,7 @@ module Web
         private _tabHtml: TabHtml;
         private _tblWeb: TabelaWeb;
 
-        protected get arrCmp(): Array<CampoHtml>
+        protected get arrCmp(): Array<CampoHtmlBase>
         {
             if (this._arrCmp != null)
             {
@@ -39,12 +39,12 @@ module Web
             return this._arrCmp;
         }
 
-        public get cmpEmFoco(): CampoHtml
+        public get cmpEmFoco(): CampoHtmlBase
         {
             return this._cmpEmFoco;
         }
 
-        public set cmpEmFoco(cmpEmFoco: CampoHtml)
+        public set cmpEmFoco(cmpEmFoco: CampoHtmlBase)
         {
             if (this._cmpEmFoco == cmpEmFoco)
             {
@@ -216,7 +216,7 @@ module Web
             this.selecionarCampo();
         }
 
-        private getArrCmp(): Array<CampoHtml>
+        private getArrCmp(): Array<CampoHtmlBase>
         {
             if (this.jq == null)
             {
@@ -230,7 +230,7 @@ module Web
                 return;
             }
 
-            var arrCmpResultado = new Array<CampoHtml>();
+            var arrCmpResultado = new Array<CampoHtmlBase>();
 
             for (var i = 0; i < arrElmCmp.length; i++)
             {
@@ -240,7 +240,7 @@ module Web
             return arrCmpResultado;
         }
 
-        private getArrCmp2(arrCmp: Array<CampoHtml>, elmCmp: HTMLElement): void
+        private getArrCmp2(arrCmp: Array<CampoHtmlBase>, elmCmp: HTMLElement): void
         {
             if (elmCmp == null)
             {
@@ -257,7 +257,7 @@ module Web
                 return;
             }
 
-            var cmp: CampoHtml = new (<any>window)["Web"][$(elmCmp).attr("clazz")](elmCmp.id);
+            var cmp: CampoHtmlBase = new (<any>window)["Web"][$(elmCmp).attr("clazz")](elmCmp.id);
 
             cmp.frm = this;
 
@@ -324,7 +324,7 @@ module Web
             return null;
         }
 
-        private getCmpPorClnWebSqlNome2(sqlClnNome: string, cmp: CampoHtml): CampoHtml
+        private getCmpPorClnWebSqlNome2(sqlClnNome: string, cmp: CampoHtmlBase): CampoHtmlBase
         {
             if (cmp == null)
             {
@@ -464,7 +464,7 @@ module Web
             }
         }
 
-        private setCmpEmFoco(cmpEmFoco: CampoHtml): void
+        private setCmpEmFoco(cmpEmFoco: CampoHtmlBase): void
         {
             this.dispararEvtOnCmpEmFocoAlterado(cmpEmFoco);
 
@@ -472,7 +472,7 @@ module Web
             this.setCmpEmFocodivDica(cmpEmFoco);
         }
 
-        private setCmpEmFocodivCritica(cmpEmFoco: CampoHtml): void
+        private setCmpEmFocodivCritica(cmpEmFoco: CampoHtmlBase): void
         {
             this.divCritica.strConteudo = null;
 
@@ -489,7 +489,7 @@ module Web
             this.divCritica.strConteudo = cmpEmFoco.strCritica;
         }
 
-        private setCmpEmFocodivDica(cmpEmFoco: CampoHtml): void
+        private setCmpEmFocodivDica(cmpEmFoco: CampoHtmlBase): void
         {
             this.divDica.strConteudo = null;
 
@@ -599,7 +599,7 @@ module Web
             this.arrEvtOnCmpEmFocoAlterado.push(evt);
         }
 
-        private dispararEvtOnCmpEmFocoAlterado(cmpEmFoco: CampoHtml): void
+        private dispararEvtOnCmpEmFocoAlterado(cmpEmFoco: CampoHtmlBase): void
         {
             if (this.arrEvtOnCmpEmFocoAlterado.length == 0)
             {

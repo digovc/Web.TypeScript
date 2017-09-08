@@ -1,4 +1,4 @@
-﻿/// <reference path="CampoHtml.ts"/>
+﻿/// <reference path="CampoHtmlBase.ts"/>
 
 module Web
 {
@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class CampoRadioButton extends CampoHtml
+    export class CampoRadioButton extends CampoHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

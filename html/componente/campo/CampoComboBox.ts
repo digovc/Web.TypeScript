@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../ComboBox.ts"/>
 /// <reference path="../../Input.ts"/>
-/// <reference path="CampoHtml.ts"/>
+/// <reference path="CampoHtmlBase.ts"/>
 
 module Web
 {
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class CampoComboBox extends CampoHtml
+    export class CampoComboBox extends CampoHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

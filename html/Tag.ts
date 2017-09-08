@@ -253,17 +253,17 @@ module Web
         {
         }
 
-        protected getBooAttValor(strAttNome: string): boolean
+        public getBooAttValor(strAttNome: string): boolean
         {
             return Utils.getBoo(this.getStrAttValor(strAttNome));
         }
 
-        protected getIntAttValor(strAttNome: string): number
+        public getIntAttValor(strAttNome: string): number
         {
             return Number(this.getStrAttValor(strAttNome));
         }
 
-        protected getStrAttValor(strAttNome: string): string
+        public getStrAttValor(strAttNome: string): string
         {
             if (Utils.getBooStrVazia(strAttNome))
             {
