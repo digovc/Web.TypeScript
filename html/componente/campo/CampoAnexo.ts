@@ -271,7 +271,7 @@ module Web
 
             frmData.append("arq_nome", this.elmInput.files[0].name);
             frmData.append("cln_web_nome", this.clnWeb.strNome);
-            frmData.append("dtt_upload", this.frm.tblWeb.dttUpload);
+            frmData.append("dtt_upload", this.frm.tblWeb.dttUpload.toString());
             frmData.append("tbl_web_nome", this.frm.tblWeb.strNome);
 
             frmData.append("arq_conteudo", this.elmInput.files[0]);
