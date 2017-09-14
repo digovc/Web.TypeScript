@@ -14,7 +14,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class CampoHtml extends ComponenteHtmlBase implements OnFocusInListener, OnFocusOutListener, OnValorAlteradoListener
+    export abstract class CampoHtmlBase extends ComponenteHtmlBase implements OnFocusInListener, OnFocusOutListener, OnValorAlteradoListener
     {
         // #region Constantes
 
@@ -23,11 +23,11 @@ module Web
         // #region Atributos
 
         private _booEmFoco: boolean;
-        private _booMostrarTituloNunca: boolean;
-        private _booMostrarTituloSempre: boolean;
         private _booObrigatorio: boolean;
         private _booPermitirAlterar: boolean;
         private _booSomenteLeitura: boolean;
+        private _booTituloFixo: boolean;
+        private _booTituloInvisivel: boolean;
         private _btnAcao: BotaoHtml;
         private _clnWeb: ColunaWeb;
         private _divContainer: Div;
@@ -54,28 +54,6 @@ module Web
             this._booEmFoco = booSEmFoco;
 
             this.setBooEmFoco(this._booEmFoco);
-        }
-
-        public get booMostrarTituloNunca(): boolean
-        {
-            return this._booMostrarTituloNunca;
-        }
-
-        public set booMostrarTituloNunca(booMostrarTituloNunca: boolean)
-        {
-            this._booMostrarTituloNunca = booMostrarTituloNunca;
-        }
-
-        private get booMostrarTituloSempre(): boolean
-        {
-            if (this._booMostrarTituloSempre != null)
-            {
-                return this._booMostrarTituloSempre;
-            }
-
-            this._booMostrarTituloSempre = (!Utils.getBooStrVazia(this.jq.attr("mostrar_titulo_sempre")));
-
-            return this._booMostrarTituloSempre;
         }
 
         private get booPermitirAlterar(): boolean
@@ -124,6 +102,28 @@ module Web
         private set booSomenteLeitura(booSomenteLeitura: boolean)
         {
             this._booSomenteLeitura = booSomenteLeitura;
+        }
+
+        private get booTituloFixo(): boolean
+        {
+            if (this._booTituloFixo != null)
+            {
+                return this._booTituloFixo;
+            }
+
+            this._booTituloFixo = (!Utils.getBooStrVazia(this.jq.attr("titulo-fixo")));
+
+            return this._booTituloFixo;
+        }
+
+        public get booTituloInvisivel(): boolean
+        {
+            return this._booTituloInvisivel;
+        }
+
+        public set booTituloInvisivel(booTituloInvisivel: boolean)
+        {
+            this._booTituloInvisivel = booTituloInvisivel;
         }
 
         public get btnAcao(): BotaoHtml
@@ -310,7 +310,7 @@ module Web
                 return;
             }
 
-            var clnWebResultado = new ColunaWeb(this.jq.attr("cln_web_nome"));
+            var clnWebResultado = new ColunaWeb(this.jq.attr("coluna-nome"));
 
             if (this.jq == null)
             {
@@ -332,7 +332,7 @@ module Web
                 return clnWebResultado;
             }
 
-            return this.frm.jnlCadastro.tblWeb.getCln(this.jq.attr("cln_web_nome"));
+            return this.frm.jnlCadastro.tblWeb.getCln(this.jq.attr("coluna-nome"));
         }
 
         private getIntRegistroId(): number
@@ -387,7 +387,7 @@ module Web
 
         private inicializarMostrarTituloSempre(): void
         {
-            if (!this.booMostrarTituloSempre)
+            if (!this.booTituloFixo)
             {
                 return;
             }
@@ -399,13 +399,13 @@ module Web
 
         protected mostrarEsconderDivTitulo(booMostrar: boolean): void
         {
-            if (booMostrar && !this.booMostrarTituloNunca)
+            if (booMostrar && !this.booTituloInvisivel)
             {
                 this.divTitulo.jq.animate({ opacity: 1 }, 200, "swing");
                 return;
             }
 
-            if (!this.booMostrarTituloSempre)
+            if (!this.booTituloFixo)
             {
                 this.divTitulo.jq.animate({ opacity: 0 }, 200, "swing");
             }
@@ -442,14 +442,11 @@ module Web
 
         protected setBooEmFoco(booEmFoco: boolean): void
         {
-            this.divTitulo.jq.css("color", (booEmFoco ? "black" : Utils.STR_VAZIA));
             this.divTitulo.jq.css("font-weight", (booEmFoco ? "bold" : Utils.STR_VAZIA));
-            this.tagInput.jq.css("border-bottom-color", (booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-            this.tagInput.jq.css("border-bottom-width", (booEmFoco ? 2 : 1));
 
             if (!Utils.getBooStrVazia(this.strCritica))
             {
-                this.tagInput.jq.css("border-bottom-color", "#f8b2b2");
+                // TODO: Mudar a aparência quando houver crítica no campo.
             }
 
             this.setBooEmFocoFrm(booEmFoco);
@@ -502,15 +499,6 @@ module Web
 
         protected setStrCritica(strCritica: string): void
         {
-            if (Utils.getBooStrVazia(strCritica))
-            {
-                this.tagInput.jq.css("border-bottom-color", (this.booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-            }
-            else
-            {
-                this.tagInput.jq.css("border-bottom-color", "#f8b2b2");
-            }
-
             this.setStrCriticaFrm(strCritica);
         }
 

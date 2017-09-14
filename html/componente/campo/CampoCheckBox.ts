@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../CheckBox.ts"/>
-/// <reference path="CampoHtml.ts"/>
+/// <reference path="CampoHtmlBase.ts"/>
 
 module Web
 {
@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class CampoCheckBox extends CampoHtml
+    export class CampoCheckBox extends CampoHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

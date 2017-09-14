@@ -19,9 +19,36 @@ module Web
 
         // #region Atributos
 
+        private _arrBtnTemp: Array<BotaoActionBar>;
+        private _arrBtnTempSubMenu: Array<BotaoActionBar>;
         private _btnMenu: BotaoActionBar;
+        private _btnSubMenu: BotaoActionBar;
         private _btnVoltar: BotaoActionBar;
         private _divTitulo: Div;
+
+        private get arrBtnTemp(): Array<BotaoActionBar>
+        {
+            if (this._arrBtnTemp != null)
+            {
+                return this._arrBtnTemp;
+            }
+
+            this._arrBtnTemp = new Array<BotaoActionBar>();
+
+            return this._arrBtnTemp;
+        }
+
+        private get arrBtnTempSubMenu(): Array<BotaoActionBar>
+        {
+            if (this._arrBtnTempSubMenu != null)
+            {
+                return this._arrBtnTempSubMenu;
+            }
+
+            this._arrBtnTempSubMenu = new Array<BotaoActionBar>();
+
+            return this._arrBtnTempSubMenu;
+        }
 
         private get btnMenu(): BotaoActionBar
         {
@@ -33,6 +60,18 @@ module Web
             this._btnMenu = new BotaoActionBar(this.strId + "_btnMenu");
 
             return this._btnMenu;
+        }
+
+        private get btnSubMenu(): BotaoActionBar
+        {
+            if (this._btnSubMenu != null)
+            {
+                return this._btnSubMenu;
+            }
+
+            this._btnSubMenu = new BotaoActionBar(this.strId + "_btnSubMenu");
+
+            return this._btnSubMenu;
         }
 
         private get btnVoltar(): BotaoActionBar
@@ -67,12 +106,49 @@ module Web
 
         // #region Métodos
 
+        public addOpcao(btn: BotaoActionBar): void
+        {
+            if (btn == null)
+            {
+                return;
+            }
+
+            if (btn.booRapido)
+            {
+                this.addOpcaoRapido(btn);
+                return;
+            }
+
+            this.arrBtnTempSubMenu.push(btn);
+            this.btnSubMenu.mostrar();
+        }
+
+        private addOpcaoRapido(btn: BotaoActionBar): void
+        {
+            this.arrBtnTemp.push(btn);
+            this.addHtml(btn.strLayoutFixo);
+
+            btn.iniciar();
+        }
+
         protected inicializar(): void
         {
             super.inicializar();
 
             this.btnMenu.iniciar();
+            this.btnSubMenu.iniciar();
             this.btnVoltar.iniciar();
+        }
+
+        public limpar(): void
+        {
+            this.arrBtnTemp.forEach(btn => btn.dispose());
+
+            this.arrBtnTemp.splice(0, this.arrBtnTemp.length);
+
+            this.arrBtnTempSubMenu.splice(0, this.arrBtnTemp.length);
+
+            this.btnSubMenu.esconder();
         }
 
         protected setEventos(): void

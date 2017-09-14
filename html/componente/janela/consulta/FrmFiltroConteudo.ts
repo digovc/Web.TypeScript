@@ -62,7 +62,7 @@ module Web
             this.arrCmp.forEach(c => this.atualizarArrFiltro2(tblWeb, c));
         }
 
-        private atualizarArrFiltro2(tblWeb: TabelaWeb, cmpFiltro: CampoHtml): void
+        private atualizarArrFiltro2(tblWeb: TabelaWeb, cmpFiltro: CampoHtmlBase): void
         {
             if (cmpFiltro == null)
             {
@@ -93,7 +93,7 @@ module Web
             this.pesquisar();
         }
 
-        private getEnmOperador(cmpFiltro: CampoHtml): any
+        private getEnmOperador(cmpFiltro: CampoHtmlBase): any
         {
             if (cmpFiltro == null)
             {
@@ -167,7 +167,7 @@ module Web
         {
             try
             {
-                if (objSender instanceof CampoHtml)
+                if (objSender instanceof CampoHtmlBase)
                 {
                     this.cmpOnKeydown(arg);
                 }

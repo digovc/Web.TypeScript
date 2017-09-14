@@ -27,6 +27,19 @@ module Web
     {
         // #region Constantes
 
+        public static get DIR_CSS(): string { return (AppWebBase.DIR_RESOURCE + "css/") };
+        public static get DIR_HTML(): string { return "res/html/" };
+        public static get DIR_HTML_PAGINA(): string { return (AppWebBase.DIR_HTML + "pagina/") };
+        public static get DIR_JS(): string { return (AppWebBase.DIR_RESOURCE + "js/") };
+        public static get DIR_JS_LIB(): string { return (AppWebBase.DIR_RESOURCE + "js/lib/") };
+        public static get DIR_JS_WEB(): string { return (AppWebBase.DIR_JS + "web/") };
+        public static get DIR_JSON_CONFIG(): string { return "JSON Config/" };
+        public static get DIR_MEDIA_GIF(): string { return (AppWebBase.DIR_RESOURCE + "media/gif/") };
+        public static get DIR_MEDIA_JPG(): string { return (AppWebBase.DIR_RESOURCE + "media/jpg/") };
+        public static get DIR_MEDIA_PNG(): string { return (AppWebBase.DIR_RESOURCE + "media/png/") };
+        public static get DIR_MEDIA_SVG(): string { return (AppWebBase.DIR_RESOURCE + "media/svg/") };
+        public static get DIR_RESOURCE(): string { return "/res/" };
+
         public static get STR_COOKIE_SESSAO_NOME(): string { return "sessao" };
 
         private static get STR_CONSTANTE_DESENVOLVIMENTO(): string { return "STR_CONSTANTE_DESENVOLVIMENTO" };

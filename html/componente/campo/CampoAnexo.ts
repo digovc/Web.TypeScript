@@ -270,7 +270,7 @@ module Web
             var frmData = new FormData();
 
             frmData.append("arq_nome", this.elmInput.files[0].name);
-            frmData.append("cln_web_nome", this.clnWeb.strNome);
+            frmData.append("coluna-nome", this.clnWeb.strNome);
             frmData.append("dtt_upload", this.frm.tblWeb.dttUpload.toString());
             frmData.append("tbl_web_nome", this.frm.tblWeb.strNome);
 

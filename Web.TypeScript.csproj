@@ -139,7 +139,7 @@
     <TypeScriptCompile Include="html\componente\campo\CampoComboBox.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoConsulta.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoDataHora.ts" />
-    <TypeScriptCompile Include="html\componente\campo\CampoHtml.ts" />
+    <TypeScriptCompile Include="html\componente\campo\CampoHtmlBase.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoImagem.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoRadioButton.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoSenha.ts" />

@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../campo/CampoAlfanumerico.ts"/>
 /// <reference path="../../campo/CampoCheckBox.ts"/>
-/// <reference path="../../campo/CampoHtml.ts"/>
+/// <reference path="../../campo/CampoHtmlBase.ts"/>
 /// <reference path="../../campo/CampoNumerico.ts"/>
 /// <reference path="../../tab/TabHtml.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
@@ -579,7 +579,7 @@ module Web
                 return;
             }
 
-            var cmp = this.frm.getCmpPorClnWebSqlNome<CampoHtml>(clnWeb.strNome);
+            var cmp = this.frm.getCmpPorClnWebSqlNome<CampoHtmlBase>(clnWeb.strNome);
 
             if (cmp == null)
             {
