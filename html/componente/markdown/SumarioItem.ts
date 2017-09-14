@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../../erro/Erro.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="IndiceItem.ts"/>
 
 module Web
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class SumarioItem extends ComponenteHtml implements OnClickListener
+    export class SumarioItem extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
 

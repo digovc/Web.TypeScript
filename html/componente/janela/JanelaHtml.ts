@@ -4,7 +4,7 @@
 /// <reference path="../../../OnMouseMoveListener.ts"/>
 /// <reference path="../../../OnMouseUpListener.ts"/>
 /// <reference path="../../pagina/PaginaHtmlBase.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -14,7 +14,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class JanelaHtml extends ComponenteHtml implements OnClickListener, OnMouseDownListener, OnMouseLeaveListener, OnMouseMoveListener, OnMouseUpListener
+    export class JanelaHtml extends ComponenteHtmlBase implements OnClickListener, OnMouseDownListener, OnMouseLeaveListener, OnMouseMoveListener, OnMouseUpListener
     {
         // #region Constantes
         // #endregion Constantes

@@ -1,4 +1,4 @@
-﻿/// <reference path="../../ComponenteHtml.ts"/>
+﻿/// <reference path="../../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuContextoItem extends ComponenteHtml implements OnClickListener, OnMouseLeaveListener, OnMouseOverListener
+    export class MenuContextoItem extends ComponenteHtmlBase implements OnClickListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
         // #endregion Constantes

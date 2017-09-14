@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../botao/actionbar/BotaoActionBar.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="OnMenuClickListener.ts"/>
 /// <reference path="OnVoltarClickListener.ts"/>
 
@@ -12,7 +12,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ActionBarBase extends ComponenteHtml implements OnClickListener
+    export abstract class ActionBarBase extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes

@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="database\view\ViwWebBase.ts" />
+    <TypeScriptCompile Include="html\componente\Card.ts" />
     <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaBase.ts" />
     <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaCabecalho.ts" />
     <TypeScriptCompile Include="html\componente\grid\coluna\DivGridColunaLinha.ts" />
@@ -143,7 +144,7 @@
     <TypeScriptCompile Include="html\componente\campo\CampoRadioButton.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoSenha.ts" />
     <TypeScriptCompile Include="html\componente\campo\CampoTexto.ts" />
-    <TypeScriptCompile Include="html\componente\ComponenteHtml.ts" />
+    <TypeScriptCompile Include="html\componente\ComponenteHtmlBase.ts" />
     <TypeScriptCompile Include="html\componente\janela\cadastro\DivComando.ts" />
     <TypeScriptCompile Include="html\componente\form\FormHtml.ts" />
     <TypeScriptCompile Include="html\componente\janela\JanelaHtml.ts" />

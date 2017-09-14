@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../../database/DataContainer.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="DivGridCabecalho.ts"/>
 /// <reference path="DivGridConteudo.ts"/>
 /// <reference path="DivGridRodape.ts"/>
@@ -13,7 +13,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class DivGridBase extends ComponenteHtml
+    export abstract class DivGridBase extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

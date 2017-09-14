@@ -1,4 +1,4 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DivGridRodape extends ComponenteHtml
+    export class DivGridRodape extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

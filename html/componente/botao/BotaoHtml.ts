@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../OnFocusInListener.ts"/>
 /// <reference path="../../../OnFocusOutListener.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class BotaoHtml extends ComponenteHtml implements OnFocusInListener, OnFocusOutListener
+    export class BotaoHtml extends ComponenteHtmlBase implements OnFocusInListener, OnFocusOutListener
     {
         // #region Constantes
         // #endregion Constantes

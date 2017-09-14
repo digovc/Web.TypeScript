@@ -1,5 +1,5 @@
 ﻿/// <reference path="botao/BotaoMini.ts"/>
-/// <reference path="ComponenteHtml.ts"/>
+/// <reference path="ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -17,7 +17,7 @@ module Web
 
     // #endregion Enumerados
 
-    export class Notificacao extends ComponenteHtml implements OnClickListener, OnMouseLeaveListener, OnMouseOverListener
+    export class Notificacao extends ComponenteHtmlBase implements OnClickListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
 

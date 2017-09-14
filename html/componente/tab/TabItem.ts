@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../../database/TabelaWeb.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="TabItemHead.ts"/>
 
 module Web
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TabItem extends ComponenteHtml implements OnTableMenuClickListener, OnTableRowClickListener
+    export class TabItem extends ComponenteHtmlBase implements OnTableMenuClickListener, OnTableRowClickListener
     {
         // #region Constantes
         // #endregion Constantes

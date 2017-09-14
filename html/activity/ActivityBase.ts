@@ -1,4 +1,4 @@
-﻿/// <reference path="../componente/ComponenteHtml.ts"/>
+﻿/// <reference path="../componente/ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ActivityBase extends ComponenteHtml
+    export abstract class ActivityBase extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

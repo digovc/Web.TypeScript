@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Utils.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="TableRow.ts"/>
 /// <reference path="OnTableMenuClickArg.ts"/>
 /// <reference path="OnTableMenuClickListener.ts"/>
@@ -14,7 +14,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TableHtml extends ComponenteHtml
+    export class TableHtml extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

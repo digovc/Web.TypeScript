@@ -1,4 +1,4 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="DivCritica.ts"/>
 /// <reference path="DivDica.ts"/>
 /// <reference path="OnCmpEmFocoAlterado.ts"/>
@@ -11,7 +11,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class FormHtml extends ComponenteHtml
+    export class FormHtml extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

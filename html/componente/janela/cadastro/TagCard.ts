@@ -1,4 +1,4 @@
-﻿/// <reference path="../../ComponenteHtml.ts"/>
+﻿/// <reference path="../../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TagCard extends ComponenteHtml implements OnClickListener
+    export class TagCard extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes

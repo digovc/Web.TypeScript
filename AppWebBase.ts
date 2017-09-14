@@ -63,7 +63,7 @@ module Web
         private _srvHttp: SrvHttpBase;
         private _strNamespace: string;
         private _strSessao: string;
-        private _tagFoco: ComponenteHtml;
+        private _tagFoco: ComponenteHtmlBase;
 
         private get arrSrv(): Array<ServerBase>
         {
@@ -186,12 +186,12 @@ module Web
             this._strSessao = strSessao;
         }
 
-        public get tagFoco(): ComponenteHtml
+        public get tagFoco(): ComponenteHtmlBase
         {
             return this._tagFoco;
         }
 
-        public set tagFoco(tagFoco: ComponenteHtml)
+        public set tagFoco(tagFoco: ComponenteHtmlBase)
         {
             if (this._tagFoco == tagFoco)
             {
