@@ -36,6 +36,7 @@
     <TypeScriptCompile Include="html\componente\grid\DivGridConteudo.ts" />
     <TypeScriptCompile Include="html\componente\grid\DivGridLinha.ts" />
     <TypeScriptCompile Include="html\componente\grid\DivGridRodape.ts" />
+    <TypeScriptCompile Include="html\componente\painel\PainelModal.ts" />
     <TypeScriptCompile Include="html\componente\table\OnTableMenuClickArg.ts" />
     <TypeScriptCompile Include="html\componente\table\OnTableMenuClickListener.ts" />
     <TypeScriptCompile Include="html\componente\table\OnTableRowClickListener.ts" />
