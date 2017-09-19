@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="../janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="TabItem.ts"/>
 
@@ -11,7 +11,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TabHtml extends ComponenteHtml implements OnClickListener
+    export class TabHtml extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes

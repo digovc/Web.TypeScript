@@ -27,10 +27,9 @@ module Web
 
         // #region Atributos
 
+        private _booConectado: boolean;
         private _dttUltimoPong: Date;
         private _objWebSocket: WebSocket;
-
-        private _booConectado: boolean;
 
         public get booConectado(): boolean
         {

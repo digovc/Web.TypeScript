@@ -1,4 +1,4 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="MenuMobileItem.ts"/>
 
 module Web
@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class MenuMobileBase extends ComponenteHtml implements OnClickListener
+    export abstract class MenuMobileBase extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes

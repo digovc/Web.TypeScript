@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../../database/dominio/FavoritoDominio.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="DivFavoritoItem.ts"/>
 
 module Web
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DivFavorito extends ComponenteHtml
+    export class DivFavorito extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

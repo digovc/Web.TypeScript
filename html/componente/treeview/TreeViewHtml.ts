@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TreeViewHtml extends ComponenteHtml
+    export class TreeViewHtml extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

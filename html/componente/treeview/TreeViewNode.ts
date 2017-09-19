@@ -6,7 +6,7 @@
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TreeViewNode extends ComponenteHtml implements OnClickListener
+    export class TreeViewNode extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes

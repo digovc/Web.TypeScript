@@ -5,7 +5,7 @@
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
 /// <reference path="../../pagina/PaginaHtmlBase.ts"/>
 /// <reference path="../../pagina/PagPrincipalBase.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="MenuItem.ts"/>
 
 module Web
@@ -16,7 +16,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class Menu extends ComponenteHtml implements OnClickListener, OnEnterListener, OnKeyUpListener, OnValorAlteradoListener
+    export abstract class Menu extends ComponenteHtmlBase implements OnClickListener, OnEnterListener, OnKeyUpListener, OnValorAlteradoListener
     {
         // #region Constantes
         // #endregion Constantes

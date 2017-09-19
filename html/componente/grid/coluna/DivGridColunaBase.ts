@@ -1,17 +1,17 @@
-﻿/// <reference path="../../../../../Web.TypeScript/html/componente/ComponenteHtml.ts"/>
+﻿/// <reference path="../../../../../Web.TypeScript/html/componente/ComponenteHtmlBase.ts"/>
 
 module Web
 {
     // #region Importações
 
-    import ComponenteHtml = Web.ComponenteHtml;
+    import ComponenteHtmlBase = Web.ComponenteHtmlBase;
 
     // #endregion Importações
 
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class DivGridColunaBase extends ComponenteHtml
+    export abstract class DivGridColunaBase extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

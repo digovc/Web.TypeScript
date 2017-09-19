@@ -71,6 +71,11 @@ module Web
             return strLayoutFixo;
         }
 
+        protected processarOnFocusIn(): void
+        {
+            //super.processarOnFocusIn();
+        }
+
         // #endregion Métodos
 
         // #region Eventos

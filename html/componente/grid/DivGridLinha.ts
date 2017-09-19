@@ -1,4 +1,4 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="coluna/DivGridColunaLinha.ts"/>
 
 module Web
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DivGridLinha extends ComponenteHtml
+    export class DivGridLinha extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

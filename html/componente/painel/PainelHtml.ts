@@ -1,4 +1,4 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class PainelHtml extends ComponenteHtml
+    export class PainelHtml extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

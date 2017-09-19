@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../../OnClickListener.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DivFavoritoItem extends ComponenteHtml implements OnClickListener
+    export class DivFavoritoItem extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
 

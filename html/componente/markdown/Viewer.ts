@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../../typedefinition/marked.d.ts" />
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class Viewer extends ComponenteHtml implements OnClickListener
+    export class Viewer extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes

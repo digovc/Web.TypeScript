@@ -9,7 +9,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class ComponenteHtml extends Div
+    export abstract class ComponenteHtmlBase extends Div
     {
         // #region Constantes
         // #endregion Constantes

@@ -1,4 +1,4 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -8,7 +8,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class DivDica extends ComponenteHtml
+    export class DivDica extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes

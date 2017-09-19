@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../database/dominio/documentacao/EmailRegistroDominio.ts"/>
 /// <reference path="../../../server/ajax/SrvAjaxDocumentacao.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class EmailRegistro extends ComponenteHtml implements OnClickListener
+    export class EmailRegistro extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes

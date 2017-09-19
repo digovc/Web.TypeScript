@@ -28,7 +28,7 @@ module Web
         // #region Constantes
 
         public static get DIR_CSS(): string { return (AppWebBase.DIR_RESOURCE + "css/") };
-        public static get DIR_HTML(): string { return "res/html/" };
+        public static get DIR_HTML(): string { return (AppWebBase.DIR_RESOURCE + "html/") };
         public static get DIR_HTML_PAGINA(): string { return (AppWebBase.DIR_HTML + "pagina/") };
         public static get DIR_JS(): string { return (AppWebBase.DIR_RESOURCE + "js/") };
         public static get DIR_JS_LIB(): string { return (AppWebBase.DIR_RESOURCE + "js/lib/") };
@@ -76,7 +76,7 @@ module Web
         private _srvHttp: SrvHttpBase;
         private _strNamespace: string;
         private _strSessao: string;
-        private _tagFoco: ComponenteHtml;
+        private _tagFoco: ComponenteHtmlBase;
 
         private get arrSrv(): Array<ServerBase>
         {
@@ -199,12 +199,12 @@ module Web
             this._strSessao = strSessao;
         }
 
-        public get tagFoco(): ComponenteHtml
+        public get tagFoco(): ComponenteHtmlBase
         {
             return this._tagFoco;
         }
 
-        public set tagFoco(tagFoco: ComponenteHtml)
+        public set tagFoco(tagFoco: ComponenteHtmlBase)
         {
             if (this._tagFoco == tagFoco)
             {

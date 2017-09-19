@@ -3,7 +3,7 @@
 /// <reference path="../../../OnMouseLeaveListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../circulo/DivCirculo.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="../painel/PainelHtml.ts"/>
 
 module Web
@@ -14,7 +14,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuItem extends ComponenteHtml implements OnClickListener, OnKeyUpListener, OnMouseLeaveListener, OnMouseOverListener
+    export class MenuItem extends ComponenteHtmlBase implements OnClickListener, OnKeyUpListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
         // #endregion Constantes

@@ -4,7 +4,7 @@
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../../Div.ts"/>
 /// <reference path="../../Input.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -14,7 +14,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export abstract class CampoHtmlBase extends ComponenteHtml implements OnFocusInListener, OnFocusOutListener, OnValorAlteradoListener
+    export abstract class CampoHtmlBase extends ComponenteHtmlBase implements OnFocusInListener, OnFocusOutListener, OnValorAlteradoListener
     {
         // #region Constantes
 

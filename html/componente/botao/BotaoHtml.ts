@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../OnFocusInListener.ts"/>
 /// <reference path="../../../OnFocusOutListener.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class BotaoHtml extends ComponenteHtml implements OnFocusInListener, OnFocusOutListener
+    export class BotaoHtml extends ComponenteHtmlBase implements OnFocusInListener, OnFocusOutListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -23,11 +23,10 @@ module Web
 
         // #region Métodos
 
-        private processarOnFocusIn(): void
+        protected processarOnFocusIn(): void
         {
             AppWebBase.i.tagFoco = this;
 
-            //this.jq.css("border", "1px solid gray");
             this.jq.css("box-shadow", "0px 2px 5px 0px black");
         }
 

@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../OnClickListener.ts"/>
 /// <reference path="botao/BotaoCircular.ts"/>
-/// <reference path="ComponenteHtml.ts"/>
+/// <reference path="ComponenteHtmlBase.ts"/>
 
 module Web
 {
@@ -18,7 +18,7 @@ module Web
 
     // #endregion Enumerados
 
-    export class Mensagem extends ComponenteHtml implements OnClickListener
+    export class Mensagem extends ComponenteHtmlBase implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes

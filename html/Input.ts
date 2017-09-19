@@ -9,6 +9,35 @@ module Web
     // #endregion Importações
 
     // #region Enumerados
+
+    export enum Input_EnmTipo
+    {
+        BUTTON,
+        CHECKBOX,
+        COLOR,
+        DATE,
+        DATETIME,
+        DATETIME_LOCAL,
+        EMAIL,
+        FILE,
+        HIDDEN,
+        IMAGE,
+        MONTH,
+        NUMBER,
+        PASSWORD,
+        RADIO,
+        RANGE,
+        RESET,
+        SEARCH,
+        SUBMIT,
+        TEL,
+        TEXT,
+        TEXT_AREA,
+        TIME,
+        URL,
+        WEEK,
+    }
+
     // #endregion Enumerados
 
     export class Input extends Tag implements OnValorAlteradoListener
@@ -22,8 +51,9 @@ module Web
         private _booValor: boolean;
         private _booVazio: boolean;
         private _decValor: number;
-        private _fltValor: number;
         private _dttValor: Date;
+        private _enmTipo: Input_EnmTipo;
+        private _fltValor: number;
         private _intValor: number;
         private _strValor: string;
         private _strValorAnterior: string;
@@ -66,7 +96,7 @@ module Web
 
         public get dttValor(): Date
         {
-            // TODO: Converter strValor para dttValor.
+            this._dttValor = new Date(this.strValor);
 
             return this._dttValor;
         }
@@ -75,12 +105,12 @@ module Web
         {
             this._dttValor = dttValor;
 
-            // TODO: Converter dttValor para strValor.
+            this.strValor = this._dttValor.toDateString();
         }
 
         public get decValor(): number
         {
-            this._decValor = this.decValor;
+            this._decValor = this.fltValor;
 
             return this._decValor;
         }
@@ -90,6 +120,18 @@ module Web
             this._decValor = decValor;
 
             this.fltValor = this._decValor;
+        }
+
+        private get enmTipo(): Input_EnmTipo
+        {
+            if (this._enmTipo != null)
+            {
+                return this._enmTipo;
+            }
+
+            this._enmTipo = this.getEnmTipo();
+
+            return this._enmTipo;
         }
 
         public get fltValor(): number
@@ -193,6 +235,38 @@ module Web
             return Utils.getBooStrVazia(this.strValor);
         }
 
+        private getEnmTipo(): Input_EnmTipo
+        {
+            switch (this.jq.attr("type"))
+            {
+                case "button": return Input_EnmTipo.BUTTON;
+                case "checkbox": return Input_EnmTipo.CHECKBOX;
+                case "color": return Input_EnmTipo.COLOR;
+                case "date": return Input_EnmTipo.DATE;
+                case "datetime": return Input_EnmTipo.DATETIME;
+                case "datetime-local": return Input_EnmTipo.DATETIME_LOCAL;
+                case "email": return Input_EnmTipo.EMAIL;
+                case "file": return Input_EnmTipo.FILE;
+                case "hidden": return Input_EnmTipo.HIDDEN;
+                case "image": return Input_EnmTipo.IMAGE;
+                case "month": return Input_EnmTipo.MONTH;
+                case "number": return Input_EnmTipo.NUMBER;
+                case "password": return Input_EnmTipo.PASSWORD;
+                case "radio": return Input_EnmTipo.RADIO;
+                case "range": return Input_EnmTipo.RANGE;
+                case "reset": return Input_EnmTipo.RESET;
+                case "search": return Input_EnmTipo.SEARCH;
+                case "submit": return Input_EnmTipo.SUBMIT;
+                case "tel": return Input_EnmTipo.TEL;
+                case "text-area": return Input_EnmTipo.TEXT_AREA;
+                case "time": return Input_EnmTipo.TIME;
+                case "url": return Input_EnmTipo.URL;
+                case "week": return Input_EnmTipo.WEEK;
+
+                default: return Input_EnmTipo.TEXT;
+            }
+        }
+
         protected inicializar(): void
         {
             super.inicializar();
@@ -243,9 +317,20 @@ module Web
 
         protected setStrValor(strValor: string): void
         {
-            if (this.jq.val() != strValor)
+            if (this.jq.val() == strValor)
             {
-                this.jq.val(strValor);
+                return;
+            }
+
+            switch (this.enmTipo)
+            {
+                case Input_EnmTipo.DATE:
+                    this.jq.val(new Date(strValor).toISOString().substring(0, 10));
+                    break;
+
+                default:
+                    this.jq.val(strValor);
+                    break;
             }
 
             this.dispararEvtOnValorAlteradoListener(strValor);
@@ -428,11 +513,23 @@ module Web
 
             if (this.arrEvtOnValorAlteradoListener.length == 0)
             {
-                this.jq.change(a => this.strValor = this.jq.val());
-                this.jq.keyup(a => this.strValor = this.jq.val());
+                this.addEvtOnValorAlteradoListenerTipo();
             }
 
             this.arrEvtOnValorAlteradoListener.push(evt);
+        }
+
+        private addEvtOnValorAlteradoListenerTipo(): void
+        {
+            this.jq.change(a => this.strValor = this.jq.val());
+            this.jq.keyup(a => this.strValor = this.jq.val());
+
+            switch (this.enmTipo)
+            {
+                case Input_EnmTipo.DATE:
+                    this.jq[0].addEventListener("change", (() => this.strValor = this.jq.val()) as any);
+                    return;
+            }
         }
 
         public removeEvtOnValorAlteradoListener(evtOnValorAlteradoListener: OnValorAlteradoListener): void

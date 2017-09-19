@@ -3,7 +3,7 @@
 /// <reference path="../../../OnClickRightListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../../../Utils.ts"/>
-/// <reference path="../ComponenteHtml.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="../menu/contexto/MenuContexto.ts"/>
 
 module Web
@@ -15,7 +15,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class TableRow extends ComponenteHtml implements OnClickListener, OnClickRightListener, OnMouseLeaveListener, OnMouseOverListener
+    export class TableRow extends ComponenteHtmlBase implements OnClickListener, OnClickRightListener, OnMouseLeaveListener, OnMouseOverListener
     {
         // #region Constantes
 

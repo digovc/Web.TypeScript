@@ -1,4 +1,4 @@
-﻿/// <reference path="../ComponenteHtml.ts"/>
+﻿/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="EmailRegistro.ts"/>
 /// <reference path="SumarioItem.ts"/>
 
@@ -10,7 +10,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class Sumario extends ComponenteHtml
+    export class Sumario extends ComponenteHtmlBase
     {
         // #region Constantes
         // #endregion Constantes
