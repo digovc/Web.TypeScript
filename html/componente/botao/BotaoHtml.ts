@@ -23,11 +23,10 @@ module Web
 
         // #region Métodos
 
-        private processarOnFocusIn(): void
+        protected processarOnFocusIn(): void
         {
             AppWebBase.i.tagFoco = this;
 
-            //this.jq.css("border", "1px solid gray");
             this.jq.css("box-shadow", "0px 2px 5px 0px black");
         }
 

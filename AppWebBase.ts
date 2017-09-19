@@ -28,7 +28,7 @@ module Web
         // #region Constantes
 
         public static get DIR_CSS(): string { return (AppWebBase.DIR_RESOURCE + "css/") };
-        public static get DIR_HTML(): string { return "res/html/" };
+        public static get DIR_HTML(): string { return (AppWebBase.DIR_RESOURCE + "html/") };
         public static get DIR_HTML_PAGINA(): string { return (AppWebBase.DIR_HTML + "pagina/") };
         public static get DIR_JS(): string { return (AppWebBase.DIR_RESOURCE + "js/") };
         public static get DIR_JS_LIB(): string { return (AppWebBase.DIR_RESOURCE + "js/lib/") };
