@@ -1,12 +1,12 @@
 ﻿// #region Reference
 
+/// <reference path="../typedefinition/velocity-animate.d.ts" />
+
 // #endregion Reference
 
 // #region RequireJS
 
 // #endregion RequireJS
-
-/// <reference path="../typedefinition/velocity-animate.d.ts" />
 
 module Web
 {

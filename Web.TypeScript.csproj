@@ -55,7 +55,7 @@
     <TypeScriptCompile Include="database\dominio\DominioWebBase.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="Historico.ts" />
-    <TypeScriptCompile Include="html\activity\ActivityBase.ts" />
+    <TypeScriptCompile Include="html\componente\mobile\activity\ActivityBase.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
     <TypeScriptCompile Include="html\componente\documentacao\ActionBarDocumentacao.ts" />
     <TypeScriptCompile Include="html\componente\markdown\EmailRegistro.ts" />

@@ -1,10 +1,12 @@
 ﻿// #region Reference
 
-/// <reference path="../componente/ComponenteHtmlBase.ts"/>
+/// <reference path="../../ComponenteHtmlBase.ts"/>
 
 // #endregion Reference
 
 // #region RequireJS
+
+requirejs(["/res/js/web/html/componente/ComponenteHtmlBase.js"]);
 
 // #endregion RequireJS
 

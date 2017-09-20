@@ -22,6 +22,22 @@
 
 // #region RequireJS
 
+requirejs(["/res/js/web/database/TabelaWeb.js"]);
+requirejs(["/res/js/web/design/TemaDefault.js"]);
+requirejs(["/res/js/web/erro/Erro.js"]);
+requirejs(["/res/js/web/Historico.js"]);
+requirejs(["/res/js/web/html/componente/Mensagem.js"]);
+requirejs(["/res/js/web/html/componente/Notificacao.js"]);
+requirejs(["/res/js/web/html/pagina/PaginaHtmlBase.js"]);
+requirejs(["/res/js/web/html/pagina/PagPrincipalBase.js"]);
+requirejs(["/res/js/web/Objeto.js"]);
+requirejs(["/res/js/web/OnFocusInListener.js"]);
+requirejs(["/res/js/web/OnFocusOutListener.js"]);
+requirejs(["/res/js/web/server/ajax/data/SrvAjaxDbeBase.js"]);
+requirejs(["/res/js/web/server/Interlocutor.js"]);
+requirejs(["/res/js/web/server/ServerBase.js"]);
+requirejs(["/res/js/web/server/SrvHttpBase.js"]);
+
 // #endregion RequireJS
 
 module Web
