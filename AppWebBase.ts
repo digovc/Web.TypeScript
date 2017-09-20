@@ -13,6 +13,8 @@
 /// <reference path="server/Interlocutor.ts"/>
 /// <reference path="server/ServerBase.ts"/>
 /// <reference path="server/SrvHttpBase.ts"/>
+/// <reference path="typedefinition/jquery.d.ts"/>
+/// <reference path="typedefinition/require.d.ts" />
 
 module Web
 {

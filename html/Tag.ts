@@ -9,7 +9,6 @@
 /// <reference path="../OnMouseMoveListener.ts"/>
 /// <reference path="../OnMouseOverListener.ts"/>
 /// <reference path="../OnMouseUpListener.ts"/>
-/// <reference path="../typedefinition/jquery.d.ts"/>
 /// <reference path="Animator.ts"/>
 
 module Web
