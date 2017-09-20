@@ -162,7 +162,7 @@ module Web
 
         public abrirConteudo(): void
         {
-            this.divConteudo.mostrarEsconder();
+            this.divConteudo.booVisivel = !this.divConteudo.booVisivel;
 
             this.divSumario.abrirConteudo(this);
         }
@@ -298,7 +298,7 @@ module Web
 
             while (divItemPai != null)
             {
-                divItemPai.divConteudo.mostrar();
+                divItemPai.divConteudo.animar();
 
                 divItemPai = divItemPai.divSumarioItemPai;
             }
@@ -326,7 +326,7 @@ module Web
         {
             if (this.divIndice.jq[0].childElementCount > 0)
             {
-                this.divIndice.mostrar();
+                this.divIndice.animar();
                 return;
             }
 
@@ -346,7 +346,7 @@ module Web
                 divIndiceItem.iniciar();
             }
 
-            this.divIndice.mostrar();
+            this.divIndice.animar();
         }
 
         private processarConteudoStrHeadSelecionada(): void

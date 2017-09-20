@@ -282,7 +282,7 @@ module Web
 
         public limparPesquisa(): void
         {
-            this.mostrar();
+            this.animar();
 
             if (this.arrMniFilho.length < 1)
             {
@@ -301,7 +301,7 @@ module Web
                 return;
             }
 
-            this.divItemConteudo.mostrarEsconder();
+            this.divItemConteudo.booVisivel = !this.divItemConteudo.booVisivel;
         }
 
         public pesquisar(strPesquisa: string): void
@@ -335,15 +335,15 @@ module Web
                 return;
             }
 
-            this.mostrar();
+            this.animar();
 
             if (this.mniPai == null)
             {
                 return;
             }
 
-            this.mniPai.mostrar();
-            this.mniPai.divItemConteudo.mostrar();
+            this.mniPai.animar();
+            this.mniPai.divItemConteudo.animar();
         }
 
         private processarOnClick(): void

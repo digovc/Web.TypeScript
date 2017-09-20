@@ -156,8 +156,8 @@ module Web
                 return;
             }
 
-            this.pnlCondicao.esconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
-            this.pnlSelecao.esconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+            this.pnlCondicao.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_OUT);
+            this.pnlSelecao.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_OUT);
         }
 
         protected inicializar(): void
@@ -181,8 +181,8 @@ module Web
                 return;
             }
 
-            this.pnlCondicao.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
-            this.pnlSelecao.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+            this.pnlCondicao.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_IN);
+            this.pnlSelecao.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_IN);
 
             if (this.frmFiltro == null)
             {

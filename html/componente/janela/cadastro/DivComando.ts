@@ -133,7 +133,7 @@ module Web
                 return;
             }
 
-            this.btnTag.mostrar();
+            this.btnTag.animar();
         }
 
         private inicializarTblWeb(): void
@@ -178,7 +178,7 @@ module Web
                 return;
             }
 
-            this.btnTag.mostrar(); // TODO: Somente mostrar o botão de tag se o salvamento for bem sucedido.
+            this.btnTag.animar(); // TODO: Somente mostrar o botão de tag se o salvamento for bem sucedido.
 
             this.frm.salvar();
         }

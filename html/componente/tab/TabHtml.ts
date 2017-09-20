@@ -300,7 +300,7 @@ module Web
                 return;
             }
 
-            this.divComando.mostrar();
+            this.divComando.animar();
         }
 
         public pesquisarTabItemPrincipal(): void
@@ -324,7 +324,7 @@ module Web
 
             tabItemPrincipal.booAtiva = true;
 
-            this.divComando.mostrar();
+            this.divComando.animar();
         }
 
         protected setEventos()

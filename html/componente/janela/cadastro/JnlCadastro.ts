@@ -460,7 +460,7 @@ module Web
         {
             super.inicializarPosicao();
 
-            this.mostrar();
+            this.animar();
         }
 
         private removerJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void
@@ -551,7 +551,7 @@ module Web
 
             if (!Utils.getBooStrVazia(tblWeb.strCritica))
             {
-                Mensagem.mostrar("Erro", tblWeb.strCritica, Mensagem_EnmTipo.NEGATIVA);
+                Mensagem.animar("Erro", tblWeb.strCritica, Mensagem_EnmTipo.NEGATIVA);
             }
 
             if (tblWeb.arrCln == null)

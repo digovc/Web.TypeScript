@@ -166,7 +166,7 @@ module Web
                 switch (objSender)
                 {
                     case this.divActionBarDocumentacao:
-                        this.divSumario.mostrarEsconder();
+                        this.divSumario.booVisivel = !this.divSumario.booVisivel;
                         return;
                 }
             }

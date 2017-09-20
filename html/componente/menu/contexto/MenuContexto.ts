@@ -87,7 +87,7 @@ module Web
             this.jq.css("top", (arg.pageY - 10));
 
             this.iniciar();
-            this.mostrar();
+            this.animar();
 
             AppWebBase.i.tagFoco = this;
         }

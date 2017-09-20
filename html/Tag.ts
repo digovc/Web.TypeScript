@@ -20,14 +20,6 @@ module Web
 
     // #region Enumerados
 
-    export enum Tag_EnmAnimacaoTipo
-    {
-        FADE,
-        IMEDIATAMENTE,
-        SLIDE_HORIZONTAL,
-        SLIDE_VERTICAL,
-    }
-
     // #endregion Enumerados
 
     export class Tag extends Objeto
@@ -42,7 +34,7 @@ module Web
 
         // #region Atributos
 
-        private _anim: Animator;
+        private _anm: Animator;
         private _booVisivel: boolean;
         private _intClickTimer: number = -1;
         private _jq: any;
@@ -52,16 +44,16 @@ module Web
         private _strSelector: string = null;
         private _strTitle: string;
 
-        public get anim(): Animator
+        private get anm(): Animator
         {
-            if (this._anim != null)
+            if (this._anm != null)
             {
-                return this._anim;
+                return this._anm;
             }
 
-            this._anim = new Animator(this);
+            this._anm = new Animator(this);
 
-            return this._anim;
+            return this._anm;
         }
 
         public get booVisivel(): boolean
@@ -206,6 +198,11 @@ module Web
             this.jq.append(strConteudo);
         }
 
+        public animar(enmAnimacao: Animator_EnmAnimacao = Animator_EnmAnimacao.FADE_IN, fncComplete: Function = null)
+        {
+            this.anm.animar(enmAnimacao, fncComplete);
+        }
+
         public dispose(): void
         {
             super.dispose()
@@ -218,35 +215,9 @@ module Web
             this.jq.remove();
         }
 
-        public esconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null): void
+        public esconder(fncComplete: Function = null): void
         {
-            this.jq.stop();
-
-            switch (enmAnimacaoTipo)
-            {
-                case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
-
-                    this.jq.css("display", "none");
-
-                    if (fncComplete != null)
-                    {
-                        fncComplete();
-                    }
-
-                    return;
-
-                case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
-                    this.jq.slideUp(250, fncComplete);
-                    return;
-
-                case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
-                    this.jq.hide(250, fncComplete); // TODO: Implementar.
-                    return;
-
-                default:
-                    this.jq.fadeOut(250, fncComplete);
-                    return;
-            }
+            this.animar(Animator_EnmAnimacao.FADE_OUT, fncComplete);
         }
 
         protected finalizar(): void
@@ -287,6 +258,11 @@ module Web
             return strJqSelector;
         }
 
+        public girar(fltDegrees: number = 360, intDuracao: number = 250, fncComplete: Function = null): void
+        {
+            this.anm.girar(fltDegrees, intDuracao, fncComplete);
+        }
+
         protected inicializar(): void
         {
         }
@@ -303,38 +279,9 @@ module Web
         {
         }
 
-        public mostrar(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null)
+        public mostrar(fncComplete: Function = null): void
         {
-            this.jq.stop();
-
-            switch (enmAnimacaoTipo)
-            {
-                case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
-                    this.jq.css("display", "block");
-
-                    if (fncComplete != null)
-                    {
-                        fncComplete();
-                    }
-                    return;
-
-                case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
-                    this.jq.slideDown(250, fncComplete);
-                    return;
-
-                case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
-                    this.jq.show(250, fncComplete); // TODO: Implementar.
-                    return;
-
-                default:
-                    this.jq.fadeIn(250, fncComplete);
-                    return;
-            }
-        }
-
-        public mostrarEsconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null): void
-        {
-            (this.booVisivel) ? this.esconder(enmAnimacaoTipo, fncComplete) : this.mostrar(enmAnimacaoTipo, fncComplete);
+            this.animar(Animator_EnmAnimacao.FADE_IN, fncComplete);
         }
 
         public perderFoco(): void
@@ -355,11 +302,11 @@ module Web
         {
             if (booVisivel)
             {
-                this.mostrar(Tag_EnmAnimacaoTipo.IMEDIATAMENTE);
+                this.jq.css("display", "none");
             }
             else
             {
-                this.esconder(Tag_EnmAnimacaoTipo.IMEDIATAMENTE);
+                this.jq.css("display", "block");
             }
         }
 
@@ -454,7 +401,7 @@ module Web
             this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evt), 1);
         }
 
-        private dispararEvtOnClickListener(arg: JQueryEventObject): void
+        public dispararEvtOnClickListener(arg: JQueryEventObject): void
         {
             this.intClickTimer = -1;
 

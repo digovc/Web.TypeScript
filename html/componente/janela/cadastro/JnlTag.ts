@@ -102,7 +102,7 @@ module Web
             this.tagInputTag.receberFoco();
 
             tagCard.iniciar();
-            tagCard.mostrar();
+            tagCard.animar();
         }
 
         private addTagCard(tagCard: TagCard): void

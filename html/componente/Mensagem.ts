@@ -127,7 +127,7 @@ module Web
 
         // #region Métodos
 
-        public static mostrar(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA): void
+        public static animar(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA): void
         {
             if (Utils.getBooStrVazia(strTitulo))
             {
@@ -164,7 +164,7 @@ module Web
 
             this.iniciar();
 
-            this.mostrar();
+            this.animar();
 
             this.btnConfirmar.receberFoco();
 
