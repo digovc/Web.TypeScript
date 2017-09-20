@@ -3,6 +3,7 @@
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../botao/actionbar/BotaoActionBar.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
+/// <reference path="../menu/contexto/MenuContexto.ts"/>
 /// <reference path="OnMenuClickListener.ts"/>
 /// <reference path="OnVoltarClickListener.ts"/>
 
@@ -114,6 +115,20 @@ module Web
 
         // #region Métodos
 
+        private abrirSubMenu(arg: JQueryEventObject): void
+        {
+            var mnu = new MenuContexto();
+
+            this.arrBtnTempSubMenu.forEach(btn => this.abrirSubMenuItem(btn, mnu));
+
+            mnu.abrirMenu(arg);
+        }
+
+        private abrirSubMenuItem(btn: BotaoActionBar, mnu: MenuContexto): void
+        {
+            mnu.addOpcao(btn.strTitle, ((mni: MenuContextoItem, arg: JQueryEventObject) => btn.dispararEvtOnClickListener(arg)));
+        }
+
         public addOpcao(btn: BotaoActionBar): void
         {
             if (btn == null)
@@ -126,17 +141,35 @@ module Web
                 this.addOpcaoRapido(btn);
                 return;
             }
-
-            this.arrBtnTempSubMenu.push(btn);
-            this.btnSubMenu.mostrar();
+            else
+            {
+                this.addOpcaoSubMenu(btn);
+            }
         }
 
         private addOpcaoRapido(btn: BotaoActionBar): void
         {
+            if (this.arrBtnTemp.indexOf(btn) > -1)
+            {
+                return;
+            }
+
             this.arrBtnTemp.push(btn);
             this.addHtml(btn.strLayoutFixo);
 
             btn.iniciar();
+        }
+
+        private addOpcaoSubMenu(btn: BotaoActionBar): void
+        {
+            if (this.arrBtnTempSubMenu.indexOf(btn) > -1)
+            {
+                return;
+            }
+
+            this.arrBtnTempSubMenu.push(btn);
+
+            this.btnSubMenu.animar();
         }
 
         protected inicializar(): void
@@ -146,6 +179,7 @@ module Web
             this.btnMenu.iniciar();
             this.btnSubMenu.iniciar();
             this.btnVoltar.iniciar();
+            this.divTitulo.iniciar();
         }
 
         public limpar(): void
@@ -164,6 +198,7 @@ module Web
             super.setEventos();
 
             this.btnMenu.addEvtOnClickListener(this);
+            this.btnSubMenu.addEvtOnClickListener(this);
             this.btnVoltar.addEvtOnClickListener(this);
             this.divTitulo.addEvtOnClickListener(this);
         }
@@ -179,7 +214,11 @@ module Web
                 switch (objSender)
                 {
                     case this.btnMenu:
-                        this.dispararEvtOnMenuClickListener(arg)
+                        this.dispararEvtOnMenuClickListener(arg);
+                        return;
+
+                    case this.btnSubMenu:
+                        this.abrirSubMenu(arg);
                         return;
 
                     case this.btnVoltar:

@@ -201,7 +201,7 @@ module Web
                 return;
             }
 
-            this.tabHtml.btnAlterar.mostrar();
+            this.tabHtml.btnAlterar.animar();
         }
 
         public pesquisar(): void
@@ -407,7 +407,7 @@ module Web
                 return;
             }
 
-            this.tabHtml.btnAlterar.mostrar();
+            this.tabHtml.btnAlterar.animar();
         }
 
         private setBooAtiva(booAtiva: boolean): void
@@ -423,7 +423,7 @@ module Web
             this.tabHtml.tabItemAtiva = this;
 
             this.pesquisar();
-            this.mostrar();
+            this.animar();
         }
 
         // #endregion Métodos

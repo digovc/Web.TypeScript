@@ -132,9 +132,9 @@ module Web
             return strLayoutFixo;
         }
 
-        public mostrar(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null)
+        public animar(enmAnimacao: Animator_EnmAnimacao = Animator_EnmAnimacao.FADE_IN, fncComplete: Function = null)
         {
-            super.mostrar(enmAnimacaoTipo, fncComplete);
+            super.animar(enmAnimacao, fncComplete);
 
             AppWebBase.i.tagFoco = this;
         }

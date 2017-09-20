@@ -499,7 +499,7 @@ module Web
         {
             try
             {
-                this.divGaveta.mostrar();
+                this.divGaveta.animar();
             }
             catch (ex)
             {

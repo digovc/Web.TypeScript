@@ -34,7 +34,7 @@ module Web
         {
             this.jq.css("box-shadow", "0px 0px 1px grey");
 
-            this.anim.girar(undefined, undefined, (() => this.animarClick2()));
+            this.girar(undefined, undefined, (() => this.animarClick2()));
         }
 
         private animarClick2(): void

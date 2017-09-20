@@ -17,7 +17,7 @@ module Web
      * Todos os métodos devem ser acessadas diretamente através da classe
      * pois são todas estáticas.
      */
-    export class Utils
+    export abstract class Utils
     {
         // #region Constantes
 

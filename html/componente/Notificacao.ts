@@ -282,7 +282,7 @@ module Web
 
             this.inicializarTimeoutFechar();
 
-            this.mostrar();
+            this.animar();
         }
 
         private inicializarEnmTipo(): void

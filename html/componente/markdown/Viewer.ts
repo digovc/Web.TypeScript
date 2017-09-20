@@ -120,7 +120,7 @@ module Web
 
             this.prepararConteudo();
 
-            this.divConteudo.mostrar();
+            this.divConteudo.animar();
 
             this.divSumarioItem.processarConteudo();
         }
