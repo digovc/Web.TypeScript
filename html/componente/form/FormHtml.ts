@@ -1,7 +1,15 @@
-﻿/// <reference path="../ComponenteHtmlBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="DivCritica.ts"/>
 /// <reference path="DivDica.ts"/>
 /// <reference path="OnCmpEmFocoAlterado.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

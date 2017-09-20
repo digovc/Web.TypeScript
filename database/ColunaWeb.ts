@@ -1,6 +1,14 @@
-﻿/// <reference path="../Objeto.ts"/>
+﻿// #region Reference
+
+/// <reference path="../Objeto.ts"/>
 /// <reference path="../OnValorAlteradoArg.ts"/>
 /// <reference path="../OnValorAlteradoListener.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

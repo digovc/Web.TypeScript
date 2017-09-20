@@ -1,8 +1,16 @@
-﻿/// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
+﻿// #region Reference
+
+/// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="../componente/janela/cadastro/JnlTag.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
 /// <reference path="../Div.ts"/>
 /// <reference path="PaginaHtmlBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

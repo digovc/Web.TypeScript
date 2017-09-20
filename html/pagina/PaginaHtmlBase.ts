@@ -1,7 +1,15 @@
-﻿/// <reference path="../../AppWebBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../AppWebBase.ts"/>
 /// <reference path="../../Objeto.ts"/>
 /// <reference path="../../OnKeyUpListener.ts"/>
 /// <reference path="../Div.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

@@ -1,6 +1,14 @@
-﻿/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="TabItemHead.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

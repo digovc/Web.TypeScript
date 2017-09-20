@@ -1,5 +1,13 @@
-﻿/// <reference path="../ComponenteHtmlBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="DivGridLinha.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

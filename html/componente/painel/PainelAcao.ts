@@ -1,4 +1,12 @@
-﻿/// <reference path="../../Div.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../Div.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

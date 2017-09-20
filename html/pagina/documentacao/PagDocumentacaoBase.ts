@@ -1,7 +1,15 @@
-﻿/// <reference path="../../componente/documentacao/ActionBarDocumentacao.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../componente/documentacao/ActionBarDocumentacao.ts"/>
 /// <reference path="../../componente/markdown/Sumario.ts"/>
 /// <reference path="../../componente/markdown/Viewer.ts"/>
 /// <reference path="../PagMobile.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

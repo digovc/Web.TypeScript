@@ -1,5 +1,13 @@
-﻿/// <reference path="ColunaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="ColunaWeb.ts"/>
 /// <reference path="TabelaWeb.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

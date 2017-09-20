@@ -1,8 +1,16 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../botao/actionbar/BotaoActionBar.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="OnMenuClickListener.ts"/>
 /// <reference path="OnVoltarClickListener.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

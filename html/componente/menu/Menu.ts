@@ -1,4 +1,6 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnEnterListener.ts"/>
 /// <reference path="../../../OnKeyDownListener.ts"/>
 /// <reference path="../../../OnKeyUpListener.ts"/>
@@ -7,6 +9,12 @@
 /// <reference path="../../pagina/PagPrincipalBase.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="MenuItem.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

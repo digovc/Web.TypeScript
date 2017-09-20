@@ -1,10 +1,18 @@
-﻿/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Keys.ts"/>
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnFocusInListener.ts"/>
 /// <reference path="../../../OnKeyDownListener.ts"/>
 /// <reference path="../menu/contexto/MenuContexto.ts"/>
 /// <reference path="CampoComboBox.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

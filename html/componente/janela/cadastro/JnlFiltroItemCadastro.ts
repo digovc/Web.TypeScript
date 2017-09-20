@@ -1,4 +1,12 @@
-﻿/// <reference path="JnlCadastro.ts"/>
+﻿// #region Reference
+
+/// <reference path="JnlCadastro.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

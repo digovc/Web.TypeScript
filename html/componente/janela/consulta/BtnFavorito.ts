@@ -1,5 +1,13 @@
-﻿/// <reference path="../../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../botao/BotaoCircular.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

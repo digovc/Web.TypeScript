@@ -1,6 +1,14 @@
-﻿/// <reference path="../../../database/dominio/FavoritoDominio.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/dominio/FavoritoDominio.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="DivFavoritoItem.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

@@ -1,4 +1,12 @@
-﻿/// <reference path="JnlMensagem.ts"/>
+﻿// #region Reference
+
+/// <reference path="JnlMensagem.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

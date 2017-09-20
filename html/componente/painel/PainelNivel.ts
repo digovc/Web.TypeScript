@@ -1,4 +1,12 @@
-﻿/// <reference path="PainelHtml.ts"/>
+﻿// #region Reference
+
+/// <reference path="PainelHtml.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

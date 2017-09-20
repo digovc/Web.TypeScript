@@ -1,10 +1,18 @@
-﻿/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnMouseLeaveListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../circulo/DivCirculo.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="../painel/PainelHtml.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

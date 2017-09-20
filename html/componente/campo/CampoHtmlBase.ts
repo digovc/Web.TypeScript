@@ -1,10 +1,18 @@
-﻿/// <reference path="../../../database/ColunaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/ColunaWeb.ts"/>
 /// <reference path="../../../erro/Erro.ts"/>
 /// <reference path="../../../OnValorAlteradoListener.ts"/>
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../../Div.ts"/>
 /// <reference path="../../Input.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

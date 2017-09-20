@@ -1,4 +1,12 @@
-﻿/// <reference path="OnTreeViewNodeClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="OnTreeViewNodeClickListener.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

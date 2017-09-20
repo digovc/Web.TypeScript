@@ -1,6 +1,14 @@
-﻿/// <reference path="../../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../painel/PainelNivel.ts"/>
 /// <reference path="JnlCadastro.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

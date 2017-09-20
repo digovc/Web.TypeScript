@@ -1,7 +1,15 @@
-﻿/// <reference path="../ServerBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ServerBase.ts"/>
 /// <reference path="OnWsCloseListenner.ts"/>
 /// <reference path="OnWsErrorListenner.ts"/>
 /// <reference path="OnWsOpenListenner.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

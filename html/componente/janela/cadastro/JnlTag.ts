@@ -1,6 +1,14 @@
-﻿/// <reference path="../../../../Keys.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../Keys.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
 /// <reference path="TagCard.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

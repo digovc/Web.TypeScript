@@ -1,5 +1,13 @@
-﻿/// <reference path="../../../typedefinition/marked.d.ts" />
+﻿// #region Reference
+
+/// <reference path="../../../typedefinition/marked.d.ts" />
 /// <reference path="../ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

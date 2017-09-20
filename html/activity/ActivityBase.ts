@@ -1,4 +1,12 @@
-﻿/// <reference path="../componente/ComponenteHtmlBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../componente/ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

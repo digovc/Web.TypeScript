@@ -1,4 +1,12 @@
-﻿/// <reference path="../../../Objeto.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../Objeto.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

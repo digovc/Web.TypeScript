@@ -1,4 +1,12 @@
-﻿/// <reference path="PaginaHtmlBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="PaginaHtmlBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

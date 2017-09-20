@@ -1,5 +1,13 @@
-﻿/// <reference path="../../database/dominio/documentacao/EmailRegistroDominio.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../database/dominio/documentacao/EmailRegistroDominio.ts"/>
 /// <reference path="SrvAjaxBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

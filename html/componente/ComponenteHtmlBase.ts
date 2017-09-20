@@ -1,5 +1,13 @@
-﻿/// <reference path="../../ConstanteManager.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../ConstanteManager.ts"/>
 /// <reference path="../Div.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

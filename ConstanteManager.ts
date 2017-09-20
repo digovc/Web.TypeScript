@@ -1,4 +1,12 @@
-﻿/// <reference path="Constante.ts"/>
+﻿// #region Reference
+
+/// <reference path="Constante.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

@@ -1,4 +1,6 @@
-﻿/// <reference path="database/TabelaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="database/TabelaWeb.ts"/>
 /// <reference path="design/TemaDefault.ts"/>
 /// <reference path="erro/Erro.ts"/>
 /// <reference path="Historico.ts"/>
@@ -15,6 +17,12 @@
 /// <reference path="server/SrvHttpBase.ts"/>
 /// <reference path="typedefinition/jquery.d.ts"/>
 /// <reference path="typedefinition/require.d.ts" />
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

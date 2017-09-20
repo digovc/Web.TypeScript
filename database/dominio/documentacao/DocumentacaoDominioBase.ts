@@ -1,4 +1,12 @@
-﻿/// <reference path="../DominioWebBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../DominioWebBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

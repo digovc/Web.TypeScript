@@ -1,4 +1,6 @@
-﻿/// <reference path="../../campo/CampoAlfanumerico.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../campo/CampoAlfanumerico.ts"/>
 /// <reference path="../../campo/CampoCheckBox.ts"/>
 /// <reference path="../../campo/CampoHtmlBase.ts"/>
 /// <reference path="../../campo/CampoNumerico.ts"/>
@@ -7,6 +9,12 @@
 /// <reference path="DivComando.ts"/>
 /// <reference path="OnSalvarArg.ts"/>
 /// <reference path="OnSalvarListener.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

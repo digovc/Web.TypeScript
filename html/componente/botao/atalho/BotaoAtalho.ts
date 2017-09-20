@@ -1,4 +1,12 @@
-﻿/// <reference path="../BotaoHtml.ts"/>
+﻿// #region Reference
+
+/// <reference path="../BotaoHtml.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

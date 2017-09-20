@@ -1,4 +1,12 @@
-﻿/// <reference path="Input.ts"/>
+﻿// #region Reference
+
+/// <reference path="Input.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

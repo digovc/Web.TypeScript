@@ -1,5 +1,12 @@
-﻿/// <reference path="OnDisposedListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="OnDisposedListener.ts"/>
 /// <reference path="Utils.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+// #endregion RequireJS
 
 module Web
 {

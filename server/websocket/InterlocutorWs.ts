@@ -1,4 +1,12 @@
-﻿/// <reference path="../Interlocutor.ts"/>
+﻿// #region Reference
+
+/// <reference path="../Interlocutor.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

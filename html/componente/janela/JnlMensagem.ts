@@ -1,4 +1,12 @@
-﻿/// <reference path="JanelaHtml.ts"/>
+﻿// #region Reference
+
+/// <reference path="JanelaHtml.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

@@ -1,5 +1,13 @@
-﻿/// <reference path="botao/BotaoMini.ts"/>
+﻿// #region Reference
+
+/// <reference path="botao/BotaoMini.ts"/>
 /// <reference path="ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

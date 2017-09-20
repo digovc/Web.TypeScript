@@ -1,4 +1,12 @@
-﻿/// <reference path="CampoHtmlBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="CampoHtmlBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

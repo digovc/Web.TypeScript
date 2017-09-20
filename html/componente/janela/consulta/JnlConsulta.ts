@@ -1,4 +1,6 @@
-﻿/// <reference path="../../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../../Div.ts"/>
 /// <reference path="../../../pagina/PagPrincipalBase.ts"/>
 /// <reference path="../../table/TableHtml.ts"/>
@@ -7,6 +9,12 @@
 /// <reference path="BtnFavorito.ts"/>
 /// <reference path="PainelAcaoConsulta.ts"/>
 /// <reference path="PainelFiltro.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

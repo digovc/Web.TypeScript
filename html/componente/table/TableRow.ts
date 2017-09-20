@@ -1,10 +1,18 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnClickRightListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../../../Utils.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="../menu/contexto/MenuContexto.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

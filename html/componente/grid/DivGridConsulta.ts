@@ -1,4 +1,12 @@
-﻿/// <reference path="DivGridBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="DivGridBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

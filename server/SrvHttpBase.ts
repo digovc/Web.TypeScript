@@ -1,5 +1,13 @@
-﻿/// <reference path="../html/Tag.ts"/>
+﻿// #region Reference
+
+/// <reference path="../html/Tag.ts"/>
 /// <reference path="ServerBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

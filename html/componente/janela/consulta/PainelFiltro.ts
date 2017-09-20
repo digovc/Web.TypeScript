@@ -1,9 +1,17 @@
-﻿/// <reference path="../../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../../../OnKeyDownListener.ts"/>
 /// <reference path="../../painel/PainelHtml.ts"/>
 /// <reference path="FrmFiltro.ts"/>
 /// <reference path="FrmFiltroConteudo.ts"/>
 /// <reference path="JnlConsulta.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

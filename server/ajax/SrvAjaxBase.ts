@@ -1,4 +1,12 @@
-﻿/// <reference path="../ServerBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ServerBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

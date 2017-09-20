@@ -1,6 +1,14 @@
-﻿/// <reference path="../../../OnFocusInListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../OnFocusInListener.ts"/>
 /// <reference path="../../../OnFocusOutListener.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

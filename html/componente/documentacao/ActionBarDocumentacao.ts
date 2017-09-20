@@ -1,4 +1,12 @@
-﻿/// <reference path="../mobile/ActionBarBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../mobile/ActionBarBase.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

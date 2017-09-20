@@ -1,5 +1,13 @@
-﻿/// <reference path="../SrvAjaxBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../SrvAjaxBase.ts"/>
 /// <reference path="PesquisaInterlocutor.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

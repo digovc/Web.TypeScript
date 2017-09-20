@@ -1,6 +1,14 @@
-﻿/// <reference path="../../../erro/Erro.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../erro/Erro.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="IndiceItem.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

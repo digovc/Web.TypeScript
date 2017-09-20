@@ -1,10 +1,18 @@
-﻿/// <reference path="../../../../database/ParValorNome.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../database/ParValorNome.ts"/>
 /// <reference path="../../../../database/TblFiltro.ts"/>
 /// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../botao/BotaoCircular.ts"/>
 /// <reference path="../../campo/CampoComboBox.ts"/>
 /// <reference path="../../form/FormHtml.ts"/>
 /// <reference path="PainelFiltro.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {

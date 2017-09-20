@@ -1,4 +1,6 @@
-﻿/// <reference path="../Objeto.ts"/>
+﻿// #region Reference
+
+/// <reference path="../Objeto.ts"/>
 /// <reference path="../OnClickRightListener.ts"/>
 /// <reference path="../OnDoubleClickListener.ts"/>
 /// <reference path="../OnKeyDownListener.ts"/>
@@ -10,6 +12,12 @@
 /// <reference path="../OnMouseOverListener.ts"/>
 /// <reference path="../OnMouseUpListener.ts"/>
 /// <reference path="Animator.ts"/>
+
+// #endregion Reference
+
+// #region RequireJS
+
+// #endregion RequireJS
 
 module Web
 {
