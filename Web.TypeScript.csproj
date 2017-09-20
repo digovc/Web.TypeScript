@@ -188,6 +188,7 @@
     <TypeScriptCompile Include="typedefinition\google.maps.d.ts" />
     <TypeScriptCompile Include="typedefinition\jquery.d.ts" />
     <TypeScriptCompile Include="typedefinition\marked.d.ts" />
+    <TypeScriptCompile Include="typedefinition\require.d.ts" />
     <TypeScriptCompile Include="typedefinition\sugarpak.d.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="server\websocket\SrvWsBase.ts" />
@@ -250,7 +251,7 @@
     <TypeScriptTarget>ES6</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
-    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
     <TypeScriptOutDir>bin\js</TypeScriptOutDir>
