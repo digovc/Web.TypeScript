@@ -4,10 +4,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -148,22 +144,21 @@ module Web
 
         private slideVerticalDireitaIn(fncComplete: Function): void
         {
-            this.tag.jq.css("margin-left", "25vw");
-            this.tag.jq.css("margin-right", "-25vw");
+            this.tag.jq.css("transform", "translateX(25px)");
             this.tag.jq.css("opacity", "0");
 
             var cfg: jquery.velocity.Options =
                 {
                     complete: (fncComplete as any),
+                    display: "block",
                     duration: 150,
                     easing: "ease",
                 }
 
             var arrCss =
                 {
-                    "margin-left": "0vw",
-                    "margin-right": "0vw",
-                    "opacity": "1",
+                    "translateX": 0,
+                    "opacity": 1,
                 }
 
             this.tag.jq.velocity(arrCss, cfg);

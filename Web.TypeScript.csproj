@@ -188,7 +188,6 @@
     <TypeScriptCompile Include="typedefinition\google.maps.d.ts" />
     <TypeScriptCompile Include="typedefinition\jquery.d.ts" />
     <TypeScriptCompile Include="typedefinition\marked.d.ts" />
-    <TypeScriptCompile Include="typedefinition\require.d.ts" />
     <TypeScriptCompile Include="typedefinition\sugarpak.d.ts" />
     <TypeScriptCompile Include="typedefinition\velocity-animate.d.ts" />
     <TypeScriptCompile Include="Utils.ts" />

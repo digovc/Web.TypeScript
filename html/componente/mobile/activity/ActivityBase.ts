@@ -4,12 +4,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-requirejs(["/res/js/web/html/componente/ComponenteHtmlBase.js"]);
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações

@@ -6,10 +6,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -90,8 +86,6 @@ module Web
         // #endregion Métodos
 
         // #region Eventos
-
-
 
         // #endregion Eventos
     }

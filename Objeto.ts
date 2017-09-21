@@ -5,9 +5,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
