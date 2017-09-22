@@ -106,7 +106,7 @@ module Web
             this.tagInputTag.receberFoco();
 
             tagCard.iniciar();
-            tagCard.animar();
+            tagCard.anm.fadeIn();
         }
 
         private addTagCard(tagCard: TagCard): void

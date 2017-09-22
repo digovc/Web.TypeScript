@@ -227,7 +227,7 @@ module Web
 
             this.txtPesquisa.jq.hide();
 
-            this.cmb.animar();
+            this.cmb.anm.fadeIn();
 
             this.btnAcao.jq.css("background-image", CampoConsulta.SRC_IMAGEM_ACAO_LIMPAR);
         }
@@ -252,7 +252,7 @@ module Web
 
             this.cmb.jq.hide();
 
-            this.txtPesquisa.animar();
+            this.txtPesquisa.anm.fadeIn();
 
             this.txtPesquisa.receberFoco();
         }
@@ -289,7 +289,7 @@ module Web
             this.btnAcao.jq.css("background-image", CampoConsulta.SRC_IMAGEM_ACAO_LIMPAR);
             this.txtPesquisa.strValor = null;
 
-            this.cmb.animar();
+            this.cmb.anm.fadeIn();
 
             window.setTimeout((() => this.cmb.receberFoco()), 10);
         }

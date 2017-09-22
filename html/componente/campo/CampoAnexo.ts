@@ -195,7 +195,7 @@ module Web
 
             this.divIcone.strConteudo = strArquivoNome.toUpperCase().substr((strArquivoNome.length - 3), 3);
 
-            this.divIcone.animar();
+            this.divIcone.anm.fadeIn();
         }
 
         private download(): void
@@ -263,7 +263,7 @@ module Web
                 return;
             }
 
-            this.divProgressBar.animar();
+            this.divProgressBar.anm.fadeIn();
 
             this.enviarArquivoModificacao();
             this.enviarArquivoNome();

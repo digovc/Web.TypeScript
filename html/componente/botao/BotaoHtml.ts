@@ -27,6 +27,13 @@ module Web
 
         // #region Métodos
 
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.booRipple = true;
+        }
+
         protected processarOnFocusIn(): void
         {
             AppWebBase.i.tagFoco = this;

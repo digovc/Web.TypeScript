@@ -146,7 +146,7 @@ module Web
                 return;
             }
 
-            this.divConsulta.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_OUT);
+            this.divConsulta.anm.fadeOut();
 
             var objInterlocutor = new Interlocutor();
 
@@ -292,7 +292,7 @@ module Web
 
         private inicializarJnlCadastro(jnlCadastroJq: JQuery): void
         {
-            this.divCadastro.animar();
+            this.divCadastro.anm.fadeIn();
 
             var jnlCadastro: JnlCadastro = new (window as any)[AppWebBase.i.strNamespace][jnlCadastroJq[0].id]();
 
@@ -303,7 +303,7 @@ module Web
         {
             this.divConsulta.jq.html(objInterlocutor.objData.toString());
 
-            this.divConsulta.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_IN);
+            this.divConsulta.anm.fadeIn();
 
             this.jnlConsulta = new JnlConsulta(this);
 

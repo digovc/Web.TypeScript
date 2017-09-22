@@ -132,7 +132,7 @@ module Web
 
             (AppWebBase.i.pag as PagPrincipalBase).abrirConsulta(this.tblWeb);
 
-            this.imgIcone.girar();
+            this.imgIcone.anm.girar();
         }
 
         private getTblWeb(): TabelaWeb

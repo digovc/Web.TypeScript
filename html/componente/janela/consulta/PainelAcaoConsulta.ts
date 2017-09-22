@@ -106,7 +106,7 @@ module Web
         {
             super.finalizar();
 
-            window.setTimeout((() => this.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_IN)), 400);
+            window.setTimeout((() => this.anm.slideVerticalDireitaIn()), 400);
         }
 
         protected inicializar(): void
