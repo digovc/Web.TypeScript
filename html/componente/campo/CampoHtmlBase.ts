@@ -40,6 +40,8 @@ module Web
         private _intRegistroId: number;
         private _strCritica: string;
         private _strDica: string;
+        private _strRegex: string;
+        private _strRegexAjuda: string;
         private _strTitulo: string;
         private _tagInput: Input;
 
@@ -227,6 +229,30 @@ module Web
         public set strDica(strDica: string)
         {
             this._strDica = strDica;
+        }
+
+        private get strRegex(): string
+        {
+            if (this._strRegex != null)
+            {
+                return this._strRegex;
+            }
+
+            this._strRegex = this.getStrAttValor("regex");
+
+            return this._strRegex;
+        }
+
+        private get strRegexAjuda(): string
+        {
+            if (this._strRegexAjuda != null)
+            {
+                return this._strRegexAjuda;
+            }
+
+            this._strRegexAjuda = this.getStrAttValor("regex-ajuda");
+
+            return this._strRegexAjuda;
         }
 
         public get strTitulo(): string
@@ -543,6 +569,11 @@ module Web
                 return false;
             }
 
+            if (!this.validarDadosRegex())
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -556,6 +587,30 @@ module Web
             this.strCritica = strErro;
 
             Notificacao.notificar(strErro, Notificacao_EnmTipo.NEGATIVA);
+        }
+
+        private validarDadosRegex(): boolean
+        {
+            if (Utils.getBooStrVazia(this.strRegex))
+            {
+                return true;
+            }
+
+            if (new RegExp(this.strRegex).test(this.tagInput.strValor))
+            {
+                return true;
+            }
+
+            if (Utils.getBooStrVazia(this.strRegexAjuda))
+            {
+                this.validarDadosErro("O formato dos dados não está correto.");
+            }
+            else
+            {
+                this.validarDadosErro("O formato dos dados não está correto. Formato esperado: " + this.strRegexAjuda);
+            }
+
+            return false
         }
 
         // #endregion Métodos
