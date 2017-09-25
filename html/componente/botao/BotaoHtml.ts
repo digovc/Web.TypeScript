@@ -6,10 +6,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -30,6 +26,13 @@ module Web
         // #endregion Construtor
 
         // #region Métodos
+
+        protected inicializar(): void
+        {
+            super.inicializar();
+
+            this.booRipple = true;
+        }
 
         protected processarOnFocusIn(): void
         {
@@ -90,8 +93,6 @@ module Web
         // #endregion Métodos
 
         // #region Eventos
-
-
 
         // #endregion Eventos
     }

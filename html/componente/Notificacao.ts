@@ -5,10 +5,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -282,7 +278,7 @@ module Web
 
             this.inicializarTimeoutFechar();
 
-            this.animar();
+            this.anm.fadeIn();
         }
 
         private inicializarEnmTipo(): void

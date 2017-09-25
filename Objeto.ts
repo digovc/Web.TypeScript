@@ -5,15 +5,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-requirejs(["/res/js/web/Utils.js"]);
-
-
-requirejs(["/res/js/web/OnDisposedListener.js"]);
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações

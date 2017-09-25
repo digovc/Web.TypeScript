@@ -9,10 +9,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -169,7 +165,7 @@ module Web
 
             this.arrBtnTempSubMenu.push(btn);
 
-            this.btnSubMenu.animar();
+            this.btnSubMenu.anm.fadeIn();
         }
 
         protected inicializar(): void

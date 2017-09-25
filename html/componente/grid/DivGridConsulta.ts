@@ -4,10 +4,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -113,7 +109,7 @@ module Web
             this.divGridConteudo.montarLayoutTabela(this.tbl);
             this.divGridRodape.montarLayoutTabela(this.tbl);
 
-            this.animar(undefined, (() => this.jq.css("display", "inline-grid")));
+            this.anm.fadeIn((() => this.jq.css("display", "inline-grid")));
         }
 
         // #endregion Métodos

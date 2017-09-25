@@ -15,10 +15,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -42,6 +38,7 @@ module Web
         // #region Atributos
 
         private _anm: Animator;
+        private _booRipple: boolean;
         private _booVisivel: boolean;
         private _intClickTimer: number = -1;
         private _jq: any;
@@ -51,7 +48,7 @@ module Web
         private _strSelector: string = null;
         private _strTitle: string;
 
-        private get anm(): Animator
+        public get anm(): Animator
         {
             if (this._anm != null)
             {
@@ -61,6 +58,18 @@ module Web
             this._anm = new Animator(this);
 
             return this._anm;
+        }
+
+        public get booRipple(): boolean
+        {
+            return this._booRipple;
+        }
+
+        public set booRipple(booRipple: boolean)
+        {
+            this._booRipple = booRipple;
+
+            this.setBooRipple(this._booRipple);
         }
 
         public get booVisivel(): boolean
@@ -205,11 +214,6 @@ module Web
             this.jq.append(strConteudo);
         }
 
-        public animar(enmAnimacao: Animator_EnmAnimacao = Animator_EnmAnimacao.FADE_IN, fncComplete: Function = null)
-        {
-            this.anm.animar(enmAnimacao, fncComplete);
-        }
-
         public dispose(): void
         {
             super.dispose()
@@ -224,7 +228,7 @@ module Web
 
         public esconder(fncComplete: Function = null): void
         {
-            this.animar(Animator_EnmAnimacao.FADE_OUT, fncComplete);
+            this.anm.fadeOut(fncComplete);
         }
 
         protected finalizar(): void
@@ -265,11 +269,6 @@ module Web
             return strJqSelector;
         }
 
-        public girar(fltDegrees: number = 360, intDuracao: number = 250, fncComplete: Function = null): void
-        {
-            this.anm.girar(fltDegrees, intDuracao, fncComplete);
-        }
-
         protected inicializar(): void
         {
         }
@@ -288,7 +287,7 @@ module Web
 
         public mostrar(fncComplete: Function = null): void
         {
-            this.animar(Animator_EnmAnimacao.FADE_IN, fncComplete);
+            this.anm.fadeIn(fncComplete);
         }
 
         public perderFoco(): void
@@ -305,15 +304,27 @@ module Web
             this.jq.focus();
         }
 
+        private setBooRipple(booRipple: boolean): void
+        {
+            if (booRipple)
+            {
+                ($ as any).ripple(("#" + this.strId), { duration: 0.35 });
+            }
+            else
+            {
+                this.jq.removeClass("has-ripple");
+            }
+        }
+
         private setBooVisivel(booVisivel: boolean): void
         {
             if (booVisivel)
             {
-                this.jq.css("display", "none");
+                this.jq.css("display", "block");
             }
             else
             {
-                this.jq.css("display", "block");
+                this.jq.css("display", "none");
             }
         }
 

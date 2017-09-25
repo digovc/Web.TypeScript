@@ -5,10 +5,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -132,9 +128,9 @@ module Web
             return strLayoutFixo;
         }
 
-        public animar(enmAnimacao: Animator_EnmAnimacao = Animator_EnmAnimacao.FADE_IN, fncComplete: Function = null)
+        public mostrar(fncComplete: Function = null)
         {
-            super.animar(enmAnimacao, fncComplete);
+            super.mostrar(fncComplete);
 
             AppWebBase.i.tagFoco = this;
         }

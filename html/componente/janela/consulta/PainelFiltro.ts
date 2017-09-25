@@ -9,10 +9,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -164,8 +160,8 @@ module Web
                 return;
             }
 
-            this.pnlCondicao.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_OUT);
-            this.pnlSelecao.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_OUT);
+            this.pnlCondicao.anm.fadeOut();
+            this.pnlSelecao.anm.fadeOut();
         }
 
         protected inicializar(): void
@@ -189,8 +185,8 @@ module Web
                 return;
             }
 
-            this.pnlCondicao.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_IN);
-            this.pnlSelecao.animar(Animator_EnmAnimacao.SLIDE_VERTICAL_IN);
+            this.pnlCondicao.anm.fadeIn();
+            this.pnlSelecao.anm.fadeIn();
 
             if (this.frmFiltro == null)
             {

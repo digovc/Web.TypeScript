@@ -10,10 +10,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -290,7 +286,7 @@ module Web
 
         public limparPesquisa(): void
         {
-            this.animar();
+            this.anm.fadeIn();
 
             if (this.arrMniFilho.length < 1)
             {
@@ -343,15 +339,15 @@ module Web
                 return;
             }
 
-            this.animar();
+            this.anm.fadeIn();
 
             if (this.mniPai == null)
             {
                 return;
             }
 
-            this.mniPai.animar();
-            this.mniPai.divItemConteudo.animar();
+            this.mniPai.anm.fadeIn();
+            this.mniPai.divItemConteudo.anm.fadeIn();
         }
 
         private processarOnClick(): void

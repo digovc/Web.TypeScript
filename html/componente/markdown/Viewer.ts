@@ -5,10 +5,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -120,7 +116,7 @@ module Web
 
             this.prepararConteudo();
 
-            this.divConteudo.animar();
+            this.divConteudo.anm.fadeIn();
 
             this.divSumarioItem.processarConteudo();
         }

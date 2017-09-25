@@ -6,10 +6,6 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
@@ -172,7 +168,7 @@ module Web
 
             this.iniciar();
 
-            this.animar();
+            this.anm.fadeIn();
 
             this.btnConfirmar.receberFoco();
 

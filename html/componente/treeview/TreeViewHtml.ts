@@ -1,12 +1,9 @@
 ﻿// #region Reference
 
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="OnTreeViewNodeClickListener.ts"/>
 
 // #endregion Reference
-
-// #region RequireJS
-
-// #endregion RequireJS
 
 module Web
 {

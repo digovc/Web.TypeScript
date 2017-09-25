@@ -4,30 +4,12 @@
 
 // #endregion Reference
 
-// #region RequireJS
-
-// #endregion RequireJS
-
 module Web
 {
     // #region Importações
     // #endregion Importações
 
     // #region Enumerados
-
-    export enum Animator_EnmAnimacao
-    {
-        FADE_IN,
-        FADE_OUT,
-        SLIDE_HORIZONTAL_IN,
-        SLIDE_HORIZONTAL_OUT,
-        SLIDE_VERTICAL_IN,
-        SLIDE_VERTICAL_OUT,
-        SLIDE_VERTICAL_DIREITA_IN,
-        SLIDE_VERTICAL_DIREITA_OUT,
-        SLIDE_VERTICAL_ESQUERDA_IN,
-        SLIDE_VERTICAL_ESQUERDA_OUT,
-    }
 
     // #endregion Enumerados
 
@@ -37,33 +19,6 @@ module Web
         // #endregion Constantes
 
         // #region Atributos
-
-        private static _arrEnmAnimacaoIn: Array<Animator_EnmAnimacao>;
-        private static _arrEnmAnimacaoOut: Array<Animator_EnmAnimacao>;
-
-        private static get arrEnmAnimacaoIn(): Array<Animator_EnmAnimacao>
-        {
-            if (this._arrEnmAnimacaoIn != null)
-            {
-                return this._arrEnmAnimacaoIn;
-            }
-
-            this._arrEnmAnimacaoIn = this.getArrEnmAnimacaoIn();
-
-            return this._arrEnmAnimacaoIn;
-        }
-
-        private static get arrEnmAnimacaoOut(): Array<Animator_EnmAnimacao>
-        {
-            if (this._arrEnmAnimacaoOut != null)
-            {
-                return this._arrEnmAnimacaoOut;
-            }
-
-            this._arrEnmAnimacaoOut = this.getArrEnmAnimacaoOut();
-
-            return this._arrEnmAnimacaoOut;
-        }
 
         private _tag: Tag;
 
@@ -92,85 +47,127 @@ module Web
 
         // #region Métodos
 
-        public animar(enmAnimacao: Animator_EnmAnimacao = Animator_EnmAnimacao.FADE_IN, fncComplete: Function = null): void
+        public animarBackgroundColor(cor: string): void
         {
+            this.preparar();
+
+            if (Utils.getBooStrVazia(cor))
+            {
+                return;
+            }
+
             if (this.tag == null)
             {
                 return;
             }
 
-            if (!this.validar(enmAnimacao))
+            this.tag.jq.velocity({ "background-color": cor }, { duration: 350 });
+        }
+
+        public balancar(fncComplete: Function = null): void
+        {
+            this.preparar();
+
+            this.tag.jq.velocity({ "translateX": "+=25" }, { duration: 125 });
+            this.tag.jq.velocity({ "translateX": "-=50" }, { duration: 125 });
+            this.tag.jq.velocity({ "translateX": "+=50" }, { duration: 125 });
+            this.tag.jq.velocity({ "translateX": "-=50" }, { duration: 125 });
+            this.tag.jq.velocity({ "translateX": "+=50" }, { duration: 125 });
+
+            this.tag.jq.velocity({ "translateX": "0px" },
+                {
+                    duration: 125,
+                    complete: (fncComplete as any)
+                });
+        }
+
+        public fadeIn(fncComplete: Function = null): void
+        {
+            this.preparar();
+
+            if (this.tag.booVisivel)
             {
                 return;
             }
 
-            this.tag.jq.stop();
+            var cfg: jquery.velocity.Options =
+                {
+                    complete: (fncComplete as any),
+                    display: "block",
+                    duration: 250,
+                }
 
-            switch (enmAnimacao)
-            {
-                case Animator_EnmAnimacao.FADE_IN:
-                    this.tag.jq.fadeIn(250, fncComplete);
-                    return;
-
-                case Animator_EnmAnimacao.FADE_OUT:
-                    this.tag.jq.fadeOut(250, fncComplete);
-                    return;
-
-                case Animator_EnmAnimacao.SLIDE_HORIZONTAL_IN:
-                    this.tag.jq.show(250, fncComplete); // TODO: Implementar.
-                    return;
-
-                case Animator_EnmAnimacao.SLIDE_HORIZONTAL_OUT:
-                    this.tag.jq.hide(250, fncComplete); // TODO: Implementar.
-                    return;
-
-                case Animator_EnmAnimacao.SLIDE_VERTICAL_IN:
-                    this.tag.jq.slideDown(250, fncComplete);
-                    return;
-
-                case Animator_EnmAnimacao.SLIDE_VERTICAL_OUT:
-                    this.tag.jq.slideUp(250, fncComplete);
-                    return;
-
-                case Animator_EnmAnimacao.SLIDE_VERTICAL_DIREITA_IN:
-                    this.slideVerticalDireitaIn(fncComplete);
-                    return;
-
-                case Animator_EnmAnimacao.SLIDE_VERTICAL_DIREITA_OUT:
-                    this.slideVerticalDireitaOut(fncComplete);
-                    return;
-
-                default:
-                    new Erro("Animação não implementada.");
-                    return;
-            }
+            this.tag.jq.velocity({ "opacity": 1 }, cfg);
         }
 
-        private slideVerticalDireitaIn(fncComplete: Function): void
+        public fadeOut(fncComplete: Function = null): void
         {
-            this.tag.jq.css("margin-left", "25vw");
-            this.tag.jq.css("margin-right", "-25vw");
-            this.tag.jq.css("opacity", "0");
+            this.preparar();
+
+            if (!this.tag.booVisivel)
+            {
+                return;
+            }
 
             var cfg: jquery.velocity.Options =
                 {
                     complete: (fncComplete as any),
-                    duration: 150,
-                    easing: "ease",
+                    display: "none",
+                    duration: 250,
+                }
+
+            this.tag.jq.velocity({ "opacity": 0 }, cfg);
+        }
+
+        private slideVerticalDireitaEsquerdaIn(fncComplete: Function, booDireita: boolean): void
+        {
+            this.preparar();
+
+            if (this.tag.booVisivel)
+            {
+                return;
+            }
+
+            this.tag.jq.css("opacity", 0);
+
+            this.tag.jq.velocity({ "translateX": (booDireita ? "25px" : "-25px") }, { duration: 0 });
+
+            var cfg: jquery.velocity.Options =
+                {
+                    complete: (fncComplete as any),
+                    display: "block",
+                    duration: 250,
+                    easing: "easeInOutQuart",
                 }
 
             var arrCss =
                 {
-                    "margin-left": "0vw",
-                    "margin-right": "0vw",
-                    "opacity": "1",
+                    "opacity": 1,
+                    "translateX": "0px",
                 }
 
             this.tag.jq.velocity(arrCss, cfg);
         }
 
-        private slideVerticalDireitaOut(fncComplete: Function): void
+        public slideVerticalDireitaIn(fncComplete: Function = null): void
         {
+            this.slideVerticalDireitaEsquerdaIn(fncComplete, true);
+        }
+
+        public slideVerticalEsquerdaIn(fncComplete: Function = null): void
+        {
+            this.slideVerticalDireitaEsquerdaIn(fncComplete, false);
+        }
+
+        public slideVerticalDireitaOut(fncComplete: Function): void
+        {
+            this.preparar();
+
+            if (!this.tag.booVisivel)
+            {
+                return;
+            }
+
             this.tag.jq.css("margin-left", "-25vw");
             this.tag.jq.css("margin-right", "25vw");
             this.tag.jq.css("opacity", "1");
@@ -178,7 +175,7 @@ module Web
             var cfg: jquery.velocity.Options =
                 {
                     complete: (fncComplete as any),
-                    duration: 150,
+                    duration: 250,
                     easing: "ease",
                 }
 
@@ -192,32 +189,10 @@ module Web
             this.tag.jq.velocity(arrCss, cfg);
         }
 
-        private static getArrEnmAnimacaoIn(): Array<Animator_EnmAnimacao>
-        {
-            var arrEnmAnimacaoInResultado = new Array<Animator_EnmAnimacao>();
-
-            arrEnmAnimacaoInResultado.push(Animator_EnmAnimacao.FADE_IN);
-            arrEnmAnimacaoInResultado.push(Animator_EnmAnimacao.SLIDE_HORIZONTAL_IN);
-            arrEnmAnimacaoInResultado.push(Animator_EnmAnimacao.SLIDE_VERTICAL_DIREITA_IN);
-            arrEnmAnimacaoInResultado.push(Animator_EnmAnimacao.SLIDE_VERTICAL_IN);
-
-            return arrEnmAnimacaoInResultado;
-        }
-
-        private static getArrEnmAnimacaoOut(): Array<Animator_EnmAnimacao>
-        {
-            var arrEnmAnimacaoOutResultado = new Array<Animator_EnmAnimacao>();
-
-            arrEnmAnimacaoOutResultado.push(Animator_EnmAnimacao.FADE_OUT);
-            arrEnmAnimacaoOutResultado.push(Animator_EnmAnimacao.SLIDE_HORIZONTAL_OUT);
-            arrEnmAnimacaoOutResultado.push(Animator_EnmAnimacao.SLIDE_VERTICAL_DIREITA_OUT);
-            arrEnmAnimacaoOutResultado.push(Animator_EnmAnimacao.SLIDE_VERTICAL_OUT);
-
-            return arrEnmAnimacaoOutResultado;
-        }
-
         public girar(fltDegrees: number = 360, intDuracao: number = 250, fncComplete: Function = null): void
         {
+            this.preparar();
+
             var cfg: JQueryAnimationOptions =
                 {
                     duration: 250,
@@ -229,19 +204,20 @@ module Web
             $({ i: 0 }).animate({ fltDegrees }, cfg);
         }
 
-        private validar(enmAnimcatao: Animator_EnmAnimacao): boolean
+        private pararAnimacao(): void
         {
-            if (this.tag.booVisivel && (Animator.arrEnmAnimacaoIn.indexOf(enmAnimcatao) > -1))
+            this.tag.jq.stop();
+            this.tag.jq.velocity("finish");
+        }
+
+        private preparar(): void
+        {
+            if (this.tag == null)
             {
-                return false;
+                throw new Error('O atributo "tag" está vazio.');
             }
 
-            if (!this.tag.booVisivel && (Animator.arrEnmAnimacaoOut.indexOf(enmAnimcatao) > -1))
-            {
-                return false;
-            }
-
-            return true;
+            this.pararAnimacao();
         }
 
         // #endregion Métodos
