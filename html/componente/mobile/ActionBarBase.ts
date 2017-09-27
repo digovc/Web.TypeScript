@@ -5,7 +5,6 @@
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="../menu/contexto/MenuContexto.ts"/>
 /// <reference path="OnMenuClickListener.ts"/>
-/// <reference path="OnVoltarClickListener.ts"/>
 
 // #endregion Reference
 
@@ -30,6 +29,7 @@ module Web
         private _btnSubMenu: BotaoActionBar;
         private _btnVoltar: BotaoActionBar;
         private _divTitulo: Div;
+        private _fncVoltar: ((a: ActionBarBase) => void);
 
         private get arrBtnTemp(): Array<BotaoActionBar>
         {
@@ -79,7 +79,7 @@ module Web
             return this._btnSubMenu;
         }
 
-        private get btnVoltar(): BotaoActionBar
+        public get btnVoltar(): BotaoActionBar
         {
             if (this._btnVoltar != null)
             {
@@ -101,6 +101,16 @@ module Web
             this._divTitulo = new Div(this.strId + "_divTitulo");
 
             return this._divTitulo;
+        }
+
+        public get fncVoltar(): ((a: ActionBarBase) => void)
+        {
+            return this._fncVoltar;
+        }
+
+        public set fncVoltar(fncVoltar: ((a: ActionBarBase) => void))
+        {
+            this._fncVoltar = fncVoltar;
         }
 
         // #endregion Atributos
@@ -199,6 +209,16 @@ module Web
             this.divTitulo.addEvtOnClickListener(this);
         }
 
+        private voltar(): void
+        {
+            if (this.fncVoltar == null)
+            {
+                return;
+            }
+
+            this.fncVoltar(this);
+        }
+
         // #endregion Métodos
 
         // #region Eventos
@@ -219,7 +239,7 @@ module Web
 
                     case this.btnVoltar:
                     case this.divTitulo:
-                        this.dispararEvtOnVoltarClickListener(arg)
+                        this.voltar();
                         return;
                 }
             }
@@ -294,72 +314,6 @@ module Web
         }
 
         // #endregion Evento OnMenuClickListener
-
-        // #region Evento OnVoltarClickListener
-
-        private _arrEvtOnVoltarClickListener: Array<OnVoltarClickListener>;
-
-        private get arrEvtOnVoltarClickListener(): Array<OnVoltarClickListener>
-        {
-            if (this._arrEvtOnVoltarClickListener != null)
-            {
-                return this._arrEvtOnVoltarClickListener;
-            }
-
-            this._arrEvtOnVoltarClickListener = new Array<OnVoltarClickListener>();
-
-            return this._arrEvtOnVoltarClickListener;
-        }
-
-        public addEvtOnVoltarClickListener(evt: OnVoltarClickListener): void
-        {
-            if (evt == null)
-            {
-                return;
-            }
-
-            if (this.arrEvtOnVoltarClickListener.indexOf(evt) > -1)
-            {
-                return;
-            }
-
-            this.arrEvtOnVoltarClickListener.push(evt);
-        }
-
-        private dispararEvtOnVoltarClickListener(arg: JQueryEventObject): void
-        {
-            if (this.arrEvtOnVoltarClickListener.length == 0)
-            {
-                return;
-            }
-
-            this.arrEvtOnVoltarClickListener.forEach((evt) =>
-            {
-                if (evt == null)
-                {
-                    return;
-                }
-
-                evt.onVoltarClick(this, arg);
-            });
-        }
-
-        public removerEvtOnVoltarClickListener(evt: OnVoltarClickListener): void
-        {
-            if (evt == null)
-            {
-                return;
-            }
-
-            if (this.arrEvtOnVoltarClickListener.indexOf(evt) == -1)
-            {
-                return;
-            }
-
-            this.arrEvtOnVoltarClickListener.splice(this.arrEvtOnVoltarClickListener.indexOf(evt), 1);
-        }
-
-        // #endregion Evento OnVoltarClickListener
 
         // #endregion Eventos
     }

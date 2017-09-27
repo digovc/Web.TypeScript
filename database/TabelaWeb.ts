@@ -17,6 +17,7 @@ module Web
     {
         // #region Constantes
 
+        private static get STR_ERRO_SRV_DBE_VAZIO(): string { return "O servidor de dados não foi indicado." };
         public static get SQL_CLN_STR_TAG_NOME(): string { return "str_tag" };
 
         // #endregion Constantes
@@ -321,6 +322,11 @@ module Web
         {
             super.copiarDados(obj);
 
+            if (obj == null)
+            {
+                return;
+            }
+
             this.copiarDadosArrCln();
         }
 
@@ -487,7 +493,7 @@ module Web
 
         protected getSrvAjaxDbe(): SrvAjaxDbeBase
         {
-            return null;
+            return AppWebBase.i.srvAjaxDbe;
         }
 
         public limparDados(): void
@@ -509,10 +515,36 @@ module Web
         {
             if (this.srvAjaxDbe == null)
             {
-                throw new Error("O servidor de dados não foi indicado.");
+                throw new Error(TabelaWeb.STR_ERRO_SRV_DBE_VAZIO);
             }
 
             this.srvAjaxDbe.pesquisar(this.strNome, arrFil, fncSucesso, fncErro);
+        }
+
+        public salvar(fncRetorno: ((o: Interlocutor) => void)): void
+        {
+            if (this.srvAjaxDbe == null)
+            {
+                throw new Error(TabelaWeb.STR_ERRO_SRV_DBE_VAZIO);
+            }
+
+            this.srvAjaxDbe.salvar(this, fncRetorno);
+        }
+
+        protected validarJson(strPropriedade: string): boolean
+        {
+            if (!super.validarJson(strPropriedade))
+            {
+                return false;
+            }
+
+            if (strPropriedade == "_srvAjaxDbe")
+
+            {
+                return false;
+            }
+
+            return true;
         }
 
         // #endregion Métodos

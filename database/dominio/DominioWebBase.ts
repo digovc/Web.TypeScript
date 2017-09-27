@@ -102,6 +102,11 @@ module Web
         {
             super.copiarDados(obj);
 
+            if (obj == null)
+            {
+                return;
+            }
+
             this.dttAlteracao = new Date(String(this.dttAlteracao));
             this.dttCadastro = new Date(String(this.dttCadastro));
 

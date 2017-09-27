@@ -93,7 +93,7 @@ module Web
             var cfg: jquery.velocity.Options =
                 {
                     complete: (fncComplete as any),
-                    display: "block",
+                    display: "auto",
                     duration: 250,
                 }
 
@@ -135,7 +135,7 @@ module Web
             var cfg: jquery.velocity.Options =
                 {
                     complete: (fncComplete as any),
-                    display: "block",
+                    display: "auto",
                     duration: 250,
                     easing: "easeInOutQuart",
                 }

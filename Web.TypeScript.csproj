@@ -96,7 +96,6 @@
     <TypeScriptCompile Include="html\componente\mobile\MenuMobileBase.ts" />
     <TypeScriptCompile Include="html\componente\mobile\MenuMobileItem.ts" />
     <TypeScriptCompile Include="html\componente\mobile\OnMenuClickListener.ts" />
-    <TypeScriptCompile Include="html\componente\mobile\OnVoltarClickListener.ts" />
     <TypeScriptCompile Include="html\componente\Notificacao.ts" />
     <TypeScriptCompile Include="html\componente\ProgressBar.ts" />
     <TypeScriptCompile Include="html\componente\tab\TabHtml.ts" />
