@@ -1,7 +1,11 @@
-﻿/// <reference path="../../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../../../OnFocusOutListener.ts"/>
 /// <reference path="../../ComponenteHtmlBase.ts"/>
 /// <reference path="MenuContextoItem.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -87,7 +91,7 @@ module Web
             this.jq.css("top", (arg.pageY - 10));
 
             this.iniciar();
-            this.mostrar();
+            this.anm.fadeIn();
 
             AppWebBase.i.tagFoco = this;
         }

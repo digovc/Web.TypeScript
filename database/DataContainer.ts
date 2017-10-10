@@ -1,5 +1,9 @@
-﻿/// <reference path="../Objeto.ts"/>
+﻿// #region Reference
+
+/// <reference path="../Objeto.ts"/>
 /// <reference path="RowWeb.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -60,6 +64,11 @@ module Web
         public copiarDados(obj: any): void
         {
             super.copiarDados(obj);
+
+            if (obj == null)
+            {
+                return;
+            }
 
             this.copiarDadosArrRow(obj)
             this.copiarDadosarrSqlColunaNome(obj)

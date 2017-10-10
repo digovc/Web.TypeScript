@@ -1,4 +1,7 @@
-﻿module Web
+﻿// #region Reference
+// #endregion Reference
+
+module Web
 {
     // #region Importações
     // #endregion Importações

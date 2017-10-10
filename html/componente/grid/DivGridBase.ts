@@ -1,8 +1,12 @@
-﻿/// <reference path="../../../database/DataContainer.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/DataContainer.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="DivGridCabecalho.ts"/>
 /// <reference path="DivGridConteudo.ts"/>
 /// <reference path="DivGridRodape.ts"/>
+
+// #endregion Reference
 
 module Web
 {

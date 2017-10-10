@@ -1,4 +1,11 @@
-﻿module Web
+﻿// #region Reference
+
+/// <reference path="../../../OnClickListener.ts"/>
+/// <reference path="../ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
+
+module Web
 {
     // #region Importações
     // #endregion Importações

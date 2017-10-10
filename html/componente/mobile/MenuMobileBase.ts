@@ -1,5 +1,9 @@
-﻿/// <reference path="../ComponenteHtmlBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="MenuMobileItem.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -41,12 +45,12 @@ module Web
 
         public abrir(): void
         {
-            this.mostrar(Tag_EnmAnimacaoTipo.FADE);
+            this.mostrar();
         }
 
         private fechar(): void
         {
-            this.esconder(Tag_EnmAnimacaoTipo.FADE);
+            this.esconder();
         }
 
         protected inicializar(): void

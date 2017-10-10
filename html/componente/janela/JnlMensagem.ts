@@ -1,4 +1,8 @@
-﻿/// <reference path="JanelaHtml.ts"/>
+﻿// #region Reference
+
+/// <reference path="JanelaHtml.ts"/>
+
+// #endregion Reference
 
 module Web
 {

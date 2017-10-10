@@ -1,4 +1,8 @@
-﻿/// <reference path="PainelHtml.ts"/>
+﻿// #region Reference
+
+/// <reference path="PainelHtml.ts"/>
+
+// #endregion Reference
 
 module Web
 {

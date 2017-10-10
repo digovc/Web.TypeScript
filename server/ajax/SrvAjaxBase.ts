@@ -1,4 +1,8 @@
-﻿/// <reference path="../ServerBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ServerBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {

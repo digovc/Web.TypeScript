@@ -1,5 +1,9 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -128,7 +132,7 @@ module Web
 
             (AppWebBase.i.pag as PagPrincipalBase).abrirConsulta(this.tblWeb);
 
-            this.imgIcone.anim.girar();
+            this.imgIcone.anm.girar();
         }
 
         private getTblWeb(): TabelaWeb

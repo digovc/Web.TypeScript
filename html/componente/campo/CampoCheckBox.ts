@@ -1,5 +1,9 @@
-﻿/// <reference path="../../CheckBox.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../CheckBox.ts"/>
 /// <reference path="CampoHtmlBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {

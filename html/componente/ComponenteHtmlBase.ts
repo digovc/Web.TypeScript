@@ -1,5 +1,9 @@
-﻿/// <reference path="../../ConstanteManager.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../ConstanteManager.ts"/>
 /// <reference path="../Div.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -124,9 +128,9 @@ module Web
             return strLayoutFixo;
         }
 
-        public mostrar(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null)
+        public mostrar(fncComplete: Function = null)
         {
-            super.mostrar(enmAnimacaoTipo, fncComplete);
+            super.mostrar(fncComplete);
 
             AppWebBase.i.tagFoco = this;
         }

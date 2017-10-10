@@ -1,4 +1,8 @@
-﻿/// <reference path="DominioWebBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="DominioWebBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {

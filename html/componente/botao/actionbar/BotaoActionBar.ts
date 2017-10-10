@@ -1,4 +1,8 @@
-﻿/// <reference path="../BotaoHtml.ts"/>
+﻿// #region Reference
+
+/// <reference path="../BotaoHtml.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -69,6 +73,11 @@ module Web
             strLayoutFixo = strLayoutFixo.replace("_div_id", this.strId);
 
             return strLayoutFixo;
+        }
+
+        protected processarOnFocusIn(): void
+        {
+            //super.processarOnFocusIn();
         }
 
         // #endregion Métodos

@@ -1,6 +1,10 @@
-﻿/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="TabItemHead.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -193,7 +197,7 @@ module Web
                 return;
             }
 
-            this.tabHtml.btnAlterar.mostrar();
+            this.tabHtml.btnAlterar.anm.fadeIn();
         }
 
         public pesquisar(): void
@@ -399,7 +403,7 @@ module Web
                 return;
             }
 
-            this.tabHtml.btnAlterar.mostrar();
+            this.tabHtml.btnAlterar.anm.fadeIn();
         }
 
         private setBooAtiva(booAtiva: boolean): void
@@ -415,7 +419,7 @@ module Web
             this.tabHtml.tabItemAtiva = this;
 
             this.pesquisar();
-            this.mostrar();
+            this.anm.fadeIn();
         }
 
         // #endregion Métodos

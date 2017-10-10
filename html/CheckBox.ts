@@ -1,4 +1,8 @@
-﻿/// <reference path="Input.ts"/>
+﻿// #region Reference
+
+/// <reference path="Input.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -68,7 +72,7 @@ module Web
         {
             super.setStrValor(strValor);
 
-            this.divSeletor.jq.animate({ "left": (Utils.getBoo(strValor) ? "15px" : "1px") }, 200, "swing");
+            this.divSeletor.jq.animate({ "left": (Utils.getBoo(strValor) ? "37px" : "1px") }, 200, "swing");
             this.divSeletor.jq.css("background-color", (Utils.getBoo(strValor) ? "rgb(132,202,156)" : Utils.STR_VAZIA));
         }
 

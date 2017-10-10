@@ -1,4 +1,10 @@
-﻿module Web
+﻿// #region Reference
+// #endregion Reference
+
+// #region RequireJS
+// #endregion RequireJS
+
+module Web
 {
     // #region Importações
     // #endregion Importações
@@ -11,7 +17,7 @@
      * Todos os métodos devem ser acessadas diretamente através da classe
      * pois são todas estáticas.
      */
-    export class Utils
+    export abstract class Utils
     {
         // #region Constantes
 

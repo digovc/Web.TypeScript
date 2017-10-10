@@ -1,4 +1,8 @@
-﻿/// <reference path="../../Div.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../Div.ts"/>
+
+// #endregion Reference
 
 module Web
 {

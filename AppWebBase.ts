@@ -1,4 +1,6 @@
-﻿/// <reference path="database/TabelaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="database/TabelaWeb.ts"/>
 /// <reference path="design/TemaDefault.ts"/>
 /// <reference path="erro/Erro.ts"/>
 /// <reference path="Historico.ts"/>
@@ -13,6 +15,9 @@
 /// <reference path="server/Interlocutor.ts"/>
 /// <reference path="server/ServerBase.ts"/>
 /// <reference path="server/SrvHttpBase.ts"/>
+/// <reference path="typedefinition/jquery.d.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -28,7 +33,7 @@ module Web
         // #region Constantes
 
         public static get DIR_CSS(): string { return (AppWebBase.DIR_RESOURCE + "css/") };
-        public static get DIR_HTML(): string { return "res/html/" };
+        public static get DIR_HTML(): string { return (AppWebBase.DIR_RESOURCE + "html/") };
         public static get DIR_HTML_PAGINA(): string { return (AppWebBase.DIR_HTML + "pagina/") };
         public static get DIR_JS(): string { return (AppWebBase.DIR_RESOURCE + "js/") };
         public static get DIR_JS_LIB(): string { return (AppWebBase.DIR_RESOURCE + "js/lib/") };

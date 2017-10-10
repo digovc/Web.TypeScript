@@ -1,4 +1,8 @@
-﻿/// <reference path="DivDica.ts"/>
+﻿// #region Reference
+
+/// <reference path="DivDica.ts"/>
+
+// #endregion Reference
 
 module Web
 {

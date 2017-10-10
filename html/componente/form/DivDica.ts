@@ -1,4 +1,8 @@
-﻿/// <reference path="../ComponenteHtmlBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {

@@ -1,9 +1,13 @@
-﻿/// <reference path="../../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../../../OnKeyDownListener.ts"/>
 /// <reference path="../../painel/PainelHtml.ts"/>
 /// <reference path="FrmFiltro.ts"/>
 /// <reference path="FrmFiltroConteudo.ts"/>
 /// <reference path="JnlConsulta.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -156,8 +160,8 @@ module Web
                 return;
             }
 
-            this.pnlCondicao.esconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
-            this.pnlSelecao.esconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+            this.pnlCondicao.anm.fadeOut();
+            this.pnlSelecao.anm.fadeOut();
         }
 
         protected inicializar(): void
@@ -181,8 +185,8 @@ module Web
                 return;
             }
 
-            this.pnlCondicao.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
-            this.pnlSelecao.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+            this.pnlCondicao.anm.fadeIn();
+            this.pnlSelecao.anm.fadeIn();
 
             if (this.frmFiltro == null)
             {

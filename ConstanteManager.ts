@@ -1,4 +1,8 @@
-﻿/// <reference path="Constante.ts"/>
+﻿// #region Reference
+
+/// <reference path="Constante.ts"/>
+
+// #endregion Reference
 
 module Web
 {

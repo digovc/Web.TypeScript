@@ -1,5 +1,9 @@
-﻿/// <reference path="../../../typedefinition/marked.d.ts" />
+﻿// #region Reference
+
+/// <reference path="../../../typedefinition/marked.d.ts" />
 /// <reference path="../ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -112,7 +116,7 @@ module Web
 
             this.prepararConteudo();
 
-            this.divConteudo.mostrar();
+            this.divConteudo.anm.fadeIn();
 
             this.divSumarioItem.processarConteudo();
         }

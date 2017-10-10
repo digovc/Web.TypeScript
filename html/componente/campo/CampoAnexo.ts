@@ -1,5 +1,9 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="CampoMedia.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -191,7 +195,7 @@ module Web
 
             this.divIcone.strConteudo = strArquivoNome.toUpperCase().substr((strArquivoNome.length - 3), 3);
 
-            this.divIcone.mostrar();
+            this.divIcone.anm.fadeIn();
         }
 
         private download(): void
@@ -259,7 +263,7 @@ module Web
                 return;
             }
 
-            this.divProgressBar.mostrar();
+            this.divProgressBar.anm.fadeIn();
 
             this.enviarArquivoModificacao();
             this.enviarArquivoNome();

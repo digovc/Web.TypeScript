@@ -1,7 +1,11 @@
-﻿/// <reference path="../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="../janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="TabItem.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -300,7 +304,7 @@ module Web
                 return;
             }
 
-            this.divComando.mostrar();
+            this.divComando.anm.fadeIn();
         }
 
         public pesquisarTabItemPrincipal(): void
@@ -324,7 +328,7 @@ module Web
 
             tabItemPrincipal.booAtiva = true;
 
-            this.divComando.mostrar();
+            this.divComando.anm.fadeIn();
         }
 
         protected setEventos()

@@ -1,5 +1,9 @@
-﻿/// <reference path="../html/Tag.ts"/>
+﻿// #region Reference
+
+/// <reference path="../html/Tag.ts"/>
 /// <reference path="ServerBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {

@@ -1,4 +1,8 @@
-﻿/// <reference path="DivGridColunaBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="DivGridColunaBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {

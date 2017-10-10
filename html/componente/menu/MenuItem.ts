@@ -1,10 +1,14 @@
-﻿/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnMouseLeaveListener.ts"/>
 /// <reference path="../../../OnMouseOverListener.ts"/>
 /// <reference path="../circulo/DivCirculo.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="../painel/PainelHtml.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -282,7 +286,7 @@ module Web
 
         public limparPesquisa(): void
         {
-            this.mostrar();
+            this.anm.fadeIn();
 
             if (this.arrMniFilho.length < 1)
             {
@@ -301,7 +305,7 @@ module Web
                 return;
             }
 
-            this.divItemConteudo.mostrarEsconder();
+            this.divItemConteudo.booVisivel = !this.divItemConteudo.booVisivel;
         }
 
         public pesquisar(strPesquisa: string): void
@@ -335,15 +339,15 @@ module Web
                 return;
             }
 
-            this.mostrar();
+            this.anm.fadeIn();
 
             if (this.mniPai == null)
             {
                 return;
             }
 
-            this.mniPai.mostrar();
-            this.mniPai.divItemConteudo.mostrar();
+            this.mniPai.anm.fadeIn();
+            this.mniPai.divItemConteudo.anm.fadeIn();
         }
 
         private processarOnClick(): void

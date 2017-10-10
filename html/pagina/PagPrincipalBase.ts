@@ -1,8 +1,12 @@
-﻿/// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
+﻿// #region Reference
+
+/// <reference path="../componente/janela/cadastro/JnlCadastro.ts"/>
 /// <reference path="../componente/janela/cadastro/JnlTag.ts"/>
 /// <reference path="../componente/janela/consulta/JnlConsulta.ts"/>
 /// <reference path="../Div.ts"/>
 /// <reference path="PaginaHtmlBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -142,7 +146,7 @@ module Web
                 return;
             }
 
-            this.divConsulta.esconder(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+            this.divConsulta.anm.fadeOut();
 
             var objInterlocutor = new Interlocutor();
 
@@ -288,7 +292,7 @@ module Web
 
         private inicializarJnlCadastro(jnlCadastroJq: JQuery): void
         {
-            this.divCadastro.mostrar();
+            this.divCadastro.anm.fadeIn();
 
             var jnlCadastro: JnlCadastro = new (window as any)[AppWebBase.i.strNamespace][jnlCadastroJq[0].id]();
 
@@ -299,7 +303,7 @@ module Web
         {
             this.divConsulta.jq.html(objInterlocutor.objData.toString());
 
-            this.divConsulta.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL);
+            this.divConsulta.anm.fadeIn();
 
             this.jnlConsulta = new JnlConsulta(this);
 

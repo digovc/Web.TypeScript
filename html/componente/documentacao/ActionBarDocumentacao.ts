@@ -1,4 +1,8 @@
-﻿/// <reference path="../mobile/ActionBarBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../mobile/ActionBarBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {

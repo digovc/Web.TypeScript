@@ -1,6 +1,10 @@
-﻿/// <reference path="../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../OnClickListener.ts"/>
 /// <reference path="botao/BotaoCircular.ts"/>
 /// <reference path="ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -127,7 +131,7 @@ module Web
 
         // #region Métodos
 
-        public static mostrar(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA): void
+        public static animar(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA): void
         {
             if (Utils.getBooStrVazia(strTitulo))
             {
@@ -164,7 +168,7 @@ module Web
 
             this.iniciar();
 
-            this.mostrar();
+            this.anm.fadeIn();
 
             this.btnConfirmar.receberFoco();
 

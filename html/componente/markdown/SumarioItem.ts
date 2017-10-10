@@ -1,6 +1,10 @@
-﻿/// <reference path="../../../erro/Erro.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../erro/Erro.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="IndiceItem.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -162,7 +166,7 @@ module Web
 
         public abrirConteudo(): void
         {
-            this.divConteudo.mostrarEsconder();
+            this.divConteudo.booVisivel = !this.divConteudo.booVisivel;
 
             this.divSumario.abrirConteudo(this);
         }
@@ -298,7 +302,7 @@ module Web
 
             while (divItemPai != null)
             {
-                divItemPai.divConteudo.mostrar();
+                divItemPai.divConteudo.anm.fadeIn();
 
                 divItemPai = divItemPai.divSumarioItemPai;
             }
@@ -326,7 +330,7 @@ module Web
         {
             if (this.divIndice.jq[0].childElementCount > 0)
             {
-                this.divIndice.mostrar();
+                this.divIndice.anm.fadeIn();
                 return;
             }
 
@@ -346,7 +350,7 @@ module Web
                 divIndiceItem.iniciar();
             }
 
-            this.divIndice.mostrar();
+            this.divIndice.anm.fadeIn();
         }
 
         private processarConteudoStrHeadSelecionada(): void

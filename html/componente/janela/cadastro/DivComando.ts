@@ -1,6 +1,10 @@
-﻿/// <reference path="../../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../painel/PainelNivel.ts"/>
 /// <reference path="JnlCadastro.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -133,7 +137,7 @@ module Web
                 return;
             }
 
-            this.btnTag.mostrar();
+            this.btnTag.anm.fadeIn();
         }
 
         private inicializarTblWeb(): void
@@ -178,7 +182,7 @@ module Web
                 return;
             }
 
-            this.btnTag.mostrar(); // TODO: Somente mostrar o botão de tag se o salvamento for bem sucedido.
+            this.btnTag.anm.fadeIn(); // TODO: Somente mostrar o botão de tag se o salvamento for bem sucedido.
 
             this.frm.salvar();
         }

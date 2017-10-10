@@ -1,4 +1,8 @@
-﻿/// <reference path="CampoMedia.ts"/>
+﻿// #region Reference
+
+/// <reference path="CampoMedia.ts"/>
+
+// #endregion Reference
 
 module Web
 {

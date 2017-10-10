@@ -1,4 +1,8 @@
-﻿/// <reference path="../Interlocutor.ts"/>
+﻿// #region Reference
+
+/// <reference path="../Interlocutor.ts"/>
+
+// #endregion Reference
 
 module Web
 {

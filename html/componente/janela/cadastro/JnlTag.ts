@@ -1,6 +1,10 @@
-﻿/// <reference path="../../../../Keys.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../Keys.ts"/>
 /// <reference path="../JanelaHtml.ts"/>
 /// <reference path="TagCard.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -102,7 +106,7 @@ module Web
             this.tagInputTag.receberFoco();
 
             tagCard.iniciar();
-            tagCard.mostrar();
+            tagCard.anm.fadeIn();
         }
 
         private addTagCard(tagCard: TagCard): void

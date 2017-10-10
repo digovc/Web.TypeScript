@@ -1,4 +1,8 @@
-﻿/// <reference path="CampoAlfanumerico.ts"/>
+﻿// #region Reference
+
+/// <reference path="CampoAlfanumerico.ts"/>
+
+// #endregion Reference
 
 module Web
 {

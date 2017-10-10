@@ -1,4 +1,9 @@
-﻿/// <reference path="OnTreeViewNodeClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ComponenteHtmlBase.ts"/>
+/// <reference path="OnTreeViewNodeClickListener.ts"/>
+
+// #endregion Reference
 
 module Web
 {

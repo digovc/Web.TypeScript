@@ -1,5 +1,9 @@
-﻿/// <reference path="OnDisposedListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="OnDisposedListener.ts"/>
 /// <reference path="Utils.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -122,6 +126,11 @@ module Web
          */
         public copiarDados(obj: any): void
         {
+            if (obj == null)
+            {
+                return;
+            }
+
             for (var objPropriedade in obj)
             {
                 (this as any)[objPropriedade] = obj[objPropriedade];

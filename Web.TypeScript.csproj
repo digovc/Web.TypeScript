@@ -36,6 +36,7 @@
     <TypeScriptCompile Include="html\componente\grid\DivGridConteudo.ts" />
     <TypeScriptCompile Include="html\componente\grid\DivGridLinha.ts" />
     <TypeScriptCompile Include="html\componente\grid\DivGridRodape.ts" />
+    <TypeScriptCompile Include="html\componente\mobile\TileBase.ts" />
     <TypeScriptCompile Include="html\componente\painel\PainelModal.ts" />
     <TypeScriptCompile Include="html\componente\table\OnTableMenuClickArg.ts" />
     <TypeScriptCompile Include="html\componente\table\OnTableMenuClickListener.ts" />
@@ -54,7 +55,7 @@
     <TypeScriptCompile Include="database\dominio\DominioWebBase.ts" />
     <TypeScriptCompile Include="erro\Erro.ts" />
     <TypeScriptCompile Include="Historico.ts" />
-    <TypeScriptCompile Include="html\activity\ActivityBase.ts" />
+    <TypeScriptCompile Include="html\componente\mobile\activity\ActivityBase.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
     <TypeScriptCompile Include="html\componente\documentacao\ActionBarDocumentacao.ts" />
     <TypeScriptCompile Include="html\componente\markdown\EmailRegistro.ts" />
@@ -95,8 +96,6 @@
     <TypeScriptCompile Include="html\componente\mobile\MenuMobileBase.ts" />
     <TypeScriptCompile Include="html\componente\mobile\MenuMobileItem.ts" />
     <TypeScriptCompile Include="html\componente\mobile\OnMenuClickListener.ts" />
-    <TypeScriptCompile Include="html\componente\mobile\OnVoltarClickListener.ts" />
-    <TypeScriptCompile Include="html\componente\mobile\TileBase.ts" />
     <TypeScriptCompile Include="html\componente\Notificacao.ts" />
     <TypeScriptCompile Include="html\componente\ProgressBar.ts" />
     <TypeScriptCompile Include="html\componente\tab\TabHtml.ts" />
@@ -189,6 +188,7 @@
     <TypeScriptCompile Include="typedefinition\jquery.d.ts" />
     <TypeScriptCompile Include="typedefinition\marked.d.ts" />
     <TypeScriptCompile Include="typedefinition\sugarpak.d.ts" />
+    <TypeScriptCompile Include="typedefinition\velocity-animate.d.ts" />
     <TypeScriptCompile Include="Utils.ts" />
     <TypeScriptCompile Include="server\websocket\SrvWsBase.ts" />
   </ItemGroup>
@@ -207,6 +207,24 @@
   <PropertyGroup>
     <AssemblyName>Web.TypeScript</AssemblyName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Cordova'">
+    <OutputPath>bin\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TypeScriptTarget>ES6</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir>bin\js</TypeScriptOutDir>
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
   <ProjectExtensions>
@@ -224,7 +242,7 @@
     <TypeScriptTarget>ES6</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
-    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
     <TypeScriptOutDir>bin\js</TypeScriptOutDir>

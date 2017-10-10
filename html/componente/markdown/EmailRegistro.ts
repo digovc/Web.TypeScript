@@ -1,6 +1,10 @@
-﻿/// <reference path="../../../database/dominio/documentacao/EmailRegistroDominio.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/dominio/documentacao/EmailRegistroDominio.ts"/>
 /// <reference path="../../../server/ajax/SrvAjaxDocumentacao.ts"/>
 /// <reference path="../ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {

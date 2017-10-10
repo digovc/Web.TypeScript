@@ -1,7 +1,11 @@
-﻿/// <reference path="../../../../Keys.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../Keys.ts"/>
 /// <reference path="../../../../OnKeyDownListener.ts"/>
 /// <reference path="../../form/FormHtml.ts"/>
 /// <reference path="PainelFiltro.ts"/>
+
+// #endregion Reference
 
 module Web
 {

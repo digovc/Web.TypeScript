@@ -1,6 +1,10 @@
-﻿/// <reference path="../../../../OnClickListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../painel/PainelAcao.ts"/>
 /// <reference path="../../table/OnTableRowClickListener.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -102,7 +106,7 @@ module Web
         {
             super.finalizar();
 
-            window.setTimeout((() => this.mostrar(Tag_EnmAnimacaoTipo.SLIDE_VERTICAL)), 400);
+            window.setTimeout((() => this.anm.slideVerticalDireitaIn()), 400);
         }
 
         protected inicializar(): void

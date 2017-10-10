@@ -1,4 +1,8 @@
-﻿/// <reference path="JnlMensagem.ts"/>
+﻿// #region Reference
+
+/// <reference path="JnlMensagem.ts"/>
+
+// #endregion Reference
 
 module Web
 {

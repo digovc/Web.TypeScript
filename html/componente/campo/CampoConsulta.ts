@@ -1,10 +1,14 @@
-﻿/// <reference path="../../../database/TabelaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../../database/TabelaWeb.ts"/>
 /// <reference path="../../../Keys.ts"/>
 /// <reference path="../../../OnClickListener.ts"/>
 /// <reference path="../../../OnFocusInListener.ts"/>
 /// <reference path="../../../OnKeyDownListener.ts"/>
 /// <reference path="../menu/contexto/MenuContexto.ts"/>
 /// <reference path="CampoComboBox.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -223,7 +227,7 @@ module Web
 
             this.txtPesquisa.jq.hide();
 
-            this.cmb.mostrar();
+            this.cmb.anm.fadeIn();
 
             this.btnAcao.jq.css("background-image", CampoConsulta.SRC_IMAGEM_ACAO_LIMPAR);
         }
@@ -248,7 +252,7 @@ module Web
 
             this.cmb.jq.hide();
 
-            this.txtPesquisa.mostrar();
+            this.txtPesquisa.anm.fadeIn();
 
             this.txtPesquisa.receberFoco();
         }
@@ -285,7 +289,7 @@ module Web
             this.btnAcao.jq.css("background-image", CampoConsulta.SRC_IMAGEM_ACAO_LIMPAR);
             this.txtPesquisa.strValor = null;
 
-            this.cmb.mostrar();
+            this.cmb.anm.fadeIn();
 
             window.setTimeout((() => this.cmb.receberFoco()), 10);
         }

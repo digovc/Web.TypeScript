@@ -1,4 +1,6 @@
-﻿/// <reference path="../Objeto.ts"/>
+﻿// #region Reference
+
+/// <reference path="../Objeto.ts"/>
 /// <reference path="../OnClickRightListener.ts"/>
 /// <reference path="../OnDoubleClickListener.ts"/>
 /// <reference path="../OnKeyDownListener.ts"/>
@@ -9,8 +11,9 @@
 /// <reference path="../OnMouseMoveListener.ts"/>
 /// <reference path="../OnMouseOverListener.ts"/>
 /// <reference path="../OnMouseUpListener.ts"/>
-/// <reference path="../typedefinition/jquery.d.ts"/>
 /// <reference path="Animator.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -19,14 +22,6 @@ module Web
     // #endregion Importações
 
     // #region Enumerados
-
-    export enum Tag_EnmAnimacaoTipo
-    {
-        FADE,
-        IMEDIATAMENTE,
-        SLIDE_HORIZONTAL,
-        SLIDE_VERTICAL,
-    }
 
     // #endregion Enumerados
 
@@ -42,7 +37,8 @@ module Web
 
         // #region Atributos
 
-        private _anim: Animator;
+        private _anm: Animator;
+        private _booRipple: boolean;
         private _booVisivel: boolean;
         private _intClickTimer: number = -1;
         private _jq: any;
@@ -52,16 +48,28 @@ module Web
         private _strSelector: string = null;
         private _strTitle: string;
 
-        public get anim(): Animator
+        public get anm(): Animator
         {
-            if (this._anim != null)
+            if (this._anm != null)
             {
-                return this._anim;
+                return this._anm;
             }
 
-            this._anim = new Animator(this);
+            this._anm = new Animator(this);
 
-            return this._anim;
+            return this._anm;
+        }
+
+        public get booRipple(): boolean
+        {
+            return this._booRipple;
+        }
+
+        public set booRipple(booRipple: boolean)
+        {
+            this._booRipple = booRipple;
+
+            this.setBooRipple(this._booRipple);
         }
 
         public get booVisivel(): boolean
@@ -218,35 +226,9 @@ module Web
             this.jq.remove();
         }
 
-        public esconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null): void
+        public esconder(fncComplete: Function = null): void
         {
-            this.jq.stop();
-
-            switch (enmAnimacaoTipo)
-            {
-                case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
-
-                    this.jq.css("display", "none");
-
-                    if (fncComplete != null)
-                    {
-                        fncComplete();
-                    }
-
-                    return;
-
-                case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
-                    this.jq.slideUp(250, fncComplete);
-                    return;
-
-                case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
-                    this.jq.hide(250, fncComplete); // TODO: Implementar.
-                    return;
-
-                default:
-                    this.jq.fadeOut(250, fncComplete);
-                    return;
-            }
+            this.anm.fadeOut(fncComplete);
         }
 
         protected finalizar(): void
@@ -303,38 +285,9 @@ module Web
         {
         }
 
-        public mostrar(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null)
+        public mostrar(fncComplete: Function = null): void
         {
-            this.jq.stop();
-
-            switch (enmAnimacaoTipo)
-            {
-                case Tag_EnmAnimacaoTipo.IMEDIATAMENTE:
-                    this.jq.css("display", "block");
-
-                    if (fncComplete != null)
-                    {
-                        fncComplete();
-                    }
-                    return;
-
-                case Tag_EnmAnimacaoTipo.SLIDE_VERTICAL:
-                    this.jq.slideDown(250, fncComplete);
-                    return;
-
-                case Tag_EnmAnimacaoTipo.SLIDE_HORIZONTAL:
-                    this.jq.show(250, fncComplete); // TODO: Implementar.
-                    return;
-
-                default:
-                    this.jq.fadeIn(250, fncComplete);
-                    return;
-            }
-        }
-
-        public mostrarEsconder(enmAnimacaoTipo: Tag_EnmAnimacaoTipo = Tag_EnmAnimacaoTipo.FADE, fncComplete: Function = null): void
-        {
-            (this.booVisivel) ? this.esconder(enmAnimacaoTipo, fncComplete) : this.mostrar(enmAnimacaoTipo, fncComplete);
+            this.anm.fadeIn(fncComplete);
         }
 
         public perderFoco(): void
@@ -351,15 +304,27 @@ module Web
             this.jq.focus();
         }
 
+        private setBooRipple(booRipple: boolean): void
+        {
+            if (booRipple)
+            {
+                ($ as any).ripple(("#" + this.strId), { duration: 0.35 });
+            }
+            else
+            {
+                this.jq.removeClass("has-ripple");
+            }
+        }
+
         private setBooVisivel(booVisivel: boolean): void
         {
             if (booVisivel)
             {
-                this.mostrar(Tag_EnmAnimacaoTipo.IMEDIATAMENTE);
+                this.jq.css("display", "block");
             }
             else
             {
-                this.esconder(Tag_EnmAnimacaoTipo.IMEDIATAMENTE);
+                this.jq.css("display", "none");
             }
         }
 
@@ -454,7 +419,7 @@ module Web
             this.arrEvtOnClickListener.splice(this.arrEvtOnClickListener.indexOf(evt), 1);
         }
 
-        private dispararEvtOnClickListener(arg: JQueryEventObject): void
+        public dispararEvtOnClickListener(arg: JQueryEventObject): void
         {
             this.intClickTimer = -1;
 

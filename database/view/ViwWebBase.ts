@@ -1,4 +1,8 @@
-﻿/// <reference path="../TabelaWeb.ts"/>
+﻿// #region Reference
+
+/// <reference path="../TabelaWeb.ts"/>
+
+// #endregion Reference
 
 module Web
 {

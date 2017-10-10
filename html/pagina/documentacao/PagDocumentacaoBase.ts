@@ -1,7 +1,11 @@
-﻿/// <reference path="../../componente/documentacao/ActionBarDocumentacao.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../componente/documentacao/ActionBarDocumentacao.ts"/>
 /// <reference path="../../componente/markdown/Sumario.ts"/>
 /// <reference path="../../componente/markdown/Viewer.ts"/>
 /// <reference path="../PagMobile.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -166,7 +170,7 @@ module Web
                 switch (objSender)
                 {
                     case this.divActionBarDocumentacao:
-                        this.divSumario.mostrarEsconder();
+                        this.divSumario.booVisivel = !this.divSumario.booVisivel;
                         return;
                 }
             }

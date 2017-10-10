@@ -1,4 +1,10 @@
-﻿/// <reference path="../../../../../Web.TypeScript/html/componente/ComponenteHtmlBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../ComponenteHtmlBase.ts"/>
+
+/// <reference path="../../../../../Web.TypeScript/html/componente/ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {

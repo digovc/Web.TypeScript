@@ -1,4 +1,8 @@
-﻿/// <reference path="../Objeto.ts"/>
+﻿// #region Reference
+
+/// <reference path="../Objeto.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -114,7 +118,7 @@ module Web
 
         // #region Construtor
 
-        constructor(strMetodo: string = "<desconhecido>", objJson: Object = null)
+        constructor(strMetodo: string = "<desconhecido>", objJson: Objeto = null)
         {
             super();
 
@@ -126,7 +130,7 @@ module Web
 
         // #region Métodos
 
-        public addFncErro(fncErro: ((strStatus: string, strThrown: string) => void)): void
+        public addFncErro(fncErro: ((strStatus: string, strThrown: string) => void)): Interlocutor
         {
             if (fncErro == null)
             {
@@ -139,9 +143,11 @@ module Web
             }
 
             this.arrFncErro.push(fncErro);
+
+            return this;
         }
 
-        public addFncProgresso(fncProgresso: ((a: ProgressEvent) => void)): void
+        public addFncProgresso(fncProgresso: ((a: ProgressEvent) => void)): Interlocutor
         {
             if (fncProgresso == null)
             {
@@ -154,9 +160,11 @@ module Web
             }
 
             this.arrFncProgresso.push(fncProgresso);
+
+            return this;
         }
 
-        public addFncSucesso(fncSucesso: ((o: Interlocutor) => void)): void
+        public addFncSucesso(fncSucesso: ((o: Interlocutor) => void)): Interlocutor
         {
             if (fncSucesso == null)
             {
@@ -169,16 +177,18 @@ module Web
             }
 
             this.arrFncSucesso.push(fncSucesso);
+
+            return this;
         }
 
-        public addJsn(obj: Object): void
+        public addJsn(obj: Objeto): void
         {
             if (obj == null)
             {
                 return;
             }
 
-            this.objData = JSON.stringify(obj);
+            this.objData = obj.toJson();
 
             this.strClazz = (obj.constructor as any).name;
         }
@@ -193,24 +203,6 @@ module Web
             this.objData = str;
 
             this.strClazz = null;
-        }
-
-        private dispararArrFncSucesso(objData: any): void
-        {
-            if (objData == null)
-            {
-                return;
-            }
-
-            this.copiarDados(objData);
-
-            if (!Utils.getBooStrVazia(this.strErro))
-            {
-                this.mostrarMsgErro("Erro no servidor", this.strErro);
-                return;
-            }
-
-            this.arrFncSucesso.forEach(fnc => fnc(this));
         }
 
         public getObjJson<T>(): T
@@ -243,7 +235,7 @@ module Web
                 strErrorThrown += "Mas não se preocupe, nossos macacos astronautas já estão cuidando para que este problema seja resolvido.";
             }
 
-            Mensagem.mostrar(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA);
+            Mensagem.animar(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA);
         }
 
         public processarOnErro(strStatus: string, strThrown: string): void
@@ -260,7 +252,22 @@ module Web
 
         public processarOnSucesso(objData: any): void
         {
-            this.dispararArrFncSucesso(objData);
+            if (objData == null)
+            {
+                return;
+            }
+
+            var objInterlocutor = new Interlocutor();
+
+            objInterlocutor.copiarDados(objData);
+
+            if (!Utils.getBooStrVazia(objInterlocutor.strErro))
+            {
+                this.mostrarMsgErro("Erro no servidor", objInterlocutor.strErro);
+                return;
+            }
+
+            this.arrFncSucesso.forEach(f => f(objInterlocutor));
         }
 
         public validarDados(): boolean

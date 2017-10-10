@@ -1,4 +1,8 @@
-﻿/// <reference path="BotaoHtml.ts"/>
+﻿// #region Reference
+
+/// <reference path="BotaoHtml.ts"/>
+
+// #endregion Reference
 
 module Web
 {

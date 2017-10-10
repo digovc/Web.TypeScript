@@ -1,7 +1,11 @@
-﻿/// <reference path="../OnEnterListener.ts"/>
+﻿// #region Reference
+
+/// <reference path="../OnEnterListener.ts"/>
 /// <reference path="../OnValorAlteradoListener.ts"/>
 /// <reference path="OnLeaveListener.ts"/>
 /// <reference path="Tag.ts"/>
+
+// #endregion Reference
 
 module Web
 {

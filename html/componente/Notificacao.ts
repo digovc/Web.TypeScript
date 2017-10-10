@@ -1,5 +1,9 @@
-﻿/// <reference path="botao/BotaoMini.ts"/>
+﻿// #region Reference
+
+/// <reference path="botao/BotaoMini.ts"/>
 /// <reference path="ComponenteHtmlBase.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -274,7 +278,7 @@ module Web
 
             this.inicializarTimeoutFechar();
 
-            this.mostrar();
+            this.anm.fadeIn();
         }
 
         private inicializarEnmTipo(): void

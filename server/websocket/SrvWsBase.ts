@@ -1,7 +1,11 @@
-﻿/// <reference path="../ServerBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ServerBase.ts"/>
 /// <reference path="OnWsCloseListenner.ts"/>
 /// <reference path="OnWsErrorListenner.ts"/>
 /// <reference path="OnWsOpenListenner.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -27,10 +31,9 @@ module Web
 
         // #region Atributos
 
+        private _booConectado: boolean;
         private _dttUltimoPong: Date;
         private _objWebSocket: WebSocket;
-
-        private _booConectado: boolean;
 
         public get booConectado(): boolean
         {

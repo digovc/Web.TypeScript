@@ -1,5 +1,9 @@
-﻿/// <reference path="../ComponenteHtmlBase.ts"/>
+﻿// #region Reference
+
+/// <reference path="../ComponenteHtmlBase.ts"/>
 /// <reference path="coluna/DivGridColunaCabecalho.ts"/>
+
+// #endregion Reference
 
 module Web
 {

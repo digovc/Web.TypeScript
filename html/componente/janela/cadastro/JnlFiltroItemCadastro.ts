@@ -1,4 +1,8 @@
-﻿/// <reference path="JnlCadastro.ts"/>
+﻿// #region Reference
+
+/// <reference path="JnlCadastro.ts"/>
+
+// #endregion Reference
 
 module Web
 {

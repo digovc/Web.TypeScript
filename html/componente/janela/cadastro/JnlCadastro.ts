@@ -1,4 +1,6 @@
-﻿/// <reference path="../../campo/CampoAlfanumerico.ts"/>
+﻿// #region Reference
+
+/// <reference path="../../campo/CampoAlfanumerico.ts"/>
 /// <reference path="../../campo/CampoCheckBox.ts"/>
 /// <reference path="../../campo/CampoHtmlBase.ts"/>
 /// <reference path="../../campo/CampoNumerico.ts"/>
@@ -7,6 +9,8 @@
 /// <reference path="DivComando.ts"/>
 /// <reference path="OnSalvarArg.ts"/>
 /// <reference path="OnSalvarListener.ts"/>
+
+// #endregion Reference
 
 module Web
 {
@@ -460,7 +464,7 @@ module Web
         {
             super.inicializarPosicao();
 
-            this.mostrar();
+            this.anm.fadeIn();
         }
 
         private removerJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void
@@ -551,7 +555,7 @@ module Web
 
             if (!Utils.getBooStrVazia(tblWeb.strCritica))
             {
-                Mensagem.mostrar("Erro", tblWeb.strCritica, Mensagem_EnmTipo.NEGATIVA);
+                Mensagem.animar("Erro", tblWeb.strCritica, Mensagem_EnmTipo.NEGATIVA);
             }
 
             if (tblWeb.arrCln == null)
