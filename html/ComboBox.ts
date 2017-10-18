@@ -1,6 +1,7 @@
 ﻿// #region Reference
 
 /// <reference path="../database/TabelaWeb.ts"/>
+/// <reference path="../server/ajax/SrvAjaxBase.ts"/>
 /// <reference path="Input.ts"/>
 
 // #endregion Reference
