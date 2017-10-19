@@ -116,7 +116,7 @@ module Web
 
             this.prepararConteudo();
 
-            this.divConteudo.anm.fadeIn();
+            this.divConteudo.anm.aparecer();
 
             this.divSumarioItem.processarConteudo();
         }

@@ -90,6 +90,7 @@
         public static get SEMI_COLON(): number { return 186 };
         public static get SHIFT(): number { return 16 };
         public static get SINGLE_QUOTE(): number { return 222 };
+        public static get SPACE(): number { return 32 };
         public static get SUBTRACT(): number { return 109 };
         public static get T(): number { return 84 };
         public static get TAB(): number { return 9 };

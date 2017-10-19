@@ -109,7 +109,7 @@ module Web
             this.divGridConteudo.montarLayoutTabela(this.tbl);
             this.divGridRodape.montarLayoutTabela(this.tbl);
 
-            this.anm.fadeIn(() => this.jq.css("display", "inline-grid"));
+            this.anm.aparecer(() => this.jq.css("display", "inline-grid"));
         }
 
         // #endregion Métodos

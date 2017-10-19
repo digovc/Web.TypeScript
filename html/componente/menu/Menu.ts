@@ -495,7 +495,7 @@ module Web
         {
             try
             {
-                this.divGaveta.anm.fadeIn();
+                this.divGaveta.anm.aparecer();
             }
             catch (ex)
             {

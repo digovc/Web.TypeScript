@@ -286,7 +286,7 @@ module Web
 
         public limparPesquisa(): void
         {
-            this.anm.fadeIn();
+            this.anm.aparecer();
 
             if (this.arrMniFilho.length < 1)
             {
@@ -339,15 +339,15 @@ module Web
                 return;
             }
 
-            this.anm.fadeIn();
+            this.anm.aparecer();
 
             if (this.mniPai == null)
             {
                 return;
             }
 
-            this.mniPai.anm.fadeIn();
-            this.mniPai.divItemConteudo.anm.fadeIn();
+            this.mniPai.anm.aparecer();
+            this.mniPai.divItemConteudo.anm.aparecer();
         }
 
         private processarOnClick(): void

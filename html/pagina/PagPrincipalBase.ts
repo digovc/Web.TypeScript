@@ -146,7 +146,7 @@ module Web
                 return;
             }
 
-            this.divConsulta.anm.fadeOut();
+            this.divConsulta.anm.sumir();
 
             var objInterlocutor = new Interlocutor();
 
@@ -292,7 +292,7 @@ module Web
 
         private inicializarJnlCadastro(jnlCadastroJq: JQuery): void
         {
-            this.divCadastro.anm.fadeIn();
+            this.divCadastro.anm.aparecer();
 
             var jnlCadastro: JnlCadastro = new (window as any)[AppWebBase.i.strNamespace][jnlCadastroJq[0].id]();
 
@@ -303,7 +303,7 @@ module Web
         {
             this.divConsulta.jq.html(objInterlocutor.objData.toString());
 
-            this.divConsulta.anm.fadeIn();
+            this.divConsulta.anm.aparecer();
 
             this.jnlConsulta = new JnlConsulta(this);
 

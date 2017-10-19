@@ -302,7 +302,7 @@ module Web
 
             while (divItemPai != null)
             {
-                divItemPai.divConteudo.anm.fadeIn();
+                divItemPai.divConteudo.anm.aparecer();
 
                 divItemPai = divItemPai.divSumarioItemPai;
             }
@@ -330,7 +330,7 @@ module Web
         {
             if (this.divIndice.jq[0].childElementCount > 0)
             {
-                this.divIndice.anm.fadeIn();
+                this.divIndice.anm.aparecer();
                 return;
             }
 
@@ -350,7 +350,7 @@ module Web
                 divIndiceItem.iniciar();
             }
 
-            this.divIndice.anm.fadeIn();
+            this.divIndice.anm.aparecer();
         }
 
         private processarConteudoStrHeadSelecionada(): void

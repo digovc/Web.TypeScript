@@ -168,7 +168,7 @@ module Web
 
             this.iniciar();
 
-            this.anm.fadeIn();
+            this.anm.aparecer();
 
             this.btnConfirmar.receberFoco();
 

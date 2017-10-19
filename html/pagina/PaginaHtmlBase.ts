@@ -37,7 +37,7 @@ module Web
             return this._divNotificacao;
         }
 
-        protected get tagBody(): Tag
+        public get tagBody(): Tag
         {
             if (this._tagBody != null)
             {
