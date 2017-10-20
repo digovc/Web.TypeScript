@@ -36,6 +36,7 @@
     <TypeScriptCompile Include="html\componente\grid\DivGridConteudo.ts" />
     <TypeScriptCompile Include="html\componente\grid\DivGridLinha.ts" />
     <TypeScriptCompile Include="html\componente\grid\DivGridRodape.ts" />
+    <TypeScriptCompile Include="html\componente\markdown\DivMarkdown.ts" />
     <TypeScriptCompile Include="html\componente\mobile\TileBase.ts" />
     <TypeScriptCompile Include="html\componente\painel\PainelModal.ts" />
     <TypeScriptCompile Include="html\componente\table\OnTableMenuClickArg.ts" />
@@ -58,8 +59,8 @@
     <TypeScriptCompile Include="html\componente\mobile\activity\ActivityBase.ts" />
     <TypeScriptCompile Include="html\CheckBox.ts" />
     <TypeScriptCompile Include="html\componente\documentacao\ActionBarDocumentacao.ts" />
-    <TypeScriptCompile Include="html\componente\markdown\EmailRegistro.ts" />
-    <TypeScriptCompile Include="html\componente\markdown\IndiceItem.ts" />
+    <TypeScriptCompile Include="html\componente\documentacao\EmailRegistro.ts" />
+    <TypeScriptCompile Include="html\componente\documentacao\IndiceItem.ts" />
     <TypeScriptCompile Include="html\componente\mobile\ActionBarBase.ts" />
     <TypeScriptCompile Include="html\componente\botao\actionbar\BotaoActionBar.ts" />
     <TypeScriptCompile Include="html\componente\botao\BotaoCircular.ts" />
@@ -85,9 +86,9 @@
     <TypeScriptCompile Include="html\componente\janela\consulta\JnlConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelAcaoConsulta.ts" />
     <TypeScriptCompile Include="html\componente\janela\consulta\PainelFiltro.ts" />
-    <TypeScriptCompile Include="html\componente\markdown\Sumario.ts" />
-    <TypeScriptCompile Include="html\componente\markdown\SumarioItem.ts" />
-    <TypeScriptCompile Include="html\componente\markdown\Viewer.ts" />
+    <TypeScriptCompile Include="html\componente\documentacao\Sumario.ts" />
+    <TypeScriptCompile Include="html\componente\documentacao\SumarioItem.ts" />
+    <TypeScriptCompile Include="html\componente\documentacao\Viewer.ts" />
     <TypeScriptCompile Include="html\componente\Mensagem.ts" />
     <TypeScriptCompile Include="html\componente\menu\contexto\MenuContexto.ts" />
     <TypeScriptCompile Include="html\componente\menu\contexto\MenuContextoItem.ts" />

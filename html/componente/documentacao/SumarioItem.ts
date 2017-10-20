@@ -334,7 +334,7 @@ module Web
                 return;
             }
 
-            var arrElmHead = this.divSumario.pagDoc.divViewer.divConteudo.jq[0].getElementsByTagName("h2");
+            var arrElmHead = this.divSumario.pagDoc.divViewer.divMarkdown.jq[0].getElementsByTagName("h2");
 
             if (arrElmHead == null)
             {

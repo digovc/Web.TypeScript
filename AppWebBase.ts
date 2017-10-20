@@ -337,8 +337,10 @@ module Web
             objWindow.close();
         }
 
-        public iniciar(): void
+        public iniciar(pag: PaginaHtmlBase): void
         {
+            this.pag = pag;
+
             this.inicializar();
 
             this.montarLayout();

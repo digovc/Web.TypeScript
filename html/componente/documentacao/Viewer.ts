@@ -2,6 +2,7 @@
 
 /// <reference path="../../../typedefinition/marked.d.ts" />
 /// <reference path="../ComponenteHtmlBase.ts"/>
+/// <reference path="../markdown/DivMarkdown.ts"/>
 
 // #endregion Reference
 
@@ -20,20 +21,20 @@ module Web
 
         // #region Atributos
 
-        private _divConteudo: Div;
+        private _divMarkdown: DivMarkdown;
         private _divSumarioItem: SumarioItem;
         private _pagMarkdown: PagDocumentacaoBase;
 
-        public get divConteudo(): Div
+        public get divMarkdown(): DivMarkdown
         {
-            if (this._divConteudo != null)
+            if (this._divMarkdown != null)
             {
-                return this._divConteudo;
+                return this._divMarkdown;
             }
 
-            this._divConteudo = new Div(this.strId + "_divConteudo");
+            this._divMarkdown = new DivMarkdown(this.strId + "_divMarkdown");
 
-            return this._divConteudo;
+            return this._divMarkdown;
         }
 
         private get divSumarioItem(): SumarioItem
@@ -80,60 +81,7 @@ module Web
                 return;
             }
 
-            if (!Utils.getBooStrVazia(this.divSumarioItem.strMarkdownConteudo))
-            {
-                this.abrirConteudoSucesso(this.divSumarioItem.strMarkdownConteudo);
-            }
-
-            if (Utils.getBooStrVazia(this.divSumarioItem.urlMarkdown))
-            {
-                return;
-            }
-
-            this.divConteudo.booVisivel = false;
-
-            $.get(this.divSumarioItem.urlMarkdown, (o => this.abrirConteudoSucesso(o)));
-        }
-
-        private abrirConteudoSucesso(strMarkdownConteudo: string): void
-        {
-            if (Utils.getBooStrVazia(strMarkdownConteudo))
-            {
-                return;
-            }
-
-            if (Utils.getBooStrVazia(this.divSumarioItem.strHtmlConteudo))
-            {
-                this.divSumarioItem.strHtmlConteudo = marked(strMarkdownConteudo);
-            }
-
-            if (Utils.getBooStrVazia(this.divSumarioItem.strMarkdownConteudo))
-            {
-                this.divSumarioItem.strMarkdownConteudo = strMarkdownConteudo;
-            }
-
-            this.divConteudo.strConteudo = this.divSumarioItem.strHtmlConteudo;
-
-            this.prepararConteudo();
-
-            this.divConteudo.anm.aparecer();
-
-            this.divSumarioItem.processarConteudo();
-        }
-
-        private prepararConteudo(): void
-        {
-            this.prepararConteudoImg();
-        }
-
-        private prepararConteudoImg(): void
-        {
-            var arrElmImg = this.divConteudo.jq[0].getElementsByTagName("img");
-
-            for (var i = 0; i < arrElmImg.length; i++)
-            {
-                arrElmImg[i].src = (this.divSumarioItem.url + "/" + $(arrElmImg[i]).attr("src"));
-            }
+            this.divMarkdown.abrirConteudo(this.divSumarioItem.urlMarkdown);
         }
 
         protected setEventos(): void
