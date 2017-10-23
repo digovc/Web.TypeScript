@@ -3,6 +3,7 @@
 /// <reference path="../../OnClickListener.ts"/>
 /// <reference path="botao/BotaoCircular.ts"/>
 /// <reference path="ComponenteHtmlBase.ts"/>
+/// <reference path="painel/PainelModal.ts"/>
 
 // #endregion Reference
 
