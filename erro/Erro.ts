@@ -103,17 +103,23 @@ module Web
                 return null;
             }
 
-            if (Utils.getBooStrVazia(this.exp.message))
+            if (!Utils.getBooStrVazia(this.exp.message))
             {
-                return null;
+                return this.exp.message;
             }
 
-            return this.exp.message;
+            if (!Utils.getBooStrVazia(<any>this.exp))
+            {
+                return (<any>this.exp);
+            }
+
+            return null;
+
         }
 
         private mostrarMensagem(): void
         {
-            Mensagem.animar("Erro", this.strMensagemFormatada, Mensagem_EnmTipo.NEGATIVA);
+            Mensagem.mostrar("Erro", this.strMensagemFormatada, Mensagem_EnmTipo.NEGATIVA);
         }
 
         // #endregion Métodos
