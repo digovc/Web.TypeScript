@@ -90,23 +90,17 @@ module Web
                 return;
             }
 
-            if (!AppWebBase.i.pag.validarJsCarregado(CampoMapa.SRC_GOOGLE_MAPS_API))
-            {
-                AppWebBase.i.pag.addJs(CampoMapa.SRC_GOOGLE_MAPS_API, (() => this.inicializarMap()));
-            }
-            else
-            {
-                this.inicializarMap();
-            }
+            AppWebBase.i.pag.carregarJs(CampoMapa.SRC_GOOGLE_MAPS_API, (() => this.inicializarMap()));
         }
 
         private getMapOption(): google.maps.MapOptions
         {
-            var mapOptionTemp: google.maps.MapOptions = {
-                center: new google.maps.LatLng(-20.364374145605524, -40.65814501647947),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                zoom: 12,
-            };
+            var mapOptionTemp: google.maps.MapOptions =
+                {
+                    center: new google.maps.LatLng(-20.36437, -40.65814),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    zoom: 12,
+                };
 
             return mapOptionTemp;
         }
