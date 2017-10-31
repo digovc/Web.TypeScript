@@ -76,7 +76,7 @@ module Web
                 return;
             }
 
-            Mensagem.animar("Desinscrito", objInterlocutor.objData.toString(), Mensagem_EnmTipo.POSITIVA);
+            Mensagem.mostrar("Desinscrito", objInterlocutor.objData.toString(), Mensagem_EnmTipo.POSITIVA);
 
             window.setTimeout((() => window.close()), 500);
         }
@@ -130,7 +130,7 @@ module Web
                 return;
             }
 
-            Mensagem.animar("Inscrito", objInterlocutor.objData.toString());
+            Mensagem.mostrar("Inscrito", objInterlocutor.objData.toString());
         }
 
         // #endregion Métodos
