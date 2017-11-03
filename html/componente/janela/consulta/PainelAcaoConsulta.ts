@@ -106,7 +106,7 @@ module Web
         {
             super.finalizar();
 
-            window.setTimeout((() => this.anm.slideVerticalDireitaIn()), 400);
+            window.setTimeout((() => this.anm.deslizarDireitaIn()), 400);
         }
 
         protected inicializar(): void

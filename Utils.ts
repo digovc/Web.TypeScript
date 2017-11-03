@@ -266,6 +266,23 @@ module Web
                 return null;
             }
 
+            for (let i = 1; i < str.length; i++)
+            {
+                if (str[i] == str[i].toLocaleLowerCase())
+                {
+                    continue;
+                }
+
+                if ((i + 1) >= str.length)
+                {
+                    break;
+                }
+
+                str = (str.substr(0, i) + "_" + str.substr(i, (str.length - i)));
+
+                i++;
+            }
+
             str = str.toLowerCase();
             str = str.trim();
 

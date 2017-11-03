@@ -464,7 +464,7 @@ module Web
         {
             super.inicializarPosicao();
 
-            this.anm.fadeIn();
+            this.anm.aparecer();
         }
 
         private removerJnlCadatroFilho(jnlCadastroFilho: JnlCadastro): void

@@ -175,7 +175,7 @@ module Web
 
             this.arrBtnTempSubMenu.push(btn);
 
-            this.btnSubMenu.anm.fadeIn();
+            this.btnSubMenu.anm.aparecer();
         }
 
         protected inicializar(): void

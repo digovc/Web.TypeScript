@@ -132,7 +132,10 @@ module Web
         {
             super.mostrar(fncComplete);
 
-            AppWebBase.i.tagFoco = this;
+            if (AppWebBase.i != null)
+            {
+                AppWebBase.i.tagFoco = this;
+            }
         }
 
         // #endregion Métodos
