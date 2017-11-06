@@ -64,7 +64,7 @@ module Web
 
         private get booPermitirAlterar(): boolean
         {
-            this._booPermitirAlterar = (this.getStrAttValor("permitir_alterar") != "false");
+            this._booPermitirAlterar = this.getBooAttValor("permitir-alterar");
 
             return this._booPermitirAlterar;
         }
