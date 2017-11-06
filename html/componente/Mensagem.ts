@@ -3,6 +3,7 @@
 /// <reference path="../../OnClickListener.ts"/>
 /// <reference path="botao/BotaoCircular.ts"/>
 /// <reference path="ComponenteHtmlBase.ts"/>
+/// <reference path="painel/PainelModal.ts"/>
 
 // #endregion Reference
 
@@ -22,7 +23,7 @@ module Web
 
     // #endregion Enumerados
 
-    export class Mensagem extends ComponenteHtmlBase implements OnClickListener
+    export class Mensagem extends PainelModal implements OnClickListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -131,7 +132,7 @@ module Web
 
         // #region Métodos
 
-        public static animar(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA): void
+        public static mostrar(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA): void
         {
             if (Utils.getBooStrVazia(strTitulo))
             {
@@ -146,8 +147,7 @@ module Web
             new Mensagem(strTitulo, strMensagem, enmTipo).abrirMensagem();
         }
 
-        // TODO: Tornar este método privado e melhorar o "static mostrar".
-        public abrirMensagem(): void
+        private abrirMensagem(): void
         {
             if (Utils.getBooStrVazia(this.strTitulo))
             {
@@ -168,11 +168,26 @@ module Web
 
             this.iniciar();
 
-            this.anm.fadeIn();
+            this.anm.aparecer();
 
             this.btnConfirmar.receberFoco();
 
             AppWebBase.i.tagFoco = this;
+
+            if (AppWebBase.i.pag != null)
+            {
+                AppWebBase.i.pag.tagBody.jq.css("overflow", "hidden");
+            }
+        }
+
+        public dispose(): void
+        {
+            super.dispose();
+
+            if (AppWebBase.i.pag != null)
+            {
+                AppWebBase.i.pag.tagBody.jq.css("overflow", Utils.STR_VAZIA);
+            }
         }
 
         protected inicializar(): void

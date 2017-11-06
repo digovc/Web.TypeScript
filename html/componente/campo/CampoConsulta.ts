@@ -28,11 +28,37 @@ module Web
 
         // #region Atributos
 
+        private _btnLimpar: BotaoHtml;
+        private _btnPesquisar: BotaoHtml;
         private _clnWebFiltro: ColunaWeb;
         private _strTblWebRefNome: string;
         private _tblWebRef: TabelaWeb;
         private _txtIntId: Input;
         private _txtPesquisa: Input;
+
+        private get btnLimpar(): BotaoHtml
+        {
+            if (this._btnLimpar != null)
+            {
+                return this._btnLimpar;
+            }
+
+            this._btnLimpar = new BotaoHtml(this.strId + "_btnLimpar");
+
+            return this._btnLimpar;
+        }
+
+        private get btnPesquisar(): BotaoHtml
+        {
+            if (this._btnPesquisar != null)
+            {
+                return this._btnPesquisar;
+            }
+
+            this._btnPesquisar = new BotaoHtml(this.strId + "_btnPesquisar");
+
+            return this._btnPesquisar;
+        }
 
         private get clnWebFiltro(): ColunaWeb
         {
@@ -152,32 +178,6 @@ module Web
             mnc.addOpcao(clnWeb.strNomeExibicao, (() => this.selecionarColunaPesquisa(clnWeb)));
         }
 
-        protected setBooEmFoco(booEmFoco: boolean): void
-        {
-            super.setBooEmFoco(booEmFoco);
-
-            this.btnAcao.jq.css("border-bottom-width", (booEmFoco ? "2px" : Utils.STR_VAZIA));
-            this.btnAcao.jq.css("border-color", (booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-            this.btnAcao.jq.css("height", (booEmFoco ? 26 : 25));
-
-            this.cmb.jq.css("height", (booEmFoco ? 23 : 22));
-
-            this.txtIntId.jq.css("border-bottom-width", (booEmFoco ? "2px" : Utils.STR_VAZIA));
-            this.txtIntId.jq.css("border-color", (booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-
-            this.txtPesquisa.jq.css("border-bottom-color", (booEmFoco ? AppWebBase.i.objTema.corTema : Utils.STR_VAZIA));
-            this.txtPesquisa.jq.css("border-bottom-width", (booEmFoco ? "2px" : Utils.STR_VAZIA));
-
-            if (Utils.getBooStrVazia(this.strCritica))
-            {
-                return;
-            }
-
-            this.btnAcao.jq.css("border-color", "#f8b2b2");
-            this.txtIntId.jq.css("border-color", "#f8b2b2");
-            this.txtPesquisa.jq.css("border-color", "#f8b2b2");
-        }
-
         protected atualizarStrValor(): void
         {
             super.atualizarStrValor();
@@ -210,7 +210,8 @@ module Web
         {
             super.inicializar();
 
-            this.btnAcao.iniciar();
+            this.btnLimpar.iniciar();
+            this.btnPesquisar.iniciar();
             this.txtPesquisa.iniciar();
 
             this.inicializarTblWebRef();
@@ -227,7 +228,7 @@ module Web
 
             this.txtPesquisa.jq.hide();
 
-            this.cmb.anm.fadeIn();
+            this.cmb.anm.aparecer();
 
             this.btnAcao.jq.css("background-image", CampoConsulta.SRC_IMAGEM_ACAO_LIMPAR);
         }
@@ -252,14 +253,14 @@ module Web
 
             this.cmb.jq.hide();
 
-            this.txtPesquisa.anm.fadeIn();
+            this.txtPesquisa.anm.aparecer();
 
             this.txtPesquisa.receberFoco();
         }
 
         private pesquisar(): void
         {
-            if (this.tagInput.booVisivel)
+            if (this.btnLimpar.booVisivel)
             {
                 return;
             }
@@ -282,14 +283,22 @@ module Web
 
             this.tblWebRef.addFil(fil);
 
-            this.cmb.carregarDados(this.tblWebRef);
+            this.cmb.carregarDados(this.tblWebRef, (() => this.pesquisarSucesso()));
+        }
 
-            this.txtPesquisa.jq.hide();
+        private pesquisarSucesso(): void
+        {
+            if (this.cmb.intOpcaoQuantidade < 2)
+            {
+                this.anm.balancar();
+                return;
+            }
 
-            this.btnAcao.jq.css("background-image", CampoConsulta.SRC_IMAGEM_ACAO_LIMPAR);
+            this.txtPesquisa.esconder();
+
             this.txtPesquisa.strValor = null;
 
-            this.cmb.anm.fadeIn();
+            this.cmb.mostrar();
 
             window.setTimeout((() => this.cmb.receberFoco()), 10);
         }

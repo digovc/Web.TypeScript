@@ -228,7 +228,7 @@ module Web
 
         public esconder(fncComplete: Function = null): void
         {
-            this.anm.fadeOut(fncComplete);
+            this.anm.sumir(fncComplete);
         }
 
         protected finalizar(): void
@@ -287,7 +287,7 @@ module Web
 
         public mostrar(fncComplete: Function = null): void
         {
-            this.anm.fadeIn(fncComplete);
+            this.anm.aparecer(fncComplete);
         }
 
         public perderFoco(): void

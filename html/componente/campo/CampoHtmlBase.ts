@@ -472,12 +472,7 @@ module Web
 
         protected setBooEmFoco(booEmFoco: boolean): void
         {
-            this.divTitulo.jq.css("font-weight", (booEmFoco ? "bold" : Utils.STR_VAZIA));
-
-            if (!Utils.getBooStrVazia(this.strCritica))
-            {
-                // TODO: Mudar a aparência quando houver crítica no campo.
-            }
+            this.jq.velocity({ scaleX: (booEmFoco ? 1.05 : 1) }, { duration: 150, easing: "ease" });
 
             this.setBooEmFocoFrm(booEmFoco);
         }

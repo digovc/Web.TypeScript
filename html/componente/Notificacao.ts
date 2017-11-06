@@ -1,6 +1,6 @@
 ﻿// #region Reference
 
-/// <reference path="botao/BotaoMini.ts"/>
+/// <reference path="../Div.ts"/>
 /// <reference path="ComponenteHtmlBase.ts"/>
 
 // #endregion Reference
@@ -32,48 +32,23 @@ module Web
 
         // #region Atributos
 
-        private static _intNotificacaoAberta: number;
-
-        private static get intNotificacaoAberta(): number
-        {
-            return this._intNotificacaoAberta;
-        }
-
-        private static set intNotificacaoAberta(intNotificacaoAberta: number)
-        {
-            this._intNotificacaoAberta = intNotificacaoAberta;
-        }
-
-        private _btnFechar: BotaoMini;
-        private _divIcone: Div;
+        private _divOk: Div;
         private _enmTipo: Notificacao_EnmTipo;
         private _intFecharTimeout: number;
         private _intTempo: number;
-        private _strNotificacao: string;
         private _objNotificacao: any;
+        private _strNotificacao: string;
 
-        private get btnFechar(): BotaoMini
+        private get divOk(): Div
         {
-            if (this._btnFechar != null)
+            if (this._divOk != null)
             {
-                return this._btnFechar;
+                return this._divOk;
             }
 
-            this._btnFechar = new BotaoMini(this.strId + "_btnFechar");
+            this._divOk = new Div(this.strId + "_divOk");
 
-            return this._btnFechar;
-        }
-
-        private get divIcone(): Div
-        {
-            if (this._divIcone != null)
-            {
-                return this._divIcone;
-            }
-
-            this._divIcone = new Div(this.strId + "_divIcone");
-
-            return this._divIcone;
+            return this._divOk;
         }
 
         private get enmTipo(): Notificacao_EnmTipo
@@ -137,7 +112,7 @@ module Web
             super(null);
 
             this.enmTipo = enmTipo;
-            this.strId = ("tagNotificacao_" + this.intObjetoId);
+            this.strId = ("divNotificacao_" + this.intObjetoId);
             this.strNotificacao = strNotificacao;
         }
 
@@ -162,10 +137,14 @@ module Web
                 return;
             }
 
-            if (Notificacao.intNotificacaoAberta > 4)
+            if (AppWebBase.i == null)
             {
-                this.atrasarNotificacao();
                 return;
+            }
+
+            if (AppWebBase.i.tagFoco instanceof Notificacao)
+            {
+                (AppWebBase.i.tagFoco as Notificacao).fechar();
             }
 
             if (AppWebBase.i.pag == null)
@@ -179,10 +158,9 @@ module Web
                 return;
             }
 
-            // TODO: Adicionar a notificação para dentro do próprio body, removendo a necessidade dessa "divNotificacao".
-            AppWebBase.i.pag.divNotificacao.jq.append(this.strLayoutFixo);
+            AppWebBase.i.pag.tagBody.jq.append(this.strLayoutFixo);
 
-            Notificacao.intNotificacaoAberta++;
+            AppWebBase.i.tagFoco = this;
 
             this.iniciar();
         }
@@ -217,14 +195,12 @@ module Web
                 {
                     body: this.strNotificacao,
                     icon: this.getUrlIcon(),
-                    onclose: (() => this.fecharNotificacao()),
+                    onclose: (() => this.fechar()),
                 }
 
             this.objNotificacao = new Notification((!Utils.getBooStrVazia(AppWebBase.i.strNome) ? AppWebBase.i.strNome : "Notificação"), objOptions);
 
-            Notificacao.intNotificacaoAberta++;
-
-            this.intFecharTimeout = window.setTimeout((() => this.fecharNotificacao()), this.intTempo)
+            this.intFecharTimeout = window.setTimeout((() => this.fechar()), this.intTempo);
         }
 
         private atrasarNotificacao(): void
@@ -232,15 +208,18 @@ module Web
             window.setTimeout((() => this.abrirNotificacao()), 1000);
         }
 
-        private fecharNotificacao(): void
+        private fechar(): void
         {
             window.clearTimeout(this.intFecharTimeout);
-
-            Notificacao.intNotificacaoAberta--;
 
             if (this.objNotificacao != null)
             {
                 this.objNotificacao.close();
+            }
+
+            if (AppWebBase.i.tagFoco == this)
+            {
+                AppWebBase.i.tagFoco = null;
             }
 
             this.dispose();
@@ -258,13 +237,13 @@ module Web
             switch (this.enmTipo)
             {
                 case Notificacao_EnmTipo.INFO:
-                    return "/res/media/png/img_notificacao_info.png";
+                    return (AppWebBase.DIR_MEDIA_PNG + "img_notificacao_info.png");
 
                 case Notificacao_EnmTipo.NEGATIVA:
-                    return "/res/media/png/img_notificacao_negativa.png";
+                    return (AppWebBase.DIR_MEDIA_PNG + "img_notificacao_negativa.png");
 
                 default:
-                    return "/res/media/png/img_notificacao_positiva.png";
+                    return (AppWebBase.DIR_MEDIA_PNG + "img_notificacao_positiva.png");
             }
         }
 
@@ -272,13 +251,15 @@ module Web
         {
             super.inicializar()
 
-            this.btnFechar.iniciar();
+            this.booRipple = true;
+
+            this.divOk.iniciar();
 
             this.inicializarEnmTipo();
 
             this.inicializarTimeoutFechar();
 
-            this.anm.fadeIn();
+            this.anm.deslizarCimaIn();
         }
 
         private inicializarEnmTipo(): void
@@ -286,20 +267,18 @@ module Web
             switch (this.enmTipo)
             {
                 case Notificacao_EnmTipo.INFO:
-                    this.divIcone.jq.css("background-image", "url('/res/media/png/img_notificacao_info.png')");
-                    this.divIcone.jq.css("border-right", "5px solid #9bcad1");
+                    this.jq.css("background-color", "#ffecb3");
                     return;
 
                 case Notificacao_EnmTipo.NEGATIVA:
-                    this.divIcone.jq.css("background-image", "url('/res/media/png/img_notificacao_negativa.png')");
-                    this.divIcone.jq.css("border-right", "5px solid #f15b28");
+                    this.jq.css("background-color", "#ef9a9a");
                     return;
             }
         }
 
         private inicializarTimeoutFechar()
         {
-            this.intFecharTimeout = window.setTimeout((() => this.fecharNotificacao()), this.intTempo);
+            this.intFecharTimeout = window.setTimeout((() => this.fechar()), this.intTempo);
         }
 
         protected montarLayoutFixo(strLayoutFixo: string): string
@@ -308,18 +287,17 @@ module Web
 
             if (Utils.getBooStrVazia(strLayoutFixo))
             {
-                return strLayoutFixo;
+                return null;
             }
 
             if (Utils.getBooStrVazia(this.strNotificacao))
             {
-                return strLayoutFixo;
+                return null;
             }
 
-            strLayoutFixo = strLayoutFixo.replace("_str_id", this.strId);
-            strLayoutFixo = strLayoutFixo.replace("_str_div_fechar_id", this.btnFechar.strId);
-            strLayoutFixo = strLayoutFixo.replace("_str_div_icone_id", this.divIcone.strId);
-            strLayoutFixo = strLayoutFixo.replace("_str_div_texto_conteudo", this.strNotificacao);
+            strLayoutFixo = Utils.replaceAll(strLayoutFixo, "_div_id", this.strId);
+
+            strLayoutFixo = strLayoutFixo.replace("_div_conteudo", this.strNotificacao);
 
             return strLayoutFixo;
         }
@@ -331,7 +309,7 @@ module Web
             this.addEvtOnMouseLeaveListener(this);
             this.addEvtOnMouseOverListener(this);
 
-            this.btnFechar.addEvtOnClickListener(this);
+            this.addEvtOnClickListener(this);
         }
 
         // #endregion Métodos
@@ -344,8 +322,8 @@ module Web
             {
                 switch (objSender)
                 {
-                    case this.btnFechar:
-                        this.fecharNotificacao();
+                    case this:
+                        this.fechar();
                         return;
                 }
             }

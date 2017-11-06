@@ -160,8 +160,8 @@ module Web
                 return;
             }
 
-            this.pnlCondicao.anm.fadeOut();
-            this.pnlSelecao.anm.fadeOut();
+            this.pnlCondicao.anm.sumir();
+            this.pnlSelecao.anm.sumir();
         }
 
         protected inicializar(): void
@@ -185,8 +185,8 @@ module Web
                 return;
             }
 
-            this.pnlCondicao.anm.fadeIn();
-            this.pnlSelecao.anm.fadeIn();
+            this.pnlCondicao.anm.aparecer();
+            this.pnlSelecao.anm.aparecer();
 
             if (this.frmFiltro == null)
             {

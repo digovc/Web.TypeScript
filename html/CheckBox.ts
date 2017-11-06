@@ -1,5 +1,7 @@
 ﻿// #region Reference
 
+/// <reference path="../Keys.ts"/>
+/// <reference path="../OnKeyPressListener.ts"/>
 /// <reference path="Input.ts"/>
 
 // #endregion Reference
@@ -12,7 +14,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class CheckBox extends Input implements OnClickListener
+    export class CheckBox extends Input implements OnClickListener, OnKeyPressListener
     {
         // #region Constantes
         // #endregion Constantes
@@ -61,11 +63,23 @@ module Web
             this.strValorInicial = this.strValor;
         }
 
+        private processarOnKeyPress(arg: JQueryKeyEventObject): void
+        {
+            switch (arg.keyCode)
+            {
+                case Keys.ENTER:
+                case Keys.SPACE:
+                    this.booValor = !this.booValor;
+                    return;
+            }
+        }
+
         protected setEventos(): void
         {
             super.setEventos();
 
             this.addEvtOnClickListener(this);
+            this.addEvtOnKeyPressListener(this);
         }
 
         protected setStrValor(strValor: string): void
@@ -85,6 +99,23 @@ module Web
             try
             {
                 this.booValor = !this.booValor;
+            }
+            catch (ex)
+            {
+                new Erro("Algo deu errado.", ex);
+            }
+        }
+
+        public onKeyPress(objSender: Objeto, arg: JQueryKeyEventObject): void
+        {
+            try
+            {
+                switch (objSender)
+                {
+                    case this:
+                        this.processarOnKeyPress(arg);
+                    default:
+                }
             }
             catch (ex)
             {

@@ -235,7 +235,7 @@ module Web
                 strErrorThrown += "Mas não se preocupe, nossos macacos astronautas já estão cuidando para que este problema seja resolvido.";
             }
 
-            Mensagem.animar(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA);
+            Mensagem.mostrar(strTextStatus, strErrorThrown, Mensagem_EnmTipo.NEGATIVA);
         }
 
         public processarOnErro(strStatus: string, strThrown: string): void

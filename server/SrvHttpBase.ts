@@ -76,7 +76,7 @@ module Web
             tagLink.href = strHref;
         }
 
-        public carregarHtml(urlImport: string, tagPai: Tag, fncComplete: any): void
+        public carregarHtml(urlImport: string, tagPai: Tag, fncSucesso: Function): void
         {
             if (Utils.getBooStrVazia(urlImport))
             {
@@ -93,7 +93,101 @@ module Web
                 return;
             }
 
-            tagPai.jq.load(urlImport, undefined, (() => this.atualizarCssMain(fncComplete)));
+            $.get(urlImport, ((d) => this.carregarHtmlSucesso(d, tagPai, fncSucesso)));
+        }
+
+        private carregarHtmlSucesso(strHtml: any, tagPai: Tag, fncSucesso: Function): void
+        {
+            if (Utils.getBooStrVazia(strHtml))
+            {
+                return;
+            }
+
+            let arrElmHtml = $(strHtml);
+
+            let arrElmJs = new Array<HTMLScriptElement>();
+            let elmDivConteudo: HTMLDivElement;
+
+            for (var i = 0; i < arrElmHtml.length; i++)
+            {
+                if (arrElmHtml[i].localName == "div")
+                {
+                    elmDivConteudo = (arrElmHtml[i] as HTMLDivElement);
+                    continue;
+                }
+
+                if (arrElmHtml[i].localName == "script")
+                {
+                    arrElmJs.push(arrElmHtml[i] as HTMLScriptElement);
+                    continue;
+                }
+            }
+
+            if (elmDivConteudo == null)
+            {
+                return;
+            }
+
+            this.carregarHtmlSucessoJs(arrElmJs, 0, elmDivConteudo, fncSucesso);
+
+            tagPai.jq.html(elmDivConteudo as any);
+        }
+
+        private carregarHtmlSucessoJs(arrElmJs: Array<HTMLScriptElement>, i: number, elmDivConteudo: HTMLDivElement, fncSucesso: Function): void
+        {
+            if (arrElmJs.length <= i)
+            {
+                if (fncSucesso != null)
+                {
+                    fncSucesso();
+                }
+
+                return;
+            }
+
+            if (!Utils.getBooStrVazia(arrElmJs[i].innerText))
+            {
+                document.head.appendChild(arrElmJs[i]);
+
+                eval(arrElmJs[i].innerText);
+            }
+
+            var src = $(arrElmJs[i]).attr("src");
+
+            if (Utils.getBooStrVazia(src))
+            {
+                this.carregarHtmlSucessoJs(arrElmJs, ++i, elmDivConteudo, fncSucesso);
+                return;
+            }
+
+            this.carregarJs(src, (() => this.carregarHtmlSucessoJs(arrElmJs, ++i, elmDivConteudo, fncSucesso)));
+        }
+
+        public carregarJs(srcJs: string, fncOnLoad: ((o: HTMLScriptElement) => void) = null): void
+        {
+            if (Utils.getBooStrVazia(srcJs))
+            {
+                fncOnLoad(null);
+                return;
+            }
+
+            if (this.validarJsCarregado(srcJs))
+            {
+                fncOnLoad(null);
+                return;
+            }
+
+            var tagScript = document.createElement("script");
+
+            tagScript.src = srcJs;
+            tagScript.type = "text/javascript";
+
+            if (fncOnLoad != null)
+            {
+                tagScript.onload = (() => fncOnLoad(tagScript));
+            }
+
+            document.head.appendChild(tagScript);
         }
 
         public carregarJq(strJqClass: string): void
@@ -113,6 +207,11 @@ module Web
         public download(url: string): void
         {
             window.open(url, "_blank");
+        }
+
+        public validarJsCarregado(srcJs: string): boolean
+        {
+            return ($("script[src^='" + srcJs + "']").length > 0);
         }
 
         // #endregion Métodos

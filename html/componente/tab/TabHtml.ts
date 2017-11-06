@@ -304,7 +304,7 @@ module Web
                 return;
             }
 
-            this.divComando.anm.fadeIn();
+            this.divComando.anm.aparecer();
         }
 
         public pesquisarTabItemPrincipal(): void
@@ -328,7 +328,7 @@ module Web
 
             tabItemPrincipal.booAtiva = true;
 
-            this.divComando.anm.fadeIn();
+            this.divComando.anm.aparecer();
         }
 
         protected setEventos()
