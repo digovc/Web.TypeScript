@@ -86,12 +86,12 @@ module Web
         {
             if (AppWebBase.i == null)
             {
-                return;
+                throw new Error('O aplicativo não foi inicializado.');
             }
 
             if (AppWebBase.i.srvHttp == null)
             {
-                return;
+                throw new Error('O servidor HTTP não foi indicado.');
             }
 
             AppWebBase.i.srvHttp.carregarJs(srcJs, fncOnLoad);
