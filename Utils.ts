@@ -74,6 +74,20 @@ module Web
             return arrBte.buffer;
         }
 
+        public static bytesToSize(lngTamanho: number): string
+        {
+            var arrStrSize = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+
+            if (lngTamanho < 1)
+            {
+                return '0 Byte';
+            }
+
+            var i = parseInt(Math.floor(Math.log(lngTamanho) / Math.log(1024)) as any);
+
+            return (Math.round(lngTamanho / Math.pow(1024, i)) + " " + arrStrSize[i]);
+        }
+
         /**
          * Carrega uma imagem no servidor e a retorna, podendo ser usada
          * na página.
