@@ -319,7 +319,7 @@ module Web
                 return null;
             }
 
-            return str.replace(" ", "_");
+            return Utils.replaceAll(str, " ", "_");
         }
 
         /**

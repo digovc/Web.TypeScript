@@ -2,7 +2,7 @@
 
 /// <reference path="../../../../OnClickListener.ts"/>
 /// <reference path="../../../../OnFocusOutListener.ts"/>
-/// <reference path="../../ComponenteHtmlBase.ts"/>
+/// <reference path="../../Card.ts"/>
 /// <reference path="MenuContextoItem.ts"/>
 
 // #endregion Reference
@@ -15,7 +15,7 @@ module Web
     // #region Enumerados
     // #endregion Enumerados
 
-    export class MenuContexto extends ComponenteHtmlBase implements OnClickListener, OnFocusOutListener
+    export class MenuContexto extends Card implements OnClickListener, OnFocusOutListener
     {
         // #region Constantes
         // #endregion Constantes
