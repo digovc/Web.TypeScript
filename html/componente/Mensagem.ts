@@ -131,7 +131,7 @@ module Web
 
         // #region Métodos
 
-        public static animar(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA): void
+        public static mostrar(strTitulo: string, strMensagem: string, enmTipo: Mensagem_EnmTipo = Mensagem_EnmTipo.POSITIVA): void
         {
             if (Utils.getBooStrVazia(strTitulo))
             {

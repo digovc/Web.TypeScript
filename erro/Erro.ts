@@ -113,7 +113,7 @@ module Web
 
         private mostrarMensagem(): void
         {
-            Mensagem.animar("Erro", this.strMensagemFormatada, Mensagem_EnmTipo.NEGATIVA);
+            Mensagem.mostrar("Erro", this.strMensagemFormatada, Mensagem_EnmTipo.NEGATIVA);
         }
 
         // #endregion Métodos

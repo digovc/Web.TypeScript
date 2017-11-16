@@ -106,7 +106,7 @@ module Web
 
         // #region Métodos
 
-        public animar(): void
+        public mostrar(): void
         {
             this.booPararAnimacao = false;
 
@@ -187,7 +187,7 @@ module Web
                 return;
             }
 
-            this.animar();
+            this.mostrar();
         }
 
         public pararAnimacao(): void
