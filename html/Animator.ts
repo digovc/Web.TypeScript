@@ -49,7 +49,7 @@ module Web
 
         public animarBackgroundColor(cor: string): void
         {
-            this.preparar();
+            this.pararAnimacao();
 
             if (Utils.getBooStrVazia(cor))
             {
@@ -64,9 +64,28 @@ module Web
             this.tag.jq.velocity({ "background-color": cor }, { duration: 350 });
         }
 
+        public aparecer(fncComplete: Function = null): void
+        {
+            if (this.tag.booVisivel)
+            {
+                return;
+            }
+
+            this.pararAnimacao();
+
+            var cfg: jquery.velocity.Options =
+                {
+                    complete: (fncComplete as any),
+                    display: "auto",
+                    duration: 250,
+                }
+
+            this.tag.jq.velocity({ "opacity": 1 }, cfg);
+        }
+
         public balancar(fncComplete: Function = null): void
         {
-            this.preparar();
+            this.pararAnimacao();
 
             this.tag.jq.velocity({ "translateX": "+=25" }, { duration: 125 });
             this.tag.jq.velocity({ "translateX": "-=50" }, { duration: 125 });
@@ -81,52 +100,44 @@ module Web
                 });
         }
 
-        public fadeIn(fncComplete: Function = null): void
+        public deslizarCimaIn(fncComplete: Function = null): void
         {
-            this.preparar();
-
             if (this.tag.booVisivel)
             {
                 return;
             }
 
-            var cfg: jquery.velocity.Options =
-                {
-                    complete: (fncComplete as any),
-                    display: "block",
-                    duration: 250,
-                }
+            this.pararAnimacao();
 
-            this.tag.jq.velocity({ "opacity": 1 }, cfg);
-        }
+            this.tag.jq.css("opacity", 0);
 
-        public fadeOut(fncComplete: Function = null): void
-        {
-            this.preparar();
-
-            if (!this.tag.booVisivel)
-            {
-                return;
-            }
+            this.tag.jq.velocity({ "translateY": "25px" }, { duration: 0 });
 
             var cfg: jquery.velocity.Options =
                 {
                     complete: (fncComplete as any),
-                    display: "none",
+                    display: "auto",
                     duration: 250,
+                    easing: "easeInOutQuart",
                 }
 
-            this.tag.jq.velocity({ "opacity": 0 }, cfg);
+            var arrCss =
+                {
+                    "opacity": 1,
+                    "translateY": "0px",
+                }
+
+            this.tag.jq.velocity(arrCss, cfg);
         }
 
-        private slideVerticalDireitaEsquerdaIn(fncComplete: Function, booDireita: boolean): void
+        private deslizarDireitaEsquerdaIn(fncComplete: Function, booDireita: boolean): void
         {
-            this.preparar();
-
             if (this.tag.booVisivel)
             {
                 return;
             }
+
+            this.pararAnimacao();
 
             this.tag.jq.css("opacity", 0);
 
@@ -135,7 +146,7 @@ module Web
             var cfg: jquery.velocity.Options =
                 {
                     complete: (fncComplete as any),
-                    display: "block",
+                    display: "auto",
                     duration: 250,
                     easing: "easeInOutQuart",
                 }
@@ -149,24 +160,24 @@ module Web
             this.tag.jq.velocity(arrCss, cfg);
         }
 
-        public slideVerticalDireitaIn(fncComplete: Function = null): void
+        public deslizarDireitaIn(fncComplete: Function = null): void
         {
-            this.slideVerticalDireitaEsquerdaIn(fncComplete, true);
+            this.deslizarDireitaEsquerdaIn(fncComplete, true);
         }
 
-        public slideVerticalEsquerdaIn(fncComplete: Function = null): void
+        public deslizarEsquerdaIn(fncComplete: Function = null): void
         {
-            this.slideVerticalDireitaEsquerdaIn(fncComplete, false);
+            this.deslizarDireitaEsquerdaIn(fncComplete, false);
         }
 
-        public slideVerticalDireitaOut(fncComplete: Function): void
+        public deslizarDireitaOut(fncComplete: Function): void
         {
-            this.preparar();
-
             if (!this.tag.booVisivel)
             {
                 return;
             }
+
+            this.pararAnimacao();
 
             this.tag.jq.css("margin-left", "-25vw");
             this.tag.jq.css("margin-right", "25vw");
@@ -191,7 +202,7 @@ module Web
 
         public girar(fltDegrees: number = 360, intDuracao: number = 250, fncComplete: Function = null): void
         {
-            this.preparar();
+            this.pararAnimacao();
 
             var cfg: JQueryAnimationOptions =
                 {
@@ -210,14 +221,23 @@ module Web
             this.tag.jq.velocity("finish");
         }
 
-        private preparar(): void
+        public sumir(fncComplete: Function = null): void
         {
-            if (this.tag == null)
+            this.pararAnimacao();
+
+            if (!this.tag.booVisivel)
             {
-                throw new Error('O atributo "tag" está vazio.');
+                return;
             }
 
-            this.pararAnimacao();
+            var cfg: jquery.velocity.Options =
+                {
+                    complete: (fncComplete as any),
+                    display: "none",
+                    duration: 250,
+                }
+
+            this.tag.jq.velocity({ "opacity": 0 }, cfg);
         }
 
         // #endregion Métodos

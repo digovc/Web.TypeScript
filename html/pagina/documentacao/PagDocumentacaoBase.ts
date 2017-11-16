@@ -1,8 +1,9 @@
 ﻿// #region Reference
 
+/// <reference path="../../../database/dominio/documentacao/EmailRegistroDominio.ts"/>
 /// <reference path="../../componente/documentacao/ActionBarDocumentacao.ts"/>
-/// <reference path="../../componente/markdown/Sumario.ts"/>
-/// <reference path="../../componente/markdown/Viewer.ts"/>
+/// <reference path="../../componente/documentacao/Sumario.ts"/>
+/// <reference path="../../componente/documentacao/Viewer.ts"/>
 /// <reference path="../PagMobile.ts"/>
 
 // #endregion Reference

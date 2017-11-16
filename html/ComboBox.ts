@@ -1,6 +1,7 @@
 ﻿// #region Reference
 
 /// <reference path="../database/TabelaWeb.ts"/>
+/// <reference path="../server/ajax/SrvAjaxBase.ts"/>
 /// <reference path="Input.ts"/>
 
 // #endregion Reference
@@ -20,7 +21,15 @@ module Web
 
         // #region Atributos
 
+        private _intOpcaoQuantidade: number;
         private _strTexto: string;
+
+        public get intOpcaoQuantidade(): number
+        {
+            this._intOpcaoQuantidade = (this.jq[0] as any).length;
+
+            return this._intOpcaoQuantidade;
+        }
 
         public get strTexto(): string
         {
@@ -46,7 +55,7 @@ module Web
             this.jq.append(tagOption);
         }
 
-        public carregarDados(tblWeb: TabelaWeb): void
+        public carregarDados(tblWeb: TabelaWeb, fncSucesso: Function = null): void
         {
             this.limparDados();
 
@@ -69,32 +78,50 @@ module Web
 
             objInterlocutor.strMetodo = SrvAjaxDbeBase.STR_METODO_PESQUISAR_COMBO_BOX;
 
-            objInterlocutor.addFncSucesso((o: Interlocutor) => this.carregarDadosSucesso(o));
+            objInterlocutor.addFncSucesso((o: Interlocutor) => this.carregarDadosSucesso(o, fncSucesso));
             objInterlocutor.addJsn(tblWeb);
 
             AppWebBase.i.srvAjaxDbe.enviar(objInterlocutor);
         }
 
-        private carregarDadosSucesso(objInterlocutor: Interlocutor): void
+        private carregarDadosSucesso(objInterlocutor: Interlocutor, fncSucesso: Function): void
         {
             if (objInterlocutor == null)
             {
+                this.carregarDadosSucessoVazio(fncSucesso);
                 return;
             }
 
             if (objInterlocutor.objData == null)
             {
+                this.carregarDadosSucessoVazio(fncSucesso);
                 return;
             }
 
             if (objInterlocutor.objData == SrvAjaxBase.STR_RESULTADO_VAZIO)
             {
+                this.carregarDadosSucessoVazio(fncSucesso);
                 return;
             }
 
             var arrData: Array<any> = JSON.parse(objInterlocutor.objData.toString());
 
             arrData.forEach(o => this.carregarDadosSucesso2(o));
+
+            if (fncSucesso != null)
+            {
+                fncSucesso();
+            }
+        }
+
+        private carregarDadosSucessoVazio(fncSucesso: Function): void
+        {
+            Notificacao.notificar("Nenhum registro foi encontrado.", Notificacao_EnmTipo.INFO);
+
+            if (fncSucesso != null)
+            {
+                fncSucesso();
+            }
         }
 
         private carregarDadosSucesso2(par: ParValorNome): void

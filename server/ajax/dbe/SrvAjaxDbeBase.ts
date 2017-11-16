@@ -101,8 +101,15 @@ module Web
                 return;
             }
 
-            if (this.getTbl(sqlTabelaNome) != null)
+            var tbl = this.getTbl(sqlTabelaNome);
+
+            if (tbl != null)
             {
+                if (fncSucesso != null)
+                {
+                    fncSucesso(tbl);
+                }
+
                 return;
             }
 
@@ -186,6 +193,16 @@ module Web
             objInterlocutor.addFncSucesso(fncSucesso);
 
             this.enviar(objInterlocutor);
+        }
+
+        public salvar(tbl: TabelaWeb, fncRetorno: ((o: Interlocutor) => void) = null): void
+        {
+            if (tbl == null)
+            {
+                return;
+            }
+
+            this.enviar(new Interlocutor(SrvAjaxDbeBase.STR_METODO_SALVAR, tbl).addFncSucesso(fncRetorno)); 1
         }
 
         // #endregion Métodos

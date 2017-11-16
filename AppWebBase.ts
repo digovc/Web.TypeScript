@@ -11,7 +11,7 @@
 /// <reference path="Objeto.ts"/>
 /// <reference path="OnFocusInListener.ts"/>
 /// <reference path="OnFocusOutListener.ts"/>
-/// <reference path="server/ajax/data/SrvAjaxDbeBase.ts"/>
+/// <reference path="server/ajax/Dbe/SrvAjaxDbeBase.ts"/>
 /// <reference path="server/Interlocutor.ts"/>
 /// <reference path="server/ServerBase.ts"/>
 /// <reference path="server/SrvHttpBase.ts"/>
@@ -337,8 +337,10 @@ module Web
             objWindow.close();
         }
 
-        public iniciar(): void
+        public iniciar(pag: PaginaHtmlBase): void
         {
+            this.pag = pag;
+
             this.inicializar();
 
             this.montarLayout();

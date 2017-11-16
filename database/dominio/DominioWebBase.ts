@@ -2,7 +2,7 @@
 
 /// <reference path="../../AppWebBase.ts"/>
 /// <reference path="../../Objeto.ts"/>
-/// <reference path="../../server/ajax/data/SrvAjaxDbeBase.ts"/>
+/// <reference path="../../server/ajax/dbe/SrvAjaxDbeBase.ts"/>
 
 // #endregion Reference
 
@@ -101,6 +101,11 @@ module Web
         public copiarDados(obj: any): DominioWebBase
         {
             super.copiarDados(obj);
+
+            if (obj == null)
+            {
+                return;
+            }
 
             this.dttAlteracao = new Date(String(this.dttAlteracao));
             this.dttCadastro = new Date(String(this.dttCadastro));

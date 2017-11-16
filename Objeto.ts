@@ -126,6 +126,11 @@ module Web
          */
         public copiarDados(obj: any): void
         {
+            if (obj == null)
+            {
+                return;
+            }
+
             for (var objPropriedade in obj)
             {
                 (this as any)[objPropriedade] = obj[objPropriedade];

@@ -65,6 +65,11 @@ module Web
         {
             super.copiarDados(obj);
 
+            if (obj == null)
+            {
+                return;
+            }
+
             this.copiarDadosArrRow(obj)
             this.copiarDadosarrSqlColunaNome(obj)
         }

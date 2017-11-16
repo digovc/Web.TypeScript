@@ -37,7 +37,7 @@ module Web
             return this._divNotificacao;
         }
 
-        protected get tagBody(): Tag
+        public get tagBody(): Tag
         {
             if (this._tagBody != null)
             {
@@ -57,33 +57,6 @@ module Web
 
         // #region Métodos
 
-        public addJs(srcJs: string, fncOnLoad: ((o: HTMLScriptElement) => void) = null): void
-        {
-            if (Utils.getBooStrVazia(srcJs))
-            {
-                fncOnLoad(null);
-                return;
-            }
-
-            if (this.validarJsCarregado(srcJs))
-            {
-                fncOnLoad(null);
-                return;
-            }
-
-            var tagScript = document.createElement("script");
-
-            tagScript.src = srcJs;
-            tagScript.type = "text/javascript";
-
-            if (fncOnLoad != null)
-            {
-                tagScript.onload = (() => fncOnLoad(tagScript));
-            }
-
-            document.head.appendChild(tagScript);
-        }
-
         public atualizarCssMain(): void
         {
             if (AppWebBase.i.srvHttp == null)
@@ -92,6 +65,36 @@ module Web
             }
 
             AppWebBase.i.srvHttp.atualizarCssMain();
+        }
+
+        public carregarHtml(urlImport: string, tagPai: Tag, fncSucesso: Function): void
+        {
+            if (AppWebBase.i == null)
+            {
+                return;
+            }
+
+            if (AppWebBase.i.srvHttp == null)
+            {
+                return;
+            }
+
+            AppWebBase.i.srvHttp.carregarHtml(urlImport, tagPai, fncSucesso);
+        }
+
+        public carregarJs(srcJs: string, fncOnLoad: ((o: HTMLScriptElement) => void) = null): void
+        {
+            if (AppWebBase.i == null)
+            {
+                throw new Error('O aplicativo não foi inicializado.');
+            }
+
+            if (AppWebBase.i.srvHttp == null)
+            {
+                throw new Error('O servidor HTTP não foi indicado.');
+            }
+
+            AppWebBase.i.srvHttp.carregarJs(srcJs, fncOnLoad);
         }
 
         protected finalizar(): void
@@ -125,11 +128,6 @@ module Web
 
         protected setEventos(): void
         {
-        }
-
-        public validarJsCarregado(srcJs: string): boolean
-        {
-            return ($("script[src^='" + srcJs + "']").length > 0);
         }
 
         // #endregion Métodos

@@ -74,6 +74,20 @@ module Web
             return arrBte.buffer;
         }
 
+        public static bytesToSize(lngTamanho: number): string
+        {
+            var arrStrSize = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+
+            if (lngTamanho < 1)
+            {
+                return '0 Byte';
+            }
+
+            var i = parseInt(Math.floor(Math.log(lngTamanho) / Math.log(1024)) as any);
+
+            return (Math.round(lngTamanho / Math.pow(1024, i)) + " " + arrStrSize[i]);
+        }
+
         /**
          * Carrega uma imagem no servidor e a retorna, podendo ser usada
          * na página.
@@ -266,6 +280,23 @@ module Web
                 return null;
             }
 
+            for (let i = 1; i < str.length; i++)
+            {
+                if (str[i] == str[i].toLocaleLowerCase())
+                {
+                    continue;
+                }
+
+                if ((i + 1) >= str.length)
+                {
+                    break;
+                }
+
+                str = (str.substr(0, i) + "_" + str.substr(i, (str.length - i)));
+
+                i++;
+            }
+
             str = str.toLowerCase();
             str = str.trim();
 
@@ -288,7 +319,7 @@ module Web
                 return null;
             }
 
-            return str.replace(" ", "_");
+            return Utils.replaceAll(str, " ", "_");
         }
 
         /**
